@@ -91,6 +91,7 @@ export class Scene3D {
   }
   _add(geom, key, edgeAngle = 20, edges = true) {
     const mesh = new THREE.Mesh(geom, materials(key));
+    (this.meshes ||= []).push({ key, geom });
     if (MAT[key].glass) mesh.renderOrder = 10;
     this.scene.add(mesh);
     geom.computeBoundingBox(); this.bbox.union(geom.boundingBox);
@@ -142,6 +143,24 @@ export class Scene3D {
       const ex = dx / L * t / 2, ey = dy / L * t / 2;
       this.prism([[a[0] + nx - ex, a[1] + ny - ey], [b[0] + nx + ex, b[1] + ny + ey], [b[0] - nx + ex, b[1] - ny + ey], [a[0] - nx - ex, a[1] - ny - ey]], axis, w0, w1, key, [], { edgeAngle: 40 });
     }
+  }
+  // exporta geometría (vértices soldados + caras) para CAD
+  exportData() {
+    const out = [];
+    for (const { key, geom } of this.meshes) {
+      const pos = geom.attributes.position.array, idx = geom.index ? geom.index.array : null;
+      const map = new Map(), V = [], F = [];
+      const vid = (i) => { const x = pos[3 * i], y = pos[3 * i + 1], z = pos[3 * i + 2];
+        const k = `${x.toFixed(1)},${y.toFixed(1)},${z.toFixed(1)}`; let v = map.get(k);
+        if (v === undefined) { v = V.length; map.set(k, v); V.push([+x.toFixed(1), +y.toFixed(1), +z.toFixed(1)]); } return v; };
+      const n = idx ? idx.length : pos.length / 3;
+      for (let t = 0; t < n; t += 3) {
+        const a = vid(idx ? idx[t] : t), b = vid(idx ? idx[t + 1] : t + 1), c = vid(idx ? idx[t + 2] : t + 2);
+        if (a !== b && b !== c && a !== c) F.push([a, b, c]);
+      }
+      out.push({ key, color: MAT[key].color, V, F });
+    }
+    return { meshes: out, anchors: this.anchors.map(a => ({ n: a.n, p: [a.p.x, a.p.y, a.p.z] })) };
   }
   anchor(n, x, y, z) { this.anchors.push({ n, p: new THREE.Vector3(x, y, z) }); }
 

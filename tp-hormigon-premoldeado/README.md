@@ -1,13 +1,20 @@
 # TP Construcciones II – Hormigón premoldeado de grandes luces con cerramiento vidriado
 
-Entregables (A3, listos para imprimir al 100 %): carpeta `../entregables/`.
-
-- **Lámina 1** – Corte integral esc. 1:20 (portrait A3) con 67 referencias numeradas, niveles, cotas y convenciones.
-- **Lámina 2** – Tres detalles de nudos en axonometría 3D (cubierta, entrepiso, piso sobre terreno).
+## Entregables (`../entregables/`)
+- `PDF_para_imprimir/` – Lámina 1 (corte integral 1:20, A3 vertical) y Lámina 2 (3 nudos en 3D, A3 apaisada). Imprimir al 100 %.
+- `DWG_AutoCAD/`
+  - `Lamina1_Corte_Integral_1-20.dwg` – corte completo en verdadera magnitud (1 unidad = 1 mm, sin interrupciones), capas por material,
+    rayados AutoCAD (ANSI31, AR-CONC, AR-SAND, EARTH, GRAVEL, INSUL, ZIGZAG), cotas asociativas (estilo `CORTE_1-20`),
+    niveles, eje, referencias numeradas, planilla de referencias y rótulo. Plotear a 1:20.
+  - `Lamina2_Detalles_3D_Nudos.dwg` – los 3 nudos como sólidos MESH por material (Z arriba), con números de referencia y planillas.
+    Usar `VSCURRENT` → Realista/Conceptual y `3DORBIT` para verlos.
+- `DXF_alternativo/` – mismos dibujos en DXF.
 
 ## Regenerar
 ```
-npm install
+npm install && pip install ezdxf
 python3 src/lamina1.py && node render.js build/lamina1.html build/lamina1 portrait
-node render.js src/lamina2.html build/lamina2 landscape
+node render.js src/lamina2.html build/lamina2 landscape build/lamina2_3d.json
+python3 src/dxf_lamina1.py && python3 src/dxf_detalles3d.py
+xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 ```

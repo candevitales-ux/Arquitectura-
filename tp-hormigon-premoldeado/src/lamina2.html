@@ -29,6 +29,7 @@ const DETS = [
 DETS.forEach((D, i) => {
   const x0 = P.x0 + i * (P.w + P.gap), y0 = P.top;
   const S = D.f();
+  (window.EXPORT ||= []).push({ t: D.t, st: D.st, refs: D.refs, ...S.exportData() });
   const r = S.render(Math.round(P.w * PX), Math.round(P.imgH * PX), D.dir, D.frac, D.off, 2.4);
   const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
   img.style.left = x0 + 'mm'; img.style.top = y0 + 'mm'; img.style.width = P.w + 'mm'; img.style.height = P.imgH + 'mm';
