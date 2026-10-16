@@ -128,9 +128,9 @@ def text(s, p, h, layer="X-TEXTOS", align=TextEntityAlignment.LEFT, rot=0):
     return t
 
 # eje de columna
-msp.add_line((100, -2300), (100, 10150), dxfattribs={"layer": "X-EJES", "ltscale": 20})
-msp.add_circle((100, 10220), 70, dxfattribs={"layer": "X-EJES"})
-text("C", (100, 10220), 70, "X-EJES", TextEntityAlignment.MIDDLE_CENTER)
+msp.add_line((450, -2300), (450, 10150), dxfattribs={"layer": "X-EJES", "ltscale": 20})
+msp.add_circle((450, 10220), 70, dxfattribs={"layer": "X-EJES"})
+text("C", (450, 10220), 70, "X-EJES", TextEntityAlignment.MIDDLE_CENTER)
 
 # niveles
 for e in D["DX"]:
@@ -179,9 +179,9 @@ for e in D["DX"]:
         text(e["s"], tuple(e["p"]), e["h"])
 
 # títulos
-text("CORTE INTEGRAL - FACHADA VIDRIADA - HORMIGON PREMOLDEADO DE GRANDES LUCES   ESC. 1:20", (-1100, 10500), 80, "X-TEXTOS")
+text("CORTE INTEGRAL - FACHADA VIDRIADA - HORMIGON PREMOLDEADO DE GRANDES LUCES   ESC. 1:20", (-700, 10500), 80, "X-TEXTOS")
 text("Dibujo en verdadera magnitud (1 unidad = 1 mm). Plotear a 1:20. En la lamina PDF las alturas de vidrio se interrumpen para entrar en A3.",
-     (-1100, 10380), 35, "X-TEXTOS")
+     (-700, 10380), 35, "X-TEXTOS")
 
 # planilla de referencias (MTEXT por grupos) a la derecha del corte
 x0, y = 3300, 10000

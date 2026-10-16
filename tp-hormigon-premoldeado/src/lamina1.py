@@ -5,7 +5,7 @@ Geometría en mm reales; x+ hacia el interior, y+ hacia arriba, ±0.00 = NPT pla
 import math, os
 
 S = 20.0                      # escala 1:20
-PX0, XR0 = 14.0, -1100.0       # x de papel donde cae x real -1100
+PX0, XR0 = 14.0, -700.0       # x de papel donde cae x real -700
 def X(x): return PX0 + (x - XR0) / S
 def YC(y): return 1000.0 - y / S          # coordenada "continua" antes de cortar en bandas
 
@@ -84,25 +84,25 @@ GLASS = "#bfe3f0"; ALU = "#9aa3ab"; STEEL = "#3b3b3b"; NEO = "#111"
 
 # ================================================================ FUNDACIÓN Y PB
 # suelo
-rect(-1100, -2160, 2600, -400, fill="url(#pTierra)", stroke="none", sw=0)
-rect(250, -400, 2600, -330, fill="url(#pTierra)", stroke="none", sw=0)
-line(-1100, -400, -50, -400, sw=0.2)
+rect(-700, -2160, 3000, -400, fill="url(#pTierra)", stroke="none", sw=0)
+rect(250, -400, 3000, -330, fill="url(#pTierra)", stroke="none", sw=0)
+line(-700, -400, -50, -400, sw=0.2)
 # Fundación en proyección (eje de columna, por detrás del plano de corte)
-rect(-950, -2080, 1150, -2000, fill="url(#pH)", stroke="#555", sw=0.15, extra='fill-opacity="0.55" ' + DASH)
-poly([(-900, -2000), (1100, -2000), (1100, -1650), (600, -1500), (-400, -1500), (-900, -1650)], fill="url(#pHAis)", stroke="#333", sw=0.18, extra='fill-opacity="0.45" ' + DASH)
+rect(-600, -2080, 1500, -2000, fill="url(#pH)", stroke="#555", sw=0.15, extra='fill-opacity="0.55" ' + DASH)
+poly([(-550, -2000), (1450, -2000), (1450, -1650), (950, -1500), (-50, -1500), (-550, -1650)], fill="url(#pHAis)", stroke="#333", sw=0.18, extra='fill-opacity="0.45" ' + DASH)
 # tintero (cáliz) y columna empotrada
-poly([(-400, -1500), (600, -1500), (600, -620), (350, -620), (350, -1450), (-150, -1450), (-150, -620), (-400, -620)],
+poly([(-50, -1500), (950, -1500), (950, -620), (700, -620), (700, -1450), (200, -1450), (200, -620), (-50, -620)],
      fill="url(#pHAis)", stroke="#333", sw=0.18, extra='fill-opacity="0.45" ' + DASH)
-rect(-150, -1450, 350, -620, fill="url(#pGrout)", stroke="#333", sw=0.13, extra='fill-opacity="0.6" ' + DASH)
-rect(-100, -1400, 300, -620, fill="url(#pHA)", stroke="#333", sw=0.15, extra='fill-opacity="0.7" ' + DASH)
+rect(200, -1450, 700, -620, fill="url(#pGrout)", stroke="#333", sw=0.13, extra='fill-opacity="0.6" ' + DASH)
+rect(250, -1400, 650, -620, fill="url(#pHA)", stroke="#333", sw=0.15, extra='fill-opacity="0.7" ' + DASH)
 for yy in (-1300, -1100, -900):          # llaves de corte (rugosidad) en columna
-    line(-100, yy, 300, yy, stroke="#555", sw=0.08, extra=DASH)
+    line(250, yy, 650, yy, stroke="#555", sw=0.08, extra=DASH)
 # armadura base (proyección)
-pline([(-830, -1650), (-830, -1930), (1030, -1930), (1030, -1650)], stroke="#7a1f1f", sw=0.14, extra=DASH)
-for xx in range(-800, 1050, 150): circ(xx, -1905, 0.22, fill="#7a1f1f")
+pline([(-480, -1650), (-480, -1930), (1380, -1930), (1380, -1650)], stroke="#7a1f1f", sw=0.14, extra=DASH)
+for xx in range(-450, 1400, 150): circ(xx, -1905, 0.22, fill="#7a1f1f")
 # armadura en espera / anclajes columna-tintero
-pline([(-320, -1880), (-320, -1080)], stroke="#7a1f1f", sw=0.12, extra=DASH)
-pline([(520, -1880), (520, -1080)], stroke="#7a1f1f", sw=0.12, extra=DASH)
+pline([(30, -1880), (30, -680)], stroke="#7a1f1f", sw=0.12, extra=DASH)
+pline([(870, -1880), (870, -680)], stroke="#7a1f1f", sw=0.12, extra=DASH)
 
 # Viga de fundación premoldeada VF 30x60
 poly([(-50, -610), (250, -610), (250, 0), (-20, 0), (-50, -20)], fill="url(#pHA)", **CUT)
@@ -113,66 +113,67 @@ rect(-50, -620, 250, -610, fill=NEO, stroke="none", sw=0)          # neopreno VF
 # aislación hidrófuga vertical
 pline([(-56, -200), (-56, -616)], stroke="#000", sw=0.4)
 # exterior: vereda
-rect(-1100, -400, -60, -300, fill="url(#pTosca)", **CUTT)
-rect(-1100, -300, -60, -200, fill="url(#pH)", **CUTT)
-for xx in (-1100, -60):
+rect(-700, -400, -60, -300, fill="url(#pTosca)", **CUTT)
+rect(-700, -300, -60, -200, fill="url(#pH)", **CUTT)
+for xx in (-700, -60):
     pass
 rect(-60, -300, -56, -200, fill=NEO, stroke="none", sw=0)          # junta c/ sellador
 for xx in range(-650, -60, 180): line(xx, -200, xx + 30, -200, sw=0.1)
 # babeta / goterón arranque
 pline([(40, 8), (-20, 4), (-62, -10), (-62, -60), (-80, -78)], stroke="#000", sw=0.28)
 # piso interior
-rect(250, -330, 2600, -182, fill="url(#pTosca)", **CUTT)
-rect(250, -182, 2600, -180, fill="#000", stroke="none", sw=0)        # film 200 micrones
-rect(270, -180, 2600, -60, fill="url(#pHAis)", **CUTT)                # contrapiso armado
-pline([(290, -110), (2600, -110)], stroke="#7a1f1f", sw=0.1, extra='stroke-dasharray="2 0.5"')
-rect(270, -60, 2600, -40, fill="url(#pHid)", **CUTT)                  # carpeta hidrófuga
-rect(270, -40, 2600, -15, fill="url(#pMort)", **CUTT)                 # carpeta niv.
-rect(275, -15, 2600, -10, fill="#8d8d8d", stroke="none", sw=0)        # adhesivo
-rect(275, -10, 2600, 0, fill="url(#pPorc)", **CUTT)
-for xx in range(875, 2600, 600): line(xx, -10, xx, 0, sw=0.15)
+rect(250, -330, 3000, -182, fill="url(#pTosca)", **CUTT)
+rect(250, -182, 3000, -180, fill="#000", stroke="none", sw=0)        # film 200 micrones
+rect(270, -180, 3000, -60, fill="url(#pHAis)", **CUTT)                # contrapiso armado
+pline([(290, -110), (3000, -110)], stroke="#7a1f1f", sw=0.1, extra='stroke-dasharray="2 0.5"')
+rect(270, -60, 3000, -40, fill="url(#pHid)", **CUTT)                  # carpeta hidrófuga
+rect(270, -40, 3000, -15, fill="url(#pMort)", **CUTT)                 # carpeta niv.
+rect(275, -15, 3000, -10, fill="#8d8d8d", stroke="none", sw=0)        # adhesivo
+rect(275, -10, 3000, 0, fill="url(#pPorc)", **CUTT)
+for xx in range(875, 3000, 600): line(xx, -10, xx, 0, sw=0.15)
 rect(250, -180, 270, -10, fill="url(#pEPSv)", **CUTT)                 # junta perimetral
 rect(250, -10, 275, 0, fill=NEO, stroke="none", sw=0)                # sellador
 
 # ================================================================ ESTRUCTURA
 def columna_vista(y0, y1):
-    rect(-100, y0, 300, y1, fill="#eceeef", **VIEW)
+    rect(250, y0, 650, y1, fill="#eceeef", **VIEW)
 def mensula(ytop):
-    poly([(300, ytop - 400), (300, ytop), (600, ytop), (600, ytop - 200)], fill="#e3e6e8", **VIEW)
-    pline([(330, ytop - 360), (330, ytop - 30), (570, ytop - 30), (570, ytop - 190)], stroke="#7a1f1f", sw=0.1, extra='stroke-dasharray="0.6 0.4"')
+    poly([(250, ytop - 400), (650, ytop - 400), (650, ytop), (250, ytop)], fill="#e3e6e8", **VIEW)
+    for xx in (330, 570): line(xx, ytop - 400, xx, ytop, stroke="#666", sw=0.1, extra='stroke-dasharray="0.6 0.4"')
 def viga_L(yb):
     yt = yb + 700
-    poly([(300, yb), (800, yb), (800, yb + 330), (600, yb + 330), (600, yt), (300, yt)], fill="url(#pHA)", **CUT)
-    rect(330, yb + 30, 570, yt - 30, stroke="#7a1f1f", sw=0.1, extra='fill="none"')
-    pline([(570, yb + 30), (770, yb + 30), (770, yb + 300), (570, yb + 300)], stroke="#7a1f1f", sw=0.1)
-    for xx in (360, 450, 540, 660, 740): circ(xx, yb + 60, 0.33)
-    for xx in (360, 540): circ(xx, yt - 55, 0.28)
+    poly([(250, yb), (750, yb), (750, yb + 330), (550, yb + 330), (550, yt), (250, yt)], fill="url(#pHA)", **CUT)
+    rect(280, yb + 30, 520, yt - 30, stroke="#7a1f1f", sw=0.1, extra='fill="none"')
+    pline([(520, yb + 30), (720, yb + 30), (720, yb + 300), (520, yb + 300)], stroke="#7a1f1f", sw=0.1)
+    for xx in (310, 400, 490, 610, 690): circ(xx, yb + 60, 0.33)
+    for xx in (310, 490): circ(xx, yt - 55, 0.28)
     # estribos salientes (vinculación con capa de compresión)
-    pline([(470, yt - 120), (470, yt - 25), (1350, yt - 25)], stroke="#7a1f1f", sw=0.16)
+    pline([(420, yt - 120), (420, yt - 25), (1300, yt - 25)], stroke="#7a1f1f", sw=0.16)
     # perno/bulón ménsula-viga (vaina grouteada) en vista
     rect(430, yb - 400 + 60, 470, yb + 400, fill="none", stroke="#333", sw=0.1, extra=DASH)
-    rect(300, yb - 10, 600, yb, fill=NEO, stroke="none", sw=0)
+    rect(250, yb - 10, 650, yb, fill=NEO, stroke="none", sw=0)
 def losa(yb):          # losa alveolar e=30, cortada por un alvéolo
     yt = yb + 300
-    rect(640, yb - 10, 790, yb, fill=NEO, stroke="none", sw=0)           # neopreno
-    poly([(620, yb), (2600, yb), (2600, yb + 45), (920, yb + 45), (920, yt - 45), (2600, yt - 45), (2600, yt), (620, yt)], fill="url(#pHA)", **CUT)
-    rect(920, yb + 45, 2600, yt - 45, fill="#f6f7f8", stroke="none", sw=0)  # alveolo (vacío)
-    line(920, yb + 45, 2600, yb + 45, sw=0.2); line(920, yt - 45, 2600, yt - 45, sw=0.2)
-    line(620, yb + 150, 920, yb + 150, sw=0.08, extra=DASH)
-    rect(620, yb + 45, 920, yt - 45, fill="url(#pH)", stroke="#000", sw=0.15)  # tapón de H°
-    pline([(650, yb + 28), (2600, yb + 28)], stroke="#7a1f1f", sw=0.16, extra='stroke-dasharray="3 0.8"')
+    rect(590, yb - 10, 740, yb, fill=NEO, stroke="none", sw=0)           # neopreno
+    poly([(570, yb), (3000, yb), (3000, yb + 45), (870, yb + 45), (870, yt - 45), (3000, yt - 45), (3000, yt), (570, yt)], fill="url(#pHA)", **CUT)
+    rect(870, yb + 45, 3000, yt - 45, fill="#f6f7f8", stroke="none", sw=0)  # alveolo (vacío)
+    line(870, yb + 45, 3000, yb + 45, sw=0.2); line(870, yt - 45, 3000, yt - 45, sw=0.2)
+    line(570, yb + 150, 870, yb + 150, sw=0.08, extra=DASH)
+    rect(570, yb + 45, 870, yt - 45, fill="url(#pH)", stroke="#000", sw=0.15)  # tapón de H°
+    pline([(600, yb + 28), (3000, yb + 28)], stroke="#7a1f1f", sw=0.16, extra='stroke-dasharray="3 0.8"')
     # junta viga-losa + capa de compresión
-    poly([(600, yb - 10), (620, yb - 10), (620, yt), (2600, yt), (2600, yt + 60), (600, yt + 60)], fill="url(#pHAis)", **CUT)
-    pline([(650, yt + 30), (2600, yt + 30)], stroke="#7a1f1f", sw=0.1, extra='stroke-dasharray="2 0.5"')
-    for xx in range(800, 2600, 300): circ(xx, yt + 30, 0.18, fill="#7a1f1f")
+    poly([(550, yb - 10), (570, yb - 10), (570, yt), (3000, yt), (3000, yt + 60), (550, yt + 60)], fill="url(#pHAis)", **CUT)
+    pline([(600, yt + 30), (3000, yt + 30)], stroke="#7a1f1f", sw=0.1, extra='stroke-dasharray="2 0.5"')
+    for xx in range(800, 3000, 300): circ(xx, yt + 30, 0.18, fill="#7a1f1f")
 def cielorraso(y):
-    rect(200, y, 2600, y + 12.5, fill="#f2f2f2", **CUTT)
-    rect(200, y + 12.5, 2600, y + 47, fill="none", stroke="#555", sw=0.1)
-    for xx in range(500, 2600, 400): rect(xx, y + 12.5, xx + 35, y + 47, fill=ALU, stroke="#444", sw=0.08)
+    rect(200, y, 3000, y + 12.5, fill="#f2f2f2", **CUTT)
+    rect(200, y + 12.5, 3000, y + 47, fill="none", stroke="#555", sw=0.1)
+    for xx in range(500, 3000, 400): rect(xx, y + 12.5, xx + 35, y + 47, fill=ALU, stroke="#444", sw=0.08)
     pline([(200, y + 60), (200, y), (240, y)], stroke="#000", sw=0.2)
 
 # columna vista PB y PA
-columna_vista(0, 8400); mensula(3750); mensula(8250)
+columna_vista(0, 3350); mensula(3750)
+columna_vista(4500, 7850); mensula(8250)
 viga_L(3760); losa(4100)
 viga_L(8260); losa(8600)
 cielorraso(3500)
@@ -182,10 +183,10 @@ for xx in (1100, 2300):
     line(xx + 17, 8147, xx + 17, 8590, stroke="#555", sw=0.1)
 
 # piso entrepiso
-rect(300, 4460, 2600, 4485, fill="url(#pMort)", **CUTT)
-rect(300, 4485, 2600, 4490, fill="#8d8d8d", stroke="none", sw=0)
-rect(300, 4490, 2600, 4500, fill="url(#pPorc)", **CUTT)
-for xx in range(860, 2600, 600): line(xx, 4490, xx, 4500, sw=0.15)
+rect(250, 4460, 3000, 4485, fill="url(#pMort)", **CUTT)
+rect(260, 4485, 3000, 4490, fill="#8d8d8d", stroke="none", sw=0)
+rect(260, 4490, 3000, 4500, fill="url(#pPorc)", **CUTT)
+for xx in range(860, 3000, 600): line(xx, 4490, xx, 4500, sw=0.15)
 
 # ================================================================ MURO CORTINA
 def dvh(y0, y1, spandrel=False):
@@ -241,22 +242,22 @@ rect(-30, 8400, 30, 8420, fill="#222", stroke="none", sw=0)                 # se
 circ(0, 8410, 0.45, fill="#fff", stroke="#000", sw=0.08)
 
 # barrera cortafuego entrepiso
-rect(93, 4340, 300, 4350, fill=STEEL, stroke="none", sw=0)
-rect(93, 4350, 300, 4455, fill="url(#pLana)", **CUTT)
-rect(93, 4455, 300, 4462, fill="#c0392b", stroke="none", sw=0)             # sellador intumescente
-pline([(182, 4503), (380, 4503)], stroke="#000", sw=0.25)                    # cubrejunta
+rect(93, 4340, 250, 4350, fill=STEEL, stroke="none", sw=0)
+rect(93, 4350, 250, 4455, fill="url(#pLana)", **CUTT)
+rect(93, 4455, 250, 4462, fill="#c0392b", stroke="none", sw=0)             # sellador intumescente
+pline([(182, 4503), (330, 4503)], stroke="#000", sw=0.25)                    # cubrejunta
 
 # grapas de anclaje (en vista) + riel embutido
 def grapa_sup(ytop):
-    rect(330, ytop - 45, 390, ytop, fill="none", stroke="#333", sw=0.1, extra=DASH)    # riel tipo Halfen
-    poly([(185, ytop), (420, ytop), (420, ytop + 10), (195, ytop + 10), (195, ytop - 160), (185, ytop - 160)], fill=STEEL, stroke="#000", sw=0.08)
-    line(360, ytop - 45, 360, ytop + 25, stroke="#000", sw=0.2)              # bulón T
+    rect(270, ytop - 45, 330, ytop, fill="none", stroke="#333", sw=0.1, extra=DASH)    # riel tipo Halfen
+    poly([(185, ytop), (360, ytop), (360, ytop + 10), (195, ytop + 10), (195, ytop - 160), (185, ytop - 160)], fill=STEEL, stroke="#000", sw=0.08)
+    line(300, ytop - 45, 300, ytop + 25, stroke="#000", sw=0.2)              # bulón T
     line(165, ytop - 110, 200, ytop - 110, stroke="#000", sw=0.25)           # bulón M12 a montante
 grapa_sup(4460)
 # grapa inferior PB (a VF) y superior (a cara de viga de cubierta)
 poly([(185, 40), (195, 40), (195, 180), (250, 180), (250, 190), (185, 190)], fill=STEEL, stroke="#000", sw=0.08)
-poly([(185, 8270), (300, 8270), (300, 8390), (290, 8390), (290, 8280), (185, 8280)], fill=STEEL, stroke="#000", sw=0.08)
-line(290, 8340, 380, 8340, stroke="#000", sw=0.25)                           # anclaje químico
+poly([(185, 8270), (250, 8270), (250, 8390), (240, 8390), (240, 8280), (185, 8280)], fill=STEEL, stroke="#000", sw=0.08)
+line(240, 8340, 330, 8340, stroke="#000", sw=0.25)                           # anclaje químico
 
 # ================================================================ CUBIERTA / PARAPETO
 # panel sándwich premoldeado (cenefa/parapeto)
@@ -273,17 +274,17 @@ line(30, 9760, 30, 9812, stroke="#000", sw=0.18)
 
 # cierre de cámara panel/viga
 rect(110, 8460, 160, 8890, fill="url(#pLanaV)", **CUTT)
-rect(110, 8408, 300, 8414, fill=STEEL, stroke="none", sw=0)
-rect(110, 8900, 300, 8960, fill="url(#pHAis)", **CUT)                         # relleno H° in situ
+rect(110, 8408, 250, 8414, fill=STEEL, stroke="none", sw=0)
+rect(110, 8900, 250, 8960, fill="url(#pHAis)", **CUT)                         # relleno H° in situ
 # unión mecánica panel-viga (en vista)
-poly([(115, 8960), (420, 8960), (420, 8972), (127, 8972), (127, 8990), (115, 8990)], fill=STEEL, stroke="#000", sw=0.08)
+poly([(115, 8960), (360, 8960), (360, 8972), (127, 8972), (127, 8990), (115, 8990)], fill=STEEL, stroke="#000", sw=0.08)
 poly([(115, 8862), (127, 8862), (127, 8960), (115, 8960)], fill=STEEL, stroke="#000", sw=0.08)
 line(60, 8915, 160, 8915, stroke="#000", sw=0.25)                            # bulón a inserto
-line(370, 8890, 370, 8985, stroke="#000", sw=0.25)                           # anclaje químico
-poly([(115, 8520), (300, 8520), (300, 8530), (127, 8530), (127, 8600), (115, 8600)], fill=STEEL, stroke="#000", sw=0.08)
+line(310, 8890, 310, 8985, stroke="#000", sw=0.25)                           # anclaje químico
+poly([(115, 8520), (250, 8520), (250, 8530), (127, 8530), (127, 8600), (115, 8600)], fill=STEEL, stroke="#000", sw=0.08)
 
 # paquete de cubierta
-x0, x1 = 110, 2600
+x0, x1 = 110, 3000
 def ypend(x, base): return base + (x - x0) * 0.02
 rect(x0, 8960, x1, 8963, fill="#000", stroke="none", sw=0)                   # barrera de vapor
 rect(x0, 8963, x1, 9013, fill="url(#pEPS)", **CUTT)
@@ -300,7 +301,7 @@ out.append('<g id="full">' + "\n".join(full) + "</g>")
 uses = []
 for i, (lo, hi, top) in enumerate(BANDS):
     dy = top - YC(hi)
-    defs.append(f'<clipPath id="cb{i}" clipPathUnits="userSpaceOnUse"><rect x="0" y="{f(YC(hi))}" width="{f(X(2600)+0.01)}" height="{f((hi-lo)/S)}"/></clipPath>')
+    defs.append(f'<clipPath id="cb{i}" clipPathUnits="userSpaceOnUse"><rect x="0" y="{f(YC(hi))}" width="{f(X(3000)+0.01)}" height="{f((hi-lo)/S)}"/></clipPath>')
     uses.append(f'<g transform="translate(0,{f(dy)})"><g clip-path="url(#cb{i})"><use href="#full"/></g></g>')
 
 def A(s): ann.append(s)
@@ -316,23 +317,23 @@ def zig_h(py, x0p, x1p):
     xm = (x0p + x1p) / 2
     pts = [(x0p, py), (xm - 1.5, py), (xm - 0.6, py - 2), (xm + 0.6, py + 2), (xm + 1.5, py), (x1p, py)]
     A('<polyline points="' + " ".join(f"{f(a)},{f(b)}" for a, b in pts) + '" fill="none" stroke="#000" stroke-width="0.18"/>')
-xa, xb = X(-1100), X(2600)
+xa, xb = X(-700), X(3000)
 for i, (lo, hi, top) in enumerate(BANDS):
     bot = top + (hi - lo) / S
     if i > 0: zig_h(top, xa, xb)
     if i < len(BANDS) - 1: zig_h(bot, xa, xb)
 # interrupción vertical derecha
 for lo, hi, top in BANDS:
-    bot = top + (hi - lo) / S; xm = X(2600); ym = (top + bot) / 2
+    bot = top + (hi - lo) / S; xm = X(3000); ym = (top + bot) / 2
     A(f'<polyline points="{f(xm)},{f(top)} {f(xm)},{f(ym-1.5)} {f(xm+2)},{f(ym-0.6)} {f(xm-2)},{f(ym+0.6)} {f(xm)},{f(ym+1.5)} {f(xm)},{f(bot)}" fill="none" stroke="#000" stroke-width="0.18"/>')
 
 # eje de columna
 for lo, hi, top in BANDS:
     bot = top + (hi - lo) / S
-    L(X(100), top, X(100), bot, sw=0.12, stroke="#b03030", extra='stroke-dasharray="4 0.8 0.6 0.8"')
-A(f'<circle cx="{f(X(100))}" cy="{f(Y(9960)-0)}" r="2.6" fill="#fff" stroke="#b03030" stroke-width="0.2"/>')
-T(X(100), Y(9960) + 0.9, "C", 2.6, "middle", "bold", "#b03030")
-L(X(100), Y(9960) + 2.6, X(100), Y(9960) + 3.0, stroke="#b03030")
+    L(X(450), top, X(450), bot, sw=0.12, stroke="#b03030", extra='stroke-dasharray="4 0.8 0.6 0.8"')
+A(f'<circle cx="{f(X(450))}" cy="{f(Y(9960)-0)}" r="2.6" fill="#fff" stroke="#b03030" stroke-width="0.2"/>')
+T(X(450), Y(9960) + 0.9, "C", 2.6, "middle", "bold", "#b03030")
+L(X(450), Y(9960) + 2.6, X(450), Y(9960) + 3.0, stroke="#b03030")
 
 # niveles
 def nivel(y, txt, xpos, side="r", sub=""):
@@ -345,8 +346,8 @@ def nivel(y, txt, xpos, side="r", sub=""):
     T(ax, py - 2.6, txt, 2.1, an, "bold")
     if sub: T(ax, py - 0.6 + 2.6, sub, 1.5, an, ital=True)
 nivel(9800, "+9,80", -300, "r", "Cota sup. parapeto")
-nivel(9077, "+9,08", 2150, "l", "Cubierta terminada (mín.)")
-nivel(8960, "+8,96", 2500, "l", "N.S.E. cubierta")
+nivel(9077, "+9,08", 2450, "l", "Cubierta terminada (mín.)")
+nivel(8960, "+8,96", 2850, "l", "N.S.E. cubierta")
 nivel(8100, "+8,10", 1500, "r", "Cielorraso PA")
 nivel(4500, "+4,50", 1700, "r", "N.P.T. Planta Alta")
 nivel(4460, "", 2500)
@@ -365,11 +366,11 @@ def cota_v(y0, y1, xpos, txt=None):
         L(px - 0.8, p + 0.8, px + 0.8, p - 0.8, 0.25); L(px - 1.2, p, px + 1.6, p, 0.1)
     v = txt or (f"{abs(y1 - y0)/1000:.2f}".replace(".", ","))
     T(px - 0.7, (p0 + p1) / 2, v, 1.7, "middle", rot=-90)
-cota_v(0, 4500, -1000); cota_v(4500, 8960, -1000); cota_v(8960, 9800, -1000, "0,84")
-cota_v(-2080, 0, -1000)
-cota_v(3760, 4460, 850, "0,70"); cota_v(8260, 8960, 850, "0,70")
-cota_v(4100, 4400, 2450, "0,30"); cota_v(4400, 4460, 2350, "")
-cota_v(-2000, -1500, 1250, "0,50"); cota_v(-1450, -620, 1250, "0,83")
+cota_v(0, 4500, -620); cota_v(4500, 8960, -620); cota_v(8960, 9800, -620, "0,84")
+cota_v(-2080, 0, -620)
+cota_v(3760, 4460, 800, "0,70"); cota_v(8260, 8960, 800, "0,70")
+cota_v(4100, 4400, 2800, "0,30"); cota_v(4400, 4460, 2700, "")
+cota_v(-2000, -1500, 1600, "0,50"); cota_v(-1450, -620, 1600, "0,83")
 cota_v(-610, 0, 380, "0,61")
 # cotas horizontales
 def cota_h(x0, x1, ypos, txt=None, below=False):
@@ -380,10 +381,10 @@ def cota_h(x0, x1, ypos, txt=None, below=False):
         L(p - 0.8, py + 0.8, p + 0.8, py - 0.8, 0.25); L(p, py - 1.2, p, py + 1.2, 0.1)
     v = txt if txt is not None else f"{abs(x1-x0)/10:.0f}".replace(".", ",")
     T((a + b) / 2, py + (2.3 if below else -0.6), v, 1.6, "middle")
-cota_h(-30, 182, 3050, "21"); cota_h(182, 300, 3050, "12"); cota_h(-100, 300, 3230, "40 (columna)")
-cota_h(300, 600, 5050, "30"); cota_h(600, 800, 5050, "20"); cota_h(-40, 110, 9880, "15")
-cota_h(-900, 1100, -2120, "2,00 (base s/cálculo)", below=True)
-cota_h(-400, 600, -1560, "1,00", below=True)
+cota_h(-30, 182, 3050, "21"); cota_h(182, 250, 3050, "7"); cota_h(250, 650, 3050, "40")
+cota_h(250, 550, 5050, "30"); cota_h(550, 750, 5050, "20"); cota_h(-40, 110, 9880, "15")
+cota_h(-550, 1450, -2120, "2,00 (base s/cálculo)", below=True)
+cota_h(-50, 950, -2120, "", below=True)
 cota_h(-50, 250, -700, "30", below=True)
 
 # ------------------------------------------------ referencias numeradas
@@ -398,16 +399,16 @@ def ref(n, x, y, dx, dy):
     T(bx, by + 0.7, str(n), 1.9 if n < 100 else 1.6, "middle", "bold", "#c0392b")
 
 # Fundación y PB
-ref(1, 1000, -2040, 12, 6)
-ref(2, 900, -1800, 18, 0)
-ref(3, 480, -1200, 30, 0)
-ref(4, -125, -1000, -16, -4)
+ref(1, 1300, -2040, 14, 4)
+ref(2, 1200, -1800, 18, 0)
+ref(3, 830, -1200, 22, 0)
+ref(4, 225, -1000, 22, -4)
 ref(5, 100, -400, -26, 6)
 ref(6, 0, -615, -24, 9)
 ref(7, -56, -500, -10, 12)
 ref(8, 2000, -700, 6, 6)
-ref(9, 2400, -260, 2, 9)
-ref(10, 2200, -181, 7, 12)
+ref(9, 2300, -260, 4, 8)
+ref(10, 2500, -181, 7, 12)
 ref(11, 2000, -120, 2, 15)
 ref(12, 1600, -50, -4, 18)
 ref(13, 1300, -28, -6, 22)
@@ -419,16 +420,16 @@ ref(41, 190, 20, 26, -16)
 ref(42, 100, 20, 30, -10)
 ref(43, -5, 2, -19, -12)
 # Estructura
-ref(18, 230, 2950, 40, 0)
-ref(18, 230, 7950, 50, 6)
-ref(19, 500, 3550, 30, 0)
-ref(20, 450, 4200, 40, 18)
-ref(21, 540, 3820, 40, 6)
+ref(18, 450, 2950, 30, 0)
+ref(18, 450, 7950, 40, 6)
+ref(19, 600, 3550, 30, 0)
+ref(20, 400, 4200, 40, 18)
+ref(21, 490, 3820, 40, 6)
 ref(22, 2000, 4300, 0, -14)
-ref(23, 770, 4250, 14, -16)
-ref(24, 750, 4095, 28, 8)
-ref(25, 610, 4300, 46, 21)
-ref(26, 2050, 4430, 0, -13)
+ref(23, 720, 4250, 14, -16)
+ref(24, 700, 4095, 28, 8)
+ref(25, 560, 4300, 46, 21)
+ref(26, 2300, 4430, 0, -13)
 ref(27, 450, 3620, 22, 10)
 ref(28, 120, 3000, -20, 2)
 ref(29, 100, 3530, 30, 4)
@@ -439,7 +440,7 @@ ref(33, 12, 2950, -19, -6)
 ref(34, 12, 3483, -22, 10)
 ref(35, 12, 4625, -24, -2)
 ref(36, 190, 4400, 47, -9)
-ref(37, 360, 4440, 54, 1)
+ref(37, 300, 4430, 54, 1)
 ref(38, 100, 4710, 32, 0)
 ref(39, 3, 4100, -16, 0)
 ref(40, 65, 4000, -24, 9)
@@ -452,7 +453,7 @@ ref(48, 1117, 4000, 8, -2)
 ref(49, 1700, 8961, 4, 9)
 ref(50, 1500, 8990, 8, 12)
 ref(51, 1700, 9040, 0, -10)
-ref(52, 2150, 9067, 2, -14)
+ref(52, 2400, 9067, 2, -14)
 ref(53, 1200, 9077, -2, -12)
 ref(54, 135, 9085, 22, -16)
 ref(55, 112, 9380, 22, -4)
@@ -460,12 +461,12 @@ ref(56, -10, 9500, -18, 0)
 ref(57, 45, 9490, -26, 8)
 ref(58, -28, 9100, -16, 6)
 ref(59, -22, 8426, -22, -3)
-ref(60, 50, 9805, -9, -5)
+ref(60, 50, 9805, 0, -8)
 ref(61, 121, 8930, 34, -20)
 ref(62, 121, 8560, 30, 6)
 ref(63, 135, 8700, 40, 6)
 ref(64, 180, 8930, 42, -2)
-ref(65, 270, 8330, 32, 6)
+ref(65, 215, 8330, 32, 6)
 ref(66, 0, 8410, -14, 11)
 ref(67, 2000, 8105, 0, 9)
 
@@ -473,15 +474,15 @@ ref(67, 2000, 8105, 0, 9)
 def lab(x, y, s, size=1.7, anchor="start", ital=True, fill="#333"):
     DX.append(dict(t='text', p=(x, y), s=s, h=size * S))
     T(X(x), Y(y), s, size, anchor, ital=ital, fill=fill)
-lab(-900, 8000, "EXTERIOR", 2.4, ital=False, fill="#555")
-lab(800, 5000, "INTERIOR · PLANTA ALTA", 2.2, ital=False, fill="#555")
-lab(800, 2980, "INTERIOR · PLANTA BAJA", 2.2, ital=False, fill="#555")
-lab(800, 700, "INTERIOR · PLANTA BAJA", 2.2, ital=False, fill="#555")
-lab(-1080, 700, "EXTERIOR", 2.4, ital=False, fill="#555")
-lab(-1080, 5000, "EXTERIOR", 2.4, ital=False, fill="#555")
-lab(1300, 9160, "pend. 2 % →  hacia canaleta perimetral", 1.6)
-A(f'<path d="M{f(X(2400))},{f(Y(9150))} l-14,0.3" stroke="#000" stroke-width="0.15" marker-end="url(#arr)"/>')
-lab(1350, -1000, "Fundación (base, tintero y", 1.5); lab(1350, -1080, "columna) en proyección, sobre", 1.5); lab(1350, -1160, "eje de columna – línea de trazos", 1.5)
+lab(-540, 8000, "EXTERIOR", 2.4, ital=False, fill="#555")
+lab(1000, 5000, "INTERIOR · PLANTA ALTA", 2.2, ital=False, fill="#555")
+lab(1000, 2980, "INTERIOR · PLANTA BAJA", 2.2, ital=False, fill="#555")
+lab(1000, 700, "INTERIOR · PLANTA BAJA", 2.2, ital=False, fill="#555")
+lab(-680, 700, "EXTERIOR", 2.4, ital=False, fill="#555")
+lab(-680, 5000, "EXTERIOR", 2.4, ital=False, fill="#555")
+lab(1550, 9160, "pend. 2 % →  hacia canaleta perimetral", 1.6)
+A(f'<path d="M{f(X(2700))},{f(Y(9150))} l-14,0.3" stroke="#000" stroke-width="0.15" marker-end="url(#arr)"/>')
+lab(-680, -1150, "Fundación (base, tintero y", 1.5); lab(-680, -1230, "columna) en proyección, sobre", 1.5); lab(-680, -1310, "eje de columna – línea de trazos", 1.5)
 lab(700, 3300, "Columna y ménsulas en vista", 1.5)
 lab(700, 3220, "(corte entre ejes, a ½ luz de viga)", 1.5)
 lab(1300, 4850, "Vidrio de seguridad laminado: protección contra caídas", 1.45)
@@ -495,7 +496,7 @@ LEG = [
 (2, "Base aislada H°A° in situ H-25 (dim. y armadura s/ cálculo y estudio de suelos)."),
 (3, "Tintero / cáliz H°A° in situ, empotramiento de columna ≥ 1,5 b (83 cm)."),
 (4, "Columna empotrada c/ llaves de corte + grout cementicio sin retracción (5 cm)."),
-(5, "Viga de fundación premoldeada H°A° 30x61 (VF) apoyada en tinteros, centrada en el eje de bases."),
+(5, "Viga de fundación premoldeada H°A° 30x61 (VF) apoyada en tinteros."),
 (6, "Apoyo de neopreno e = 10 mm, VF / tintero."),
 (7, "Aislación hidrófuga vertical: pintura asfáltica 2 manos + film 200 µ."),
 (8, "Suelo natural compactado."),
@@ -509,8 +510,8 @@ LEG = [
 (16, "Vereda H° peinado e = 10 cm s/ tosca + junta c/ sellador."),
 (17, "Babeta chapa galv. N°24 plegada c/ goterón."),
 ("ESTRUCTURA PREMOLDEADA (GRANDES LUCES)", None),
-(18, "Columna premoldeada H°A° 40x40 H-30 en el eje de fachada (en vista); el muro cortina se interrumpe en cada columna c/ perfil de encuentro + sellador."),
-(19, "Ménsula corta interior de columna, apoyo de viga (en vista)."),
+(18, "Columna premoldeada H°A° 40x40 H-30 c/ ménsulas (en vista)."),
+(19, "Ménsula corta de columna 40x40 (en vista)."),
 (20, "Viga portante premoldeada pretensada tipo “L” 30/70 c/ talón 20x33, H-40."),
 (21, "Cordones de pretensado Ø 12,7 mm + estribos / armadura pasiva."),
 (22, "Losa alveolar pretensada e = 30 cm (luces hasta 14 m), corte por alvéolo."),
@@ -607,7 +608,6 @@ NOTAS = ["Sistema: columnas premoldeadas empotradas en tinteros + vigas “L” 
  "s/ ménsulas + losas alveolares pretensadas (luces 10–14 m). Uniones mecánicas",
  "(bulones, perfiles, insertos) y húmedas (grout / H° in situ: capa de compresión).",
  "Corte entre ejes de columnas (a ½ luz de viga); columna y ménsulas en vista.",
- "Eje único de fachada: muro cortina, VF, columna, tintero y base alineados.",
  "Muro cortina stick: montantes colgados de cada entrepiso (grapa superior fija,",
  "inferior deslizante) c/ junta de dilatación 20 mm para absorber deformaciones.",
  "Tolerancias de montaje premoldeado ±10 mm, absorbidas por grapas regulables 3D.",
@@ -640,8 +640,8 @@ for i in range(5):
 T(sx + 25, sy - 1.8, "50 cm", 1.3, "middle"); T(sx + 32, sy, "ESC. 1:20", 1.8, weight="bold")
 
 # título del corte
-T(X(-1100), 12.5, "CORTE INTEGRAL — FACHADA VIDRIADA · HORMIGÓN PREMOLDEADO", 3.0, weight="bold")
-T(X(-1100) + 140, 12.5, "ESC. 1:20", 3.0, weight="bold")
+T(X(-700), 12.5, "CORTE INTEGRAL — FACHADA VIDRIADA · HORMIGÓN PREMOLDEADO", 3.0, weight="bold")
+T(X(-700) + 140, 12.5, "ESC. 1:20", 3.0, weight="bold")
 
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="297mm" height="420mm" viewBox="0 0 297 420"
  font-family="Liberation Sans, Arial, sans-serif">
