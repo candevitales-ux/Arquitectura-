@@ -1,0 +1,94 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 420mm 297mm; margin: 0 }
+html, body { margin: 0; padding: 0; background: #fff; font-family: 'Liberation Sans', Arial, sans-serif; }
+#page { position: relative; width: 420mm; height: 297mm; overflow: hidden; }
+svg { position: absolute; left: 0; top: 0; }
+img.det { position: absolute; }
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="page"></div>
+<script type="module">
+import { det1, det2, det3, REF1, REF2, REF3 } from './details.js';
+
+const PX = 13;                         // px por mm de papel
+const P = { w: 134, imgH: 168, top: 17, gap: 3.5, x0: 7 };
+const page = document.getElementById('page');
+let svg = '';
+const T = (x, y, s, o = {}) => svg += `<text x="${x}" y="${y}" font-size="${o.size || 2}" font-weight="${o.w || 'normal'}" fill="${o.fill || '#000'}" text-anchor="${o.a || 'start'}"${o.it ? ' font-style="italic"' : ''}>${s}</text>`;
+const R = (x, y, w, h, o = {}) => svg += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${o.fill || 'none'}" stroke="${o.st || '#000'}" stroke-width="${o.sw || 0.25}"/>`;
+const Ln = (pts, o = {}) => svg += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="${o.st || '#c0392b'}" stroke-width="${o.sw || 0.15}"/>`;
+
+const DETS = [
+  { f: det1, refs: REF1, t: 'DETALLE 1 · NUDO CUBIERTA', st: 'Parapeto (panel sándwich) – viga “L” – losa alveolar – remate del muro cortina', dir: [1.0, 0.62, 1.35], frac: 0.84, off: [0, 0] },
+  { f: det2, refs: REF2, t: 'DETALLE 2 · NUDO ENTREPISO', st: 'Unión columna–ménsula–viga–losa · anclaje del muro cortina · spandrel y barrera cortafuego', dir: [1.0, 0.6, 1.3], frac: 0.84, off: [0, 0] },
+  { f: det3, refs: REF3, t: 'DETALLE 3 · NUDO PISO SOBRE TERRENO', st: 'Base + tintero + columna empotrada – viga de fundación – piso – arranque del muro cortina', dir: [1.0, 0.7, 1.45], frac: 0.84, off: [0, 0] },
+];
+
+DETS.forEach((D, i) => {
+  const x0 = P.x0 + i * (P.w + P.gap), y0 = P.top;
+  const S = D.f();
+  const r = S.render(Math.round(P.w * PX), Math.round(P.imgH * PX), D.dir, D.frac, D.off, 2.4);
+  const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
+  img.style.left = x0 + 'mm'; img.style.top = y0 + 'mm'; img.style.width = P.w + 'mm'; img.style.height = P.imgH + 'mm';
+  page.appendChild(img);
+  // encabezado
+  svg += `<rect x="${x0}" y="${y0 - 8.5}" width="${P.w}" height="5.2" fill="#2f3b45"/>`;
+  T(x0 + 1.5, y0 - 4.6, D.t, { size: 3, w: 'bold', fill: '#fff' });
+  T(x0 + P.w - 1.5, y0 - 4.6, `AXONOMETRÍA · ESC. APROX. 1:${Math.round(r.scale / P.w)}`, { size: 1.9, fill: '#fff', a: 'end', w: 'bold' });
+  T(x0 + 0.5, y0 - 0.8, D.st, { size: 1.85, it: true, fill: '#333' });
+  R(x0, y0, P.w, P.imgH, { sw: 0.2 });
+  // globos: columnas izquierda / derecha
+  const pts = r.anchors.map(a => ({ n: a.n, ax: x0 + a.x * P.w, ay: y0 + a.y * P.imgH }));
+  const byX = [...pts].sort((p, q) => p.ax - q.ax); byX.forEach((p, k) => p.left = k < Math.ceil(pts.length * 0.55));
+  for (const side of [true, false]) {
+    const L = pts.filter(p => p.left === side).sort((a, b) => a.ay - b.ay);
+    const gap = 5.6, ymin = y0 + 4, ymax = y0 + P.imgH - 4;
+    L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
+    for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
+    const bx = side ? x0 + 4.5 : x0 + P.w - 4.5;
+    for (const p of L) {
+      const ex = side ? bx + 2 : bx - 2, kx = side ? bx + 6 : bx - 6;
+      Ln([[p.ax, p.ay], [kx, p.by], [ex, p.by]]);
+      svg += `<circle cx="${p.ax}" cy="${p.ay}" r="0.45" fill="#c0392b"/>`;
+      svg += `<circle cx="${bx}" cy="${p.by}" r="2.05" fill="#fff" stroke="#c0392b" stroke-width="0.22"/>`;
+      T(bx, p.by + 0.75, p.n, { size: 2.1, w: 'bold', fill: '#c0392b', a: 'middle' });
+    }
+  }
+  // referencias
+  let ly = y0 + P.imgH + 4.6, col = 0;
+  const half = Math.ceil(D.refs.length / 2), cw = P.w / 2;
+  const wrap = (s, n) => { const o = []; let c = ''; for (const w of s.split(' ')) { if ((c + ' ' + w).trim().length > n) { o.push(c); c = w; } else c = (c + ' ' + w).trim(); } o.push(c); return o; };
+  const ys = [ly, ly];
+  D.refs.forEach((s, k) => {
+    const c = k < half ? 0 : 1, xx = x0 + c * cw;
+    T(xx + 1.6, ys[c], k + 1, { size: 1.95, w: 'bold', fill: '#c0392b', a: 'middle' });
+    for (const ln of wrap(s, 44)) { T(xx + 3.6, ys[c], ln, { size: 1.95 }); ys[c] += 2.45; }
+    ys[c] += 0.2;
+  });
+  R(x0, y0 + P.imgH + 1, P.w, 297 - 29.5 - (y0 + P.imgH + 1), { sw: 0.2 });
+});
+
+// rótulo
+const ry = 297 - 23;
+R(7, ry, 409, 17, { sw: 0.3 });
+T(10, ry + 6.5, 'LÁMINA 2 · DETALLES CONSTRUCTIVOS EN 3D DE LOS NUDOS', { size: 4, w: 'bold' });
+T(10, ry + 11.5, 'Sistema de hormigón premoldeado de grandes luces · Cerramiento vidriado – muro cortina (sistema stick, módulo 1,25 m)', { size: 2.3 });
+T(10, ry + 15, 'Axonometrías seccionadas en el plano de corte del corte integral; capas escalonadas para mostrar cada material. Cotas y especificaciones idem Lámina 1 (corte 1:20).', { size: 1.8, it: true, fill: '#333' });
+const cells = [['MATERIA', 'Construcciones II'], ['CÁTEDRA', 'Arq. ____________'], ['ALUMNO/A', '__________________'], ['GRUPO', '____'], ['HOJA', '2 de 2 · A3 · 2026']];
+let cx = 238;
+for (const [k, v] of cells) {
+  const w = k === 'ALUMNO/A' ? 46 : k === 'GRUPO' ? 18 : 36;
+  svg += `<line x1="${cx}" y1="${ry}" x2="${cx}" y2="${ry + 17}" stroke="#000" stroke-width="0.2"/>`;
+  T(cx + 1.5, ry + 5, k, { size: 1.7, w: 'bold' }); T(cx + 1.5, ry + 11, v, { size: 2.1 });
+  cx += w;
+}
+// leyenda de colores
+const sw = [['#c3c9cf', 'H°A° premoldeado'], ['#d3ccbd', 'H°A° in situ'], ['#dedad1', 'H° simple'], ['#e4e4e2', 'Mortero'], ['#aeb0b2', 'Grout'], ['#fff0a0', 'EPS'], ['#f5d07e', 'Lana mineral'], ['#8fd0e8', 'Vidrio'], ['#a3abb3', 'Aluminio'], ['#5d6369', 'Acero galv.'], ['#1d1d1d', 'Neopreno / sellador'], ['#a8321e', 'Armaduras']];
+sw.forEach(([c, t], k) => { const xx = 7 + k * 34; svg += `<rect x="${xx}" y="${ry - 3.6}" width="4" height="2.4" fill="${c}" stroke="#000" stroke-width="0.12"/>`; T(xx + 5, ry - 1.7, t, { size: 1.7 }); });
+svg = `<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297" font-family="Liberation Sans, Arial, sans-serif"><rect x="3" y="3" width="414" height="291" fill="none" stroke="#000" stroke-width="0.5"/>${svg}</svg>`;
+page.insertAdjacentHTML('beforeend', svg);
+await Promise.all([...document.images].map(im => im.decode()));
+window.READY = true;
+</script></body></html>
