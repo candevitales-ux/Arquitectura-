@@ -407,7 +407,7 @@ T(10, ry + 6.5, "LÁMINA 3 · DETALLES DE UNIONES EN CORTE (del corte integral)"
 T(10, ry + 11.5, "Sistema de hormigón premoldeado de grandes luces · Cerramiento vidriado – muro cortina (sistema stick, módulo 1,25 m)", 2.3)
 T(10, ry + 15, "Ventanas ampliadas del mismo corte integral de la Lámina 1 (mismo plano y cotas), a escala 1:5. Cotas en cm salvo indicación.", 1.8, ital=True, fill="#333")
 cx = 238
-for k, v in [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. ____________"), ("ALUMNO/A", "__________________"), ("GRUPO", "____"), ("HOJA", "3 de 3 · A3 · 2026")]:
+for k, v in [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. ____________"), ("ALUMNO/A", "__________________"), ("GRUPO", "____"), ("HOJA", "3 de 4 · A3 · 2026")]:
     w = 46 if k == "ALUMNO/A" else 18 if k == "GRUPO" else 36
     title += f'<line x1="{cx}" y1="{ry}" x2="{cx}" y2="{ry+17}" stroke="#000" stroke-width="0.2"/>'
     T(cx + 1.5, ry + 5, k, 1.7, weight="bold"); T(cx + 1.5, ry + 11, v, 2.1); cx += w
