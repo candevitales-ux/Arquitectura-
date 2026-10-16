@@ -165,6 +165,42 @@ export class Scene3D {
   anchor(n, x, y, z) { this.anchors.push({ n, p: new THREE.Vector3(x, y, z) }); }
 
   // render a imagen; devuelve dataURL y posiciones de anclas en [0..1]
+  // perspectiva cónica simétrica: cámara sobre el plano de simetría z = zc, mirando al centro
+  renderPersp(Wpx, Hpx, dir, fov = 28, frac = 0.8, lineW = 2.6, shiftY = 0) {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(1); renderer.setSize(Wpx, Hpx);
+    const target = this.bbox.getCenter(new THREE.Vector3());
+    const d = new THREE.Vector3(...dir).normalize();
+    const cam = new THREE.PerspectiveCamera(fov, Wpx / Hpx, 5, 1e6);
+    const corners = []; const b = this.bbox;
+    for (const x of [b.min.x, b.max.x]) for (const y of [b.min.y, b.max.y]) for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, y, z));
+    let dist = b.getSize(new THREE.Vector3()).length() * 1.6, cy = 0;
+    for (let it = 0; it < 12; it++) {
+      cam.position.copy(target).addScaledVector(d, dist); cam.up.set(0, 1, 0); cam.lookAt(target);
+      cam.updateMatrixWorld(); cam.updateProjectionMatrix();
+      let mx = 0, mny = 1e9, mxy = -1e9;
+      for (const c of corners) { const v = c.clone().project(cam); mx = Math.max(mx, Math.abs(v.x)); mny = Math.min(mny, v.y); mxy = Math.max(mxy, v.y); }
+      const ext = Math.max(mx, (mxy - mny) / 2);
+      cy = (mxy + mny) / 2;
+      dist *= Math.pow(ext / frac, 0.9);
+      // recentrar en vertical
+      const up = new THREE.Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
+      target.addScaledVector(up, cy * 0.5 * dist * Math.tan(fov * Math.PI / 360) * 0.9);
+    }
+    const up = new THREE.Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
+    target.addScaledVector(up, -shiftY * dist * Math.tan(fov * Math.PI / 360));
+    cam.position.copy(target).addScaledVector(d, dist); cam.lookAt(target); cam.updateMatrixWorld();
+    for (const e of this.edges) {
+      const g = new LineSegmentsGeometry(); g.setPositions(e.pos);
+      const m = new LineMaterial({ color: '#111111', linewidth: lineW * e.w, resolution: new THREE.Vector2(Wpx, Hpx) });
+      const l = new LineSegments2(g, m); l.renderOrder = 20; this.scene.add(l);
+    }
+    renderer.render(this.scene, cam);
+    const url = renderer.domElement.toDataURL('image/png');
+    const anchors = this.anchors.map(a => { const v = a.p.clone().project(cam); return { n: a.n, x: (v.x + 1) / 2, y: (1 - v.y) / 2 }; });
+    renderer.dispose();
+    return { url, anchors, scale: 0 };
+  }
   render(Wpx, Hpx, dir, frac = 0.72, offset = [0, 0], lineW = 3.2) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
     renderer.setPixelRatio(1); renderer.setSize(Wpx, Hpx);

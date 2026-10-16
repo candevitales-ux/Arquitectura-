@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """Exporta los tres nudos 3D (Lámina 2) a DXF como entidades MESH por material,
 en verdadera magnitud (mm), Z hacia arriba. Incluye números de referencia y planillas."""
-import json, ezdxf
+import json, sys, ezdxf
 from ezdxf.enums import TextEntityAlignment
 
-D = json.load(open("build/lamina2_3d.json"))
+IN = sys.argv[1] if len(sys.argv) > 1 else "build/lamina2_3d.json"
+OUT = sys.argv[2] if len(sys.argv) > 2 else "build/dwg_in/Lamina2_Detalles_3D_Nudos.dxf"
+TITLE = sys.argv[3] if len(sys.argv) > 3 else "LAMINA 2 - DETALLES 3D DE NUDOS - Hormigon premoldeado de grandes luces con muro cortina (mm, verdadera magnitud, Z arriba)"
+D = json.load(open(IN))
 doc = ezdxf.new("R2018", setup=True)
 doc.units = ezdxf.units.MM
 doc.styles.add("ARIAL", font="arial.ttf")
@@ -57,7 +60,7 @@ for i, det in enumerate(D):
     mt = msp.add_mtext(det["st"] + r"\P\P" + txt, dxfattribs={"layer": "3D-TEXTOS", "char_height": 32, "style": "ARIAL", "width": 3400})
     mt.set_location((ox - 600, -500, base_z))
 
-t = msp.add_text("LAMINA 2 - DETALLES 3D DE NUDOS - Hormigon premoldeado de grandes luces con muro cortina (mm, verdadera magnitud, Z arriba)",
+t = msp.add_text(TITLE,
                  height=110, dxfattribs={"layer": "3D-TEXTOS", "style": "ARIAL"})
 t.set_placement((-600, -100, 2600))
 vp = doc.viewports.get("*Active")[0]
@@ -65,5 +68,5 @@ vp.dxf.direction = (1, -1.2, 0.9)
 vp.dxf.target = (DX, 0, 800)
 vp.dxf.height = 12000
 vp.dxf.center = (0, 0)
-doc.saveas("build/dwg_in/Lamina2_Detalles_3D_Nudos.dxf")
+doc.saveas(OUT)
 print("ok")

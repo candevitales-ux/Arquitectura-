@@ -627,7 +627,7 @@ T(204, ry + 9.5, "Sistema de hormigón premoldeado de grandes luces", 2.0)
 T(204, ry + 12.5, "Cerramiento vidriado – muro cortina (sistema stick)", 2.0)
 A(f'<line x1="202" y1="{ry+15}" x2="291" y2="{ry+15}" stroke="#000" stroke-width="0.2"/>')
 rows = [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. ________________"), ("ALUMNO/A", "______________________"),
-        ("GRUPO", "______"), ("ESCALA", "1:20 (impresión al 100 % en A3)"), ("HOJA", "1 de 2 · A3 · 2026")]
+        ("GRUPO", "______"), ("ESCALA", "1:20 (impresión al 100 % en A3)"), ("HOJA", "1 de 3 · A3 · 2026")]
 for i, (k, v) in enumerate(rows):
     yy = ry + 19 + i * 4.1
     T(204, yy, k, 1.6, weight="bold"); T(222, yy, v, 1.8)

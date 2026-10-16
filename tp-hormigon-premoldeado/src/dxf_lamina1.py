@@ -205,7 +205,7 @@ ry = min(y - 150, -1500)
 msp.add_lwpolyline([(x0 - 50, ry), (x0 + 2750, ry), (x0 + 2750, ry - 900), (x0 - 50, ry - 900)], close=True, dxfattribs={"layer": "X-ROTULO"})
 rot = [("LAMINA 2 - CORTE INTEGRAL", 70), ("Sistema de hormigon premoldeado de grandes luces - Cerramiento vidriado (muro cortina stick)", 36),
        ("MATERIA: Construcciones II", 36), ("CATEDRA: Arq. ____________", 36), ("ALUMNO/A: ____________________", 36),
-       ("GRUPO: ____", 36), ("ESCALA: 1:20", 36), ("HOJA: 1 de 2 - A3", 36)]
+       ("GRUPO: ____", 36), ("ESCALA: 1:20", 36), ("HOJA: 1 de 3 - A3", 36)]
 yy = ry - 120
 for s, h in rot:
     text(s, (x0, yy), h, "X-ROTULO"); yy -= h * 2.4
