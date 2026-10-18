@@ -1,5 +1,5 @@
-LÁMINA FINAL (A3 apaisada): Corte integral 1:20 + 3 nudos axonométricos isométricos (1:12,5) + referencias.
-- Corte_Integral_1-20_y_Nudos_Vidriado_A3.pdf : lámina para imprimir al 100 %.
+LÁMINA FINAL (A3 VERTICAL): Corte integral 1:20 + 3 nudos axonométricos isométricos (1:12,5) + referencias.
+- Corte_Integral_1-20_y_Nudos_Vidriado_A3_vertical.pdf : imprimir al 100 % en A3 vertical.
 - Corte_Integral_1-20_Vidriado.dwg : corte en verdadera magnitud (mm), sin interrupciones, capas por material,
   rayados, cotas editables, niveles, eje y referencias. Plotear a 1:20.
 - Nudos_Axonometricos_3D.dwg : los 3 nudos como mallas 3D por material (VSCURRENT > Realista, 3DORBIT).

@@ -5,12 +5,12 @@ Geometría en mm reales; x+ hacia el interior, y+ hacia arriba, ±0.00 = NPT pla
 import math, os
 
 S = 20.0                      # escala 1:20
-PX0, XR0 = 9.0, -750.0        # x de papel donde cae x real -750
+PX0, XR0 = 9.0, -600.0        # x de papel donde cae x real -600
 def X(x): return PX0 + (x - XR0) / S
 def YC(y): return 1000.0 - y / S          # coordenada "continua" antes de cortar en bandas
 
 # bandas (real lo, real hi, y papel superior)
-BANDS = [(7880, 9520, 8.0), (3290, 4710, 93.0), (-2180, 250, 167.0)]
+BANDS = [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
 def band_of(y):
     for lo, hi, top in BANDS:
         if lo - 1 <= y <= hi + 1: return (lo, hi, top)
@@ -297,11 +297,11 @@ rect(185, 9420, 260, 9440, fill="#222", stroke="none", sw=0)                    
 # =====================================================================================
 #  COMPOSICIÓN
 # =====================================================================================
-XMAX = 2700
+XMAX = 1700
 uses = []
 for i, (lo, hi, top) in enumerate(BANDS):
     dy = top - YC(hi)
-    defs.append(f'<clipPath id="cb{i}" clipPathUnits="userSpaceOnUse"><rect x="{f(X(-750))}" y="{f(YC(hi))}" width="{f(X(XMAX) - X(-750))}" height="{f((hi-lo)/S)}"/></clipPath>')
+    defs.append(f'<clipPath id="cb{i}" clipPathUnits="userSpaceOnUse"><rect x="{f(X(-600))}" y="{f(YC(hi))}" width="{f(X(XMAX) - X(-600))}" height="{f((hi-lo)/S)}"/></clipPath>')
     uses.append(f'<g transform="translate(0,{f(dy)})"><g clip-path="url(#cb{i})"><use href="#fullg"/></g></g>')
 
 def A(s): ann.append(s)
@@ -312,7 +312,7 @@ def T(x, y, s, size=2.0, anchor="start", weight="normal", fill="#000", rot=None,
 def L(x0, y0, x1, y1, sw=0.15, stroke="#000", extra=""):
     A(f'<line x1="{f(x0)}" y1="{f(y0)}" x2="{f(x1)}" y2="{f(y1)}" stroke="{stroke}" stroke-width="{sw}" {extra}/>')
 
-xa, xb = X(-750), X(XMAX)
+xa, xb = X(-600), X(XMAX)
 def zig_h(py):
     xm = (xa + xb) / 2
     A(f'<polyline points="{f(xa)},{f(py)} {f(xm-1.5)},{f(py)} {f(xm-0.6)},{f(py-2)} {f(xm+0.6)},{f(py+2)} {f(xm+1.5)},{f(py)} {f(xb)},{f(py)}" fill="none" stroke="#000" stroke-width="0.18"/>')
@@ -333,14 +333,14 @@ def nivel(y, txt, xpos, side="r", sub=""):
     T(ax, py - 2.4, txt, 1.9, an, "bold")
     if sub: T(ax, py + 2.2, sub, 1.4, an, ital=True)
 nivel(9472, "+9,47", -600, "r", "Cupertina")
-nivel(9092, "+9,09", 2250, "l", "Cubierta terminada")
-nivel(8915, "+8,92", 1800, "r", "N.S. estructura")
-nivel(7950, "+7,95", 1500, "r", "Cielorraso PA")
-nivel(4500, "+4,50", 1700, "r", "N.P.T. P. Alta")
-nivel(3450, "+3,45", 1500, "r", "Cielorraso PB")
-nivel(0, "±0,00", 1700, "r", "N.P.T. P. Baja")
-nivel(-150, "-0,15", -450, "r", "Vereda")
-nivel(-510, "-0,51", 1300, "r", "Sup. cuello")
+nivel(9092, "+9,09", 1650, "l", "Cubierta terminada")
+nivel(8915, "+8,92", 1350, "r", "N.S. estructura")
+nivel(7950, "+7,95", 1000, "r", "Cielorraso PA")
+nivel(4500, "+4,50", 1250, "r", "N.P.T. P. Alta")
+nivel(3450, "+3,45", 1000, "r", "Cielorraso PB")
+nivel(0, "±0,00", 1250, "r", "N.P.T. P. Baja")
+nivel(-150, "-0,15", -420, "r", "Vereda")
+nivel(-510, "-0,51", 1650, "l", "Sup. cuello")
 nivel(-2150, "-2,15", -300, "r", "Fundación")
 
 def cota_v(y0, y1, xpos, txt=None):
@@ -356,21 +356,21 @@ def cota_h(x0, x1, ypos, txt, below=False):
     L(a, py, b, py, 0.12)
     for p in (a, b): L(p - 0.7, py + 0.7, p + 0.7, py - 0.7, 0.25); L(p, py - 1.1, p, py + 1.1, 0.1)
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
-cota_v(0, 4500, -700); cota_v(4500, 8915, -700, "4,42"); cota_v(-2150, 0, -700)
+cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
 cota_v(3715, 4415, 760, "0,70"); cota_v(8215, 8915, 760, "0,70"); cota_v(4365, 4415 - 600 + 0, 2620, "")
-cota_v(3815, 4415, 2600, "0,60")
-cota_v(-2050, -1750, 1600, "0,30"); cota_v(-1350, -510, 1150, "0,84")
+cota_v(3815, 4415, 1640, "0,60")
+cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(-500, 0, -150, "0,50"); cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3330, "21"); cota_h(182, 250, 3330, "7"); cota_h(250, 650, 3330, "40")
 cota_h(-550, 1450, -2170, "2,00 (s/ cálculo)", below=True); cota_h(-75, 975, -1420, "1,05")
 cota_h(-50, 250, -620, "30", below=True)
-T(X(-740), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(1100), Y(9420), "INTERIOR", 2.0, fill="#555")
-T(X(-740), Y(4650), "EXTERIOR", 2.0, fill="#555"); T(X(900), Y(4650), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
-T(X(-740), Y(200), "EXTERIOR", 2.0, fill="#555"); T(X(900), Y(200), "INTERIOR · PLANTA BAJA", 2.0, fill="#555")
-T(X(1400), Y(9140), "pend. 2 % → embudo y caño pluvial en columna", 1.4, ital=True, fill="#333")
-T(X(1150), Y(-1000), "Fundación cortada por el eje de columna", 1.4, ital=True, fill="#333")
-T(X(1150), Y(-1070), "(línea de corte quebrada en ±0,00)", 1.4, ital=True, fill="#333")
-T(X(700), Y(3360), "Columna y VP en vista; ménsula y VL cortadas", 1.4, ital=True, fill="#333")
+T(X(-590), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(900), Y(9420), "INTERIOR", 2.0, fill="#555")
+T(X(-590), Y(4900), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(4900), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
+T(X(-590), Y(1300), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(1300), "INTERIOR · PLANTA BAJA", 2.0, fill="#555")
+T(X(700), Y(9200), "pend. 2 % → embudo y caño pluvial en columna", 1.4, ital=True, fill="#333")
+T(X(1050), Y(-1000), "Fundación cortada por el eje de columna", 1.4, ital=True, fill="#333")
+T(X(1050), Y(-1070), "(línea de corte quebrada en ±0,00)", 1.4, ital=True, fill="#333")
+T(X(700), Y(3280), "Columna y VP en vista; ménsula y VL cortadas", 1.4, ital=True, fill="#333")
 
 # círculo de eje
 A(f'<circle cx="{f(X(450))}" cy="{f(BANDS[0][2] + 2.2)}" r="2.1" fill="#fff" stroke="#b03030" stroke-width="0.2"/>')
@@ -386,18 +386,18 @@ def ref(n, x, y, dx, dy):
     T(bx, by + 0.62, str(n), 1.7, "middle", "bold", "#c0392b")
 
 REFS_POS = [
- (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1700, 9050, 0, 7), (6, 2100, 8995, 0, 7),
+ (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 1640, 8995, 0, 9),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 2000, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1275, 8600, 9, 9), (13, 450, 8500, 20, 2), (14, 2000, 8300, 0, 7),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1275, 8600, 9, 9), (13, 450, 8500, 20, 2), (14, 1550, 8300, 0, 7),
  (15, 450, 7880, 14, 0), (16, 300, 8000, -14, 3), (17, 450, 8207, 18, 6), (18, 600, 8565, 20, 10), (19, 505, 7900, 22, -3),
- (20, 1500, 4495, 0, -7), (21, 1900, 4475, 0, -9), (22, 1700, 3456, 0, 6), (23, 2100, 3475, 0, 6), (24, 1275, 3700, 9, 3),
+ (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3700, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, -20, 7), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, -14, 3),
- (35, 1500, -5, 0, -6), (36, 1800, -25, 0, -8), (37, 2100, -45, 0, -10), (38, 1700, -120, 0, 10), (39, 2300, -176, 0, 9),
- (40, 2000, -260, 0, 9), (41, 660, -100, 10, 12), (42, 100, -250, -18, -2), (43, 0, -505, -12, 6), (44, -60, -40, -10, -4),
+ (35, 950, -5, 0, -6), (36, 1150, -25, 0, -8), (37, 1350, -45, 0, -10), (38, 1100, -120, 0, 12), (39, 1550, -176, 0, 9),
+ (40, 1350, -260, 0, 10), (41, 660, -100, 10, 12), (42, 100, -250, -18, -2), (43, 0, -505, -12, 6), (44, -60, -40, -10, -4),
  (45, -300, -200, 6, -9), (46, 450, -900, 14, 0), (47, 700, -800, 20, 0), (48, 690, -1200, 22, 0), (49, 540, -1600, 20, 2),
- (50, 850, -700, 18, 12), (51, 1200, -1800, 8, 0), (52, 1100, -1960, 10, -4), (53, 1400, -2100, 6, 3), (54, 2300, -1200, 0, 5),
- (55, 1500, -420, 2, 7), (5, 0, 0, 0, 0),
+ (50, 850, -700, 18, 12), (51, 1200, -1800, 9, 0), (52, 1100, -1960, 10, -4), (53, 1400, -2100, 4, 3), (54, 1400, -1350, 0, 5),
+ (55, 1200, -420, 2, 9), (5, 0, 0, 0, 0),
 ]
 for n, x, y, dx, dy in REFS_POS:
     if (dx, dy) != (0, 0): ref(n, x, y, dx, dy)
@@ -465,50 +465,51 @@ LEG = [
 (55, "Caño pluvial PVC Ø110 a cámara de inspección y colectora."),
 ]
 
-RX = 185.0
-LX, LY, LW = 301.0, 137.0, 112.0
+RX = 130.0
+LX, LY = 130.0, 252.0
 def legend():
-    A(f'<rect x="{LX}" y="{LY}" width="{LW}" height="5" fill="#2f3b45"/>')
-    T(LX + 1.5, LY + 3.6, "REFERENCIAS (corte y nudos)", 2.4, weight="bold", fill="#fff")
-    cols = [(LX + 0.5, LY + 8.8), (LX + 57, LY + 8.8)]; ci = 0; x0, y = cols[0]; ymax = 262.0
+    T(LX, LY, "REFERENCIAS (corte integral y nudos)", 2.4, weight="bold")
+    A(f'<line x1="{LX}" y1="{LY+1.2}" x2="290" y2="{LY+1.2}" stroke="#000" stroke-width="0.2"/>')
+    cols = [(LX, LY + 5.5), (LX + 81, LY + 5.5)]; ci = 0; x0, y = cols[0]; ymax = 352.0
     blocks = []; cur = None
     for item in LEG:
         if item[1] is None: cur = [item[0], []]; blocks.append(cur)
         else: cur[1].append(item)
     for title, items in blocks:
-        need = 3.9 + 2.0 * len(items)
-        if y + need > ymax and ci == 0: ci = 1; x0, y = cols[1]
-        A(f'<rect x="{f(x0-0.4)}" y="{f(y-1.6)}" width="54.5" height="2.2" fill="#d9dee2"/>')
-        T(x0, y, title, 1.45, weight="bold"); y += 2.4
+        if y + 6 > ymax and ci == 0: ci = 1; x0, y = cols[1]
+        T(x0, y, title, 1.8, weight="bold"); y += 2.7
         for n, txt in items:
             words, lines, cur2 = txt.split(), [], ""
             for w in words:
-                if len(cur2) + len(w) + 1 > 48: lines.append(cur2); cur2 = w
+                if len(cur2) + len(w) + 1 > 54: lines.append(cur2); cur2 = w
                 else: cur2 = (cur2 + " " + w).strip()
             lines.append(cur2)
-            if y + 1.95 * len(lines) > ymax and ci == 0: ci = 1; x0, y = cols[1]
-            T(x0 + 1.3, y, str(n), 1.5, "middle", "bold", "#c0392b")
-            for ln in lines: T(x0 + 3.0, y, ln, 1.5); y += 1.9
-            y += 0.07
-        y += 0.9
+            if y + 2.3 * len(lines) > ymax and ci == 0: ci = 1; x0, y = cols[1]
+            T(x0 + 1.5, y, str(n), 1.8, "middle", "bold", "#c0392b")
+            for ln in lines: T(x0 + 3.6, y, ln, 1.8); y += 2.3
+            y += 0.1
+        y += 1.0
     return y
 yend = legend(); my = yend
-# rótulo (debajo de referencias y nudos)
-ry = 265.0
-A(f'<rect x="{RX-2}" y="{ry}" width="{413-RX+2}" height="25" fill="none" stroke="#000" stroke-width="0.3"/>')
-T(RX, ry + 5, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS", 2.9, weight="bold")
-T(RX, ry + 9, "Sistema de hormigón premoldeado de grandes luces (sistema Pi) · cerramiento vidriado – muro cortina", 1.75)
-cells = [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. Tucci"), ("DOCENTES", "____________"), ("ALUMNO/A", "_______________"),
-         ("GRUPO", "____"), ("ESCALAS", "Corte 1:20 · Nudos 1:12,5"), ("HOJA", "A3 · 2026")]
+# rótulo (sin recuadro)
+ry = 398.0
+A(f'<line x1="{RX}" y1="{ry-3}" x2="290" y2="{ry-3}" stroke="#000" stroke-width="0.25"/>')
+T(RX, ry + 1, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS — VIDRIADO", 2.8, weight="bold")
+T(RX, ry + 5, "Hormigón premoldeado de grandes luces (sistema Pi) · cerramiento vidriado – muro cortina", 1.7)
+cells = [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. Tucci"), ("ALUMNO/A", "_____________"), ("GRUPO", "____"),
+         ("ESCALAS", "Corte 1:20 · Nudos 1:12,5"), ("HOJA", "A3 · 2026")]
 for i, (k, v) in enumerate(cells):
-    x = RX + (i % 4) * 57; y = ry + 14 + (i // 4) * 6
-    T(x, y, k, 1.3, weight="bold"); T(x, y + 2.8, v, 1.8)
-T(X(-740) + 1, 292.8, "ESC. 1:20 — corte por apoyo de VL / ménsula; fundación por eje de columna", 1.6, weight="bold")
+    x = RX + (i % 3) * 54; y = ry + 9.5 + (i // 3) * 5.2
+    T(x, y, k, 1.25, weight="bold"); T(x + 15, y, v, 1.6)
+T(X(-590), 395.5, "ESC. 1:20 — corte por apoyo de VL / ménsula; fundación por eje de columna (corte quebrado en ±0,00)", 1.5, weight="bold")
+sx, sy = X(-590), 401.5
+for i in range(5):
+    A(f'<rect x="{sx + i*5}" y="{sy-1.1}" width="5" height="1.1" fill="{"#000" if i%2==0 else "#fff"}" stroke="#000" stroke-width="0.12"/>')
+T(sx, sy - 1.6, "0", 1.2, "middle"); T(sx + 25, sy - 1.6, "50 cm", 1.2, "middle")
 
 SVG_BODY = f'''<defs>{"".join(defs)}<g id="fullg">{"".join(full)}</g></defs>
-<rect x="0" y="0" width="420" height="297" fill="#fff"/>
-<rect x="3" y="3" width="414" height="291" fill="none" stroke="#000" stroke-width="0.5"/>
-<line x1="{RX-3.5}" y1="3" x2="{RX-3.5}" y2="294" stroke="#000" stroke-width="0.3"/>
+<rect x="0" y="0" width="297" height="420" fill="#fff"/>
+<rect x="4" y="4" width="289" height="412" fill="none" stroke="#000" stroke-width="0.4"/>
 {"".join(uses)}
 {"".join(ann)}'''
 import json

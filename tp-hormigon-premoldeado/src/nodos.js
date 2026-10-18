@@ -115,7 +115,7 @@ export function n1() {
 // =============================================================== NUDO 2 · ENTREPISO
 export function n2() {
   const S = new Scene3D();
-  const Y0 = 3450, Y1 = 4520, X1 = 1000, ZB = -200, yb = 3715;
+  const Y0 = 3480, Y1 = 4520, X1 = 1000, ZB = -200, yb = 3715;
   // columna en vista (detrás) + ménsula cortada + VL (tramo sobre la ménsula) + VL del otro lado
   S.box(250, 650, Y0, Y1, ZB, -150, 'pre', { axis: 'y' });
   S.box(250, 650, Y0, 3705, -150, 0, 'pre');
