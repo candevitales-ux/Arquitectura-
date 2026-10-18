@@ -201,7 +201,7 @@ export class Scene3D {
     renderer.dispose();
     return { url, anchors, scale: 0 };
   }
-  render(Wpx, Hpx, dir, frac = 0.72, offset = [0, 0], lineW = 3.2) {
+  render(Wpx, Hpx, dir, frac = 0.72, offset = [0, 0], lineW = 3.2, fixedW = null) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
     renderer.setPixelRatio(1); renderer.setSize(Wpx, Hpx);
     const target = this.bbox.getCenter(new THREE.Vector3());
@@ -217,8 +217,14 @@ export class Scene3D {
     }
     const asp = Wpx / Hpx; let w = (mxx - mnx) / frac, h = (mxy - mny) / frac;
     if (w / h > asp) h = w / asp; else w = h * asp;
+    if (fixedW) { w = fixedW; h = w / asp; }
+    { let ax = 1e9, bx = -1e9, ay = 1e9, by = -1e9; const v = new THREE.Vector3();
+      for (const m of this.meshes || []) { const P = m.geom.attributes.position.array;
+        for (let i = 0; i < P.length; i += 3) { v.set(P[i], P[i + 1], P[i + 2]).applyMatrix4(inv); ax = Math.min(ax, v.x); bx = Math.max(bx, v.x); ay = Math.min(ay, v.y); by = Math.max(by, v.y); } }
+      this.fit = { needW: bx - ax, needH: by - ay };
+      if (fixedW) { const cx2 = (ax + bx) / 2, cy2 = (ay + by) / 2; cam.left = cx2 - w / 2; cam.right = cx2 + w / 2; cam.top = cy2 + h / 2; cam.bottom = cy2 - h / 2; cam.updateProjectionMatrix(); } }
     const cx = (mnx + mxx) / 2 - offset[0] * w, cy = (mny + mxy) / 2 - offset[1] * h;
-    cam.left = cx - w / 2; cam.right = cx + w / 2; cam.top = cy + h / 2; cam.bottom = cy - h / 2; cam.updateProjectionMatrix();
+    if (!fixedW) { cam.left = cx - w / 2; cam.right = cx + w / 2; cam.top = cy + h / 2; cam.bottom = cy - h / 2; cam.updateProjectionMatrix(); }
     this.mmPerPx = w / Wpx;
     // aristas
     for (const e of this.edges) {
@@ -230,6 +236,6 @@ export class Scene3D {
     const url = renderer.domElement.toDataURL('image/png');
     const anchors = this.anchors.map(a => { const v = a.p.clone().project(cam); return { n: a.n, x: (v.x + 1) / 2, y: (1 - v.y) / 2 }; });
     renderer.dispose();
-    return { url, anchors, scale: w };
+    return { url, anchors, scale: w, fit: this.fit };
   }
 }

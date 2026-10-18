@@ -2,11 +2,13 @@
 """Exporta el corte integral (Lámina 1) a DXF en escala real (1 unidad = 1 mm),
 sin interrupciones, con capas por material, rayados AutoCAD, cotas asociativas
 editables, niveles, referencias y planilla de referencias. Luego se convierte a DWG."""
-import json, ezdxf
+import json, sys, ezdxf
 from ezdxf import colors
 from ezdxf.enums import TextEntityAlignment
 
-D = json.load(open("build/lamina1_dx.json"))
+IN = sys.argv[1] if len(sys.argv) > 1 else "build/lamina1_dx.json"
+OUT = sys.argv[2] if len(sys.argv) > 2 else "build/dwg_in/Lamina1_Corte_Integral_1-20.dxf"
+D = json.load(open(IN))
 doc = ezdxf.new("R2018", setup=True)
 doc.units = ezdxf.units.MM
 msp = doc.modelspace()
@@ -203,12 +205,12 @@ y -= 60 * (len(D["NOTAS"]) + 2)
 # rótulo
 ry = min(y - 150, -1500)
 msp.add_lwpolyline([(x0 - 50, ry), (x0 + 2750, ry), (x0 + 2750, ry - 900), (x0 - 50, ry - 900)], close=True, dxfattribs={"layer": "X-ROTULO"})
-rot = [("LAMINA 2 - CORTE INTEGRAL", 70), ("Sistema de hormigon premoldeado de grandes luces - Cerramiento vidriado (muro cortina stick)", 36),
+rot = [("CORTE INTEGRAL 1:20", 70), ("Sistema de hormigon premoldeado de grandes luces - Cerramiento vidriado (muro cortina stick)", 36),
        ("MATERIA: Construcciones II", 36), ("CATEDRA: Arq. ____________", 36), ("ALUMNO/A: ____________________", 36),
-       ("GRUPO: ____", 36), ("ESCALA: 1:20", 36), ("HOJA: 1 de 4 - A3", 36)]
+       ("GRUPO: ____", 36), ("ESCALA: 1:20", 36), ("HOJA: A3", 36)]
 yy = ry - 120
 for s, h in rot:
     text(s, (x0, yy), h, "X-ROTULO"); yy -= h * 2.4
 
-doc.saveas("build/dwg_in/Lamina1_Corte_Integral_1-20.dxf")
+doc.saveas(OUT)
 print("dxf ok")

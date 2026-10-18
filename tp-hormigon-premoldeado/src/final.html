@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 420mm 297mm; margin: 0 }
+html, body { margin: 0; padding: 0; background: #fff; font-family: 'Liberation Sans', Arial, sans-serif; }
+#page { position: relative; width: 420mm; height: 297mm; overflow: hidden; }
+svg { position: absolute; left: 0; top: 0; }
+img.det { position: absolute; }
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="page"></div>
+<script type="module">
+import { n1, n2, n3 } from './nodos.js';
+const page = document.getElementById('page');
+const base = await (await fetch('/build/final_corte.svgpart')).text();
+const PX = 14;
+let o = '';
+const T = (x, y, s, z = {}) => o += `<text x="${x}" y="${y}" font-size="${z.size || 2}" font-weight="${z.w || 'normal'}" fill="${z.fill || '#000'}" text-anchor="${z.a || 'start'}"${z.it ? ' font-style="italic"' : ''}>${s}</text>`;
+const Ln = (p) => o += `<polyline points="${p.map(q => q.join(',')).join(' ')}" fill="none" stroke="#c0392b" stroke-width="0.12"/>`;
+const ISO = [1, 1, 1];
+const SLOTS = [
+  { f: n1, x: 185, y: 8, t: 'NUDO 1 · CERRAMIENTO – CUBIERTA', st: 'VL + panel TT + paquete de cubierta + zócalo in situ + cupertina + remate del muro cortina' },
+  { f: n2, x: 301, y: 8, t: 'NUDO 2 · CERRAMIENTO – ENTREPISO', st: 'Ménsula + neopreno/perno + VL + bulón pasante + TT/VP + spandrel y cortafuego' },
+  { f: n3, x: 185, y: 137, t: 'NUDO 3 · CERRAMIENTO Y PISO S/ TERRENO', st: 'Cuello + anclaje mecánico húmedo + VPP + arranque del muro cortina + piso' },
+];
+const W = 112, H = 125, HD = 8;
+const DENS = [10, 12.5, 15, 20];
+for (const s of SLOTS) {
+  const S = s.f();
+  (window.EXPORT ||= []).push({ t: s.t, st: s.st, refs: [], ...S.exportData() });
+  const iw = W, ih = H - HD;
+  // escala: la mayor disponible (1:10, si no entra 1:12,5 …)
+  const probe = S.render(40, 40 * ih / iw, ISO, 1, [0, 0], 1);
+  let den = DENS.find(d => probe.fit.needW <= iw * d * 0.97 && probe.fit.needH <= ih * d * 0.97) || 20; console.log(s.t, probe.fit.needW|0, probe.fit.needH|0, den);
+  const S2 = s.f();
+  const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.0, iw * den);
+  const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
+  Object.assign(img.style, { left: s.x + 'mm', top: (s.y + HD) + 'mm', width: iw + 'mm', height: ih + 'mm' });
+  page.appendChild(img);
+  o += `<rect x="${s.x}" y="${s.y}" width="${W}" height="5" fill="#2f3b45"/>`;
+  T(s.x + 1.3, s.y + 3.6, s.t, { size: 2.25, w: 'bold', fill: '#fff' });
+  T(s.x + W - 1.3, s.y + 3.6, `ISOMÉTRICA ${den === 10 ? '1:10' : '1:' + String(den).replace('.', ',')}`, { size: 1.7, w: 'bold', fill: '#fff', a: 'end' });
+  T(s.x + 0.3, s.y + 7.2, s.st, { size: 1.3, it: true, fill: '#333' });
+  o += `<rect x="${s.x}" y="${s.y + HD}" width="${iw}" height="${ih}" fill="none" stroke="#000" stroke-width="0.2"/>`;
+  if (den !== 10) T(s.x + 1, s.y + H - 1.2, `Escala ajustada de 1:10 a 1:${String(den).replace('.', ',')} para entrar en la lámina`, { size: 1.2, it: true, fill: '#555' });
+  // globos con la numeración de las referencias generales
+  const pts = r.anchors.map(a => ({ n: a.n, ax: s.x + a.x * iw, ay: s.y + HD + a.y * ih }));
+  const byX = [...pts].sort((p, q) => p.ax - q.ax); byX.forEach((p, k) => p.left = k < Math.ceil(pts.length / 2));
+  for (const side of [true, false]) {
+    const L = pts.filter(p => p.left === side).sort((a, b) => a.ay - b.ay);
+    const gap = 4.4, ymin = s.y + HD + 3, ymax = s.y + H - 4;
+    L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
+    for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
+    const bx = side ? s.x + 3 : s.x + iw - 3;
+    for (const p of L) {
+      Ln([[p.ax, p.ay], [side ? bx + 5 : bx - 5, p.by], [side ? bx + 1.7 : bx - 1.7, p.by]]);
+      o += `<circle cx="${p.ax}" cy="${p.ay}" r="0.35" fill="#c0392b"/><circle cx="${bx}" cy="${p.by}" r="1.7" fill="#fff" stroke="#c0392b" stroke-width="0.18"/>`;
+      T(bx, p.by + 0.62, p.n, { size: 1.7, w: 'bold', fill: '#c0392b', a: 'middle' });
+    }
+  }
+}
+page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
+page.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297" font-family="Liberation Sans, Arial, sans-serif">${o}</svg>`);
+await Promise.all([...document.images].map(im => im.decode()));
+window.READY = true;
+</script></body></html>
