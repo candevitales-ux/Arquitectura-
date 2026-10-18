@@ -104,10 +104,8 @@ for det in V["VEC2D"]:
         col = tuple(max(0, min(255, int(c * (sh if not f["cap"] else 1)))) for c in col)
         for g in polys:
             ext = [P(x, y) for x, y in list(g.exterior.coords)[:-1]]
-            h = msp.add_hatch(color=256, dxfattribs={"layer": "2-AXO-RELLENOS"}); h.set_solid_fill(color=256, rgb=col)
-            if f["glass"]: h.transparency = 0.6
-            h.paths.add_polyline_path(ext, is_closed=True, flags=1)
-            for hole in g.interiors: h.paths.add_polyline_path([P(x, y) for x, y in list(hole.coords)[:-1]], is_closed=True)
+            if not f["glass"]:   # sin pintar: máscara (wipeout) del color del fondo para ocultar lo que queda detrás
+                msp.add_wipeout(ext, dxfattribs={"layer": "2-AXO-RELLENOS"})
             if f["cap"] and f.get("hatch") in AXO_PAT:
                 pat, sc = AXO_PAT[f["hatch"]]
                 h2 = msp.add_hatch(color=256, dxfattribs={"layer": "2-AXO-RAYADOS"}); h2.set_pattern_fill(pat, color=8, scale=sc)

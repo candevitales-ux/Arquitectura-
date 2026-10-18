@@ -320,8 +320,6 @@ for i, (lo, hi, top) in enumerate(BANDS):
     bot = top + (hi - lo) / S
     if i > 0: zig_h(top)
     if i < len(BANDS) - 1: zig_h(bot)
-    xm = X(XMAX); ym = (top + bot) / 2
-    A(f'<polyline points="{f(xm)},{f(top)} {f(xm)},{f(ym-1.5)} {f(xm+1.6)},{f(ym-0.6)} {f(xm-1.6)},{f(ym+0.6)} {f(xm)},{f(ym+1.5)} {f(xm)},{f(bot)}" fill="none" stroke="#000" stroke-width="0.18"/>')
     L(X(450), top, X(450), bot, sw=0.12, stroke="#b03030", extra='stroke-dasharray="4 0.8 0.6 0.8"')
 
 def nivel(y, txt, xpos, side="r", sub=""):
@@ -380,10 +378,10 @@ T(X(450), BANDS[0][2] + 2.95, "C", 2.2, "middle", "bold", "#b03030")
 def ref(n, x, y, dx, dy):
     DX.append(dict(t='ref', n=n, a=(x, y), b=(x + dx * S, y - dy * S)))
     px, py = X(x), Y(y); bx, by = px + dx, py + dy
-    A(f'<circle cx="{f(px)}" cy="{f(py)}" r="0.32" fill="#c0392b"/>')
-    L(px, py, bx, by, 0.11, "#c0392b")
-    A(f'<circle cx="{f(bx)}" cy="{f(by)}" r="1.6" fill="#fff" stroke="#c0392b" stroke-width="0.17"/>')
-    T(bx, by + 0.62, str(n), 1.7, "middle", "bold", "#c0392b")
+    A(f'<circle cx="{f(px)}" cy="{f(py)}" r="0.32" fill="#000"/>')
+    L(px, py, bx, by, 0.11, "#000")
+    A(f'<circle cx="{f(bx)}" cy="{f(by)}" r="1.6" fill="#fff" stroke="#000" stroke-width="0.17"/>')
+    T(bx, by + 0.62, str(n), 1.7, "middle", "bold", "#000")
 
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 1640, 8995, 0, 9),
@@ -466,27 +464,27 @@ LEG = [
 ]
 
 RX = 130.0
-LX, LY = 130.0, 252.0
+LX, LY = 130.0, 12.0
 def legend():
     T(LX, LY, "REFERENCIAS (corte integral y nudos)", 2.4, weight="bold")
     A(f'<line x1="{LX}" y1="{LY+1.2}" x2="290" y2="{LY+1.2}" stroke="#000" stroke-width="0.2"/>')
-    cols = [(LX, LY + 5.5), (LX + 81, LY + 5.5)]; ci = 0; x0, y = cols[0]; ymax = 352.0
+    cols = [(LX, LY + 5.5), (LX + 81, LY + 5.5)]; ci = 0; x0, y = cols[0]; ymax = 113.0
     blocks = []; cur = None
     for item in LEG:
         if item[1] is None: cur = [item[0], []]; blocks.append(cur)
         else: cur[1].append(item)
     for title, items in blocks:
-        if y + 6 > ymax and ci == 0: ci = 1; x0, y = cols[1]
-        T(x0, y, title, 1.8, weight="bold"); y += 2.7
+        if y + 8 > ymax and ci == 0: ci = 1; x0, y = cols[1]
+        T(x0, y, title, 1.6, weight="bold"); y += 2.3
         for n, txt in items:
             words, lines, cur2 = txt.split(), [], ""
             for w in words:
-                if len(cur2) + len(w) + 1 > 54: lines.append(cur2); cur2 = w
+                if len(cur2) + len(w) + 1 > 64: lines.append(cur2); cur2 = w
                 else: cur2 = (cur2 + " " + w).strip()
             lines.append(cur2)
-            if y + 2.3 * len(lines) > ymax and ci == 0: ci = 1; x0, y = cols[1]
-            T(x0 + 1.5, y, str(n), 1.8, "middle", "bold", "#c0392b")
-            for ln in lines: T(x0 + 3.6, y, ln, 1.8); y += 2.3
+            if y + 1.95 * len(lines) > ymax and ci == 0: ci = 1; x0, y = cols[1]
+            T(x0 + 1.4, y, str(n), 1.55, "middle", "bold", "#000")
+            for ln in lines: T(x0 + 3.3, y, ln, 1.55); y += 1.95
             y += 0.1
         y += 1.0
     return y
