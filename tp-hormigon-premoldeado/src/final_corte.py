@@ -305,7 +305,9 @@ for i, (lo, hi, top) in enumerate(BANDS):
     uses.append(f'<g transform="translate(0,{f(dy)})"><g clip-path="url(#cb{i})"><use href="#fullg"/></g></g>')
 
 def A(s): ann.append(s)
+TMIN = 2.8   # font-size mínimo (mm) -> altura de letra ≥ 2,0 mm impresa
 def T(x, y, s, size=2.0, anchor="start", weight="normal", fill="#000", rot=None, ital=False):
+    size = max(size, TMIN)
     r = f' transform="rotate({rot},{f(x)},{f(y)})"' if rot is not None else ""
     st = ' font-style="italic"' if ital else ""
     A(f'<text x="{f(x)}" y="{f(y)}" font-size="{size}" text-anchor="{anchor}" font-weight="{weight}" fill="{fill}"{st}{r}>{s}</text>')
@@ -332,12 +334,12 @@ def nivel(y, txt, xpos, side="r", sub=""):
     if sub: T(ax, py + 2.2, sub, 1.4, an, ital=True)
 nivel(9472, "+9,47", -600, "r", "Cupertina")
 nivel(9092, "+9,09", 1650, "l", "Cubierta terminada")
-nivel(8915, "+8,92", 1350, "r", "N.S. estructura")
-nivel(7950, "+7,95", 1000, "r", "Cielorraso PA")
+nivel(8915, "+8,92", 800, "r", "")
+nivel(7950, "+7,95", 1000, "r", "")
 nivel(4500, "+4,50", 1250, "r", "N.P.T. P. Alta")
-nivel(3450, "+3,45", 1000, "r", "Cielorraso PB")
+nivel(3450, "+3,45", 1000, "r", "")
 nivel(0, "±0,00", 1250, "r", "N.P.T. P. Baja")
-nivel(-150, "-0,15", -420, "r", "Vereda")
+nivel(-150, "-0,15", -560, "r", "")
 nivel(-510, "-0,51", 1650, "l", "Sup. cuello")
 nivel(-2150, "-2,15", -300, "r", "Fundación")
 
@@ -365,10 +367,10 @@ cota_h(-50, 250, -620, "30", below=True)
 T(X(-590), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(900), Y(9420), "INTERIOR", 2.0, fill="#555")
 T(X(-590), Y(4900), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(4900), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
 T(X(-590), Y(1300), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(1300), "INTERIOR · PLANTA BAJA", 2.0, fill="#555")
-T(X(700), Y(9200), "pend. 2 % → embudo y caño pluvial en columna", 1.4, ital=True, fill="#333")
-T(X(1050), Y(-1000), "Fundación cortada por el eje de columna", 1.4, ital=True, fill="#333")
-T(X(1050), Y(-1070), "(línea de corte quebrada en ±0,00)", 1.4, ital=True, fill="#333")
-T(X(700), Y(3280), "Columna y VP en vista; ménsula y VL cortadas", 1.4, ital=True, fill="#333")
+T(X(1150), Y(9200), "pend. 2 %", 1.4, ital=True, fill="#333")
+T(X(1000), Y(-1000), "Fundación cortada", 1.4, ital=True, fill="#333")
+T(X(1000), Y(-1090), "por eje de columna", 1.4, ital=True, fill="#333")
+T(X(700), Y(3280), "Col. y VP en vista", 1.4, ital=True, fill="#333")
 
 # círculo de eje
 A(f'<circle cx="{f(X(450))}" cy="{f(BANDS[0][2] + 2.2)}" r="2.1" fill="#fff" stroke="#b03030" stroke-width="0.2"/>')
@@ -380,8 +382,8 @@ def ref(n, x, y, dx, dy):
     px, py = X(x), Y(y); bx, by = px + dx, py + dy
     A(f'<circle cx="{f(px)}" cy="{f(py)}" r="0.32" fill="#000"/>')
     L(px, py, bx, by, 0.11, "#000")
-    A(f'<circle cx="{f(bx)}" cy="{f(by)}" r="1.6" fill="#fff" stroke="#000" stroke-width="0.17"/>')
-    T(bx, by + 0.62, str(n), 1.7, "middle", "bold", "#000")
+    A(f'<circle cx="{f(bx)}" cy="{f(by)}" r="2.35" fill="#fff" stroke="#000" stroke-width="0.2"/>')
+    T(bx, by + 1.0, str(n), 2.8, "middle", "bold", "#000")
 
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 1640, 8995, 0, 9),
@@ -389,8 +391,8 @@ REFS_POS = [
  (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1275, 8600, 9, 9), (13, 450, 8500, 20, 2), (14, 1550, 8300, 0, 7),
  (15, 450, 7880, 14, 0), (16, 300, 8000, -14, 3), (17, 450, 8207, 18, 6), (18, 600, 8565, 20, 10), (19, 505, 7900, 22, -3),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3700, 9, 3),
- (25, 120, 4200, -16, 0), (26, 100, 4590, -20, 7), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
- (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, -14, 3),
+ (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
+ (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
  (35, 950, -5, 0, -6), (36, 1150, -25, 0, -8), (37, 1350, -45, 0, -10), (38, 1100, -120, 0, 12), (39, 1550, -176, 0, 9),
  (40, 1350, -260, 0, 10), (41, 660, -100, 10, 12), (42, 100, -250, -18, -2), (43, 0, -505, -12, 6), (44, -60, -40, -10, -4),
  (45, -300, -200, 6, -9), (46, 450, -900, 14, 0), (47, 700, -800, 20, 0), (48, 690, -1200, 22, 0), (49, 540, -1600, 20, 2),
@@ -402,105 +404,99 @@ for n, x, y, dx, dy in REFS_POS:
 
 LEG = [
 ("CUBIERTA", None),
-(1, "Cupertina chapa galv. N°22 plegada c/ goterones, tornillos y sellador."),
-(2, "Perfil de cierre superior del muro cortina + sellador de silicona."),
-(3, "Membrana asfáltica 4 mm c/ aluminio; babeta en buña + perfil + sellador."),
-(4, "Carpeta niveladora 1:3 c/ 10 % de hidrófugo, e = 2 cm."),
-(5, "Contrapiso liviano H° c/ EPS 1:6, pend. 2 % (mín. 5 cm)."),
-(6, "Aislación térmica EPS 30 kg/m³, e = 5 cm (IRAM 11605)."),
-(7, "Barrera de vapor: imprimación asfáltica + film 200 µ."),
-(8, "Zócalo superior H°A° in situ c/ barras de atado a la VL."),
-(9, "Media caña de mortero."),
+(1, "Cupertina chapa galv. N°22 c/ goterones"),
+(2, "Perfil de cierre sup. muro cortina + sellador"),
+(3, "Membrana asfáltica 4 mm c/ aluminio + babeta"),
+(4, "Carpeta 1:3 c/ 10 % hidrófugo, e = 2 cm"),
+(5, "Contrapiso liviano H° c/ EPS, pend. 2 %"),
+(6, "Aislación térmica EPS 30 kg/m³, e = 5 cm"),
+(7, "Barrera de vapor: imprimación + film 200 µ"),
+(8, "Zócalo sup. H°A° in situ c/ barras de atado"),
+(9, "Media caña de mortero"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
-(10, "Capa de compresión H° e = 5 cm c/ malla electrosoldada Ø6 c/15."),
-(11, "Estribos salientes de la VL (2Ø10) p/ vinculación c/ capa de compresión."),
-(12, "Panel TT pretensado (corte transversal), apoyado en VP."),
-(13, "Viga pretensada VL 40x70 (doble T), perimetral."),
-(14, "Viga pretensada VP (en vista), apoyo de paneles TT."),
-(15, "Columna pretensada 40x40 c/ caño pluvial (en vista)."),
-(16, "Ménsula de columna p/ apoyo de viga."),
-(17, "Apoyo de neopreno c/ perno de fijación Ø20."),
-(18, "Bulón pasante Ø3/4\" c/ tuerca y arandela Ø90 + sellado c/ masilla (anclaje)."),
-(19, "Caño de desagüe pluvial PVC Ø110 embutido en la columna."),
+(10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
+(11, "Estribos salientes de la VL (2Ø10)"),
+(12, "Panel TT pretensado, apoyado en VP"),
+(13, "Viga pretensada VL 40x70 (doble T)"),
+(14, "Viga pretensada VP (en vista)"),
+(15, "Columna pretensada 40x40 (en vista)"),
+(16, "Ménsula de columna p/ apoyo de viga"),
+(17, "Neopreno c/ perno de fijación Ø20"),
+(18, "Bulón pasante Ø3/4\" + arandela Ø90 + sellado"),
+(19, "Caño pluvial PVC Ø110 en la columna"),
 ("ENTREPISO Y CIELORRASOS", None),
-(20, "Solado cerámico s/ adhesivo cementicio."),
-(21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm."),
-(22, "Cielorraso suspendido placa de roca de yeso 12,5 mm."),
-(23, "Montantes y soleras de chapa galv. 35 mm."),
-(24, "Gancho / vela de fijación a los nervios del panel TT."),
+(20, "Solado cerámico s/ adhesivo cementicio"),
+(21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
+(22, "Cielorraso placa de roca de yeso 12,5 mm"),
+(23, "Montantes y soleras chapa galv. 35 mm"),
+(24, "Gancho / vela a los nervios del panel TT"),
 ("MURO CORTINA (STICK, MÓDULO 1,25 m)", None),
-(25, "Montante de aluminio 50x150 (en vista)."),
-(26, "Travesaño de aluminio + presor + tapa + burletes EPDM."),
-(27, "DVH: 6 templado + cámara 12 + 3+3 laminado PVB."),
-(28, "Spandrel: vidrio templado 6 mm esmaltado."),
-(29, "Lana mineral 50 mm + bandeja de chapa galv."),
-(30, "Barrera cortafuego: lana mineral 100 kg/m³ + sellador intumescente."),
-(31, "Grapa de acero galv. regulable (colisos) + bulón M12 inox."),
-(32, "Junta de dilatación del montante 20 mm + manguito."),
-(33, "Perfil de arranque alum. c/ drenaje + tarugos a la VPP."),
-(34, "Sellador de silicona neutra s/ fondo de junta."),
+(25, "Montante de aluminio 50x150 (en vista)"),
+(26, "Travesaño + presor + tapa + burletes EPDM"),
+(27, "DVH 6 templado + 12 + 3+3 laminado PVB"),
+(28, "Spandrel: vidrio templado 6 mm esmaltado"),
+(29, "Lana mineral 50 mm + bandeja chapa galv."),
+(30, "Barrera cortafuego lana mineral + intumescente"),
+(31, "Grapa acero galv. regulable + bulón M12 inox"),
+(32, "Junta de dilatación 20 mm + manguito"),
+(33, "Perfil de arranque alum. c/ drenaje"),
+(34, "Sellador silicona neutra s/ fondo de junta"),
 ("PLANTA BAJA Y FUNDACIÓN", None),
-(35, "Solado cerámico s/ adhesivo cementicio."),
-(36, "Carpeta niveladora MHR 1:1/4:3."),
-(37, "Carpeta hidrófuga MCI 1:3 c/ aditivo hidrófugo."),
-(38, "Contrapiso de H° pobre e = 12 cm."),
-(39, "Separador de suelos: film de polietileno 200 µ."),
-(40, "Tosca compactada e = 15 cm."),
-(41, "Junta de dilatación perimetral EPS 2 cm + sellador."),
-(42, "Viga perimetral portamuro (VPP) premoldeada 30x50."),
-(43, "Banda de neopreno s/ cuello p/ apoyo de la VPP."),
-(44, "Babeta/goterón chapa galv. + aislación hidrófuga vertical."),
-(45, "Vereda de H° peinado s/ tosca + junta c/ sellador."),
-(46, "Tronco de columna dentro del cuello."),
-(47, "Anclaje mecánico húmedo: horquillas entrelazadas columna/cuello."),
-(48, "Relleno de H° cementicio entre cuello y columna."),
-(49, "Armadura de vinculación fundación–columna."),
-(50, "Cuello de la base, H°A° colado in situ."),
-(51, "Base de H°A° colada in situ (s/ cálculo)."),
-(52, "Armadura de fundación s/ cálculo estructural."),
-(53, "H° de limpieza (hidráulico pobre) e = 10 cm."),
-(54, "Terreno natural."),
-(55, "Caño pluvial PVC Ø110 a cámara de inspección y colectora."),
+(35, "Solado cerámico s/ adhesivo cementicio"),
+(36, "Carpeta niveladora MHR 1:1/4:3"),
+(37, "Carpeta hidrófuga MCI 1:3"),
+(38, "Contrapiso de H° pobre, e = 12 cm"),
+(39, "Film de polietileno 200 µ"),
+(40, "Tosca compactada, e = 15 cm"),
+(41, "Junta perimetral EPS 2 cm + sellador"),
+(42, "Viga perimetral portamuro (VPP) 30x50"),
+(43, "Banda de neopreno s/ cuello"),
+(44, "Babeta chapa galv. + aislación hidrófuga"),
+(45, "Vereda de H° peinado s/ tosca"),
+(46, "Tronco de columna dentro del cuello"),
+(47, "Anclaje mecánico húmedo (horquillas)"),
+(48, "Relleno de H° cementicio cuello/columna"),
+(49, "Armadura de vinculación fundación–columna"),
+(50, "Cuello de la base, H°A° in situ"),
+(51, "Base de H°A° colada in situ (s/ cálculo)"),
+(52, "Armadura de fundación s/ cálculo"),
+(53, "H° de limpieza, e = 10 cm"),
+(54, "Terreno natural"),
+(55, "Caño pluvial PVC Ø110 a cámara y colectora"),
 ]
 
 RX = 130.0
-LX, LY = 130.0, 12.0
+LX, LY = 128.0, 13.0
 def legend():
-    T(LX, LY, "REFERENCIAS (corte integral y nudos)", 2.4, weight="bold")
-    A(f'<line x1="{LX}" y1="{LY+1.2}" x2="290" y2="{LY+1.2}" stroke="#000" stroke-width="0.2"/>')
-    cols = [(LX, LY + 5.5), (LX + 81, LY + 5.5)]; ci = 0; x0, y = cols[0]; ymax = 113.0
+    T(LX, LY, "REFERENCIAS (corte integral y nudos)", 3.6, weight="bold")
+    A(f'<line x1="{LX}" y1="{LY+1.4}" x2="292" y2="{LY+1.4}" stroke="#000" stroke-width="0.25"/>')
+    cols = [(LX, LY + 6.5), (LX + 82, LY + 6.5)]; ci = 0; x0, y = cols[0]; ymax = 136.0
     blocks = []; cur = None
     for item in LEG:
         if item[1] is None: cur = [item[0], []]; blocks.append(cur)
         else: cur[1].append(item)
     for title, items in blocks:
-        if y + 8 > ymax and ci == 0: ci = 1; x0, y = cols[1]
-        T(x0, y, title, 1.6, weight="bold"); y += 2.3
+        if y + 9 > ymax and ci == 0: ci = 1; x0, y = cols[1]
+        T(x0, y, title, 2.8, weight="bold"); y += 3.6
         for n, txt in items:
-            words, lines, cur2 = txt.split(), [], ""
-            for w in words:
-                if len(cur2) + len(w) + 1 > 64: lines.append(cur2); cur2 = w
-                else: cur2 = (cur2 + " " + w).strip()
-            lines.append(cur2)
-            if y + 1.95 * len(lines) > ymax and ci == 0: ci = 1; x0, y = cols[1]
-            T(x0 + 1.4, y, str(n), 1.55, "middle", "bold", "#000")
-            for ln in lines: T(x0 + 3.3, y, ln, 1.55); y += 1.95
-            y += 0.1
+            if y > ymax and ci == 0: ci = 1; x0, y = cols[1]
+            T(x0 + 2.2, y, str(n), 2.8, "middle", "bold", "#000")
+            T(x0 + 5.0, y, txt, 2.8); y += 3.35
         y += 1.0
     return y
 yend = legend(); my = yend
 # rótulo (sin recuadro)
-ry = 398.0
-A(f'<line x1="{RX}" y1="{ry-3}" x2="290" y2="{ry-3}" stroke="#000" stroke-width="0.25"/>')
-T(RX, ry + 1, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS — VIDRIADO", 2.8, weight="bold")
-T(RX, ry + 5, "Hormigón premoldeado de grandes luces (sistema Pi) · cerramiento vidriado – muro cortina", 1.7)
-cells = [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. Tucci"), ("ALUMNO/A", "_____________"), ("GRUPO", "____"),
-         ("ESCALAS", "Corte 1:20 · N1-N2 1:12,5 · N3 1:10"), ("HOJA", "A3 · 2026")]
+ry = 392.0
+A(f'<line x1="{RX-2}" y1="{ry-3.5}" x2="292" y2="{ry-3.5}" stroke="#000" stroke-width="0.25"/>')
+T(RX - 2, ry + 1, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS", 3.6, weight="bold")
+T(RX - 2, ry + 5.2, "H° premoldeado de grandes luces · cerramiento vidriado", 2.8)
+cells = [("MATERIA:", "Construcciones II"), ("CÁTEDRA:", "Arq. Tucci"), ("ALUMNO/A:", "____________"), ("GRUPO:", "____"),
+         ("ESCALAS:", "indicadas"), ("HOJA:", "A3 · 2026")]
 for i, (k, v) in enumerate(cells):
-    x = RX + (i % 3) * 54; y = ry + 9.5 + (i // 3) * 5.2
-    T(x, y, k, 1.25, weight="bold"); T(x + 15, y, v, 1.6)
-T(X(-590), 395.5, "ESC. 1:20 — corte por apoyo de VL / ménsula; fundación por eje de columna (corte quebrado en ±0,00)", 1.5, weight="bold")
-sx, sy = X(-590), 401.5
+    x = RX - 2 + (i % 2) * 82; y = ry + 10 + (i // 2) * 4.2
+    T(x, y, k, 2.8, weight="bold"); T(x + 19, y, v, 2.8)
+T(X(-590), 397.5, "CORTE INTEGRAL — ESC. 1:20", 3.2, weight="bold")
+sx, sy = X(-590), 406.5
 for i in range(5):
     A(f'<rect x="{sx + i*5}" y="{sy-1.1}" width="5" height="1.1" fill="{"#000" if i%2==0 else "#fff"}" stroke="#000" stroke-width="0.12"/>')
 T(sx, sy - 1.6, "0", 1.2, "middle"); T(sx + 25, sy - 1.6, "50 cm", 1.2, "middle")

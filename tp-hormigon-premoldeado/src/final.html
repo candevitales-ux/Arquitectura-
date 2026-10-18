@@ -19,16 +19,16 @@ const page = document.getElementById('page');
 const base = await (await fetch('/build/final_corte.svgpart')).text();
 const PX = 14;
 let o = '';
-const T = (x, y, s, z = {}) => o += `<text x="${x}" y="${y}" font-size="${z.size || 2}" font-weight="${z.w || 'normal'}" fill="${z.fill || '#000'}" text-anchor="${z.a || 'start'}"${z.it ? ' font-style="italic"' : ''}>${s}</text>`;
+const T = (x, y, s, z = {}) => o += `<text x="${x}" y="${y}" font-size="${Math.max(z.size || 2, 2.8)}" font-weight="${z.w || 'normal'}" fill="${z.fill || '#000'}" text-anchor="${z.a || 'start'}"${z.it ? ' font-style="italic"' : ''}>${s}</text>`;
 const Ln = (p) => o += `<polyline points="${p.map(q => q.join(',')).join(' ')}" fill="none" stroke="#000" stroke-width="0.12"/>`;
 const ISO = [1, 1, 1];
 const SLOTS = [
-  { f: n1, x: 128, y: 120, W: 80, H: 118, t: 'NUDO 1 · CUBIERTA', st: 'VL + TT + cubierta + zócalo in situ + cupertina' },
-  { f: n2, x: 210, y: 120, W: 82, H: 118, t: 'NUDO 2 · ENTREPISO', st: 'Ménsula + perno + VL + bulón pasante + spandrel' },
-  { f: n3, x: 130, y: 243, W: 160, H: 149, t: 'NUDO 3 · CERRAMIENTO Y PISO S/ TERRENO', st: 'Cuello + anclaje mecánico húmedo + VPP + arranque del muro cortina + piso', center: true },
+  { f: n1, x: 128, y: 141, W: 80, H: 108, t: 'NUDO 1 · CUBIERTA' },
+  { f: n2, x: 211, y: 141, W: 81, H: 108, t: 'NUDO 2 · ENTREPISO' },
+  { f: n3, x: 130, y: 252, W: 160, H: 133, t: 'NUDO 3 · PISO S/ TERRENO', center: true },
 ];
-const HD = 7;
-const DENS = [10, 12.5, 15, 20];
+const HD = 9;
+const DENS = [10, 12.5, 15, 17.5, 20];
 for (const s of SLOTS) {
   const W = s.W, H = s.H;
   const S = s.f();
@@ -46,21 +46,21 @@ for (const s of SLOTS) {
   Object.assign(img.style, { left: s.x + 'mm', top: (s.y + HD) + 'mm', width: iw + 'mm', height: ih + 'mm' });
   page.appendChild(img);
   const tx = s.center ? s.x + s.W / 2 : s.x, ta = s.center ? 'middle' : 'start';
-  T(tx, s.y + 2.6, s.t, { size: 2.3, w: 'bold', a: ta });
-  T(tx, s.y + 5.6, `Isométrica esc. 1:${String(den).replace('.', ',')} ${den === 10 ? '' : '(ajustada de 1:10) '}· ${s.st}`, { size: 1.25, it: true, fill: '#333', a: ta });
+  T(tx, s.y + 3, s.t, { size: 3.2, w: 'bold', a: ta });
+  T(tx, s.y + 7, `Isométrica esc. 1:${String(den).replace('.', ',')}`, { size: 2.8, a: ta });
   // globos con la numeración de las referencias generales
   const pts = r.anchors.map(a => ({ n: a.n, ax: s.x + a.x * iw, ay: s.y + HD + a.y * ih }));
   const byX = [...pts].sort((p, q) => p.ax - q.ax); byX.forEach((p, k) => p.left = k < Math.ceil(pts.length / 2));
   for (const side of [true, false]) {
     const L = pts.filter(p => p.left === side).sort((a, b) => a.ay - b.ay);
-    const gap = 4.4, ymin = s.y + HD + 3, ymax = s.y + H - 4;
+    const gap = 5.6, ymin = s.y + HD + 3, ymax = s.y + H - 4;
     L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
     for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
-    const bx = side ? s.x + 2 : s.x + iw - 2;
+    const bx = side ? s.x + 2.6 : s.x + iw - 2.6;
     for (const p of L) {
-      Ln([[p.ax, p.ay], [side ? bx + 5 : bx - 5, p.by], [side ? bx + 1.7 : bx - 1.7, p.by]]);
-      o += `<circle cx="${p.ax}" cy="${p.ay}" r="0.35" fill="#000"/><circle cx="${bx}" cy="${p.by}" r="1.7" fill="#fff" stroke="#000" stroke-width="0.18"/>`;
-      T(bx, p.by + 0.62, p.n, { size: 1.7, w: 'bold', fill: '#000', a: 'middle' });
+      Ln([[p.ax, p.ay], [side ? bx + 6 : bx - 6, p.by], [side ? bx + 2.35 : bx - 2.35, p.by]]);
+      o += `<circle cx="${p.ax}" cy="${p.ay}" r="0.35" fill="#000"/><circle cx="${bx}" cy="${p.by}" r="2.35" fill="#fff" stroke="#000" stroke-width="0.2"/>`;
+      T(bx, p.by + 1.0, p.n, { size: 2.8, w: 'bold', fill: '#000', a: 'middle' });
     }
   }
 }
