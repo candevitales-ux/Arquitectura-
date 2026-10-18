@@ -164,9 +164,13 @@ def draw_svg(xml, skip_rects=True):
                 pts = [P(x, y), P(x + dx, y + dy), P(x + dx + hh, y + dy)]
                 h = msp.add_hatch(color=7, dxfattribs={"layer": "3-COTAS-NIVELES"}); h.set_solid_fill(color=7)
                 h.paths.add_polyline_path(pts, is_closed=True)
-        elif tag == "rect" and not skip_rects:
+        elif tag == "rect":
             x, y, w, hgt = (num(a.get(k)) for k in ("x", "y", "width", "height"))
-            msp.add_lwpolyline([P(x, y), P(x + w, y), P(x + w, y + hgt), P(x, y + hgt)], close=True, dxfattribs={"layer": "3-TEXTOS"})
+            if skip_rects and w > 10: continue
+            pts = [P(x, y), P(x + w, y), P(x + w, y + hgt), P(x, y + hgt)]
+            if fill not in ("none", "#fff"):
+                h = msp.add_hatch(color=256, dxfattribs={"layer": "3-TEXTOS"}); h.set_solid_fill(color=256, rgb=rgb(fill)); h.paths.add_polyline_path(pts, is_closed=True)
+            msp.add_lwpolyline(pts, close=True, dxfattribs={"layer": "3-TEXTOS", "lineweight": 13})
 
 svgpart = open("build/final_corte.svgpart").read()
 svgpart = svgpart[svgpart.index("</defs>") + 7:]

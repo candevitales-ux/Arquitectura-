@@ -5,3 +5,6 @@ LÁMINA FINAL (A3 VERTICAL): Corte integral 1:20 + 3 nudos axonométricos isomé
 - Nudos_Axonometricos_3D.dwg : los 3 nudos como mallas 3D por material (VSCURRENT > Realista, 3DORBIT).
 - DXF/ : los mismos dibujos en DXF.
 La numeración de referencias es única para el corte y los nudos.
+- Lamina_A3_vertical_Corte_y_Nudos_2D.dwg : LA LÁMINA COMPLETA EN 2D, en mm de papel (escala 1:1 de la hoja).
+  Marco A3 297x420 + corte 1:20 + 3 axonometrías dibujadas en 2D (rellenos y aristas) + referencias + rótulo.
+  Se plotea a escala 1:1 en hoja A3 vertical. Capas: 0-MARCO-A3, 1-CORTE-*, 2-AXO-*, 3-TEXTOS/REFERENCIAS.
