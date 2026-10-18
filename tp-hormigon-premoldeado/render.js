@@ -17,6 +17,7 @@ const { chromium } = require('playwright-core');
   await p.goto('http://localhost:8765/' + inp);
   await p.waitForFunction('window.READY === true', { timeout: 240000 });
   if (process.argv[5]) require('fs').writeFileSync(process.argv[5], JSON.stringify(await p.evaluate(() => window.EXPORT)));
+  if (process.argv[6]) require('fs').writeFileSync(process.argv[6], JSON.stringify(await p.evaluate(() => ({ VEC2D: window.VEC2D || [], OVERLAY: window.OVERLAY || '' }))));
   await p.pdf({ path: out + '.pdf', width: W+'mm', height: H+'mm', printBackground: true, pageRanges:'1' });
   await p.screenshot({ path: out + '.png', fullPage: false });
   await b.close(); srv.close();

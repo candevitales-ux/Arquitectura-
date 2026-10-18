@@ -91,7 +91,7 @@ export class Scene3D {
   }
   _add(geom, key, edgeAngle = 20, edges = true) {
     const mesh = new THREE.Mesh(geom, materials(key));
-    (this.meshes ||= []).push({ key, geom });
+    (this.meshes ||= []).push({ key, geom, mesh });
     if (MAT[key].glass) mesh.renderOrder = 10;
     this.scene.add(mesh);
     geom.computeBoundingBox(); this.bbox.union(geom.boundingBox);
@@ -201,6 +201,63 @@ export class Scene3D {
     renderer.dispose();
     return { url, anchors, scale: 0 };
   }
+  // ---------- vectorización 2D (para DWG): caras ordenadas (pintor) + aristas visibles (z-buffer)
+  _vectorize(renderer, cam, W, H) {
+    const lines = []; this.scene.traverse(o => { if (o.isLineSegments2) { lines.push(o); o.visible = false; } });
+    const glassM = (this.meshes || []).filter(m => MAT[m.key].glass).map(m => m.mesh); glassM.forEach(m => m.visible = false);
+    const rt = new THREE.WebGLRenderTarget(W, H);
+    this.scene.overrideMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking });
+    const bg = this.scene.background; this.scene.background = null;
+    renderer.setRenderTarget(rt); renderer.setClearColor(0xffffff, 1); renderer.clear(); renderer.render(this.scene, cam);
+    const buf = new Uint8Array(W * H * 4); renderer.readRenderTargetPixels(rt, 0, 0, W, H, buf);
+    renderer.setRenderTarget(null); this.scene.overrideMaterial = null; this.scene.background = bg;
+    lines.forEach(o => o.visible = true); glassM.forEach(m => m.visible = true);
+    const D = (px, py) => { if (px < 0 || py < 0 || px >= W || py >= H) return 1; const i = (py * W + px) * 4;
+      return (buf[i] / 255 / 16777216 + buf[i + 1] / 255 / 65536 + buf[i + 2] / 255 / 256 + buf[i + 3] / 255) * 255 / 256; };
+    const v = new THREE.Vector3();
+    const proj = (x, y, z) => { v.set(x, y, z).project(cam); return [v.x, v.y, v.z * 0.5 + 0.5]; };
+    const visible = (q) => { const px = Math.round((q[0] + 1) / 2 * W - 0.5), py = Math.round((q[1] + 1) / 2 * H - 0.5); let m = 0;
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) m = Math.max(m, D(px + dx, py + dy)); return q[2] <= m + 0.0006; };
+    // aristas
+    const edges = [];
+    for (const e of this.edges) {
+      const P = e.pos;
+      for (let i = 0; i < P.length; i += 6) {
+        const a = proj(P[i], P[i + 1], P[i + 2]), b = proj(P[i + 3], P[i + 4], P[i + 5]);
+        const lenPx = Math.hypot((b[0] - a[0]) * W / 2, (b[1] - a[1]) * H / 2); const n = Math.max(2, Math.ceil(lenPx / 1.5));
+        let run = null;
+        for (let k = 0; k <= n; k++) {
+          const t = k / n, q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+          if (visible(q)) { if (!run) run = [q, q]; else run[1] = q; }
+          else if (run) { edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0]); run = null; }
+        }
+        if (run) edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0]);
+      }
+    }
+    // caras visibles agrupadas por plano, con profundidad para el orden del pintor
+    const toViewer = new THREE.Vector3(); cam.getWorldDirection(toViewer); toViewer.negate();
+    const groups = new Map(); const A = new THREE.Vector3(), B = new THREE.Vector3(), C = new THREE.Vector3(), N = new THREE.Vector3();
+    (this.meshes || []).forEach((m, mi) => {
+      const g = m.geom, P = g.attributes.position.array, idx = g.index ? g.index.array : null;
+      const nT = (idx ? idx.length : P.length / 3) / 3;
+      const capOf = (t) => { for (const gr of g.groups || []) if (t * 3 >= gr.start && t * 3 < gr.start + gr.count) return gr.materialIndex === 0 && g.type === 'ExtrudeGeometry'; return false; };
+      for (let t = 0; t < nT; t++) {
+        const i0 = idx ? idx[3 * t] : 3 * t, i1 = idx ? idx[3 * t + 1] : 3 * t + 1, i2 = idx ? idx[3 * t + 2] : 3 * t + 2;
+        A.fromArray(P, 3 * i0); B.fromArray(P, 3 * i1); C.fromArray(P, 3 * i2);
+        N.subVectors(B, A).cross(new THREE.Vector3().subVectors(C, A)); if (N.lengthSq() < 1e-9) continue; N.normalize();
+        if (N.dot(toViewer) <= 1e-4 && !MAT[m.key].glass) continue;
+        const d = N.dot(A); const key = mi + '|' + N.x.toFixed(2) + ',' + N.y.toFixed(2) + ',' + N.z.toFixed(2) + '|' + d.toFixed(0);
+        let G = groups.get(key);
+        if (!G) { G = { key: m.key, color: MAT[m.key].color, hatch: MAT[m.key].hatch || null, glass: !!MAT[m.key].glass, cap: capOf(t), tris: [], dsum: 0, dn: 0 }; groups.set(key, G); }
+        const pa = proj(A.x, A.y, A.z), pb = proj(B.x, B.y, B.z), pc = proj(C.x, C.y, C.z);
+        G.tris.push([pa[0], pa[1], pb[0], pb[1], pc[0], pc[1]]); G.dsum += pa[2] + pb[2] + pc[2]; G.dn += 3;
+        G.shade = Math.max(0.55, Math.min(1, 0.62 + 0.38 * N.dot(new THREE.Vector3(0.55, 1, 0.75).normalize())));
+      }
+    });
+    const faces = [...groups.values()].map(G => ({ key: G.key, color: G.color, hatch: G.hatch, glass: G.glass, cap: G.cap, shade: G.shade, depth: G.dsum / G.dn, tris: G.tris }))
+      .sort((p, q) => q.depth - p.depth);
+    return { faces, edges };
+  }
   render(Wpx, Hpx, dir, frac = 0.72, offset = [0, 0], lineW = 3.2, fixedW = null) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
     renderer.setPixelRatio(1); renderer.setSize(Wpx, Hpx);
@@ -235,7 +292,8 @@ export class Scene3D {
     renderer.render(this.scene, cam);
     const url = renderer.domElement.toDataURL('image/png');
     const anchors = this.anchors.map(a => { const v = a.p.clone().project(cam); return { n: a.n, x: (v.x + 1) / 2, y: (1 - v.y) / 2 }; });
+    const vec = this.want2D ? this._vectorize(renderer, cam, Wpx, Hpx) : null;
     renderer.dispose();
-    return { url, anchors, scale: w, fit: this.fit };
+    return { url, anchors, scale: w, fit: this.fit, vec };
   }
 }

@@ -33,8 +33,11 @@ for (const s of SLOTS) {
   // escala: la mayor disponible (1:10, si no entra 1:12,5 …)
   const probe = S.render(40, 40 * ih / iw, ISO, 1, [0, 0], 1);
   let den = DENS.find(d => probe.fit.needW <= iw * d * 0.97 && probe.fit.needH <= ih * d * 0.97) || 20; console.log(s.t, probe.fit.needW|0, probe.fit.needH|0, den);
-  const S2 = s.f();
+  const S2 = s.f(); S2.want2D = true;
   const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.0, iw * den);
+  { const mx = (x) => s.x + (x + 1) / 2 * iw, my = (y) => s.y + HD + (1 - y) / 2 * ih;
+    (window.VEC2D ||= []).push({ slot: s.t, den, faces: r.vec.faces.map(f => ({ ...f, tris: f.tris.map(t => [mx(t[0]), my(t[1]), mx(t[2]), my(t[3]), mx(t[4]), my(t[5])]) })),
+      edges: r.vec.edges.map(e => [mx(e[0]), my(e[1]), mx(e[2]), my(e[3]), e[4]]) }); }
   const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
   Object.assign(img.style, { left: s.x + 'mm', top: (s.y + HD) + 'mm', width: iw + 'mm', height: ih + 'mm' });
   page.appendChild(img);
@@ -57,6 +60,7 @@ for (const s of SLOTS) {
   }
 }
 page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
+window.OVERLAY = o;
 page.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${o}</svg>`);
 await Promise.all([...document.images].map(im => im.decode()));
 window.READY = true;
