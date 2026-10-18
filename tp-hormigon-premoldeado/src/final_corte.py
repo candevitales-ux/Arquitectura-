@@ -495,7 +495,7 @@ A(f'<line x1="{RX}" y1="{ry-3}" x2="290" y2="{ry-3}" stroke="#000" stroke-width=
 T(RX, ry + 1, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS — VIDRIADO", 2.8, weight="bold")
 T(RX, ry + 5, "Hormigón premoldeado de grandes luces (sistema Pi) · cerramiento vidriado – muro cortina", 1.7)
 cells = [("MATERIA", "Construcciones II"), ("CÁTEDRA", "Arq. Tucci"), ("ALUMNO/A", "_____________"), ("GRUPO", "____"),
-         ("ESCALAS", "Corte 1:20 · Nudos 1:12,5"), ("HOJA", "A3 · 2026")]
+         ("ESCALAS", "Corte 1:20 · N1-N2 1:12,5 · N3 1:10"), ("HOJA", "A3 · 2026")]
 for i, (k, v) in enumerate(cells):
     x = RX + (i % 3) * 54; y = ry + 9.5 + (i // 3) * 5.2
     T(x, y, k, 1.25, weight="bold"); T(x + 15, y, v, 1.6)
