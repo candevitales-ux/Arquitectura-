@@ -150,11 +150,11 @@ pl([(15, 386), (W - 15, 386)], "3-TITULOS", 70)
 titulo_detalle("1", "EL PANEL - AXONOMETRÍA", "S/E", 15, 378, 128)
 C30, S30 = math.cos(math.radians(30)), math.sin(math.radians(30))
 HP, LP = 520.0, 1100.0                    # alto del trozo de panel y largo dibujado
-AS = 1 / 15.0
+AS = 1 / 16.5
 # encuadre: el panel ocupa x 18..140, y 300..372 de la hoja
 _raw = [((z - x) * C30, y + (x + z) * S30) for x in (0, T) for y in (0, HP + 16) for z in (0, LP)]
 AX0 = 80 - (min(p[0] for p in _raw) + max(p[0] for p in _raw)) / 2 * AS
-AY0 = 336 - (min(p[1] for p in _raw) + max(p[1] for p in _raw)) / 2 * AS
+AY0 = 341 - (min(p[1] for p in _raw) + max(p[1] for p in _raw)) / 2 * AS
 def iso(x, y, z): return (AX0 + (z - x) * C30 * AS, AY0 + (y + (x + z) * S30) * AS)
 
 def prisma(poly, z0, z1, layer, lw=18, fill=(255, 255, 255), rayas=None):
@@ -192,8 +192,8 @@ globo(3, iso(T, 120, 90), (22, 318))
 globo(4, iso(30, HP + 10, 330), (40, 372))
 globo(5, iso(38, HP + 16, 700), (82, 375))
 globo(17, iso(-10, HP - 50, LP - 90), (138, 362))
-txt("e = 80 mm", 18, 304, 2.2)
-txt("ancho útil 1000 mm  ·  largo a medida", 140, 302, 2.2, TA.RIGHT)
+txt("e = 80 mm", 18, 310, 2.2)
+txt("ancho útil 1000 mm  ·  largo a medida", 140, 309, 2.2, TA.RIGHT)
 
 # ---------------------------------------------------------------- 02 FICHA TÉCNICA
 titulo_detalle("2", "FICHA TÉCNICA", "", 152, 378, 130)
@@ -216,17 +216,18 @@ filas = [("Producto", "Panel sándwich de fachada, junta machihembrada"),
          ("Colores", "blanco, gris, a elección (carta RAL)"),
          ("Tolerancias", "espesor ±2 mm · largo ±5 mm")]
 fx0, fx1, fx2, fy = 152, 196, 282, 373
-rh = 4.2
+rh = 3.6
 pl([(fx0, fy), (fx2, fy)], "3-TABLAS", 35)
 for i, (a, b) in enumerate(filas):
     y = fy - (i + 1) * rh
     if i % 2 == 0: hatch([(fx0, y), (fx2, y), (fx2, y + rh), (fx0, y + rh)], "SOLID", layer="3-TABLAS", rgb=(238, 238, 238), color=254)
-    txt(a, fx0 + 1.2, y + 1.4, 2.1, TA.LEFT, "3-TABLAS", True)
-    txt(b, fx1 + 1.2, y + 1.4, 2.1, TA.LEFT, "3-TABLAS")
+    txt(a, fx0 + 1.2, y + 0.9, 2.1, TA.LEFT, "3-TABLAS", True)
+    txt(b, fx1 + 1.2, y + 0.9, 2.1, TA.LEFT, "3-TABLAS")
 yb = fy - len(filas) * rh
 pl([(fx0, yb), (fx2, yb)], "3-TABLAS", 35); pl([(fx1, fy), (fx1, yb)], "3-TABLAS", 13)
 txt("Valores de referencia de catálogo: verificar con el fabricante elegido.", fx0, yb - 3.5, 2.0)
 
+_n0 = len(msp)
 # ---------------------------------------------------------------- 03 SECCIÓN DEL PANEL 1:20 + JUNTA 1:2
 titulo_detalle("3", "SECCIÓN", "ESC. 1:20", 15, 286, 44)
 v = V(20, 33, 216)
@@ -345,10 +346,10 @@ globo(9, v5.p(150, -200), (80, 118)); globo(19, v5.p(200, -8), (90, 185))
 # ---------------------------------------------------------------- 06 ARRANQUE SOBRE VIGA PORTAPANEL (CORTE 1:5)
 titulo_detalle("6", "ARRANQUE S/ VIGA PORTAPANEL", "ESC. 1:5", 107, 196, 88)
 v6 = V(5, 135, 124)   # origen: cara ext. del panel, nivel superior de fundación
-fu = [(-60, 0), (260, 0), (260, -180), (-60, -180)]
+fu = [(-60, 0), (260, 0), (260, -120), (-60, -120)]
 hatch(v6.P(fu), "ANSI31", 0.35, 0, "1-HORMIGON", color=8)
-pl(v6.P([(-60, -180), (-60, 0), (260, 0)]), "1-HORMIGON", 35)
-corte_rotura(v6, (-70, -180), (270, -180)); corte_rotura(v6, (260, -190), (260, 10))
+pl(v6.P([(-60, -120), (-60, 0), (260, 0)]), "1-HORMIGON", 35)
+corte_rotura(v6, (-70, -120), (270, -120)); corte_rotura(v6, (260, -130), (260, 10))
 ce = [(-130, -100), (-62, -100), (-62, 22), (-130, 19)]                  # contrapiso exterior
 hatch(v6.P(ce), "AR-CONC", 0.04, 0, "1-HORMIGON", color=8); pl(v6.P(ce), "1-HORMIGON", 18, True)
 pl(v6.P([(-130, 25), (-62, 28), (-62, 22)]), "1-CONTORNO", 25)          # solado exterior c/ pendiente
@@ -359,9 +360,9 @@ tin = [(-6.8, 13.2), (86.8, 13.2), (86.8, 66.8), (-6.8, 66.8)]
 hatch(v6.P(tube), "ANSI31", 0.12, 0, "1-ACERO", color=7)
 hatch(v6.P(tin), "SOLID", layer="1-OCULTAR", rgb=(255, 255, 255), color=7)
 pl(v6.P(tube), "1-ACERO", 50, True); pl(v6.P(tin), "1-ACERO", 18, True)
-pl(v6.P([(40, -120), (40, 30)]), "1-TORNILLERIA", 35)                   # anclaje químico Ø12
+pl(v6.P([(40, -100), (40, 30)]), "1-TORNILLERIA", 35)                   # anclaje químico Ø12
 pl(v6.P([(30, 16), (50, 16), (50, 24), (30, 24)]), "1-TORNILLERIA", 25, True)
-for k in range(14): pl(v6.P([(35, -115 + 8 * k), (45, -111 + 8 * k)]), "1-TORNILLERIA", 9)
+for k in range(12): pl(v6.P([(35, -95 + 8 * k), (45, -111 + 8 * k)]), "1-TORNILLERIA", 9)
 pb = [(96, 0), (260, 0), (260, 22), (96, 22)]                           # placa base de columna
 hatch(v6.P(pb), "ANSI31", 0.12, 0, "1-ACERO", color=7); pl(v6.P(pb), "1-ACERO", 35, True)
 pl(v6.P([(100, 22), (100, 240)]), "1-ACERO", 35); pl(v6.P([(116.2, 22), (116.2, 240)]), "1-VISTA", 13)
@@ -379,8 +380,8 @@ tornillo_h(v6, -1, 100, 150)
 v6.dim((-10, 10), (90, 10), -26, text="100")
 v6.dim((-10, 10), (-10, 70), -9, vertical=True, text="60")
 txt("±0,00", v6.p(-128, 45)[0], v6.p(0, 45)[1] + 0.8, 2.0, TA.LEFT)
-globo(12, v6.p(-15, 50), (114, 150)); globo(13, v6.p(20, 60), (110, 128)); globo(14, v6.p(40, -60), (114, 92))
-globo(15, v6.p(200, -100), (176, 86)); globo(16, v6.p(-100, -40), (112, 112)); globo(18, v6.p(60, 73.5), (170, 120))
+globo(12, v6.p(-15, 50), (114, 150)); globo(13, v6.p(20, 60), (110, 128)); globo(14, v6.p(40, -60), (114, 100))
+globo(15, v6.p(200, -80), (180, 100)); globo(16, v6.p(-100, -40), (112, 112)); globo(18, v6.p(60, 73.5), (170, 120))
 globo(7, v6.p(-1, 150), (114, 168)); globo(2, v6.p(40, 200), (128, 186)); globo(9, v6.p(180, 180), (180, 186))
 
 # ---------------------------------------------------------------- 07 MODULACIÓN (S/E) + MONTAJE
@@ -417,43 +418,88 @@ import textwrap
 yy = 130
 for p in pasos:
     for j, ln in enumerate(textwrap.wrap(p, 62)):
-        txt(ln if j == 0 else "    " + ln, 199, yy, 2.0); yy -= 3.3
-    yy -= 0.9
+        txt(ln if j == 0 else "    " + ln, 199, yy, 2.0); yy -= 3.0
+    yy -= 0.4
+
+for _e in list(msp)[_n0:]: _e.translate(0, 12, 0)    # filas 2 y 3 suben 12 mm para dejar lugar al cómputo
+
+# ---------------------------------------------------------------- 08 CÓMPUTO DE MATERIALES
+titulo_detalle("8", "CÓMPUTO DE MATERIALES", "", 15, 100, 267)
+
+def tabla(x0, ytop, titulo, cols, filas, h=3.1):
+    """Planilla con fila de título, encabezados y datos; cols = [(encabezado, ancho, alineación)]."""
+    x1 = x0 + sum(c[1] for c in cols); nf = len(filas) + 2
+    for i in range(nf + 1): pl([(x0, ytop - i * h), (x1, ytop - i * h)], "3-TABLAS", 25 if i in (0, 2, nf) else 13)
+    hatch([(x0, ytop - 2 * h), (x1, ytop - 2 * h), (x1, ytop), (x0, ytop)], "SOLID", layer="3-TABLAS", rgb=(230, 230, 230), color=254)
+    txt(titulo, (x0 + x1) / 2, ytop - h / 2, 2.0, TA.MIDDLE_CENTER, "3-TABLAS", True)
+    xx = x0
+    for j, (enc, w, al) in enumerate(cols):
+        pl([(xx, ytop - h), (xx, ytop - nf * h)], "3-TABLAS", 13)
+        txt(enc, xx + w / 2, ytop - 1.5 * h, 2.0, TA.MIDDLE_CENTER, "3-TABLAS", True)
+        for i, fila in enumerate(filas):
+            y = ytop - (i + 2.5) * h
+            if al == "c": txt(fila[j], xx + w / 2, y, 2.0, TA.MIDDLE_CENTER, "3-TABLAS")
+            else: txt(fila[j], xx + 1, y, 2.0, TA.MIDDLE_LEFT, "3-TABLAS")
+        xx += w
+    pl([(x0, ytop), (x0, ytop - nf * h)], "3-TABLAS", 25); pl([(x1, ytop), (x1, ytop - nf * h)], "3-TABLAS", 25)
+    pl([(x0, ytop - h), (x1, ytop - h)], "3-TABLAS", 13)
+
+# datos tal cual la planilla del grupo (cómputo de muros y cubierta, Grupo LTN)
+tabla(15, 95, "CÓMPUTO DE MUROS Y CUBIERTA - GRUPO LTN",
+      [("Material", 17, "l"), ("Ancho panel", 17, "c"), ("Largo panel", 17, "c"), ("Espesor", 13, "c"), ("Cantidad", 14, "c"),
+       ("m² nec.", 15, "c"), ("ml nec.", 15, "c"), ("Función", 27, "l"), ("$ / m²", 13, "c")],
+      [("Foilroof", "1,00", "12,00", "0,05", "62", "744 m²", "744 ml", "Cubierta", ""),
+       ("Glasswall", "1,00", "11,50", "0,05", "6", "69", "69", "Muro perimetral", ""),
+       ("Glasswall", "1,00", "6,30", "0,05", "6", "37,8", "37,8", "Muro perimetral", ""),
+       ("Glasswall", "1,00", "6,00", "0,05", "60", "360", "360", "Muro perimetral", ""),
+       ("Glasswall", "1,00", "7,00", "0,05", "10", "70", "70", "Muro perimetral", ""),
+       ("Glasswall", "1,00", "8,00", "0,05", "12", "96", "96", "Muro perimetral", ""),
+       ("Glasswall", "1,00", "7,00", "0,05", "10", "70", "70", "Muro interior", ""),
+       ("Glasswall", "1,00", "8,00", "0,05", "12", "96", "96", "Muro interior", ""),
+       ("Glasswall", "1,00", "2,88", "0,05", "25", "72", "72", "Muro interior", "")])
+tabla(185, 95, "CÓMPUTO DE CARPINTERÍA MÓDENA",
+      [("Material", 15, "l"), ("Ancho", 10, "c"), ("Alto", 9, "c"), ("Tipo", 18, "l"), ("Cant.", 10, "c"),
+       ("m² nec.", 12, "c"), ("$ / m²", 23, "c")],
+      [("Aluminio", "2 m", "1 m", "Corrediza", "11", "22 m²", ""),
+       ("Aluminio", "1 m", "1 m", "Paño fijo", "2", "2 m²", ""),
+       ("Aluminio", "1 m", "1 m", "Paño fijo", "3", "3 m²", ""),
+       ("Aluminio", "11", "6", "Curtain wall", "1", "66 m²", "")])
+txt("Medidas en metros. Datos según planilla de cómputo del grupo.", 185, 73.5, 2.0)
 
 # ---------------------------------------------------------------- REFERENCIAS
-txt("REFERENCIAS", 15, 69, 2.8, TA.LEFT, "3-TITULOS", True)
-pl([(15, 67), (W - 15, 67)], "3-TITULOS", 25)
-refs = ["Chapa exterior acero galv. prepintado e=0,5 mm", "Núcleo de poliuretano inyectado (PUR) 80 mm",
-        "Chapa interior acero galv. prepintado e=0,5 mm", "Junta machihembrada (macho / hembra)",
-        "Burlete de EPDM", "Sellador poliuretánico + cordón de respaldo", "Tornillo autoperforante Ø6,3 c/ arandela EPDM",
+txt("REFERENCIAS", 15, 56.5, 2.6, TA.LEFT, "3-TITULOS", True)
+pl([(15, 55), (W - 15, 55)], "3-TITULOS", 25)
+refs = ["Chapa ext. acero galv. prepintado e=0,5 mm", "Núcleo poliuretano inyectado (PUR) 80 mm",
+        "Chapa int. acero galv. prepintado e=0,5 mm", "Junta machihembrada (macho / hembra)",
+        "Burlete de EPDM", "Sellador poliuretánico + cordón de respaldo", "Tornillo autoperf. Ø6,3 c/ arandela EPDM",
         "Montante tubo 100x20x2 soldado al ala", "Columna IPN 300 (ref. 10 del corte)", "Tapajunta de chapa plegada prepintada",
-        "Cupertina chapa galv. plegada c/ gotero (ref. 1)", "Perfil U de arranque + babeta c/ gotero",
+        "Cupertina chapa galv. c/ gotero (ref. 1)", "Perfil U de arranque + babeta c/ gotero",
         "Viga portapanel tubo 100x60x3,2 (ref. 28)", "Anclaje químico Ø12 mm", "Fundación base H°A° (ref. 21)",
-        "Contrapiso + solado exterior (refs. 19 y 12)", "Film protector (se retira al terminar)", "Cinta butílica de sellado",
-        "Tapa de columna e=8 mm + soporte de cupertina"]
-cw = (W - 30) / 3
+        "Contrapiso + solado ext. (refs. 19 y 12)", "Film protector (se retira al terminar)", "Cinta butílica de sellado",
+        "Tapa de columna e=8 + soporte de cupertina"]
+cw = (W - 30) / 4
 for i, r in enumerate(refs):
-    col, row = divmod(i, 7)
-    x, y = 15 + col * cw, 62 - row * 4.3
-    circle((x + 2.2, y + 0.9), 1.9, "3-REFERENCIAS", 18)
-    txt(str(i + 1), x + 2.2, y + 0.9, 2.0, TA.MIDDLE_CENTER, "3-REFERENCIAS")
-    txt(r, x + 5.5, y, 2.0)
+    col, row = divmod(i, 5)
+    x, y = 15 + col * cw, 51 - row * 3.2
+    circle((x + 1.8, y + 0.8), 1.5, "3-REFERENCIAS", 13)
+    txt(str(i + 1), x + 1.8, y + 0.8, 1.8 if i >= 9 else 2.0, TA.MIDDLE_CENTER, "3-REFERENCIAS")
+    txt(r, x + 4.3, y, 2.0)
 
 # ---------------------------------------------------------------- RÓTULO (mismo formato que el corte integral)
-ry0, ry1 = 13, 33
+ry0, ry1 = 12, 30
 xs = [15, 62, 175, 225, 282]
 pl([(xs[0], ry0), (xs[-1], ry0), (xs[-1], ry1), (xs[0], ry1)], "0-MARCO", 50, True)
 for x in xs[1:-1]: pl([(x, ry0), (x, ry1)], "0-MARCO", 25)
-txt("LÁMINA 4", (xs[0] + xs[1]) / 2, 24.5, 5.0, TA.MIDDLE_CENTER, "3-TITULOS", True)
-txt("FECHA: 19/10/26", xs[0] + 2, 15.5, 2.0)
-txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 2, 28.5, 2.0)
-txt("ALUMNOS: Azcona Karina, Gómez Karen, Rosales Abril,", xs[1] + 2, 24.5, 2.0)
-txt("Vitale Candelaria", xs[1] + 18.5, 21, 2.0)
-txt("GRUPO: 13", xs[1] + 2, 15.5, 2.0)
-txt("NIVEL:", xs[2] + 2, 28.5, 2.0); txt("OBS:", xs[2] + 2, 24.5, 2.0)
-txt("CONSTRUCCIONES II", xs[3] + 2, 26.5, 2.4)
-txt("CATEDRA: ARQ. TUCCI", xs[3] + 2, 20.5, 2.4)
-txt("A3 - imprimir al 100%", xs[3] + 2, 15.2, 2.0)
+txt("LÁMINA 4", (xs[0] + xs[1]) / 2, 22.5, 5.0, TA.MIDDLE_CENTER, "3-TITULOS", True)
+txt("FECHA: 19/10/26", xs[0] + 2, 14, 2.0)
+txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 2, 26, 2.0)
+txt("ALUMNOS: Azcona Karina, Gómez Karen, Rosales Abril,", xs[1] + 2, 22, 2.0)
+txt("Vitale Candelaria", xs[1] + 18.5, 18.6, 2.0)
+txt("GRUPO: 13", xs[1] + 2, 14, 2.0)
+txt("NIVEL:", xs[2] + 2, 26, 2.0); txt("OBS:", xs[2] + 2, 22, 2.0)
+txt("CONSTRUCCIONES II", xs[3] + 2, 24.5, 2.4)
+txt("CATEDRA: ARQ. TUCCI", xs[3] + 2, 19, 2.4)
+txt("A3 - imprimir al 100%", xs[3] + 2, 14, 2.0)
 
 doc.saveas(f"{OUT}/Lamina4_Catalogo_Opaco_A3.dxf")
 print("ok")
