@@ -57,7 +57,10 @@ for (const s of SLOTS) {
     const gap = 5.6, ymin = s.y + HD + 3, ymax = s.y + H - 4;
     L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
     for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
-    const bx = side ? s.x + 2.6 : s.x + iw - 2.6;
+    // columnas de globos pegadas al dibujo (no al borde del espacio)
+    const ex = r.vec.edges.flatMap(e => [e[0], e[2]]).map(x => s.x + (x + 1) / 2 * iw);
+    const dMin = Math.min(...ex), dMax = Math.max(...ex);
+    const bx = side ? Math.max(s.x + 2.6, dMin - 9) : Math.min(s.x + iw - 2.6, dMax + 9);
     for (const p of L) {
       Ln([[p.ax, p.ay], [side ? bx + 6 : bx - 6, p.by], [side ? bx + 2.35 : bx - 2.35, p.by]]);
       o += `<circle cx="${p.ax}" cy="${p.ay}" r="0.35" fill="#000"/><circle cx="${bx}" cy="${p.by}" r="2.35" fill="#fff" stroke="#000" stroke-width="0.2"/>`;
