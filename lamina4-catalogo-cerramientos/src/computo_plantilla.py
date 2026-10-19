@@ -55,7 +55,7 @@ def tabla(x0, ytop, titulo, cols, filas, total=None, h=7.0, th=2.8):
 
 # ============================================================== HOJA
 txt("CÓMPUTO DE MATERIALES", W / 2, 396, 8.0, TA.MIDDLE_CENTER, "3-TITULOS", True)
-txt("LÁMINA 4  -  CATÁLOGO DE CERRAMIENTOS: VIDRIADOS Y OPACOS", W / 2, 385, 3.4, TA.MIDDLE_CENTER, "3-TITULOS")
+txt("CATÁLOGO DE CERRAMIENTOS: VIDRIADOS Y OPACOS", W / 2, 385, 3.4, TA.MIDDLE_CENTER, "3-TITULOS")
 pl([(15, 379), (W - 15, 379)], "3-TITULOS", 70)
 
 VACIA = lambda n, k: [("",) * k for _ in range(n)]
