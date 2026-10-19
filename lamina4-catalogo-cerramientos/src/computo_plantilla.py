@@ -6,6 +6,7 @@ import ezdxf
 from ezdxf.enums import TextEntityAlignment as TA
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "build"
+SIN_NOMBRE = "--sin-nombre" in sys.argv     # versión con "ALUMNA:" vacío
 os.makedirs(OUT, exist_ok=True)
 W, H = 297.0, 420.0
 doc = ezdxf.new("R2018", setup=True); doc.units = ezdxf.units.MM
@@ -78,11 +79,11 @@ for x in xs[1:-1]: pl([(x, ry0), (x, ry1)], "0-MARCO", 25)
 txt("TP FINAL", (xs[0] + xs[1]) / 2, 20.4, 3.4, TA.MIDDLE_CENTER, "3-TITULOS", True)
 txt("FECHA: 19/10/2026", (xs[0] + xs[1]) / 2, 15.2, 1.8, TA.MIDDLE_CENTER)
 txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 2, 22.6, 2.4)
-txt("ALUMNA: Candelaria Vitale", xs[1] + 2, 19.0, 2.4)
+txt("ALUMNA:" if SIN_NOMBRE else "ALUMNA: Candelaria Vitale", xs[1] + 2, 19.0, 2.4)
 txt("GRUPO: 13", xs[1] + 2, 15.4, 2.4)
 txt("NIVEL:", xs[2] + 2, 22.6, 2.4); txt("OBS:", xs[2] + 2, 19.0, 2.4)
 txt("CONSTRUCCIONES II", (xs[3] + xs[4]) / 2, 21.0, 2.6, TA.MIDDLE_CENTER)
 txt("CATEDRA: ARQ. TUCCI", (xs[3] + xs[4]) / 2, 17.0, 2.6, TA.MIDDLE_CENTER)
 
-doc.saveas(f"{OUT}/Lamina4_Computo_Plantilla_A3.dxf")
+doc.saveas(f"{OUT}/Lamina4_Computo_Plantilla{'_sin_nombre' if SIN_NOMBRE else ''}_A3.dxf")
 print("ok")
