@@ -12,6 +12,7 @@ img.det { position: absolute; }
 <script type="module">
 import { n1, n2, n3 } from './nodos.js';
 import { MAT } from './lib3d.js';
+globalThis.LINE_ONLY = true;
 // nudos "sin pintar": caras blancas, rayado solo en las caras cortadas
 for (const k of Object.keys(MAT)) { const m = MAT[k]; if (k === 'red') { m.color = '#444444'; continue; }
   m.color = '#ffffff'; if (m.bg) m.bg = '#ffffff'; if (m.glass) m.color = '#ffffff'; }
@@ -38,7 +39,7 @@ for (const s of SLOTS) {
   const probe = S.render(40, 40 * ih / iw, ISO, 1, [0, 0], 1);
   let den = DENS.find(d => probe.fit.needW <= iw * d * 0.97 && probe.fit.needH <= ih * d * 0.97) || 20; console.log(s.t, probe.fit.needW|0, probe.fit.needH|0, den);
   const S2 = s.f(); S2.want2D = true;
-  const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.0, iw * den);
+  const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.4, iw * den);
   { const mx = (x) => s.x + (x + 1) / 2 * iw, my = (y) => s.y + HD + (1 - y) / 2 * ih;
     (window.VEC2D ||= []).push({ slot: s.t, den, faces: r.vec.faces.map(f => ({ ...f, tris: f.tris.map(t => [mx(t[0]), my(t[1]), mx(t[2]), my(t[3]), mx(t[4]), my(t[5])]) })),
       edges: r.vec.edges.map(e => [mx(e[0]), my(e[1]), mx(e[2]), my(e[3]), e[4]]) }); }

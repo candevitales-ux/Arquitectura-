@@ -32,7 +32,13 @@ function hatchCanvas(kind, bg) {
 const texCache = {};
 function hatchTex(kind, bg, period) {
   const key = kind + bg + period; if (texCache[key]) return texCache[key];
-  const t = new THREE.CanvasTexture(hatchCanvas(kind, bg)); t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  const cv = hatchCanvas(kind, bg);
+  if (globalThis.LINE_ONLY) {   // rayados en escala de grises
+    const g = cv.getContext('2d'), im = g.getImageData(0, 0, cv.width, cv.height), d = im.data;
+    for (let i = 0; i < d.length; i += 4) { const y = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2]; const v = y > 200 ? 255 : Math.min(y, 90); d[i] = d[i + 1] = d[i + 2] = v; }
+    g.putImageData(im, 0, 0);
+  }
+  const t = new THREE.CanvasTexture(cv); t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.repeat.set(1 / period, 1 / period); t.anisotropy = 8; t.colorSpace = THREE.SRGBColorSpace;
   return (texCache[key] = t);
 }
@@ -69,6 +75,12 @@ function materials(key) {
   const m = MAT[key];
   const base = { polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 };
   let side, cap;
+  if (globalThis.LINE_ONLY) {   // solo línea: caras blancas sin sombreado; rayado gris solo en caras cortadas
+    if (m.glass) side = new THREE.MeshBasicMaterial({ ...base, color: '#ffffff', transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
+    else side = new THREE.MeshBasicMaterial({ ...base, color: key === 'red' ? '#ffffff' : '#ffffff' });
+    cap = (m.hatch && !m.glass) ? new THREE.MeshBasicMaterial({ ...base, map: hatchTex(m.hatch, '#ffffff', m.period) }) : side;
+    return (matCache[key] = [cap, side]);
+  }
   if (m.glass) {
     side = new THREE.MeshLambertMaterial({ ...base, color: m.color, transparent: true, opacity: 0.38, depthWrite: false, side: THREE.DoubleSide });
     cap = side;
