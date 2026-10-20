@@ -54,14 +54,15 @@ function vigaL(S, yt, z0, z1, ymin = -1e9) {
     for (const z of [-60, -160]) S.sheet([[420, yt - 120], [420, yt + 40], [490, yt + 40], [490, yt - 120]], 10, 'z', z - 5, z + 5, 'red');
   }
 }
-// panel TT h = 0,65 perpendicular a la fachada: z = 0 corta el ala entre nervios; nervio (z -230..-70, en vista) apoyado en el ala de la viga L
+// panel TT h = 0,65 en corte transversal: ala + 2 nervios ("dientes") cortados en z = 0; el primero apoya en el ala de la viga L
 function panelTT(S, yt, x1, zb) {
   const yf = yt - 50;
-  S.box(570, x1, yf, yt, zb, 0, 'pre');                                                       // ala
-  S.prism([[-230, yf], [-70, yf], [-90, yt - 650], [-210, yt - 650]].map(([z, y]) => [-z, y]).reverse(), 'x', 580, x1, 'prev');  // nervio
-  S.box(590, 740, yt - 660, yt - 650, -230, -70, 'neo');                                      // neopreno
-  S.cyl('y', 665, -150, 8, yt - 780, yt - 520, 'steel', 12);                                  // pasador Ø16
-  S.box(550, 570, yt - 650, yt, zb, 0, 'grout');                                              // junta
+  S.box(570, x1, yf, yt, zb, 0, 'pre');
+  for (const xc of [660, 1860]) if (xc + 90 <= x1 + 1)
+    S.prism([[xc - 90, yf], [xc + 90, yf], [xc + 60, yt - 650], [xc - 60, yt - 650]], 'z', zb, 0, 'pre');
+  S.box(600, 720, yt - 660, yt - 650, zb, 0, 'neo');
+  S.box(550, 570, yt - 650, yt, zb, 0, 'grout');
+  for (const y of [yt - 610, yt - 560]) S.cyl('z', 660, y, 6.4, -4, 2, 'neo', 12);
 }
 function capa(S, ytop, x1, zb) {
   S.box(250, x1, ytop, ytop + 50, zb, 0, 'insitu');
@@ -102,7 +103,7 @@ export function n1() {
   grapa(S, 8565);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
-  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 1000, 8500, -70); A(19, 700, 8258, -150); A(14, 665, 8200, -150);
+  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 900, 8800, 0); A(19, 700, 8258, 0);
   A(13, 400, 8300, 0);  A(18, 270, 8565, -40); A(25, 110, 9000, ZM + 25); A(28, 3, 8800, 0); A(29, 65, 8700, 0); A(31, 160, 8565, ZM + 35);
   return S;
 }
@@ -126,7 +127,7 @@ export function n2() {
   S.sheet([[182, 4503], [330, 4503]], 3, 'z', ZB, -120, 'alu');
   grapa(S, 4065);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 1000, 4000, -70); A(19, 700, 3758, -150); A(14, 665, 3700, -150); A(13, 400, 3800, 0);  A(15, 650, 2900, -700);
+  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 900, 4300, 0); A(19, 700, 3758, 0); A(13, 400, 3800, 0);  A(15, 650, 2900, -700);
   A(16, 450, 3400, -90); A(17, 500, 3508, -200); A(18, 270, 4065, -40); A(20, 900, 4500, -300); A(21, 900, 4475, -200);
   A(25, 110, 4100, ZM + 25); A(28, 3, 3800, 0); A(29, 65, 3600, 0); A(30, 170, 4410, 0); A(31, 160, 4065, ZM + 35);
   return S;

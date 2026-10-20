@@ -199,15 +199,19 @@ def viga_L(yt):
     for dy in (-22, 22): line(292, yy + dy, 345, yy + dy, stroke="#000", sw=0.14)            # anclajes del riel
     rect(268, yy - 8, 284, yy + 8, fill="#555", stroke="#000", sw=0.05)                    # cabeza de bulón T
 def panel_TT(yt):
-    """panel TT h = 0,65 PERPENDICULAR a la fachada. El corte pasa entre nervios: el ala del TT va cortada (rayada) y el
-    nervio se ve en VISTA (sin rayado), con su extremo apoyado en el ala de la viga L s/ neopreno + pasador Ø16."""
+    """panel TT h = 0,65 en corte transversal: ala cortada + sus dos nervios ("dientes") cortados, integrados al panel.
+    El primer nervio entra en la L y apoya en su ala s/ neopreno + pasador; el segundo a 1,20 m. VP en vista detrás."""
     yf = yt - 50
-    rect(580, yt - 650, 2700, yf, fill="#e9ebed", stroke="#222", sw=0.22)                  # nervio (en vista)
-    pline([(600, yt - 610), (2700, yt - 610)], stroke=REB, sw=0.1, extra=DASH)              # cordones (ocultos)
+    rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)                                  # viga VP (en vista)
+    line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)
     rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala del TT (cortada)
-    rect(590, yt - 660, 740, yt - 650, fill=NEO, stroke="none", sw=0)                      # neopreno nervio / ala viga L
-    rect(657, yt - 780, 673, yt - 520, fill="none", stroke="#333", sw=0.15, extra=DASH)    # pasador Ø16 (oculto)
-    rect(550, yt - 650, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                 # junta llenada c/ grout
+    for xc in (660, 1580):                                                                 # nervios (cortados)
+        poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)
+        for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)
+        line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)
+    rect(600, yt - 660, 720, yt - 650, fill=NEO, stroke="none", sw=0)                      # neopreno nervio / ala viga L
+    rect(652, yt - 780, 668, yt - 560, fill="none", stroke="#333", sw=0.15, extra=DASH)    # pasador Ø16 (oculto)
+    rect(550, yt - 650, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                 # junta L / panel c/ grout
 def capa_compresion(ytop, x0=250):
     rect(x0, ytop, 2700, ytop + 50, fill="url(#pHAis)", **CUT)
     pline([(x0 + 30, ytop + 25), (2700, ytop + 25)], stroke=REB, sw=0.12, extra='stroke-dasharray="2 0.5"')
@@ -346,7 +350,7 @@ def cota_h(x0, x1, ypos, txt, below=False):
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
 cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
 cota_v(3515, 4415, 900, "0,90"); cota_v(8015, 8915, 900, "0,90")
-cota_v(3765, 4415, 1640, "0,65")
+cota_v(3765, 4415, 1200, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3330, "21"); cota_h(182, 250, 3330, "7"); cota_h(250, 650, 3330, "40")
@@ -373,8 +377,8 @@ def ref(n, x, y, dx, dy):
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 400, 8250, 22, 2), (14, 665, 8200, 30, 8),
- (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 700, 3760, 24, 7),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1580, 8500, -9, 0), (13, 400, 8250, 22, 2), (14, 660, 8170, 30, 8),
+ (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 700, 3758, 24, 7),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3600, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 24, -4), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
@@ -401,7 +405,7 @@ LEG = [
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
 (11, "Estribos salientes de la viga L (2Ø10)"),
-(12, "Panel TT h 0,65 (ala cortada, nervio en vista)"),
+(12, "Panel TT h 0,65: ala y nervios cortados"),
 (13, "Viga L de borde (ala = apoyo de los TT)"),
 (14, "Pasador Ø16 en vaina c/ grout"),
 (15, "Columna pretensada 40x40 (en vista)"),
