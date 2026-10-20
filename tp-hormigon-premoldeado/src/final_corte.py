@@ -205,14 +205,10 @@ def panel_TT(yt):
     rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)                                  # viga VP (en vista)
     line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)
     rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala del TT (cortada)
-    for xc in (1170, 1590):                                                                # nervios: 0,60 del borde y c/ 1,20 m (con interrupción)
+    for xc in (1170,):                                                                     # nervio a 0,60 del borde del panel
         poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)
         for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)
         line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)
-    # línea de interrupción entre nervios (se omiten 0,78 m)
-    xi = 1380
-    poly([(xi - 12, yt - 760), (xi + 12, yt - 760), (xi + 12, yt + 70), (xi - 12, yt + 70)], fill="#fff", stroke="none", sw=0)
-    pline([(xi, yt - 760), (xi, yt - 380), (xi + 40, yt - 340), (xi - 40, yt - 300), (xi, yt - 260), (xi, yt + 70)], stroke="#000", sw=0.18)
     rect(550, yt - 120, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                 # junta L / panel c/ grout
 def capa_compresion(ytop, x0=250):
     rect(x0, ytop, 2700, ytop + 50, fill="url(#pHAis)", **CUT)
@@ -352,7 +348,7 @@ def cota_h(x0, x1, ypos, txt, below=False):
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
 cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
 cota_v(3515, 4415, 900, "0,90"); cota_v(8015, 8915, 900, "0,90")
-cota_v(3765, 4415, 1000, "0,65")
+cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3330, "21"); cota_h(182, 250, 3330, "7"); cota_h(250, 650, 3330, "40")
