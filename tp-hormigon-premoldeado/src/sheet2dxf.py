@@ -28,8 +28,10 @@ def lw(sw):
     return 50
 
 # =============================================================== CORTE (geometría real -> papel, por bandas)
-S, PX0, XR0, XMAX = 20.0, 9.0, -600.0, 1700.0
-BANDS = [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
+import sys
+TAG = sys.argv[1] if len(sys.argv) > 1 else 'final'
+S, PX0, XR0, XMAX = 20.0, (170.0 if TAG == 'tp' else 9.0), -600.0, 1700.0
+BANDS = [(7600, 9540, 8.0), (3200, 5000, 109.0), (-2180, 1500, 203.0)] if TAG == 'tp' else [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
 FILL = {"url(#pHA)": ("ANSI31", 0.4, 0), "url(#pHAis)": ("AR-CONC", 0.06, 0), "url(#pH)": ("AR-CONC", 0.04, 0),
         "url(#pMort)": ("AR-SAND", 0.03, 0), "url(#pHid)": ("AR-SAND", 0.02, 0), "url(#pGrout)": ("AR-SAND", 0.02, 0),
         "url(#pTierra)": ("EARTH", 0.6, 45), "url(#pTosca)": ("GRAVEL", 0.4, 0), "url(#pEPS)": ("ZIGZAG", 0.3, 0),
@@ -54,7 +56,7 @@ def add_fill(polys, fill, layer_fill, layer_hatch, pat_scale_mult=1.0):
             h.paths.add_polyline_path(ext, is_closed=True, flags=1)
             for hole in g.interiors: h.paths.add_polyline_path(list(hole.coords)[:-1], is_closed=True)
 
-D = json.load(open("build/final_dx.json"))
+D = json.load(open("build/tp_dx.json" if TAG == "tp" else "build/final_dx.json"))
 for lo, hi, top in BANDS:
     W = box(XR0, lo, XMAX, hi)
     dy = top - (1000.0 - hi / S)
@@ -95,7 +97,7 @@ for lo, hi, top in BANDS:
 # =============================================================== AXONOMETRÍAS (2D)
 AXO_PAT = {"ha": ("ANSI31", 0.3), "hais": ("AR-CONC", 0.04), "h": ("AR-CONC", 0.03), "mort": ("AR-SAND", 0.02), "grout": ("AR-SAND", 0.015),
            "tosca": ("GRAVEL", 0.3), "tierra": ("EARTH", 0.4), "eps": ("ZIGZAG", 0.25), "lana": ("INSUL", 0.12)}
-V = json.load(open("build/final_2d.json"))
+V = json.load(open("build/tp_2d.json" if TAG == "tp" else "build/final_2d.json"))
 for det in V["VEC2D"]:
     for f in det["faces"]:
         polys = unary_union([Polygon([(t[0], t[1]), (t[2], t[3]), (t[4], t[5])]).buffer(0.002) for t in f["tris"]])
@@ -170,15 +172,16 @@ def draw_svg(xml, skip_rects=True):
                 h = msp.add_hatch(color=256, dxfattribs={"layer": "3-TEXTOS"}); h.set_solid_fill(color=256, rgb=rgb(fill)); h.paths.add_polyline_path(pts, is_closed=True)
             msp.add_lwpolyline(pts, close=True, dxfattribs={"layer": "3-TEXTOS", "lineweight": 13})
 
-svgpart = open("build/final_corte.svgpart").read()
+svgpart = open("build/tp_corte.svgpart" if TAG == "tp" else "build/final_corte.svgpart").read()
 svgpart = svgpart[svgpart.index("</defs>") + 7:]
 draw_svg(svgpart)
 draw_svg(V["OVERLAY"])
 
 # =============================================================== MARCO A3
 msp.add_lwpolyline([(0, 0), (297, 0), (297, 420), (0, 420)], close=True, dxfattribs={"layer": "0-MARCO-A3", "lineweight": 13})
-msp.add_lwpolyline([P(4, 4), P(293, 4), P(293, 416), P(4, 416)], close=True, dxfattribs={"layer": "0-MARCO-A3", "lineweight": 50})
+if TAG == "tp": msp.add_lwpolyline([P(10.7, 400.1), P(285.6, 400.1), P(285.6, 411.3), P(10.7, 411.3)], close=True, dxfattribs={"layer": "0-MARCO-A3", "lineweight": 35})
+if TAG != "tp": msp.add_lwpolyline([P(4, 4), P(293, 4), P(293, 416), P(4, 416)], close=True, dxfattribs={"layer": "0-MARCO-A3", "lineweight": 50})
 doc.header["$EXTMIN"] = (0, 0, 0); doc.header["$EXTMAX"] = (297, 420, 0)
 doc.set_modelspace_vport(height=430, center=(148.5, 210))
-doc.saveas("build/dwg_lamina_in/Lamina_A3_vertical_Corte_y_Nudos_2D.dxf")
+doc.saveas("build/dwg_tp_in/HORMIGON_VIDRIADO_A3.dxf" if TAG == "tp" else "build/dwg_lamina_in/Lamina_A3_vertical_Corte_y_Nudos_2D.dxf")
 print("ok")
