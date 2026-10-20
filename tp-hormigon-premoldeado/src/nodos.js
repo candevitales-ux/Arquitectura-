@@ -54,13 +54,24 @@ function vigaL(S, yt, z0, z1, ymin = -1e9) {
     for (const z of [-60, -160]) S.sheet([[420, yt - 120], [420, yt + 40], [490, yt + 40], [490, yt - 120]], 10, 'z', z - 5, z + 5, 'red');
   }
 }
-// panel TT h = 0,65 (corre perpendicular a la fachada): ala cortada en z = 0, nervio detrás
+// panel TT h = 0,65 paralelo a la fachada: ala + nervios (c/ 1,00 m) que corren en z; corte transversal en z = 0
 function panelTT(S, yt, x1, zb) {
   S.box(570, x1, yt - 50, yt, zb, 0, 'pre');                                 // ala
-  S.prism([[170, yt - 50], [330, yt - 50], [310, yt - 650], [190, yt - 650]], 'x', 580, x1, 'pre');   // nervio (cortado en x1)
-  S.box(590, 740, yt - 660, yt - 650, -340, -160, 'neo');                    // neopreno s/ ala de la viga L
-  S.box(550, 570, yt - 650, yt, zb, 0, 'grout');                             // junta llenada
-  S.cyl('x', yt - 610, -250, 6.4, 600, x1, 'neo', 10);                       // cordón del nervio
+  for (const xc of [650, 1650]) if (xc + 90 <= x1 + 1)
+    S.prism([[xc - 90, yt - 50], [xc + 90, yt - 50], [xc + 60, yt - 650], [xc - 60, yt - 650]], 'z', zb, 0, 'pre');
+  S.box(590, 710, yt - 660, yt - 650, zb, 0, 'neo');                         // nervio de borde s/ ala de viga L
+  S.box(550, 570, yt - 50, yt, zb, 0, 'grout');                              // junta L / panel
+  for (const y of [yt - 610, yt - 560]) S.cyl('z', 650, y, 6.4, -4, 2, 'neo', 12);
+}
+// viga VP doble T 0,70 (perpendicular a la fachada) en la línea de columnas (z zc0..zc1), apoyada en ménsula con diagonal
+function vpMensula(S, ytop, x1, zc0, zc1, hw = 150) {
+  const yb = ytop - 700, zm = (zc0 + zc1) / 2, u = (z) => -z;
+  S.prism([[u(zm - hw), yb], [u(zm + hw), yb], [u(zm + hw), yb + 150], [u(zm + 60), yb + 200], [u(zm + 60), ytop - 200], [u(zm + hw), ytop - 150],
+    [u(zm + hw), ytop], [u(zm - hw), ytop], [u(zm - hw), ytop - 150], [u(zm - 60), ytop - 200], [u(zm - 60), yb + 200], [u(zm - hw), yb + 150]].reverse(), 'x', 660, x1, 'pre');
+  // ménsula en la cara interior de la columna: cara sup., frente y diagonal (perfil x-y), ancho = columna
+  S.prism([[650, yb], [950, yb], [950, yb - 120], [650, yb - 300]], 'z', zc0, zc1, 'prev');
+  S.box(660, 940, yb - 10, yb, zm - hw + 10, zm + hw - 10, 'neo');
+  S.cyl('y', 800, zm, 10, yb - 200, yb + 160, 'steel', 14);
 }
 function capa(S, ytop, x1, zb) {
   S.box(250, x1, ytop, ytop + 50, zb, 0, 'insitu');
@@ -79,8 +90,10 @@ function columnaMensula(S, ytopM, y0, y1, zc0, zc1) {
 // =============================================================== NUDO 1 · CUBIERTA
 export function n1() {
   const S = new Scene3D();
-  const Y0 = 8000, X1 = 800, ZB = -260, yt = 8915;
-  vigaL(S, yt, ZB, 0, Y0);
+  const Y0 = 8000, X1 = 850, ZB = -560, yt = 8915;
+  vigaL(S, yt, -300, 0, Y0);
+  // VP doble T (perpendicular a la fachada) recortada en Y0: ala sup. + alma
+  S.box(660, X1, 8115, 8265, ZB, -300, 'pre'); S.box(660, X1, Y0, 8115, -490, -370, 'pre');
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
   // cubierta: barrera de vapor + contrapiso liviano H° c/ EPS + carpeta + membrana
@@ -101,17 +114,18 @@ export function n1() {
   grapa(S, 8565);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
-  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 700, 8890, 0);
-  A(13, 400, 8300, 0); A(14, 750, 8500, -170); A(18, 270, 8565, -40); A(25, 110, 9000, ZM + 25); A(28, 3, 8800, 0); A(29, 65, 8700, 0); A(31, 160, 8565, ZM + 35);
+  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 650, 8500, 0);
+  A(13, 400, 8300, 0); A(14, 850, 8190, -430); A(18, 270, 8565, -40); A(25, 110, 9000, ZM + 25); A(28, 3, 8800, 0); A(29, 65, 8700, 0); A(31, 160, 8565, ZM + 35);
   return S;
 }
 
 // =============================================================== NUDO 2 · ENTREPISO (corte entre columnas; al fondo la columna con su ménsula)
 export function n2() {
   const S = new Scene3D();
-  const Y0 = 3000, Y1 = 4520, X1 = 1000, ZB = -650, yt = 4415, ZC = -470;
-  columnaMensula(S, 3505, 2750, Y1, -870, ZC);
-  vigaL(S, yt, ZC + 10, 0);
+  const Y0 = 2760, Y1 = 4520, X1 = 800, ZB = -720, yt = 4415, ZC = -500;
+  S.box(250, 650, Y0, 3515, ZB, ZC, 'pre', { axis: 'y' });                   // columna (detrás)
+  vpMensula(S, 3765, X1, ZB, ZC, 105);
+  vigaL(S, yt, ZC, 0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
   S.box(250, X1, 4465, 4485, ZB, -120, 'mort');
@@ -125,8 +139,8 @@ export function n2() {
   S.sheet([[182, 4503], [330, 4503]], 3, 'z', ZB, -120, 'alu');
   grapa(S, 4065);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 900, 4390, 0); A(13, 400, 3800, 0); A(14, 900, 4000, -170); A(15, 650, 2900, -700);
-  A(16, 650, 3330, ZC - 150); A(17, 450, 3510, ZC - 60); A(18, 270, 4065, -40); A(19, 560, 4200, 0); A(20, 900, 4500, -300); A(21, 900, 4475, -200);
+  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 650, 4000, 0); A(13, 400, 3800, 0); A(14, 800, 3400, -610); A(15, 450, 3000, ZB);
+  A(16, 800, 2900, ZC); A(17, 800, 3062, -610); A(18, 270, 4065, -40); A(19, 560, 4200, 0); A(20, 900, 4500, -300); A(21, 900, 4475, -200);
   A(25, 110, 4100, ZM + 25); A(28, 3, 3800, 0); A(29, 65, 3600, 0); A(30, 170, 4410, 0); A(31, 160, 4065, ZM + 35);
   return S;
 }
