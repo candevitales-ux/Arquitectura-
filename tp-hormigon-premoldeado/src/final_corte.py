@@ -201,14 +201,13 @@ def viga_L(yt):
 def panel_TT(yt):
     """panel TT h = 0,65 (como el corte original): ala y nervios CORTADOS; nervio de borde s/ ala de la viga L; VP en vista detrás"""
     yf = yt - 50
-    rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)                                  # viga VP (en vista)
-    line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)
+    rect(660, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)                                  # viga VP (en vista)
+    line(660, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)
     rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                      # ala (cortada)
-    for xc in (650, 1650):                                                                 # nervios (cortados)
+    for xc in (1170, 2370):                                                                # nervios c/ 1,20 m, a 0,60 del borde
         poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)
         for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)
         line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)
-    rect(590, yt - 660, 710, yt - 650, fill=NEO, stroke="none", sw=0)                      # neopreno nervio / ala viga L
     rect(550, yf, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                       # junta L / panel
 def capa_compresion(ytop, x0=250):
     rect(x0, ytop, 2700, ytop + 50, fill="url(#pHAis)", **CUT)
@@ -375,8 +374,8 @@ def ref(n, x, y, dx, dy):
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1650, 8500, -9, 0), (13, 400, 8250, 22, 2), (14, 1300, 8000, 0, 7),
- (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 650, 8260, 26, -2), (18, 272, 8565, 22, 9), (19, 650, 3760, 22, 6),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 400, 8250, 22, 2), (14, 1300, 8000, 0, 7),
+ (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 560, 4390, 24, -6),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3600, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
@@ -403,14 +402,14 @@ LEG = [
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
 (11, "Estribos salientes de la viga L (2Ø10)"),
-(12, "Panel TT h = 0,65 (ala y nervios cortados)"),
+(12, "Panel TT h 0,65, nervios c/ 1,20 m (corte)"),
 (13, "Viga L premoldeada pretensada (portante)"),
 (14, "Viga VP pretensada (en vista)"),
 (15, "Columna pretensada 40x40 (en vista)"),
 (16, "Ménsula de columna c/ diagonal (en vista)"),
 (17, "Banda de neopreno + perno Ø20"),
 (18, "Riel de anclaje embutido + bulón T"),
-(19, "Nervio de borde s/ ala viga L + neopreno"),
+(19, "Junta viga L / panel llenada c/ grout"),
 ("ENTREPISO Y CIELORRASOS", None),
 (20, "Solado cerámico s/ adhesivo cementicio"),
 (21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
