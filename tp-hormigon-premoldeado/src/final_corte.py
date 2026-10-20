@@ -148,9 +148,6 @@ for xx in (360, 540):
     rect(xx - 18, -1300, xx + 18, -740, fill="none", stroke="#555", sw=0.1, extra=DASH)
 # armadura de la columna (estribos y barras)
 for xx in (290, 610): pline([(xx, -1290), (xx, -10)], stroke=REB, sw=0.12)
-# caño pluvial PVC Ø110 dentro de la columna, sale hacia el interior
-pline([(395, -10), (395, -330), (430, -390), (650, -400), (2700, -440)], stroke="#2b5d8a", sw=0.18)
-pline([(505, -10), (505, -260), (520, -285), (650, -290), (2700, -330)], stroke="#2b5d8a", sw=0.18)
 # SIN viga perimetral: el muro cortina de PB cuelga del entrepiso; abajo solo una guía deslizante sobre el contrapiso
 # aislación hidrófuga vertical + vereda exterior
 pline([(-64, -150), (-64, -327)], stroke="#000", sw=0.45)
@@ -175,11 +172,9 @@ for xx in range(975, 2700, 400): line(xx, -10, xx, 0, sw=0.15)
 for xa in (230, 650):
     rect(xa, -505, xa + 20, -10, fill="url(#pEPSv)", **CUTT)
     rect(xa, -10, xa + 20, 0, fill=NEO, stroke="none", sw=0)
-rect(-62, -505, 230, -327, fill="url(#pTosca)", **CUTT)                                   # relleno de tosca s/ cuello
 # ------------------------------------------------------------------ ESTRUCTURA (corte entre columnas: viga L cortada, columna y ménsula en vista)
 def columna_vista(y0, y1):
     rect(250, y0, 650, y1, fill="#eceeef", **VIEW)
-    for xx in (395, 505): line(xx, y0, xx, y1, stroke="#2b5d8a", sw=0.1, extra=DASH)    # caño pluvial
 def mensula_vista(ytop):
     """ménsula corta en vista: cara superior horizontal, frente vertical y diagonal inferior hasta la columna"""
     poly([(250, ytop), (760, ytop), (760, ytop - 160), (650, ytop - 470), (250, ytop - 470)], fill="#e3e6e8", stroke="#222", sw=0.2)
@@ -314,7 +309,6 @@ for i, (lo, hi, top) in enumerate(BANDS):
     bot = top + (hi - lo) / S
     if i > 0: zig_h(top)
     if i < len(BANDS) - 1: zig_h(bot)
-    L(X(450), top, X(450), bot, sw=0.12, stroke="#b03030", extra='stroke-dasharray="4 0.8 0.6 0.8"')
 
 def nivel(y, txt, xpos, side="r", sub=""):
     DX.append(dict(t='nivel', y=y, x=xpos, txt=txt, sub=sub, side=side))
@@ -364,9 +358,6 @@ T(X(1000), Y(-1000), "Fundación cortada", 1.4, ital=True, fill="#333")
 T(X(1000), Y(-1090), "por eje de columna", 1.4, ital=True, fill="#333")
 T(X(700), Y(3280), "Columna y ménsula en vista", 1.4, ital=True, fill="#333")
 
-# círculo de eje
-A(f'<circle cx="{f(X(450))}" cy="{f(BANDS[0][2] + 2.2)}" r="2.1" fill="#fff" stroke="#b03030" stroke-width="0.2"/>')
-T(X(450), BANDS[0][2] + 2.95, "C", 2.2, "middle", "bold", "#b03030")
 
 # ------------------------------------------------------------------ REFERENCIAS
 def ref(n, x, y, dx, dy):
@@ -381,7 +372,7 @@ REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
  (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1300, 8890, 0, 9), (13, 400, 8250, 22, 2), (14, 1450, 8500, 0, 7),
- (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 650, 8260, 26, -2), (18, 272, 8565, 22, 9), (19, 505, 7700, 22, -3),
+ (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 650, 8260, 26, -2), (18, 272, 8565, 22, 9), (19, 560, 4150, 26, -4),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3600, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
@@ -389,7 +380,7 @@ REFS_POS = [
  (40, 1350, -260, 0, 10), (41, 660, -250, 14, 10), (42, 100, -120, -16, 6), (43, 120, 600, 14, 0), (44, -60, -40, -10, -4),
  (45, -300, -200, 6, -9), (46, 450, -900, 14, 0), (47, 700, -800, 20, 0), (48, 690, -1200, 22, 0), (49, 540, -1600, 20, 2),
  (50, 850, -700, 18, 12), (51, 1200, -1800, 9, 0), (52, 1100, -1960, 10, -4), (53, 1400, -2100, 4, 3), (54, 1400, -1350, 0, 5),
- (55, 1200, -420, 2, 9), (5, 0, 0, 0, 0),
+ (55, 60, -70, -6, 16), (5, 0, 0, 0, 0),
 ]
 for n, x, y, dx, dy in REFS_POS:
     if (dx, dy) != (0, 0): ref(n, x, y, dx, dy)
@@ -415,7 +406,7 @@ LEG = [
 (16, "Ménsula de columna c/ diagonal (en vista)"),
 (17, "Banda de neopreno + perno Ø20"),
 (18, "Riel de anclaje embutido + bulón T"),
-(19, "Caño pluvial PVC Ø110 en la columna"),
+(19, "Junta viga L / TT llenada c/ grout"),
 ("ENTREPISO Y CIELORRASOS", None),
 (20, "Solado cerámico s/ adhesivo cementicio"),
 (21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
@@ -454,7 +445,7 @@ LEG = [
 (52, "Armadura de fundación s/ cálculo"),
 (53, "H° de limpieza, e = 10 cm"),
 (54, "Terreno natural"),
-(55, "Caño pluvial PVC Ø110 a cámara y colectora"),
+(55, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
 ]
 
 RX = 130.0
