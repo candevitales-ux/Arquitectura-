@@ -146,10 +146,9 @@ export function n3() {
     }
   for (const x of [360, 540]) S.cyl('y', x, -1, 8, Y0, -760, 'red', 12);
   // terreno y vereda
-  S.box(X0, -66, Y0, -400, ZB, 0, 'tierra');
-  S.box(X0, -66, -400, -250, ZB, 0, 'tosca'); S.box(X0, -66, -250, -150, ZB, -120, 'hs'); S.box(-70, -66, -250, -150, ZB, -120, 'seal');
-  S.box(975, X1, Y0, -327, ZB, 0, 'tierra');
-  S.box(-62, 230, -505, -327, ZB, 0, 'tosca');
+  S.box(X0, -76, Y0, -327, ZB, 0, 'tierra'); S.box(-76, 230, -510, -327, ZB, 0, 'tierra');
+  S.box(X0, -66, -327, -250, ZB, 0, 'tosca'); S.box(X0, -66, -250, -150, ZB, -120, 'hs'); S.box(-70, -66, -250, -150, ZB, -120, 'seal');
+  S.box(975, X1, Y0, -327, ZB, 0, 'tierra'); S.box(670, 975, -510, -327, ZB, 0, 'tierra');
   // piso (dos tramos) separados de la columna por juntas de dilatación
   for (const [xa, xb] of [[-62, 230], [670, X1]]) {
     S.box(xa, xb, -327, -177, ZB, 0, 'tosca'); S.box(xa, xb, -177, -175, ZB, -40, 'film');
@@ -157,7 +156,7 @@ export function n3() {
   }
   S.box(-62, 182, -35, 0, ZB, -190, 'mort'); S.box(182, 230, -35, -15, ZB, -190, 'mort'); S.box(670, X1, -35, -15, ZB, -190, 'mort');
   S.box(185, 230, -15, 0, ZB, -230, 'porc'); S.box(675, X1, -15, 0, ZB, -230, 'porc');
-  for (const xa of [230, 650]) { S.box(xa, xa + 20, -505, -10, ZB, 0, 'eps'); S.box(xa, xa + 20, -10, 0, ZB, 0, 'seal'); }
+  for (const xa of [230, 650]) { S.box(xa, xa + 20, -327, -10, ZB, 0, 'eps'); S.box(xa, xa + 20, -10, 0, ZB, 0, 'seal'); }
   S.box(-70, -62, -327, -150, ZB, 0, 'memb');
   // babeta + perfil guía de arranque + travesaño + vidrio + montante (colgado del entrepiso)
   S.sheet([[40, 8], [-20, 4], [-68, -12], [-68, -140], [-88, -160]], 3, 'z', ZB, 0, 'galv');

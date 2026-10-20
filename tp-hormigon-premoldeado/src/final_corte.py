@@ -122,7 +122,7 @@ REB = "#7a1f1f"
 
 # ------------------------------------------------------------------ TERRENO Y FUNDACIÓN (corte por eje de columna)
 rect(-750, -2180, 2700, -327, fill="url(#pTierra)", stroke="none", sw=0)
-line(-750, -400, -56, -400, sw=0.2)
+line(-750, -327, -64, -327, sw=0.2)
 rect(-600, -2150, 1500, -2050, fill="url(#pH)", **CUTT)                                   # H° de limpieza
 poly([(-550, -2050), (1450, -2050), (1450, -1750), (975, -1450), (-75, -1450), (-550, -1750)], fill="url(#pHAis)", **CUT)   # base
 poly([(-75, -1450), (975, -1450), (975, -510), (725, -510), (725, -1350), (175, -1350), (175, -510), (-75, -510)], fill="url(#pHAis)", **CUT)  # cuello
@@ -151,7 +151,7 @@ for xx in (290, 610): pline([(xx, -1290), (xx, -10)], stroke=REB, sw=0.12)
 # SIN viga perimetral: el muro cortina de PB cuelga del entrepiso; abajo solo una guía deslizante sobre el contrapiso
 # aislación hidrófuga vertical + vereda exterior
 pline([(-64, -150), (-64, -327)], stroke="#000", sw=0.45)
-rect(-750, -400, -66, -250, fill="url(#pTosca)", **CUTT)
+rect(-750, -327, -66, -250, fill="url(#pTosca)", **CUTT)
 poly([(-750, -250), (-66, -250), (-66, -150), (-750, -157)], fill="url(#pH)", **CUTT)
 rect(-70, -250, -66, -150, fill=NEO, stroke="none", sw=0)
 # babeta / goterón del arranque
@@ -170,7 +170,7 @@ rect(182, -35, 230, -15, fill="url(#pMort)", **CUTT)
 for xx in range(975, 2700, 400): line(xx, -10, xx, 0, sw=0.15)
 # JUNTAS DE DILATACIÓN piso / columna (EPS 2 cm desde el cuello hasta el piso + sellador)
 for xa in (230, 650):
-    rect(xa, -505, xa + 20, -10, fill="url(#pEPSv)", **CUTT)
+    rect(xa, -327, xa + 20, -10, fill="url(#pEPSv)", **CUTT)
     rect(xa, -10, xa + 20, 0, fill=NEO, stroke="none", sw=0)
 # ------------------------------------------------------------------ ESTRUCTURA (corte entre columnas: viga L cortada, columna y ménsula en vista)
 def columna_vista(y0, y1):
