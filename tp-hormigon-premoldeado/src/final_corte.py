@@ -182,8 +182,8 @@ def mensula_vista(ytop):
     pline([(300, ytop - 40), (720, ytop - 40), (720, ytop - 150), (640, ytop - 400)], stroke=REB, sw=0.12, extra=DASH)  # armadura (oculta)
     rect(440, ytop - 260, 460, ytop + 160, fill="none", stroke="#333", sw=0.12, extra=DASH)  # perno Ø20 (oculto)
 def viga_L(yt):
-    """viga portante premoldeada pretensada en L: alma 30 x 90 + ala de apoyo 20 x 24"""
-    yb = yt - 900; ya = yt - 660
+    """viga de borde premoldeada pretensada en L: alma 30 x 90 + ala (ménsula corrida) 20 x 50; recibe los dientes de los TT"""
+    yb = yt - 900; ya = yt - 400
     poly([(265, yb), (735, yb), (750, yb + 15), (750, ya), (550, ya), (550, yt), (250, yt), (250, yb + 15)], fill="url(#pHA)", **CUT)
     pline([(283, yb + 30), (520, yb + 30), (520, yt - 30), (283, yt - 30), (283, yb + 30)], stroke=REB, sw=0.12)   # estribo alma
     pline([(520, yb + 30), (725, yb + 30), (725, ya - 30), (520, ya - 30)], stroke=REB, sw=0.12)                   # estribo ala
@@ -199,16 +199,18 @@ def viga_L(yt):
     for dy in (-22, 22): line(292, yy + dy, 345, yy + dy, stroke="#000", sw=0.14)            # anclajes del riel
     rect(268, yy - 8, 284, yy + 8, fill="#555", stroke="#000", sw=0.05)                    # cabeza de bulón T
 def panel_TT(yt):
-    """panel TT h = 0,65 PERPENDICULAR a la fachada; el corte pasa por un nervio (corte longitudinal).
-    El nervio apoya en el ala de la viga L s/ neopreno + pasador Ø16; junta llenada con grout."""
-    yf = yt - 50
-    rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala (cortada)
-    rect(580, yt - 650, 2700, yf, fill="url(#pHA)", **CUT)                                 # nervio (corte longitudinal)
-    for yy in (yt - 610, yt - 570): pline([(600, yy), (2700, yy)], stroke=REB, sw=0.14)     # cordones de pretensado
-    for xx in range(700, 2700, 200): line(xx, yt - 630, xx, yf + 10, stroke=REB, sw=0.08)  # estribos del nervio
-    rect(590, yt - 660, 740, yt - 650, fill=NEO, stroke="none", sw=0)                      # neopreno nervio / ala viga L
-    rect(657, yt - 780, 673, yt - 520, fill=STEEL, stroke="#000", sw=0.06)                 # pasador Ø16 en vaina grouteada
-    rect(550, yt - 650, 580, yt, fill="url(#pGrout)", stroke="none", sw=0)                 # junta llenada c/ grout
+    """panel TT h = 0,65 perpendicular a la fachada. El corte pasa ENTRE nervios: el ala va cortada (rayada) y el
+    nervio se ve en VISTA (sin rayado), con su extremo rebajado (DIENTE) apoyado en el ala de la viga L."""
+    yf = yt - 50; yd = yt - 390                                                            # cara inferior del diente
+    # nervio en vista con diente encastrado
+    poly([(580, yf), (2700, yf), (2700, yt - 650), (790, yt - 650), (760, yt - 620), (760, yd + 30), (730, yd), (580, yd)],
+         fill="#e9ebed", stroke="#222", sw=0.22)
+    pline([(600, yt - 610), (2700, yt - 610)], stroke=REB, sw=0.1, extra=DASH)              # cordones (ocultos)
+    pline([(600, yd + 40), (780, yd + 40), (800, yt - 600)], stroke=REB, sw=0.1, extra=DASH)  # armadura del diente (oculta)
+    rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala del TT (cortada)
+    rect(590, yd - 10, 745, yd, fill=NEO, stroke="none", sw=0)                             # neopreno diente / ala viga L
+    rect(657, yd - 130, 673, yd + 180, fill="none", stroke="#333", sw=0.15, extra=DASH)    # pasador Ø16 (oculto)
+    rect(550, yd - 10, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                  # junta llenada c/ grout
 def capa_compresion(ytop, x0=250):
     rect(x0, ytop, 2700, ytop + 50, fill="url(#pHAis)", **CUT)
     pline([(x0 + 30, ytop + 25), (2700, ytop + 25)], stroke=REB, sw=0.12, extra='stroke-dasharray="2 0.5"')
@@ -346,7 +348,7 @@ def cota_h(x0, x1, ypos, txt, below=False):
     for p in (a, b): L(p - 0.7, py + 0.7, p + 0.7, py - 0.7, 0.25); L(p, py - 1.1, p, py + 1.1, 0.1)
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
 cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
-cota_v(3515, 4415, 780, "0,90"); cota_v(8015, 8915, 780, "0,90")
+cota_v(3515, 4415, 900, "0,90"); cota_v(8015, 8915, 900, "0,90")
 cota_v(3765, 4415, 1640, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(8968, 9440, 220, "0,47")
@@ -374,8 +376,8 @@ def ref(n, x, y, dx, dy):
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1300, 8890, 0, 9), (13, 400, 8250, 22, 2), (14, 665, 8200, 34, -2),
- (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 660, 3760, 26, 6),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1300, 8890, 0, 9), (13, 400, 8250, 22, 2), (14, 665, 8560, 30, 6),
+ (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 690, 4020, 26, 6),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3600, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 26, -14), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
@@ -402,14 +404,14 @@ LEG = [
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
 (11, "Estribos salientes de la viga L (2Ø10)"),
-(12, "Panel TT h 0,65 (corte por nervio)"),
-(13, "Viga L premoldeada pretensada (portante)"),
+(12, "Panel TT h 0,65: ala cortada, nervio en vista"),
+(13, "Viga L de borde (ala = apoyo de los TT)"),
 (14, "Pasador Ø16 en vaina c/ grout"),
 (15, "Columna pretensada 40x40 (en vista)"),
 (16, "Ménsula de columna c/ diagonal (en vista)"),
 (17, "Banda de neopreno + perno Ø20"),
 (18, "Riel de anclaje embutido + bulón T"),
-(19, "Neopreno nervio / ala viga L"),
+(19, "Diente del nervio s/ ala viga L + neopreno"),
 ("ENTREPISO Y CIELORRASOS", None),
 (20, "Solado cerámico s/ adhesivo cementicio"),
 (21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
