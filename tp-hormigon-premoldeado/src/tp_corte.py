@@ -180,11 +180,11 @@ def mensula_corte(ytop):
     de la fachada; en el plano de corte su altura es 30 cm) y debajo, en vista, su diagonal hasta la columna"""
     rect(250, ytop - 300, 650, ytop, fill="url(#pHA)", **CUT)
     pline([(280, ytop - 270), (620, ytop - 270), (620, ytop - 30), (280, ytop - 30), (280, ytop - 270)], stroke=REB, sw=0.12)  # estribo
-    for xx in (310, 590): circ(xx, ytop - 45, 0.3, fill=REB)                                # tensor superior
-    for xx in (310, 590): circ(xx, ytop - 250, 0.24, fill=REB)
+    for xx in (290, 450, 610): circ(xx, ytop - 45, 0.3, fill=REB)                           # tensor superior
+    for xx in (290, 610): circ(xx, ytop - 250, 0.24, fill=REB)
     line(250, ytop - 470, 650, ytop - 470, stroke="#444", sw=0.13)                         # diagonal en vista (encuentro c/ columna)
-    # perno Ø20 anclado en la ménsula (cortado)
-    rect(440, ytop - 260, 460, ytop, fill=STEEL, stroke="#000", sw=0.08)
+    # 2 pernos Ø20 anclados en la ménsula (cortados)
+    for xp in (330, 570): rect(xp - 10, ytop - 260, xp + 10, ytop, fill=STEEL, stroke="#000", sw=0.08)
 def mensula_vp(yt):
     """ménsula c/ diagonal que recibe la VP (perpendicular a la fachada) — EN VISTA, detrás del plano de corte"""
     yv = yt - 760
@@ -200,12 +200,13 @@ def viga_L(yt):
          (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]
     poly(P, fill="url(#pHA)", **CUT)                                                       # VL doble T (cortada)
     for xx in (290, 370, 450, 530, 610): circ(xx, yb + 45, 0.32)                            # cordones
-    for xx in (330, 570): circ(xx, yb + 100, 0.32)
+    for xx in (410, 490): circ(xx, yb + 100, 0.32)
     for xx in (290, 450, 610): circ(xx, yv - 45, 0.28, fill=REB)
     pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)
     rect(250, yb - 10, 650, yb, fill=NEO, stroke="#000", sw=0.06)                          # neopreno VL / ménsula
-    rect(428, yb, 472, yb + 180, fill="url(#pGrout)", stroke="#000", sw=0.08)              # vaina Ø40 rellena c/ grout
-    rect(440, yb - 10, 460, yb + 160, fill=STEEL, stroke="#000", sw=0.08)                   # perno Ø20 (pasa el neopreno)
+    for xp in (330, 570):                                                                  # 2 pernos: impiden el vuelco/torsión de la VL
+        rect(xp - 22, yb, xp + 22, yb + 180, fill="url(#pGrout)", stroke="#000", sw=0.08)  # vaina Ø40 rellena c/ grout
+        rect(xp - 10, yb - 10, xp + 10, yb + 160, fill=STEEL, stroke="#000", sw=0.08)       # perno Ø20 (pasa el neopreno)
     # viga L de borde (encima de la VL)
     poly([(250, yv), (650, yv), (650, yt - 60), (400, yt - 60), (400, yt + 50), (250, yt + 50)], fill="url(#pHA)", **CUT)
     pline([(270, yv + 20), (630, yv + 20), (630, yt - 80), (380, yt - 80), (380, yt + 30), (270, yt + 30), (270, yv + 20)], stroke=REB, sw=0.12)
@@ -301,6 +302,12 @@ poly([(x0, 9088), (x0 + 60, 9088), (x0, 9148)], fill="url(#pMort)", **CUTT)     
 pline([(x1, ypend(x1, 9092)), (x0 + 60, 9092), (x0 + 4, 9148), (x0 + 4, 9335), (385, 9340)], stroke="#000", sw=0.45)
 pline([(420, 9356), (402, 9356), (402, 9300)], stroke="#000", sw=0.2)
 rect(381, 9331, 399, 9349, fill="#222", stroke="none", sw=0)
+# embudo (entre columnas, por eso en vista): ala del embudo bajo la membrana + rejilla parabólica
+xe = 640; ye = ypend(xe, 9092)
+line(xe - 120, ye + 4, xe + 120, ye + 4, stroke="#444", sw=0.2)                           # ala del embudo (en vista)
+pline([(xe - 85, ye + 4)] + [(xe + t, ye + 4 + 115 * (1 - (t / 85) ** 2)) for t in range(-85, 86, 17)] + [(xe + 85, ye + 4)], stroke="#333", sw=0.15)
+for t in (-51, -17, 17, 51): line(xe + t, ye + 4, xe + t, ye + 4 + 115 * (1 - (t / 85) ** 2), stroke="#333", sw=0.1)
+line(xe - 70, ye + 45, xe + 70, ye + 45, stroke="#333", sw=0.1)
 # cupertina
 pline([(-50, 9380), (-52, 9400), (-52, 9472), (430, 9452), (430, 9395), (436, 9380)], stroke="#000", sw=0.32)
 line(330, 9441, 330, 9480, stroke="#000", sw=0.18)
@@ -375,7 +382,7 @@ cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3090, "21"); cota_h(182, 250, 3090, "7"); cota_h(250, 650, 3090, "40")
 cota_h(-550, 1450, -2170, "2,00 (s/ cálculo)", below=True); cota_h(-75, 975, -1420, "1,05")
 
-T(X(-590), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(900), Y(9420), "INTERIOR", 2.0, fill="#555")
+T(X(-590), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(1450), Y(9420), "INTERIOR", 2.0, fill="#555")
 T(X(-590), Y(4900), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(4900), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
 T(X(-590), Y(1100), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(1100), "INTERIOR · PLANTA BAJA", 2.0, fill="#555")
 T(X(1150), Y(9200), "pend. 2 %", 1.4, ital=True, fill="#333")
@@ -395,17 +402,17 @@ def ref(n, x, y, dx, dy):
 
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
- (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 330, 8800, 20, 3), (14, 470, 8380, 28, 4),
- (15, 450, 7560, 14, 0), (16, 560, 7800, 30, 6), (17, 600, 8000, 34, 9), (20, 450, 3600, 35, 9), (21, 620, 4205, 18, -14), (22, 2300, 3800, 6, 6), (23, 900, 3500, 25, 10), (24, 1280, 3822, 13, 4), (18, 272, 8625, 22, 9), (19, 540, 4358, 30, 12),
- (25, 1500, 4495, 0, -7), (26, 1600, 4475, 0, -9), (27, 1300, 3006, 0, 6), (28, 1550, 3025, 0, 6), (29, 1275, 3200, 20, -5),
- (30, 120, 4200, -16, 0), (31, 100, 4590, 14, -8), (32, 12, 4665, -24, 14), (33, 3, 4100, -14, 3), (34, 65, 3900, -16, 4),
- (35, 170, 4410, -22, -4), (36, 210, 4125, 24, -4), (37, 100, 4708, -28, 1), (38, 100, 20, -18, -5), (39, -5, 2, 4, -14),
- (40, 950, -5, 0, -6), (41, 1150, -25, 0, -8), (42, 1350, -45, 0, -10), (43, 1100, -120, 0, 12), (44, 1550, -176, 0, 9),
- (45, 1350, -260, 0, 10), (46, 660, -250, 14, 10), (47, 100, -120, -16, 6), (48, 120, 600, 14, 0), (49, -60, -40, -10, -4),
- (50, -300, -200, 6, -9), (51, 450, -900, 14, 0), (52, 700, -800, 20, 0), (53, 690, -1200, 22, 0), (54, 540, -1600, 20, 2),
- (55, 850, -700, 18, 12), (56, 1200, -1800, 9, 0), (57, 1100, -1960, 10, -4), (58, 1400, -2100, 4, 3), (59, 1400, -1350, 0, 5),
- (60, 60, -70, -6, 16), (5, 0, 0, 0, 0),
+ (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3), (10, 680, 9160, 12, -14),
+ (11, 1550, 8945, 0, 12), (12, 470, 8980, 34, -16), (13, 1170, 8500, 9, 0), (14, 330, 8800, 20, 3), (15, 470, 8380, 28, 4),
+ (16, 450, 7560, 14, 0), (17, 560, 7800, 30, 6), (18, 600, 8000, 34, 9), (21, 330, 3600, 41, 9), (22, 620, 4205, 18, -14), (23, 2300, 3800, 6, 6), (24, 900, 3500, 25, 10), (25, 1280, 3822, 13, 4), (19, 272, 8625, 22, 9), (20, 540, 4358, 30, 12),
+ (26, 1500, 4495, 0, -7), (27, 1600, 4475, 0, -9), (28, 1300, 3006, 0, 6), (29, 1550, 3025, 0, 6), (30, 1275, 3200, 20, -5),
+ (31, 120, 4200, -16, 0), (32, 100, 4590, 14, -8), (33, 12, 4665, -24, 14), (34, 3, 4100, -14, 3), (35, 65, 3900, -16, 4),
+ (36, 170, 4410, -22, -4), (37, 210, 4125, 24, -4), (38, 100, 4708, -28, 1), (39, 100, 20, -18, -5), (40, -5, 2, 4, -14),
+ (41, 950, -5, 0, -6), (42, 1150, -25, 0, -8), (43, 1350, -45, 0, -10), (44, 1100, -120, 0, 12), (45, 1550, -176, 0, 9),
+ (46, 1350, -260, 0, 10), (47, 660, -250, 14, 10), (48, 100, -120, -16, 6), (49, 120, 600, 14, 0), (50, -60, -40, -10, -4),
+ (51, -300, -200, 6, -9), (52, 450, -900, 14, 0), (53, 700, -800, 20, 0), (54, 690, -1200, 22, 0), (55, 540, -1600, 20, 2),
+ (56, 850, -700, 18, 12), (57, 1200, -1800, 9, 0), (58, 1100, -1960, 10, -4), (59, 1400, -2100, 4, 3), (60, 1400, -1350, 0, 5),
+ (61, 60, -70, -6, 16), (5, 0, 0, 0, 0),
 ]
 for n, x, y, dx, dy in REFS_POS:
     if (dx, dy) != (0, 0): ref(n, x, y, dx, dy)
@@ -421,61 +428,62 @@ LEG = [
 (7, "Barrera de vapor: imprimación + film 200 µ"),
 (8, "Zócalo sup. H°A° in situ c/ barras a viga L"),
 (9, "Media caña de mortero"),
+(10, "Embudo c/ rejilla parabólica (en vista)"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
-(10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
-(11, "Estribos salientes viga L (2Ø10)"),
-(12, "Panel TT h 0,65: ala y nervios cortados"),
-(13, "Viga L de borde s/ VL (recibe el TT)"),
-(14, "Viga VL doble T 40x70 pretensada"),
-(15, "Columna pretensada 40x40 (en vista)"),
-(16, "Ménsula de columna p/ VL (cortada)"),
-(17, "Neopreno 10 mm: apoyo VL s/ ménsula"),
-(18, "Riel de anclaje embutido + bulón T"),
-(19, "Ala TT s/ talón viga L: neopreno + grout"),
-(20, "Perno Ø20 en vaina rellena c/ grout"),
-(21, "Junta VL / viga L: grout + barras Ø12"),
-(22, "Viga VP T invertida (en vista)"),
-(23, "Ménsula + neopreno + perno: apoyo VP (vista)"),
-(24, "Nervio TT s/ talón VP + neopreno"),
+(11, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
+(12, "Estribos salientes viga L (2Ø10)"),
+(13, "Panel TT h 0,65: ala y nervios cortados"),
+(14, "Viga L de borde s/ VL (recibe el TT)"),
+(15, "Viga VL doble T 40x70 pretensada"),
+(16, "Columna pretensada 40x40 (en vista)"),
+(17, "Ménsula de columna p/ VL (cortada)"),
+(18, "Neopreno 10 mm: apoyo VL s/ ménsula"),
+(19, "Riel de anclaje embutido + bulón T"),
+(20, "Ala TT s/ talón viga L: neopreno + grout"),
+(21, "2 pernos Ø20 en vainas c/ grout (antivuelco)"),
+(22, "Junta VL / viga L: grout + barras Ø12"),
+(23, "Viga VP T invertida (en vista)"),
+(24, "Ménsula + neopreno + perno: apoyo VP (vista)"),
+(25, "Nervio TT s/ talón VP + neopreno"),
 ("ENTREPISO Y CIELORRASOS", None),
-(25, "Solado cerámico s/ adhesivo cementicio"),
-(26, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
-(27, "Cielorraso placa de roca de yeso 12,5 mm"),
-(28, "Montantes y soleras chapa galv. 35 mm"),
-(29, "Gancho / vela a los nervios del panel TT"),
+(26, "Solado cerámico s/ adhesivo cementicio"),
+(27, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
+(28, "Cielorraso placa de roca de yeso 12,5 mm"),
+(29, "Montantes y soleras chapa galv. 35 mm"),
+(30, "Gancho / vela a los nervios del panel TT"),
 ("MURO CORTINA (STICK, MÓDULO 1,25 m)", None),
-(30, "Mullion: montante alum. 50x150"),
-(31, "Travesaño + presor + tapa + burletes EPDM"),
-(32, "DVH 6 templado + 12 + 3+3 laminado PVB"),
-(33, "Spandrel: vidrio templado 6 mm esmaltado"),
-(34, "Lana mineral 50 mm + bandeja chapa galv."),
-(35, "Barrera cortafuego lana mineral + intumescente"),
-(36, "Grapa acero galv. regulable + bulón M12 inox"),
-(37, "Junta de dilatación 20 mm + manguito"),
-(38, "Perfil guía de arranque (deslizante)"),
-(39, "Sellador silicona neutra s/ fondo de junta"),
+(31, "Mullion: montante alum. 50x150"),
+(32, "Travesaño + presor + tapa + burletes EPDM"),
+(33, "DVH 6 templado + 12 + 3+3 laminado PVB"),
+(34, "Spandrel: vidrio templado 6 mm esmaltado"),
+(35, "Lana mineral 50 mm + bandeja chapa galv."),
+(36, "Barrera cortafuego lana mineral + intumescente"),
+(37, "Grapa acero galv. regulable + bulón M12 inox"),
+(38, "Junta de dilatación 20 mm + manguito"),
+(39, "Perfil guía de arranque (deslizante)"),
+(40, "Sellador silicona neutra s/ fondo de junta"),
 ("PLANTA BAJA Y FUNDACIÓN", None),
-(40, "Solado cerámico s/ adhesivo cementicio"),
-(41, "Carpeta niveladora MHR 1:1/4:3"),
-(42, "Carpeta hidrófuga MCI 1:3"),
-(43, "Contrapiso de H° pobre, e = 12 cm"),
-(44, "Film de polietileno 200 µ"),
-(45, "Tosca compactada, e = 15 cm"),
-(46, "Junta de dilatación EPS 2 cm + sellador"),
-(47, "Contrapiso armado hasta la fachada"),
-(48, "Montante colgado del entrepiso"),
-(49, "Babeta chapa galv. + aislación hidrófuga"),
-(50, "Vereda de H° peinado s/ tosca"),
-(51, "Tronco de columna dentro del cuello"),
-(52, "Anclaje mecánico húmedo (horquillas)"),
-(53, "Relleno de H° cementicio cuello/columna"),
-(54, "Armadura de vinculación fundación–columna"),
-(55, "Cuello de la base, H°A° in situ"),
-(56, "Base de H°A° colada in situ (s/ cálculo)"),
-(57, "Armadura de fundación s/ cálculo"),
-(58, "H° de limpieza, e = 10 cm"),
-(59, "Terreno natural"),
-(60, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
+(41, "Solado cerámico s/ adhesivo cementicio"),
+(42, "Carpeta niveladora MHR 1:1/4:3"),
+(43, "Carpeta hidrófuga MCI 1:3"),
+(44, "Contrapiso de H° pobre, e = 12 cm"),
+(45, "Film de polietileno 200 µ"),
+(46, "Tosca compactada, e = 15 cm"),
+(47, "Junta de dilatación EPS 2 cm + sellador"),
+(48, "Contrapiso armado hasta la fachada"),
+(49, "Montante colgado del entrepiso"),
+(50, "Babeta chapa galv. + aislación hidrófuga"),
+(51, "Vereda de H° peinado s/ tosca"),
+(52, "Tronco de columna dentro del cuello"),
+(53, "Anclaje mecánico húmedo (horquillas)"),
+(54, "Relleno de H° cementicio cuello/columna"),
+(55, "Armadura de vinculación fundación–columna"),
+(56, "Cuello de la base, H°A° in situ"),
+(57, "Base de H°A° colada in situ (s/ cálculo)"),
+(58, "Armadura de fundación s/ cálculo"),
+(59, "H° de limpieza, e = 10 cm"),
+(60, "Terreno natural"),
+(61, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
 ]
 
 # ---------------- FORMATO TP (según plantilla de la cátedra)
@@ -486,11 +494,11 @@ T(16, 65.8, "REFERENCIAS", 5.0)
 items = [it for it in LEG if it[1] is not None]
 y0 = 70.4; dy = 3.25
 for k, (n, txt) in enumerate(items):
-    col, row = (0, k) if k < 30 else (1, k - 30)
+    col, row = (0, k) if k < 31 else (1, k - 31)
     xn = 18.6 if col == 0 else 90.4
     T(xn, y0 + row * dy, str(n), 2.8, "end", "bold")
     T(xn + 1.3, y0 + row * dy, txt, 2.8)
-yend = my = y0 + 30 * dy
+yend = my = y0 + 31 * dy
 # rótulo (como la plantilla)
 A('<rect x="10.7" y="400.1" width="274.9" height="11.2" fill="none" stroke="#000" stroke-width="0.35"/>')
 for xx in (39.5, 150.9, 244.3):
