@@ -24,12 +24,12 @@ const T = (x, y, s, z = {}) => o += `<text x="${x}" y="${y}" font-size="${Math.m
 const Ln = (p) => o += `<polyline points="${p.map(q => q.join(',')).join(' ')}" fill="none" stroke="#000" stroke-width="0.12"/>`;
 const ISO = [1, 1, 1];
 const SLOTS = [
-  { f: n1, x: 10, y: 179, W: 86, H: 107, t: 'NUDO 1 · CUBIERTA', tx: 22 },
-  { f: n2, x: 97, y: 179, W: 64, H: 107, t: 'NUDO 2 · ENTREPISO', tx: 111 },
-  { f: n3, x: 10, y: 286, W: 150, H: 112, t: 'NUDO 3 · PISO', tx: 63 },
+  { f: n1, x: 8, y: 173, W: 80, H: 117, t: 'NUDO 1 · CUBIERTA', tx: 22 },
+  { f: n2, x: 89, y: 173, W: 80, H: 117, t: 'NUDO 2 · ENTREPISO', tx: 111 },
+  { f: n3, x: 10, y: 290, W: 150, H: 108, t: 'NUDO 3 · PISO', tx: 63 },
 ];
 const HD = 9;
-const DENS = [15, 17.5, 20];
+const DENS = [15];   // consigna: nudos a 1:15
 for (const s of SLOTS) {
   const W = s.W, H = s.H;
   const S = s.f();
@@ -37,7 +37,7 @@ for (const s of SLOTS) {
   const iw = W, ih = H - HD;
   // escala: la mayor disponible (1:10, si no entra 1:12,5 …)
   const probe = S.render(40, 40 * ih / iw, ISO, 1, [0, 0], 1);
-  let den = DENS.find(d => probe.fit.needW <= iw * d * 0.97 && probe.fit.needH <= ih * d * 0.97) || 20; console.log(s.t, probe.fit.needW|0, probe.fit.needH|0, den);
+  let den = DENS.find(d => probe.fit.needW <= iw * d * 0.97 && probe.fit.needH <= ih * d * 0.97) || 20; console.log('FIT', s.t, (probe.fit.needW / (iw * 0.97)).toFixed(1), (probe.fit.needH / (ih * 0.97)).toFixed(1));
   const S2 = s.f(); S2.want2D = true;
   const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.4, iw * den);
   { const mx = (x) => s.x + (x + 1) / 2 * iw, my = (y) => s.y + HD + (1 - y) / 2 * ih;
