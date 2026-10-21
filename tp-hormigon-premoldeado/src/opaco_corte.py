@@ -143,12 +143,9 @@ poly([(x0, 9010), (630, ypend(630, 9068)), (x1, ypend(x1, 9068)), (x1, ypend(x1,
 import math as _m
 arcm = [(420 + 73 * _m.cos(t), 9040 + 73 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
 pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (493, 9044)] + arcm[1:-1] + [(347, 9044), (347, 9188), (234, 9188), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
-# (2) desagüe: gárgola Ø100 a través de parapeto y panel en cada eje de columna (oculta) + cabezal y caño de lluvia exterior (en vista)
-rect(-60, 8960, 345, 9060, fill="none", stroke="#333", sw=0.13, extra=DASH)
-poly([(-180, 9080), (20, 9080), (20, 9060), (-10, 8900), (-120, 8900), (-150, 9060)], fill="#eceeef", stroke="#444", sw=0.15)   # cabezal
-rect(-120, -60, -10, 8900, fill="#eceeef", stroke="#444", sw=0.15)                     # caño de lluvia Ø110 (en vista)
-for yy in (1500, 3800, 6200, 7800): rect(-130, yy - 15, 30, yy + 15, fill="#bbb", stroke="#444", sw=0.1)   # grampas al panel
-poly([(-120, -60), (-10, -60), (-60, -140), (-260, -140), (-260, -110), (-120, -110)], fill="#eceeef", stroke="#444", sw=0.15)  # codo de descarga
+# desagüe: embudo c/ rejilla en el fondo de la canaleta, c/ eje de columna (oculto) -> caño de lluvia interior junto a la columna
+rect(375, 8890, 465, 8967, fill="none", stroke="#333", sw=0.13, extra=DASH)
+pline([(350, 8967), (490, 8967)], stroke="#333", sw=0.13, extra=DASH)
 pline([(214, 9346), (238, 9346), (238, 9290)], stroke="#000", sw=0.2)                       # babeta
 rect(213, 9331, 229, 9349, fill="#222", stroke="none", sw=0)
 # cupertina (pendiente al interior, goterones) fijada c/ tornillo + arandela de neopreno
@@ -190,7 +187,7 @@ REFS_POS = [
  (5, 1500, 9050, 275, 44.5), (7, 1000, 8967, 250, 44.8), (9, 430, 8960, 226, 26), (8, 240, 9000, 223, 33),
  (10, 1550, 8945, 289.5, 46), (11, 285, 9060, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 400, 8780, 236.5, 51), (14, 450, 8100, 252.5, 88),
  (15, 450, 7640, 236.5, 103), (16, 700, 7720, 248, 105), (17, 500, 8000, 248, 90.5), (18, 520, 8705, 247, 56), (19, 540, 8858, 258, 52),
- (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 100, 9010, EX, 45.5), (58, 420, 8945, EX, 19.5), (60, -65, 8300, 181, 80), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
+ (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 420, 8930, EX, 45.5), (58, 340, 9000, EX, 19.5), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
  # entrepiso
  (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1300, 3306, 245, 200), (23, 1550, 3325, 257.5, 200), (24, 1275, 3500, 252.5, 187),
  (32, 235, 4520, EX, 128), (57, 120, 4250, EX, 140), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
@@ -268,8 +265,7 @@ LEG = [
 (56, "Junta vereda / viga EPS 1 cm + sellador"),
 (57, "Zona maciza local 30x30 en cada anclaje (sin EPS)"),
 (58, "EPS 25 mm + carpeta armada bajo membrana (canaleta)"),
-(59, "Gárgola Ø100 c/ manguito sellado, c/ eje de columna"),
-(60, "Caño de lluvia chapa galv. Ø110 + cabezal (en vista)"),
+(59, "Embudo c/ rejilla en canaleta (c/ eje col.) a caño interior"),
 ]
 
 '''

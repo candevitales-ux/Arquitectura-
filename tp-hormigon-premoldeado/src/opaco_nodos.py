@@ -41,7 +41,6 @@ export function n1() {
   S.prism([...AR(115), [305, 9150], [330, 9150], ...AR(90).reverse()], 'z', ZB, 0, 'eps');
   S.prism([...AR(90), [330, 9150], [345, 9150], ...AR(75).reverse()], 'z', ZB, -60, 'mort');
   S.box(250, 345, 9150, 9175, ZB, 0, 'eps'); S.box(250, 345, 9175, 9185, ZB, -60, 'mort');
-  S.cyl('x', 9010, -90, 50, -60, 330, 'neo', 20);                                   // gárgola Ø100
   for (const z of [-60, -200]) S.sheet([[278, yl - 90], [278, 9120]], 10, 'z', z - 5, z + 5, 'red');
   // panel TT (ala s/ viga de borde) + capa
   S.box(580, X1, yt - 50, yt, ZB, 0, 'pre'); S.box(590, 645, yt - 60, yt - 50, ZB, 0, 'neo'); S.box(560, 580, yt - 60, yt, ZB, 0, 'grout');
