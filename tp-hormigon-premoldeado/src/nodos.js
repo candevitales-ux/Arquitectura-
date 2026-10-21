@@ -41,26 +41,32 @@ function grapa(S, yy) {
   S.cyl('x', yy, ZM, 7, 240, 285, 'inox', 14);                               // bulón T al riel
 }
 // viga L premoldeada (alma 30 x 90 + ala 20 x 24), extruida en z
+function perfilVLdt(yb) {   // VL doble T 40x70
+  const yt = yb + 700;
+  return [[250, yb], [650, yb], [650, yb + 150], [530, yb + 210], [510, yb + 210], [510, yt - 190], [530, yt - 190], [650, yt - 130], [650, yt],
+    [250, yt], [250, yt - 130], [370, yt - 190], [390, yt - 190], [390, yb + 210], [370, yb + 210], [250, yb + 150]];
+}
+// VL doble T (portante, sobre ménsula) + viga L de borde ENCIMA (alma 15 x 26 + ala 25 x 20) que recibe el ala del TT
 function vigaL(S, yt, z0, z1, ymin = -1e9) {
-  const yb = Math.max(yt - 900, ymin), ya = yt - 660;
-  S.prism([[250, yb], [750, yb], [750, ya], [550, ya], [550, yt], [250, yt]], 'z', z0, z1, 'pre');
-  // riel embutido en la cara exterior
+  const yv = yt - 260, yb = yt - 960;
+  if (ymin <= yb) S.prism(perfilVLdt(yb), 'z', z0, z1, 'pre');
+  else S.prism(perfilVLdt(yb).map(([x, y]) => [x, Math.max(y, ymin)]).filter((p, i, a) => i === 0 || p[0] !== a[i - 1][0] || p[1] !== a[i - 1][1]), 'z', z0, z1, 'pre');
+  S.prism([[250, yv], [650, yv], [650, yt - 60], [400, yt - 60], [400, yt], [250, yt]], 'z', z0, z1, 'pre');   // viga L
   S.prism([[250, yt - 376], [292, yt - 376], [292, yt - 324], [250, yt - 324], [250, yt - 332], [284, yt - 332], [284, yt - 368], [250, yt - 368]], 'z', z0, z1, 'steel');
-  // armaduras sobre la cara de corte
   if (z1 === 0) {
-    sheetZ(S, [[283, Math.max(yt - 870, ymin + 5)], [283, yt - 30], [520, yt - 30], [520, Math.max(yt - 870, ymin + 5)]], 7);
-    for (const x of [300, 380, 460, 600, 690]) if (yt - 850 > ymin) S.cyl('z', x, yt - 850, 6.4, -4, 2, 'neo', 12);
-    for (const x of [300, 500]) S.cyl('z', x, yt - 50, 6, -4, 2, 'red', 12);
-    for (const z of [-60, -160]) S.sheet([[420, yt - 120], [420, yt + 40], [490, yt + 40], [490, yt - 120]], 10, 'z', z - 5, z + 5, 'red');
+    for (const x of [290, 450, 610]) S.cyl('z', x, yv - 45, 6, -4, 2, 'red', 12);
+    if (ymin <= yb) for (const x of [290, 370, 450, 530, 610]) S.cyl('z', x, yb + 45, 6.4, -4, 2, 'neo', 12);
+    for (const x of [330, 520]) S.cyl('y', x, -1, 8, yv - 120, yv + 150, 'red', 10);
+    for (const z of [-60, -160]) S.sheet([[300, yt - 120], [300, yt + 40], [360, yt + 40], [360, yt - 120]], 10, 'z', z - 5, z + 5, 'red');
   }
 }
-// panel TT h = 0,65 en corte transversal: ala + 2 nervios ("dientes") cortados en z = 0; el primero apoya en el ala de la viga L
 function panelTT(S, yt, x1, zb) {
   const yf = yt - 50;
-  S.box(570, x1, yf, yt, zb, 0, 'pre');
+  S.box(420, x1, yf, yt, zb, 0, 'pre');
+  S.box(430, 640, yt - 60, yt - 50, zb, 0, 'neo');
   for (const xc of [1170, 2370]) if (xc + 90 <= x1 + 1)
     S.prism([[xc - 90, yf], [xc + 90, yf], [xc + 60, yt - 650], [xc - 60, yt - 650]], 'z', zb, 0, 'pre');
-  S.box(550, 570, yt - 120, yt, zb, 0, 'grout');
+  S.box(400, 420, yt - 60, yt, zb, 0, 'grout');
   for (const y of [yt - 610, yt - 560]) S.cyl('z', 1170, y, 6.4, -4, 2, 'neo', 12);
 }
 function capa(S, ytop, x1, zb) {
@@ -80,7 +86,7 @@ function columnaMensula(S, ytopM, y0, y1, zc0, zc1) {
 // =============================================================== NUDO 1 · CUBIERTA
 export function n1() {
   const S = new Scene3D();
-  const Y0 = 8000, X1 = 1265, ZB = -260, yt = 8915;
+  const Y0 = 7900, X1 = 1265, ZB = -260, yt = 8915;
   vigaL(S, yt, ZB, 0, Y0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
@@ -102,16 +108,16 @@ export function n1() {
   grapa(S, 8565);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
-  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 1170, 8500, 0); A(19, 560, 8860, 0);
-  A(13, 400, 8300, 0);  A(18, 270, 8565, -40); A(25, 110, 9000, ZM + 25); A(28, 3, 8800, 0); A(29, 65, 8700, 0); A(31, 160, 8565, ZM + 35);
+  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 1170, 8500, 0); A(19, 540, 8858, 0); A(14, 450, 8200, 0);
+  A(13, 330, yt - 150, 0);  A(18, 270, 8565, -40); A(25, 110, 9000, ZM + 25); A(28, 3, 8800, 0); A(29, 65, 8700, 0); A(31, 160, 8565, ZM + 35);
   return S;
 }
 
 // =============================================================== NUDO 2 · ENTREPISO (corte entre columnas; al fondo la columna con su ménsula)
 export function n2() {
   const S = new Scene3D();
-  const Y0 = 3000, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, ZC = -400;
-  columnaMensula(S, 3505, 2750, Y1, -680, ZC);
+  const Y0 = 2950, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, ZC = -400;
+  columnaMensula(S, 3445, 2700, Y1, -680, ZC);
   vigaL(S, yt, ZC + 10, 0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
@@ -126,7 +132,7 @@ export function n2() {
   S.sheet([[182, 4503], [330, 4503]], 3, 'z', ZB, -120, 'alu');
   grapa(S, 4065);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 1170, 4000, 0); A(19, 560, 4360, 0); A(13, 400, 3800, 0);  A(15, 650, 2900, -700);
+  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 1170, 4000, 0); A(19, 540, 4358, 0); A(14, 450, 3700, 0); A(13, 330, yt - 150, 0);  A(15, 650, 2900, -700);
   A(16, 450, 3400, -90); A(17, 500, 3508, -200); A(18, 270, 4065, -40); A(20, 900, 4500, -300); A(21, 900, 4475, -200);
   A(25, 110, 4100, ZM + 25); A(28, 3, 3800, 0); A(29, 65, 3600, 0); A(30, 170, 4410, 0); A(31, 160, 4065, ZM + 35);
   return S;

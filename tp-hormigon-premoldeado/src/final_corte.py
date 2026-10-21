@@ -182,34 +182,41 @@ def mensula_vista(ytop):
     pline([(300, ytop - 40), (720, ytop - 40), (720, ytop - 150), (640, ytop - 400)], stroke=REB, sw=0.12, extra=DASH)  # armadura (oculta)
     rect(440, ytop - 260, 460, ytop + 160, fill="none", stroke="#333", sw=0.12, extra=DASH)  # perno Ø20 (oculto)
 def viga_L(yt):
-    """viga de borde premoldeada pretensada en L: alma 30 x 90 + ala de apoyo 20 x 24; en el ala apoyan los nervios de los TT"""
-    yb = yt - 900; ya = yt - 660
-    poly([(265, yb), (735, yb), (750, yb + 15), (750, ya), (550, ya), (550, yt), (250, yt), (250, yb + 15)], fill="url(#pHA)", **CUT)
-    pline([(283, yb + 30), (520, yb + 30), (520, yt - 30), (283, yt - 30), (283, yb + 30)], stroke=REB, sw=0.12)   # estribo alma
-    pline([(520, yb + 30), (725, yb + 30), (725, ya - 30), (520, ya - 30)], stroke=REB, sw=0.12)                   # estribo ala
-    for xx in (300, 380, 460, 600, 690): circ(xx, yb + 50, 0.32)                            # cordones de pretensado
-    for xx in (300, 500): circ(xx, yb + 120, 0.32)
-    for xx in (300, 500): circ(xx, yt - 50, 0.28, fill=REB)
-    for yy in (yb + 330, yb + 560): circ(295, yy, 0.22, fill=REB); circ(505, yy, 0.22, fill=REB)
-    pline([(420, yt - 120), (420, yt + 40), (490, yt + 40), (490, yt - 120)], stroke=REB, sw=0.22)  # estribos salientes 2Ø10
-    rect(250, yb - 10, 750, yb, fill=NEO, stroke="none", sw=0)                             # banda de neopreno s/ ménsula
-    # riel de anclaje embutido en la cara exterior (fijación de grapas del muro cortina)
+    """VL doble T 40x70 pretensada (perimetral, portante) apoyada en la ménsula + ENCIMA viga L de borde
+    premoldeada (alma 15 x 26 + ala 25 x 20) que cubre el hueco hasta el nivel de losa y recibe el ala del TT."""
+    yb = yt - 960; yv = yt - 260                                                            # VL: yb..yv ; L: yv..yt
+    P = [(250, yb), (650, yb), (650, yb + 150), (530, yb + 210), (510, yb + 210), (510, yv - 190), (530, yv - 190), (650, yv - 130), (650, yv),
+         (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]
+    poly(P, fill="url(#pHA)", **CUT)                                                       # VL doble T (cortada)
+    for xx in (290, 370, 450, 530, 610): circ(xx, yb + 45, 0.32)                            # cordones
+    for xx in (330, 570): circ(xx, yb + 100, 0.32)
+    for xx in (290, 450, 610): circ(xx, yv - 45, 0.28, fill=REB)
+    pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)
+    rect(250, yb - 10, 650, yb, fill=NEO, stroke="none", sw=0)                             # neopreno VL / ménsula
+    # viga L de borde (encima de la VL)
+    poly([(250, yv), (650, yv), (650, yt - 60), (400, yt - 60), (400, yt), (250, yt)], fill="url(#pHA)", **CUT)
+    pline([(270, yv + 20), (630, yv + 20), (630, yt - 80), (380, yt - 80), (380, yt - 20), (270, yt - 20), (270, yv + 20)], stroke=REB, sw=0.12)
+    for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)
+    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 150)], stroke=REB, sw=0.25)       # barras de vinculación VL / L (en grout)
+    rect(250, yv - 3, 650, yv + 3, fill="url(#pGrout)", stroke="none", sw=0)              # junta VL / L c/ mortero
+    pline([(300, yt - 120), (300, yt + 40), (360, yt + 40), (360, yt - 120)], stroke=REB, sw=0.22)  # estribos salientes 2Ø10
+    # riel de anclaje embutido en la VL (grapas del muro cortina)
     yy = yt - 350
     poly([(250, yy - 26), (292, yy - 26), (292, yy + 26), (250, yy + 26), (250, yy + 18), (284, yy + 18), (284, yy - 18), (250, yy - 18)], fill=STEEL, stroke="#000", sw=0.06)
-    for dy in (-22, 22): line(292, yy + dy, 345, yy + dy, stroke="#000", sw=0.14)            # anclajes del riel
-    rect(268, yy - 8, 284, yy + 8, fill="#555", stroke="#000", sw=0.05)                    # cabeza de bulón T
+    for dy in (-22, 22): line(292, yy + dy, 345, yy + dy, stroke="#000", sw=0.14)
+    rect(268, yy - 8, 284, yy + 8, fill="#555", stroke="#000", sw=0.05)
 def panel_TT(yt):
-    """panel TT h = 0,65 en corte transversal: ala cortada + sus dos nervios ("dientes") cortados, integrados al panel.
-    El primer nervio entra en la L y apoya en su ala s/ neopreno + pasador; el segundo a 1,20 m. VP en vista detrás."""
+    """panel TT h = 0,65 en corte transversal: ala cortada apoyada en el ala de la viga L s/ neopreno; nervio cortado"""
     yf = yt - 50
     rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)                                  # viga VP (en vista)
     line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)
-    rect(570, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala del TT (cortada)
-    for xc in (1170,):                                                                     # nervio a 0,60 del borde del panel
+    rect(420, yf, 2700, yt, fill="url(#pHA)", **CUT)                                       # ala del TT (cortada)
+    for xc in (1170,):
         poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)
         for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)
         line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)
-    rect(550, yt - 120, 570, yt, fill="url(#pGrout)", stroke="none", sw=0)                 # junta L / panel c/ grout
+    rect(430, yt - 60, 640, yt - 50, fill=NEO, stroke="none", sw=0)                        # neopreno ala TT / ala viga L
+    rect(400, yt - 60, 420, yt, fill="url(#pGrout)", stroke="none", sw=0)                  # junta L / panel c/ grout
 def capa_compresion(ytop, x0=250):
     rect(x0, ytop, 2700, ytop + 50, fill="url(#pHAis)", **CUT)
     pline([(x0 + 30, ytop + 25), (2700, ytop + 25)], stroke=REB, sw=0.12, extra='stroke-dasharray="2 0.5"')
@@ -221,17 +228,17 @@ def cielorraso(y, ytt):
     for xc in (1275, 2125): line(xc, y + 47, xc, ytt - 650, stroke="#555", sw=0.15)       # vela de cuelgue al nervio del TT
 
 # columnas en vista
-columna_vista(0, 3035); columna_vista(4465, 7535)
+columna_vista(0, 2975); columna_vista(4465, 7475)
 # entrepiso
-mensula_vista(3505); viga_L(4415); panel_TT(4415); capa_compresion(4415)
+mensula_vista(3445); viga_L(4415); panel_TT(4415); capa_compresion(4415)
 rect(250, 4465, 2700, 4485, fill="url(#pMort)", **CUTT)
 rect(260, 4485, 2700, 4490, fill="#8d8d8d", stroke="none", sw=0)
 rect(260, 4490, 2700, 4500, fill="url(#pPorc)", **CUTT)
 for xx in range(860, 2700, 400): line(xx, 4490, xx, 4500, sw=0.15)
-cielorraso(3420, 4415)
+cielorraso(3300, 4415)
 # cubierta
-mensula_vista(8005); viga_L(8915); panel_TT(8915); capa_compresion(8915)
-cielorraso(7920, 8915)
+mensula_vista(7945); viga_L(8915); panel_TT(8915); capa_compresion(8915)
+cielorraso(7800, 8915)
 
 # ------------------------------------------------------------------ MURO CORTINA
 montante(40, 4700); montante(4720, 9390)
@@ -242,14 +249,14 @@ rect(25, 0, 190, 40, fill=ALU, **CUTT); rect(32, 6, 182, 40, fill="#fff", stroke
 for xx in (60, 150): line(xx, 0, xx, -110, stroke="#000", sw=0.14)
 rect(-30, 0, 25, 4, fill="#222", stroke="none", sw=0)
 travesano(40, 60, glass_below=False)
-dvh(110, 3370)
-travesano(3380, 60)
-dvh(3450, 4550, spandrel=True)
+dvh(110, 3240)
+travesano(3250, 60)
+dvh(3320, 4550, spandrel=True)
 rect(40, 3450, 90, 4550, fill="url(#pLanaV)", **CUTT); rect(90, 3450, 93, 4550, fill=STEEL, stroke="none", sw=0)
 travesano(4560, 60)
-dvh(4630, 7870)
-travesano(7880, 60)
-dvh(7950, 9380, spandrel=True)
+dvh(4630, 7740)
+travesano(7750, 60)
+dvh(7820, 9380, spandrel=True)
 rect(40, 7950, 90, 9380, fill="url(#pLanaV)", **CUTT); rect(90, 7950, 93, 9380, fill=STEEL, stroke="none", sw=0)
 # cierre superior del muro cortina
 rect(-32, 9380, 190, 9420, fill=ALU, **CUTT); rect(-25, 9386, 183, 9414, fill="#fff", stroke="#000", sw=0.06)
@@ -325,9 +332,9 @@ def nivel(y, txt, xpos, side="r", sub=""):
 nivel(9472, "+9,47", -600, "r", "Cupertina")
 nivel(9092, "+9,09", 1650, "l", "Cubierta terminada")
 nivel(8915, "+8,92", 800, "r", "")
-nivel(7920, "+7,92", 1000, "r", "")
+nivel(7800, "+7,80", 1350, "r", "")
 nivel(4500, "+4,50", 1250, "r", "N.P.T. P. Alta")
-nivel(3420, "+3,42", 1000, "r", "")
+nivel(3300, "+3,30", 1350, "r", "")
 nivel(0, "±0,00", 1250, "r", "N.P.T. P. Baja")
 nivel(-150, "-0,15", -560, "r", "")
 nivel(-510, "-0,51", 1650, "l", "Sup. cuello")
@@ -347,7 +354,7 @@ def cota_h(x0, x1, ypos, txt, below=False):
     for p in (a, b): L(p - 0.7, py + 0.7, p + 0.7, py - 0.7, 0.25); L(p, py - 1.1, p, py + 1.1, 0.1)
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
 cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
-cota_v(3515, 4415, 900, "0,90"); cota_v(8015, 8915, 900, "0,90")
+cota_v(3455, 4155, 900, "0,70"); cota_v(4155, 4415, 900, "0,26"); cota_v(7955, 8655, 900, "0,70"); cota_v(8655, 8915, 900, "0,26")
 cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(8968, 9440, 220, "0,47")
@@ -375,9 +382,9 @@ def ref(n, x, y, dx, dy):
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 400, 8250, 22, 2), (14, 660, 8170, 30, 8),
- (15, 450, 7650, 14, 0), (16, 700, 7800, 14, 6), (17, 500, 8008, 26, 4), (18, 272, 8565, 22, 9), (19, 560, 4350, 26, 12),
- (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3456, 0, 6), (23, 1550, 3475, 0, 6), (24, 1275, 3600, 9, 3),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 330, 8800, 26, -4), (14, 450, 8100, 30, 6),
+ (15, 450, 7640, 14, 0), (16, 700, 7720, 14, 6), (17, 500, 7950, 26, 6), (18, 272, 8565, 22, 9), (19, 540, 4358, 30, 12),
+ (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3306, 0, 6), (23, 1550, 3325, 0, 6), (24, 1275, 3500, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 24, -4), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
  (35, 950, -5, 0, -6), (36, 1150, -25, 0, -8), (37, 1350, -45, 0, -10), (38, 1100, -120, 0, 12), (39, 1550, -176, 0, 9),
@@ -402,15 +409,15 @@ LEG = [
 (9, "Media caña de mortero"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
-(11, "Estribos salientes de la viga L (2Ø10)"),
+(11, "Estribos salientes viga L (2Ø10)"),
 (12, "Panel TT h 0,65: ala y nervios cortados"),
-(13, "Viga L de borde (ala = apoyo de los TT)"),
-(14, "Pasador Ø16 en vaina c/ grout"),
+(13, "Viga L de borde s/ VL (recibe el TT)"),
+(14, "Viga VL doble T 40x70 pretensada"),
 (15, "Columna pretensada 40x40 (en vista)"),
 (16, "Ménsula de columna c/ diagonal (en vista)"),
-(17, "Banda de neopreno + perno Ø20"),
+(17, "Neopreno + perno Ø20 (VL / ménsula)"),
 (18, "Riel de anclaje embutido + bulón T"),
-(19, "Junta viga L / panel c/ grout + capa"),
+(19, "Ala del TT s/ ala viga L + neopreno"),
 ("ENTREPISO Y CIELORRASOS", None),
 (20, "Solado cerámico s/ adhesivo cementicio"),
 (21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
