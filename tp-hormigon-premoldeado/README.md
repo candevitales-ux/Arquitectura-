@@ -23,3 +23,9 @@ python3 src/dxf_detalles3d.py build/lamina4_3d.json build/dwg_in/Lamina4_Detalle
 python3 src/dxf_lamina1.py && python3 src/dxf_detalles3d.py
 xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 ```
+
+## Lámina TP final – Cerramiento OPACO (A3 vertical)
+`../entregables/TP_FINAL_HORMIGON_OPACO_A3/HORMIGON_OPACO_A3.pdf` – corte integral 1:20 + 3 nudos axonométricos 1:15 + referencias, con el formato/rótulo de la plantilla vidriada.
+```
+python3 src/opaco_corte.py && node render.js src/opaco.html build/opaco portrait
+```
