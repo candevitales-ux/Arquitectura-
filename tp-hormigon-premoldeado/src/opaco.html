@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 297mm 420mm; margin: 0 }
+html, body { margin: 0; padding: 0; background: #fff; font-family: 'Liberation Sans', Arial, sans-serif; }
+#page { position: relative; width: 297mm; height: 420mm; overflow: hidden; }
+svg { position: absolute; left: 0; top: 0; }
+img.det { position: absolute; }
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="page"></div>
+<script type="module">
+globalThis.GRAY = true;   // corrección de cátedra: elementos en escala de grises
+import { MAT } from './lib3d.js';
+import { n1, n2, n3 } from './nodos_opaco.js';
+const GRAYS = { pre: '#c4c4c4', insitu: '#d4d4d4', hs: '#dedede', mort: '#e6e6e6', hid: '#cdcdcd', grout: '#b3b3b3', eps: '#f6f6f6', lana: '#ececec',
+  tosca: '#d9d9d9', tierra: '#cfcfcf', steel: '#5a5a5a', galv: '#a2a2a2', neo: '#1e1e1e', memb: '#383838', porc: '#adadad', yeso: '#f7f7f7',
+  film: '#4a4a4a', red: '#3c3c3c', seal: '#262626', intum: '#555555', inox: '#c2c2c2', liv: '#ededed' };
+for (const [k, c] of Object.entries(GRAYS)) if (MAT[k]) { MAT[k].color = c; if (MAT[k].bg) MAT[k].bg = c; }
+const page = document.getElementById('page');
+const base = await (await fetch('/build/opaco_corte.svgpart')).text();
+const PX = 14;
+let o = '';
+const T = (x, y, s, z = {}) => o += `<text x="${x}" y="${y}" font-size="${Math.max(z.size || 2, 2.8)}" font-weight="${z.w || 'normal'}" fill="${z.fill || '#000'}" text-anchor="${z.a || 'start'}"${z.it ? ' font-style="italic"' : ''}>${s}</text>`;
+const Ln = (p) => o += `<polyline points="${p.map(q => q.join(',')).join(' ')}" fill="none" stroke="#000" stroke-width="0.12"/>`;
+const DIR = [0.42, 0.5, 1];
+const SLOTS = [
+  { f: n1, x: 10, y: 163, W: 81, H: 152, t: 'NUDO 1 · CUBIERTA', st: 'corte entre columnas' },
+  { f: n2, x: 92, y: 163, W: 102, H: 124, t: 'NUDO 2 · ENTREPISO', st: 'corte por eje de columna' },
+  { f: n3, x: 92, y: 287, W: 102, H: 111, t: 'NUDO 3 · PISO S/ TERRENO', st: 'corte por eje de columna' },
+];
+const HD = 9;
+const DENS = [10, 12.5, 15];
+for (const s of SLOTS) {
+  const W = s.W, H = s.H, iw = W, ih = H - HD;
+  const probe = s.f().render(40, 40 * ih / iw, DIR, 1, [0, 0], 1);
+  let den = DENS.find(d => probe.fit.needW <= (iw - 15) * d && probe.fit.needH <= (ih - 3) * d);
+  console.log('FIT', s.t, (probe.fit.needW / (iw - 15)).toFixed(1), (probe.fit.needH / (ih - 3)).toFixed(1), den);
+  den ||= 15;
+  const S2 = s.f();
+  const r = S2.render(Math.round(iw * PX), Math.round(ih * PX), DIR, 1, [0, 0], 2.4, iw * den);
+  const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
+  Object.assign(img.style, { left: s.x + 'mm', top: (s.y + HD) + 'mm', width: iw + 'mm', height: ih + 'mm' });
+  page.appendChild(img);
+  T(s.x + 1, s.y + 3, s.t, { size: 3.2, w: 'bold' });
+  T(s.x + 1, s.y + 7, `Axonometría esc. 1:${String(den).replace('.', ',')} · ${s.st}`, { size: 2.8 });
+  // globos con la numeración de las referencias generales
+  const pts = r.anchors.map(a => ({ n: a.n, ax: s.x + a.x * iw, ay: s.y + HD + a.y * ih }));
+  const cx = s.x + iw / 2;
+  pts.forEach(p => p.left = p.ax < cx);
+  // equilibrar lados
+  const byX = [...pts].sort((p, q) => p.ax - q.ax); byX.forEach((p, k) => p.left = k < Math.ceil(pts.length / 2));
+  for (const side of [true, false]) {
+    const L = pts.filter(p => p.left === side).sort((a, b) => a.ay - b.ay);
+    const gap = 5.4, ymin = s.y + HD + 2.6, ymax = s.y + H - 3;
+    L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
+    for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
+    const bx = side ? s.x + 2.6 : s.x + iw - 2.6;
+    for (const p of L) {
+      Ln([[p.ax, p.ay], [side ? bx + 5 : bx - 5, p.by], [side ? bx + 2.35 : bx - 2.35, p.by]]);
+      o += `<circle cx="${p.ax}" cy="${p.ay}" r="0.35" fill="#000"/><circle cx="${bx}" cy="${p.by}" r="2.35" fill="#fff" stroke="#000" stroke-width="0.2"/>`;
+      T(bx, p.by + 1.0, p.n, { size: 2.8, w: 'bold', a: 'middle' });
+    }
+  }
+}
+// convenciones de rayado (escala de grises, siempre en el mismo sentido)
+{ const x0 = 12, y0 = 322; T(x0, y0, 'CONVENCIONES', { size: 3.2, w: 'bold' });
+  const C = [['pHA', 'H°A premoldeado'], ['pHAis', 'H°A in situ'], ['pH', 'H° simple / contrapiso'], ['pLiv', 'H° liviano c/ EPS'],
+    ['pMort', 'Carpeta / mortero'], ['pHid', 'Carpeta hidrófuga'], ['pGrout', 'Grout sin contracción'], ['pEPS', 'EPS (aislación térmica)'],
+    ['pLana', 'Lana mineral'], ['pTosca', 'Tosca compactada'], ['pTierra', 'Terreno natural'], ['#1e1e1e', 'Neopreno / sellador'],
+    ['#8c8c8c', 'Acero galvanizado'], ['#f0f0f0', 'Elemento en vista']];
+  C.forEach(([p, t], k) => { const yy = y0 + 3.5 + k * 5.1;
+    o += `<rect x="${x0}" y="${yy}" width="9" height="3.8" fill="${p.startsWith('#') ? p : `url(#${p})`}" stroke="#000" stroke-width="0.2"/>`;
+    T(x0 + 11, yy + 3.0, t, { size: 2.8 }); }); }
+page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
+page.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${o}</svg>`);
+await Promise.all([...document.images].map(im => im.decode()));
+window.READY = true;
+</script></body></html>

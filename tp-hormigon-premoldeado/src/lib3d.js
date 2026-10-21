@@ -33,9 +33,9 @@ const texCache = {};
 function hatchTex(kind, bg, period) {
   const key = kind + bg + period; if (texCache[key]) return texCache[key];
   const cv = hatchCanvas(kind, bg);
-  if (globalThis.LINE_ONLY) {   // rayados en escala de grises
+  if (globalThis.LINE_ONLY || globalThis.GRAY) {   // rayados en escala de grises
     const g = cv.getContext('2d'), im = g.getImageData(0, 0, cv.width, cv.height), d = im.data;
-    for (let i = 0; i < d.length; i += 4) { const y = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2]; const v = y > 200 ? 255 : Math.min(y, 90); d[i] = d[i + 1] = d[i + 2] = v; }
+    for (let i = 0; i < d.length; i += 4) { const y = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2]; const v = globalThis.GRAY ? y : (y > 200 ? 255 : Math.min(y, 90)); d[i] = d[i + 1] = d[i + 2] = v; }
     g.putImageData(im, 0, 0);
   }
   const t = new THREE.CanvasTexture(cv); t.wrapS = t.wrapT = THREE.RepeatWrapping;
