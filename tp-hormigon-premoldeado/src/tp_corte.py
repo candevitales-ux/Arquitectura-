@@ -259,6 +259,13 @@ cielorraso(7500, 8915)
 montante(40, 4700); montante(4720, 9390)
 rect(32, 4700, 182, 4720, fill="#fff", stroke="#444", sw=0.1)
 rect(60, 4600, 150, 4840, fill="none", stroke="#444", sw=0.1, extra=DASH)
+def bandeja_spandrel(y0, y1):
+    """spandrel: bandeja de chapa galv. tipo caja (fondo + pliegues sup. e inf.) apoyada y atornillada a los travesaños,
+    rellena c/ lana mineral 50 mm; cámara ventilada entre el vidrio esmaltado y la lana"""
+    rect(40, y0 + 6, 90, y1 - 6, fill="url(#pLanaV)", **CUTT)
+    poly([(40, y0), (93, y0), (93, y1), (40, y1), (40, y1 - 6), (87, y1 - 6), (87, y0 + 6), (40, y0 + 6)], fill=STEEL, stroke="#000", sw=0.05)
+    for yy in (y0, y1): line(70, yy - 25 if yy == y0 else yy + 25, 70, yy, stroke="#000", sw=0.14)   # tornillos a travesaños
+
 # arranque PB: perfil guía (U) fijado al contrapiso; el montante desliza dentro (cuelga del entrepiso)
 rect(25, 0, 190, 40, fill=ALU, **CUTT); rect(32, 6, 182, 40, fill="#fff", stroke="#000", sw=0.06)
 for xx in (60, 150): line(xx, 0, xx, -110, stroke="#000", sw=0.14)
@@ -267,12 +274,12 @@ travesano(40, 60, glass_below=False)
 dvh(110, 3240)
 travesano(3250, 60)
 dvh(3320, 4550, spandrel=True)
-rect(40, 3450, 90, 4550, fill="url(#pLanaV)", **CUTT); rect(90, 3450, 93, 4550, fill=STEEL, stroke="none", sw=0)
+bandeja_spandrel(3310, 4560)
 travesano(4560, 60)
 dvh(4630, 7740)
 travesano(7750, 60)
 dvh(7820, 9380, spandrel=True)
-rect(40, 7950, 90, 9380, fill="url(#pLanaV)", **CUTT); rect(90, 7950, 93, 9380, fill=STEEL, stroke="none", sw=0)
+bandeja_spandrel(7810, 9380)
 # cierre superior del muro cortina
 rect(-32, 9380, 190, 9420, fill=ALU, **CUTT); rect(-25, 9386, 183, 9414, fill="#fff", stroke="#000", sw=0.06)
 # barrera cortafuego entrepiso
@@ -458,7 +465,7 @@ LEG = [
 (32, "Travesaño + presor + tapa + burletes EPDM"),
 (33, "DVH 6 templado + 12 + 3+3 laminado PVB"),
 (34, "Spandrel: vidrio templado 6 mm esmaltado"),
-(35, "Lana mineral 50 mm + bandeja chapa galv."),
+(35, "Lana 50 mm en bandeja galv. atornillada"),
 (36, "Cortafuego: lana + sellador s/ ángulo galv."),
 (37, "Grapa acero galv. regulable + bulón M12 inox"),
 (38, "Junta de dilatación 20 mm + manguito"),
