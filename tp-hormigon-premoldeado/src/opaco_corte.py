@@ -47,6 +47,8 @@ for xx in range(975, 2700, 400): line(xx, -10, xx, 0, sw=0.15)
 
 # ------------------------------------------------------------------ la VL no lleva riel para muro cortina (el fija panel pasa por el alma)
 SRC = cut(SRC, "    # riel de anclaje embutido en la VL", "def panel_TT", "")
+SRC = SRC.replace("# columnas en vista", '\nimport math as _m\ndef viga_borde_canaleta(yt):\n    """cubierta (lado opaco, como el corte de referencia): VL doble T s/ ménsula + viga de borde premoldeada (apoyo del ala del TT)\n    + CANALETA de H°A colada in situ c/ hueco semicircular entre el parapeto del panel y el TT"""\n    yb = yt - 910; yv = yt - 210; yl = yt - 60\n    P = [(250, yb), (650, yb), (650, yb + 150), (530, yb + 210), (510, yb + 210), (510, yv - 190), (530, yv - 190), (650, yv - 130), (650, yv),\n         (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]\n    poly(P, fill="url(#pHA)", **CUT)\n    for xx in (290, 370, 450, 530, 610): circ(xx, yb + 45, 0.32)\n    for xx in (330, 570): circ(xx, yb + 100, 0.32)\n    for xx in (290, 450, 610): circ(xx, yv - 45, 0.28, fill=REB)\n    pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)\n    rect(250, yb - 10, 650, yb, fill=NEO, stroke="none", sw=0)\n    rect(250, yv - 3, 650, yv + 3, fill="url(#pGrout)", stroke="none", sw=0)\n    rect(250, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada\n    for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)\n    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)\n    arc = [(430 + 110 * _m.cos(t), 9040 + 110 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]\n    poly([(250, yl), (560, yl), (560, 9040), (540, 9040)] + arc[1:-1] + [(320, 9040), (320, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ\n    for xx in (285, 560 - 15): pline([(xx, yl - 90), (xx, 9010 if xx < 300 else 9010)], stroke=REB, sw=0.2)               # estribos salientes\n    pline([(285, 9010), (285, 9120)], stroke=REB, sw=0.2)\n    circ(285, 9100, 0.22, fill=REB); circ(545, 9000, 0.22, fill=REB)\ndef panel_TT_c(yt):\n    yf = yt - 50\n    rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)\n    line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)\n    rect(580, yf, 2700, yt, fill="url(#pHA)", **CUT)\n    for xc in (1170,):\n        poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)\n        for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)\n        line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)\n    rect(590, yt - 60, 645, yt - 50, fill=NEO, stroke="none", sw=0)\n    rect(560, yt - 60, 580, yt, fill="url(#pGrout)", stroke="none", sw=0)\n' + "\n# columnas en vista", 1)
+SRC = SRC.replace("mensula_vista(7995); viga_L(8915); panel_TT(8915); capa_compresion(8915, 400)", "mensula_vista(7995); viga_borde_canaleta(8915); panel_TT_c(8915); capa_compresion(8915, 570)")
 # cielorraso: arranca en el panel (no en el muro cortina)
 SRC = SRC.replace("rect(190, y, 2700, y + 12.5,", "rect(242, y, 2700, y + 12.5,").replace("pline([(190, y + 70), (190, y), (230, y)]", "pline([(230, y + 70), (230, y - 5), (270, y - 5)]")
 
@@ -59,41 +61,38 @@ def panel(y0, y1):
     for yy in range(y0 + 500, y1 - 300, 700): line(80, yy, 160, yy + 60, stroke="#222", sw=0.16)                   # conectores fibra de vidrio
     rect(212, 9330, 230, 9350, fill="#fff", stroke="#000", sw=0.1)                                                 # buña p/ babeta
 def fija_panel(yy):
-    """riel embutido en el panel + bulón T, ángulo al panel, ángulo al alma de la VL (ovalados, regulación) y bulón M16 pasante"""
-    poly([(230, yy - 20), (200, yy - 20), (200, yy + 20), (230, yy + 20), (230, yy + 11), (206, yy + 11), (206, yy - 11), (230, yy - 11)], fill=STEEL, stroke="#000", sw=0.06)
-    for dy in (-15, 15): line(200, yy + dy, 162, yy + dy, stroke="#000", sw=0.16)
-    rect(208, yy - 9, 220, yy + 9, fill="#222", stroke="none", sw=0)
-    line(220, yy, 244, yy, stroke="#000", sw=0.3); rect(240, yy - 9, 246, yy + 9, fill="#222", stroke="none", sw=0)
-    poly([(230, yy - 50), (240, yy - 50), (240, yy + 30), (340, yy + 30), (340, yy + 40), (230, yy + 40)], fill=STEEL, stroke="#000", sw=0.08)
-    poly([(280, yy + 40), (390, yy + 40), (390, yy + 140), (380, yy + 140), (380, yy + 50), (280, yy + 50)], fill=STEEL, stroke="#000", sw=0.08)
-    line(310, yy + 15, 310, yy + 70, stroke="#000", sw=0.3)
-    rect(300, yy + 50, 320, yy + 58, fill="#222", stroke="none", sw=0); rect(300, yy + 22, 320, yy + 30, fill="#222", stroke="none", sw=0)
-    rect(390, yy + 78, 510, yy + 102, fill="none", stroke="#333", sw=0.1, extra=DASH)
-    line(368, yy + 90, 542, yy + 90, stroke="#000", sw=0.32)
-    rect(368, yy + 78, 380, yy + 102, fill="#222", stroke="none", sw=0)
-    rect(510, yy + 74, 516, yy + 106, fill="#222", stroke="none", sw=0); rect(516, yy + 80, 532, yy + 100, fill="#222", stroke="none", sw=0)
+    """anclaje pasante (sistema Astori): rehundido Ø100 prof. 3 cm en la cara exterior (tapado c/ mortero), agujero ovalado
+    40x60 a través de TODO el panel, calce de neopreno en la junta, vaina pasante en el ala superior de la VL y tuerca + arandela del lado interior"""
+    rect(30, yy - 50, 60, yy + 50, fill="url(#pMort)", stroke="#000", sw=0.12)                 # rehundido tapado c/ mortero
+    rect(60, yy - 22, 230, yy + 22, fill="#fff", stroke="#333", sw=0.1, extra=DASH)          # agujero ovalado 40x60 en el panel
+    rect(232, yy - 40, 248, yy + 40, fill=NEO, stroke="none", sw=0)                           # calce de neopreno en la junta
+    rect(250, yy - 16, 650, yy + 16, fill="#fff", stroke="#333", sw=0.1, extra=DASH)          # vaina pasante en el ala de la VL
+    line(40, yy, 700, yy, stroke="#000", sw=0.36)                                             # bulón pasante M20
+    rect(60, yy - 40, 68, yy + 40, fill=STEEL, stroke="#000", sw=0.06); rect(44, yy - 15, 60, yy + 15, fill="#222", stroke="none", sw=0)   # arandela + cabeza
+    rect(650, yy - 40, 660, yy + 40, fill=STEEL, stroke="#000", sw=0.06); rect(660, yy - 16, 682, yy + 16, fill="#222", stroke="none", sw=0)  # arandela + tuerca
 panel(-40, 9440)
 # juntas panel / estructura: lana mineral cortafuego + selladores; piso del entrepiso hasta el panel
 rect(230, 3505, 250, 4465, fill="url(#pLanaV)", **CUTT); rect(230, 3505, 250, 3520, fill=NEO, stroke="none", sw=0)
 rect(230, 4465, 240, 4500, fill="url(#pEPSv)", stroke="#000", sw=0.08); rect(230, 4490, 240, 4500, fill=NEO, stroke="none", sw=0)
 rect(240, 4465, 250, 4485, fill="url(#pMort)", **CUTT); rect(240, 4485, 250, 4490, fill="#8d8d8d", stroke="none", sw=0); rect(240, 4490, 250, 4500, fill="url(#pPorc)", **CUTT)
 rect(230, 4500, 240, 4600, fill="#cdbb9c", stroke="#000", sw=0.1)                                 # zócalo
-rect(230, 8005, 250, 8965, fill="url(#pLanaV)", **CUTT); rect(230, 8005, 250, 8020, fill=NEO, stroke="none", sw=0)
-fija_panel(3800); fija_panel(8300)
+rect(230, 8005, 250, 8855, fill="url(#pLanaV)", **CUTT); rect(230, 8005, 250, 8020, fill=NEO, stroke="none", sw=0)
+fija_panel(4140); fija_panel(8640)
 
 '''
 SRC = cut(SRC, "# ------------------------------------------------------------------ MURO CORTINA", "# ------------------------------------------------------------------ CUBIERTA", PANEL)
 
 # ------------------------------------------------------------------ cubierta: paquete hasta el parapeto del panel
 SRC = cut(SRC, "# ------------------------------------------------------------------ CUBIERTA", "# =====================================================================================\n#  COMPOSICIÓN", '''# ------------------------------------------------------------------ CUBIERTA (el panel sube como parapeto)
-rect(240, 8965, 2700, 8968, fill="#000", stroke="none", sw=0)                               # barrera de vapor
-rect(230, 8965, 240, 9100, fill="url(#pEPSv)", stroke="#000", sw=0.08)                      # junta EPS panel / paquete
-x0, x1 = 240, 2700
+rect(570, 8965, 2700, 8968, fill="#000", stroke="none", sw=0)                               # barrera de vapor
+rect(230, 8855, 250, 9150, fill="url(#pEPSv)", stroke="#000", sw=0.08)                      # junta EPS panel / canaleta
+x0, x1 = 570, 2700
 def ypend(x, b): return b + (x - x0) * 0.02
-poly([(x0, 8968), (x1, 8968), (x1, ypend(x1, 9068)), (x0, 9068)], fill="url(#pEPS)", **CUTT)   # contrapiso liviano H° c/ EPS (aislante + pendiente)
-poly([(x0, 9068), (x1, ypend(x1, 9068)), (x1, ypend(x1, 9088)), (x0, 9088)], fill="url(#pMort)", **CUTT)  # carpeta
-poly([(x0, 9088), (x0 + 60, 9088), (x0, 9148)], fill="url(#pMort)", **CUTT)                # media caña
-pline([(x1, ypend(x1, 9092)), (x0 + 60, 9092), (234, 9150), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana
+poly([(x0, 8968), (x1, 8968), (x1, ypend(x1, 9068)), (630, ypend(630, 9068)), (x0, 9010)], fill="url(#pEPS)", **CUTT)   # contrapiso liviano H° c/ EPS
+poly([(x0, 9010), (630, ypend(630, 9068)), (x1, ypend(x1, 9068)), (x1, ypend(x1, 9088)), (630, ypend(630, 9088)), (560, 9040), (x0, 9040)], fill="url(#pMort)", **CUTT)  # carpeta (baja a la canaleta)
+import math as _m
+arcm = [(430 + 106 * _m.cos(t), 9040 + 106 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (540, 9044)] + arcm[1:-1] + [(324, 9044), (324, 9154), (234, 9154), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
 pline([(214, 9346), (238, 9346), (238, 9290)], stroke="#000", sw=0.2)                       # babeta
 rect(213, 9331, 229, 9349, fill="#222", stroke="none", sw=0)
 # cupertina (pendiente al interior, goterones) fijada c/ tornillo + arandela de neopreno
@@ -127,14 +126,13 @@ EX = 191.0
 REFS_POS = [
  # cubierta
  (1, 12, 9440, 193, 8.5), (2, 130, 9468, 218, 6.5), (6, 236, 9310, 222, 14), (3, 1000, 9093, 250, 22.4), (4, 1300, 9100, 266, 20.4),
- (5, 1500, 9050, 275, 44.5), (7, 1000, 8967, 250, 44.8), (9, 260, 9100, 226, 24), (8, 235, 9030, 223, 31),
- (10, 1550, 8945, 289.5, 46), (11, 470, 8980, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 330, 8800, 236.5, 51), (14, 450, 8100, 252.5, 88),
+ (5, 1500, 9050, 275, 44.5), (7, 1000, 8967, 250, 44.8), (9, 430, 8960, 226, 26), (8, 240, 9000, 223, 33),
+ (10, 1550, 8945, 289.5, 46), (11, 285, 9060, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 400, 8780, 236.5, 51), (14, 450, 8100, 252.5, 88),
  (15, 450, 7640, 236.5, 103), (16, 700, 7720, 248, 105), (17, 500, 8000, 248, 90.5), (18, 520, 8705, 247, 56), (19, 540, 8858, 258, 52),
- (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (31, 240, 8600, EX, 52), (29, 300, 8340, EX, 64), (28, 210, 8300, EX, 70.5),
- (30, 530, 8390, 247, 70),
+ (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
  # entrepiso
  (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1300, 3306, 245, 200), (23, 1550, 3325, 257.5, 200), (24, 1275, 3500, 252.5, 187),
- (32, 235, 4520, EX, 128), (31, 240, 4250, EX, 146), (29, 300, 3840, EX, 160), (28, 210, 3800, EX, 168), (30, 530, 3890, 244, 162),
+ (32, 235, 4520, EX, 128), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
  (13, 330, 4300, 236.5, 148), (19, 540, 4358, 257, 150), (14, 450, 3600, 247, 176),
  # planta baja y fundación
  (25, 60, 900, EX, 228), (26, 190, 700, EX, 236), (27, 120, 500, EX, 244), (43, 120, -45, EX, 270), (34, 25, -45, EX, 277),
@@ -154,19 +152,19 @@ LEG = [
 (5, "Contrapiso liviano H° c/ EPS (aislante), pend. 2 %"),
 (6, "Babeta chapa galv. + sellador en buña del panel"),
 (7, "Barrera de vapor: imprimación + film 200 µ"),
-(8, "Junta EPS 1 cm panel / cubierta"),
-(9, "Media caña de mortero"),
+(8, "Junta EPS 2 cm panel / canaleta + sellador"),
+(9, "Canaleta H°A in situ c/ hueco semicircular, pend. 1 %"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
-(11, "Estribos salientes viga L (2Ø10)"),
+(11, "Estribos salientes Ø10 (anclan canaleta y capa)"),
 (12, "Panel TT h 0,65: ala y nervios cortados"),
-(13, "Viga L de borde s/ VL (cubre el hueco, recibe TT)"),
+(13, "Viga de borde premold. s/ VL (L en entrepiso)"),
 (14, "Viga VL doble T 40x70 pretensada"),
 (15, "Columna pretensada 40x40 (en vista)"),
 (16, "Ménsula de columna c/ diagonal (en vista)"),
 (17, "Neopreno + perno Ø20 (VL / ménsula)"),
 (18, "Barras de vinculación VL / L en mortero"),
-(19, "Ala del TT s/ ala viga L + neopreno"),
+(19, "Ala del TT s/ viga de borde + neopreno"),
 ("ENTREPISO Y CIELORRASOS", None),
 (20, "Solado cerámico s/ adhesivo cementicio"),
 (21, "Carpeta niveladora MHR 1:1/4:3, e = 2 cm"),
@@ -177,9 +175,9 @@ LEG = [
 (25, "Panel sándwich premoldeado H°A, e = 20 cm"),
 (26, "Hoja ext. H°A 6 cm / hoja int. portante 8 cm"),
 (27, "Alma EPS 6 cm + conectores de fibra de vidrio"),
-(28, "Riel de anclaje embutido en el panel + bulón T"),
-(29, "Fija panel: 2 ángulos L 100x10 galv. c/ ovalados"),
-(30, "Bulón M16 pasante en vaina del alma de la VL"),
+(28, "Rehundido Ø100 prof. 3 cm tapado c/ mortero"),
+(29, "Bulón pasante M20: atraviesa panel y ala de VL"),
+(30, "Agujero ovalado 40x60 + vaina, tuerca y arandela"),
 (31, "Junta 2 cm: lana mineral cortafuego + sellador"),
 (32, "Junta perimetral EPS 1 cm + zócalo"),
 (33, "Junta vertical panel / panel: fondo + sellador PU"),
@@ -213,7 +211,7 @@ LEG = [
 SRC = cut(SRC, "# ------------------------------------------------------------------ REFERENCIAS", "# ---------------- FORMATO TP", REFS)
 SRC = SRC.replace('T(16, 39.9, "MURO CORTINA", 7.4)', 'T(16, 39.9, "CERRAMIENTO OPACO", 7.4)')
 SRC = SRC.replace('open("build/tp_corte.svgpart", "w")', 'open("build/opaco_corte.svgpart", "w")').replace('open("build/tp_dx.json", "w")', 'open("build/opaco_dx.json", "w")')
-for must in ("CERRAMIENTO OPACO", "opaco_corte.svgpart", "fija_panel(3800)", "viga portapanel"):
+for must in ("CERRAMIENTO OPACO", "opaco_corte.svgpart", "fija_panel(4140)", "viga portapanel", "viga_borde_canaleta(8915)"):
     assert must in SRC, must
 exec(compile(SRC, "opaco_corte(tp_corte)", "exec"))
 open("build/opaco_corte_solo.svg", "w").write(f'<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">{SVG_BODY}</svg>')
