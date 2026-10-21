@@ -67,21 +67,20 @@ def viga_borde_canaleta(yt):
     rect(428, yb, 472, yb + 180, fill="url(#pGrout)", stroke="#000", sw=0.08)              # vaina Ø40 c/ grout
     rect(440, yb - 10, 460, yb + 160, fill=STEEL, stroke="#000", sw=0.08)                   # perno Ø20
     rect(250, yv - 5, 650, yv + 5, fill="url(#pGrout)", stroke="#000", sw=0.06)
-    rect(555, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada (talón 9,5 x 14, apoyo del TT)
-    for xx in (580, 625): circ(xx, yv + 40, 0.26, fill=REB)
-    for xx in (330, 600): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)
-    # canaleta H° in situ s/ la VL: hueco en U (paredes + fondo semicircular), forrado c/ EPS + carpeta armada
-    C, R, YB = 420, 115, 8905
-    def upath(d, ytl, ytr):
-        a = [(C + (R - d) * _m.cos(t), YB + (R - d) * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
-        return [(C + R - d, ytr)] + a + [(C - R + d, ytl)]
-    poly([(250, yv + 3), (555, yv + 3), (555, yl), (560, yl), (560, 9040)] + upath(0, 9150, 9040) + [(250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ
-    pline([(278, yv - 80), (278, 9120)], stroke=REB, sw=0.2); pline([(548, yv - 80), (548, 9020)], stroke=REB, sw=0.2)              # estribos salientes VL
-    circ(278, 9100, 0.22, fill=REB); circ(548, 9000, 0.22, fill=REB); circ(420, 8740, 0.22, fill=REB)
-    def layer(d0, d1, fill):
-        poly(upath(d0, 9150, 9040) + upath(d1, 9150, 9040)[::-1], fill=fill, stroke="#000", sw=0.1)
-    layer(0, 25, "url(#pEPS)")                                                              # EPS 25 mm
-    layer(25, 40, "url(#pMort)")                                                            # carpeta armada 15 mm
+    rect(250, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada
+    for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)
+    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)
+    C, R = 420, 115                                                                       # hueco semicircular Ø23
+    arc = [(C + R * _m.cos(t), 9040 + R * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+    poly([(250, yl), (560, yl), (560, 9040), (C + R, 9040)] + arc[1:-1] + [(C - R, 9040), (C - R, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ
+    pline([(278, yl - 90), (278, 9120)], stroke=REB, sw=0.2); pline([(548, yl - 90), (548, 9020)], stroke=REB, sw=0.2)              # estribos salientes
+    circ(278, 9100, 0.22, fill=REB); circ(548, 9000, 0.22, fill=REB)
+    def ring(r0, r1, xw0, xw1, fill):
+        A0 = [(C + r0 * _m.cos(t), 9040 + r0 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+        A1 = [(C + r1 * _m.cos(t), 9040 + r1 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+        poly(A0 + [(xw0, 9150), (xw1, 9150)] + A1[::-1], fill=fill, stroke="#000", sw=0.1)
+    ring(115, 90, 305, 330, "url(#pEPS)")                                                 # EPS 25 mm
+    ring(90, 75, 330, 345, "url(#pMort)")                                                 # carpeta armada 15 mm
     rect(250, 9150, 345, 9175, fill="url(#pEPS)", stroke="#000", sw=0.1)                  # EPS s/ coronamiento
     rect(250, 9175, 345, 9185, fill="url(#pMort)", stroke="#000", sw=0.08)
 def panel_TT_c(yt):
@@ -143,20 +142,11 @@ def ypend(x, b): return b + (x - x0) * 0.02
 poly([(x0, 8968), (x1, 8968), (x1, ypend(x1, 9068)), (630, ypend(630, 9068)), (x0, 9010)], fill="url(#pEPS)", **CUTT)   # contrapiso liviano H° c/ EPS
 poly([(x0, 9010), (630, ypend(630, 9068)), (x1, ypend(x1, 9068)), (x1, ypend(x1, 9088)), (630, ypend(630, 9088)), (560, 9040), (x0, 9040)], fill="url(#pMort)", **CUTT)  # carpeta (baja a la canaleta)
 import math as _m
-arcm = [(420 + 73 * _m.cos(t), 8905 + 73 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
-pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (493, 9044)] + arcm + [(347, 9044), (347, 9188), (234, 9188), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
-# desagüe "lateral a columna": embudo c/ rejilla a 0,45 m del eje de columna (en vista), caño PVC Ø110 por pases de fábrica en VL y viga de borde,
-# luego adosado a la columna (en vista) hasta cámara de PB
-def cano(y0, y1, hidden=False):
-    rect(365, y0, 475, y1, fill="none" if hidden else "#f6f6f6", stroke="#333", sw=0.13, extra=DASH if hidden else "")
-poly([(330, 8835), (510, 8835), (475, 8790), (365, 8790)], fill="none", stroke="#333", sw=0.13, extra=DASH)   # embudo
-for yy in (8805, 8820): line(345, yy + 30, 495, yy + 30, stroke="#333", sw=0.08, extra=DASH)                 # rejilla
-cano(7695, 8790, True)                                  # pases en VL y ménsula (oculto)
-cano(4465, 7695)                                        # en vista, adosado a la columna (P. Alta)
-cano(3195, 4465, True)                                  # pases en viga L, VL y ménsula del entrepiso
-cano(-60, 3195)                                         # en vista (P. Baja)
-for yy in (1500, 6000): rect(355, yy - 12, 485, yy + 12, fill="#bbb", stroke="#444", sw=0.08)   # abrazaderas a la columna
-pline([(420, -60), (420, -380), (1100, -380)], stroke="#333", sw=0.9, extra=DASH)                # a cámara de inspección
+arcm = [(420 + 73 * _m.cos(t), 9040 + 73 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (493, 9044)] + arcm[1:-1] + [(347, 9044), (347, 9188), (234, 9188), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
+# desagüe: embudo c/ rejilla en el fondo de la canaleta, c/ eje de columna (oculto) -> caño de lluvia interior junto a la columna
+rect(375, 8890, 465, 8967, fill="none", stroke="#333", sw=0.13, extra=DASH)
+pline([(350, 8967), (490, 8967)], stroke="#333", sw=0.13, extra=DASH)
 pline([(214, 9346), (238, 9346), (238, 9290)], stroke="#000", sw=0.2)                       # babeta
 rect(213, 9331, 229, 9349, fill="#222", stroke="none", sw=0)
 # cupertina (pendiente al interior, goterones) fijada c/ tornillo + arandela de neopreno
@@ -197,9 +187,9 @@ REFS_POS = [
  # cubierta
  (1, 12, 9440, 193, 8.5), (2, 130, 9468, 218, 6.5), (6, 236, 9310, 222, 14), (3, 1000, 9093, 250, 22.4), (4, 1300, 9100, 266, 20.4),
  (5, 1500, 9050, 275, 44.5), (7, 1000, 8967, 250, 44.8), (9, 430, 8960, 226, 26), (8, 240, 9000, 223, 33),
- (10, 1550, 8945, 289.5, 46), (11, 285, 9060, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 600, 8780, 236.5, 51), (14, 450, 8100, 252.5, 88),
+ (10, 1550, 8945, 289.5, 46), (11, 285, 9060, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 400, 8780, 236.5, 51), (14, 450, 8100, 252.5, 88),
  (15, 450, 7640, 236.5, 103), (16, 700, 7720, 248, 105), (17, 500, 8000, 248, 90.5), (18, 520, 8705, 247, 56), (19, 540, 8858, 258, 52),
- (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 420, 8810, EX, 45.5), (58, 330, 8950, EX, 19.5), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
+ (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 420, 8930, EX, 45.5), (58, 340, 9000, EX, 19.5), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
  # entrepiso
  (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1300, 3306, 245, 200), (23, 1550, 3325, 257.5, 200), (24, 1275, 3500, 252.5, 187),
  (32, 235, 4520, EX, 128), (57, 120, 4250, EX, 140), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
@@ -223,12 +213,12 @@ LEG = [
 (6, "Babeta chapa galv. + sellador en buña del panel"),
 (7, "Barrera de vapor: imprimación + film 200 µ"),
 (8, "Junta EPS 2 cm panel / canaleta + sellador"),
-(9, "Canaleta H°A in situ s/ VL, hueco en U, pend. 1 %"),
+(9, "Canaleta H°A in situ (hueco semicirc.), pend. 1 %"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
 (11, "Estribos salientes Ø10 (anclan canaleta y capa)"),
 (12, "Panel TT h 0,65: ala y nervios cortados"),
-(13, "Viga de borde premold. s/ VL (talón en cubierta)"),
+(13, "Viga de borde premold. s/ VL (L en entrepiso)"),
 (14, "Viga VL doble T 40x70 pretensada"),
 (15, "Columna pretensada 40x40 (en vista)"),
 (16, "Ménsula de columna c/ diagonal (en vista)"),
@@ -260,7 +250,7 @@ LEG = [
 (39, "Film de polietileno 200 µ"),
 (40, "Tosca compactada, e = 15 cm"),
 (41, "Junta EPS 2 cm + faja perimetral EPS 3 cm x 0,60"),
-(42, "Viga portapanel pretens. 20x85, diente 20x45 (s/ cálc.)"),
+(42, "Viga portapanel pretensada 20x85, diente 20x45"),
 (43, "Mortero de asiento + pasador Ø16 en vaina c/ grout"),
 (44, "Pintura asfáltica en caras enterradas"),
 (45, "Vereda de H° peinado s/ tosca"),
@@ -269,15 +259,15 @@ LEG = [
 (48, "Relleno de H° cementicio cuello/columna"),
 (49, "Armadura de vinculación fundación–columna"),
 (50, "Cuello de la base, H°A° in situ"),
-(51, "Base de H°A° colada in situ (s/ cálculo)"),
-(52, "Armadura de fundación s/ cálculo"),
+(51, "Base de H°A° colada in situ"),
+(52, "Armadura de fundación (parrilla inferior)"),
 (53, "H° de limpieza, e = 10 cm"),
 (54, "Terreno natural"),
 (55, "Neopreno de apoyo viga portapanel / cuello"),
 (56, "Junta vereda / viga EPS 1 cm + sellador"),
 (57, "Zona maciza local 30x30 en cada anclaje (sin EPS)"),
 (58, "EPS 25 mm + carpeta armada bajo membrana (canaleta)"),
-(59, "Embudo c/ rejilla + caño PVC Ø110 adosado a columna"),
+(59, "Embudo c/ rejilla en canaleta (c/ eje col.) a caño interior"),
 ]
 
 '''
