@@ -45,6 +45,7 @@ for xa, xb, sol in ((670, 2700, (675, 2700)),):
     rect(sol[0], -15, sol[1], -10, fill="#8d8d8d", stroke="none", sw=0)
     rect(sol[0], -10, sol[1], 0, fill="url(#pPorc)", **CUTT)
 for xx in range(975, 2700, 400): line(xx, -10, xx, 0, sw=0.15)
+rect(670, -207, 1270, -177, fill="url(#pEPS)", stroke="#000", sw=0.12)                     # faja perimetral EPS 30 mm (borde del piso)
 ''')
 
 # ------------------------------------------------------------------ la VL no lleva riel para muro cortina (el fija panel pasa por el alma)
@@ -156,15 +157,16 @@ rect(30, 9440, 230, 9446, fill="#888", stroke="none", sw=0)
 ''')
 
 # ------------------------------------------------------------------ cotas propias
-SRC = cut(SRC, "cota_v(0, 4500, -560)", "T(X(-590), Y(9300)", '''cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
+_m0 = SRC.index("cota_v(0, 4500, -560)"); _m1 = SRC.rindex("\n", 0, SRC.index('"EXTERIOR"', _m0)) + 1   # hasta los rótulos EXTERIOR/INTERIOR
+SRC = SRC[:_m0] + '''cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
 cota_v(3505, 4205, 900, "0,70"); cota_v(4205, 4465, 900, "0,26"); cota_v(8005, 8705, 900, "0,70"); cota_v(8705, 8965, 900, "0,26")
 cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(9092, 9440, -60, "0,35")
 cota_h(30, 230, 3090, "20"); cota_h(230, 250, 3090, "2"); cota_h(250, 650, 3090, "40")
-cota_h(-550, 1450, -2170, "2,00 (s/ cálculo)", below=True); cota_h(-75, 975, -1420, "1,05")
+cota_h(-550, 1450, -2170, "2,00", below=True); cota_h(-75, 975, -1420, "1,05")
 
-''')
+''' + SRC[_m1:]
 
 REFS = '''# ------------------------------------------------------------------ REFERENCIAS
 _OLDB = [(7600, 9540, 8.0), (3200, 5000, 109.0), (-2180, 1500, 203.0)]
@@ -197,7 +199,7 @@ REFS_POS = [
  (45, -300, -200, 180, 292), (56, 22, -200, EX, 288), (44, 28, -400, EX, 300), (55, 90, -505, EX, 312), (42, 120, -300, 180, 304),
  (35, 950, -5, 247.5, 272), (36, 1150, -25, 257.5, 271), (37, 1350, -45, 267.5, 270), (38, 1100, -120, 255, 294), (39, 1550, -176, 277.5, 297),
  (40, 1350, -260, 267.5, 301), (41, 660, -250, 247, 298), (46, 450, -900, 236.5, 327), (47, 700, -800, 255, 322), (48, 690, -1200, 256.5, 343),
- (49, 540, -1600, 247, 363), (50, 850, -700, 260.5, 330), (51, 1200, -1800, 269, 362), (52, 1100, -1960, 265, 368), (53, 1400, -2100, 274, 386), (54, 1400, -1350, 275, 352),
+ (49, 540, -1600, 247, 363), (50, 850, -700, 260.5, 330), (51, 1200, -1800, 269, 362), (52, 1100, -1960, 265, 368), (53, 1400, -2100, 274, 386), (54, 1500, -1150, 284, 335),
 ]
 for r in REFS_POS: ref(*r)
 
@@ -247,8 +249,8 @@ LEG = [
 (38, "Contrapiso de H° pobre, e = 12 cm"),
 (39, "Film de polietileno 200 µ"),
 (40, "Tosca compactada, e = 15 cm"),
-(41, "Junta de dilatación EPS 2 cm + sellador"),
-(42, "Viga portapanel pretens. 20x85, diente 20x45 (s/ cálc.)"),
+(41, "Junta EPS 2 cm + faja perimetral EPS 3 cm x 0,60"),
+(42, "Viga portapanel pretensada 20x85, diente 20x45"),
 (43, "Mortero de asiento + pasador Ø16 en vaina c/ grout"),
 (44, "Pintura asfáltica en caras enterradas"),
 (45, "Vereda de H° peinado s/ tosca"),
@@ -257,8 +259,8 @@ LEG = [
 (48, "Relleno de H° cementicio cuello/columna"),
 (49, "Armadura de vinculación fundación–columna"),
 (50, "Cuello de la base, H°A° in situ"),
-(51, "Base de H°A° colada in situ (s/ cálculo)"),
-(52, "Armadura de fundación s/ cálculo"),
+(51, "Base de H°A° colada in situ"),
+(52, "Armadura de fundación (parrilla inferior)"),
 (53, "H° de limpieza, e = 10 cm"),
 (54, "Terreno natural"),
 (55, "Neopreno de apoyo viga portapanel / cuello"),
