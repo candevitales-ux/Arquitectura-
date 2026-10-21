@@ -5,7 +5,7 @@ Object.assign(MAT, {
   pa: { color: '#3c4650' }, butyl: { color: '#141414' }, silic: { color: '#4a4a4a' }, pvb: { color: '#e4f2f7' },
   epdm: { color: '#202020' }, inox: { color: '#b9bec4' }, pvc: { color: '#7fa7c9' }, prev: { color: '#c3c9cf' },
 });
-const ZM = -250;   // eje del montante (detrás del plano de corte)
+let ZM = -250;   // eje del montante (detrás del plano de corte); el nudo 2 lo acerca para que la grapa tome la VL
 const sheetZ = (S, pts, t = 8, key = 'red') => S.sheet(pts, t, 'z', -1.5, 1.5, key);
 const hex = (S, axis, c1, c2, r, w0, w1, key = 'inox') => S.cyl(axis, c1, c2, r, w0, w1, key, 6);
 
@@ -87,7 +87,8 @@ function columnaMensula(S, ytopM, y0, y1, zc0, zc1) {
 // =============================================================== NUDO 1 · CUBIERTA
 export function n1() {
   const S = new Scene3D();
-  const Y0 = 7900, X1 = 1265, ZB = -260, yt = 8915;
+  ZM = -250;
+  const Y0 = 7900, X1 = 1265, ZB = -400, yt = 8915;
   vigaL(S, yt, ZB, 0, Y0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
@@ -101,6 +102,10 @@ export function n1() {
   S.prism([[400, 9088], [460, 9088], [400, 9148]], 'z', ZB, -130, 'mort');
   S.prism([[400, 9088], [X1, sl(X1, 9088)], [X1, sl(X1, 9092)], [460, 9092], [404, 9148], [404, 9335], [400, 9335]], 'z', ZB, -190, 'memb');
   S.sheet([[420, 9356], [402, 9356], [402, 9300]], 3, 'z', ZB, -190, 'galv');
+  // embudo c/ rejilla parabólica en el punto bajo (junto a la media caña)
+  { const ye = sl(640, 9092), ze = -300;
+    S.cyl('y', 640, ze, 95, ye, ye + 4, 'galv', 28);
+    [[80, 0, 35], [66, 35, 65], [46, 65, 90], [22, 90, 105]].forEach(([r, a, b]) => S.cyl('y', 640, ze, r, ye + 4 + a, ye + 4 + b, 'galv', 20)); }
   S.sheet([[-50, 9380], [-52, 9400], [-52, 9472], [430, 9452], [430, 9395], [436, 9380]], 3, 'z', ZB, 0, 'galv');
   // muro cortina
   mullion(S, Y0, 9380);
@@ -108,7 +113,7 @@ export function n1() {
   S.box(-32, 190, 9380, 9420, ZB, 0, 'alu'); S.box(185, 260, 9420, 9440, ZB, 0, 'seal');
   grapa(S, 8625);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
+  A(10, 640, 9180, -300); A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
   A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(11, 700, 8940, 0); A(12, 455, 8955, -60); A(13, 1170, 8500, 0); A(20, 540, 8858, 0); A(15, 450, 8200, 0);
   A(14, 330, yt - 150, 0);  A(19, 270, 8625, -40); A(31, 110, 9000, ZM + 25); A(34, 3, 8800, 0); A(35, 65, 8700, 0); A(37, 160, 8625, ZM + 35);
   return S;
@@ -117,31 +122,66 @@ export function n1() {
 // =============================================================== NUDO 2 · ENTREPISO (corte entre columnas; al fondo la columna con su ménsula)
 export function n2() {
   const S = new Scene3D();
-  const Y0 = 2950, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, ZC = -400;
-  columnaMensula(S, 3495, 2700, Y1, -680, ZC);
-  vigaL(S, yt, ZC + 10, 0);
-  panelTT(S, yt, X1, ZB);
-  capa(S, yt, X1, ZB);
-  S.box(250, X1, 4465, 4485, ZB, -120, 'mort');
-  S.box(260, X1, 4485, 4500, ZB, -220, 'porc');
-  // muro cortina: spandrel, lana, bandeja, cortafuego, grapa
-  mullion(S, Y0, Y1);
-  for (const [z0, z1] of GSEG(ZB)) {
-    S.box(0, 6, Y0, Y1, z0, z1, 'spandrel'); S.box(40, 90, Y0, Y1, z0, z1, 'lana'); S.box(90, 93, Y0, Y1, z0, z1, 'galv');
+  ZM = -95;                                         // montante frente a la VL (la grapa toma el riel de la VL)
+  const Y0 = 2950, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, yf = yt - 50;
+  const ZC = -180, ZC0 = -580;                      // columna 40x40: z -580..-180 (el corte pasa a 18 cm de su cara)
+  // columna (en vista) y ménsula de la VL CORTADA en z = 0 (como en el corte integral)
+  S.box(250, 650, 2700, Y1, ZC0, ZC, 'pre', { axis: 'y' });
+  const ytm = 3495;
+  S.box(250, 650, ytm - 301, ytm, ZC, 0, 'pre');                                                     // ménsula VL (cara cortada)
+  S.prism([[180, ytm - 301], [0, ytm - 301], [180, ytm - 470]].reverse(), 'x', 250, 650, 'prev');     // su diagonal hasta la columna
+  S.box(250, 650, ytm, ytm + 10, ZC + 10, 0, 'neo');                                                  // neopreno VL / ménsula
+  for (const xp of [330, 570]) {                                                                      // 2 pernos Ø20 en vainas c/ grout (cortados)
+    S.box(xp - 22, xp + 22, ytm + 10, ytm + 190, -3, 0.4, 'grout');
+    S.box(xp - 10, xp + 10, ytm - 260, ytm + 170, -3, 0.8, 'steel');
   }
-  S.box(93, 250, 4355, 4365, ZB, 0, 'galv'); S.box(93, 250, 4365, 4458, ZB, 0, 'lana'); S.box(93, 250, 4458, 4466, ZB, 0, 'intum');
+  // VP T invertida (perpendicular a la fachada) sobre su ménsula c/ diagonal + neopreno + perno
+  S.prism([[650, yt - 760], [1000, yt - 760], [1000, yt - 920], [650, yt - 1230]], 'z', ZC0, ZC, 'prev');
+  S.box(670, 990, yt - 760, yt - 750, ZC0 + 20, ZC - 20, 'neo');
+  S.box(660, X1, yt - 750, yt - 610, ZC0, -30, 'prev');                                               // talón de la VP
+  S.box(660, X1, yt - 610, yt, ZC0, ZC, 'prev');                                                      // alma de la VP
+  // VL doble T + viga L (terminan a 1 cm de la columna)
+  vigaL(S, yt, ZC + 10, 0);
+  // panel TT: ala s/ talón de la viga L; nervio con rebaje apoyado s/ talón de la VP c/ neopreno
+  S.box(420, X1, yf, yt, ZC + 10, 0, 'pre');
+  S.box(430, 640, yt - 60, yt - 50, ZC + 10, 0, 'neo'); S.box(400, 420, yt - 60, yt, ZC + 10, 0, 'grout');
+  const xc = 1170;
+  S.prism([[xc - 90, yf], [xc + 90, yf], [xc + 60, yt - 650], [xc - 60, yt - 650]], 'z', -30, 0, 'pre');
+  S.prism([[xc - 90, yf], [xc + 90, yf], [xc + 62, yt - 600], [xc - 62, yt - 600]], 'z', ZC + 10, -30, 'pre');
+  S.box(xc - 75, xc + 75, yt - 610, yt - 600, ZC + 10, -40, 'neo');
+  for (const y of [yt - 610, yt - 560]) S.cyl('z', xc, y, 6.4, -4, 2, 'neo', 12);
+  // capa de compresión y piso (sobre TT y VP; la columna atraviesa)
+  capa(S, yt, X1, ZC + 10);
+  S.box(660, X1, yt, yt + 50, ZB, ZC + 10, 'insitu');
+  S.box(250, X1, 4465, 4485, ZC + 10, -120, 'mort'); S.box(660, X1, 4465, 4485, ZB, ZC + 10, 'mort');
+  S.box(660, X1, 4485, 4500, ZB, -220, 'porc');
+  // muro cortina: visión + travesaño + spandrel (bandeja tipo caja c/ lana), montante, grapa
+  mullion(S, Y0, Y1);
+  for (const [z0, z1] of SEG(ZB)) transom(S, 3250, z0, z1);
+  for (const [z0, z1] of GSEG(ZB)) {
+    dvh(S, Y0, 3240, z0, z1);
+    S.box(0, 6, 3320, Y1, z0, z1, 'spandrel');
+    S.box(40, 87, 3316, Y1, z0, z1, 'lana'); S.box(87, 93, 3310, Y1, z0, z1, 'galv'); S.box(40, 87, 3310, 3316, z0, z1, 'galv');
+  }
+  // barrera cortafuego: lana s/ ángulo galv. fijado c/ broca + sellador intumescente
+  S.box(93, 250, 4355, 4362, ZB, 0, 'galv'); S.box(243, 250, 4280, 4355, ZB, 0, 'galv'); S.box(93, 100, 4362, 4400, ZB, 0, 'galv');
+  S.box(100, 243, 4365, 4458, ZB, 0, 'lana'); S.box(93, 250, 4458, 4466, ZB, 0, 'intum');
+  for (const z of [-40, -150]) S.cyl('x', 4318, z, 6, 236, 330, 'inox', 12);
   S.sheet([[182, 4503], [330, 4503]], 3, 'z', ZB, -120, 'alu');
   grapa(S, 4125);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(11, 900, 4440, 0); A(12, 455, 4455, -60); A(13, 1170, 4000, 0); A(20, 540, 4358, 0); A(15, 450, 3700, 0); A(14, 330, yt - 150, 0);  A(16, 650, 2900, -700);
-  A(17, 450, 3400, -90); A(18, 500, 3500, -200); A(19, 270, 4125, -40); A(26, 900, 4500, -300); A(27, 900, 4475, -200);
-  A(31, 110, 4100, ZM + 25); A(34, 3, 3800, 0); A(35, 65, 3600, 0); A(36, 170, 4410, 0); A(37, 160, 4125, ZM + 35);
+  A(11, 900, 4440, 0); A(12, 455, 4455, -60); A(13, 1170, 4000, 0); A(20, 540, 4358, 0); A(15, 450, 3700, 0); A(14, 330, yt - 150, 0);
+  A(16, 450, 3000, ZC); A(17, 450, 3300, 0); A(18, 470, ytm + 5, 0); A(21, 330, 3560, 0.8); A(22, 600, yt - 210, 0);
+  A(23, 760, 3760, ZC); A(24, 820, 3560, ZC); A(25, 1170, yt - 605, -110);
+  A(19, 270, 4125, ZM + 40); A(26, 900, 4500, -300); A(27, 900, 4475, -200);
+  A(36, 170, 4410, 0); A(37, 160, 4125, ZM + 35);
   return S;
 }
 
 // =============================================================== NUDO 3 · PISO SOBRE TERRENO (corte por eje de columna) — sin viga perimetral
 export function n3() {
   const S = new Scene3D();
+  ZM = -250;
   const Y0 = -760, Y1 = 260, X0 = -300, X1 = 950, ZB = -250;
   // cuello (corte), relleno, columna (medio, cortada por su eje)
   S.box(-75, 175, Y0, -510, -275, 0, 'insitu'); S.box(725, 975, Y0, -510, -275, 0, 'insitu');

@@ -389,7 +389,7 @@ cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1600, "0,84")
 cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3090, "21"); cota_h(182, 250, 3090, "7"); cota_h(250, 650, 3090, "40")
-cota_h(-550, 1450, -2170, "2,00 (s/ cálculo)", below=True); cota_h(-75, 975, -1420, "1,05")
+cota_h(-550, 1450, -2170, "2,00", below=True); cota_h(-75, 975, -1420, "1,05")
 
 T(X(-530), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(1450), Y(9420), "INTERIOR", 2.0, fill="#555")
 T(X(-530), Y(4900), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(4900), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
@@ -488,8 +488,8 @@ LEG = [
 (54, "Relleno de H° cementicio cuello/columna"),
 (55, "Armadura de vinculación fundación–columna"),
 (56, "Cuello de la base, H°A° in situ"),
-(57, "Base de H°A° colada in situ (s/ cálculo)"),
-(58, "Armadura de fundación s/ cálculo"),
+(57, "Base de H°A° colada in situ"),
+(58, "Armadura de base: parrilla Ø12 c/15"),
 (59, "H° de limpieza, e = 10 cm"),
 (60, "Terreno natural"),
 (61, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
