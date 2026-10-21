@@ -46,18 +46,19 @@ function perfilVLdt(yb) {   // VL doble T 40x70
   return [[250, yb], [650, yb], [650, yb + 150], [530, yb + 210], [510, yb + 210], [510, yt - 190], [530, yt - 190], [650, yt - 130], [650, yt],
     [250, yt], [250, yt - 130], [370, yt - 190], [390, yt - 190], [390, yb + 210], [370, yb + 210], [250, yb + 150]];
 }
-// VL doble T (portante, sobre ménsula) + viga L de borde ENCIMA (alma 15 x 26 + ala 25 x 20) que recibe el ala del TT
+// VL doble T (portante, sobre ménsula) + viga L de borde ENCIMA (alma 15 x 26 hasta tope capa + talón 25 x 15) que recibe el ala del TT
 function vigaL(S, yt, z0, z1, ymin = -1e9) {
-  const yv = yt - 260, yb = yt - 960;
+  const yv = yt - 210, yb = yt - 910;
   if (ymin <= yb) S.prism(perfilVLdt(yb), 'z', z0, z1, 'pre');
   else S.prism(perfilVLdt(yb).map(([x, y]) => [x, Math.max(y, ymin)]).filter((p, i, a) => i === 0 || p[0] !== a[i - 1][0] || p[1] !== a[i - 1][1]), 'z', z0, z1, 'pre');
-  S.prism([[250, yv], [650, yv], [650, yt - 60], [400, yt - 60], [400, yt], [250, yt]], 'z', z0, z1, 'pre');   // viga L
+  S.prism([[250, yv + 8], [650, yv + 8], [650, yt - 60], [400, yt - 60], [400, yt + 50], [250, yt + 50]], 'z', z0, z1, 'pre');   // viga L
+  S.box(250, 650, yv, yv + 8, z0, z1, 'grout');   // junta VL / L c/ mortero
   S.prism([[250, yt - 376], [292, yt - 376], [292, yt - 324], [250, yt - 324], [250, yt - 332], [284, yt - 332], [284, yt - 368], [250, yt - 368]], 'z', z0, z1, 'steel');
   if (z1 === 0) {
     for (const x of [290, 450, 610]) S.cyl('z', x, yv - 45, 6, -4, 2, 'red', 12);
     if (ymin <= yb) for (const x of [290, 370, 450, 530, 610]) S.cyl('z', x, yb + 45, 6.4, -4, 2, 'neo', 12);
-    for (const x of [330, 520]) S.cyl('y', x, -1, 8, yv - 120, yv + 150, 'red', 10);
-    for (const z of [-60, -160]) S.sheet([[300, yt - 120], [300, yt + 40], [360, yt + 40], [360, yt - 120]], 10, 'z', z - 5, z + 5, 'red');
+    for (const x of [330, 520]) S.cyl('y', x, -1, 8, yv - 120, yv + 125, 'red', 10);
+    for (const z of [-60, -160]) S.sheet([[320, yt - 150], [320, yt + 25], [640, yt + 25]], 10, 'z', z - 5, z + 5, 'red');
   }
 }
 function panelTT(S, yt, x1, zb) {
@@ -70,9 +71,9 @@ function panelTT(S, yt, x1, zb) {
   for (const y of [yt - 610, yt - 560]) S.cyl('z', 1170, y, 6.4, -4, 2, 'neo', 12);
 }
 function capa(S, ytop, x1, zb) {
-  S.box(250, x1, ytop, ytop + 50, zb, 0, 'insitu');
-  sheetZ(S, [[280, ytop + 25], [x1, ytop + 25]], 6);
-  for (let x = 350; x < x1; x += 150) S.cyl('z', x, ytop + 25, 3, -3, 2, 'red', 8);
+  S.box(400, x1, ytop, ytop + 50, zb, 0, 'insitu');
+  sheetZ(S, [[430, ytop + 25], [x1, ytop + 25]], 6);
+  for (let x = 500; x < x1; x += 150) S.cyl('z', x, ytop + 25, 3, -3, 2, 'red', 8);
 }
 // columna + ménsula corta con diagonal (la viga apoya en su extremo)
 function columnaMensula(S, ytopM, y0, y1, zc0, zc1) {
@@ -117,7 +118,7 @@ export function n1() {
 export function n2() {
   const S = new Scene3D();
   const Y0 = 2950, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, ZC = -400;
-  columnaMensula(S, 3445, 2700, Y1, -680, ZC);
+  columnaMensula(S, 3495, 2700, Y1, -680, ZC);
   vigaL(S, yt, ZC + 10, 0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);

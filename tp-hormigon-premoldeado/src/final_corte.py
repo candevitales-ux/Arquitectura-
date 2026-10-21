@@ -183,8 +183,8 @@ def mensula_vista(ytop):
     rect(440, ytop - 260, 460, ytop + 160, fill="none", stroke="#333", sw=0.12, extra=DASH)  # perno Ø20 (oculto)
 def viga_L(yt):
     """VL doble T 40x70 pretensada (perimetral, portante) apoyada en la ménsula + ENCIMA viga L de borde
-    premoldeada (alma 15 x 26 + ala 25 x 20) que cubre el hueco hasta el nivel de losa y recibe el ala del TT."""
-    yb = yt - 960; yv = yt - 260                                                            # VL: yb..yv ; L: yv..yt
+    premoldeada (alma 15 x 26 hasta tope capa de compresión + talón 25 x 15) que cubre el hueco hasta el nivel de losa y recibe el ala del TT."""
+    yb = yt - 910; yv = yt - 210                                                            # VL: yb..yv ; L: yv..yt
     P = [(250, yb), (650, yb), (650, yb + 150), (530, yb + 210), (510, yb + 210), (510, yv - 190), (530, yv - 190), (650, yv - 130), (650, yv),
          (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]
     poly(P, fill="url(#pHA)", **CUT)                                                       # VL doble T (cortada)
@@ -194,12 +194,12 @@ def viga_L(yt):
     pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)
     rect(250, yb - 10, 650, yb, fill=NEO, stroke="none", sw=0)                             # neopreno VL / ménsula
     # viga L de borde (encima de la VL)
-    poly([(250, yv), (650, yv), (650, yt - 60), (400, yt - 60), (400, yt), (250, yt)], fill="url(#pHA)", **CUT)
-    pline([(270, yv + 20), (630, yv + 20), (630, yt - 80), (380, yt - 80), (380, yt - 20), (270, yt - 20), (270, yv + 20)], stroke=REB, sw=0.12)
+    poly([(250, yv), (650, yv), (650, yt - 60), (400, yt - 60), (400, yt + 50), (250, yt + 50)], fill="url(#pHA)", **CUT)
+    pline([(270, yv + 20), (630, yv + 20), (630, yt - 80), (380, yt - 80), (380, yt + 30), (270, yt + 30), (270, yv + 20)], stroke=REB, sw=0.12)
     for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)
-    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 150)], stroke=REB, sw=0.25)       # barras de vinculación VL / L (en grout)
+    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 125)], stroke=REB, sw=0.25)       # barras de vinculación VL / L (en grout)
     rect(250, yv - 3, 650, yv + 3, fill="url(#pGrout)", stroke="none", sw=0)              # junta VL / L c/ mortero
-    pline([(300, yt - 120), (300, yt + 40), (360, yt + 40), (360, yt - 120)], stroke=REB, sw=0.22)  # estribos salientes 2Ø10
+    pline([(320, yt - 150), (320, yt + 25), (640, yt + 25)], stroke=REB, sw=0.22)              # estribos salientes 2Ø10 (anclan la capa)
     # riel de anclaje embutido en la VL (grapas del muro cortina)
     yy = yt - 350
     poly([(250, yy - 26), (292, yy - 26), (292, yy + 26), (250, yy + 26), (250, yy + 18), (284, yy + 18), (284, yy - 18), (250, yy - 18)], fill=STEEL, stroke="#000", sw=0.06)
@@ -230,14 +230,14 @@ def cielorraso(y, ytt):
 # columnas en vista
 columna_vista(0, 2975); columna_vista(4465, 7475)
 # entrepiso
-mensula_vista(3445); viga_L(4415); panel_TT(4415); capa_compresion(4415)
+mensula_vista(3495); viga_L(4415); panel_TT(4415); capa_compresion(4415, 400)
 rect(250, 4465, 2700, 4485, fill="url(#pMort)", **CUTT)
 rect(260, 4485, 2700, 4490, fill="#8d8d8d", stroke="none", sw=0)
 rect(260, 4490, 2700, 4500, fill="url(#pPorc)", **CUTT)
 for xx in range(860, 2700, 400): line(xx, 4490, xx, 4500, sw=0.15)
 cielorraso(3300, 4415)
 # cubierta
-mensula_vista(7945); viga_L(8915); panel_TT(8915); capa_compresion(8915)
+mensula_vista(7995); viga_L(8915); panel_TT(8915); capa_compresion(8915, 400)
 cielorraso(7800, 8915)
 
 # ------------------------------------------------------------------ MURO CORTINA
@@ -354,7 +354,7 @@ def cota_h(x0, x1, ypos, txt, below=False):
     for p in (a, b): L(p - 0.7, py + 0.7, p + 0.7, py - 0.7, 0.25); L(p, py - 1.1, p, py + 1.1, 0.1)
     T((a + b) / 2, py + (2.2 if below else -0.6), txt, 1.5, "middle")
 cota_v(0, 4500, -560); cota_v(4500, 8915, -560, "4,42"); cota_v(-2150, 0, -560)
-cota_v(3455, 4155, 900, "0,70"); cota_v(4155, 4415, 900, "0,26"); cota_v(7955, 8655, 900, "0,70"); cota_v(8655, 8915, 900, "0,26")
+cota_v(3505, 4205, 900, "0,70"); cota_v(4205, 4465, 900, "0,26"); cota_v(8005, 8705, 900, "0,70"); cota_v(8705, 8965, 900, "0,26")
 cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(8968, 9440, 220, "0,47")
@@ -382,8 +382,8 @@ def ref(n, x, y, dx, dy):
 REFS_POS = [
  (1, 200, 9462, 4, -6), (2, 80, 9400, -14, -3), (3, 1000, 9092, 0, -8), (4, 1300, 9080, 2, -10), (5, 1500, 9050, 0, 7), (6, 410, 9356, 14, -4),
  (7, 1000, 8967, 0, 8), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3),
- (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 330, 8800, 26, -4), (14, 450, 8100, 30, 6),
- (15, 450, 7640, 14, 0), (16, 700, 7720, 14, 6), (17, 500, 7950, 26, 6), (18, 272, 8565, 22, 9), (19, 540, 4358, 30, 12),
+ (10, 1550, 8945, 0, 12), (11, 470, 8980, 34, -16), (12, 1170, 8500, 9, 0), (13, 330, 8800, 20, 3), (14, 450, 8100, 30, 6),
+ (15, 450, 7640, 14, 0), (16, 700, 7720, 14, 6), (17, 500, 8000, 26, 6), (18, 272, 8565, 22, 9), (19, 540, 4358, 30, 12),
  (20, 1500, 4495, 0, -7), (21, 1600, 4475, 0, -9), (22, 1300, 3306, 0, 6), (23, 1550, 3325, 0, 6), (24, 1275, 3500, 9, 3),
  (25, 120, 4200, -16, 0), (26, 100, 4590, 14, -8), (27, 12, 4665, -24, 14), (28, 3, 4100, -14, 3), (29, 65, 3900, -16, 4),
  (30, 170, 4410, -22, -4), (31, 210, 4065, 24, -4), (32, 100, 4708, -28, 1), (33, 100, 20, -18, -5), (34, -5, 2, 4, -14),
