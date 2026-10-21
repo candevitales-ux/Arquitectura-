@@ -276,7 +276,9 @@ rect(40, 7950, 90, 9380, fill="url(#pLanaV)", **CUTT); rect(90, 7950, 93, 9380, 
 # cierre superior del muro cortina
 rect(-32, 9380, 190, 9420, fill=ALU, **CUTT); rect(-25, 9386, 183, 9414, fill="#fff", stroke="#000", sw=0.06)
 # barrera cortafuego entrepiso
-rect(93, 4355, 250, 4365, fill=STEEL, stroke="none", sw=0)
+# barrera cortafuego: lana mineral comprimida apoyada en ángulo de chapa galv. fijado al borde de la viga L c/ broca
+poly([(93, 4400), (93, 4355), (250, 4355), (250, 4280), (243, 4280), (243, 4362), (100, 4362), (100, 4400)], fill=STEEL, stroke="#000", sw=0.05)
+line(243, 4318, 330, 4318, stroke="#000", sw=0.35); rect(236, 4310, 243, 4326, fill="#555", stroke="#000", sw=0.05)   # broca + arandela
 rect(93, 4365, 250, 4458, fill="url(#pLana)", **CUTT)
 rect(93, 4458, 250, 4466, fill="#c0392b", stroke="none", sw=0)
 pline([(182, 4503), (330, 4503)], stroke="#000", sw=0.25)
@@ -457,7 +459,7 @@ LEG = [
 (33, "DVH 6 templado + 12 + 3+3 laminado PVB"),
 (34, "Spandrel: vidrio templado 6 mm esmaltado"),
 (35, "Lana mineral 50 mm + bandeja chapa galv."),
-(36, "Barrera cortafuego lana mineral + intumescente"),
+(36, "Cortafuego: lana + sellador s/ ángulo galv."),
 (37, "Grapa acero galv. regulable + bulón M12 inox"),
 (38, "Junta de dilatación 20 mm + manguito"),
 (39, "Perfil guía de arranque (deslizante)"),
