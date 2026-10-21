@@ -47,8 +47,47 @@ for xx in range(975, 2700, 400): line(xx, -10, xx, 0, sw=0.15)
 
 # ------------------------------------------------------------------ la VL no lleva riel para muro cortina (el fija panel pasa por el alma)
 SRC = cut(SRC, "    # riel de anclaje embutido en la VL", "def panel_TT", "")
-SRC = SRC.replace("# columnas en vista", '\nimport math as _m\ndef viga_borde_canaleta(yt):\n    """cubierta (lado opaco, como el corte de referencia): VL doble T s/ ménsula + viga de borde premoldeada (apoyo del ala del TT)\n    + CANALETA de H°A colada in situ c/ hueco semicircular entre el parapeto del panel y el TT"""\n    yb = yt - 910; yv = yt - 210; yl = yt - 60\n    P = [(250, yb), (650, yb), (650, yb + 150), (530, yb + 210), (510, yb + 210), (510, yv - 190), (530, yv - 190), (650, yv - 130), (650, yv),\n         (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]\n    poly(P, fill="url(#pHA)", **CUT)\n    for xx in (290, 370, 450, 530, 610): circ(xx, yb + 45, 0.32)\n    for xx in (330, 570): circ(xx, yb + 100, 0.32)\n    for xx in (290, 450, 610): circ(xx, yv - 45, 0.28, fill=REB)\n    pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)\n    rect(250, yb - 10, 650, yb, fill=NEO, stroke="none", sw=0)\n    rect(250, yv - 3, 650, yv + 3, fill="url(#pGrout)", stroke="none", sw=0)\n    rect(250, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada\n    for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)\n    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)\n    arc = [(430 + 110 * _m.cos(t), 9040 + 110 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]\n    poly([(250, yl), (560, yl), (560, 9040), (540, 9040)] + arc[1:-1] + [(320, 9040), (320, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ\n    for xx in (285, 560 - 15): pline([(xx, yl - 90), (xx, 9010 if xx < 300 else 9010)], stroke=REB, sw=0.2)               # estribos salientes\n    pline([(285, 9010), (285, 9120)], stroke=REB, sw=0.2)\n    circ(285, 9100, 0.22, fill=REB); circ(545, 9000, 0.22, fill=REB)\ndef panel_TT_c(yt):\n    yf = yt - 50\n    rect(760, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)\n    line(760, yt - 600, 2700, yt - 600, stroke="#888", sw=0.08)\n    rect(580, yf, 2700, yt, fill="url(#pHA)", **CUT)\n    for xc in (1170,):\n        poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)\n        for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)\n        line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)\n    rect(590, yt - 60, 645, yt - 50, fill=NEO, stroke="none", sw=0)\n    rect(560, yt - 60, 580, yt, fill="url(#pGrout)", stroke="none", sw=0)\n' + "\n# columnas en vista", 1)
-SRC = SRC.replace("mensula_vista(7995); viga_L(8915); panel_TT(8915); capa_compresion(8915, 400)", "mensula_vista(7995); viga_borde_canaleta(8915); panel_TT_c(8915); capa_compresion(8915, 570)")
+ROOF = r'''
+import math as _m
+def viga_borde_canaleta(yt):
+    """cubierta (lado opaco, como el corte de referencia): VL doble T s/ ménsula + viga de borde premoldeada (apoyo del ala del TT)
+    + CANALETA de H°A colada in situ c/ hueco semicircular entre el parapeto del panel y el TT"""
+    yb = yt - 910; yv = yt - 210; yl = yt - 60
+    P = [(250, yb), (650, yb), (650, yb + 150), (530, yb + 210), (510, yb + 210), (510, yv - 190), (530, yv - 190), (650, yv - 130), (650, yv),
+         (250, yv), (250, yv - 130), (370, yv - 190), (390, yv - 190), (390, yb + 210), (370, yb + 210), (250, yb + 150)]
+    poly(P, fill="url(#pHA)", **CUT)
+    for xx in (290, 370, 450, 530, 610): circ(xx, yb + 45, 0.32)
+    for xx in (330, 570): circ(xx, yb + 100, 0.32)
+    for xx in (290, 450, 610): circ(xx, yv - 45, 0.28, fill=REB)
+    pline([(400, yb + 30), (400, yv - 30)], stroke=REB, sw=0.1); pline([(500, yb + 30), (500, yv - 30)], stroke=REB, sw=0.1)
+    rect(250, yb - 10, 650, yb, fill=NEO, stroke="#000", sw=0.06)
+    rect(428, yb, 472, yb + 180, fill="url(#pGrout)", stroke="#000", sw=0.08)              # vaina Ø40 c/ grout
+    rect(440, yb - 10, 460, yb + 160, fill=STEEL, stroke="#000", sw=0.08)                   # perno Ø20
+    rect(250, yv - 5, 650, yv + 5, fill="url(#pGrout)", stroke="#000", sw=0.06)
+    rect(250, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada
+    for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)
+    for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)
+    arc = [(430 + 110 * _m.cos(t), 9040 + 110 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+    poly([(250, yl), (560, yl), (560, 9040), (540, 9040)] + arc[1:-1] + [(320, 9040), (320, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ
+    for xx in (285, 560 - 15): pline([(xx, yl - 90), (xx, 9010 if xx < 300 else 9010)], stroke=REB, sw=0.2)               # estribos salientes
+    pline([(285, 9010), (285, 9120)], stroke=REB, sw=0.2)
+    circ(285, 9100, 0.22, fill=REB); circ(545, 9000, 0.22, fill=REB)
+def panel_TT_c(yt):
+    yf = yt - 50
+    rect(660, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)
+    line(660, yt - 600, 2700, yt - 600, stroke="#444", sw=0.1)
+    rect(1050, yt - 600, 1290, yt - 590, fill=NEO, stroke="#222", sw=0.06)
+    rect(580, yf, 2700, yt, fill="url(#pHA)", **CUT)
+    for xc in (1170,):
+        poly([(xc - 90, yf), (xc + 90, yf), (xc + 60, yt - 650), (xc - 60, yt - 650)], fill="url(#pHA)", **CUT)
+        for yy in (yt - 610, yt - 560): circ(xc, yy, 0.3)
+        line(xc, yt - 640, xc, yf, stroke=REB, sw=0.1)
+    rect(590, yt - 60, 645, yt - 50, fill=NEO, stroke="none", sw=0)
+    rect(560, yt - 60, 580, yt, fill="url(#pGrout)", stroke="none", sw=0)
+'''
+SRC = SRC.replace("# columnas en vista", ROOF + "\n# columnas en vista", 1)
+assert "viga_L(8915); panel_TT(8915); capa_compresion(8915, 400)" in SRC
+SRC = SRC.replace("viga_L(8915); panel_TT(8915); capa_compresion(8915, 400)", "viga_borde_canaleta(8915); panel_TT_c(8915); capa_compresion(8915, 570)")
 # cielorraso: arranca en el panel (no en el muro cortina)
 SRC = SRC.replace("rect(190, y, 2700, y + 12.5,", "rect(242, y, 2700, y + 12.5,").replace("pline([(190, y + 70), (190, y), (230, y)]", "pline([(230, y + 70), (230, y - 5), (270, y - 5)]")
 
@@ -108,14 +147,19 @@ cota_v(3505, 4205, 900, "0,70"); cota_v(4205, 4465, 900, "0,26"); cota_v(8005, 8
 cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1150, "0,84")
 cota_v(9092, 9440, -60, "0,35")
-cota_h(30, 230, 3330, "20"); cota_h(230, 250, 3330, "2"); cota_h(250, 650, 3330, "40")
+cota_h(30, 230, 3090, "20"); cota_h(230, 250, 3090, "2"); cota_h(250, 650, 3090, "40")
 cota_h(-550, 1450, -2170, "2,00 (s/ cálculo)", below=True); cota_h(-75, 975, -1420, "1,05")
 
 ''')
 
 REFS = '''# ------------------------------------------------------------------ REFERENCIAS
+_OLDB = [(7600, 9540, 8.0), (3200, 5000, 109.0), (-2180, 1500, 203.0)]
+def _Yold(y):
+    for lo, hi, top in _OLDB:
+        if lo - 1 <= y <= hi + 1: return 1000.0 - y / S + (top - (1000.0 - hi / S))
 def ref(n, x, y, bx, by):
-    """globo en posición absoluta de papel (bx, by)"""
+    """globo: (bx, by) en papel según las bandas originales; se conserva su desplazamiento respecto del punto"""
+    by = Y(y) + (by - _Yold(y))
     DX.append(dict(t='ref', n=n, a=(x, y), b=(x + (bx - X(x)) * S, y - (by - Y(y)) * S)))
     px, py = X(x), Y(y)
     A(f'<circle cx="{f(px)}" cy="{f(py)}" r="0.32" fill="#000"/>')
