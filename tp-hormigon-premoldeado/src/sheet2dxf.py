@@ -31,7 +31,7 @@ def lw(sw):
 import sys
 TAG = sys.argv[1] if len(sys.argv) > 1 else 'final'
 S, PX0, XR0, XMAX = 20.0, (170.0 if TAG == 'tp' else 9.0), -600.0, 1700.0
-BANDS = [(7600, 9540, 8.0), (3200, 5000, 109.0), (-2180, 1500, 203.0)] if TAG == 'tp' else [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
+BANDS = [(7450, 9540, 8.0), (2980, 5000, 116.5), (-2180, 1200, 221.5)] if TAG == 'tp' else [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
 FILL = {"url(#pHA)": ("ANSI31", 0.4, 0), "url(#pHAis)": ("AR-CONC", 0.06, 0), "url(#pH)": ("AR-CONC", 0.04, 0),
         "url(#pMort)": ("AR-SAND", 0.03, 0), "url(#pHid)": ("AR-SAND", 0.02, 0), "url(#pGrout)": ("AR-SAND", 0.02, 0),
         "url(#pTierra)": ("EARTH", 0.6, 45), "url(#pTosca)": ("GRAVEL", 0.4, 0), "url(#pEPS)": ("ZIGZAG", 0.3, 0),
