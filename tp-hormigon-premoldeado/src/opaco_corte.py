@@ -15,23 +15,25 @@ def cut(src, a, b, new):
 
 # ------------------------------------------------------------------ fundación: arranque del panel en viga portapanel
 SRC = cut(SRC, "# SIN viga perimetral", "# JUNTAS DE DILATACIÓN", '''# viga portapanel premoldeada (SOLO bajo los paneles) apoyada en el cuello de la base s/ neopreno
-rect(10, -510, 175, -500, fill=NEO, stroke="none", sw=0)
-poly([(10, -500), (230, -500), (230, -50), (30, -50), (10, -70)], fill="url(#pHA)", **CUT)
-for xx, yy in ((40, -470), (200, -470), (40, -90), (200, -90)): circ(xx, yy, 0.3, fill=REB)
-pline([(25, -485), (215, -485), (215, -65), (25, -65), (25, -485)], stroke=REB, sw=0.1, extra=DASH)
-line(8, -500, 8, -160, stroke="#000", sw=0.45)                                            # pintura asfáltica (caras enterradas)
+# (el corte pasa por el apoyo: se ve el DIENTE 20x45 de la viga pretensada 20x85, que entre cuellos baja hasta -0,90)
+rect(30, -510, 175, -500, fill=NEO, stroke="none", sw=0)
+rect(30, -500, 230, -50, fill="url(#pHA)", **CUT)
+for xx, yy in ((55, -470), (205, -470), (55, -80), (205, -80)): circ(xx, yy, 0.3, fill=REB)
+pline([(45, -485), (215, -485), (215, -65), (45, -65), (45, -485)], stroke=REB, sw=0.1, extra=DASH)
+pline([(70, -110), (70, -480), (140, -480)], stroke=REB, sw=0.22)                          # armadura de suspensión del diente
+line(28, -500, 28, -160, stroke="#000", sw=0.45)                                          # pintura asfáltica (caras enterradas)
 rect(230, -500, 250, -327, fill="url(#pEPSv)", **CUTT)                                    # junta EPS viga / columna
 # arranque del panel: mortero de asiento + calces de neopreno, pasador Ø16 en vaina c/ grout, selladores
 rect(30, -50, 230, -40, fill="url(#pMort)", **CUTT)
 rect(70, -50, 110, -40, fill=NEO, stroke="none", sw=0)
 rect(175, -330, 205, 230, fill="url(#pGrout)", stroke="#333", sw=0.1)
 line(190, -320, 190, 220, stroke="#000", sw=0.32)
-rect(18, -52, 31, -38, fill="#111", stroke="none", sw=0)
+rect(30, -50, 44, -40, fill="#111", stroke="none", sw=0)                                  # sellador PU s/ fondo de junta (enrasado, sin escalón)
 rect(230, -50, 250, 0, fill=NEO, stroke="none", sw=0)
 # vereda exterior hasta la viga portapanel (junta EPS + sellador)
-rect(-750, -327, 0, -250, fill="url(#pTosca)", **CUTT)
-poly([(-750, -250), (0, -250), (0, -150), (-750, -157)], fill="url(#pH)", **CUTT)
-rect(0, -250, 8, -150, fill="url(#pEPSv)", stroke="#000", sw=0.08); rect(0, -162, 8, -150, fill=NEO, stroke="none", sw=0)
+rect(-750, -327, 18, -250, fill="url(#pTosca)", **CUTT)
+poly([(-750, -250), (18, -250), (18, -150), (-750, -157)], fill="url(#pH)", **CUTT)
+rect(18, -250, 26, -150, fill="url(#pEPSv)", stroke="#000", sw=0.08); rect(18, -162, 26, -150, fill=NEO, stroke="none", sw=0)
 # piso sobre terreno (interior), separado de la columna por junta de dilatación
 for xa, xb, sol in ((670, 2700, (675, 2700)),):
     rect(xa, -327, xb, -177, fill="url(#pTosca)", **CUTT)
@@ -67,11 +69,19 @@ def viga_borde_canaleta(yt):
     rect(250, yv + 3, 650, yl, fill="url(#pHA)", **CUT)                                    # viga de borde premoldeada
     for xx in (290, 610): circ(xx, yv + 40, 0.26, fill=REB)
     for xx in (330, 520): pline([(xx, yv - 120), (xx, yv + 110)], stroke=REB, sw=0.25)
-    arc = [(430 + 110 * _m.cos(t), 9040 + 110 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
-    poly([(250, yl), (560, yl), (560, 9040), (540, 9040)] + arc[1:-1] + [(320, 9040), (320, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ
-    for xx in (285, 560 - 15): pline([(xx, yl - 90), (xx, 9010 if xx < 300 else 9010)], stroke=REB, sw=0.2)               # estribos salientes
-    pline([(285, 9010), (285, 9120)], stroke=REB, sw=0.2)
-    circ(285, 9100, 0.22, fill=REB); circ(545, 9000, 0.22, fill=REB)
+    C, R = 420, 115                                                                       # hueco semicircular Ø23
+    arc = [(C + R * _m.cos(t), 9040 + R * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+    poly([(250, yl), (560, yl), (560, 9040), (C + R, 9040)] + arc[1:-1] + [(C - R, 9040), (C - R, 9150), (250, 9150)], fill="url(#pHAis)", **CUT)   # canaleta in situ
+    pline([(278, yl - 90), (278, 9120)], stroke=REB, sw=0.2); pline([(548, yl - 90), (548, 9020)], stroke=REB, sw=0.2)              # estribos salientes
+    circ(278, 9100, 0.22, fill=REB); circ(548, 9000, 0.22, fill=REB)
+    def ring(r0, r1, xw0, xw1, fill):
+        A0 = [(C + r0 * _m.cos(t), 9040 + r0 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+        A1 = [(C + r1 * _m.cos(t), 9040 + r1 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+        poly(A0 + [(xw0, 9150), (xw1, 9150)] + A1[::-1], fill=fill, stroke="#000", sw=0.1)
+    ring(115, 90, 305, 330, "url(#pEPS)")                                                 # EPS 25 mm
+    ring(90, 75, 330, 345, "url(#pMort)")                                                 # carpeta armada 15 mm
+    rect(250, 9150, 345, 9175, fill="url(#pEPS)", stroke="#000", sw=0.1)                  # EPS s/ coronamiento
+    rect(250, 9175, 345, 9185, fill="url(#pMort)", stroke="#000", sw=0.08)
 def panel_TT_c(yt):
     yf = yt - 50
     rect(660, yt - 750, 2700, yf, fill="#e9ebed", **VIEW)
@@ -95,7 +105,8 @@ SRC = SRC.replace("rect(190, y, 2700, y + 12.5,", "rect(242, y, 2700, y + 12.5,"
 PANEL = '''# ------------------------------------------------------------------ PANEL SÁNDWICH PREMOLDEADO (cerramiento integral opaco)
 def panel(y0, y1):
     rect(30, y0, 230, y1, fill="url(#pHA)", **CUT)
-    rect(90, y0 + 60, 150, y1 - 60, fill="url(#pEPSv)", stroke="#000", sw=0.12)
+    cuts = [y0 + 60] + [v for yy in (4140, 8640) for v in (yy - 150, yy + 150)] + [y1 - 60]
+    for a, b in zip(cuts[::2], cuts[1::2]): rect(90, a, 150, b, fill="url(#pEPSv)", stroke="#000", sw=0.12)   # EPS interrumpido: zona maciza 30x30 en cada anclaje
     for xx in (60, 190): line(xx, y0 + 30, xx, y1 - 30, stroke=REB, sw=0.09, extra='stroke-dasharray="2 0.6"')   # mallas
     for yy in range(y0 + 500, y1 - 300, 700): line(80, yy, 160, yy + 60, stroke="#222", sw=0.16)                   # conectores fibra de vidrio
     rect(212, 9330, 230, 9350, fill="#fff", stroke="#000", sw=0.1)                                                 # buña p/ babeta
@@ -103,7 +114,7 @@ def fija_panel(yy):
     """anclaje pasante (sistema Astori): rehundido Ø100 prof. 3 cm en la cara exterior (tapado c/ mortero), agujero ovalado
     40x60 a través de TODO el panel, calce de neopreno en la junta, vaina pasante en el ala superior de la VL y tuerca + arandela del lado interior"""
     rect(30, yy - 50, 60, yy + 50, fill="url(#pMort)", stroke="#000", sw=0.12)                 # rehundido tapado c/ mortero
-    rect(60, yy - 22, 230, yy + 22, fill="#fff", stroke="#333", sw=0.1, extra=DASH)          # agujero ovalado 40x60 en el panel
+    rect(60, yy - 30, 230, yy + 30, fill="#fff", stroke="#333", sw=0.1, extra=DASH)          # agujero ovalado 40x60 VERTICAL (permite dilatar)
     rect(232, yy - 40, 248, yy + 40, fill=NEO, stroke="none", sw=0)                           # calce de neopreno en la junta
     rect(250, yy - 16, 650, yy + 16, fill="#fff", stroke="#333", sw=0.1, extra=DASH)          # vaina pasante en el ala de la VL
     line(40, yy, 700, yy, stroke="#000", sw=0.36)                                             # bulón pasante M20
@@ -130,8 +141,11 @@ def ypend(x, b): return b + (x - x0) * 0.02
 poly([(x0, 8968), (x1, 8968), (x1, ypend(x1, 9068)), (630, ypend(630, 9068)), (x0, 9010)], fill="url(#pEPS)", **CUTT)   # contrapiso liviano H° c/ EPS
 poly([(x0, 9010), (630, ypend(630, 9068)), (x1, ypend(x1, 9068)), (x1, ypend(x1, 9088)), (630, ypend(630, 9088)), (560, 9040), (x0, 9040)], fill="url(#pMort)", **CUTT)  # carpeta (baja a la canaleta)
 import math as _m
-arcm = [(430 + 106 * _m.cos(t), 9040 + 106 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
-pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (540, 9044)] + arcm[1:-1] + [(324, 9044), (324, 9154), (234, 9154), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
+arcm = [(420 + 73 * _m.cos(t), 9040 + 73 * _m.sin(t)) for t in [-k * _m.pi / 24 for k in range(25)]]
+pline([(x1, ypend(x1, 9092)), (630, ypend(630, 9092)), (560, 9044), (493, 9044)] + arcm[1:-1] + [(347, 9044), (347, 9188), (234, 9188), (234, 9335), (214, 9340)], stroke="#000", sw=0.45)   # membrana continua
+# desagüe: embudo c/ rejilla en el fondo de la canaleta, c/ eje de columna (oculto) -> caño de lluvia interior junto a la columna
+rect(375, 8890, 465, 8967, fill="none", stroke="#333", sw=0.13, extra=DASH)
+pline([(350, 8967), (490, 8967)], stroke="#333", sw=0.13, extra=DASH)
 pline([(214, 9346), (238, 9346), (238, 9290)], stroke="#000", sw=0.2)                       # babeta
 rect(213, 9331, 229, 9349, fill="#222", stroke="none", sw=0)
 # cupertina (pendiente al interior, goterones) fijada c/ tornillo + arandela de neopreno
@@ -173,14 +187,14 @@ REFS_POS = [
  (5, 1500, 9050, 275, 44.5), (7, 1000, 8967, 250, 44.8), (9, 430, 8960, 226, 26), (8, 240, 9000, 223, 33),
  (10, 1550, 8945, 289.5, 46), (11, 285, 9060, 257.5, 20), (12, 1170, 8500, 238.5, 63.5), (13, 400, 8780, 236.5, 51), (14, 450, 8100, 252.5, 88),
  (15, 450, 7640, 236.5, 103), (16, 700, 7720, 248, 105), (17, 500, 8000, 248, 90.5), (18, 520, 8705, 247, 56), (19, 540, 8858, 258, 52),
- (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
+ (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 420, 8930, EX, 45.5), (58, 340, 9000, EX, 19.5), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
  # entrepiso
  (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1300, 3306, 245, 200), (23, 1550, 3325, 257.5, 200), (24, 1275, 3500, 252.5, 187),
- (32, 235, 4520, EX, 128), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
+ (32, 235, 4520, EX, 128), (57, 120, 4250, EX, 140), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
  (13, 330, 4300, 236.5, 148), (19, 540, 4358, 257, 150), (14, 450, 3600, 247, 176),
  # planta baja y fundación
  (25, 60, 900, EX, 228), (26, 190, 700, EX, 236), (27, 120, 500, EX, 244), (43, 120, -45, EX, 270), (34, 25, -45, EX, 277),
- (45, -300, -200, 180, 292), (56, 4, -200, EX, 288), (44, 8, -400, EX, 300), (55, 90, -505, EX, 312), (42, 120, -300, 180, 304),
+ (45, -300, -200, 180, 292), (56, 22, -200, EX, 288), (44, 28, -400, EX, 300), (55, 90, -505, EX, 312), (42, 120, -300, 180, 304),
  (35, 950, -5, 247.5, 272), (36, 1150, -25, 257.5, 271), (37, 1350, -45, 267.5, 270), (38, 1100, -120, 255, 294), (39, 1550, -176, 277.5, 297),
  (40, 1350, -260, 267.5, 301), (41, 660, -250, 247, 298), (46, 450, -900, 236.5, 327), (47, 700, -800, 255, 322), (48, 690, -1200, 256.5, 343),
  (49, 540, -1600, 247, 363), (50, 850, -700, 260.5, 330), (51, 1200, -1800, 269, 362), (52, 1100, -1960, 265, 368), (53, 1400, -2100, 274, 386), (54, 1400, -1350, 275, 352),
@@ -197,7 +211,7 @@ LEG = [
 (6, "Babeta chapa galv. + sellador en buña del panel"),
 (7, "Barrera de vapor: imprimación + film 200 µ"),
 (8, "Junta EPS 2 cm panel / canaleta + sellador"),
-(9, "Canaleta H°A in situ c/ hueco semicircular, pend. 1 %"),
+(9, "Canaleta H°A in situ (hueco semicirc.), pend. 1 %"),
 ("ESTRUCTURA PREMOLDEADA (SISTEMA PI)", None),
 (10, "Capa de compresión 5 cm c/ malla Ø6 c/15"),
 (11, "Estribos salientes Ø10 (anclan canaleta y capa)"),
@@ -221,7 +235,7 @@ LEG = [
 (27, "Alma EPS 6 cm + conectores de fibra de vidrio"),
 (28, "Rehundido Ø100 prof. 3 cm tapado c/ mortero"),
 (29, "Bulón pasante M20: atraviesa panel y ala de VL"),
-(30, "Agujero ovalado 40x60 + vaina, tuerca y arandela"),
+(30, "Agujero ovalado VERTICAL 40x60 (dilatación) + vaina"),
 (31, "Junta 2 cm: lana mineral cortafuego + sellador"),
 (32, "Junta perimetral EPS 1 cm + zócalo"),
 (33, "Junta vertical panel / panel: fondo + sellador PU"),
@@ -234,7 +248,7 @@ LEG = [
 (39, "Film de polietileno 200 µ"),
 (40, "Tosca compactada, e = 15 cm"),
 (41, "Junta de dilatación EPS 2 cm + sellador"),
-(42, "Viga portapanel premoldeada 22x45 (s/ cuellos)"),
+(42, "Viga portapanel pretens. 20x85, diente 20x45 (s/ cálc.)"),
 (43, "Mortero de asiento + pasador Ø16 en vaina c/ grout"),
 (44, "Pintura asfáltica en caras enterradas"),
 (45, "Vereda de H° peinado s/ tosca"),
@@ -249,6 +263,9 @@ LEG = [
 (54, "Terreno natural"),
 (55, "Neopreno de apoyo viga portapanel / cuello"),
 (56, "Junta vereda / viga EPS 1 cm + sellador"),
+(57, "Zona maciza local 30x30 en cada anclaje (sin EPS)"),
+(58, "EPS 25 mm + carpeta armada bajo membrana (canaleta)"),
+(59, "Embudo c/ rejilla en canaleta (c/ eje col.) a caño interior"),
 ]
 
 '''
