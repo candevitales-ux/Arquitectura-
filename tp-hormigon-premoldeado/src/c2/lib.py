@@ -584,3 +584,32 @@ def page(titulo):
         f.titulo = titulo
         return f
     return deco
+
+
+def fitview(sh, box, bb, scale):
+    """vista a escala centrada en box (papel) para el rectángulo real bb = (xmin, xmax, zmin, zmax)"""
+    bx0, by0, bx1, by1 = box; x0, x1, z0, z1 = bb
+    w, h = (x1 - x0) / scale, (z1 - z0) / scale
+    return View(sh, (bx0 + bx1) / 2 - w / 2 - x0 / scale, (by0 + by1) / 2 + h / 2 + z0 / scale, scale)
+
+
+def autocallouts(sh, items, box, r=2.3, gap=None):
+    """globos a los costados de box (izq./der. según la posición del punto), sin superponerse; items = [(label, (px, py))]"""
+    gap = gap or 2 * r + 1.2
+    mid = (box[0] + box[2]) / 2
+    for side in (0, 1):
+        its = sorted([it for it in items if (it[1][0] >= mid) == bool(side)], key=lambda it: it[1][1])
+        if not its: continue
+        ys = []
+        for _, (px, py) in its:
+            y = min(max(py, box[1] + r), box[3] - r)
+            if ys and y < ys[-1] + gap: y = ys[-1] + gap
+            ys.append(y)
+        over = ys[-1] - (box[3] - r)
+        if over > 0:
+            for k in range(len(ys) - 1, -1, -1):
+                lim = (box[3] - r) if k == len(ys) - 1 else ys[k + 1] - gap
+                ys[k] = min(ys[k], lim)
+        x = box[2] - r if side else box[0] + r
+        for (lab, p), y in zip(its, ys):
+            sh.callout(p, (x, y), lab, r=r)
