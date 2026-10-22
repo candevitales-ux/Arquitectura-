@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["panel"], "Muro exterior opaco: integral panel sándwich 80 mm", "PUNTO 4 - MURO EXTERIOR", "1:200 - 1:12,5 - 1:2")
+sh = Sheet(NUM["panel"], "Muro exterior opaco: integral panel sándwich 80 mm", "PUNTO 4 - MURO EXTERIOR", "1:200 - 1:12,5 - 1:2", hmin=2.8)
 y0 = sh.encabezado("4° MURO EXTERIOR OPACO: PANEL SÁNDWICH (INTEGRAL)",
                    "Panel metálico autoportante con núcleo aislante, colocado horizontal entre columnas - laterales y contrafrente")
 L, R = sh.L + 3, sh.R - 3
@@ -39,10 +39,10 @@ v.pl([(0, 0), (0, 25), (30, 30), (30, 50), (0, 55), (0, EP)], "1-SECCION", 25)
 v.dim((0, EP + 2), (1000, EP + 2), 6, txt="ancho útil 1000")
 v.dim((1030, 0), (1030, EP), 4)
 v.ley("chapa ext. 0,5 microperfilada", (300, EP + 2), (-4, 12), 1.4)
-v.ley("núcleo PUR 40 kg/m³", (500, 40), (6, -10), 1.4)
-v.ley("chapa int. 0,5", (800, 0), (2, -8), 1.4)
+v.ley("núcleo PUR 40 kg/m³", (300, 40), (2, -14), 1.4)
+v.ley("chapa int. 0,5", (850, 0), (-4, -20), 1.4)
 v.ley("macho", (1030, 40), (-4, -14), 1.4)
-v.ley("hembra", (20, 40), (2, -14), 1.4)
+v.ley("hembra", (20, 40), (-2, -14), 1.4)
 v.label("EXTERIOR", 500, 260, 1.4, TA.MIDDLE_CENTER, True); v.label("INTERIOR", 300, -240, 1.4, TA.MIDDLE_CENTER, True)
 
 # =============================================================== 3. JUNTA MACHIHEMBRADA 1:2
@@ -64,9 +64,9 @@ v.rect(EP, -85, EP + 20, 85, "1-VISTA", 18)                                     
 bulon(v, (-6, 50), (EP + 18, 50), 6.3, cab=4, tuerca=False, lw=13)
 v.rect(-8, 44, -4, 56, "1-VISTA", 13); v.hatch([(-8, 44), (-4, 44), (-4, 56), (-8, 56)], "negro")
 v.ley("chapa exterior con labio de goteo", (-4, 8), (10, -34), 1.4)
-v.ley("cinta / burlete EPDM", (EP - 10, 0), (14, -10), 1.4)
-v.ley("cordón de PUR en obra", (40, 30), (14, 18), 1.4)
-v.ley("montante tubo 100x20x2", (EP + 10, -60), (6, -6), 1.4)
+v.ley("burlete EPDM", (EP - 10, 0), (2, -12), 1.4)
+v.ley("cordón PUR", (40, 30), (4, -34), 1.4)
+v.ley("montante 100x20x2", (EP + 10, -60), (2, -16), 1.4)
 v.ley("autoperf. Ø6,3 + EPDM", (-6, 50), (8, 8), 1.4)
 v.label("EXTERIOR", -40, -75, 1.4, TA.MIDDLE_CENTER, True)
 

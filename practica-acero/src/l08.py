@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["u13"], "Uniones U1, U2, U3 y funcionamiento", "PUNTO 2 - JUNTAS Y UNIONES", "1:10 - 1:20")
+sh = Sheet(NUM["u13"], "Uniones U1, U2, U3 y funcionamiento", "PUNTO 2 - JUNTAS Y UNIONES", "1:10 - 1:20", hmin=2.3)
 y0 = sh.encabezado("2° UNIONES U1, U2 Y U3", f"Detalles a escala de las uniones estructurales principales (ver ubicación en lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -73,7 +73,7 @@ v.dim((100, -500), (110, -500), -10, txt="10")
 v.ley("placa de corte 320x120x10", (215, -110), (18, -4))
 v.ley("filete 8 al ala", (104, -86), (-10, 18))
 v.ley("4 bulones M20 8.8", (172, -290), (20, -6))
-v.ley("columna HEB 200", (-60, -600), (-2, -6))
+v.ley("columna HEB 200", (-60, -600), (3, -6))
 v.ley("viga IPN 500", (480, -h), (-4, -6))
 v.label("VISTA LATERAL 1:10", 200, -690, 2.0, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XA, Y2 - 95, W2, [

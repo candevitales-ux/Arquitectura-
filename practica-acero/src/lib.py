@@ -49,7 +49,9 @@ def wrap(s, w, h, bold=False):
 
 
 class Sheet:
-    def __init__(self, num, titulo, punto, escalas="", orient="P"):
+    def __init__(self, num, titulo, punto, escalas="", orient="P", hmin=2.0):
+        global HMIN
+        HMIN = hmin                       # letra mínima de esta lámina (mm); donde sobra lugar se agranda
         self.num, self.titulo, self.punto, self.escalas = num, titulo, punto, escalas
         self.W, self.H = (210.0, 297.0) if orient == "P" else (297.0, 210.0)
         d = ezdxf.new("R2018", setup=True); d.units = ezdxf.units.MM
@@ -58,7 +60,7 @@ class Sheet:
         for n, (c, lt) in LAYERS.items():
             d.layers.add(n, color=c, linetype=lt)
         ds = d.dimstyles.new("A4")
-        ds.dxf.dimtxsty = "ARIAL"; ds.dxf.dimtxt = 2.0; ds.dxf.dimasz = 1.1; ds.dxf.dimtsz = 0.9
+        ds.dxf.dimtxsty = "ARIAL"; ds.dxf.dimtxt = HMIN; ds.dxf.dimasz = 1.1; ds.dxf.dimtsz = 0.9
         ds.dxf.dimexe = 0.8; ds.dxf.dimexo = 0.6; ds.dxf.dimgap = 0.5; ds.dxf.dimdec = 0; ds.dxf.dimtad = 1
         ds.dxf.dimclrd = 7; ds.dxf.dimclre = 7; ds.dxf.dimclrt = 7; ds.dxf.dimlwd = 13; ds.dxf.dimlwe = 13
         ds.dxf.dimtih = 0; ds.dxf.dimtoh = 0; ds.dxf.dimjust = 0; ds.dxf.dimtmove = 0; ds.dxf.dimzin = 8
@@ -118,17 +120,19 @@ class Sheet:
 
     def titulo_dib(self, x, y, n, s, esc="", w=None, h=2.6):
         """Título de dibujo: número en círculo negro + nombre + escala, subrayado."""
-        r = 2.4
+        h = max(h, HMIN + 0.3)
+        r = max(2.4, HMIN + 0.4)
         c = self.msp.add_hatch(color=7, dxfattribs={"layer": "3-TITULOS"}); c.set_solid_fill(color=7)
         ep = c.paths.add_edge_path(); ep.add_arc((x + r, y), r, 0, 360)
-        t = self.txt(str(n), x + r, y, 2.4, TA.MIDDLE_CENTER, "3-TITULOS", True)
+        t = self.txt(str(n), x + r, y, 2.4, TA.MIDDLE_CENTER, "3-TITULOS", True, maxw=2 * r - 0.7)
         t.dxf.true_color = ezdxf.colors.rgb2int((255, 255, 255))     # número en blanco sobre el círculo
-        self.txt(s, x + 2 * r + 1.5, y, h, TA.MIDDLE_LEFT, "3-TITULOS", True)
+        we = tw("ESC. " + esc, 2.0) + 3 if esc else 0
+        self.txt(s, x + 2 * r + 1.5, y, h, TA.MIDDLE_LEFT, "3-TITULOS", True, maxw=(w - 2 * r - 1.5 - we) if w else None)
         wt = tw(s, h, True)
         if esc:
             if w: self.txt("ESC. " + esc, x + w, y - 0.1, 2.0, TA.MIDDLE_RIGHT, "3-TITULOS")
             else: self.txt("ESC. " + esc, x + 2 * r + 4 + wt, y - 0.1, 2.0, TA.MIDDLE_LEFT, "3-TITULOS")
-            wt += tw("ESC. " + esc, 2.0) + 3
+            wt += we
         ww = w if w else 2 * r + 2.5 + wt
         self.pl([(x, y - r - 0.8), (x + ww, y - r - 0.8)], "3-TITULOS", 35)
 
@@ -142,7 +146,7 @@ class Sheet:
         for i, f in enumerate(rows):
             cells = [wrap(str(f[j]), cols[j][1] - 2 * pad, h) for j in range(len(cols))]
             nl = max(len(c) for c in cells)
-            rh = nl * h * lead + 2 * pad - (lead - 1) * h
+            rh = nl * h * lead + 2 * pad - (lead - 1) * h + 0.22 * h      # + descendentes
             if head and i == 0:
                 self.solid([(x, yy), (x1, yy), (x1, yy - rh), (x, yy - rh)], 230, "3-TABLAS")
             xx = x

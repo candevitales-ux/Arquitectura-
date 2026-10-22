@@ -17,7 +17,7 @@ UNIONES = [
 ]
 
 if __name__ == "__main__":
-    sh = Sheet(NUM["uesq"], "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:100")
+    sh = Sheet(NUM["uesq"], "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:100", hmin=2.3)
     y0 = sh.encabezado("2° JUNTAS Y UNIONES DEL SISTEMA",
                        "Ubicación de cada encuentro entre elementos (U1 a U10) y su clasificación")
     L, R = sh.L + 3, sh.R - 3

@@ -28,7 +28,7 @@ ELEMENTOS = [
 
 if __name__ == "__main__":
     sh = Sheet(NUM["axo"], "Axonometría estructural y elementos del sistema", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
-               "Axonometría isométrica 1:190")
+               "Axonometría isométrica 1:190", hmin=2.4)
     y = sh.encabezado("1° ELEMENTOS CONSTRUCTIVOS DEL SISTEMA",
                       "Axonometría estructural del edificio adoptado con la referencia de cada elemento")
     L, R = sh.L + 3, sh.R - 3

@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["comp"], "Comparación CW vs. panel y justificación de la elección", "PUNTO 4 - MURO EXTERIOR", "1:20")
+sh = Sheet(NUM["comp"], "Comparación CW vs. panel y justificación de la elección", "PUNTO 4 - MURO EXTERIOR", "1:20", hmin=2.4)
 y0 = sh.encabezado("4° COMPARACIÓN: VIDRIADO (CW) vs. OPACO (PANEL)",
                    "Los dos cerramientos dibujados a la misma escala frente a la losa de entrepiso (+3,80)")
 L, R = sh.L + 3, sh.R - 3
@@ -61,7 +61,7 @@ for zj in (-650, 350):
     v.ln((PX, zj), (PX + 80, zj), "1-SECCION", 35)
 v.hatch([(-60, -LOSA), (PX - 20, -LOSA), (PX - 20, 0), (-60, 0)], "lana")
 v.dim((PX, 560), (PX + 80, 560), 3)
-v.ley("panel PUR 80 (junta c/ 1,00 m)", (PX + 40, 500), (10, 4), 1.4)
+v.ley("panel PUR 80", (PX + 40, 500), (8, 4), 1.4)
 v.ley("montante 100x20 (en columna)", (PX - 10, -900), (-6, -10), 1.4)
 v.ley("relleno lana mineral + sello", (30, -60), (-4, -26), 1.4)
 v.ley("junta machihembrada", (PX + 80, 350), (6, -6), 1.4)
@@ -95,7 +95,7 @@ ficha_spec(sh, XB, Y3 - 6, W2, [
     ("Panel en laterales y contrafrente:", "fachadas sin vistas importantes; el panel aísla 10 veces más que el vidrio, pesa 4 veces menos (menos carga en vigas y fundaciones), es barato y se coloca muy rápido."),
     ("Resultado:", "se combina lo mejor de cada uno: transparencia donde hace falta y eficiencia térmica y económica en el resto (≈ 75 % de la envolvente es opaca)."),
 ], h=1.55, lead=1.34)
-Y4 = Y3 - 31
+Y4 = Y3 - 37
 sh.titulo_dib(L, Y4, 3, "MATRIZ DE DECISIÓN POR FACHADA (1 = malo, 5 = muy bueno; peso según la fachada)", w=R - L)
 crit = [("Luz natural y visuales", 5, 1, 3, 1), ("Aislación térmica", 2, 5, 1, 3), ("Peso sobre la estructura", 2, 5, 1, 2),
         ("Costo", 1, 5, 1, 3), ("Velocidad de montaje", 2, 5, 1, 2), ("Mantenimiento", 2, 4, 1, 2), ("Imagen / representatividad", 5, 2, 3, 1)]

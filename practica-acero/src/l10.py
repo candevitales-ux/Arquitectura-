@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["u810"], "Uniones U8 a U10: cerramientos a la estructura y cubierta", "PUNTO 2 - JUNTAS Y UNIONES", "1:5 - 1:10")
+sh = Sheet(NUM["u810"], "Uniones U8 a U10: cerramientos a la estructura y cubierta", "PUNTO 2 - JUNTAS Y UNIONES", "1:5 - 1:10", hmin=2.4)
 y0 = sh.encabezado("2° UNIONES U8, U9 Y U10", f"Juntas entre los cerramientos (opaco y vidriado) y la estructura de acero (ver lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -52,7 +52,7 @@ v.rect(0, 20, 20, 210, "1-VISTA", 18)
 v.ley("viga portapanel 100x60x3,2", (-30, -50), (-4, 22), 1.5)
 v.ley("U de arranque + babeta", (110, -30), (-4, -14), 1.5)
 v.ley("cinta butílica", (50, 4), (14, 14), 1.5)
-v.ley("contrapiso / vereda", (60, -130), (8, -6), 1.5)
+v.ley("contrapiso", (100, -110), (4, -6), 1.5)
 v.label("CORTE - ARRANQUE 1:5", 0, -155, 1.5, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, L, Y1 - 86, R - L, [
     ("Tipo:", "seca, atornillada; junta machihembrada entre paneles y junta sellada sobre columnas."),
@@ -89,7 +89,7 @@ v.ley("riel + bulón T", (-73, 55), (-2, -14))
 v.ley("bulón M12 inox", (100, 165), (-10, 20))
 v.ley("montante 50x150", (135, 20), (4, -10))
 v.ley("empalme c/ junta 20", (210, 222), (-6, 4))
-v.ley("cortafuego (lana + sello)", (0, 70), (-6, -26))
+v.ley("cortafuego", (0, 70), (-6, -26))
 v.ley("vidrio", (245, -120), (-4, -8))
 v.label("CORTE VERTICAL 1:5", -60, -150, 2.0, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XA, Y2 - 106, W2, [
@@ -116,7 +116,7 @@ v.ley("cupertina chapa galv. N°22", (-30, 612), (-8, -4), 1.5)
 v.ley("babeta: membrana rebatida 25 cm", (-40, 200), (-10, 14), 1.5)
 v.ley("membrana asfáltica 4 mm", (-300, 68), (2, 20), 1.5)
 v.ley("contrapiso alivianado 1-2 %", (-400, 40), (2, 9), 1.5)
-v.ley("panel 80 (parapeto)", (EP, 300), (4, -6), 1.5)
+v.ley("panel 80 (parapeto)", (EP, 300), (-28, -10), 1.5)
 v.ley("losa cubierta + viga de borde", (-300, -100), (2, -9), 1.5)
 v.ley("montante de parapeto", (-30, 450), (-4, 6), 1.5)
 v.label("CORTE 1:10", 150, -150, 1.5, TA.MIDDLE_CENTER, True)

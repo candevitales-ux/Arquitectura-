@@ -4,7 +4,7 @@ from lib import *
 from geom import *
 
 sh = Sheet(NUM["vigas"], "Vigas principales, secundarias, de borde y piezas de unión", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
-           "1:10 - 1:100 - 1:75 - 1:5")
+           "1:10 - 1:100 - 1:75 - 1:5", hmin=2.2)
 y0 = sh.encabezado("1° ELEMENTOS: VIGAS Y PIEZAS DE UNIÓN", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -41,7 +41,7 @@ v.dim((0, 600), (ANCHO, 600), 7)
 for k in range(6): v.dim((k * SEC, -500), (k * SEC + SEC, -500), -4)
 v.label("ELEVACIÓN 1:100", 6000, -1300, 1.7, TA.MIDDLE_CENTER, True)
 v.ley("studs Ø19 c/ 300 (en el valle de la chapa)", (3210, 125), (4, 4), 1.6)
-v.ley("ángulos p/ secundarias", (8000, -130), (8, 7), 1.6)
+v.ley("ángulos (U3)", (10000, -130), (4, 9), 1.6)
 ficha_spec(sh, L + 48, Y1 - 48, R - L - 48, [
     ("Función:", "salvar la luz de 12,00 m sin apoyos, recibir las reacciones de las vigas secundarias y, con los conectores, trabajar en sección compuesta con la losa."),
     ("Medidas:", "IPN 500: h 500, b 185, tw 18, tf 27 mm; 141 kg/m; Ix = 68.740 cm⁴; Wx = 2.750 cm³; pieza de 11,68 m (entra en un semirremolque de 12 m)."),
@@ -71,7 +71,7 @@ v.dim((0, 0), (VANO, 0), 6)
 v.dim((19, -200), (VANO - 19, -200), -4)
 v.label("ELEVACIÓN 1:75", 2000, -700, 1.6, TA.MIDDLE_CENTER, True)
 v.ley("destaje 90 x 40", (110, -20), (4, 10), 1.6)
-v.ley("doble ángulo", (VANO - 60, -110), (-6, -11), 1.6)
+v.ley("doble ángulo", (VANO - 60, -60), (-12, 14), 1.6)
 ficha_spec(sh, XA, Y2 - 56, W2, [
     ("Función:", "apoyo de la chapa colaborante cada 2,00 m; lleva las cargas de la losa a las vigas principales."),
     ("Medidas:", "IPN 200: h 200, b 90, tw 7,5, tf 11,3 mm; 26,2 kg/m; Wx = 214 cm³; largo 3,96 m."),
@@ -105,7 +105,7 @@ ficha_spec(sh, XB, Y2 - 56, W2, [
 ])
 
 # =============================================================== 8. PIEZAS DE UNIÓN
-Y3 = Y2 - 78
+Y3 = Y2 - 86
 sh.titulo_dib(L, Y3, 8, "PIEZAS DE UNIÓN: PLACA DE CORTE Y DOBLE ÁNGULO", "1:10 / 1:5", w=R - L)
 # placa de corte (vista de frente) para viga principal
 v = sh.view_in((L, Y3 - 55, L + 30, Y3 - 6), (-80, -270, 160, 215), 10)

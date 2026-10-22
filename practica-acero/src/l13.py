@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["cw"], "Muro cortina (CW) stick", "PUNTO 4 - MURO EXTERIOR", "1:100 - 1:20 - 1:2,5")
+sh = Sheet(NUM["cw"], "Muro cortina (CW) stick", "PUNTO 4 - MURO EXTERIOR", "1:125 - 1:20 - 1:2,5", hmin=2.5)
 y0 = sh.encabezado("4° MURO EXTERIOR VIDRIADO: MURO CORTINA (CW)",
                    "Sistema stick de aluminio (montantes + travesaños armados en obra) colgado de las losas - frente A")
 L, R = sh.L + 3, sh.R - 3
@@ -12,8 +12,8 @@ MOD = 1000                                       # módulo horizontal (4 por van
 SPN = 900                                        # spandrel frente a cada losa
 
 # =============================================================== 1. ELEVACIÓN
-sh.titulo_dib(L, Y1, 1, "ELEVACIÓN PARCIAL (EJES 1 A 3)", "1:100", w=86)
-v = sh.view_in((L, Y1 - 100, L + 86, Y1 - 8), (-500, -900, 8100, 8300), 100)
+sh.titulo_dib(L, Y1, 1, "ELEVACIÓN PARCIAL (EJES 1 A 3)", "1:125", w=86)
+v = sh.view_in((L, Y1 - 100, L + 86, Y1 - 8), (-1500, -1100, 8400, 8300), 125)
 v.ln((-700, 0), (8300, 0), "1-VISTA", 35)
 for nl in (N1, N2):
     v.hatch([(0, nl - LOSA - 500 - 260), (8000, nl - LOSA - 500 - 260), (8000, nl - LOSA - 500 - 260 + SPN), (0, nl - LOSA - 500 - 260 + SPN)], "gris")
@@ -58,8 +58,8 @@ v.hatch([(-53, -100), (MX0, -100), (MX0, -32), (-53, -32)], "lana"); v.rect(-53,
 v.ley("montante 50x150 (1)", (MX0 + 75, 300), (6, 4), 1.4)
 v.ley("travesaño 50x120 (2)", (MX0 + 90, z_s1 - 30), (16, -7), 1.4)
 v.ley("DVH 6+12+3+3 (6)", (MX0 + 192, -1150), (4, -2), 1.4)
-v.ley("spandrel templado 6 esmaltado (7)", (MX0 + 188, z_s0 + 300), (4, 4), 1.4)
-v.ley("lana mineral 50 + bandeja (7)", (MX0 + 125, z_s0 + 200), (14, -12), 1.4)
+v.ley("spandrel esmaltado (7)", (MX0 + 188, z_s0 + 300), (4, 4), 1.4)
+v.ley("lana 50 + bandeja (7)", (MX0 + 125, z_s0 + 200), (14, -12), 1.4)
 v.ley("grapa regulable (8)", (0, -25), (-8, 12), 1.4)
 v.ley("junta 20 + manguito (10)", (MX0 + 150, 82), (10, -2), 1.4)
 v.ley("cortafuego sellado (12)", (0, -70), (-12, -16), 1.4)
@@ -92,9 +92,9 @@ v.dim((-25, 0), (25, 0), -4); v.dim((25, 0), (25, 150), 6)
 v.dim((-100, 152), (-100, 176), -4, txt="24,8")
 v.ley("montante (1)", (-22, 40), (-4, -8), 1.4)
 v.ley("RPT (13)", (6, 160), (12, -14), 1.4)
-v.ley("presor + tornillo inox (3)", (20, 172), (16, -2), 1.4)
-v.ley("tapa a presión (4)", (20, 190), (14, 6), 1.4)
-v.ley("burlete EPDM (5)", (30, 149), (16, -18), 1.4)
+v.ley("presor (3)", (20, 172), (12, -2), 1.4)
+v.ley("tapa a presión (4)", (25, 190), (6, -2), 1.4)
+v.ley("burlete (5)", (30, 149), (12, -18), 1.4)
 v.ley("separador + desecante", (-20, 164), (-2, 12), 1.4)
 v.ley("6 templado + 3+3 laminado", (-90, 152), (2, -16), 1.4)
 v.label("EXTERIOR", 60, 200, 1.4, TA.MIDDLE_CENTER, True); v.label("INTERIOR", 60, -30, 1.4, TA.MIDDLE_CENTER, True)

@@ -1,6 +1,6 @@
 PRÁCTICA EN CLASE C2 - GRANDES LUCES EN ACERO (TP6 ACERO) - 15 láminas A4 vertical, sin rótulo
 
-Letra mínima: 2,0 mm en toda la hoja impresa (textos, tablas, referencias y cotas).
+Letra mínima: 2,0 mm en toda la hoja impresa; en las láminas con lugar libre la letra se agrandó (2,1 a 2,8 mm).
 
 Practica_Acero_C2_A4_completa.pdf : las 15 láminas en un solo PDF. Imprimir en A4 al 100 % (sin "ajustar a página").
 PDF_por_lamina/  : cada lámina por separado.

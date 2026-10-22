@@ -4,7 +4,7 @@ from lib import *
 from geom import *
 
 sh = Sheet(NUM["maq"], "Máquinas y herramientas de montaje, moldeo y anclaje", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS",
-           "1:400 - 1:200 - 1:20")
+           "1:400 - 1:200 - 1:20", hmin=2.1)
 y0 = sh.encabezado("3° MÁQUINAS Y HERRAMIENTAS", "Equipos para izar, montar, soldar, fijar y anclar los elementos prefabricados de acero")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2

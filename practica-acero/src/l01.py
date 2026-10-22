@@ -135,6 +135,6 @@ sh.titulo_dib(L, yi, "i", "ÍNDICE DE LÁMINAS", w=R - L)
 rows = [[f"{n:02d}", t, p] for n, t, p in LAMINAS]
 wt = (R - L - 4) / 2
 cols = [("N°", 8), ("Contenido", wt - 8 - 12), ("Punto", 12)]
-sh.tabla(L, yi - 5, cols, rows[:8], h=2.0, lead=1.3, pad=0.5)
-sh.tabla(L + wt + 4, yi - 5, cols, rows[8:], h=2.0, lead=1.3, pad=0.5)
+sh.tabla(L, yi - 5, cols, rows[:8], h=2.0, lead=1.3, pad=0.25)
+sh.tabla(L + wt + 4, yi - 5, cols, rows[8:], h=2.0, lead=1.3, pad=0.25)
 sh.save(f"L{lam('sistema')}_Sistema_adoptado")

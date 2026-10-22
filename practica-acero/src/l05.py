@@ -119,7 +119,7 @@ v.dim((-16, 126.5), (16, 126.5), 4)
 v.dim((9.5, 1.5), (9.5, 126.5), 14)
 v.dim((-9.5, 40), (9.5, 40), 0.01)
 v.ley("collar de soldadura", (13, 6), (5, 3), 1.5)
-v.ley("chapa e = 0,9", (-70, 1), (-2, 5), 1.5)
+v.ley("chapa e = 0,9", (-70, 1), (2, 9), 1.5)
 v.ley("ala de la viga", (-60, -14), (-2, -5), 1.5)
 ficha_spec(sh, X[0], Y2 - 57, W3, [
     ("Medidas:", "Ø19 x 125 mm, cabeza Ø32 x 10; altura mín. = h nervio + 40 = 116 mm."),

@@ -4,7 +4,7 @@ from lib import *
 from geom import *
 
 sh = Sheet(NUM["u47"], "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "PUNTO 2 - JUNTAS Y UNIONES",
-           "1:5 - 1:10")
+           "1:5 - 1:10", hmin=2.6)
 y0 = sh.encabezado("2° UNIONES U4, U5, U6 Y U7", f"Detalles a escala de las uniones del entrepiso y del arriostramiento (ver lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -76,7 +76,7 @@ stud(v, 0, 0)
 v.pl([(20, LOSA - 40), (-50, LOSA - 40), (-50, 20)], "1-VISTA", 18)
 v.dim((-63, -15), (-63, LOSA), -6)
 v.dim((-63, LOSA), (0, LOSA), 4)
-v.ley("cenefa chapa galv. e = 1,6", (-63, 70), (-6, 12), 1.5)
+v.ley("cenefa e = 1,6", (-63, 20), (-2, -22), 1.5)
 v.ley("rienda de fleje c/ 600", (-50, 60), (8, 20), 1.5)
 v.ley("fijación al ala c/ 300", (20, -12), (10, -10), 1.5)
 v.ley("viga de borde IPN 200", (40, -150), (8, -4), 1.5)

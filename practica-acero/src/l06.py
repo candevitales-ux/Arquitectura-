@@ -4,7 +4,7 @@ from lib import *
 from geom import *
 
 sh = Sheet(NUM["arr"], "Arriostramiento, bulones, soldadura, fijaciones y protección", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
-           "1:125 - 1:10 - 1:5 - 1:2,5 - 1:2")
+           "1:125 - 1:10 - 1:5 - 1:2,5 - 1:2", hmin=2.3)
 y0 = sh.encabezado("1° ELEMENTOS: ARRIOSTRAMIENTOS Y ELEMENTOS DE UNIÓN", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -13,7 +13,7 @@ Y1 = y0 - 3.5
 
 # =============================================================== 15. ARRIOSTRAMIENTO
 sh.titulo_dib(L, Y1, 15, "ARRIOSTRAMIENTO: CRUZ DE SAN ANDRÉS CON TENSOR", "1:125 / 1:10 / 1:5", w=R - L)
-v = sh.view_in((L, Y1 - 86, L + 46, Y1 - 8), (-1100, -1150, 4400, 7600), 125)
+v = sh.view_in((L, Y1 - 86, L + 48, Y1 - 8), (-1600, -1150, 4400, 7600), 125)
 for yy in (0, VANO):
     v.rect(yy - 100, -300, yy + 100, N2, "1-VISTA", 25)
 for z in (N1, N2):
@@ -24,7 +24,7 @@ for zl, zh in ((0, N1 - LOSA - 500), (N1, N2 - LOSA - 500)):
     v.rect(xm - 300, zm - 300 * (zh - zl - 200) / (VANO - 300), xm + 300, zm + 300 * (zh - zl - 200) / (VANO - 300), "1-VISTA", 9) if False else None
 v.ln((-600, 0), (VANO + 600, 0), "1-VISTA", 25)
 v.dim((0, -300), (VANO, -300), -4)
-v.nivel(-500, N1, "+3,80", -1); v.nivel(-500, N2, "+7,40", -1); v.nivel(-500, 0, "±0,00", -1)
+v.nivel(-300, N1, "+3,80", -1); v.nivel(-300, N2, "+7,40", -1); v.nivel(-300, 0, "±0,00", -1)
 v.label("ELEVACIÓN EJE 6 (B-C) 1:125", 1700, -1100, 1.5, TA.MIDDLE_CENTER, True)
 v.ley("barra Ø20", (VANO * 0.3, 200 + (N1 - LOSA - 700) * 0.3), (8, 2), 1.5)
 # cartela 1:10 (nudo inferior: columna + placa base)
@@ -75,8 +75,8 @@ v.rect(18, -30, 38, 30, "1-SECCION", 25); v.hatch([(18, -30), (38, -30), (38, 30
 bulon(v, (-4, 0), (42, 0), 20)
 v.rect(-4, -18, 0, 18, "1-VISTA", 18); v.rect(38, -18, 42, 18, "1-VISTA", 18)
 v.dim((-17, -30), (66, -30), -4, txt="L = 75")
-v.ley("cabeza hexagonal", (-10, 16), (-4, 5), 1.5)
-v.ley("arandela endurecida", (-2, -18), (-4, -5), 1.5)
+v.ley("cabeza hexagonal", (-10, 16), (2, 10), 1.5)
+v.ley("arandela endurecida", (-2, -18), (2, -8), 1.5)
 v.ley("tuerca clase 8", (52, 16), (4, 5), 1.5)
 filas = [["Clase", "8.8: fu 800 MPa / fy 640 MPa (equivale a ASTM A325)"],
          ["Diámetros", "M20 (vigas-columnas), M16 (secundarias)"],
@@ -110,7 +110,7 @@ filas = [["Proceso", "taller: semiautomática MIG (ER70S-6); obra: electrodo E70
 sh.tabla(XB, Y2 - 48, [("Ítem", 16), ("Especificación", W2 - 16)], filas, h=2.0, lead=1.3, pad=0.8)
 
 # =============================================================== 18. FIJACIONES DE CHAPA
-Y3 = Y2 - 84
+Y3 = Y2 - 90
 sh.titulo_dib(XA, Y3, 18, "FIJACIONES DE LA CHAPA", "1:2", w=W2)
 v = sh.view_in((XA, Y3 - 44, XA + 20, Y3 - 8), (-18, -30, 18, 40), 2)
 v.rect(-15, -12, 15, 0, "1-SECCION", 25); v.hatch([(-15, -12), (15, -12), (15, 0), (-15, 0)], "acero")

@@ -4,7 +4,7 @@ from lib import *
 from geom import *
 
 sh = Sheet(NUM["fund"], "Fundación, pernos de anclaje, placa base y columna", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
-           "1:25 - 1:10 - 1:20 - 1:5 - 1:125")
+           "1:25 - 1:10 - 1:20 - 1:5 - 1:125", hmin=2.2)
 y0 = sh.encabezado("1° ELEMENTOS: FUNDACIÓN Y COLUMNA", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2

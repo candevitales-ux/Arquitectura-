@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["plan"], "Planificación: alquiler, armado y acceso a obra", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS", "Obrador 1:500")
+sh = Sheet(NUM["plan"], "Planificación: alquiler, armado y acceso a obra", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS", "Obrador 1:500", hmin=2.4)
 y0 = sh.encabezado("3° PLANIFICACIÓN DE ALQUILER, ARMADO Y ACCESO", "Cómo se organizan los equipos para montar la estructura en seco")
 L, R = sh.L + 3, sh.R - 3
 Y1 = y0 - 3.5
@@ -17,7 +17,7 @@ v.rect(-3000, -9000, 33000, -1500, "1-VISTA", 13); v.hatch([(-3000, -9000), (330
 v.ln((-3000, -5250), (33000, -5250), "1-OCULTO", 9)
 v.rect(-3000, -1500, 33000, 0, "1-VISTA", 13)
 v.label("CALLE (doble mano, 7,50 m)", 15000, -7500, 1.5, TA.MIDDLE_CENTER)
-v.label("vereda", 2000, -900, 1.3)
+v.label("vereda", 1000, -1100, 1.3)
 # edificio
 bx, by = 5000, 16000
 v.rect(bx, by, bx + LARGO, by + ANCHO, "1-SECCION", 50)
@@ -76,7 +76,7 @@ yy = ficha_spec(sh, xt, yy - 10, R - xt, [
 ], h=1.55, lead=1.36)
 
 # =============================================================== cronograma
-yc = Y1 - 130
+yc = min(Y1 - 130, yy - 5)
 sh.titulo_dib(L, yc, 2, "CRONOGRAMA DE MONTAJE Y USO DE EQUIPOS (SEMANAS)", w=R - L)
 tareas = [("Bases, pernos con plantilla y curado", [1, 2], "retro + hormigón elaborado"),
           ("Montaje columnas y vigas nivel +3,80", [3], "grúa E1/E2 (3 jornadas), plataforma"),
