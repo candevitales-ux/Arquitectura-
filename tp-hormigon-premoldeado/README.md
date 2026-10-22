@@ -30,7 +30,7 @@ xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 python3 src/opaco_corte.py && python3 src/opaco_nodos.py && node render.js src/opaco.html build/opaco portrait
 ```
 
-## Práctica C2 en clase (13 láminas A4 apaisadas)
+## Práctica C2 en clase (26 láminas A4 verticales)
 `../entregables/C2_PRACTICA_HORMIGON_A4/` – PDF completo + PDF/DWG/DXF por lámina + DWG conjunto. Fuente en `src/c2/`
 (`lib.py` dibuja cada primitiva una vez y la emite a SVG→PDF y a DXF→DWG en mm de papel; `s01…s13` son las láminas).
 ```
