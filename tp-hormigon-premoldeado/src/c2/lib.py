@@ -7,7 +7,9 @@ import numpy as np
 from shapely.geometry import Polygon, Point
 from shapely.strtree import STRtree
 
-W, H = 297.0, 210.0          # A4 apaisada
+W, H = 210.0, 297.0          # A4 vertical
+# tamaños de letra (mm de cuerpo; altura de mayúscula ≈ 0,72 x): legibles al imprimir A4 al 100 %
+TB, TS, TD, TT, TH = 2.5, 2.3, 2.1, 3.2, 4.3
 FONT = "Arial, 'Liberation Sans', Helvetica, sans-serif"
 CW = 0.53                    # ancho medio de carácter / tamaño de fuente (Arial)
 
@@ -105,8 +107,8 @@ def wrap(text, width, size):
 
 
 class Sheet:
-    def __init__(self, num, total, title, subtitle="", escalas=""):
-        self.num, self.total, self.title, self.subtitle, self.escalas = num, total, title, subtitle, escalas
+    def __init__(self, num, total, title, subtitle="", escalas="", fname="lamina"):
+        self.num, self.total, self.title, self.subtitle, self.escalas, self.fname = num, total, title, subtitle, escalas, fname
         self.ops = []        # registro de primitivas en papel (y hacia abajo)
         self.svg = []
 
@@ -146,7 +148,7 @@ class Sheet:
         self.pline(pts, **k)
         return pts
 
-    def text(self, x, y, s, size=2.2, anchor="start", bold=False, ital=False, color="#000", rot=0, layer="TEXTOS"):
+    def text(self, x, y, s, size=TB, anchor="start", bold=False, ital=False, color="#000", rot=0, layer="TEXTOS"):
         s = str(s)
         a = {"start": "start", "middle": "middle", "end": "end"}[anchor]
         tr = f' transform="rotate({f(-rot)} {f(x)} {f(y)})"' if rot else ""
@@ -154,12 +156,12 @@ class Sheet:
                         f'{" font-weight=\"bold\"" if bold else ""}{" font-style=\"italic\"" if ital else ""} fill="{color}"{tr}>{esc(s)}</text>')
         self.ops.append(dict(t="text", p=(x, y), s=s, size=size, anchor=anchor, bold=bold, ital=ital, color=color, rot=rot, layer=layer))
 
-    def para(self, x, y, width, text, size=2.0, lead=1.3, **k):
+    def para(self, x, y, width, text, size=TB, lead=1.3, **k):
         for ln in wrap(text, width, size):
             self.text(x, y, ln, size, **k); y += size * lead
         return y
 
-    def bullets(self, x, y, width, items, size=2.0, lead=1.3, gap=0.4, mark="•", **k):
+    def bullets(self, x, y, width, items, size=TB, lead=1.3, gap=0.6, mark="•", **k):
         for it in items:
             lines = wrap(it, width - size * 1.2, size)
             self.text(x, y, mark, size, **k)
@@ -168,7 +170,7 @@ class Sheet:
             y += gap
         return y
 
-    def ball(self, x, y, label, r=2.0, size=None, fill="#fff", color="#000", layer="REFERENCIAS"):
+    def ball(self, x, y, label, r=2.3, size=None, fill="#fff", color="#000", layer="REFERENCIAS"):
         self.circle(x, y, r, fill=fill, stroke=color, sw=0.22, layer=layer)
         self.text(x, y + (size or r * 0.95) * 0.36, label, size or r * 0.95, anchor="middle", bold=True, color=color, layer=layer)
 
@@ -176,7 +178,7 @@ class Sheet:
         self.pline(pts, sw=sw, layer=layer, stroke=color)
         if dot: self.circle(pts[0][0], pts[0][1], 0.35, fill=color, stroke=None, sw=0, layer=layer)
 
-    def callout(self, target, at, label, r=2.0, **k):
+    def callout(self, target, at, label, r=2.3, **k):
         """globo en 'at' con línea al punto 'target'"""
         tx, ty = target; ax, ay = at
         d = math.hypot(tx - ax, ty - ay)
@@ -184,14 +186,14 @@ class Sheet:
             self.leader([target, (ax + (tx - ax) * r / d, ay + (ty - ay) * r / d)], **k)
         self.ball(ax, ay, label, r)
 
-    def note(self, target, at, txt, size=1.9, anchor="start", **k):
+    def note(self, target, at, txt, size=TS, anchor="start", **k):
         """texto con línea de referencia"""
         tx, ty = target; ax, ay = at
         self.leader([target, (ax, ay)])
         self.line(ax, ay, ax + (len(txt) * size * CW + 0.6) * (1 if anchor == "start" else -1), ay, sw=0.15, layer="REFERENCIAS")
         self.text(ax + (0.3 if anchor == "start" else -0.3), ay - 0.6, txt, size, anchor=anchor, **k)
 
-    def dim(self, p1, p2, off, txt, size=1.8, ext=True, layer="COTAS"):
+    def dim(self, p1, p2, off, txt, size=TD, ext=True, layer="COTAS"):
         """cota alineada en papel: p1-p2, desplazada 'off' (mm papel, + a la izquierda del vector p1->p2)"""
         (x1, y1), (x2, y2) = p1, p2
         L = math.hypot(x2 - x1, y2 - y1)
@@ -219,13 +221,13 @@ class Sheet:
             ty = my
         self.text(tx, ty, txt, size, anchor="middle", rot=ang, layer=layer)
 
-    def level(self, x, y, txt, size=1.8, side=1, layer="COTAS"):
+    def level(self, x, y, txt, size=TD, side=1, layer="COTAS"):
         """marca de nivel (triángulo) + texto"""
         self.poly([(x - 1.2, y - 1.6), (x + 1.2, y - 1.6), (x, y)], fill="#000", stroke="#000", sw=0.1, layer=layer)
         self.line(x - 3 * side, y, x + 8 * side, y, sw=0.12, layer=layer)
         self.text(x + 1.8 * side, y - 1.0, txt, size, anchor="start" if side > 0 else "end", bold=True, layer=layer)
 
-    def scalebar(self, x, y, scale, total_m, step_m, size=1.6):
+    def scalebar(self, x, y, scale, total_m, step_m, size=TD):
         L = total_m * 1000 / scale
         n = int(round(total_m / step_m))
         for i in range(n):
@@ -236,13 +238,13 @@ class Sheet:
             self.text(x + L * i / n, y + 3.0, (f"{v:g}" if v else "0"), size * 0.9, anchor="middle", layer="COTAS")
         self.text(x + L + 1.2, y + 1.0, "m", size * 0.9, layer="COTAS")
 
-    def title_drawing(self, x, y, title, scale_txt=None, size=2.6):
+    def title_drawing(self, x, y, title, scale_txt=None, size=TT):
         self.text(x, y, title, size, bold=True)
         w = len(title) * size * 0.6
         self.line(x, y + 0.9, x + w, y + 0.9, sw=0.3)
-        if scale_txt: self.text(x, y + size * 1.25 + 0.6, scale_txt, size * 0.72, color="#222")
+        if scale_txt: self.text(x, y + size * 1.15 + 1.4, scale_txt, max(TS, size * 0.72), color="#222")
 
-    def table(self, x, y, colw, rows, size=1.75, rowh=None, head=True, lead=1.22, fills=None):
+    def table(self, x, y, colw, rows, size=TS, rowh=None, head=True, lead=1.22, fills=None):
         """tabla con ajuste de texto por celda; devuelve y final"""
         for ri, row in enumerate(rows):
             cells = [wrap(c, colw[i] - 1.6, size) for i, c in enumerate(row)]
@@ -262,28 +264,21 @@ class Sheet:
     # ---------------------------------------------------------- marco + rótulo
     def frame(self):
         self.rect(5, 5, W - 5, H - 5, stroke="#000", sw=0.5, layer="MARCO")
-        y0 = H - 17
-        self.rect(5, y0, W - 5, H - 5, stroke="#000", sw=0.4, layer="MARCO")
-        xs = [5, 52, 112, 168, 232, W - 5]
-        for xx in xs[1:-1]: self.line(xx, y0, xx, H - 5, sw=0.3, layer="MARCO")
-        self.text(7, y0 + 4.6, "C2 · PRÁCTICA EN CLASE", 2.3, bold=True, layer="MARCO")
-        self.text(7, y0 + 8.3, "Hormigón premoldeado de grandes luces", 1.6, layer="MARCO")
-        self.text(7, y0 + 10.9, "Fecha: 22/10/2026", 1.6, layer="MARCO")
-        self.text(54, y0 + 3.6, "DOCENTE: Arq. Tucci y Arq. Cardozo", 1.6, layer="MARCO")
-        self.text(54, y0 + 6.6, "ALUMNA: Candelaria Vitale", 1.6, layer="MARCO")
-        self.text(54, y0 + 9.6, "GRUPO: 13", 1.6, layer="MARCO")
-        self.text(114, y0 + 3.6, self.title.upper(), 1.9, bold=True, layer="MARCO")
-        yy = y0 + 6.6
-        for ln in wrap(self.subtitle, 52, 1.5)[:2]:
-            self.text(114, yy, ln, 1.5, layer="MARCO"); yy += 2.6
-        self.text(170, y0 + 3.6, "ESCALAS:", 1.6, bold=True, layer="MARCO")
-        yy = y0 + 6.6
-        for ln in wrap(self.escalas, 60, 1.5)[:2]:
-            self.text(170, yy, ln, 1.5, layer="MARCO"); yy += 2.6
-        self.text(234, y0 + 3.6, "CONSTRUCCIONES II", 1.8, bold=True, layer="MARCO")
-        self.text(234, y0 + 6.6, "CÁTEDRA: ARQ. TUCCI", 1.6, layer="MARCO")
-        self.text(234, y0 + 10.2, "Hoja A4 · imprimir al 100 %", 1.4, layer="MARCO")
-        self.text(W - 7, y0 + 10.6, f"LÁMINA {self.num:02d}/{self.total:02d}", 2.6, anchor="end", bold=True, layer="MARCO")
+        y0, y1, y2 = H - 29, H - 17, H - 5
+        self.rect(5, y0, W - 5, y2, stroke="#000", sw=0.4, layer="MARCO")
+        self.line(5, y1, W - 5, y1, sw=0.3, layer="MARCO")
+        for xx in (72, 146): self.line(xx, y0, xx, y1, sw=0.3, layer="MARCO")
+        self.line(146, y1, 146, y2, sw=0.3, layer="MARCO")
+        self.text(7, y0 + 4.6, "C2 · PRÁCTICA EN CLASE", 3.0, bold=True, layer="MARCO")
+        self.text(7, y0 + 9.6, "H° premoldeado de grandes luces", TS, layer="MARCO")
+        self.text(74, y0 + 4.4, "DOCENTE: Arq. Tucci y Arq. Cardozo", TS, layer="MARCO")
+        self.text(74, y0 + 9.6, "ALUMNA: Candelaria Vitale · GRUPO 13", TS, layer="MARCO")
+        self.text(148, y0 + 4.6, "CONSTRUCCIONES II", 2.7, bold=True, layer="MARCO")
+        self.text(148, y0 + 9.6, "CÁTEDRA: ARQ. TUCCI", TS, layer="MARCO")
+        self.text(7, y1 + 4.8, self.title.upper(), 2.8, bold=True, layer="MARCO")
+        self.text(7, y1 + 9.8, "Escalas: " + self.escalas, TS if len(self.escalas) < 95 else 2.1, layer="MARCO")
+        self.text(148, y1 + 5.4, f"LÁMINA {self.num:02d}/{self.total:02d}", 3.6, bold=True, layer="MARCO")
+        self.text(148, y1 + 10.0, "A4 vertical · 22/10/2026", 2.1, layer="MARCO")
 
     def view(self, ox, oy, scale):
         return View(self, ox, oy, scale)
@@ -539,7 +534,7 @@ class Iso:
 
 
 # ====================================================================== bloques de texto técnicos
-def spec(sh, x, y, w, title, kv, size=1.75, lead=1.3, tsize=2.2):
+def spec(sh, x, y, w, title, kv, size=TB, lead=1.3, tsize=TT):
     """bloque de especificación: título + pares (clave, texto); devuelve y final"""
     if title:
         sh.text(x, y, title, tsize, bold=True)
@@ -559,8 +554,11 @@ def spec(sh, x, y, w, title, kv, size=1.75, lead=1.3, tsize=2.2):
 
 
 def heading(sh, txt, sub=None):
-    sh.text(10, 13.5, txt, 3.4, bold=True)
-    if sub: sh.text(10, 18.0, sub, 1.9, color="#333")
+    sh.text(10, 15.0, txt, TH, bold=True)
+    if sub:
+        y = 21.0
+        for ln in wrap(sub, 190, TS):
+            sh.text(10, y, ln, TS, color="#333"); y += TS * 1.3
 
 
 def breakline(sh, p1, p2, sw=0.15):
@@ -578,3 +576,11 @@ def ground(sh, x0, x1, y, sw=0.25):
     x = x0 + 0.8
     while x < x1:
         sh.line(x, y, x - 1.2, y + 1.2, sw=0.1); x += 1.6
+
+
+def page(titulo):
+    """decorador: registra el título de la lámina (para el índice de la carátula)"""
+    def deco(f):
+        f.titulo = titulo
+        return f
+    return deco
