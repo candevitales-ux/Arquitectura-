@@ -41,6 +41,16 @@ function grapa(S, yy) {
   S.cyl('x', yy, ZM, 7, 240, 285, 'inox', 14);                               // bulón T al riel
 }
 // viga L premoldeada (alma 30 x 90 + ala 20 x 24), extruida en z
+// recorte de un polígono por el semiplano y >= ymin (Sutherland–Hodgman)
+function clipY(P, ymin) {
+  const out = [];
+  for (let i = 0; i < P.length; i++) {
+    const a = P[i], b = P[(i + 1) % P.length], ina = a[1] >= ymin, inb = b[1] >= ymin;
+    if (ina) out.push(a);
+    if (ina !== inb) out.push([a[0] + (b[0] - a[0]) * (ymin - a[1]) / (b[1] - a[1]), ymin]);
+  }
+  return out;
+}
 function perfilVLdt(yb) {   // VL doble T 40x70
   const yt = yb + 700;
   return [[250, yb], [650, yb], [650, yb + 150], [530, yb + 210], [510, yb + 210], [510, yt - 190], [530, yt - 190], [650, yt - 130], [650, yt],
@@ -50,7 +60,7 @@ function perfilVLdt(yb) {   // VL doble T 40x70
 function vigaL(S, yt, z0, z1, ymin = -1e9) {
   const yv = yt - 210, yb = yt - 910;
   if (ymin <= yb) S.prism(perfilVLdt(yb), 'z', z0, z1, 'pre');
-  else S.prism(perfilVLdt(yb).map(([x, y]) => [x, Math.max(y, ymin)]).filter((p, i, a) => i === 0 || p[0] !== a[i - 1][0] || p[1] !== a[i - 1][1]), 'z', z0, z1, 'pre');
+  else S.prism(clipY(perfilVLdt(yb), ymin), 'z', z0, z1, 'pre');   // recorte horizontal real (queda el alma)
   S.prism([[250, yv + 8], [650, yv + 8], [650, yt - 60], [400, yt - 60], [400, yt + 50], [250, yt + 50]], 'z', z0, z1, 'pre');   // viga L
   S.box(250, 650, yv, yv + 8, z0, z1, 'grout');   // junta VL / L c/ mortero
   S.prism([[250, yt - 316], [292, yt - 316], [292, yt - 264], [250, yt - 264], [250, yt - 272], [284, yt - 272], [284, yt - 308], [250, yt - 308]], 'z', z0, z1, 'steel');
@@ -68,7 +78,7 @@ function panelTT(S, yt, x1, zb) {
   for (const xc of [1170, 2370]) if (xc + 90 <= x1 + 1)
     S.prism([[xc - 90, yf], [xc + 90, yf], [xc + 60, yt - 650], [xc - 60, yt - 650]], 'z', zb, 0, 'pre');
   S.box(400, 420, yt - 60, yt, zb, 0, 'grout');
-  for (const y of [yt - 610, yt - 560]) S.cyl('z', 1170, y, 6.4, -4, 2, 'neo', 12);
+  if (x1 >= 1260) for (const y of [yt - 610, yt - 560]) S.cyl('z', 1170, y, 6.4, -4, 2, 'neo', 12);
 }
 function capa(S, ytop, x1, zb) {
   S.box(400, x1, ytop, ytop + 50, zb, 0, 'insitu');
@@ -88,7 +98,7 @@ function columnaMensula(S, ytopM, y0, y1, zc0, zc1) {
 export function n1() {
   const S = new Scene3D();
   ZM = -250;
-  const Y0 = 7900, X1 = 1265, ZB = -260, yt = 8915;
+  const Y0 = 8300, X1 = 965, ZB = -260, yt = 8915;   // recortado p/ esc. 1:15 (el nervio se ve en el nudo 2)
   vigaL(S, yt, ZB, 0, Y0);
   panelTT(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
@@ -110,7 +120,7 @@ export function n1() {
   grapa(S, 8625);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
-  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 1170, 8500, 0); A(19, 540, 8858, 0); A(14, 450, 8200, 0);
+  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 800, 8890, 0); A(19, 540, 8858, 0); A(14, 450, 8420, 0);
   A(13, 330, yt - 150, 0);  A(18, 270, 8625, -40); A(30, 110, 9000, ZM + 25); A(33, 3, 8800, 0); A(34, 65, 8700, 0); A(36, 160, 8625, ZM + 35);
   return S;
 }
@@ -119,10 +129,10 @@ export function n1() {
 export function n2() {
   const S = new Scene3D();
   ZM = -95;                                         // montante frente a la VL (la grapa toma el riel de la VL)
-  const Y0 = 2950, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, yf = yt - 50;
+  const Y0 = 3040, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415, yf = yt - 50;   // recortado abajo p/ esc. 1:15
   const ZC = -180, ZC0 = -580;                      // columna 40x40: z -580..-180 (el corte pasa a 18 cm de su cara)
   // columna (en vista) y ménsula de la VL CORTADA en z = 0 (como en el corte integral)
-  S.box(250, 650, 2700, Y1, ZC0, ZC, 'pre', { axis: 'y' });
+  S.box(250, 650, Y0, Y1, ZC0, ZC, 'pre', { axis: 'y' });
   const ytm = 3495;
   S.box(250, 650, ytm - 301, ytm, ZC, 0, 'pre');                                                     // ménsula VL (cara cortada)
   S.prism([[180, ytm - 301], [0, ytm - 301], [180, ytm - 470]].reverse(), 'x', 250, 650, 'prev');     // su diagonal hasta la columna
@@ -167,7 +177,7 @@ export function n2() {
   grapa(S, 4125);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 1170, 4000, 0); A(19, 540, 4358, 0); A(14, 450, 3700, 0); A(13, 330, yt - 150, 0);
-  A(15, 450, 3000, ZC); A(16, 450, 3300, 0); A(17, 470, ytm + 5, 0); A(20, 330, 3560, 0.8); A(21, 600, yt - 210, 0);
+  A(15, 450, 3100, ZC); A(16, 450, 3300, 0); A(17, 470, ytm + 5, 0); A(20, 330, 3560, 0.8); A(21, 600, yt - 210, 0);
   A(22, 760, 3760, ZC); A(23, 820, 3560, ZC); A(24, 1170, yt - 605, -110);
   A(18, 270, 4125, ZM + 40); A(25, 900, 4500, -300); A(26, 900, 4475, -200);
   A(35, 170, 4410, 0); A(36, 160, 4125, ZM + 35);
@@ -178,21 +188,20 @@ export function n2() {
 export function n3() {
   const S = new Scene3D();
   ZM = -250;
-  const Y0 = -760, Y1 = 260, X0 = -300, X1 = 950, ZB = -250;
+  const Y0 = -700, Y1 = 260, X0 = -150, X1 = 850, ZB = -250;   // recortado p/ esc. 1:15
   // cuello (corte), relleno, columna (medio, cortada por su eje)
-  S.box(-75, 175, Y0, -510, -275, 0, 'insitu'); S.box(725, 975, Y0, -510, -275, 0, 'insitu');
+  S.box(-75, 175, Y0, -510, -275, 0, 'insitu'); S.box(725, X1, Y0, -510, -275, 0, 'insitu');
   S.box(175, 250, Y0, -510, -275, 0, 'grout'); S.box(650, 725, Y0, -510, -275, 0, 'grout'); S.box(250, 650, Y0, -510, -275, -200, 'grout');
   S.box(250, 650, Y0, Y1, -200, 0, 'pre', { axis: 'y' });
   for (const [xc, xw, sg] of [[250, 175, -1], [650, 725, 1]])
-    for (let yy = -790; yy < -560; yy += 115) {
+    for (let yy = -675; yy < -560; yy += 115) {
       sheetZ(S, [[xc, yy], [xc + sg * 55, yy], [xc + sg * 55, yy + 38], [xc + sg * 15, yy + 38]], 7);
       sheetZ(S, [[xw, yy + 58], [xw - sg * 55, yy + 58], [xw - sg * 55, yy + 96], [xw - sg * 15, yy + 96]], 7);
     }
-  for (const x of [360, 540]) S.cyl('y', x, -1, 8, Y0, -760, 'red', 12);
   // terreno y vereda
   S.box(X0, -76, Y0, -327, ZB, 0, 'tierra'); S.box(-76, 230, -510, -327, ZB, 0, 'tierra');
   S.box(X0, -66, -327, -250, ZB, 0, 'tosca'); S.box(X0, -66, -250, -150, ZB, -120, 'hs'); S.box(-70, -66, -250, -150, ZB, -120, 'seal');
-  S.box(975, X1, Y0, -327, ZB, 0, 'tierra'); S.box(670, 975, -510, -327, ZB, 0, 'tierra');
+  S.box(670, X1, -510, -327, ZB, 0, 'tierra');
   // piso (dos tramos) separados de la columna por juntas de dilatación
   for (const [xa, xb] of [[-62, 230], [670, X1]]) {
     S.box(xa, xb, -327, -177, ZB, 0, 'tosca'); S.box(xa, xb, -177, -175, ZB, -40, 'film');
@@ -211,9 +220,9 @@ export function n3() {
   mullion(S, 40, Y1);
   S.box(-30, 25, 0, 4, ZB, 0, 'seal');
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(15, 450, 150, -200); A(38, 100, 20, 0); A(39, -5, 2, 0); A(40, 850, 0, -230); A(41, 850, -25, -190);
-  A(42, 850, -45, -140); A(43, 850, -120, -90); A(44, 850, -176, -40); A(45, 850, -260, 0); A(46, 240, -250, 0); A(47, 100, -120, 0);
-  A(48, 110, 200, ZM + 25); A(49, -68, -60, -150); A(50, -250, -200, -120); A(51, 450, -650, 0); A(52, 690, -700, 0); A(53, 212, -600, 0);
-  A(54, 540, -740, 0); A(55, 850, -700, 0); A(59, 900, -600, 0); A(60, 100, -60, -60); A(32, 12, 200, 0);
+  A(15, 450, 150, -200); A(38, 100, 20, 0); A(39, -5, 2, 0); A(40, 800, 0, -230); A(41, 800, -25, -190);
+  A(42, 800, -45, -140); A(43, 800, -120, -90); A(44, 800, -176, -40); A(45, 800, -260, 0); A(46, 240, -250, 0); A(47, 100, -120, 0);
+  A(48, 110, 200, ZM + 25); A(49, -68, -60, -150); A(50, -110, -200, -120); A(51, 450, -650, 0); A(52, 690, -700, 0); A(53, 212, -600, 0);
+  A(54, 540, -740, 0); A(55, 790, -650, 0); A(59, 780, -420, 0); A(60, 100, -60, -60); A(32, 12, 200, 0);
   return S;
 }
