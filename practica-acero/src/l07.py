@@ -17,13 +17,13 @@ UNIONES = [
 ]
 
 if __name__ == "__main__":
-    sh = Sheet(7, "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:125")
+    sh = Sheet(7, "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:100")
     y0 = sh.encabezado("2° JUNTAS Y UNIONES DEL SISTEMA",
                        "Ubicación de cada encuentro entre elementos (U1 a U10) y su clasificación")
     L, R = sh.L + 3, sh.R - 3
     Y1 = y0 - 3.5
-    sh.titulo_dib(L, Y1, 1, "CORTE TRANSVERSAL CON LAS UNIONES", "1:125", w=118)
-    v = sh.view_in((L, Y1 - 92, L + 118, Y1 - 8), (-1700, -1700, 13000, 8300), 125)
+    sh.titulo_dib(L, Y1, 1, "CORTE TRANSVERSAL CON LAS UNIONES", "1:100", w=R - L)
+    v = sh.view_in((L, Y1 - 110, R, Y1 - 8), (-3000, -1700, 14600, 8300), 100)
     # suelo, fundaciones, contrapiso
     v.ln((-1500, -150), (ANCHO + 1000, -150), "1-VISTA", 25)
     v.hatch([(-1500, -150), (ANCHO + 1000, -150), (ANCHO + 1000, -1650), (-1500, -1650)], "tierra")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     marcas = [(1, (0, -290), (-12, -6)), (2, (ANCHO - 160, N1 - LOSA - 250), (-12, -10)), (3, (6000, N1 - LOSA - 100), (4, -12)),
               (4, (3000, N1 - LOSA), (0, 9)), (5, (9000, N2), (0, 7)), (6, (-60, N1 - 70), (-11, 7)),
               (7, (4150, 200), (6, 10)), (8, (ANCHO + 190, 2500), (11, 0)), (9, (-205, N1 - 70), (-12, -5)),
-              (10, (ANCHO + 100, CUP), (8, 6))]
+              (10, (ANCHO + 100, CUP), (-12, 4))]
     for n, at, off in marcas:
         marca_u(sh, n, v.p(*at), off)
     v.label("frente A: muro cortina", -300, 4800, 1.5, TA.RIGHT)
@@ -67,9 +67,14 @@ if __name__ == "__main__":
     v.label("en el fondo: cruz eje 6", 6000, 2900, 1.4, TA.MIDDLE_CENTER)
 
     # teoría
-    xt = L + 122
-    sh.titulo_dib(xt, Y1, "T", "CONCEPTOS", w=R - xt)
-    ficha_spec(sh, xt, Y1 - 6, R - xt, [
+    yt = Y1 - 114
+    sh.titulo_dib(L, yt, 2, "CLASIFICACIÓN DE LAS JUNTAS Y UNIONES", w=R - L)
+    cols = [("N°", 9), ("Encuentro", 30), ("Medio de unión", 42), ("Tipo", 28), ("Vínculo / movimiento", 34), ("Taller / obra", 18), ("Lám.", R - L - 161)]
+    yb = sh.tabla(L, yt - 5, cols, [list(u) for u in UNIONES], h=1.65, lead=1.3, pad=0.6)
+    xt = L
+    Y1 = yb - 5
+    sh.titulo_dib(xt, Y1, 3, "CONCEPTOS (TEÓRICA DE JUNTAS Y UNIONES)", w=R - xt)
+    conc = [
         ("Unión:", "vínculo que transmite esfuerzos entre dos elementos (vigas, columnas, losa)."),
         ("Junta:", "encuentro con separación que absorbe movimientos (térmicos, cargas, montaje) y debe ser estanca."),
         ("Seca:", "se arma sin agua: bulones, tornillos, clavos, encastres; desmontable y rápida."),
@@ -78,11 +83,20 @@ if __name__ == "__main__":
         ("Articulada:", "transmite corte, gira libre; la estabilidad la dan los arriostramientos."),
         ("Rígida:", "transmite corte y momento (empotramiento)."),
         ("Dilatación:", "el edificio mide 20 m (< 40 m): no lleva junta estructural; los cerramientos sí tienen juntas móviles."),
-    ], h=1.6, lead=1.36)
-
-    # tabla
-    yt = Y1 - 98
-    sh.titulo_dib(L, yt, 2, "CLASIFICACIÓN DE LAS JUNTAS Y UNIONES", w=R - L)
-    cols = [("N°", 9), ("Encuentro", 30), ("Medio de unión", 42), ("Tipo", 28), ("Vínculo / movimiento", 34), ("Taller / obra", 18), ("Lám.", R - L - 161)]
-    sh.tabla(L, yt - 5, cols, [list(u) for u in UNIONES], h=1.65, lead=1.3, pad=0.6)
+    ]
+    wc = (R - L - 6) / 2
+    ficha_spec(sh, L, Y1 - 6, wc, conc[:4], h=1.65, lead=1.38)
+    yb2 = ficha_spec(sh, L + wc + 6, Y1 - 6, wc, conc[4:], h=1.65, lead=1.38)
+    Y4 = yb2 - 6
+    sh.titulo_dib(L, Y4, 4, "ORDEN DE EJECUCIÓN DE LAS UNIONES EN OBRA", w=R - L)
+    pasos = ["1. U1: pernos colados en la base; montaje de columna sobre tuercas de nivelación, aplomado y grout.",
+             "2. U2: izado de la viga principal y abulonado a las placas de corte (2 bulones por placa hasta aplomar, luego todos).",
+             "3. U3: vigas secundarias y de borde con doble ángulo; U7: cruces con tensor, y recién entonces apriete final.",
+             "4. U5: despliegue y fijación de la chapa colaborante; U6: cenefas y tapas de cierre.",
+             "5. U4: soldadura de studs, malla, negativos y hormigonado de la losa (la única unión húmeda en altura).",
+             "6. Se repite en el nivel de cubierta; luego U8 (panel), U9 (muro cortina) y U10 (cubierta y parapeto).",
+             "Control: torque de bulones al 10 %, inspección visual de soldaduras, ensayo de doblado de 1 stud cada 100."]
+    yy = Y4 - 6
+    for p_ in pasos:
+        yy = sh.para(L, yy, R - L, p_, 1.7, lead=1.38) - 0.5
     sh.save("L07_Esquema_uniones")
