@@ -1,39 +1,65 @@
-PRÁCTICA EN CLASE C2 - GRANDES LUCES EN ACERO (TP6 ACERO) - 21 láminas A4 vertical
+PRÁCTICA EN CLASE C2 - GRANDES LUCES EN ACERO (TP6 ACERO) - 15 láminas A4 vertical, sin rótulo
 
 Letra mínima: 2,0 mm en toda la hoja impresa (textos, tablas, referencias y cotas).
 
-Practica_Acero_C2_A4_completa.pdf : las 21 láminas en un solo PDF. Imprimir en A4 al 100 % (sin "ajustar a página").
+Practica_Acero_C2_A4_completa.pdf : las 15 láminas en un solo PDF. Imprimir en A4 al 100 % (sin "ajustar a página").
 PDF_por_lamina/  : cada lámina por separado.
 DWG_AutoCAD/     : cada lámina en DWG (AutoCAD 2018), dibujada en mm de papel = hoja A4 a escala 1:1.
-                   Cada dibujo está a la escala indicada en su título; las cotas son asociativas y muestran la medida REAL
-                   en mm. Se plotea a escala 1:1 en hoja A4 vertical. Capas: 0-MARCO, 1-SECCION, 1-VISTA, 1-OCULTO,
-                   1-EJES, 2-RAYADO, 3-COTAS, 3-TEXTOS, 3-TITULOS, 3-REFS, 3-TABLAS.
+                   Cada dibujo está a la escala indicada en su título; las cotas son asociativas y muestran la
+                   medida REAL en mm. Se plotea a 1:1 en A4 vertical.
 DXF_alternativo/ : los mismos dibujos en DXF.
-vistas_previas/  : imagen de cada lámina.
 
 Índice:
- 01 (punto -) Carátula, consigna e índice
- 02 (punto -) Sistema adoptado: memoria, planta estructural y corte transversal
- 03 (punto 1) Axonometría estructural: elementos del sistema y referencias
- 04 (punto 1) Fundación, pernos de anclaje, placa base y columna
- 05 (punto 1) Vigas principales, secundarias, de borde y piezas de unión
- 06 (punto 1) Chapa colaborante: perfil, máximos y mínimos, colocación, malla y hormigón
- 07 (punto 1) Conector de corte, cenefa de borde y tapa de cierre
- 08 (punto 1) Arriostramiento, bulones y soldadura
- 09 (punto 1) Fijaciones de la chapa y protección del acero
- 10 (punto 2) Juntas y uniones: esquema general y clasificación
- 11 (punto 2) Uniones U1 y U2: base y viga principal-columna
- 12 (punto 2) Unión U3: secundaria-principal y cómo trabajan las uniones
- 13 (punto 2) Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento
- 14 (punto 2) Uniones U8 a U10: cerramientos a la estructura y cubierta
- 15 (punto 3) Grúa, plataformas y soldadora de pernos
- 16 (punto 3) Llaves, fijadora y otros equipos
- 17 (punto 3) Planificación: alquiler, armado y acceso a obra
- 18 (punto 4) Muro cortina: elevación y corte vertical
- 19 (punto 4) Muro cortina: corte horizontal y elementos
- 20 (punto 4) Panel sándwich 80 mm (integral opaco)
- 21 (punto 4) Comparación CW vs. panel y justificación
+ 01 (punto -) Sistema adoptado: memoria, planta y corte
+ 02 (punto 1) Axonometría estructural y listado de elementos
+ 03 (punto 1) Fundación, pernos, placa base y columna
+ 04 (punto 1) Vigas y piezas de unión
+ 05 (punto 1) Losa colaborante: chapa y piezas
+ 06 (punto 1) Arriostramiento, bulones, soldadura, fijaciones
+ 07 (punto 2) Juntas y uniones: esquema y clasificación
+ 08 (punto 2) Uniones U1, U2, U3 y funcionamiento
+ 09 (punto 2) Uniones U4 a U7
+ 10 (punto 2) Uniones U8 a U10 (cerramientos)
+ 11 (punto 3) Máquinas y herramientas
+ 12 (punto 3) Alquiler, armado y acceso a obra
+ 13 (punto 4) Muro cortina (CW) stick
+ 14 (punto 4) Panel sándwich 80 mm (integral)
+ 15 (punto 4) Comparación CW / panel y justificación
 
-Edificio adoptado: el mismo del cómputo de la Lámina 4 (planta 20 x 12 m, columnas IPN 300 c/ 4 m, losas colaborantes +3,80 y +7,40).
+====================================================================================================
+DATOS PARA HACER EL CORTE INTEGRAL (todo sale de estas láminas; medidas en m o mm)
+====================================================================================================
+Edificio: planta 20,00 x 12,00 m. Pórticos transversales (ejes 1 a 6) cada 4,00 m con luz libre de 12,00 m.
+Ejes A (frente, muro cortina) - B - C - D (contrafrente). Laterales = ejes 1 y 6.
+
+NIVELES
+  -1,50  fondo de la base (H° de limpieza 5 cm debajo)
+  -1,05  cara superior de la base (base 1,60 x 1,60 x 0,45)
+  -0,33  coronamiento del pedestal 0,50 x 0,50
+  -0,30  placa base 380 x 250 x 20 sobre 30 mm de grout (queda bajo el contrapiso)
+  ±0,00  nivel de piso terminado PB (contrapiso 15 cm)
+  +3,80  sup. losa de entrepiso (losa colaborante 140 mm: chapa 76 + 64 de hormigón)
+  +7,40  sup. losa de cubierta (igual + contrapiso con pendiente 1-2 % y membrana)
+  +8,00  cupertina del parapeto
+
+ESTRUCTURA (de abajo hacia arriba en el corte por un pórtico)
+  Columnas HEB 200 (h 200, b 200), una sola pieza de 7,52 m, el alma en el plano del pórtico.
+  Pernos de anclaje 4 M20 x 600 a 300 x 120 mm; placa base soldada con filete de 8 mm.
+  Viga principal IPN 500 (luz 12,00 m) bajo cada losa: cara superior en +3,66 y +7,26; contraflecha 30 mm.
+  Unión viga-columna: placa de corte 320 x 120 x 10 soldada al ala de la columna + 4 bulones M20.
+  Vigas secundarias IPN 200 cada 2,00 m (enrasadas con la principal, con destaje), doble ángulo L76 + M16.
+  Vigas de borde IPN 200 en los ejes A y D.
+  Chapa colaborante h 76, e 0,9 mm, nervios en sentido A-D, studs Ø19 x 125, malla Q188 a 25 mm de arriba,
+  cenefa de chapa galv. 1,6 mm en los bordes y tapas de cierre en los bordes A y D.
+  Arriostramiento: cruces Ø20 con tensor en laterales (vano B-C) y contrafrente (vanos 1-2 y 5-6).
+
+CERRAMIENTOS
+  Frente A: muro cortina stick, montantes 50 x 150 c/ 1,00 m colgados de cada losa con grapa al riel
+  embutido en el canto; spandrel de 0,90 m frente a cada losa; DVH 6+12+3+3; junta de 20 mm por piso;
+  barrera cortafuego entre canto de losa y montante. Parapeto +7,40 a +8,00 con panel 80.
+  Laterales y contrafrente: panel sándwich PUR 80 mm horizontal (1,00 m x 4,00 m) sobre montantes
+  tubo 100 x 20 soldados a las columnas; arranque en viga portapanel 100 x 60 con perfil U y babeta.
+  Cubierta: membrana asfáltica rebatida como babeta sobre el parapeto + cupertina de chapa galv.
+
 Los valores de catálogo son de referencia: verificar con el fabricante elegido.
 Fuentes para regenerar: practica-acero/ (./build.sh).

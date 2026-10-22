@@ -28,10 +28,10 @@ if __name__ == "__main__":
     v.ln((-1500, -150), (ANCHO + 1000, -150), "1-VISTA", 25)
     v.hatch([(-1500, -150), (ANCHO + 1000, -150), (ANCHO + 1000, -1650), (-1500, -1650)], "tierra")
     for cy in (0, ANCHO):
-        base = [(cy - 700, FUND), (cy + 700, FUND), (cy + 700, FUND + 400), (cy + 250, FUND + 400), (cy + 250, -330),
-                (cy - 250, -330), (cy - 250, FUND + 400), (cy - 700, FUND + 400)]
+        base = [(cy - 800, FUND), (cy + 800, FUND), (cy + 800, FUND + BASE_E), (cy + 250, FUND + BASE_E), (cy + 250, -330),
+                (cy - 250, -330), (cy - 250, FUND + BASE_E), (cy - 800, FUND + BASE_E)]
         v.hatch(base, "gris"); v.pl(base, "1-SECCION", 35, True)
-        v.rect(cy - 225, -300, cy + 225, -278, "1-SECCION", 25)
+        v.rect(cy - PL_A / 2, -300, cy + PL_A / 2, -280, "1-SECCION", 25)
     v.hatch([(0, -150), (ANCHO, -150), (ANCHO, 0), (0, 0)], "hormigon"); v.rect(0, -150, ANCHO, 0, "1-SECCION", 25)
     # arriostramiento del fondo (eje 6, vano B-C) en línea fina
     for zl, zh in ((0, N1 - LOSA - 500), (N1, N2 - LOSA - 500)):
@@ -46,7 +46,8 @@ if __name__ == "__main__":
         for k in range(7):
             p = xf(perfil_poly(VS), k * SEC, nl - LOSA - 100); v.pl(p, "1-SECCION", 13, True); v.hatch(p, "negro")
     # muro cortina (frente A) y panel (contrafrente D)
-    for x in (-230, -180): v.ln((x, -150), (x, N2 + 600), "1-VISTA", 18)
+    for x in (-230, -180): v.ln((x, -150), (x, N2), "1-VISTA", 18)
+    v.rect(-260, N2, -180, CUP - 60, "1-VISTA", 25); v.hatch([(-260, N2), (-180, N2), (-180, CUP - 60), (-260, CUP - 60)], "gris")
     for z in range(0, int(N2), 1250): v.ln((-230, z), (-180, z), "1-VISTA", 13)
     v.rect(ANCHO + 150, -150, ANCHO + 230, CUP, "1-VISTA", 25)
     v.hatch([(ANCHO + 150, -150), (ANCHO + 230, -150), (ANCHO + 230, CUP), (ANCHO + 150, CUP)], "gris")

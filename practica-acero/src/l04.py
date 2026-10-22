@@ -37,10 +37,10 @@ while x < ANCHO - 200:
 for k in range(1, 6):
     xx = k * SEC
     v.rect(xx - 60, -230, xx + 60, -30, "1-OCULTO", 9)
-v.dim((0, 600), (ANCHO, 600), 3)
+v.dim((0, 600), (ANCHO, 600), 7)
 for k in range(6): v.dim((k * SEC, -500), (k * SEC + SEC, -500), -4)
 v.label("ELEVACIÓN 1:100", 6000, -1300, 1.7, TA.MIDDLE_CENTER, True)
-v.ley("studs Ø19 c/ 300 (en el valle de la chapa)", (3210, 125), (4, 9), 1.6)
+v.ley("studs Ø19 c/ 300 (en el valle de la chapa)", (3210, 125), (4, 4), 1.6)
 v.ley("ángulos p/ secundarias", (8000, -130), (8, 7), 1.6)
 ficha_spec(sh, L + 48, Y1 - 48, R - L - 48, [
     ("Función:", "salvar la luz de 12,00 m sin apoyos, recibir las reacciones de las vigas secundarias y, con los conectores, trabajar en sección compuesta con la losa."),
@@ -93,15 +93,15 @@ v.ln((-25, 0), (-25, LOSA), "1-OCULTO", 9)
 v.dim((-63, -18), (-63, LOSA), -5)
 v.dim((-63, LOSA), (0, LOSA), 4)
 v.ley("cenefa chapa galv. e = 1,6", (-63, 60), (-8, 8), 1.6)
-v.ley("riel de anclaje p/ CW", (-60, -150), (-6, -4), 1.6)
-v.rect(-60, -165, -45, -135, "1-VISTA", 18)
+v.rect(-63, 20, -45, 60, "1-SECCION", 25); v.hatch([(-63, 20), (-45, 20), (-45, 60), (-63, 60)], "gris")
+v.ley("riel de anclaje p/ CW (embutido)", (-63, 40), (-6, -12), 1.6)
 v.ley("fijación de cenefa", (20, -16), (8, -10), 1.6)
 v.ley("chapa colaborante", (250, 0), (-4, -16), 1.6)
 v.label("SECCIÓN 1:10 (frente A)", 0, -265, 1.6, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XB, Y2 - 56, W2, [
     ("Función:", "cerrar el perímetro de la losa, atar las columnas de la fachada y recibir los anclajes del cerramiento."),
     ("Medidas:", "IPN 200 (igual a la secundaria), vano 4,00 m; vuelo de losa 60 mm hasta la cenefa."),
-    ("Especificación:", "F-24; en el frente lleva riel de anclaje soldado para las grapas del muro cortina; en laterales recibe la viga portapanel."),
+    ("Especificación:", "F-24; en el frente, la cenefa lleva un riel de anclaje que queda embutido en el canto de la losa para las grapas del muro cortina."),
 ])
 
 # =============================================================== 8. PIEZAS DE UNIÓN
@@ -109,21 +109,21 @@ Y3 = Y2 - 78
 sh.titulo_dib(L, Y3, 8, "PIEZAS DE UNIÓN: PLACA DE CORTE Y DOBLE ÁNGULO", "1:10 / 1:5", w=R - L)
 # placa de corte (vista de frente) para viga principal
 v = sh.view_in((L, Y3 - 55, L + 30, Y3 - 6), (-80, -270, 160, 215), 10)
-v.rect(-60, -200, 60, 200, "1-SECCION", 35); v.hatch([(-60, -200), (60, -200), (60, 200), (-60, 200)], "gris")
+v.rect(-60, -160, 60, 160, "1-SECCION", 35); v.hatch([(-60, -160), (60, -160), (60, 160), (-60, 160)], "gris")
 for zz in (-120, -40, 40, 120):
     v.circ((15, zz), 11, "1-VISTA", 18)
-v.dim((-60, -200), (60, -200), -4); v.dim((60, -200), (60, 200), 4)
+v.dim((-60, -160), (60, -160), -4); v.dim((60, -160), (60, 160), 4)
 v.dim((60, -120), (60, -40), 11)
 v.label("PLACA 1:10", 15, -250, 1.6, TA.MIDDLE_CENTER, True)
 # placa en planta soldada al ala de la columna
-v = sh.view_in((L + 32, Y3 - 52, L + 80, Y3 - 6), (-170, -200, 250, 70), 10)
+v = sh.view_in((L + 32, Y3 - 52, L + 80, Y3 - 6), (-140, -200, 270, 70), 10)
 pts = xf(perfil_poly(COL), 0, 0, 90); v.pl(pts, "1-SECCION", 35, True); v.hatch(pts, "acero")
-v.rect(62, -5, 182, 5, "1-SECCION", 35); v.hatch([(62, -5), (182, -5), (182, 5), (62, 5)], "acero")
-filete(v, (62, 5), 8, 1, 1); filete(v, (62, -5), 8, 1, -1)
-v.rect(102, 5, 230, 23, "1-VISTA", 18)                               # alma de la viga (fantasma)
-bulon(v, (130, 41), (130, -5 - 0), 20)
-v.label("PLANTA 1:10 (soldada al ala)", 30, -190, 1.6, TA.MIDDLE_CENTER, True)
-v.ley("alma IPN 500", (220, 23), (-2, 8), 1.5)
+v.rect(100, -5, 220, 5, "1-SECCION", 35); v.hatch([(100, -5), (220, -5), (220, 5), (100, 5)], "acero")
+filete(v, (100, 5), 8, 1, 1); filete(v, (100, -5), 8, 1, -1)
+v.rect(110, 5, 250, 23, "1-VISTA", 18)                               # alma de la viga (fantasma)
+bulon(v, (170, 41), (170, -5 - 0), 20)
+v.label("PLANTA 1:10 (al ala HEB)", 60, -190, 1.6, TA.MIDDLE_CENTER, True)
+v.ley("alma IPN 500", (240, 23), (-2, 8), 1.5)
 # doble ángulo
 v = sh.view_in((L + 82, Y3 - 52, L + 128, Y3 - 6), (-95, -125, 95, 60), 5)
 v.rect(-4, -70, 4, 40, "1-VISTA", 13)
@@ -141,7 +141,7 @@ v.dim((0, -70), (76, -70), -4); v.dim((76, -70), (76, 70), 4); v.dim((76, -35), 
 v.label("ÁNGULO 1:5 - 2 M16", 38, -115, 1.6, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, L, Y3 - 58, R - L, [
     ("Función:", "vincular vigas con columnas y vigas entre sí transmitiendo el corte (uniones articuladas de montaje en seco)."),
-    ("Placa de corte:", "chapa F-24 de 400 x 120 x 10 mm soldada en taller al ala de la columna (filete 8 mm ambos lados); 4 agujeros Ø22, paso 80 mm, para M20."),
+    ("Placa de corte:", "chapa F-24 de 320 x 120 x 10 mm soldada en taller al ala de la columna (filete 8 mm ambos lados); 4 agujeros Ø22, paso 80 mm, para M20."),
     ("Doble ángulo:", "2 L 76 x 76 x 8 (3\" x 5/16\") de 140 mm, abulonados al alma de la viga principal y de la secundaria; 2 bulones M16 por ala, agujeros Ø18."),
 ])
 sh.save(f"L{lam('vigas')}_Vigas_piezas_union")

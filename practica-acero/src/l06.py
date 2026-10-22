@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["arr"], "Arriostramiento, bulones y soldadura", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
+sh = Sheet(NUM["arr"], "Arriostramiento, bulones, soldadura, fijaciones y protección", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
            "1:125 - 1:10 - 1:5 - 1:2,5 - 1:2")
 y0 = sh.encabezado("1° ELEMENTOS: ARRIOSTRAMIENTOS Y ELEMENTOS DE UNIÓN", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
@@ -13,31 +13,30 @@ Y1 = y0 - 3.5
 
 # =============================================================== 15. ARRIOSTRAMIENTO
 sh.titulo_dib(L, Y1, 15, "ARRIOSTRAMIENTO: CRUZ DE SAN ANDRÉS CON TENSOR", "1:125 / 1:10 / 1:5", w=R - L)
-v = sh.view_in((L, Y1 - 88, L + 46, Y1 - 8), (-1100, -1150, 4400, 7600), 125)
+v = sh.view_in((L, Y1 - 86, L + 46, Y1 - 8), (-1100, -1150, 4400, 7600), 125)
 for yy in (0, VANO):
-    v.rect(yy - 150, -300, yy + 150, N2, "1-VISTA", 25)
+    v.rect(yy - 100, -300, yy + 100, N2, "1-VISTA", 25)
 for z in (N1, N2):
-    v.rect(150, z - LOSA - 200 * 0, VANO - 150, z - LOSA + 0 + 0, "1-VISTA", 13)
-    v.rect(150, z - 500 - LOSA, VANO - 150, z - LOSA, "1-VISTA", 25)
+    v.rect(100, z - 500 - LOSA, VANO - 100, z - LOSA, "1-VISTA", 25)
 for zl, zh in ((0, N1 - LOSA - 500), (N1, N2 - LOSA - 500)):
-    v.ln((150, zl + 200), (VANO - 150, zh), "1-SECCION", 25); v.ln((VANO - 150, zl + 200), (150, zh), "1-SECCION", 25)
+    v.ln((100, zl + 200), (VANO - 100, zh), "1-SECCION", 25); v.ln((VANO - 100, zl + 200), (100, zh), "1-SECCION", 25)
     xm = VANO / 2; zm = (zl + 200 + zh) / 2
     v.rect(xm - 300, zm - 300 * (zh - zl - 200) / (VANO - 300), xm + 300, zm + 300 * (zh - zl - 200) / (VANO - 300), "1-VISTA", 9) if False else None
 v.ln((-600, 0), (VANO + 600, 0), "1-VISTA", 25)
 v.dim((0, -300), (VANO, -300), -4)
 v.nivel(-500, N1, "+3,80", -1); v.nivel(-500, N2, "+7,40", -1); v.nivel(-500, 0, "±0,00", -1)
 v.label("ELEVACIÓN EJE 6 (B-C) 1:125", 1700, -1100, 1.5, TA.MIDDLE_CENTER, True)
-v.ley("barra Ø20", (VANO * 0.3, 200 + (N1 - LOSA - 700) * 0.3 / 1), (8, 2), 1.5)
+v.ley("barra Ø20", (VANO * 0.3, 200 + (N1 - LOSA - 700) * 0.3), (8, 2), 1.5)
 # cartela 1:10 (nudo inferior: columna + placa base)
-v = sh.view_in((L + 47, Y1 - 60, L + 106, Y1 - 8), (-160, -160, 400, 330), 10)
-v.rect(-150, -100, 150, 330, "1-VISTA", 25)                        # columna (alma vista)
-v.ln((-150 + 16, -100), (-150 + 16, 330), "1-VISTA", 13); v.ln((150 - 16, -100), (150 - 16, 330), "1-VISTA", 13)
-v.rect(-225, -122, 225, -100, "1-VISTA", 25)
-g = [(150, 0), (330, 0), (330, 60), (150, 240)]
+v = sh.view_in((L + 47, Y1 - 60, L + 106, Y1 - 8), (-200, -160, 360, 330), 10)
+v.rect(-100, -100, 100, 330, "1-VISTA", 25)                        # columna HEB 200 (se ve el ala)
+v.ln((-4.5, -100), (-4.5, 330), "1-OCULTO", 9); v.ln((4.5, -100), (4.5, 330), "1-OCULTO", 9)
+v.rect(-190, -120, 190, -100, "1-VISTA", 25)
+g = [(100, 0), (280, 0), (280, 60), (100, 240)]
 v.pl(g, "1-SECCION", 35, True); v.hatch(g, "gris")
-filete(v, (150, 0), 8, 1, 1)
-ang = math.atan2(N1 - LOSA - 700, VANO - 300)
-cx, cy = 270, 90
+filete(v, (100, 0), 8, 1, 1)
+ang = math.atan2(N1 - LOSA - 700, VANO - 200)
+cx, cy = 220, 90
 ux, uy = math.cos(ang), math.sin(ang)
 v.circ((cx, cy), 13, "1-VISTA", 25)
 v.pl([(cx - uy * 30, cy + ux * 30), (cx + ux * 120 - uy * 30, cy + uy * 120 + ux * 30)], "1-VISTA", 18)
@@ -45,7 +44,7 @@ v.pl([(cx + uy * 30, cy - ux * 30), (cx + ux * 120 + uy * 30, cy + uy * 120 - ux
 v.pl([(cx + ux * 120 - uy * 10, cy + uy * 120 + ux * 10), (cx + ux * 230 - uy * 10, cy + uy * 230 + ux * 10)], "1-SECCION", 25)
 v.pl([(cx + ux * 120 + uy * 10, cy + uy * 120 - ux * 10), (cx + ux * 230 + uy * 10, cy + uy * 230 - ux * 10)], "1-SECCION", 25)
 v.label("CARTELA 1:10", 80, -145, 1.5, TA.MIDDLE_CENTER, True)
-v.ley("cartela e = 10 soldada", (300, 20), (2, -6), 1.5)
+v.ley("cartela e = 10 soldada", (250, 20), (2, -6), 1.5)
 v.ley("horquilla + pasador Ø20", (cx, cy), (-16, 12), 1.5)
 # tensor 1:5
 v = sh.view_in((L + 108, Y1 - 60, R, Y1 - 8), (-180, -90, 180, 90), 5)
@@ -59,7 +58,7 @@ for xx in range(25, 171, 8): v.ln((xx, -10), (xx + 4, 10), "1-VISTA", 9)
 v.dim((-75, -25), (75, -25), -5); v.dim((75, -25), (75, 25), 5)
 v.label("TENSOR (TORNIQUETE) M20 1:5", 0, -85, 1.5, TA.MIDDLE_CENTER, True)
 v.ley("rosca derecha", (-150, 10), (-2, 9), 1.5); v.ley("rosca izquierda", (150, 10), (-2, 9), 1.5)
-v.ley("contratuercas", (-55, -17), (-6, -10), 1.5)
+v.ley("contratuercas", (-55, -17), (4, -12), 1.5)
 ficha_spec(sh, L + 52, Y1 - 62, R - L - 52, [
     ("Función:", "dar estabilidad lateral al edificio (viento y sismo): las barras trabajan solo a tracción y llevan la fuerza horizontal a las fundaciones."),
     ("Ubicación:", "laterales (ejes 1 y 6, vano B-C) y contrafrente (eje D, vanos 1-2 y 5-6), en los dos niveles; el frente vidriado queda libre."),
@@ -68,7 +67,7 @@ ficha_spec(sh, L + 52, Y1 - 62, R - L - 52, [
 ], h=1.65, lead=1.38)
 
 # =============================================================== 16. BULONES
-Y2 = Y1 - 104
+Y2 = Y1 - 92
 sh.titulo_dib(XA, Y2, 16, "BULÓN ISO 8.8 M20", "1:2", w=W2)
 v = sh.view_in((XA, Y2 - 44, XA + W2, Y2 - 8), (-40, -40, 120, 28), 2)
 v.rect(0, -30, 18, 30, "1-SECCION", 25); v.hatch([(0, -30), (18, -30), (18, 30), (0, 30)], "acero")
@@ -110,53 +109,42 @@ filas = [["Proceso", "taller: semiautomática MIG (ER70S-6); obra: electrodo E70
          ["Símbolo", "flecha + línea de referencia; triángulo = filete; V = a tope"]]
 sh.tabla(XB, Y2 - 48, [("Ítem", 16), ("Especificación", W2 - 16)], filas, h=2.0, lead=1.3, pad=0.8)
 
-sh.save(f"L{lam('arr')}_Arriostramiento_bulones_soldadura")
-
 # =============================================================== 18. FIJACIONES DE CHAPA
-sh = Sheet(NUM["fij"], "Fijaciones de la chapa y protección del acero", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS", "1:1 - s/ esc.")
-y0 = sh.encabezado("1° ELEMENTOS: FIJACIONES Y PROTECCIÓN", "Elementos de fijación de la chapa colaborante y sistema de protección del acero")
-Y3 = y0 - 3.5
-sh.titulo_dib(L, Y3, 18, "FIJACIONES DE LA CHAPA COLABORANTE", "1:1", w=R - L)
-v = sh.view_in((L, Y3 - 76, L + 40, Y3 - 9), (-18, -26, 18, 40), 1)
+Y3 = Y2 - 84
+sh.titulo_dib(XA, Y3, 18, "FIJACIONES DE LA CHAPA", "1:2", w=W2)
+v = sh.view_in((XA, Y3 - 44, XA + 20, Y3 - 8), (-18, -30, 18, 40), 2)
 v.rect(-15, -12, 15, 0, "1-SECCION", 25); v.hatch([(-15, -12), (15, -12), (15, 0), (-15, 0)], "acero")
 v.rect(-15, 0, 15, 1, "1-SECCION", 18)
 v.pl([(-2, -10), (0, -12), (2, -10), (2, 14), (-2, 14)], "1-VISTA", 18, True)
 v.rect(-6, 14, 6, 16, "1-VISTA", 18); v.rect(-7, 1, 7, 3, "1-VISTA", 18); v.rect(-5, 16, 5, 30, "1-OCULTO", 9)
-v.label("CLAVO DE PÓLVORA", 0, -24, 2.0, TA.MIDDLE_CENTER, True)
-v.ley("ala de la viga", (12, -6), (6, -6))
-v.ley("chapa colaborante", (12, 0.5), (6, 6))
-v = sh.view_in((L + 42, Y3 - 76, L + 82, Y3 - 9), (-18, -26, 18, 40), 1)
+v.label("CLAVO", 0, -28, 2.0, TA.MIDDLE_CENTER, True)
+v = sh.view_in((XA + 21, Y3 - 44, XA + 41, Y3 - 8), (-18, -30, 18, 40), 2)
 v.rect(-15, -2, 15, 0, "1-SECCION", 18); v.rect(-15, 0, 15, 1, "1-SECCION", 18)
 v.pl([(-2.4, -10), (0, -14), (2.4, -10), (2.4, 4), (-2.4, 4)], "1-VISTA", 18, True)
 for zz in range(-9, 3, 2): v.ln((-2.4, zz), (2.4, zz + 1), "1-VISTA", 9)
 v.rect(-6, 4, 6, 8, "1-VISTA", 18); v.rect(-8, 1, 8, 4, "1-VISTA", 18); v.hatch([(-8, 1), (8, 1), (8, 4), (-8, 4)], "negro")
-v.label("AUTOPERFORANTE", 0, -24, 2.0, TA.MIDDLE_CENTER, True)
-v.ley("solape de chapas", (12, 0), (4, -8))
-v.ley("arandela EPDM", (8, 2.5), (6, 6))
-ficha_spec(sh, L + 88, Y3 - 9, R - L - 88, [
-    ("Clavo:", "tipo X-ENP 19 con arandelas, colocado con pistola de pólvora; ala ≥ 6 mm."),
-    ("Autoperf.:", "#10 x 19 (Ø4,8) con arandela EPDM; costura de solapes."),
-    ("Tapón:", "alternativa: soldadura Ø16 en el valle."),
-], h=2.0, lead=1.4)
-ficha_spec(sh, L + 88, Y3 - 56, R - L - 88, [
-    ("Función:", "fijar la chapa a las vigas durante el montaje (evita que se vuele o se corra) y coser los solapes para que trabaje como un diafragma."),
-    ("Cantidad:", "en cada valle de los extremos de la chapa y c/ 450 mm en apoyos intermedios; costura lateral c/ 600 mm."),
-], h=2.0, lead=1.4)
+v.label("TORNILLO", 0, -28, 2.0, TA.MIDDLE_CENTER, True)
+ficha_spec(sh, XA + 43, Y3 - 8, W2 - 43, [
+    ("Clavo:", "X-ENP 19 con pistola de pólvora; ala ≥ 6 mm."),
+    ("Tornillo:", "autoperforante #10 x 19 (Ø4,8) + EPDM, para coser solapes."),
+], h=2.0, lead=1.38)
+ficha_spec(sh, XA, Y3 - 47, W2, [
+    ("Función:", "fijar la chapa a las vigas en el montaje y coser los solapes para que trabaje como diafragma."),
+    ("Cantidad:", "en cada valle de los extremos y c/ 450 mm en apoyos intermedios; costura c/ 600 mm."),
+], h=2.0, lead=1.38)
 
 # =============================================================== 19. PROTECCIÓN
-Y3 = Y3 - 100
-sh.titulo_dib(L, Y3, 19, "PROTECCIÓN DEL ACERO (CAPAS)", "s/ esc.", w=R - L)
-cap = [("acero F-24 arenado grado Sa 2½", 255), ("1. antióxido epoxi / fosfato de zinc 50 µm (taller)", 225),
-       ("2. retoque en obra de uniones y raspones", 205), ("3. esmalte sintético 2 manos 60 µm", 185),
-       ("o pintura intumescente (F60) 1 a 2 mm", 165)]
-xx, yy = L + 2, Y3 - 9
-for i, (s, g) in enumerate(cap):
-    x0 = xx + i * 8
-    sh.solid([(x0, yy - 44), (x0 + 8, yy - 44), (x0 + 8, yy), (x0, yy)], g)
-    sh.pl([(x0, yy - 44), (x0 + 8, yy - 44), (x0 + 8, yy), (x0, yy)], "1-VISTA", 13, True)
-    sh.leyenda(s, (x0 + 4, yy - 4 - i * 8.5), (46 - i * 8, 0), 2.0)
-ficha_spec(sh, L + 2, Y3 - 58, R - L - 2, [
-    ("Función:", "evitar la corrosión del acero y retrasar la pérdida de resistencia en un incendio (el acero pierde la mitad a ~550 °C)."),
-    ("Especificación:", "la chapa colaborante y los bulones llevan galvanizado de fábrica; las caras de contacto de uniones y las alas con studs no se pintan."),
-], h=2.0, lead=1.4)
-sh.save(f"L{lam('fij')}_Fijaciones_proteccion")
+sh.titulo_dib(XB, Y3, 19, "PROTECCIÓN DEL ACERO", "s/ esc.", w=W2)
+cap = [("acero arenado Sa 2½", 255), ("1. antióxido epoxi 50 µm (taller)", 225), ("2. retoque en obra", 205),
+       ("3. esmalte 2 manos 60 µm", 185), ("o intumescente F60 (1-2 mm)", 165)]
+xx, yy = XB, Y3 - 9
+for i, (t, g) in enumerate(cap):
+    x0 = xx + i * 5
+    sh.solid([(x0, yy - 33), (x0 + 5, yy - 33), (x0 + 5, yy), (x0, yy)], g)
+    sh.pl([(x0, yy - 33), (x0 + 5, yy - 33), (x0 + 5, yy), (x0, yy)], "1-VISTA", 13, True)
+    sh.leyenda(t, (x0 + 2.5, yy - 3 - i * 6.5), (31 - i * 5, 0), 2.0)
+ficha_spec(sh, XB, Y3 - 47, W2, [
+    ("Función:", "evitar la corrosión y retrasar la pérdida de resistencia en un incendio (a ~550 °C el acero pierde la mitad)."),
+    ("Nota:", "chapa y bulones vienen galvanizados; las caras de contacto de uniones y las alas con studs no se pintan."),
+], h=2.0, lead=1.38)
+sh.save(f"L{lam('arr')}_Arriostramiento_uniones_proteccion")

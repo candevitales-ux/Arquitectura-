@@ -6,8 +6,8 @@ from geom import *
 ELEMENTOS = [
     (1, "Base aislada de H°A° con pedestal", "Transmitir las cargas de la columna al suelo", lam("fund")),
     (2, "Pernos de anclaje M20 (4 por columna)", "Fijar la placa base a la fundación", lam("fund")),
-    (3, "Placa base 450x250x22 + mortero de nivelación", "Repartir la carga y nivelar la columna", lam("fund")),
-    (4, "Columna IPN 300", "Bajar cargas verticales; parte del pórtico", lam("fund")),
+    (3, "Placa base 380x250x20 + mortero de nivelación", "Repartir la carga y nivelar la columna", lam("fund")),
+    (4, "Columna HEB 200", "Bajar cargas verticales; parte del pórtico", lam("fund")),
     (5, "Viga principal IPN 500 (luz 12,00 m)", "Salvar la gran luz; recibe las secundarias", lam("vigas")),
     (6, "Viga secundaria IPN 200 c/ 2,00 m", "Apoyo de la chapa colaborante (luz 4,00 m)", lam("vigas")),
     (7, "Viga de borde IPN 200", "Borde de losa; anclaje de los cerramientos", lam("vigas")),
@@ -39,8 +39,8 @@ if __name__ == "__main__":
     # fundaciones
     cols = [(x, 0) for x in EJES_X] + [(x, ANCHO) for x in EJES_X] + [(0, 4000), (0, 8000), (LARGO, 4000), (LARGO, 8000)]
     for cx, cy in sorted(cols, key=lambda c: -(c[0] + c[1])):
-        v.box(cx - 700, cy - 700, FUND, cx + 700, cy + 700, FUND + 400, lw=13)
-        v.box(cx - 250, cy - 250, FUND + 400, cx + 250, cy + 250, -300, lw=13)
+        v.box(cx - 800, cy - 800, FUND, cx + 800, cy + 800, FUND + BASE_E, lw=13)
+        v.box(cx - 250, cy - 250, FUND + BASE_E, cx + 250, cy + 250, -300, lw=13)
     # contorno de PB (proyección del contrapiso)
     v.pl([(0, 0, 0), (LARGO, 0, 0), (LARGO, ANCHO, 0), (0, ANCHO, 0)], "1-OCULTO", 13, True)
     # entrepiso: paño 1-2 con chapa colaborante, paño 2-3 con hormigón

@@ -33,7 +33,7 @@ ficha_spec(sh, XA, Y1 - 80, W2, [
     ("Tipo:", "soldada (stud) + húmeda (hormigón). Es la única unión que se hace en altura con soldadura."),
     ("Función:", "toma el rasante entre losa y viga: ambas trabajan juntas (viga T compuesta), lo que reduce el perfil necesario."),
     ("Control:", "1 stud cada 100 se dobla a 15° con martillo; no debe fisurarse el cordón."),
-], h=1.6, lead=1.36)
+], h=2.0, lead=1.36)
 
 # =============================================================== U5 CHAPA - VIGA PRINCIPAL Y COSTURA
 sh.titulo_dib(XB, Y1, "U5", "CHAPA - VIGA Y CHAPA - CHAPA", "1:5", w=W2)
@@ -51,7 +51,7 @@ for xx in (-55, 55):
     v.pl([(xx - 2, -12), (xx, -16), (xx + 2, -12), (xx + 2, 14), (xx - 2, 14)], "1-VISTA", 18, True)
     v.rect(xx - 6, 14, xx + 6, 17, "1-VISTA", 18)
 # solape lateral con autoperforante (a la derecha)
-v.ley("clavo de pólvora (2 por valle)", (55, 10), (-2, -36), 1.5)
+v.ley("clavo de pólvora (2 por valle)", (55, 10), (-16, -22), 1.5)
 v.ley("stud Ø19", (0, 100), (-6, 14), 1.5)
 v.ley("valle apoyado (mín. 40 mm)", (-60, 0), (-4, -24), 1.5)
 v.ley("viga IPN 500", (-60, -120), (-4, -6), 1.5)
@@ -60,7 +60,7 @@ ficha_spec(sh, XB, Y1 - 80, W2, [
     ("Tipo:", "seca, mecánica (clavos de pólvora / autoperforantes). Provisoria hasta el hormigonado y luego diafragma."),
     ("Chapa - viga:", "clavo en cada valle en los extremos de chapa; c/ 450 mm en apoyos intermedios."),
     ("Chapa - chapa:", "solape lateral de 1 media onda (macho-hembra) cosido con autoperforante #10 c/ 600 mm; solape de extremo a tope sobre la viga."),
-], h=1.6, lead=1.36)
+], h=2.0, lead=1.36)
 
 # =============================================================== U6 BORDE DE LOSA
 Y2 = Y1 - 112
@@ -85,33 +85,33 @@ ficha_spec(sh, XA, Y2 - 87, W2, [
     ("Tipo:", "seca (cenefa fijada) + húmeda (hormigón que la rellena)."),
     ("Función:", "cerrar el encofrado perdido en el perímetro y dejar el canto recto y a plomo para recibir el cerramiento."),
     ("Junta:", "entre losa y muro cortina queda una junta de 20-30 mm que se cierra con barrera cortafuego (ver U9)."),
-], h=1.6, lead=1.36)
+], h=2.0, lead=1.36)
 
 # =============================================================== U7 ARRIOSTRAMIENTO - NUDO SUPERIOR
-sh.titulo_dib(XB, Y2, "U7", "ARRIOSTRAMIENTO - COLUMNA - VIGA", "1:10", w=W2)
-v = sh.view_in((XB, Y2 - 80, XB + W2, Y2 - 8), (-200, -760, 650, 60), 10)
-ipn_vertical(v, COL, 0, -740, 0, False, 35)
-v.rect(150, -200, 650, 0, "1-VISTA", 25); v.ln((150, -11), (650, -11), "1-VISTA", 13); v.ln((150, -189), (650, -189), "1-VISTA", 13)
-g = [(150, -200), (420, -200), (420, -260), (150, -470)]
+sh.titulo_dib(XB, Y2, "U7", "ARRIOSTRAMIENTO - NUDO SUPERIOR", "1:10", w=W2)
+v = sh.view_in((XB, Y2 - 80, XB + W2, Y2 - 8), (-200, -470, 650, 230), 10)
+ipn_vertical(v, COL, 0, -460, 220, True, 35)                       # en el lateral se ve el ala de la HEB
+v.pl([(100, 220), (650, 220)], "1-VISTA", 13, lt="DASHED2")
+v.rect(100, 0, 650, 200, "1-VISTA", 25); v.ln((100, 27), (650, 27), "1-VISTA", 13)
+g = [(100, 0), (370, 0), (370, -60), (100, -270)]
 v.pl(g, "1-SECCION", 35, True); v.hatch(g, "gris")
-filete(v, (150, -470), 8, 1, -1) if False else None
-ang = math.atan2(-(N1 - LOSA - 700), VANO - 300)
-cx, cy = 280, -300
+ang = math.atan2(-(N1 - LOSA - 700), VANO - 200)
+cx, cy = 230, -100
 ux, uy = math.cos(ang), math.sin(ang)
 v.circ((cx, cy), 13, "1-VISTA", 25)
 for sgn in (-1, 1):
     v.pl([(cx + sgn * uy * 30, cy - sgn * ux * 30), (cx + ux * 120 + sgn * uy * 30, cy + uy * 120 - sgn * ux * 30)], "1-VISTA", 18)
 v.pl([(cx + ux * 120 - uy * 10, cy + uy * 120 + ux * 10), (cx + ux * 420 - uy * 10, cy + uy * 420 + ux * 10)], "1-SECCION", 25)
 v.pl([(cx + ux * 120 + uy * 10, cy + uy * 120 - ux * 10), (cx + ux * 420 + uy * 10, cy + uy * 420 - ux * 10)], "1-SECCION", 25)
-v.ley("columna IPN 300", (-60, -650), (-2, -5), 1.5)
-v.ley("viga de borde IPN 200", (550, -100), (-2, 10), 1.5)
-v.ley("cartela e = 10", (380, -230), (6, 8), 1.5)
-v.ley("horquilla + pasador Ø20", (cx, cy), (-24, -8), 1.5)
-v.ley("barra Ø20 (a tensor)", (cx + ux * 380, cy + uy * 380), (-4, -8), 1.5)
-v.label("ELEVACIÓN 1:10", 250, -750, 1.5, TA.MIDDLE_CENTER, True)
+v.ley("columna HEB 200 (ala)", (-60, -420), (6, -2))
+v.ley("viga IPN 500 del pórtico extremo", (500, 120), (-6, 12))
+v.ley("cartela e = 10", (330, -40), (6, 6))
+v.ley("horquilla + pasador Ø20", (cx, cy), (-4, -16))
+v.ley("barra Ø20 (al tensor)", (cx + ux * 380, cy + uy * 380), (-4, -7))
+v.label("ELEVACIÓN 1:10 (lateral)", 250, -455, 2.0, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XB, Y2 - 87, W2, [
     ("Tipo:", "cartela soldada en taller + horquilla con pasador en obra (unión de un solo bulón)."),
     ("Vínculo:", "articulado; la barra solo trabaja a tracción. El eje de la barra pasa por el nudo columna-viga (sin excentricidad)."),
     ("Ajuste:", "con el tensor central, hasta sacar la flecha de la barra."),
-], h=1.6, lead=1.36)
+], h=2.0, lead=1.36)
 sh.save(f"L{lam('u47')}_Uniones_U4_U7")

@@ -77,9 +77,9 @@ sh.txt("Columna HEB 200", lx + 10, ly2 - 0.9, 1.9)
 sh.txt("Flecha: nervios de la chapa", lx, ly2 - 6, 1.9); sh.txt("en sentido A-D (luz 2,00 m)", lx, ly2 - 9.4, 1.9)
 
 # ------------------------------------------------------------------ corte transversal 1:125
-yc = yp - 92
+yc = yp - 94
 sh.titulo_dib(L, yc, 2, "CORTE TRANSVERSAL POR PÓRTICO (EJE 3)", "1:125", w=R - L)
-v = sh.view(L + 38, yc - 19 - 8000 / 125, 125)
+v = sh.view(L + 38, yc - 12 - 8000 / 125, 125)
 # terreno y fundaciones
 v.ln((-2200, PB - 150), (ANCHO + 2200, PB - 150), "1-VISTA", 25)
 v.hatch([(-2200, -150), (ANCHO + 2200, -150), (ANCHO + 2200, -1650), (-2200, -1650)], "tierra")
@@ -130,7 +130,7 @@ for s, at, off in labs:
     sh.pl([pa, c], "3-REFS", 13)
     sh.txt(s, c[0] + (0.6 if off[0] >= 0 else -0.6), c[1] + 0.5, 1.8, TA.LEFT if off[0] >= 0 else TA.RIGHT)
 # ------------------------------------------------------------------ índice (sin carátula)
-yi = yc - 19 - 8000 / 125 - 1650 / 125 - 8
+yi = yc - 12 - 8000 / 125 - 1650 / 125 - 3
 sh.titulo_dib(L, yi, "i", "ÍNDICE DE LÁMINAS", w=R - L)
 rows = [[f"{n:02d}", t, p] for n, t, p in LAMINAS]
 wt = (R - L - 4) / 2

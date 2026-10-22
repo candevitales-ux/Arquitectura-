@@ -15,10 +15,10 @@ EP = 80                                     # espesor del panel
 sh.titulo_dib(L, Y1, "U8", "PANEL SÁNDWICH 80 - ESTRUCTURA", "1:5", w=R - L)
 # planta: junta vertical sobre columna (x = hacia afuera, y = a lo largo de la fachada)
 v = sh.view_in((L, Y1 - 82, L + 88, Y1 - 8), (-140, -190, 150, 180), 5)
-v.pl([(-140, -62.5), (0, -62.5), (0, 62.5), (-140, 62.5)], "1-SECCION", 35)       # ala de la columna (corte)
-v.hatch([(-16, -62.5), (0, -62.5), (0, 62.5), (-16, 62.5)], "acero")
-v.ln((-16, -62.5), (-16, 62.5), "1-SECCION", 25)
-v.hatch([(-140, -5.4), (-16, -5.4), (-16, 5.4), (-140, 5.4)], "acero"); v.pl([(-140, -5.4), (-16, -5.4)], "1-SECCION", 25); v.pl([(-140, 5.4), (-16, 5.4)], "1-SECCION", 25)
+v.pl([(-140, -100), (0, -100), (0, 100), (-140, 100)], "1-SECCION", 35)       # ala de la columna HEB 200 (corte)
+v.hatch([(-15, -100), (0, -100), (0, 100), (-15, 100)], "acero")
+v.ln((-15, -100), (-15, 100), "1-SECCION", 25)
+v.hatch([(-140, -4.5), (-15, -4.5), (-15, 4.5), (-140, 4.5)], "acero"); v.pl([(-140, -4.5), (-15, -4.5)], "1-SECCION", 25); v.pl([(-140, 4.5), (-15, 4.5)], "1-SECCION", 25)
 v.rect(0, -50, 20, 50, "1-SECCION", 35); v.rect(2, -48, 18, 48, "1-VISTA", 13)                    # montante tubo 100x20x2
 filete(v, (0, 50), 4, 1, 1); filete(v, (0, -50), 4, 1, -1)
 for sgn in (-1, 1):
@@ -30,7 +30,7 @@ for sgn in (-1, 1):
     bulon(v, (20 + EP + 4, sgn * 30), (2, sgn * 30), 6, cab=3, tuerca=False, lw=13)
 v.rect(20 + EP, -40, 20 + EP + 2, 40, "1-SECCION", 25)
 v.rect(20 + EP - 15, -5, 20 + EP, 5, "1-VISTA", 13); v.hatch([(20 + EP - 15, -5), (20 + EP, -5), (20 + EP, 5), (20 + EP - 15, 5)], "negro")
-v.ley("columna IPN 300", (-80, 30), (-2, 26), 1.5)
+v.ley("columna HEB 200", (-80, 60), (-2, 22), 1.5)
 v.ley("montante tubo 100x20x2", (10, -48), (-6, -14), 1.5)
 v.ley("panel PUR 80", (60, 140), (14, 4), 1.5)
 v.ley("autoperforante Ø6,3 + EPDM", (90, 30), (16, 10), 1.5)
@@ -59,43 +59,44 @@ ficha_spec(sh, L, Y1 - 86, R - L, [
     ("Movimiento:", "la chapa exterior dilata ~1 mm/m con 50 °C: la junta vertical (10 mm) y el sellador elástico absorben el movimiento."),
     ("Fijación:", "2 autoperforantes Ø6,3 por panel y apoyo, sin aplastar el núcleo."),
     ("Agua:", "babeta con gotero en el arranque y paneles con el macho hacia arriba."),
-], h=1.55, lead=1.36)
+], h=2.0, lead=1.36)
 
 # =============================================================== U9 MURO CORTINA - LOSA
 Y2 = Y1 - 114
 sh.titulo_dib(XA, Y2, "U9", "MURO CORTINA - LOSA (ANCLAJE)", "1:5", w=W2)
-v = sh.view_in((XA, Y2 - 90, XA + W2, Y2 - 9), (-200, -240, 240, 150), 5)
-v.hatch([(-200, 0), (-60, 0), (-60, LOSA), (-200, LOSA)], "hormigon"); v.rect(-200, 0, -60, LOSA, "1-SECCION", 35)
-v.pl([(-60, LOSA), (-63, LOSA), (-63, -12), (-150, -12)], "1-SECCION", 25)
-v.pl([(-200, -12), (-45 - 100, -12)], "1-VISTA", 13)
-v.rect(-145, -200, -55, -12, "1-VISTA", 18)                                    # viga de borde (ala)
-v.hatch([(-145, -24), (-55, -24), (-55, -12), (-145, -12)], "acero")
-v.rect(-63, 20, -45, 60, "1-SECCION", 25); v.hatch([(-63, 20), (-45, 20), (-45, 60), (-63, 60)], "gris")     # riel de anclaje embutido
-gr = [(-45, 30), (40, 30), (40, 130), (30, 130), (30, 40), (-45, 40)]
+v = sh.view_in((XA, Y2 - 102, XA + W2, Y2 - 14), (-160, -175, 270, 250), 5)
+# losa de entrepiso (0 a 140) con cenefa y viga de borde debajo
+v.hatch([(-160, 0), (-60, 0), (-60, LOSA), (-160, LOSA)], "hormigon"); v.pl([(-160, LOSA), (-60, LOSA), (-60, 0), (-160, 0)], "1-SECCION", 35)
+v.pl([(-60, LOSA), (-63, LOSA), (-63, -3), (-150, -3)], "1-SECCION", 25)
+v.rect(-150, -160, -60, -3, "1-VISTA", 18); v.hatch([(-150, -14), (-60, -14), (-60, -3), (-150, -3)], "acero")
+v.rect(-83, 55, -63, 95, "1-SECCION", 25); v.hatch([(-83, 55), (-63, 55), (-63, 95), (-83, 95)], "gris")     # riel embutido
+# grapa: placa contra el canto + brazo horizontal + aleta que toma el montante
+gr = [(-63, 30), (-53, 30), (-53, 110), (140, 110), (140, 120), (-63, 120)]
 v.pl(gr, "1-SECCION", 35, True); v.hatch(gr, "acero")
-bulon(v, (-30, 48), (-57, 48), 12, cab=6, tuerca=False, lw=13)
-v.rect(40, -230, 90, 150, "1-SECCION", 35)                                     # montante 50 x 150 (corte lateral: 50 de ancho)
-v.rect(42, -228, 88, 148, "1-VISTA", 9)
-v.ln((40, -40), (90, -40), "1-SECCION", 35); v.rect(43, -110, 87, 30, "1-OCULTO", 9)        # junta de dilatación + manguito
-bulon(v, (24, 90), (96, 90), 12, cab=6, lw=13)
-v.rect(90, -230, 110, 150, "1-VISTA", 13)                                      # presor + tapa
-v.rect(112, -230, 137, 150, "1-SECCION", 25); v.hatch([(112, -230), (137, -230), (137, 150), (112, 150)], "vidrio")
-v.hatch([(-60, 60), (40, 60), (40, 140), (-60, 140)], "lana"); v.rect(-60, 60, 40, 140, "1-VISTA", 13)
-v.ln((-60, 140), (40, 140), "1-SECCION", 25)
-v.dim((40, -40), (90, -40), 0.01) if False else None
-v.ley("grapa regulable (agujeros ovalados)", (0, 130), (4, 8), 1.5)
-v.ley("riel de anclaje + bulón T M12", (-54, 30), (4, -26), 1.5)
-v.ley("bulón M12 inox", (96, 90), (4, 10), 1.5)
-v.ley("montante 50x150", (65, 0), (16, 2), 1.5)
-v.ley("junta 20 mm + manguito", (90, -40), (6, -8), 1.5)
-v.ley("cortafuego", (-20, 120), (-6, -30), 1.5)
-v.ley("DVH / spandrel", (125, -150), (2, -12), 1.5)
-v.label("CORTE VERTICAL 1:5", 0, -235, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, XA, Y2 - 94, W2, [
+bulon(v, (-48, 75), (-80, 75), 12, cab=6, tuerca=False, lw=13)
+v.rect(60, 120, 140, 205, "1-VISTA", 25); v.hatch([(60, 120), (140, 120), (140, 205), (60, 205)], "gris")
+v.circ((100, 165), 7, "1-VISTA", 25); v.circ((100, 165), 13, "1-VISTA", 13)
+# montante 50 x 150 (se ve de costado: 150 de profundidad), empalme y vidrio
+v.rect(60, -160, 210, 250, "1-SECCION", 35)
+v.ln((60, 222), (210, 222), "1-SECCION", 35); v.rect(66, 180, 204, 250, "1-OCULTO", 9)
+v.rect(210, -160, 230, 250, "1-VISTA", 13)
+v.rect(232, -160, 257, 250, "1-SECCION", 25); v.hatch([(232, -160), (257, -160), (257, 250), (232, 250)], "vidrio")
+# barrera cortafuego entre canto de losa y montante
+v.hatch([(-53, 40), (60, 40), (60, 108), (-53, 108)], "lana"); v.rect(-53, 40, 60, 108, "1-VISTA", 13)
+v.dim((60, -160), (210, -160), -4)
+v.ley("grapa regulable", (-20, 120), (-4, 9))
+v.ley("riel + bulón T", (-73, 55), (-2, -14))
+v.ley("bulón M12 inox", (100, 165), (-10, 20))
+v.ley("montante 50x150", (135, 20), (4, -10))
+v.ley("empalme c/ junta 20", (210, 222), (-6, 4))
+v.ley("cortafuego (lana + sello)", (0, 70), (-6, -26))
+v.ley("vidrio", (245, -120), (-4, -8))
+v.label("CORTE VERTICAL 1:5", -60, -150, 2.0, TA.MIDDLE_CENTER, True)
+ficha_spec(sh, XA, Y2 - 106, W2, [
     ("Tipo:", "seca y regulable en 3 direcciones (riel, agujeros ovalados y suplementos)."),
     ("Movimiento:", "el montante cuelga de cada losa; la junta horizontal de 20 mm con manguito absorbe la flecha de la viga y la dilatación."),
     ("Fuego / aire:", "la barrera de lana mineral sellada cierra el hueco losa-muro entre pisos."),
-], h=1.55, lead=1.36)
+], h=2.0, lead=1.36)
 
 # =============================================================== U10 CUBIERTA - PARAPETO
 sh.titulo_dib(XB, Y2, "U10", "CUBIERTA - PARAPETO (FACHADA D)", "1:10", w=W2)
@@ -111,17 +112,17 @@ v.pl([(-60, 620), (-60, 600), (-50, 610), (EP + 40, 610), (EP + 40, 560)], "1-SE
 v.pl([(-60, 580), (-60, 620)], "1-SECCION", 35)
 v.ln((-20, 610), (EP + 40, 610), "1-SECCION", 35)
 v.dim((-600, 0), (-600, 80), -4) if False else None
-v.ley("cupertina chapa galv. N°22 c/ gotero", (-30, 612), (-8, 4), 1.5)
+v.ley("cupertina chapa galv. N°22", (-30, 612), (-8, -4), 1.5)
 v.ley("babeta: membrana rebatida 25 cm", (-40, 200), (-10, 14), 1.5)
-v.ley("membrana asfáltica 4 mm c/ aluminio", (-300, 68), (-2, 18), 1.5)
+v.ley("membrana asfáltica 4 mm", (-300, 68), (2, 20), 1.5)
 v.ley("contrapiso alivianado 1-2 %", (-400, 40), (2, 9), 1.5)
 v.ley("panel 80 (parapeto)", (EP, 300), (4, -6), 1.5)
 v.ley("losa cubierta + viga de borde", (-300, -100), (2, -9), 1.5)
 v.ley("montante de parapeto", (-30, 450), (-4, 6), 1.5)
 v.label("CORTE 1:10", 150, -150, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, XB, Y2 - 94, W2, [
+ficha_spec(sh, XB, Y2 - 106, W2, [
     ("Tipo:", "junta de estanqueidad (no estructural): membrana, babeta y cupertina superpuestas."),
     ("Movimiento:", "la babeta queda suelta del panel y la cupertina solapa: absorben dilatación sin fisurar."),
     ("Agua:", "pendiente 1-2 % hacia embudos; la cupertina vuelca hacia la cubierta y gotea afuera."),
-], h=1.55, lead=1.36)
+], h=2.0, lead=1.36)
 sh.save(f"L{lam('u810')}_Uniones_U8_U10")

@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(NUM["cw"], "Muro cortina: elevación y corte vertical", "PUNTO 4 - MURO EXTERIOR", "1:100 - 1:20")
+sh = Sheet(NUM["cw"], "Muro cortina (CW) stick", "PUNTO 4 - MURO EXTERIOR", "1:100 - 1:20 - 1:2,5")
 y0 = sh.encabezado("4° MURO EXTERIOR VIDRIADO: MURO CORTINA (CW)",
                    "Sistema stick de aluminio (montantes + travesaños armados en obra) colgado de las losas - frente A")
 L, R = sh.L + 3, sh.R - 3
@@ -18,10 +18,10 @@ v.ln((-700, 0), (8300, 0), "1-VISTA", 35)
 for nl in (N1, N2):
     v.hatch([(0, nl - LOSA - 500 - 260), (8000, nl - LOSA - 500 - 260), (8000, nl - LOSA - 500 - 260 + SPN), (0, nl - LOSA - 500 - 260 + SPN)], "gris")
 for x in range(0, 8001, MOD):
-    v.ln((x, 0), (x, N2 + 300), "1-VISTA", 25 if x % VANO else 35)
-for z in (0, N1 - LOSA - 760, N1 - LOSA - 760 + SPN, N2 - LOSA - 760, N2 - LOSA - 760 + SPN, N2 + 300):
+    v.ln((x, 0), (x, N2), "1-VISTA", 25 if x % VANO else 35)
+for z in (0, N1 - LOSA - 760, N1 - LOSA - 760 + SPN, N2 - LOSA - 760, N2):
     v.ln((0, z), (8000, z), "1-VISTA", 25)
-v.rect(0, N2 + 300, 8000, CUP, "1-VISTA", 18); v.hatch([(0, N2 + 300), (8000, N2 + 300), (8000, CUP), (0, CUP)], "aislacion")
+v.rect(0, N2, 8000, CUP, "1-VISTA", 18); v.hatch([(0, N2), (8000, N2), (8000, CUP), (0, CUP)], "aislacion")
 for i, x in enumerate((0, 4000, 8000)): v.eje((x, -800), (x, -300), str(i + 1), at_end=False) if False else None
 v.dim((0, -300), (MOD, -300), -3); v.dim((MOD, -300), (VANO, -300), -3)
 v.dim((8000, N1 - LOSA - 760), (8000, N1 - LOSA - 760 + SPN), 4)
@@ -42,9 +42,11 @@ v.rect(-700, 0, -200, 30, "1-VISTA", 13)
 v.pl([(-700, -LOSA - 600), (-120, -LOSA - 600), (-120, -LOSA - 400)], "1-OCULTO", 13)   # cielorraso
 MX0 = 60                                           # cara interior del montante
 v.rect(MX0, -1300, MX0 + 150, 450, "1-VISTA", 25)                                     # montante (vista)
-v.ln((MX0, -200), (MX0 + 150, -200), "1-SECCION", 25)                               # junta de empalme
-gz = [(-45, -100), (50, -100), (50, 0), (40, 0), (40, -90), (-45, -90)]
+v.ln((MX0, 82), (MX0 + 150, 82), "1-SECCION", 35)                                 # junta de empalme (como en U9)
+v.rect(-83, -85, -63, -45, "1-SECCION", 18); v.hatch([(-83, -85), (-63, -85), (-63, -45), (-83, -45)], "gris")   # riel embutido
+gz = [(-63, -110), (-53, -110), (-53, -30), (140, -30), (140, -20), (-63, -20)]
 v.pl(gz, "1-SECCION", 25, True); v.hatch(gz, "acero")
+v.rect(60, -20, 140, 65, "1-VISTA", 18); v.hatch([(60, -20), (140, -20), (140, 65), (60, 65)], "gris"); v.circ((100, 25), 7, "1-VISTA", 18)
 z_s0, z_s1 = -LOSA - 760, -LOSA - 760 + SPN
 for zz in (z_s0, z_s1):
     v.rect(MX0, zz - 60, MX0 + 150 + 30, zz, "1-SECCION", 35); v.hatch([(MX0, zz - 60), (MX0 + 180, zz - 60), (MX0 + 180, zz), (MX0, zz)], "gris")
@@ -52,36 +54,22 @@ v.rect(MX0 + 150 + 30, -1300, MX0 + 150 + 55, z_s0 - 60, "1-SECCION", 25); v.hat
 v.rect(MX0 + 150 + 30, z_s1, MX0 + 150 + 55, 450, "1-SECCION", 25); v.hatch([(MX0 + 180, z_s1), (MX0 + 205, z_s1), (MX0 + 205, 450), (MX0 + 180, 450)], "vidrio")
 v.rect(MX0 + 185, z_s0, MX0 + 191, z_s1 - 60, "1-SECCION", 25); v.hatch([(MX0 + 185, z_s0), (MX0 + 191, z_s0), (MX0 + 191, z_s1 - 60), (MX0 + 185, z_s1 - 60)], "negro")
 v.rect(MX0 + 100, z_s0, MX0 + 150, z_s1 - 60, "1-VISTA", 13); v.hatch([(MX0 + 100, z_s0), (MX0 + 150, z_s0), (MX0 + 150, z_s1 - 60), (MX0 + 100, z_s1 - 60)], "lana")
-v.hatch([(-60, -LOSA), (MX0, -LOSA), (MX0, 0), (-60, 0)], "lana"); v.ln((-60, 0), (MX0, 0), "1-SECCION", 25)
+v.hatch([(-53, -100), (MX0, -100), (MX0, -32), (-53, -32)], "lana"); v.rect(-53, -100, MX0, -32, "1-VISTA", 13)
 v.ley("montante 50x150 (1)", (MX0 + 75, 300), (6, 4), 1.4)
-v.ley("travesaño 50x120 (2)", (MX0 + 90, z_s1 - 30), (12, 6), 1.4)
-v.ley("DVH 6+12+3+3 (6)", (MX0 + 192, 200), (4, -2), 1.4)
+v.ley("travesaño 50x120 (2)", (MX0 + 90, z_s1 - 30), (16, -7), 1.4)
+v.ley("DVH 6+12+3+3 (6)", (MX0 + 192, -1150), (4, -2), 1.4)
 v.ley("spandrel templado 6 esmaltado (7)", (MX0 + 188, z_s0 + 300), (4, 4), 1.4)
 v.ley("lana mineral 50 + bandeja (7)", (MX0 + 125, z_s0 + 200), (14, -12), 1.4)
-v.ley("grapa regulable (8)", (0, -95), (-8, 10), 1.4)
-v.ley("junta 20 + manguito (10)", (MX0 + 150, -200), (8, -4), 1.4)
-v.ley("cortafuego sellado (12)", (0, -60), (-12, -16), 1.4)
-v.ley("losa colaborante", (-500, -70), (-2, 14), 1.4)
+v.ley("grapa regulable (8)", (0, -25), (-8, 12), 1.4)
+v.ley("junta 20 + manguito (10)", (MX0 + 150, 82), (10, -2), 1.4)
+v.ley("cortafuego sellado (12)", (0, -70), (-12, -16), 1.4)
+v.ley("losa colaborante", (-650, -70), (2, -10), 1.4)
 v.ley("viga de borde", (-100, -LOSA - 150), (-6, -8), 1.4)
 
-sh._last = ficha_spec(sh, L, Y1 - 112, R - L, [
-    ("Función:", "cerramiento liviano y transparente que no carga: solo recibe su peso y el viento y los lleva a las losas."),
-    ("Límites:", "módulo 0,90-1,50 m; altura de montante = 1 piso (máx. ~4,50 m); deformación por viento L/175; tolerancia ±2 mm."),
-    ("Montaje:", "desde plataforma articulada, piso por piso: grapas, montantes, travesaños, vidrios sobre calzos, presores, tapas y sellados."),
-], h=2.0, lead=1.4)
-yy = ficha_spec(sh, L, sh._last - 3, R - L, [
-    ("Ventajas:", "transparencia y luz natural; liviano (~45 kg/m²); se monta en seco desde afuera; modulación precisa sobre la estructura metálica."),
-    ("Desventajas:", "costo alto; ganancia solar y pérdidas de calor (U 2,8 frente a 0,27 del panel); mantenimiento de sellados y limpieza."),
-], h=2.0, lead=1.4)
-sh.save(f"L{lam('cw')}_Muro_cortina_elevacion_corte")
-
-sh = Sheet(NUM["cw2"], "Muro cortina: corte horizontal y elementos", "PUNTO 4 - MURO EXTERIOR", "1:2")
-y0 = sh.encabezado("4° MURO CORTINA (CONTINUACIÓN)", "Corte horizontal por el montante y listado de los elementos del sistema stick")
-Y1 = y0 - 3.5
 # =============================================================== 3. CORTE HORIZONTAL POR MONTANTE 1:2,5
-Y2 = Y1
-sh.titulo_dib(L, Y2, 3, "CORTE HORIZONTAL POR MONTANTE", "1:2", w=R - L)
-v = sh.view_in((L, Y2 - 132, R, Y2 - 8), (-100, -40, 100, 205), 2)
+Y2 = Y1 - 106
+sh.titulo_dib(L, Y2, 3, "CORTE HORIZONTAL POR MONTANTE", "1:2,5", w=86)
+v = sh.view_in((L, Y2 - 106, L + 86, Y2 - 8), (-100, -40, 100, 205), 2.5)
 # montante tubular 50 x 150 con canal
 mp = [(-25, 0), (25, 0), (25, 150), (-25, 150)]
 v.pl(mp, "1-SECCION", 35, True)
@@ -102,18 +90,17 @@ for sgn in (-1, 1):
     v.rect(min(sgn * 18, sgn * 26), 176, max(sgn * 18, sgn * 26), 181, "1-VISTA", 13); v.hatch([(sgn * 18, 176), (sgn * 26, 176), (sgn * 26, 181), (sgn * 18, 181)], "negro")
 v.dim((-25, 0), (25, 0), -4); v.dim((25, 0), (25, 150), 6)
 v.dim((-100, 152), (-100, 176), -4, txt="24,8")
-v.ley("montante alum. 6063-T6 e = 2,5 (1)", (-22, 60), (-2, 14), 1.4)
+v.ley("montante (1)", (-22, 40), (-4, -8), 1.4)
 v.ley("RPT (13)", (6, 160), (12, -14), 1.4)
 v.ley("presor + tornillo inox (3)", (20, 172), (16, -2), 1.4)
 v.ley("tapa a presión (4)", (20, 190), (14, 6), 1.4)
 v.ley("burlete EPDM (5)", (30, 149), (16, -18), 1.4)
-v.ley("separador c/ desecante + silicona", (-20, 164), (-8, 10), 1.4)
-v.ley("templado 6 ext. / laminado 3+3 int.", (-90, 176), (0, 8), 1.4)
+v.ley("separador + desecante", (-20, 164), (-2, 12), 1.4)
+v.ley("6 templado + 3+3 laminado", (-90, 152), (2, -16), 1.4)
 v.label("EXTERIOR", 60, 200, 1.4, TA.MIDDLE_CENTER, True); v.label("INTERIOR", 60, -30, 1.4, TA.MIDDLE_CENTER, True)
 
 # =============================================================== 4. ESPECIFICACIÓN
-xs = L
-Y2 = Y2 - 138
+xs = L + 90
 sh.titulo_dib(xs, Y2, 4, "ELEMENTOS DEL SISTEMA", w=R - xs)
 filas = [["1", "Montante", "alum. 6063-T6, 50x150, c/ 1,00 m, colgado de cada losa"],
          ["2", "Travesaño", "alum. 50x120, a +0,90 (spandrel) y en cada losa"],
@@ -127,5 +114,15 @@ filas = [["1", "Montante", "alum. 6063-T6, 50x150, c/ 1,00 m, colgado de cada lo
          ["12", "Cortafuego", "lana mineral 100 kg/m³ + sellador intumescente"],
          ["13", "RPT", "aislador de poliamida entre montante y presor"],
          ["14", "Sellados", "silicona neutra en perímetros y babetas"]]
-yb = sh.tabla(xs, Y2 - 5, [("N°", 10), ("Pieza", 30), ("Medidas / especificación", R - xs - 40)], filas, h=2.0, lead=1.25, pad=0.55)
-sh.save(f"L{lam('cw2')}_Muro_cortina_horizontal_elementos")
+yb = sh.tabla(xs, Y2 - 5, [("N°", 8), ("Pieza", 19), ("Medidas / especificación", R - xs - 27)], filas, h=2.0, lead=1.22, pad=0.45)
+sh._last = ficha_spec(sh, xs, yb - 3, R - xs, [
+    ("Función:", "cerramiento liviano y transparente que no carga: solo recibe su peso y el viento y los lleva a las losas."),
+    ("Límites:", "módulo 0,90-1,50 m; altura de montante = 1 piso (máx. ~4,50 m); deformación por viento L/175; tolerancia ±2 mm."),
+    ("Montaje:", "desde plataforma articulada, piso por piso: grapas, montantes, travesaños, vidrios sobre calzos, presores, tapas y sellados."),
+], h=2.0, lead=1.4)
+yy = ficha_spec(sh, L, min(sh._last, Y2 - 108) - 2, R - L, [
+    ("Ventajas:", "transparencia y luz natural; liviano (~45 kg/m²); se monta en seco desde afuera; modulación precisa sobre la estructura metálica."),
+    ("Desventajas:", "costo alto; ganancia solar y pérdidas de calor (U 2,8 frente a 0,27 del panel); mantenimiento de sellados y limpieza."),
+], h=2.0, lead=1.4)
+
+sh.save(f"L{lam('cw')}_Muro_cortina")

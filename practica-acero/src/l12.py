@@ -38,7 +38,7 @@ v.label("semirremolque", 15400, 6000, 1.3, TA.MIDDLE_CENTER, rot=90)
 for i, (gx, gy) in enumerate(((8000, 12500), (22000, 12500))):
     v.rect(gx - 3300, gy - 3250, gx + 3300, gy + 3250, "1-OCULTO", 9)
     v.rect(gx - 6250, gy - 1275, gx + 6250, gy + 1275, "1-VISTA", 25)
-    v.circ((gx, gy), 15200, "1-EJES", 18)
+    v.circ((gx, gy), 16000, "1-EJES", 18)
     v.circ((gx, gy), 400, "1-SECCION", 25)
     v.label(f"E{i + 1}", gx + 700, gy + 700, 1.6, bold=True)
 # acopios y obrador
@@ -49,7 +49,7 @@ for (x0, y0_, x1, y1, s) in ((1000, 1000, 11000, 5500, "acopio perfiles"), (1950
 v.circ((27500, 29500), 900, "1-VISTA", 13); v.label("grupo elec.", 27500, 27800, 1.2, TA.MIDDLE_CENTER)
 v.dim((0, LOTE_Y), (LOTE_X, LOTE_Y), 3)
 v.dim((LOTE_X, 0), (LOTE_X, LOTE_Y), 3)
-v.ley("radio de trabajo 15,2 m", (22000 + 10748, 12500 - 10748), (-2, -8), 1.4)
+v.ley("radio de trabajo 16 m", (22000 + 11314, 12500 - 11314), (-2, -8), 1.4)
 v.ley("estabilizadores s/ placas", (25300, 15750), (-2, 6), 1.4)
 
 # =============================================================== texto: alquiler, armado, acceso

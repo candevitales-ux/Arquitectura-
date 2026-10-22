@@ -28,9 +28,11 @@ v = sh.view_in((XA, Y1 - 92, XA + W2, Y1 - 8), REAL, 20)
 estructura(v)
 MX0 = 60
 v.rect(MX0, -1050, MX0 + 150, 560, "1-VISTA", 25)
-v.ln((MX0, -200), (MX0 + 150, -200), "1-SECCION", 25)
-gz = [(-45, -100), (50, -100), (50, 0), (40, 0), (40, -90), (-45, -90)]
+v.ln((MX0, 82), (MX0 + 150, 82), "1-SECCION", 35)
+v.rect(-83, -85, -63, -45, "1-SECCION", 18); v.hatch([(-83, -85), (-63, -85), (-63, -45), (-83, -45)], "gris")
+gz = [(-63, -110), (-53, -110), (-53, -30), (140, -30), (140, -20), (-63, -20)]
 v.pl(gz, "1-SECCION", 25, True); v.hatch(gz, "acero")
+v.rect(60, -20, 140, 65, "1-VISTA", 18); v.hatch([(60, -20), (140, -20), (140, 65), (60, 65)], "gris")
 z0, z1 = -LOSA - 760, -LOSA - 760 + 900
 for zz in (z0, z1):
     v.rect(MX0, zz - 60, MX0 + 180, zz, "1-SECCION", 25); v.hatch([(MX0, zz - 60), (MX0 + 180, zz - 60), (MX0 + 180, zz), (MX0, zz)], "gris")
@@ -38,13 +40,13 @@ for za, zb in ((-1050, z0 - 60), (z1, 560)):
     v.rect(MX0 + 180, za, MX0 + 205, zb, "1-SECCION", 25); v.hatch([(MX0 + 180, za), (MX0 + 205, za), (MX0 + 205, zb), (MX0 + 180, zb)], "vidrio")
 v.rect(MX0 + 185, z0, MX0 + 191, z1 - 60, "1-SECCION", 25); v.hatch([(MX0 + 185, z0), (MX0 + 191, z0), (MX0 + 191, z1 - 60), (MX0 + 185, z1 - 60)], "negro")
 v.rect(MX0 + 100, z0, MX0 + 150, z1 - 60, "1-VISTA", 13); v.hatch([(MX0 + 100, z0), (MX0 + 150, z0), (MX0 + 150, z1 - 60), (MX0 + 100, z1 - 60)], "lana")
-v.hatch([(-60, -LOSA), (MX0, -LOSA), (MX0, 0), (-60, 0)], "lana")
+v.hatch([(-53, -100), (MX0, -100), (MX0, -32), (-53, -32)], "lana"); v.rect(-53, -100, MX0, -32, "1-VISTA", 13)
 v.dim((MX0, 560), (MX0 + 205, 560), 3)
 v.ley("montante alum. 50x150", (MX0 + 75, 500), (12, 4), 1.4)
 v.ley("DVH 24,8 mm", (MX0 + 192, -1100), (6, 0), 1.4)
 v.ley("spandrel + lana mineral", (MX0 + 188, z0 + 400), (6, 0), 1.4)
-v.ley("grapa al borde de losa", (0, -95), (-4, -18), 1.4)
-v.ley("cortafuego", (0, -40), (-14, -26), 1.4)
+v.ley("grapa al canto de losa", (0, -25), (-4, -24), 1.4)
+v.ley("cortafuego", (0, -70), (-14, -30), 1.4)
 
 # =============================================================== PANEL
 sh.titulo_dib(XB, Y1, "B", "OPACO: PANEL SÁNDWICH 80", "1:20", w=W2)
@@ -96,7 +98,7 @@ ficha_spec(sh, XB, Y3 - 6, W2, [
 Y4 = Y3 - 31
 sh.titulo_dib(L, Y4, 3, "MATRIZ DE DECISIÓN POR FACHADA (1 = malo, 5 = muy bueno; peso según la fachada)", w=R - L)
 crit = [("Luz natural y visuales", 5, 1, 3, 1), ("Aislación térmica", 2, 5, 1, 3), ("Peso sobre la estructura", 2, 5, 1, 2),
-        ("Costo", 1, 5, 2, 3), ("Velocidad de montaje", 2, 5, 1, 2), ("Mantenimiento", 2, 4, 1, 2), ("Imagen / representatividad", 5, 2, 3, 1)]
+        ("Costo", 1, 5, 1, 3), ("Velocidad de montaje", 2, 5, 1, 2), ("Mantenimiento", 2, 4, 1, 2), ("Imagen / representatividad", 5, 2, 3, 1)]
 filas = []
 tA = [0, 0]; tB = [0, 0]
 for c, a, b, pf, pl in crit:
