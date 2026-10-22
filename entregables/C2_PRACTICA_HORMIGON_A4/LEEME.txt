@@ -1,0 +1,18 @@
+C2 · PRÁCTICA EN CLASE · GRANDES LUCES DE HORMIGÓN PREMOLDEADO  (13 láminas A4 apaisadas)
+
+C2_PRACTICA_HORMIGON_A4_COMPLETA.pdf : las 13 láminas en un solo PDF. Imprimir en A4 apaisada al 100 % (sin "ajustar a página").
+PDF/   : cada lámina por separado.
+DWG/   : cada lámina en DWG (AutoCAD 2018), dibujada en mm de papel a escala 1:1 de la hoja: cada dibujo ya está
+         en su escala (indicada en el título y en el rótulo). Plotear desde la presentación "LAMINA nn" (A4, escala 1:1).
+         Capas: MARCO, CONTORNOS, LINEAS, TEXTOS, REFERENCIAS, COTAS, TABLAS, ISO, ARMADURAS (+ -RELLENO / -RAYADO).
+C2_PRACTICA_HORMIGON_A4_CONJUNTO.dwg : las 13 láminas en un único DWG (una al lado de la otra) con 13 presentaciones.
+DXF/   : los mismos dibujos en DXF.
+vistas_previas/ : PNG de cada lámina.
+
+CONTENIDO
+01 Carátula, índice y axonometría del sistema con la lista gráfica de elementos E1…E11
+02-04  1º Elementos constructivos: fundación cáliz, columna, VL doble T, viga L, VP T invertida, panel TT, capa, apoyos y conectores
+05-07  2º Juntas y uniones J1…J15: ubicación en planta y corte, clasificación y detalles
+08-10  3º Máquinas: grúa telescópica + tabla de carga, carretón, balancín, pista de pretensado, gato, puntales, plataforma,
+          grouteo, herramientas; planificación del alquiler, armado y acceso (implantación 1:500 + cronograma)
+11-13  4º Muro cortina y panel sándwich: croquis a escala, especificación, comparación y justificación

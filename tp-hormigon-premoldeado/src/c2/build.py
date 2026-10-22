@@ -15,7 +15,7 @@ MODS = ["s01_caratula", "s02_fundacion_columna", "s03_vigas", "s04_panel_tt", "s
 NAMES = ["Caratula_Sistema", "Elementos_1_Fundacion_Columna", "Elementos_2_Vigas", "Elementos_3_Panel_TT_Accesorios",
          "Juntas_1_Ubicacion", "Juntas_2_Estructura", "Juntas_3_Cerramientos", "Maquinas_1_Montaje", "Maquinas_2_Moldeo_Anclaje",
          "Maquinas_3_Planificacion_Alquiler_Acceso", "Cerramiento_1_Muro_Cortina", "Cerramiento_2_Opaco", "Cerramiento_3_Comparacion"]
-LAYERS = {"MARCO": 7, "CONTORNOS": 7, "LINEAS": 7, "TEXTOS": 7, "REFERENCIAS": 1, "COTAS": 3, "TABLAS": 7, "ISO": 7, "ARMADURAS": 14}
+LAYERS = {"MARCO": 7, "CONTORNOS": 7, "LINEAS": 7, "TEXTOS": 7, "REFERENCIAS": 7, "COTAS": 7, "TABLAS": 7, "ISO": 7, "ARMADURAS": 14}
 
 
 def new_doc():
@@ -30,6 +30,7 @@ def layout_a4(doc, name, cx):
     lay = doc.layouts.new(name)
     lay.page_setup(size=(W, H), margins=(0, 0, 0, 0), units="mm", scale=(1, 1))
     lay.add_viewport(center=(W / 2, H / 2), size=(W, H), view_center_point=(cx, H / 2), view_height=H)
+    if "Layout1" in doc.layouts: doc.layouts.delete("Layout1")
 
 
 def main():
