@@ -111,7 +111,7 @@ filas = [["Proceso", "taller: semiautomática MIG (ER70S-6); obra: electrodo E70
 sh.tabla(XB, Y2 - 42, [("Ítem", 16), ("Especificación", W2 - 16)], filas, h=1.6, lead=1.3, pad=0.55)
 
 # =============================================================== 18. FIJACIONES DE CHAPA
-Y3 = Y2 - 82
+Y3 = Y2 - 74
 sh.titulo_dib(XA, Y3, 18, "FIJACIONES DE LA CHAPA", "1:2", w=W2)
 v = sh.view_in((XA, Y3 - 36, XA + 30, Y3 - 6), (-15, -20, 15, 40), 2)
 v.rect(-15, -12, 15, 0, "1-SECCION", 25); v.hatch([(-15, -12), (15, -12), (15, 0), (-15, 0)], "acero")

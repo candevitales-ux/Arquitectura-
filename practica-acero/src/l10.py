@@ -84,11 +84,11 @@ v.hatch([(-60, 60), (40, 60), (40, 140), (-60, 140)], "lana"); v.rect(-60, 60, 4
 v.ln((-60, 140), (40, 140), "1-SECCION", 25)
 v.dim((40, -40), (90, -40), 0.01) if False else None
 v.ley("grapa regulable (agujeros ovalados)", (0, 130), (-2, 6), 1.5)
-v.ley("riel de anclaje + bulón T M12", (-54, 30), (-6, -14), 1.5)
+v.ley("riel de anclaje + bulón T M12", (-54, 30), (4, -26), 1.5)
 v.ley("bulón M12 inox", (96, 90), (4, 10), 1.5)
 v.ley("montante 50x150", (65, 0), (16, 2), 1.5)
 v.ley("junta 20 mm + manguito", (90, -40), (6, -8), 1.5)
-v.ley("cortafuego", (-20, 120), (-8, 16), 1.5)
+v.ley("cortafuego", (-20, 120), (-6, -30), 1.5)
 v.ley("DVH / spandrel", (125, -150), (2, -12), 1.5)
 v.label("CORTE VERTICAL 1:5", 0, -235, 1.5, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XA, Y2 - 94, W2, [
@@ -105,7 +105,7 @@ v.rect(-145, -LOSA - 200, -55, -LOSA, "1-VISTA", 18)
 v.pl([(-500, 0), (-500, 72), (-60, 40), (-60, 0)], "1-VISTA", 18); v.hatch([(-500, 0), (-500, 72), (-60, 40), (-60, 0)], "mortero")
 v.pl([(-500, 78), (-60, 46), (-40, 46), (-40, 250)], "1-SECCION", 35)
 v.rect(-40, 0, -20, 600, "1-VISTA", 18)                                         # montante de parapeto
-v.rect(0, -220, EP, 600, "1-SECCION", 35); v.hatch([(0, -220), (EP, -220), (EP, 600), (0, 600)], "aislacion")
+v.rect(0, -170, EP, 600, "1-SECCION", 35); v.hatch([(0, -170), (EP, -170), (EP, 600), (0, 600)], "aislacion")
 v.pl([(-30, 250), (-30, 300), (-55, 300)], "1-SECCION", 18)
 v.pl([(-60, 620), (-60, 600), (-50, 610), (EP + 40, 610), (EP + 40, 560)], "1-SECCION", 35)
 v.pl([(-60, 580), (-60, 620)], "1-SECCION", 35)
