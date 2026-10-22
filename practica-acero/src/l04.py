@@ -117,7 +117,7 @@ v.dim((60, -120), (60, -40), 11)
 v.label("PLACA 1:10", 15, -250, 1.6, TA.MIDDLE_CENTER, True)
 # placa en planta soldada al ala de la columna
 v = sh.view_in((L + 32, Y3 - 52, L + 80, Y3 - 6), (-170, -200, 250, 70), 10)
-pts = xf(ipn_poly(*IPN[COL]), 0, 0, 90); v.pl(pts, "1-SECCION", 35, True); v.hatch(pts, "acero")
+pts = xf(perfil_poly(COL), 0, 0, 90); v.pl(pts, "1-SECCION", 35, True); v.hatch(pts, "acero")
 v.rect(62, -5, 182, 5, "1-SECCION", 35); v.hatch([(62, -5), (182, -5), (182, 5), (62, 5)], "acero")
 filete(v, (62, 5), 8, 1, 1); filete(v, (62, -5), 8, 1, -1)
 v.rect(102, 5, 230, 23, "1-VISTA", 18)                               # alma de la viga (fantasma)

@@ -44,7 +44,7 @@ if __name__ == "__main__":
         v.rect(-60, nl - LOSA, ANCHO + 60, nl, "1-SECCION", 25)
         v.hatch([(-60, nl - LOSA), (ANCHO + 60, nl - LOSA), (ANCHO + 60, nl), (-60, nl)], "hormigon")
         for k in range(7):
-            p = xf(ipn_poly(*IPN[VS]), k * SEC, nl - LOSA - 100); v.pl(p, "1-SECCION", 13, True); v.hatch(p, "negro")
+            p = xf(perfil_poly(VS), k * SEC, nl - LOSA - 100); v.pl(p, "1-SECCION", 13, True); v.hatch(p, "negro")
     # muro cortina (frente A) y panel (contrafrente D)
     for x in (-230, -180): v.ln((x, -150), (x, N2 + 600), "1-VISTA", 18)
     for z in range(0, int(N2), 1250): v.ln((-230, z), (-180, z), "1-VISTA", 13)

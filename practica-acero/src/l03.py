@@ -101,7 +101,7 @@ ficha_spec(sh, XB, YT - 90, W2, [
 sh.titulo_dib(XA, YM, 3, "PLACA BASE 450 x 250 x 22", "1:10", w=W2)
 v = sh.view_in((XA, YM - 46, XA + W2, YM - 10), (-240, -210, 290, 150), 10)            # planta
 v.rect(-225, -125, 225, 125, "1-VISTA", 35)
-pts = ipn_poly(*IPN[COL]); pts = xf(pts, 0, 0, 90)
+pts = perfil_poly(COL); pts = xf(pts, 0, 0, 90)
 v.pl(pts, "1-SECCION", 35, True); v.hatch(pts, "acero")
 for cx in (-185, 185):
     for cy in (-85, 85):

@@ -39,7 +39,7 @@ ficha_spec(sh, XA, Y1 - 80, W2, [
 sh.titulo_dib(XB, Y1, "U5", "CHAPA - VIGA Y CHAPA - CHAPA", "1:5", w=W2)
 v = sh.view_in((XB, Y1 - 78, XB + W2, Y1 - 8), (-215, -170, 215, 190), 5)
 seccion_ipn(v, VP, 0, -h5 / 2) if False else None
-pts = ipn_poly(*IPN[VP]); pts = [(x, y - h5 / 2) for x, y in pts]
+pts = perfil_poly(VP); pts = [(x, y - h5 / 2) for x, y in pts]
 top = [p for p in pts if p[1] > -160]
 v.pl([(-b5 / 2, -150), (-b5 / 2, -tf5 + 4), (-tw5 / 2, -tf5 - 3), (-tw5 / 2, -150)], "1-SECCION", 35)
 v.pl([(b5 / 2, -150), (b5 / 2, -tf5 + 4), (tw5 / 2, -tf5 - 3), (tw5 / 2, -150)], "1-SECCION", 35)

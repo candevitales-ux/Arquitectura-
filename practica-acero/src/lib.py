@@ -8,7 +8,7 @@ from ezdxf.enums import TextEntityAlignment as TA
 
 OUT = os.environ.get("OUT", "build")
 HMIN = 2.0                       # altura mínima de letra en la hoja impresa (mm)
-TOTAL = 21
+TOTAL = 15
 FECHA = "22/10/26"
 
 LAYERS = {
@@ -204,42 +204,12 @@ class Sheet:
         self.L, self.R, self.T, self.B = 15.0, W - 7.0, H - 7.0, 7.0
         self.pl([(0, 0), (W, 0), (W, H), (0, H)], "0-MARCO", 0, True, color=9)
         self.pl([(self.L, self.B), (self.R, self.B), (self.R, self.T), (self.L, self.T)], "0-MARCO", 50, True)
-        rh = 20.0
-        y0, y1 = self.B, self.B + rh
-        self.rotulo_top = y1
-        self.pl([(self.L, y1), (self.R, y1)], "0-MARCO", 50)
-        ww = self.R - self.L
-        xs = [self.L, self.L + 0.11 * ww, self.L + 0.53 * ww, self.L + 0.80 * ww, self.R]
-        for x in xs[1:-1]: self.pl([(x, y0), (x, y1)], "0-MARCO", 35)
-        # 1: número de lámina
-        self.txt("LÁMINA", (xs[0] + xs[1]) / 2, y1 - 4, 2.0, TA.MIDDLE_CENTER, "3-TITULOS", True)
-        self.txt(f"{self.num:02d}", (xs[0] + xs[1]) / 2, y0 + 9, 6.0, TA.MIDDLE_CENTER, "3-TITULOS", True)
-        self.txt(f"de {TOTAL}", (xs[0] + xs[1]) / 2, y0 + 2.8, 2.0, TA.MIDDLE_CENTER, "3-TITULOS")
-        # 2: título
-        x = xs[1] + 2
-        mw = xs[2] - xs[1] - 4
-        self.txt("UNM - CONSTRUCCIONES 2 - GRANDES LUCES EN ACERO", x, y1 - 4, 1.9, bold=True, maxw=mw)
-        self.txt(self.punto, x, y1 - 7.8, 1.9, maxw=mw)
-        tl = wrap(self.titulo, xs[2] - xs[1] - 4, 2.4, True)
-        for i, ln in enumerate(tl[:2]):
-            self.txt(ln, x, y1 - 12.2 - i * 3.4, 2.4, bold=True, maxw=mw)
-        # 3: datos
-        x = xs[2] + 2
-        self.txt("ALUMNA: Vitale Candelaria", x, y1 - 4, 2.0, bold=True, maxw=xs[3] - xs[2] - 3)
-        self.txt("GRUPO: 13  (TP6 ACERO)", x, y1 - 8, 2.0)
-        self.txt("DOCENTES: Arq. Tucci", x, y1 - 12, 2.0)
-        self.txt("y Arq. Cardozo", x + 19.5, y1 - 15.6, 2.0)
-        # 4: escala / fecha
-        x = xs[3] + 2
-        self.txt("ESCALAS:", x, y1 - 4, 2.0, bold=True)
-        for i, ln in enumerate(wrap(self.escalas or "s/ esc.", xs[4] - xs[3] - 4, 2.0)[:2]):
-            self.txt(ln, x, y1 - 7.8 - i * 3.2, 2.0)
-        self.txt(f"FECHA: {FECHA}", x, y0 + 5.6, 2.0)
-        self.txt("A4 - IMPRIMIR AL 100 %", x, y0 + 2.0, 2.0)
+        self.rotulo_top = self.B          # sin rótulo: el dibujo puede llegar hasta el marco
 
     def encabezado(self, s, sub=None):
         """Título general de la lámina arriba a la izquierda; devuelve la y libre."""
-        self.txt(s, self.L + 3, self.T - 6.5, 4.0, bold=True, layer="3-TITULOS")
+        self.txt(f"LÁMINA {self.num:02d}/{TOTAL}", self.R - 3, self.T - 6.5, 3.2, TA.LEFT if False else TA.RIGHT, "3-TITULOS", True)
+        self.txt(s, self.L + 3, self.T - 6.5, 4.0, bold=True, layer="3-TITULOS", maxw=self.R - self.L - 40)
         y = self.T - 9.5
         if sub:
             self.txt(sub, self.L + 3, y - 2.2, 2.2, layer="3-TITULOS"); y -= 4
@@ -332,18 +302,24 @@ class View:
 
 
 # ====================================================================== perfiles y piezas
-IPN = {200: (200, 90, 7.5, 11.3), 300: (300, 125, 10.8, 16.2), 450: (450, 170, 16.2, 24.3), 500: (500, 185, 18.0, 27.0)}
+IPN = {200: (200, 90, 7.5, 11.3), 300: (300, 125, 10.8, 16.2), 450: (450, 170, 16.2, 24.3), 500: (500, 185, 18.0, 27.0),
+       "HEB200": (200, 200, 9.0, 15.0)}
+TAPER = {"HEB200": 0.0}                    # los HEB tienen alas paralelas; los IPN, pendiente 14 %
 
 
-def ipn_poly(h, b, tw, tf):
-    """Contorno de un IPN centrado en (0,0), alma vertical, alas con pendiente 14 %."""
+def ipn_poly(h, b, tw, tf, taper=0.14):
+    """Contorno de un perfil doble T centrado en (0,0), alma vertical (IPN: alas con pendiente 14 %)."""
     q = (b - tw) / 4.0
-    t_in = tf + 0.14 * q            # espesor del ala junto al alma
-    t_out = tf - 0.14 * q           # espesor del ala en la punta
+    t_in = tf + taper * q           # espesor del ala junto al alma
+    t_out = tf - taper * q          # espesor del ala en la punta
     y = h / 2
     half = [(b / 2, y), (b / 2, y - t_out), (tw / 2, y - t_in), (tw / 2, -y + t_in), (b / 2, -y + t_out), (b / 2, -y)]
     left = [(-px, py) for px, py in reversed(half)]
     return half + left
+
+
+def perfil_poly(n):
+    return ipn_poly(*IPN[n], taper=TAPER.get(n, 0.14))
 
 
 def xf(pts, dx=0, dy=0, rot=0, sx=1):
@@ -352,7 +328,7 @@ def xf(pts, dx=0, dy=0, rot=0, sx=1):
 
 
 def seccion_ipn(v, n, cx, cy, rot=0, hatch=True, lw=35):
-    pts = xf(ipn_poly(*IPN[n]), cx, cy, rot)
+    pts = xf(perfil_poly(n), cx, cy, rot)
     v.pl(pts, "1-SECCION", lw, True)
     if hatch: v.hatch(pts, "acero")
     return pts

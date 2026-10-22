@@ -15,7 +15,7 @@ yy = y - 9
 mem = [
     ("Edificio: ", "planta libre rectangular de 20,00 x 12,00 m, dos niveles (entrepiso +3,80 y cubierta +7,40), cupertina +8,00. Uso: oficinas / comercio."),
     ("Grandes luces: ", "pórticos transversales cada 4,00 m que salvan 12,00 m sin apoyos intermedios. Viga principal IPN 500 de alma llena, trabajando en sección compuesta con la losa (conectores de corte)."),
-    ("Columnas: ", "IPN 300 sobre bases aisladas de H°A° con placa base y 4 pernos de anclaje M20. Columnas de fachada en los lados cortos (ejes B y C)."),
+    ("Columnas: ", "HEB 200 (alas paralelas) sobre bases aisladas de H°A° de 1,60 x 1,60 m, con placa base 380 x 250 x 20 y 4 pernos de anclaje M20. Columnas de fachada en los lados cortos (ejes B y C)."),
     ("Entrepiso y cubierta: ", "vigas secundarias IPN 200 cada 2,00 m (luz 4,00 m) y losa colaborante: chapa de acero galvanizado trapezoidal h = 76 mm + hormigón H-25, e total = 140 mm, malla Q188."),
     ("Estabilidad: ", "uniones viga-columna abulonadas; cruces de San Andrés (barras Ø20 con tensor) en laterales y contrafrente; la losa actúa como diafragma rígido horizontal."),
     ("Cerramientos: ", "frente (eje A) muro cortina de aluminio tipo stick con DVH; laterales y contrafrente con panel sándwich metálico PUR 80 mm (integral opaco)."),
@@ -42,7 +42,7 @@ for k in range(0, 7):
 cols = [(x, 0) for x in EJES_X] + [(x, ANCHO) for x in EJES_X] + [(0, 4000), (0, 8000), (LARGO, 4000), (LARGO, 8000)]
 for (cx, cy) in cols:
     rot = 0 if cy in (0, ANCHO) else 90           # alma en el plano del pórtico; columnas de fachada corta giradas
-    pts = xf(ipn_poly(*IPN[COL]), cx, cy, rot)
+    pts = xf(perfil_poly(COL), cx, cy, rot)
     v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "negro")
 # chapa colaborante: un paño con la dirección de los nervios
 v.pl([(4000, 2000), (8000, 2000), (8000, 8000), (4000, 8000)], "1-OCULTO", 13, True)
@@ -73,7 +73,7 @@ for i, (lay, lw, s) in enumerate(items):
     sh.pl([(lx, yl), (lx + 8, yl)], lay, lw); sh.txt(s, lx + 10, yl - 0.9, 1.9)
 ly2 = ly - 4 * 4.4
 sh.solid([(lx + 2.7, ly2 - 1), (lx + 5.3, ly2 - 1), (lx + 5.3, ly2 + 1), (lx + 2.7, ly2 + 1)], 60)
-sh.txt("Columna IPN 300", lx + 10, ly2 - 0.9, 1.9)
+sh.txt("Columna HEB 200", lx + 10, ly2 - 0.9, 1.9)
 sh.txt("Flecha: nervios de la chapa", lx, ly2 - 6, 1.9); sh.txt("en sentido A-D (luz 2,00 m)", lx, ly2 - 9.4, 1.9)
 
 # ------------------------------------------------------------------ corte transversal 1:125
@@ -84,7 +84,7 @@ v = sh.view(L + 38, yc - 19 - 8000 / 125, 125)
 v.ln((-2200, PB - 150), (ANCHO + 2200, PB - 150), "1-VISTA", 25)
 v.hatch([(-2200, -150), (ANCHO + 2200, -150), (ANCHO + 2200, -1650), (-2200, -1650)], "tierra")
 for cy in (0, ANCHO):
-    base = [(cy - 700, FUND), (cy + 700, FUND), (cy + 700, FUND + 400), (cy + 250, FUND + 400), (cy + 250, -300), (cy - 250, -300), (cy - 250, FUND + 400), (cy - 700, FUND + 400)]
+    base = [(cy - 800, FUND), (cy + 800, FUND), (cy + 800, FUND + BASE_E), (cy + 250, FUND + BASE_E), (cy + 250, -300), (cy - 250, -300), (cy - 250, FUND + BASE_E), (cy - 800, FUND + BASE_E)]
     v.hatch(base, "gris"); v.pl(base, "1-SECCION", 35, True)
 # contrapiso PB
 v.hatch([(0, -150), (ANCHO, -150), (ANCHO, 0), (0, 0)], "hormigon"); v.rect(0, -150, ANCHO, 0, "1-SECCION", 25)
@@ -97,14 +97,14 @@ for nl in (N1, N2):
     v.rect(-150, nl - LOSA, ANCHO + 150, nl, "1-SECCION", 25); v.hatch([(-150, nl - LOSA), (ANCHO + 150, nl - LOSA), (ANCHO + 150, nl), (-150, nl)], "hormigon")
     for k in range(0, 7):
         yy3 = k * SEC
-        p = xf(ipn_poly(*IPN[VS]), yy3, nl - LOSA - 100)
+        p = xf(perfil_poly(VS), yy3, nl - LOSA - 100)
         v.pl(p, "1-SECCION", 18, True); v.hatch(p, "negro")
 # parapeto, cerramientos
 v.rect(-200, N2, -120, CUP, "1-VISTA", 25); v.rect(ANCHO + 120, N2, ANCHO + 200, CUP, "1-VISTA", 25)
 v.hatch([(-200, N2), (-120, N2), (-120, CUP), (-200, CUP)], "gris"); v.hatch([(ANCHO + 120, N2), (ANCHO + 200, N2), (ANCHO + 200, CUP), (ANCHO + 120, CUP)], "gris")
 # frente: CW (eje A) - línea doble
 for x in (-260, -200):
-    v.ln((x, 0), (x, N2 - 200), "1-VISTA", 18)
+    v.ln((x, 0), (x, N2), "1-VISTA", 18)
 # contrafrente: panel con ventana
 v.rect(ANCHO + 120, 0, ANCHO + 200, N2, "1-VISTA", 25)
 v.hatch([(ANCHO + 120, 0), (ANCHO + 200, 0), (ANCHO + 200, N2), (ANCHO + 120, N2)], "gris")
@@ -123,10 +123,18 @@ px, py = v.p(-260, 2500); sh.txt("CW", px - 1, py, 1.9, TA.RIGHT, rot=0)
 px, py = v.p(-260, 2000); sh.txt("frente A", px - 1, py, 1.9, TA.RIGHT)
 px, py = v.p(ANCHO + 200, 2500); sh.txt("panel 80", px + 1, py + 6, 1.9)
 labs = [("Viga principal IPN 500 - luz 12,00 m", (6000, N1 - 390), (0, 4)), ("Losa colaborante e = 140", (3000, N2 - 70), (0, 6)),
-        ("Viga sec. IPN 200 c/ 2,00", (8000, N1 - 240), (2, -7)), ("Columna IPN 300", (ANCHO, 5600), (-28, 0)),
-        ("Base aislada H°A° + pedestal", (ANCHO - 700, FUND + 200), (-36, 0))]
+        ("Viga sec. IPN 200 c/ 2,00", (8000, N1 - 240), (2, -7)), ("Columna HEB 200", (ANCHO, 5600), (-28, 0)),
+        ("Base aislada H°A° 1,60 x 1,60 + pedestal", (ANCHO - 800, FUND + 200), (-30, 0))]
 for s, at, off in labs:
     pa = v.p(*at); c = (pa[0] + off[0], pa[1] + off[1])
     sh.pl([pa, c], "3-REFS", 13)
     sh.txt(s, c[0] + (0.6 if off[0] >= 0 else -0.6), c[1] + 0.5, 1.8, TA.LEFT if off[0] >= 0 else TA.RIGHT)
+# ------------------------------------------------------------------ índice (sin carátula)
+yi = yc - 19 - 8000 / 125 - 1650 / 125 - 8
+sh.titulo_dib(L, yi, "i", "ÍNDICE DE LÁMINAS", w=R - L)
+rows = [[f"{n:02d}", t, p] for n, t, p in LAMINAS]
+wt = (R - L - 4) / 2
+cols = [("N°", 8), ("Contenido", wt - 8 - 12), ("Punto", 12)]
+sh.tabla(L, yi - 5, cols, rows[:8], h=2.0, lead=1.3, pad=0.5)
+sh.tabla(L + wt + 4, yi - 5, cols, rows[8:], h=2.0, lead=1.3, pad=0.5)
 sh.save(f"L{lam('sistema')}_Sistema_adoptado")

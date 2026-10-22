@@ -16,7 +16,7 @@ REAL = (-750, -1060, 900, 620)
 def estructura(v, borde_txt=True):
     v.hatch([(-750, -LOSA), (-60, -LOSA), (-60, 0), (-750, 0)], "hormigon"); v.rect(-750, -LOSA, -60, 0, "1-SECCION", 35)
     v.pl([(-60, 0), (-63, 0), (-63, -LOSA - 15), (-150, -LOSA - 15)], "1-SECCION", 25)
-    pts = xf(ipn_poly(*IPN[VS]), -100, -LOSA - 100); v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "acero")
+    pts = xf(perfil_poly(VS), -100, -LOSA - 100); v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "acero")
     v.rect(-750, 0, -200, 30, "1-VISTA", 13)
     v.pl([(-750, -LOSA - 600), (-200, -LOSA - 600)], "1-OCULTO", 13)
     v.nivel(-650, 0, "+3,80", 1)

@@ -39,7 +39,7 @@ v.ley("contrapiso", (300, -100), (2, 3), 1.5)
 v.label("CORTE 1:10", -60, -715, 1.5, TA.MIDDLE_CENTER, True)
 v = sh.view_in((L + 104, Y1 - 96, L + 150, Y1 - 64), (-250, -200, 250, 170), 20)
 v.rect(-225, -125, 225, 125, "1-VISTA", 25)
-pts = xf(ipn_poly(*IPN[COL]), 0, 0, 90); v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "acero")
+pts = xf(perfil_poly(COL), 0, 0, 90); v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "acero")
 for cx in (-185, 185):
     for cy in (-85, 85): v.circ((cx, cy), 13, "1-VISTA", 13)
 v.label("PLANTA 1:20", 0, -190, 1.4, TA.MIDDLE_CENTER, True)

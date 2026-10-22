@@ -13,35 +13,35 @@ FUND = -1500                     # fondo de la base aislada
 PB = 0
 
 # perfiles adoptados
-COL = 300                        # columna IPN 300
+COL = "HEB200"                   # columna HEB 200 (alas paralelas; pandeo verificado en ambas direcciones)
+COLN = "HEB 200"                 # nombre para los textos
+BASE, BASE_E = 1600, 450         # base aislada 1,60 x 1,60 x 0,45 m
+PL_A, PL_B, PL_E = 380, 250, 20  # placa base (A en el sentido del alma)
+PX, PY = 150, 60                 # pernos de anclaje a +-PX (fuera de las alas) y +-PY
 VP = 500                         # viga principal de pórtico IPN 500 (luz 12,00 m)
 VS = 200                         # viga secundaria y de borde IPN 200 (luz 4,00 m)
 
-# orden de las láminas: clave del dibujo -> (número, título para el índice, punto de la consigna)
+# orden de las láminas: clave del dibujo -> (título para el índice, punto de la consigna)
 ORDEN = [
-    ("caratula", "Carátula, consigna e índice", "-"),
-    ("sistema", "Sistema adoptado: memoria, planta estructural y corte transversal", "-"),
-    ("axo", "Axonometría estructural: elementos del sistema y referencias", "1"),
-    ("fund", "Fundación, pernos de anclaje, placa base y columna", "1"),
-    ("vigas", "Vigas principales, secundarias, de borde y piezas de unión", "1"),
-    ("deck", "Chapa colaborante: perfil, máximos y mínimos, colocación, malla y hormigón", "1"),
-    ("deck2", "Conector de corte, cenefa de borde y tapa de cierre", "1"),
-    ("arr", "Arriostramiento, bulones y soldadura", "1"),
-    ("fij", "Fijaciones de la chapa y protección del acero", "1"),
-    ("uesq", "Juntas y uniones: esquema general y clasificación", "2"),
-    ("u12", "Uniones U1 y U2: base y viga principal-columna", "2"),
-    ("u3", "Unión U3: secundaria-principal y cómo trabajan las uniones", "2"),
-    ("u47", "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "2"),
-    ("u810", "Uniones U8 a U10: cerramientos a la estructura y cubierta", "2"),
-    ("maq", "Grúa, plataformas y soldadora de pernos", "3"),
-    ("maq2", "Llaves, fijadora y otros equipos", "3"),
-    ("plan", "Planificación: alquiler, armado y acceso a obra", "3"),
-    ("cw", "Muro cortina: elevación y corte vertical", "4"),
-    ("cw2", "Muro cortina: corte horizontal y elementos", "4"),
-    ("panel", "Panel sándwich 80 mm (integral opaco)", "4"),
-    ("comp", "Comparación CW vs. panel y justificación", "4"),
+    ("sistema", "Sistema adoptado: memoria, planta y corte", "-"),
+    ("axo", "Axonometría estructural y listado de elementos", "1"),
+    ("fund", "Fundación, pernos, placa base y columna", "1"),
+    ("vigas", "Vigas y piezas de unión", "1"),
+    ("deck", "Losa colaborante: chapa y piezas", "1"),
+    ("arr", "Arriostramiento, bulones, soldadura, fijaciones", "1"),
+    ("uesq", "Juntas y uniones: esquema y clasificación", "2"),
+    ("u13", "Uniones U1, U2, U3 y funcionamiento", "2"),
+    ("u47", "Uniones U4 a U7", "2"),
+    ("u810", "Uniones U8 a U10 (cerramientos)", "2"),
+    ("maq", "Máquinas y herramientas", "3"),
+    ("plan", "Alquiler, armado y acceso a obra", "3"),
+    ("cw", "Muro cortina (CW) stick", "4"),
+    ("panel", "Panel sándwich 80 mm (integral)", "4"),
+    ("comp", "Comparación CW / panel y justificación", "4"),
 ]
+ALIAS = {"deck2": "deck", "fij": "arr", "u12": "u13", "u3": "u13", "maq2": "maq", "cw2": "cw", "caratula": "sistema"}
 NUM = {k: i + 1 for i, (k, t, p) in enumerate(ORDEN)}
+NUM.update({a: NUM[k] for a, k in ALIAS.items()})
 LAMINAS = [(NUM[k], t, p) for k, t, p in ORDEN]
 
 
