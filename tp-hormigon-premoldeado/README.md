@@ -27,5 +27,6 @@ xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 ## Lámina TP final – Cerramiento OPACO (A3 vertical)
 `../entregables/TP_FINAL_HORMIGON_OPACO_A3/HORMIGON_OPACO_A3.pdf` – mismo edificio que la lámina vidriada visto del lado opaco: `src/opaco_corte.py` y `src/opaco_nodos.py` leen `tp_corte.py` / `nodos.js` (estructura, fundación, colores, estilo) y solo reemplazan el cerramiento (panel sándwich + fija panel + viga portapanel).
 ```
-python3 src/opaco_corte.py && python3 src/opaco_nodos.py && node render.js src/opaco.html build/opaco portrait
+python3 src/opaco_corte.py && python3 src/opaco_nodos.py && node render.js src/opaco.html build/opaco portrait "" build/opaco_2d.json
+python3 src/sheet2dxf.py opaco && xvfb-run -a ODAFileConverter build/dwg_opaco_in build/dwg_opaco_out ACAD2018 DWG 0 1 "*.DXF"   # DWG 2D A3 en mm de papel
 ```
