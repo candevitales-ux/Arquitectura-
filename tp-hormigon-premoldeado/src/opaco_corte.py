@@ -175,7 +175,8 @@ def _Yold(y):
         if lo - 1 <= y <= hi + 1: return 1000.0 - y / S + (top - (1000.0 - hi / S))
 def ref(n, x, y, bx, by):
     """globo: (bx, by) en papel según las bandas originales; se conserva su desplazamiento respecto del punto"""
-    by = Y(y) + (by - _Yold(y))
+    yo = _Yold(y)
+    if yo is not None: by = Y(y) + (by - yo)
     DX.append(dict(t='ref', n=n, a=(x, y), b=(x + (bx - X(x)) * S, y - (by - Y(y)) * S)))
     px, py = X(x), Y(y)
     A(f'<circle cx="{f(px)}" cy="{f(py)}" r="0.32" fill="#000"/>')
@@ -191,7 +192,7 @@ REFS_POS = [
  (15, 450, 7640, 236.5, 103), (16, 700, 7720, 248, 105), (17, 500, 8000, 248, 90.5), (18, 520, 8705, 247, 56), (19, 540, 8858, 258, 52),
  (25, 60, 9150, EX, 26), (26, 190, 9000, EX, 32.5), (27, 120, 8850, EX, 39), (59, 420, 8930, EX, 45.5), (58, 340, 9000, EX, 19.5), (28, 45, 8640, EX, 52), (30, 140, 8640, EX, 58.5), (31, 240, 8400, EX, 70.5), (29, 600, 8640, 247, 66),
  # entrepiso
- (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1300, 3306, 245, 200), (23, 1550, 3325, 257.5, 200), (24, 1275, 3500, 252.5, 187),
+ (20, 1500, 4495, 275, 127), (21, 1600, 4475, 280, 128.6), (22, 1150, 3006, 247, 207), (23, 1300, 3030, 258, 207), (24, 1275, 3500, 252.5, 187),
  (32, 235, 4520, EX, 128), (57, 120, 4250, EX, 140), (28, 45, 4140, EX, 147), (30, 140, 4140, EX, 154), (31, 240, 3900, EX, 165), (29, 600, 4140, 244, 162),
  (13, 330, 4300, 236.5, 148), (19, 540, 4358, 257, 150), (14, 450, 3600, 247, 176),
  # planta baja y fundación
@@ -276,5 +277,6 @@ SRC = SRC.replace('T(16, 39.9, "MURO CORTINA", 7.4)', 'T(16, 39.9, "CERRAMIENTO 
 SRC = SRC.replace('open("build/tp_corte.svgpart", "w")', 'open("build/opaco_corte.svgpart", "w")').replace('open("build/tp_dx.json", "w")', 'open("build/opaco_dx.json", "w")')
 for must in ("CERRAMIENTO OPACO", "opaco_corte.svgpart", "fija_panel(4140)", "viga portapanel", "viga_borde_canaleta(8915)"):
     assert must in SRC, must
+SRC = SRC.replace('T(X(900), Y(3120), "Columna, ménsula y VP en vista"', 'T(X(1000), Y(3330), "Columna, ménsula y VP en vista"')   # rótulo libre de globos
 exec(compile(SRC, "opaco_corte(tp_corte)", "exec"))
 open("build/opaco_corte_solo.svg", "w").write(f'<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">{SVG_BODY}</svg>')
