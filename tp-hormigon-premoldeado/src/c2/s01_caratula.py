@@ -87,11 +87,12 @@ def axonometria(num, total):
         sh.callout(P(*p3), at, lab, r=3.0)
     y = 186
     sh.text(12, y, "REFERENCIAS · ELEMENTOS DEL SISTEMA", TT, bold=True); y += 7.5
+    ys = [y, y]
     for k, (c, t) in enumerate(ELEM):
-        col, row = divmod(k, 6)
-        xx, yy = 12 + col * 96, y + row * 7.6
+        col = k // 6
+        xx, yy = 12 + col * 96, ys[col]
         sh.ball(xx + 3.5, yy - 0.9, c, r=3.2)
-        sh.para(xx + 9, yy, 85, t, TB, 1.15)
+        ys[col] = max(sh.para(xx + 9, yy, 85, t, TB, 1.15) + 2.6, yy + 7.6)
     return sh
 
 

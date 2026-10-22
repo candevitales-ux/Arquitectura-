@@ -11,6 +11,7 @@ W, H = 210.0, 297.0          # A4 vertical
 # tamaños de letra (mm de cuerpo; altura de mayúscula ≈ 0,72 x): legibles al imprimir A4 al 100 %
 MINF = 2.8                   # cuerpo mínimo: altura de mayúscula ≈ 0,716 x 2,8 = 2,0 mm
 TB, TS, TD, TT, TH = 2.9, 2.8, 2.8, 3.6, 4.6
+FLOW = 1.0                   # factor de agrandamiento del texto corrido (lo elige build.py por lámina)
 FONT = "Arial, 'Liberation Sans', Helvetica, sans-serif"
 CW = 0.5                     # ancho medio de carácter / tamaño de fuente (Arial)
 
@@ -112,6 +113,7 @@ class Sheet:
     def __init__(self, num, total, title, subtitle="", escalas="", fname="lamina"):
         self.num, self.total, self.title, self.subtitle, self.escalas, self.fname = num, total, title, subtitle, escalas, fname
         self.ops = []        # registro de primitivas en papel (y hacia abajo)
+        self._flow = 0
         self.svg = []
 
     # ---------------------------------------------------------- primitivas en papel
@@ -129,7 +131,7 @@ class Sheet:
         self.svg.append(f'<{tag} points="{d}" fill="{fsvg if closed else "none"}"{op} stroke="{st}" stroke-width="{f(sw)}" '
                         f'stroke-linejoin="round" stroke-linecap="round"{ex}/>')
         self.ops.append(dict(t="poly", pts=pts, bg=bg if closed else None, hat=hat if closed else None, stroke=stroke, sw=sw,
-                             dash=dash, closed=closed, layer=layer, mat=mat))
+                             dash=dash, closed=closed, layer=layer, mat=mat, flow=self._flow > 0))
 
     def rect(self, x0, y0, x1, y1, **k):
         self.poly([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], **k)
@@ -143,7 +145,7 @@ class Sheet:
     def circle(self, x, y, r, fill="none", stroke="#000", sw=0.18, layer="LINEAS", dash=None):
         ex = f' stroke-dasharray="{dash}"' if dash else ""
         self.svg.append(f'<circle cx="{f(x)}" cy="{f(y)}" r="{f(r)}" fill="{fill}" stroke="{stroke or "none"}" stroke-width="{f(sw)}"{ex}/>')
-        self.ops.append(dict(t="circ", c=(x, y), r=r, fill=None if fill in (None, "none") else fill, stroke=stroke, sw=sw, layer=layer, dash=dash))
+        self.ops.append(dict(t="circ", c=(x, y), r=r, fill=None if fill in (None, "none") else fill, stroke=stroke, sw=sw, layer=layer, dash=dash, flow=self._flow > 0))
 
     def arc(self, cx, cy, r, a0, a1, n=24, **k):
         pts = [(cx + r * math.cos(math.radians(a0 + (a1 - a0) * i / n)), cy - r * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
@@ -156,16 +158,24 @@ class Sheet:
         tr = f' transform="rotate({f(-rot)} {f(x)} {f(y)})"' if rot else ""
         self.svg.append(f'<text x="{f(x)}" y="{f(y)}" font-family="{FONT}" font-size="{f(size)}" text-anchor="{a}"'
                         f'{" font-weight=\"bold\"" if bold else ""}{" font-style=\"italic\"" if ital else ""} fill="{color}"{tr}>{esc(s)}</text>')
-        self.ops.append(dict(t="text", p=(x, y), s=s, size=size, anchor=anchor, bold=bold, ital=ital, color=color, rot=rot, layer=layer))
+        self.ops.append(dict(t="text", p=(x, y), s=s, size=size, anchor=anchor, bold=bold, ital=ital, color=color, rot=rot, layer=layer, flow=self._flow > 0))
 
     def para(self, x, y, width, text, size=TB, lead=1.3, **k):
-        size = max(size, MINF)
+        size = max(size, MINF) * FLOW; self._flow += 1
+        try: return self._para(x, y, width, text, size, lead, **k)
+        finally: self._flow -= 1
+
+    def _para(self, x, y, width, text, size, lead, **k):
         for ln in wrap(text, width, size):
             self.text(x, y, ln, size, **k); y += size * lead
         return y
 
     def bullets(self, x, y, width, items, size=TB, lead=1.3, gap=0.6, mark="•", **k):
-        size = max(size, MINF)
+        size = max(size, MINF) * FLOW; self._flow += 1
+        try: return self._bullets(x, y, width, items, size, lead, gap, mark, **k)
+        finally: self._flow -= 1
+
+    def _bullets(self, x, y, width, items, size, lead, gap, mark, **k):
         for it in items:
             lines = wrap(it, width - size * 1.2, size)
             self.text(x, y, mark, size, **k)
@@ -251,7 +261,11 @@ class Sheet:
         if scale_txt: self.text(x, y + size * 1.15 + 1.4, scale_txt, max(TS, size * 0.72), color="#222")
 
     def table(self, x, y, colw, rows, size=TS, rowh=None, head=True, lead=1.22, fills=None):
-        size = max(size, MINF)
+        size = max(size, MINF) * FLOW; self._flow += 1
+        try: return self._table(x, y, colw, rows, size, rowh, head, lead, fills)
+        finally: self._flow -= 1
+
+    def _table(self, x, y, colw, rows, size, rowh, head, lead, fills):
         """tabla con ajuste de texto por celda; devuelve y final"""
         for ri, row in enumerate(rows):
             cells = [wrap(c, colw[i] - 1.6, size) for i, c in enumerate(row)]
@@ -282,17 +296,20 @@ class Sheet:
         """recuadro de ideas clave en el espacio libre inferior; recorta ítems si no entran"""
         ymax = ymax or H - 13
         y0 = self.content_bottom() + 7
-        size, lead = TB, 1.32
+        size, lead = TB * FLOW, 1.32
+        self._flow += 1
         def height(its):
             n = sum(len(wrap(t, W - 34 - size * 1.2, size)) for t in its)
             return 11 + n * size * lead + len(its) * 1.0
         its = list(items)
-        if y0 + height(its) > ymax: return            # sólo si entra completo
+        if y0 + height(its) > ymax:                   # sólo si entra completo
+            self._flow -= 1; return
         h = height(its)
         self.rect(10, y0, W - 10, y0 + h, fill="#fff8dc", stroke="#c9a227", sw=0.35, layer="ESTUDIO")
         self.rect(10, y0, W - 10, y0 + 8, fill="#f3d77a", stroke="#c9a227", sw=0.35, layer="ESTUDIO")
         self.text(14, y0 + 5.6, "PARA ESTUDIAR · IDEAS CLAVE", TT, bold=True, layer="ESTUDIO")
-        self.bullets(14, y0 + 13.5, W - 30, its, size, lead, 1.0, layer="ESTUDIO")
+        self._bullets(14, y0 + 13.5, W - 30, its, size, lead, 1.0, "•", layer="ESTUDIO")
+        self._flow -= 1
 
     def frame(self):
         """sin rótulo: sólo número de página (para ubicarse con el índice)"""
@@ -555,7 +572,12 @@ class Iso:
 
 # ====================================================================== bloques de texto técnicos
 def spec(sh, x, y, w, title, kv, size=TB, lead=1.3, tsize=TT):
-    size = max(size, MINF)
+    sh._flow += 1
+    try: return _spec(sh, x, y, w, title, kv, max(size, MINF) * FLOW, lead, tsize * FLOW)
+    finally: sh._flow -= 1
+
+
+def _spec(sh, x, y, w, title, kv, size, lead, tsize):
     """bloque de especificación: título + pares (clave, texto); devuelve y final"""
     if title:
         sh.text(x, y, title, tsize, bold=True)

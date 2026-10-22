@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461336.949074074
+2461336.9535532407
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461336.949074074
+2461336.9535532407
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-12D
+130
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{5C8E79E1-D9A3-4936-8C17-F8000A1270FB}
+{5937D3C2-425D-4B08-B827-6F6D1793A6AC}
   9
 $VERSIONGUID
   2
-{C08AB2DC-B513-4BFC-A4C9-5CCEC0982C41}
+{6086F271-6026-4005-ADC5-CF3448120E8D}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -3893,7 +3893,7 @@ ACAD
   0
 APPID
   5
-12A
+12D
 330
 3
 100
@@ -3907,7 +3907,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-12B
+12E
 330
 3
 100
@@ -5693,7 +5693,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-124
+127
 330
 9
 100
@@ -5703,7 +5703,7 @@ AcDbBlockTableRecord
   2
 *Paper_Space
 340
-127
+12A
  70
 0
 280
@@ -5975,9 +5975,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-125
+128
 330
-124
+127
 100
 AcDbEntity
   8
@@ -6001,9 +6001,9 @@ AcDbBlockBegin
   0
 ENDBLK
   5
-126
+129
 330
-124
+127
 100
 AcDbEntity
   8
@@ -6707,9 +6707,9 @@ AcDbText
  30
 0.0
  40
-2.0048
+2.40576
   1
-Placa dureza 60 Shore A, e = 10 mm, con chapas de acero
+Placa dureza 60 Shore A, e = 10 mm, con chapas de
   7
 ARIAL
  11
@@ -6735,19 +6735,19 @@ AcDbText
  10
 12.0
  20
-195.5
+194.8
  30
 0.0
  40
-2.0048
+2.40576
   1
-interiores; σ adm ≈ 7-10 MPa.
+acero interiores; σ adm ≈ 7-10 MPa.
   7
 ARIAL
  11
 12.0
  21
-195.5
+194.8
  31
 0.0
 100
@@ -8129,9 +8129,9 @@ AcDbText
  30
 0.0
  40
-2.0048
+2.40576
   1
-Viga arriba / ménsula abajo: impide vuelco y deslizamiento sin
+Viga arriba / ménsula abajo: impide vuelco y
   7
 ARIAL
  11
@@ -8157,19 +8157,19 @@ AcDbText
  10
 108.0
  20
-195.5
+194.8
  30
 0.0
  40
-2.0048
+2.40576
   1
-trabar el giro.
+deslizamiento sin trabar el giro.
   7
 ARIAL
  11
 108.0
  21
-195.5
+194.8
  31
 0.0
 100
@@ -8913,9 +8913,9 @@ AcDbText
  30
 0.0
  40
-2.0048
+2.40576
   1
-Perfil C 52/34 galvanizado + bulón T M12: regulación lateral
+Perfil C 52/34 galvanizado + bulón T M12: regulación
   7
 ARIAL
  11
@@ -8941,19 +8941,19 @@ AcDbText
  10
 12.0
  20
-107.5
+106.80000000000001
  30
 0.0
  40
-2.0048
+2.40576
   1
-de la grapa ± 25 mm.
+lateral de la grapa ± 25 mm.
   7
 ARIAL
  11
 12.0
  21
-107.5
+106.80000000000001
  31
 0.0
 100
@@ -9757,9 +9757,9 @@ AcDbText
  30
 0.0
  40
-2.0048
+2.40576
   1
-Capacidad s/ catálogo: 2,5 a 10 t por inserto; se usan siempre de
+Capacidad s/ catálogo: 2,5 a 10 t por inserto; se usan
   7
 ARIAL
  11
@@ -9785,19 +9785,19 @@ AcDbText
  10
 108.0
  20
-107.5
+106.80000000000001
  30
 0.0
  40
-2.0048
+2.40576
   1
-a pares o de a cuatro.
+siempre de a pares o de a cuatro.
   7
 ARIAL
  11
 108.0
  21
-107.5
+106.80000000000001
  31
 0.0
 100
@@ -9821,7 +9821,7 @@ AcDbText
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
 ESPECIFICACIÓN
   7
@@ -9875,11 +9875,11 @@ AcDbText
  10
 12.0
  20
-90.57499999999999
+89.85
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
 Neopreno:
   7
@@ -9887,7 +9887,7 @@ ARIAL-NEGRITA
  11
 12.0
  21
-90.57499999999999
+89.85
  31
 0.0
 100
@@ -9905,21 +9905,21 @@ TEXTOS
 100
 AcDbText
  10
-27.08
+30.096
  20
-90.57499999999999
+89.85
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-placas zunchadas e = 10 mm bajo VL, VP y TT: reparten la carga y permiten giros y dilataciones (apoyo articulado).
+placas zunchadas e = 10 mm bajo VL, VP y TT: reparten la carga y permiten giros y dilataciones
   7
 ARIAL
  11
-27.08
+30.096
  21
-90.57499999999999
+89.85
  31
 0.0
 100
@@ -9939,19 +9939,19 @@ AcDbText
  10
 12.0
  20
-86.45499999999998
+85.326
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Pernos:
+(apoyo articulado).
   7
-ARIAL-NEGRITA
+ARIAL
  11
 12.0
  21
-86.45499999999998
+85.326
  31
 0.0
 100
@@ -9969,21 +9969,21 @@ TEXTOS
 100
 AcDbText
  10
-24.064
+12.0
  20
-86.45499999999998
+80.452
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Ø20 anclados en la ménsula; entran en vainas Ø40 de la viga que se rellenan con grout.
+Pernos:
   7
-ARIAL
+ARIAL-NEGRITA
  11
-24.064
+12.0
  21
-86.45499999999998
+80.452
  31
 0.0
 100
@@ -10001,21 +10001,21 @@ TEXTOS
 100
 AcDbText
  10
-12.0
+26.4768
  20
-82.33499999999998
+80.452
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Grout:
+Ø20 anclados en la ménsula; entran en vainas Ø40 de la viga que se rellenan con grout.
   7
-ARIAL-NEGRITA
+ARIAL
  11
-12.0
+26.4768
  21
-82.33499999999998
+80.452
  31
 0.0
 100
@@ -10033,21 +10033,21 @@ TEXTOS
 100
 AcDbText
  10
-22.556
+12.0
  20
-82.33499999999998
+75.578
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-mortero cementicio fluido sin retracción ≥ 40 MPa para vainas, juntas y cáliz.
+Grout:
   7
-ARIAL
+ARIAL-NEGRITA
  11
-22.556
+12.0
  21
-82.33499999999998
+75.578
  31
 0.0
 100
@@ -10065,21 +10065,21 @@ TEXTOS
 100
 AcDbText
  10
-12.0
+24.6672
  20
-78.21499999999997
+75.578
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Riel / insertos:
+mortero cementicio fluido sin retracción ≥ 40 MPa para vainas, juntas y cáliz.
   7
-ARIAL-NEGRITA
+ARIAL
  11
-12.0
+24.6672
  21
-78.21499999999997
+75.578
  31
 0.0
 100
@@ -10097,21 +10097,85 @@ TEXTOS
 100
 AcDbText
  10
-37.635999999999996
+12.0
  20
-78.21499999999997
+70.70400000000001
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-embutidos en fábrica: riel C p/ grapas del muro cortina, insertos de izaje y placas de soldadura.
+Riel / insertos:
+  7
+ARIAL-NEGRITA
+ 11
+12.0
+ 21
+70.70400000000001
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+114
+330
+17
+100
+AcDbEntity
+  8
+TEXTOS
+100
+AcDbText
+ 10
+42.7632
+ 20
+70.70400000000001
+ 30
+0.0
+ 40
+2.4916799999999997
+  1
+embutidos en fábrica: riel C p/ grapas del muro cortina, insertos de izaje y placas de
   7
 ARIAL
  11
-37.635999999999996
+42.7632
  21
-78.21499999999997
+70.70400000000001
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+115
+330
+17
+100
+AcDbEntity
+  8
+TEXTOS
+100
+AcDbText
+ 10
+12.0
+ 20
+66.18
+ 30
+0.0
+ 40
+2.4916799999999997
+  1
+soldadura.
+  7
+ARIAL
+ 11
+12.0
+ 21
+66.18
  31
 0.0
 100
@@ -10119,7 +10183,7 @@ AcDbText
   0
 HATCH
   5
-114
+116
 330
 17
 100
@@ -10161,19 +10225,19 @@ SOLID
  10
 10.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-40.303
+20.612000000000023
  10
 10.0
  20
-40.303
+20.612000000000023
  97
 0
  75
@@ -10185,7 +10249,7 @@ SOLID
   0
 LWPOLYLINE
   5
-115
+117
 330
 17
 100
@@ -10205,23 +10269,23 @@ AcDbPolyline
  10
 10.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-40.303
+20.612000000000023
  10
 10.0
  20
-40.303
+20.612000000000023
   0
 HATCH
   5
-116
+118
 330
 17
 100
@@ -10263,19 +10327,19 @@ SOLID
  10
 10.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-62.61499999999998
+50.58000000000001
  10
 10.0
  20
-62.61499999999998
+50.58000000000001
  97
 0
  75
@@ -10287,7 +10351,7 @@ SOLID
   0
 LWPOLYLINE
   5
-117
+119
 330
 17
 100
@@ -10307,83 +10371,19 @@ AcDbPolyline
  10
 10.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-70.61499999999998
+58.58000000000001
  10
 200.0
  20
-62.61499999999998
+50.58000000000001
  10
 10.0
  20
-62.61499999999998
-  0
-TEXT
-  5
-118
-330
-17
-100
-AcDbEntity
-  8
-ESTUDIO
-100
-AcDbText
- 10
-14.0
- 20
-65.01499999999999
- 30
-0.0
- 40
-2.5776
-  1
-PARA ESTUDIAR · IDEAS CLAVE
-  7
-ARIAL-NEGRITA
- 11
-14.0
- 21
-65.01499999999999
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-119
-330
-17
-100
-AcDbEntity
-  8
-ESTUDIO
-100
-AcDbText
- 10
-14.0
- 20
-57.11499999999998
- 30
-0.0
- 40
-2.0764
-  1
-•
-  7
-ARIAL
- 11
-14.0
- 21
-57.11499999999998
- 31
-0.0
-100
-AcDbText
+50.58000000000001
   0
 TEXT
   5
@@ -10397,21 +10397,21 @@ ESTUDIO
 100
 AcDbText
  10
-17.19
+14.0
  20
-57.11499999999998
+52.98000000000002
  30
 0.0
  40
-2.0764
+2.5776
   1
-Neopreno: apoyo elástico que reparte la carga y deja girar y dilatar la viga → unión articulada.
+PARA ESTUDIAR · IDEAS CLAVE
   7
-ARIAL
+ARIAL-NEGRITA
  11
-17.19
+14.0
  21
-57.11499999999998
+52.98000000000002
  31
 0.0
 100
@@ -10431,11 +10431,11 @@ AcDbText
  10
 14.0
  20
-52.28699999999998
+45.08000000000001
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
 •
   7
@@ -10443,7 +10443,7 @@ ARIAL
  11
 14.0
  21
-52.28699999999998
+45.08000000000001
  31
 0.0
 100
@@ -10461,21 +10461,21 @@ ESTUDIO
 100
 AcDbText
  10
-17.19
+17.828
  20
-52.28699999999998
+45.08000000000001
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Perno + vaina con grout: traba la pieza en el plano (no se cae ni se desliza) sin impedir el giro.
+Neopreno: apoyo elástico que reparte la carga y deja girar y dilatar la viga → unión articulada.
   7
 ARIAL
  11
-17.19
+17.828
  21
-52.28699999999998
+45.08000000000001
  31
 0.0
 100
@@ -10495,11 +10495,11 @@ AcDbText
  10
 14.0
  20
-47.458999999999975
+39.4864
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
 •
   7
@@ -10507,7 +10507,7 @@ ARIAL
  11
 14.0
  21
-47.458999999999975
+39.4864
  31
 0.0
 100
@@ -10525,21 +10525,21 @@ ESTUDIO
 100
 AcDbText
  10
-17.19
+17.828
  20
-47.458999999999975
+39.4864
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Grout: mortero fluido sin retracción que rellena cálices, vainas y juntas (une sin dejar huecos).
+Perno + vaina con grout: traba la pieza en el plano (no se cae ni se desliza) sin impedir el giro.
   7
 ARIAL
  11
-17.19
+17.828
  21
-47.458999999999975
+39.4864
  31
 0.0
 100
@@ -10559,11 +10559,11 @@ AcDbText
  10
 14.0
  20
-42.63099999999997
+33.89280000000002
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
 •
   7
@@ -10571,7 +10571,7 @@ ARIAL
  11
 14.0
  21
-42.63099999999997
+33.89280000000002
  31
 0.0
 100
@@ -10589,21 +10589,117 @@ ESTUDIO
 100
 AcDbText
  10
-17.19
+17.828
  20
-42.63099999999997
+33.89280000000002
  30
 0.0
  40
-2.0764
+2.4916799999999997
   1
-Riel e insertos: piezas metálicas que se dejan embutidas en fábrica para fijar cerramientos e izar las piezas.
+Grout: mortero fluido sin retracción que rellena cálices, vainas y juntas (une sin dejar huecos).
   7
 ARIAL
  11
-17.19
+17.828
  21
-42.63099999999997
+33.89280000000002
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+121
+330
+17
+100
+AcDbEntity
+  8
+ESTUDIO
+100
+AcDbText
+ 10
+14.0
+ 20
+28.29920000000004
+ 30
+0.0
+ 40
+2.4916799999999997
+  1
+•
+  7
+ARIAL
+ 11
+14.0
+ 21
+28.29920000000004
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+122
+330
+17
+100
+AcDbEntity
+  8
+ESTUDIO
+100
+AcDbText
+ 10
+17.828
+ 20
+28.29920000000004
+ 30
+0.0
+ 40
+2.4916799999999997
+  1
+Riel e insertos: piezas metálicas que se dejan embutidas en fábrica para fijar cerramientos e izar
+  7
+ARIAL
+ 11
+17.828
+ 21
+28.29920000000004
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+123
+330
+17
+100
+AcDbEntity
+  8
+ESTUDIO
+100
+AcDbText
+ 10
+17.828
+ 20
+23.70560000000006
+ 30
+0.0
+ 40
+2.4916799999999997
+  1
+las piezas.
+  7
+ARIAL
+ 11
+17.828
+ 21
+23.70560000000006
  31
 0.0
 100
@@ -10611,7 +10707,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-121
+124
 330
 17
 100
@@ -10639,7 +10735,7 @@ AcDbPolyline
   0
 TEXT
   5
-122
+125
 330
 17
 100
@@ -10673,7 +10769,7 @@ AcDbText
   0
 TEXT
   5
-123
+126
 330
 17
 100
@@ -10709,9 +10805,9 @@ AcDbText
   0
 VIEWPORT
   5
-128
+12B
 330
-124
+127
 100
 AcDbEntity
  67
@@ -10813,9 +10909,9 @@ AcDbViewport
   0
 VIEWPORT
   5
-129
+12C
 330
-124
+127
 100
 AcDbEntity
  67
@@ -11015,7 +11111,7 @@ Model
   3
 LAMINA 08
 350
-127
+12A
   0
 DICTIONARY
   5
@@ -11881,7 +11977,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-12C
+12F
   0
 DICTIONARYVAR
   5
@@ -11893,7 +11989,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T22:46:40.296405+00:00
+1.4.5 @ 2026-10-22T22:53:07.199292+00:00
   0
 VISUALSTYLE
   5
@@ -18447,7 +18543,7 @@ strokes_ogs.tif
   0
 LAYOUT
   5
-127
+12A
 330
 D
 100
@@ -18569,13 +18665,13 @@ LAMINA 08
  76
 1
 330
-124
+127
 331
-128
+12B
   0
 DICTIONARYVAR
   5
-12C
+12F
 330
 2D
 100
@@ -18583,7 +18679,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T22:46:40.304820+00:00
+1.4.5 @ 2026-10-22T22:53:07.208342+00:00
   0
 ENDSEC
   0

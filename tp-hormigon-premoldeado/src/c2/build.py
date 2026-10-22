@@ -40,6 +40,81 @@ def layout_a4(doc, name, cx):
     if "Layout1" in doc.layouts: doc.layouts.delete("Layout1")
 
 
+FACTORS = (1.3, 1.25, 1.2, 1.15, 1.1, 1.05)
+
+
+def make_sheet(fn, i, total, f):
+    import lib, estudio
+    lib.FLOW = f
+    try:
+        sh = fn(i, total)
+        if sh.fname in estudio.NOTAS: sh.estudiar(estudio.NOTAS[sh.fname])
+    finally:
+        lib.FLOW = 1.0
+    return sh
+
+
+def geoms(sh):
+    """(es_flow, capa, geometría) de cada primitiva en papel; textos como rectángulo aproximado"""
+    from shapely.geometry import box, LineString, Polygon, Point
+    from lib import CW
+    out = []
+    for o in sh.ops:
+        if o["layer"] == "MARCO": continue
+        if o["t"] == "text":
+            if o["rot"]: continue
+            x, y = o["p"]; w = len(o["s"]) * o["size"] * CW * (1.05 if o["bold"] else 1.0); h = o["size"] * 0.72
+            x0 = x - (w / 2 if o["anchor"] == "middle" else (w if o["anchor"] == "end" else 0))
+            g = box(x0, y - h, x0 + w, y + 0.15 * o["size"]); kind = "T"
+        elif o["t"] == "circ":
+            g = Point(o["c"]).buffer(o["r"], 8); kind = "C"
+        else:
+            if len(o["pts"]) < 2: continue
+            g = Polygon(o["pts"]).buffer(0) if (o["closed"] and len(o["pts"]) >= 3) else LineString(o["pts"])
+            if o["closed"] and (o["bg"] or o["hat"]) and len(o["pts"]) >= 3: kind = "F"     # relleno
+            else: g = g.boundary if g.geom_type == "Polygon" else g; kind = "L"
+        out.append((o.get("flow", False), o["layer"], kind, g))
+    return out
+
+
+def score(sh):
+    """choques del texto corrido con todo lo que no es texto corrido + desbordes de página"""
+    from shapely.strtree import STRtree
+    from lib import W, H
+    G = geoms(sh)
+    flow = [g for g in G if g[0] and g[2] == "T"]
+    other = [g for g in G if not g[0]]
+    hits = 0
+    if other:
+        tree = STRtree([g[3] for g in other])
+        for _, _, _, t in flow:
+            tt = t.buffer(-0.25)
+            for j in tree.query(tt):
+                if other[int(j)][3].intersects(tt): hits += 1
+    T = [g[3].buffer(-0.2) for g in G if g[2] == "T"]
+    if T:
+        tt = STRtree(T)
+        for k, t in enumerate(T):
+            for j in tt.query(t):
+                if int(j) > k and T[int(j)].intersects(t): hits += 1
+    out = sum(1 for g in G if g[3].bounds[2] > W - 7 or g[3].bounds[3] > H - 10.5 or g[3].bounds[0] < 7)
+    estudio = any(o["layer"] == "ESTUDIO" for o in sh.ops)
+    return hits, out, estudio
+
+
+def best_sheet(fn, i, total):
+    base = make_sheet(fn, i, total, 1.0)
+    h0, o0, e0 = score(base)
+    for f in FACTORS:
+        sh = make_sheet(fn, i, total, f)
+        h, o, e = score(sh)
+        if h <= h0 and o <= o0 and (e or not e0):
+            sh.flow = f
+            return sh
+    base.flow = 1.0
+    return base
+
+
 def main():
     pages = all_pages()
     total = len(pages)
@@ -48,12 +123,10 @@ def main():
     os.makedirs(B, exist_ok=True); os.makedirs(os.path.join(B, "dwg_in"), exist_ok=True)
     sheets = {}
     for i in sel:
-        sh = pages[i - 1](i, total)
-        import estudio
-        if sh.fname in estudio.NOTAS: sh.estudiar(estudio.NOTAS[sh.fname])
+        sh = best_sheet(pages[i - 1], i, total)
         sh.frame()
         sheets[i] = sh
-        print("lámina", i, sh.fname, len(sh.ops), "entidades")
+        print("lámina", i, sh.fname, "texto x", sh.flow)
     # ---- HTML -> PDF
     pages = "".join(f'<div class="pg" id="pg{k + 1}">{sheets[i].svg_doc()}</div>' for k, i in enumerate(sel))
     html = ('<!doctype html><html><head><meta charset="utf-8"><style>@page{size:210mm 297mm;margin:0}html,body{margin:0;padding:0}'

@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461336.949085648
+2461336.9535648148
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461336.949085648
+2461336.9535648148
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-1A5
+1A7
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{593D04F9-2791-4CF8-9B12-24DD1C497B42}
+{5D3038DB-AD16-4CAB-9BE2-B73CFCFFBE39}
   9
 $VERSIONGUID
   2
-{0DFAF212-4DF5-4980-A186-5ACEF1542606}
+{CC68171F-4D3A-466F-91AB-EB93D9A6A24E}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -3893,7 +3893,7 @@ ACAD
   0
 APPID
   5
-1A2
+1A4
 330
 3
 100
@@ -3907,7 +3907,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-1A3
+1A5
 330
 3
 100
@@ -5693,7 +5693,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-19C
+19E
 330
 9
 100
@@ -5703,7 +5703,7 @@ AcDbBlockTableRecord
   2
 *Paper_Space
 340
-19F
+1A1
  70
 0
 280
@@ -5975,9 +5975,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-19D
+19F
 330
-19C
+19E
 100
 AcDbEntity
   8
@@ -6001,9 +6001,9 @@ AcDbBlockBegin
   0
 ENDBLK
   5
-19E
+1A0
 330
-19C
+19E
 100
 AcDbEntity
   8
@@ -18141,7 +18141,7 @@ AcDbText
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
 •
   7
@@ -18167,19 +18167,19 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+84.147
  20
 91.0
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-Muro cortina (azul): fachada principal hacia la calle y al norte, con
+Muro cortina (azul): fachada principal hacia la calle y al
   7
 ARIAL
  11
-83.19
+84.147
  21
 91.0
  31
@@ -18199,21 +18199,21 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+84.147
  20
-87.22999999999999
+86.09899999999999
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-parasoles / aleros para controlar la ganancia solar.
+norte, con parasoles / aleros para controlar la ganancia
   7
 ARIAL
  11
-83.19
+84.147
  21
-87.22999999999999
+86.09899999999999
  31
 0.0
 100
@@ -18231,21 +18231,21 @@ TEXTOS
 100
 AcDbText
  10
-80.0
+84.147
  20
-82.25999999999999
+81.19799999999998
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-•
+solar.
   7
 ARIAL
  11
-80.0
+84.147
  21
-82.25999999999999
+81.19799999999998
  31
 0.0
 100
@@ -18263,21 +18263,21 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+80.0
  20
-82.25999999999999
+75.09699999999998
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-Panel sándwich (beige): fachadas este, oeste (sol bajo de la tarde) y
+•
   7
 ARIAL
  11
-83.19
+80.0
  21
-82.25999999999999
+75.09699999999998
  31
 0.0
 100
@@ -18295,21 +18295,21 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+84.147
  20
-78.48999999999998
+75.09699999999998
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-posterior / medianera, donde se exige aislación y F120.
+Panel sándwich (beige): fachadas este, oeste (sol bajo de la
   7
 ARIAL
  11
-83.19
+84.147
  21
-78.48999999999998
+75.09699999999998
  31
 0.0
 100
@@ -18327,21 +18327,21 @@ TEXTOS
 100
 AcDbText
  10
-80.0
+84.147
  20
-73.51999999999998
+70.19599999999997
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-•
+tarde) y posterior / medianera, donde se exige aislación y
   7
 ARIAL
  11
-80.0
+84.147
  21
-73.51999999999998
+70.19599999999997
  31
 0.0
 100
@@ -18359,21 +18359,21 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+84.147
  20
-73.51999999999998
+65.29499999999996
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-Superficie vidriada ≈ 25 % de la envolvente: buen balance entre luz natural y
+F120.
   7
 ARIAL
  11
-83.19
+84.147
  21
-73.51999999999998
+65.29499999999996
  31
 0.0
 100
@@ -18391,21 +18391,85 @@ TEXTOS
 100
 AcDbText
  10
-83.19
+80.0
  20
-69.74999999999997
+59.19399999999996
  30
 0.0
  40
-2.0764
+2.6993199999999997
   1
-consumo energético.
+•
   7
 ARIAL
  11
-83.19
+80.0
  21
-69.74999999999997
+59.19399999999996
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+199
+330
+17
+100
+AcDbEntity
+  8
+TEXTOS
+100
+AcDbText
+ 10
+84.147
+ 20
+59.19399999999996
+ 30
+0.0
+ 40
+2.6993199999999997
+  1
+Superficie vidriada ≈ 25 % de la envolvente: buen balance
+  7
+ARIAL
+ 11
+84.147
+ 21
+59.19399999999996
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+19A
+330
+17
+100
+AcDbEntity
+  8
+TEXTOS
+100
+AcDbText
+ 10
+84.147
+ 20
+54.29299999999995
+ 30
+0.0
+ 40
+2.6993199999999997
+  1
+entre luz natural y consumo energético.
+  7
+ARIAL
+ 11
+84.147
+ 21
+54.29299999999995
  31
 0.0
 100
@@ -18413,7 +18477,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-199
+19B
 330
 17
 100
@@ -18441,7 +18505,7 @@ AcDbPolyline
   0
 TEXT
   5
-19A
+19C
 330
 17
 100
@@ -18475,7 +18539,7 @@ AcDbText
   0
 TEXT
   5
-19B
+19D
 330
 17
 100
@@ -18511,9 +18575,9 @@ AcDbText
   0
 VIEWPORT
   5
-1A0
+1A2
 330
-19C
+19E
 100
 AcDbEntity
  67
@@ -18615,9 +18679,9 @@ AcDbViewport
   0
 VIEWPORT
   5
-1A1
+1A3
 330
-19C
+19E
 100
 AcDbEntity
  67
@@ -18817,7 +18881,7 @@ Model
   3
 LAMINA 25
 350
-19F
+1A1
   0
 DICTIONARY
   5
@@ -19683,7 +19747,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-1A4
+1A6
   0
 DICTIONARYVAR
   5
@@ -19695,7 +19759,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T22:46:41.078449+00:00
+1.4.5 @ 2026-10-22T22:53:08.015565+00:00
   0
 VISUALSTYLE
   5
@@ -26249,7 +26313,7 @@ strokes_ogs.tif
   0
 LAYOUT
   5
-19F
+1A1
 330
 D
 100
@@ -26371,13 +26435,13 @@ LAMINA 25
  76
 1
 330
-19C
+19E
 331
-1A0
+1A2
   0
 DICTIONARYVAR
   5
-1A4
+1A6
 330
 2D
 100
@@ -26385,7 +26449,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T22:46:41.091485+00:00
+1.4.5 @ 2026-10-22T22:53:08.032859+00:00
   0
 ENDSEC
   0
