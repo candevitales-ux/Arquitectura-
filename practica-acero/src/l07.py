@@ -4,26 +4,26 @@ from lib import *
 from geom import *
 
 UNIONES = [
-    ("U1", "Columna - fundación", "placa base soldada + 4 pernos M20 + grout", "abulonada + húmeda", "articulada", "taller / obra", "08"),
-    ("U2", "Viga principal - columna", "placa de corte soldada al ala + 4 M20", "seca, abulonada", "articulada (corte)", "taller / obra", "08"),
-    ("U3", "Viga secundaria - principal", "doble ángulo L76 + 2+2 M16", "seca, abulonada", "articulada", "obra", "08"),
-    ("U4", "Losa - viga (conexión de corte)", "studs Ø19 soldados + hormigón", "soldada + húmeda", "rígida (sección compuesta)", "obra", "09"),
-    ("U5", "Chapa - chapa y chapa - viga", "solape + autoperforantes / clavos", "seca, mecánica", "diafragma", "obra", "09"),
-    ("U6", "Borde de losa - viga de borde", "cenefa fijada + hormigón", "seca + húmeda", "rígida", "obra", "09"),
-    ("U7", "Arriostramiento - columna", "cartela soldada + horquilla y pasador", "abulonada (pasador)", "articulada, solo tracción", "taller / obra", "09"),
-    ("U8", "Panel sándwich - estructura", "autoperforante + junta machihembrada", "seca + sellado", "junta móvil (dilatación)", "obra", "10"),
-    ("U9", "Muro cortina - losa", "grapa regulable + bulón en riel", "seca, regulable", "junta móvil 20 mm por piso", "obra", "10"),
-    ("U10", "Cubierta - parapeto", "membrana + babeta + cupertina", "junta de estanqueidad", "junta móvil sellada", "obra", "10"),
+    ("U1", "Columna - fundación", "placa base soldada + 4 pernos M20 + grout", "abulonada + húmeda", "articulada", "taller / obra", lam("u12")),
+    ("U2", "Viga principal - columna", "placa de corte soldada al ala + 4 M20", "seca, abulonada", "articulada (corte)", "taller / obra", lam("u12")),
+    ("U3", "Viga secundaria - principal", "doble ángulo L76 + 2+2 M16", "seca, abulonada", "articulada", "obra", lam("u3")),
+    ("U4", "Losa - viga (conexión de corte)", "studs Ø19 soldados + hormigón", "soldada + húmeda", "rígida (sección compuesta)", "obra", lam("u47")),
+    ("U5", "Chapa - chapa y chapa - viga", "solape + autoperforantes / clavos", "seca, mecánica", "diafragma", "obra", lam("u47")),
+    ("U6", "Borde de losa - viga de borde", "cenefa fijada + hormigón", "seca + húmeda", "rígida", "obra", lam("u47")),
+    ("U7", "Arriostramiento - columna", "cartela soldada + horquilla y pasador", "abulonada (pasador)", "articulada, solo tracción", "taller / obra", lam("u47")),
+    ("U8", "Panel sándwich - estructura", "autoperforante + junta machihembrada", "seca + sellado", "junta móvil (dilatación)", "obra", lam("u810")),
+    ("U9", "Muro cortina - losa", "grapa regulable + bulón en riel", "seca, regulable", "junta móvil 20 mm por piso", "obra", lam("u810")),
+    ("U10", "Cubierta - parapeto", "membrana + babeta + cupertina", "junta de estanqueidad", "junta móvil sellada", "obra", lam("u810")),
 ]
 
 if __name__ == "__main__":
-    sh = Sheet(7, "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:100")
+    sh = Sheet(NUM["uesq"], "Juntas y uniones: esquema general y clasificación", "PUNTO 2 - JUNTAS Y UNIONES", "Corte 1:100")
     y0 = sh.encabezado("2° JUNTAS Y UNIONES DEL SISTEMA",
                        "Ubicación de cada encuentro entre elementos (U1 a U10) y su clasificación")
     L, R = sh.L + 3, sh.R - 3
     Y1 = y0 - 3.5
     sh.titulo_dib(L, Y1, 1, "CORTE TRANSVERSAL CON LAS UNIONES", "1:100", w=R - L)
-    v = sh.view_in((L, Y1 - 110, R, Y1 - 8), (-3000, -1700, 14600, 8300), 100)
+    v = sh.view_in((L, Y1 - 106, R, Y1 - 8), (-3000, -1700, 14600, 8300), 100)
     # suelo, fundaciones, contrapiso
     v.ln((-1500, -150), (ANCHO + 1000, -150), "1-VISTA", 25)
     v.hatch([(-1500, -150), (ANCHO + 1000, -150), (ANCHO + 1000, -1650), (-1500, -1650)], "tierra")
@@ -67,10 +67,10 @@ if __name__ == "__main__":
     v.label("en el fondo: cruz eje 6", 6000, 2900, 1.4, TA.MIDDLE_CENTER)
 
     # teoría
-    yt = Y1 - 114
+    yt = Y1 - 111
     sh.titulo_dib(L, yt, 2, "CLASIFICACIÓN DE LAS JUNTAS Y UNIONES", w=R - L)
     cols = [("N°", 9), ("Encuentro", 30), ("Medio de unión", 42), ("Tipo", 28), ("Vínculo / movimiento", 34), ("Taller / obra", 18), ("Lám.", R - L - 161)]
-    yb = sh.tabla(L, yt - 5, cols, [list(u) for u in UNIONES], h=1.65, lead=1.3, pad=0.6)
+    yb = sh.tabla(L, yt - 5, cols, [list(u) for u in UNIONES], h=2.0, lead=1.25, pad=0.6)
     xt = L
     Y1 = yb - 5
     sh.titulo_dib(xt, Y1, 3, "CONCEPTOS (TEÓRICA DE JUNTAS Y UNIONES)", w=R - xt)
@@ -99,4 +99,4 @@ if __name__ == "__main__":
     yy = Y4 - 6
     for p_ in pasos:
         yy = sh.para(L, yy, R - L, p_, 1.7, lead=1.38) - 0.5
-    sh.save("L07_Esquema_uniones")
+    sh.save(f"L{lam('uesq')}_Esquema_uniones")

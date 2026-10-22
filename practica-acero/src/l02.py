@@ -4,30 +4,30 @@ from lib import *
 from geom import *
 
 ELEMENTOS = [
-    (1, "Base aislada de H°A° con pedestal", "Transmitir las cargas de la columna al suelo", "03"),
-    (2, "Pernos de anclaje M20 (4 por columna)", "Fijar la placa base a la fundación", "03"),
-    (3, "Placa base 450x250x22 + mortero de nivelación", "Repartir la carga y nivelar la columna", "03"),
-    (4, "Columna IPN 300", "Bajar cargas verticales; parte del pórtico", "03"),
-    (5, "Viga principal IPN 500 (luz 12,00 m)", "Salvar la gran luz; recibe las secundarias", "04"),
-    (6, "Viga secundaria IPN 200 c/ 2,00 m", "Apoyo de la chapa colaborante (luz 4,00 m)", "04"),
-    (7, "Viga de borde IPN 200", "Borde de losa; anclaje de los cerramientos", "04"),
-    (8, "Placas de corte y angulares de unión", "Vincular vigas entre sí y con columnas", "04"),
-    (9, "Chapa colaborante h = 76 mm, e = 0,9 mm", "Encofrado perdido y armadura inferior", "05"),
-    (10, "Conectores de corte (stud Ø19 x 125)", "Hacer trabajar juntos losa y viga", "05"),
-    (11, "Malla Q188 + armadura de negativos", "Retracción, temperatura y continuidad", "05"),
-    (12, "Hormigón H-25 (losa e = 140 mm)", "Losa de compresión; diafragma rígido", "05"),
-    (13, "Cenefa de borde (chapa galv. e = 1,6)", "Encofrado del borde de la losa", "05"),
-    (14, "Tapas de cierre de nervios", "Evitar fugas de hormigón en extremos", "05"),
-    (15, "Arriostramiento: barra Ø20 + tensor", "Estabilidad lateral (viento / sismo)", "06"),
-    (16, "Bulones ISO 8.8 (ASTM A325) M16 / M20", "Uniones abulonadas de obra", "06"),
-    (17, "Soldadura (electrodo E7018)", "Uniones de taller y studs", "06"),
-    (18, "Fijaciones: clavos de pólvora / autoperforantes", "Fijar y coser la chapa colaborante", "06"),
-    (19, "Protección: antióxido + esmalte / intumescente", "Corrosión y resistencia al fuego", "06"),
-    (20, "Subestructura de fachada (montantes, portapanel)", "Soporte de cerramientos", "13/14"),
+    (1, "Base aislada de H°A° con pedestal", "Transmitir las cargas de la columna al suelo", lam("fund")),
+    (2, "Pernos de anclaje M20 (4 por columna)", "Fijar la placa base a la fundación", lam("fund")),
+    (3, "Placa base 450x250x22 + mortero de nivelación", "Repartir la carga y nivelar la columna", lam("fund")),
+    (4, "Columna IPN 300", "Bajar cargas verticales; parte del pórtico", lam("fund")),
+    (5, "Viga principal IPN 500 (luz 12,00 m)", "Salvar la gran luz; recibe las secundarias", lam("vigas")),
+    (6, "Viga secundaria IPN 200 c/ 2,00 m", "Apoyo de la chapa colaborante (luz 4,00 m)", lam("vigas")),
+    (7, "Viga de borde IPN 200", "Borde de losa; anclaje de los cerramientos", lam("vigas")),
+    (8, "Placas de corte y angulares de unión", "Vincular vigas entre sí y con columnas", lam("vigas")),
+    (9, "Chapa colaborante h = 76 mm, e = 0,9 mm", "Encofrado perdido y armadura inferior", lam("deck")),
+    (10, "Conectores de corte (stud Ø19 x 125)", "Hacer trabajar juntos losa y viga", lam("deck2")),
+    (11, "Malla Q188 + armadura de negativos", "Retracción, temperatura y continuidad", lam("deck")),
+    (12, "Hormigón H-25 (losa e = 140 mm)", "Losa de compresión; diafragma rígido", lam("deck")),
+    (13, "Cenefa de borde (chapa galv. e = 1,6)", "Encofrado del borde de la losa", lam("deck2")),
+    (14, "Tapas de cierre de nervios", "Evitar fugas de hormigón en extremos", lam("deck2")),
+    (15, "Arriostramiento: barra Ø20 + tensor", "Estabilidad lateral (viento / sismo)", lam("arr")),
+    (16, "Bulones ISO 8.8 (ASTM A325) M16 / M20", "Uniones abulonadas de obra", lam("arr")),
+    (17, "Soldadura (electrodo E7018)", "Uniones de taller y studs", lam("arr")),
+    (18, "Fijaciones: clavos de pólvora / autoperforantes", "Fijar y coser la chapa colaborante", lam("fij")),
+    (19, "Protección: antióxido + esmalte / intumescente", "Corrosión y resistencia al fuego", lam("fij")),
+    (20, "Subestructura de fachada (montantes, portapanel)", "Soporte de cerramientos", lam("cw") + "/" + lam("panel")),
 ]
 
 if __name__ == "__main__":
-    sh = Sheet(2, "Axonometría estructural y elementos del sistema", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
+    sh = Sheet(NUM["axo"], "Axonometría estructural y elementos del sistema", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
                "Axonometría isométrica 1:190")
     y = sh.encabezado("1° ELEMENTOS CONSTRUCTIVOS DEL SISTEMA",
                       "Axonometría estructural del edificio adoptado con la referencia de cada elemento")
@@ -95,8 +95,8 @@ if __name__ == "__main__":
             (19, (VANO * 5, 0, 1500), (12, -4)), (20, (LARGO, 0, 7700), (12, 6)), (18, (2500, 12000, N1), (-14, 10))]
     for n, at, off in refs:
         v.ref(n, at, off)
-    a = v.p(12000, -150, 3000); sh.txt("muro cortina (lám. 13)", a[0] + 3, a[1] - 1, 1.8)
-    a = v.p(LARGO, 0, 7700); sh.txt("fachadas y parapeto: panel 80 (lám. 14)", R, a[1] + 11, 1.8, TA.RIGHT)
+    a = v.p(12000, -150, 3000); sh.txt(f"muro cortina (lám. {lam('cw')})", a[0] + 3, a[1] - 1, 1.8)
+    a = v.p(LARGO, 0, 7700); sh.txt(f"fachadas y parapeto: panel 80 (lám. {lam('panel')})", R, a[1] + 11, 1.8, TA.RIGHT)
 
     # ------------------------------------------------------------- listado
     yt = y - 160
@@ -112,4 +112,4 @@ if __name__ == "__main__":
             "barras de anclaje F-24 roscadas; chapa colaborante de acero galvanizado Z275 (fy = 280 MPa); hormigón H-25; malla ADN 420. "
             "Todas las piezas se fabrican, perforan y pintan en taller y se montan en obra con uniones abulonadas (montaje en seco); "
             "en obra solo se suelda el conector de corte y se hormigona la losa.", 1.8, lead=1.45)
-    sh.save("L02_Axonometria_elementos")
+    sh.save(f"L{lam('axo')}_Axonometria_elementos")

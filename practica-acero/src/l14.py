@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(14, "Muro exterior opaco: integral panel sándwich 80 mm", "PUNTO 4 - MURO EXTERIOR", "1:200 - 1:12,5 - 1:2")
+sh = Sheet(NUM["panel"], "Muro exterior opaco: integral panel sándwich 80 mm", "PUNTO 4 - MURO EXTERIOR", "1:200 - 1:12,5 - 1:2")
 y0 = sh.encabezado("4° MURO EXTERIOR OPACO: PANEL SÁNDWICH (INTEGRAL)",
                    "Panel metálico autoportante con núcleo aislante, colocado horizontal entre columnas - laterales y contrafrente")
 L, R = sh.L + 3, sh.R - 3
@@ -101,4 +101,4 @@ ficha_spec(sh, L + w2 + 6, Y3 - 6, w2, [
     ("Ventajas:", "liviano, rápido (≈ 150 m²/día por cuadrilla), muy aislante, montaje en seco."),
     ("Desventajas:", "opaco; sensible a golpes; PUR combustible (usar PIR o lana mineral si se exige fuego)."),
 ], h=1.55, lead=1.34)
-sh.save("L14_Panel_sandwich")
+sh.save(f"L{lam('panel')}_Panel_sandwich")

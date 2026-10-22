@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(4, "Vigas principales, secundarias, de borde y piezas de unión", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
+sh = Sheet(NUM["vigas"], "Vigas principales, secundarias, de borde y piezas de unión", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
            "1:10 - 1:100 - 1:75 - 1:5")
 y0 = sh.encabezado("1° ELEMENTOS: VIGAS Y PIEZAS DE UNIÓN", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
@@ -40,7 +40,7 @@ for k in range(1, 6):
 v.dim((0, 600), (ANCHO, 600), 3)
 for k in range(6): v.dim((k * SEC, -500), (k * SEC + SEC, -500), -4)
 v.label("ELEVACIÓN 1:100", 6000, -1300, 1.7, TA.MIDDLE_CENTER, True)
-v.ley("studs Ø19 c/ 300 (en el valle de la chapa)", (3210, 125), (-4, 7), 1.6)
+v.ley("studs Ø19 c/ 300 (en el valle de la chapa)", (3210, 125), (4, 9), 1.6)
 v.ley("ángulos p/ secundarias", (8000, -130), (8, 7), 1.6)
 ficha_spec(sh, L + 48, Y1 - 48, R - L - 48, [
     ("Función:", "salvar la luz de 12,00 m sin apoyos, recibir las reacciones de las vigas secundarias y, con los conectores, trabajar en sección compuesta con la losa."),
@@ -105,7 +105,7 @@ ficha_spec(sh, XB, Y2 - 56, W2, [
 ])
 
 # =============================================================== 8. PIEZAS DE UNIÓN
-Y3 = Y2 - 80
+Y3 = Y2 - 78
 sh.titulo_dib(L, Y3, 8, "PIEZAS DE UNIÓN: PLACA DE CORTE Y DOBLE ÁNGULO", "1:10 / 1:5", w=R - L)
 # placa de corte (vista de frente) para viga principal
 v = sh.view_in((L, Y3 - 55, L + 30, Y3 - 6), (-80, -270, 160, 215), 10)
@@ -144,4 +144,4 @@ ficha_spec(sh, L, Y3 - 58, R - L, [
     ("Placa de corte:", "chapa F-24 de 400 x 120 x 10 mm soldada en taller al ala de la columna (filete 8 mm ambos lados); 4 agujeros Ø22, paso 80 mm, para M20."),
     ("Doble ángulo:", "2 L 76 x 76 x 8 (3\" x 5/16\") de 140 mm, abulonados al alma de la viga principal y de la secundaria; 2 bulones M16 por ala, agujeros Ø18."),
 ])
-sh.save("L04_Vigas_piezas_union")
+sh.save(f"L{lam('vigas')}_Vigas_piezas_union")

@@ -1,30 +1,38 @@
-PRÁCTICA EN CLASE C2 - GRANDES LUCES EN ACERO (TP6 ACERO) - 15 láminas A4 vertical
+PRÁCTICA EN CLASE C2 - GRANDES LUCES EN ACERO (TP6 ACERO) - 21 láminas A4 vertical
 
-Practica_Acero_C2_A4_completa.pdf : las 15 láminas en un solo PDF. Imprimir en A4 al 100 % (sin "ajustar a página").
+Letra mínima: 2,0 mm en toda la hoja impresa (textos, tablas, referencias y cotas).
+
+Practica_Acero_C2_A4_completa.pdf : las 21 láminas en un solo PDF. Imprimir en A4 al 100 % (sin "ajustar a página").
 PDF_por_lamina/  : cada lámina por separado.
 DWG_AutoCAD/     : cada lámina en DWG (AutoCAD 2018), dibujada en mm de papel = hoja A4 a escala 1:1.
-                   Marco A4 210 x 297. Cada dibujo está a la escala indicada en su título (1:5, 1:10, 1:20, 1:100...);
-                   las cotas son asociativas y muestran la medida REAL en mm (factor de escala lineal = escala del dibujo).
-                   Se plotea a escala 1:1 en hoja A4 vertical. Capas: 0-MARCO, 1-SECCION, 1-VISTA, 1-OCULTO, 1-EJES,
-                   2-RAYADO, 3-COTAS, 3-TEXTOS, 3-TITULOS, 3-REFS, 3-TABLAS.
+                   Cada dibujo está a la escala indicada en su título; las cotas son asociativas y muestran la medida REAL
+                   en mm. Se plotea a escala 1:1 en hoja A4 vertical. Capas: 0-MARCO, 1-SECCION, 1-VISTA, 1-OCULTO,
+                   1-EJES, 2-RAYADO, 3-COTAS, 3-TEXTOS, 3-TITULOS, 3-REFS, 3-TABLAS.
 DXF_alternativo/ : los mismos dibujos en DXF.
+vistas_previas/  : imagen de cada lámina.
 
-Contenido:
- 01 Sistema adoptado: memoria, planta estructural 1:200, corte transversal 1:125, índice
- 02 Punto 1 - Axonometría estructural con los 20 elementos y su listado
- 03 Punto 1 - Base aislada, pernos de anclaje, placa base, columna IPN 300
- 04 Punto 1 - Vigas principal IPN 500, secundaria y de borde IPN 200, placas de corte y doble ángulo
- 05 Punto 1 - Chapa colaborante (perfil, solape, dimensiones máximas y mínimas, colocación), studs, cenefa, tapas, malla, hormigón
- 06 Punto 1 - Arriostramientos, bulones, soldadura, fijaciones de chapa, protección
- 07 Punto 2 - Esquema de juntas y uniones U1 a U10 sobre el corte, clasificación, conceptos y orden de ejecución
- 08 Punto 2 - Uniones U1 (base), U2 (viga principal-columna), U3 (secundaria-principal) + cómo trabajan
- 09 Punto 2 - Uniones U4 (losa-viga), U5 (chapa-viga y chapa-chapa), U6 (borde de losa), U7 (arriostramiento)
- 10 Punto 2 - Uniones U8 (panel-estructura), U9 (muro cortina-losa), U10 (cubierta-parapeto)
- 11 Punto 3 - Grúa telescópica, plataformas, soldadora de pernos, llaves, fijadora y otros equipos
- 12 Punto 3 - Plano de obrador 1:500, alquiler, armado, acceso, cronograma y planilla de alquiler
- 13 Punto 4 - Muro cortina stick (elevación, corte vertical, corte horizontal, elementos)
- 14 Punto 4 - Panel sándwich 80 mm (elevación, sección, junta, especificación, montaje)
- 15 Punto 4 - Comparación CW vs. panel a la misma escala, cuadro comparativo, justificación y matriz de decisión
+Índice:
+ 01 (punto -) Carátula, consigna e índice
+ 02 (punto -) Sistema adoptado: memoria, planta estructural y corte transversal
+ 03 (punto 1) Axonometría estructural: elementos del sistema y referencias
+ 04 (punto 1) Fundación, pernos de anclaje, placa base y columna
+ 05 (punto 1) Vigas principales, secundarias, de borde y piezas de unión
+ 06 (punto 1) Chapa colaborante: perfil, máximos y mínimos, colocación, malla y hormigón
+ 07 (punto 1) Conector de corte, cenefa de borde y tapa de cierre
+ 08 (punto 1) Arriostramiento, bulones y soldadura
+ 09 (punto 1) Fijaciones de la chapa y protección del acero
+ 10 (punto 2) Juntas y uniones: esquema general y clasificación
+ 11 (punto 2) Uniones U1 y U2: base y viga principal-columna
+ 12 (punto 2) Unión U3: secundaria-principal y cómo trabajan las uniones
+ 13 (punto 2) Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento
+ 14 (punto 2) Uniones U8 a U10: cerramientos a la estructura y cubierta
+ 15 (punto 3) Grúa, plataformas y soldadora de pernos
+ 16 (punto 3) Llaves, fijadora y otros equipos
+ 17 (punto 3) Planificación: alquiler, armado y acceso a obra
+ 18 (punto 4) Muro cortina: elevación y corte vertical
+ 19 (punto 4) Muro cortina: corte horizontal y elementos
+ 20 (punto 4) Panel sándwich 80 mm (integral opaco)
+ 21 (punto 4) Comparación CW vs. panel y justificación
 
 Edificio adoptado: el mismo del cómputo de la Lámina 4 (planta 20 x 12 m, columnas IPN 300 c/ 4 m, losas colaborantes +3,80 y +7,40).
 Los valores de catálogo son de referencia: verificar con el fabricante elegido.

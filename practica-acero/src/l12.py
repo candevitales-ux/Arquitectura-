@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(12, "Planificación: alquiler, armado y acceso a obra", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS", "Obrador 1:500")
+sh = Sheet(NUM["plan"], "Planificación: alquiler, armado y acceso a obra", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS", "Obrador 1:500")
 y0 = sh.encabezado("3° PLANIFICACIÓN DE ALQUILER, ARMADO Y ACCESO", "Cómo se organizan los equipos para montar la estructura en seco")
 L, R = sh.L + 3, sh.R - 3
 Y1 = y0 - 3.5
@@ -43,7 +43,7 @@ for i, (gx, gy) in enumerate(((8000, 12500), (22000, 12500))):
     v.label(f"E{i + 1}", gx + 700, gy + 700, 1.6, bold=True)
 # acopios y obrador
 for (x0, y0_, x1, y1, s) in ((1000, 1000, 11000, 5500, "acopio perfiles"), (19500, 1000, 29000, 5500, "acopio chapa y paneles"),
-                             (1000, 30500, 9000, 40500, "obrador / pañol"), (21000, 33000, 29000, 40500, "contenedores")):
+                             (1000, 30500, 9000, 40500, "obrador"), (21000, 33000, 29000, 40500, "contenedores")):
     v.rect(x0, y0_, x1, y1, "1-VISTA", 18)
     v.label(s, (x0 + x1) / 2, (y0_ + y1) / 2, 1.3, TA.MIDDLE_CENTER)
 v.circ((27500, 29500), 900, "1-VISTA", 13); v.label("grupo elec.", 27500, 27800, 1.2, TA.MIDDLE_CENTER)
@@ -106,7 +106,7 @@ for xx in [x0, x0 + wt, x0 + wt + wq] + [x0 + wt + wq + k * wsem for k in range(
 sh.pl([(x0, yy), (R, yy)], "3-TABLAS", 35); sh.pl([(x0, yb), (R, yb)], "3-TABLAS", 35)
 sh.pl([(x0, yy - 5), (R, yy - 5)], "3-TABLAS", 25)
 sh.para(L, yb - 2, R - L, "Seguridad: plan de izaje firmado por responsable técnico; zona de exclusión bajo la carga; arnés y línea de vida en altura; no se trabaja con lluvia ni viento fuerte.", 1.6, lead=1.36)
-yq = yb - 10
+yq = yb - 13
 sh.titulo_dib(L, yq, 3, "PLANILLA DE ALQUILER DE EQUIPOS", w=R - L)
 filas = [["Grúa telescópica 50 t", "por hora (mín. 8 h) + traslado", "6 jornadas (sem. 3 y 5)", "con operador; seguro RC; plan de izaje"],
          ["Plataforma articulada 12 m", "por semana / mes", "sem. 3 a 8", "operario capacitado; arnés"],
@@ -115,5 +115,5 @@ filas = [["Grúa telescópica 50 t", "por hora (mín. 8 h) + traslado", "6 jorna
          ["Fijadora a pólvora + clavos", "por día o compra de insumos", "sem. 4 y 6", "registro de cartuchos; EPP"],
          ["Autobomba de hormigón", "por servicio (m³ + traslado)", "2 servicios", "acceso del mixer; programación con la hormigonera"],
          ["Llaves de impacto y torque", "propias de la empresa montadora", "sem. 3 a 6", "calibración vigente de la llave de torque"]]
-sh.tabla(L, yq - 5, [("Equipo", 46), ("Modalidad", 44), ("Período", 34), ("Requisitos", R - L - 124)], filas, h=1.6, lead=1.3, pad=0.6)
-sh.save("L12_Planificacion_obra")
+sh.tabla(L, yq - 5, [("Equipo", 46), ("Modalidad", 44), ("Período", 34), ("Requisitos", R - L - 124)], filas, h=2.0, lead=1.25, pad=0.6)
+sh.save(f"L{lam('plan')}_Planificacion_obra")

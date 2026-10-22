@@ -3,8 +3,8 @@
 from lib import *
 from geom import *
 
-sh = Sheet(11, "Máquinas y herramientas de montaje, moldeo y anclaje", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS",
-           "1:400 - 1:200 - 1:20 - 1:10")
+sh = Sheet(NUM["maq"], "Grúa, plataformas y soldadora de pernos", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS",
+           "1:400 - 1:200 - 1:20")
 y0 = sh.encabezado("3° MÁQUINAS Y HERRAMIENTAS", "Equipos para izar, montar, soldar, fijar y anclar los elementos prefabricados de acero")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
@@ -44,7 +44,7 @@ v.ln((tx, 9000), (tx - 2500, 7900), "1-VISTA", 13); v.ln((tx, 9000), (tx + 2500,
 v.rect(tx - 6000, 7400, tx + 6000, 7900, "1-SECCION", 25); v.hatch([(tx - 6000, 7400), (tx + 6000, 7400), (tx + 6000, 7900), (tx - 6000, 7900)], "gris")
 v.ln((tx - 6000, 7650), (tx - 7500, 5500), "1-OCULTO", 9)
 v.dim((px, 0), (tx, 0), -4, txt="radio 15,2 m")
-v.ley("pluma telescópica 4 tramos (11 a 40 m)", (px + ux * 16000, py + uy * 16000), (12, 4), 1.5)
+v.ley("pluma 4 tramos (11 a 40 m)", (px + ux * 16000, py + uy * 16000), (8, 4), 1.5)
 v.ley("viga IPN 500 de 11,68 m (1,65 t) con balancín", (tx + 4000, 7650), (2, 10), 1.5)
 v.ley("estabilizadores + placas de reparto", (13300, -40), (40, 3), 1.5)
 v.ley("cable guía (viento)", (tx - 7000, 6200), (10, -8), 1.5)
@@ -56,7 +56,7 @@ ficha_spec(sh, L + 98, Y1 - 8, R - L - 98, [
 ], h=1.55, lead=1.36)
 
 # =============================================================== 2. PLATAFORMAS ELEVADORAS
-Y2 = Y1 - 88
+Y2 = Y1 - 100
 sh.titulo_dib(XA, Y2, 2, "PLATAFORMAS ELEVADORAS", "1:200", w=W2)
 v = sh.view_in((XA, Y2 - 62, XA + W2, Y2 - 7), (-1000, -400, 16500, 10500), 200)
 v.ln((-1000, 0), (16500, 0), "1-VISTA", 25)
@@ -104,9 +104,13 @@ ficha_spec(sh, XB, Y2 - 64, W2, [
 ], h=1.55, lead=1.36)
 
 # =============================================================== 4. LLAVES DE IMPACTO Y TORQUE
-Y3 = Y2 - 80
-sh.titulo_dib(XA, Y3, 4, "LLAVES DE IMPACTO Y DE TORQUE", "1:10", w=W2)
-v = sh.view_in((XA, Y3 - 28, XA + W2, Y3 - 7), (-40, -70, 850, 100), 10)
+sh.save(f"L{lam('maq')}_Grua_plataformas_soldadora")
+
+sh = Sheet(NUM["maq2"], "Llaves, fijadora y otros equipos", "PUNTO 3 - MÁQUINAS Y HERRAMIENTAS", "1:5")
+y0 = sh.encabezado("3° MÁQUINAS Y HERRAMIENTAS (CONTINUACIÓN)", "Herramientas de mano para abulonar y fijar, y resto de los equipos de obra")
+Y3 = y0 - 3.5
+sh.titulo_dib(L, Y3, 4, "LLAVES DE IMPACTO Y DE TORQUE", "1:5", w=R - L)
+v = sh.view_in((L, Y3 - 44, R, Y3 - 8), (-40, -75, 850, 100), 5)
 b = [(0, 0), (220, 0), (240, 30), (240, 80), (0, 80)]
 v.pl(b, "1-SECCION", 35, True); v.hatch(b, "gris")
 v.pl([(60, 0), (40, -120 + 60), (110, -60), (130, 0)], "1-VISTA", 25)
@@ -116,14 +120,15 @@ v.pl([(450, 30), (800, 30), (800, 50), (450, 50)], "1-VISTA", 25, True)
 v.rect(410, 20, 450, 60, "1-VISTA", 25); v.rect(700, 25, 800, 55, "1-SECCION", 25); v.hatch([(700, 25), (800, 25), (800, 55), (700, 55)], "negro")
 v.rect(560, 50, 640, 70, "1-VISTA", 13)
 v.ley("escala N·m", (600, 70), (2, 6), 1.5)
-ficha_spec(sh, XA, Y3 - 30, W2, [
+ficha_spec(sh, L, Y3 - 47, R - L, [
     ("Impacto:", "neumática o a batería 1/2\" - 3/4\", 1000 N·m: aprieta los bulones de vigas y columnas."),
     ("Torque:", "de click 100-600 N·m: controla el 10 % de los bulones (M20 ≈ 400 N·m) y la tuerca de los pernos de anclaje."),
 ], h=1.55, lead=1.36)
 
 # =============================================================== 5. FIJADORA DE PÓLVORA
-sh.titulo_dib(XB, Y3, 5, "FIJADORA Y ATORNILLADOR", "1:10", w=W2)
-v = sh.view_in((XB, Y3 - 28, XB + W2, Y3 - 7), (-40, -70, 850, 100), 10)
+Y3 = Y3 - 68
+sh.titulo_dib(L, Y3, 5, "FIJADORA A PÓLVORA Y ATORNILLADOR", "1:5", w=R - L)
+v = sh.view_in((L, Y3 - 44, R, Y3 - 8), (-40, -75, 850, 100), 5)
 b = [(0, 10), (380, 10), (380, 70), (0, 70)]
 v.pl(b, "1-SECCION", 35, True); v.hatch(b, "gris")
 v.pl([(260, 10), (240, -110 + 60), (310, -50), (320, 10)], "1-VISTA", 25)
@@ -134,13 +139,13 @@ v.pl(b2, "1-SECCION", 35, True); v.hatch(b2, "gris")
 v.pl([(560, 20), (550, -50), (600, -50), (610, 20)], "1-VISTA", 25)
 v.rect(720, 35, 800, 55, "1-VISTA", 18); v.ln((800, 45), (840, 45), "1-VISTA", 18)
 v.ley("atornillador c/ tope", (760, 55), (-4, 8), 1.5)
-ficha_spec(sh, XB, Y3 - 30, W2, [
+ficha_spec(sh, L, Y3 - 47, R - L, [
     ("Fijadora:", "tipo Hilti DX 76: clava la chapa colaborante al ala (1 clavo/2 s); carga de pólvora según espesor del ala; con protección auditiva."),
     ("Atornillador:", "2500 rpm con tope de profundidad para autoperforantes de costura y de panel."),
 ], h=1.55, lead=1.36)
 
 # =============================================================== otros equipos
-Y4 = Y3 - 43
+Y4 = Y3 - 68
 sh.titulo_dib(L, Y4, 6, "OTROS EQUIPOS DE MONTAJE, MOLDEO Y ANCLAJE", w=R - L)
 otros = [
     ["Camión semirremolque 12,5 m", "traslado de perfiles, chapas y paneles desde el taller", "montaje"],
@@ -151,5 +156,5 @@ otros = [
     ["Plantilla de pernos + vibrador", "posición de los pernos al hormigonar las bases", "anclaje"],
     ["Puntales metálicos regulables", "apuntalamiento de la chapa si la luz supera la máxima", "moldeo"],
 ]
-sh.tabla(L, Y4 - 5, [("Equipo", 56), ("Uso", R - L - 56 - 20), ("Tarea", 20)], otros, h=1.6, lead=1.3, pad=0.55)
-sh.save("L11_Maquinas_herramientas")
+sh.tabla(L, Y4 - 5, [("Equipo", 56), ("Uso", R - L - 56 - 20), ("Tarea", 20)], otros, h=2.0, lead=1.3, pad=0.8)
+sh.save(f"L{lam('maq2')}_Llaves_fijadora_otros")

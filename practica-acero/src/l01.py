@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(1, "Sistema adoptado: memoria, planta y corte", "CARÁTULA - SISTEMA DEL TP6 ACERO",
+sh = Sheet(NUM["sistema"], "Sistema adoptado: memoria, planta y corte", "SISTEMA DEL TP6 ACERO",
            "Planta 1:200 - Corte 1:125")
 y = sh.encabezado("SISTEMA ESTRUCTURAL ADOPTADO - TP6 ACERO",
                   "Estructura metálica de grandes luces con entrepiso y cubierta de losa colaborante (steel deck)")
@@ -64,27 +64,17 @@ v.dim((0, 0), (0, ANCHO), -15)
 for k in range(6):
     v.dim((LARGO, k * SEC), (LARGO, (k + 1) * SEC), 9)
 # leyenda
-lx, ly = L + 136, yp - 64
+lx, ly = L + 136, yp - 10
+sh.txt("REFERENCIAS", lx, yp - 1, 2.2, bold=True)
 items = [("1-SECCION", 60, "Viga ppal. IPN 500 (luz 12 m)"), ("1-VISTA", 35, "Viga de borde IPN 200"),
          ("1-VISTA", 18, "Viga sec. IPN 200 c/ 2,00 m"), ("1-OCULTO", 13, "Paño de chapa colaborante")]
 for i, (lay, lw, s) in enumerate(items):
-    yl = ly - i * 3.6
+    yl = ly - i * 4.4
     sh.pl([(lx, yl), (lx + 8, yl)], lay, lw); sh.txt(s, lx + 10, yl - 0.9, 1.9)
-ly2 = ly - 4 * 3.6
+ly2 = ly - 4 * 4.4
 sh.solid([(lx + 2.7, ly2 - 1), (lx + 5.3, ly2 - 1), (lx + 5.3, ly2 + 1), (lx + 2.7, ly2 + 1)], 60)
 sh.txt("Columna IPN 300", lx + 10, ly2 - 0.9, 1.9)
-sh.txt("Flecha: nervios de la chapa", lx, ly2 - 5, 1.9); sh.txt("en sentido A-D (luz 2,00 m)", lx, ly2 - 8.1, 1.9)
-
-# ------------------------------------------------------------------ índice
-ix = L + 136
-sh.titulo_dib(ix, yp, "i", "ÍNDICE DE LÁMINAS", w=R - ix)
-yi = yp - 6
-CORTO = ["Sistema adoptado", "Axonometría y elementos", "Fundación, placa y columna", "Vigas y piezas de unión",
-         "Losa colaborante", "Arriostram., bulones, sold.", "Esquema de uniones", "Uniones U1 a U3",
-         "Uniones U4 a U7", "Uniones U8 a U10", "Máquinas y herramientas", "Alquiler, armado, acceso",
-         "Muro cortina (CW)", "Panel sándwich 80", "Comparación CW / panel"]
-rows = [[f"{n:02d}", CORTO[n - 1], p] for n, t, p in LAMINAS]
-sh.tabla(ix, yi, [("N°", 6), ("Contenido", R - ix - 14), ("Pto.", 8)], rows, h=1.8, lead=1.35, pad=0.7)
+sh.txt("Flecha: nervios de la chapa", lx, ly2 - 6, 1.9); sh.txt("en sentido A-D (luz 2,00 m)", lx, ly2 - 9.4, 1.9)
 
 # ------------------------------------------------------------------ corte transversal 1:125
 yc = yp - 92
@@ -139,4 +129,4 @@ for s, at, off in labs:
     pa = v.p(*at); c = (pa[0] + off[0], pa[1] + off[1])
     sh.pl([pa, c], "3-REFS", 13)
     sh.txt(s, c[0] + (0.6 if off[0] >= 0 else -0.6), c[1] + 0.5, 1.8, TA.LEFT if off[0] >= 0 else TA.RIGHT)
-sh.save("L01_Sistema_adoptado")
+sh.save(f"L{lam('sistema')}_Sistema_adoptado")

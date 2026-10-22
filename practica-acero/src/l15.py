@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(15, "Comparación CW vs. panel y justificación de la elección", "PUNTO 4 - MURO EXTERIOR", "1:20")
+sh = Sheet(NUM["comp"], "Comparación CW vs. panel y justificación de la elección", "PUNTO 4 - MURO EXTERIOR", "1:20")
 y0 = sh.encabezado("4° COMPARACIÓN: VIDRIADO (CW) vs. OPACO (PANEL)",
                    "Los dos cerramientos dibujados a la misma escala frente a la losa de entrepiso (+3,80)")
 L, R = sh.L + 3, sh.R - 3
@@ -107,4 +107,4 @@ wc = (R - L - 52) / 8
 ybm = sh.tabla(L, Y4 - 5, [("Criterio", 52), ("CW", wc), ("Panel", wc), ("Peso frente", wc), ("Peso lat./contraf.", wc),
                      ("Frente CW", wc), ("Frente panel", wc), ("Lat. CW", wc), ("Lat. panel", wc)], filas, h=1.55, lead=1.28, pad=0.5)
 sh.para(L, ybm - 2, R - L, f"Resultado: en el frente gana el muro cortina ({tA[0]} contra {tB[0]}) porque pesan la luz y la imagen; en laterales y contrafrente gana el panel ({tB[1]} contra {tA[1]}) por aislación, costo y velocidad.", 1.6, bold=True, lead=1.36)
-sh.save("L15_Comparacion_CW_panel")
+sh.save(f"L{lam('comp')}_Comparacion_CW_panel")

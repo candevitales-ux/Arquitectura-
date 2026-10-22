@@ -3,9 +3,9 @@
 from lib import *
 from geom import *
 
-sh = Sheet(9, "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "PUNTO 2 - JUNTAS Y UNIONES",
+sh = Sheet(NUM["u47"], "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "PUNTO 2 - JUNTAS Y UNIONES",
            "1:5 - 1:10")
-y0 = sh.encabezado("2° UNIONES U4, U5, U6 Y U7", "Detalles a escala de las uniones del entrepiso y del arriostramiento (ver lámina 07)")
+y0 = sh.encabezado("2° UNIONES U4, U5, U6 Y U7", f"Detalles a escala de las uniones del entrepiso y del arriostramiento (ver lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
 XA, XB = L, L + W2 + 6
@@ -24,10 +24,9 @@ for xx in (-PASO / 2, PASO / 2):
     stud(v, xx, 0)
 v.dim((-215, 0), (-215, LOSA), -5); v.dim((-215, 0), (-215, H_DECK), -11)
 v.dim((PASO / 2 - 16, 125), (PASO / 2 + 16, 125), 3) if False else None
-v.ley("stud Ø19 x 125 (1 por valle)", (-PASO / 2 + 10, 100), (4, 16), 1.5)
+v.ley("stud Ø19 x 125 (1 por valle)", (-PASO / 2 + 10, 100), (6, 17), 1.5)
 v.ley("soldado a través de la chapa", (PASO / 2 + 10, 4), (8, -8), 1.5)
 v.ley("malla Q188 a 25 mm", (100, LOSA - 30), (6, 9), 1.5)
-v.ley("hormigón H-25", (0, 110), (6, 15), 1.5)
 v.ley("ala sup. IPN 200", (150, -6), (2, -10), 1.5)
 v.label("CORTE POR LA VIGA SECUNDARIA 1:5", 0, -145, 1.5, TA.MIDDLE_CENTER, True)
 ficha_spec(sh, XA, Y1 - 80, W2, [
@@ -52,7 +51,7 @@ for xx in (-55, 55):
     v.pl([(xx - 2, -12), (xx, -16), (xx + 2, -12), (xx + 2, 14), (xx - 2, 14)], "1-VISTA", 18, True)
     v.rect(xx - 6, 14, xx + 6, 17, "1-VISTA", 18)
 # solape lateral con autoperforante (a la derecha)
-v.ley("clavo de pólvora (2 por valle)", (55, 10), (20, -10), 1.5)
+v.ley("clavo de pólvora (2 por valle)", (55, 10), (-2, -36), 1.5)
 v.ley("stud Ø19", (0, 100), (-6, 14), 1.5)
 v.ley("valle apoyado (mín. 40 mm)", (-60, 0), (-4, -24), 1.5)
 v.ley("viga IPN 500", (-60, -120), (-4, -6), 1.5)
@@ -115,4 +114,4 @@ ficha_spec(sh, XB, Y2 - 87, W2, [
     ("Vínculo:", "articulado; la barra solo trabaja a tracción. El eje de la barra pasa por el nudo columna-viga (sin excentricidad)."),
     ("Ajuste:", "con el tensor central, hasta sacar la flecha de la barra."),
 ], h=1.6, lead=1.36)
-sh.save("L09_Uniones_U4_U7")
+sh.save(f"L{lam('u47')}_Uniones_U4_U7")

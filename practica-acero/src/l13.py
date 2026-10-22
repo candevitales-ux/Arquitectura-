@@ -3,7 +3,7 @@
 from lib import *
 from geom import *
 
-sh = Sheet(13, "Muro exterior vidriado: muro cortina (CW) tipo stick", "PUNTO 4 - MURO EXTERIOR", "1:100 - 1:20 - 1:2,5")
+sh = Sheet(NUM["cw"], "Muro cortina: elevación y corte vertical", "PUNTO 4 - MURO EXTERIOR", "1:100 - 1:20")
 y0 = sh.encabezado("4° MURO EXTERIOR VIDRIADO: MURO CORTINA (CW)",
                    "Sistema stick de aluminio (montantes + travesaños armados en obra) colgado de las losas - frente A")
 L, R = sh.L + 3, sh.R - 3
@@ -33,7 +33,7 @@ v.ley("parapeto panel 80", (5500, CUP - 300), (2, 5), 1.4)
 # =============================================================== 2. CORTE VERTICAL POR LOSA 1:20
 xc = L + 90
 sh.titulo_dib(xc, Y1, 2, "CORTE VERTICAL POR LOSA", "1:20", w=R - xc)
-v = sh.view_in((xc, Y1 - 100, R, Y1 - 8), (-700, -1300, 550, 450), 20)
+v = sh.view_in((xc + 2, Y1 - 100, R, Y1 - 8), (-700, -1300, 550, 450), 20, ha="l")
 zt = 0                                            # sup. losa entrepiso (+3,80) como origen
 v.hatch([(-700, -LOSA), (-60, -LOSA), (-60, 0), (-700, 0)], "hormigon"); v.rect(-700, -LOSA, -60, 0, "1-SECCION", 35)
 v.pl([(-60, 0), (-63, 0), (-63, -LOSA - 15), (-150, -LOSA - 15)], "1-SECCION", 25)
@@ -64,10 +64,24 @@ v.ley("cortafuego sellado (12)", (0, -60), (-12, -16), 1.4)
 v.ley("losa colaborante", (-500, -70), (-2, 14), 1.4)
 v.ley("viga de borde", (-100, -LOSA - 150), (-6, -8), 1.4)
 
+sh._last = ficha_spec(sh, L, Y1 - 112, R - L, [
+    ("Función:", "cerramiento liviano y transparente que no carga: solo recibe su peso y el viento y los lleva a las losas."),
+    ("Límites:", "módulo 0,90-1,50 m; altura de montante = 1 piso (máx. ~4,50 m); deformación por viento L/175; tolerancia ±2 mm."),
+    ("Montaje:", "desde plataforma articulada, piso por piso: grapas, montantes, travesaños, vidrios sobre calzos, presores, tapas y sellados."),
+], h=2.0, lead=1.4)
+yy = ficha_spec(sh, L, sh._last - 3, R - L, [
+    ("Ventajas:", "transparencia y luz natural; liviano (~45 kg/m²); se monta en seco desde afuera; modulación precisa sobre la estructura metálica."),
+    ("Desventajas:", "costo alto; ganancia solar y pérdidas de calor (U 2,8 frente a 0,27 del panel); mantenimiento de sellados y limpieza."),
+], h=2.0, lead=1.4)
+sh.save(f"L{lam('cw')}_Muro_cortina_elevacion_corte")
+
+sh = Sheet(NUM["cw2"], "Muro cortina: corte horizontal y elementos", "PUNTO 4 - MURO EXTERIOR", "1:2")
+y0 = sh.encabezado("4° MURO CORTINA (CONTINUACIÓN)", "Corte horizontal por el montante y listado de los elementos del sistema stick")
+Y1 = y0 - 3.5
 # =============================================================== 3. CORTE HORIZONTAL POR MONTANTE 1:2,5
-Y2 = Y1 - 108
-sh.titulo_dib(L, Y2, 3, "CORTE HORIZONTAL POR MONTANTE", "1:2,5", w=86)
-v = sh.view_in((L, Y2 - 107, L + 86, Y2 - 8), (-100, -40, 100, 205), 2.5)
+Y2 = Y1
+sh.titulo_dib(L, Y2, 3, "CORTE HORIZONTAL POR MONTANTE", "1:2", w=R - L)
+v = sh.view_in((L, Y2 - 132, R, Y2 - 8), (-100, -40, 100, 205), 2)
 # montante tubular 50 x 150 con canal
 mp = [(-25, 0), (25, 0), (25, 150), (-25, 150)]
 v.pl(mp, "1-SECCION", 35, True)
@@ -98,7 +112,8 @@ v.ley("templado 6 ext. / laminado 3+3 int.", (-90, 176), (0, 8), 1.4)
 v.label("EXTERIOR", 60, 200, 1.4, TA.MIDDLE_CENTER, True); v.label("INTERIOR", 60, -30, 1.4, TA.MIDDLE_CENTER, True)
 
 # =============================================================== 4. ESPECIFICACIÓN
-xs = L + 90
+xs = L
+Y2 = Y2 - 138
 sh.titulo_dib(xs, Y2, 4, "ELEMENTOS DEL SISTEMA", w=R - xs)
 filas = [["1", "Montante", "alum. 6063-T6, 50x150, c/ 1,00 m, colgado de cada losa"],
          ["2", "Travesaño", "alum. 50x120, a +0,90 (spandrel) y en cada losa"],
@@ -112,14 +127,5 @@ filas = [["1", "Montante", "alum. 6063-T6, 50x150, c/ 1,00 m, colgado de cada lo
          ["12", "Cortafuego", "lana mineral 100 kg/m³ + sellador intumescente"],
          ["13", "RPT", "aislador de poliamida entre montante y presor"],
          ["14", "Sellados", "silicona neutra en perímetros y babetas"]]
-yb = sh.tabla(xs, Y2 - 5, [("N°", 8), ("Pieza", 20), ("Medidas / especificación", R - xs - 28)], filas, h=1.55, lead=1.28, pad=0.55)
-sh._last = ficha_spec(sh, xs, yb - 2, R - xs, [
-    ("Función:", "cerramiento liviano y transparente que no carga: solo recibe su peso y el viento y los lleva a las losas."),
-    ("Límites:", "módulo 0,90-1,50 m; altura de montante = 1 piso (máx. ~4,50 m); deformación por viento L/175; tolerancia ±2 mm."),
-    ("Montaje:", "desde plataforma articulada, piso por piso: grapas, montantes, travesaños, vidrios sobre calzos, presores, tapas y sellados."),
-], h=1.55, lead=1.34)
-yy = ficha_spec(sh, xs, sh._last - 3, R - xs, [
-    ("Ventajas:", "transparencia y luz natural; liviano (~45 kg/m²); se monta en seco desde afuera; modulación precisa sobre la estructura metálica."),
-    ("Desventajas:", "costo alto; ganancia solar y pérdidas de calor (U 2,8 frente a 0,27 del panel); mantenimiento de sellados y limpieza."),
-], h=1.55, lead=1.34)
-sh.save("L13_Muro_cortina")
+yb = sh.tabla(xs, Y2 - 5, [("N°", 10), ("Pieza", 30), ("Medidas / especificación", R - xs - 40)], filas, h=2.0, lead=1.25, pad=0.55)
+sh.save(f"L{lam('cw2')}_Muro_cortina_horizontal_elementos")

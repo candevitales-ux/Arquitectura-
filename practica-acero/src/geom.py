@@ -17,20 +17,33 @@ COL = 300                        # columna IPN 300
 VP = 500                         # viga principal de pórtico IPN 500 (luz 12,00 m)
 VS = 200                         # viga secundaria y de borde IPN 200 (luz 4,00 m)
 
-LAMINAS = [
-    (1, "Sistema adoptado: memoria, planta estructural y corte transversal", "-"),
-    (2, "Axonometría estructural: elementos del sistema y referencias", "1"),
-    (3, "Elementos 1: fundación, pernos de anclaje, placa base y columna", "1"),
-    (4, "Elementos 2: vigas principales, secundarias, de borde y piezas de unión", "1"),
-    (5, "Elementos 3: chapa colaborante, conectores, malla, cenefa y cierres", "1"),
-    (6, "Elementos 4: arriostramientos, bulones, soldadura, fijaciones y protección", "1"),
-    (7, "Juntas y uniones: esquema general y clasificación", "2"),
-    (8, "Uniones U1 a U3: base, viga principal-columna, secundaria-principal", "2"),
-    (9, "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "2"),
-    (10, "Uniones U8 a U10: cerramientos a la estructura y junta de cubierta", "2"),
-    (11, "Máquinas y herramientas de montaje, moldeo y anclaje", "3"),
-    (12, "Planificación: alquiler, armado y acceso a obra", "3"),
-    (13, "Muro exterior vidriado: muro cortina (CW) stick", "4"),
-    (14, "Muro exterior opaco: integral panel sándwich 80 mm", "4"),
-    (15, "Comparación CW vs. panel y justificación de la elección", "4"),
+# orden de las láminas: clave del dibujo -> (número, título para el índice, punto de la consigna)
+ORDEN = [
+    ("caratula", "Carátula, consigna e índice", "-"),
+    ("sistema", "Sistema adoptado: memoria, planta estructural y corte transversal", "-"),
+    ("axo", "Axonometría estructural: elementos del sistema y referencias", "1"),
+    ("fund", "Fundación, pernos de anclaje, placa base y columna", "1"),
+    ("vigas", "Vigas principales, secundarias, de borde y piezas de unión", "1"),
+    ("deck", "Chapa colaborante: perfil, máximos y mínimos, colocación, malla y hormigón", "1"),
+    ("deck2", "Conector de corte, cenefa de borde y tapa de cierre", "1"),
+    ("arr", "Arriostramiento, bulones y soldadura", "1"),
+    ("fij", "Fijaciones de la chapa y protección del acero", "1"),
+    ("uesq", "Juntas y uniones: esquema general y clasificación", "2"),
+    ("u12", "Uniones U1 y U2: base y viga principal-columna", "2"),
+    ("u3", "Unión U3: secundaria-principal y cómo trabajan las uniones", "2"),
+    ("u47", "Uniones U4 a U7: losa-viga, chapas, borde de losa, arriostramiento", "2"),
+    ("u810", "Uniones U8 a U10: cerramientos a la estructura y cubierta", "2"),
+    ("maq", "Grúa, plataformas y soldadora de pernos", "3"),
+    ("maq2", "Llaves, fijadora y otros equipos", "3"),
+    ("plan", "Planificación: alquiler, armado y acceso a obra", "3"),
+    ("cw", "Muro cortina: elevación y corte vertical", "4"),
+    ("cw2", "Muro cortina: corte horizontal y elementos", "4"),
+    ("panel", "Panel sándwich 80 mm (integral opaco)", "4"),
+    ("comp", "Comparación CW vs. panel y justificación", "4"),
 ]
+NUM = {k: i + 1 for i, (k, t, p) in enumerate(ORDEN)}
+LAMINAS = [(NUM[k], t, p) for k, t, p in ORDEN]
+
+
+def lam(k):
+    return f"{NUM[k]:02d}"

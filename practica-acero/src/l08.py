@@ -3,9 +3,9 @@
 from lib import *
 from geom import *
 
-sh = Sheet(8, "Uniones U1 a U3: base, viga principal-columna, secundaria-principal", "PUNTO 2 - JUNTAS Y UNIONES",
+sh = Sheet(NUM["u12"], "Uniones U1 y U2: base y viga principal-columna", "PUNTO 2 - JUNTAS Y UNIONES",
            "1:10 - 1:20")
-y0 = sh.encabezado("2° UNIONES U1, U2 Y U3", "Detalles a escala de las uniones estructurales principales (ver ubicación en lámina 07)")
+y0 = sh.encabezado("2° UNIONES U1 Y U2", f"Detalles a escala de las uniones estructurales principales (ver ubicación en lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
 XA, XB = L, L + W2 + 6
@@ -37,7 +37,7 @@ v.ley("tuerca de nivelación", (185, TOPP + 11), (6, -8), 1.5)
 v.ley("perno M20", (185, -500), (8, 0), 1.5)
 v.ley("contrapiso", (300, -100), (2, 3), 1.5)
 v.label("CORTE 1:10", -60, -715, 1.5, TA.MIDDLE_CENTER, True)
-v = sh.view_in((L + 104, Y1 - 72, L + 150, Y1 - 38), (-250, -200, 250, 170), 20)
+v = sh.view_in((L + 104, Y1 - 96, L + 150, Y1 - 64), (-250, -200, 250, 170), 20)
 v.rect(-225, -125, 225, 125, "1-VISTA", 25)
 pts = xf(ipn_poly(*IPN[COL]), 0, 0, 90); v.pl(pts, "1-SECCION", 25, True); v.hatch(pts, "acero")
 for cx in (-185, 185):
@@ -51,7 +51,7 @@ ficha_spec(sh, L + 104, Y1 - 8, R - L - 104, [
 ], h=1.6, lead=1.36)
 
 # =============================================================== U2 VIGA PRINCIPAL - COLUMNA
-Y2 = Y1 - 78
+Y2 = Y1 - 102
 sh.titulo_dib(XA, Y2, "U2", "VIGA PRINCIPAL - COLUMNA", "1:10", w=W2)
 v = sh.view_in((XA, Y2 - 92, XA + W2, Y2 - 7), (-300, -700, 560, 150), 10)
 ipn_vertical(v, COL, 0, -680, 150, False, 35)
@@ -77,7 +77,7 @@ v.ley("4 bulones M20 8.8", (225, -290), (14, -26), 1.5)
 v.ley("columna IPN 300", (-100, -600), (-2, -4), 1.5)
 v.ley("viga IPN 500", (480, -h + 60), (2, -8), 1.5)
 v.label("VISTA LATERAL 1:10", 80, -690, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, XA, Y2 - 94, W2, [
+ficha_spec(sh, XB, Y2 - 40, W2, [
     ("Tipo:", "seca, abulonada; placa soldada en taller (control de calidad) y bulones en obra."),
     ("Vínculo:", "articulada a corte: la placa fina y flexible permite el giro del extremo de la viga."),
     ("Montaje:", "la viga se baja con grúa, se presenta con 2 bulones de montaje y punzón, se aploma y se colocan todos."),
@@ -85,8 +85,13 @@ ficha_spec(sh, XA, Y2 - 94, W2, [
 ], h=1.6, lead=1.36)
 
 # =============================================================== U3 SECUNDARIA - PRINCIPAL
-sh.titulo_dib(XB, Y2, "U3", "VIGA SECUNDARIA - VIGA PRINCIPAL", "1:10", w=W2)
-v = sh.view_in((XB, Y2 - 92, XB + W2, Y2 - 7), (-320, -700, 560, 150), 10)
+sh.save(f"L{lam('u12')}_Uniones_U1_U2")
+
+sh = Sheet(NUM["u3"], "Unión U3 y cómo trabajan las uniones", "PUNTO 2 - JUNTAS Y UNIONES", "1:10 - s/ esc.")
+y0 = sh.encabezado("2° UNIÓN U3 Y FUNCIONAMIENTO", f"Viga secundaria - viga principal y camino de las cargas por las uniones (ver lámina {lam('uesq')})")
+Y2 = y0 - 3.5
+sh.titulo_dib(XA, Y2, "U3", "VIGA SECUNDARIA - VIGA PRINCIPAL", "1:10", w=R - L)
+v = sh.view_in((L, Y2 - 92, R, Y2 - 7), (-320, -700, 560, 150), 10)
 seccion_ipn(v, VP, 0, -h / 2)
 hs, bs, tws, tfs = IPN[VS]
 x0 = twb / 2 + 12
@@ -104,9 +109,9 @@ v.ley("2 bulones M16 (al alma ppal.)", (-30, -65), (-8, -8), 1.5)
 v.ley("2 bulones M16 (al alma sec.)", (twb / 2 + 45, -135), (18, -22), 1.5)
 v.ley("destaje del ala", (x0 + 45, -40), (14, -8), 1.5)
 v.ley("viga IPN 500 (cortada)", (-80, -420), (-2, -6), 1.5)
-v.ley("viga IPN 200", (545, -180), (-6, 6), 1.5)
+v.ley("viga IPN 200", (545, -180), (6, -10), 1.5)
 v.label("CORTE 1:10", 120, -690, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, XB, Y2 - 94, W2, [
+ficha_spec(sh, L, Y2 - 96, R - L, [
     ("Tipo:", "seca, abulonada en obra; ángulos abulonados a la secundaria en taller."),
     ("Vínculo:", "articulada (simplemente apoyada): solo transmite corte."),
     ("Detalle:", "la secundaria lleva destaje del ala superior para quedar enrasada con la principal y apoyar la chapa en el mismo plano."),
@@ -114,7 +119,7 @@ ficha_spec(sh, XB, Y2 - 94, W2, [
 ], h=1.6, lead=1.36)
 
 # =============================================================== funcionamiento de las uniones
-Y3 = Y2 - 110
+Y3 = Y2 - 124
 sh.titulo_dib(L, Y3, "F", "CÓMO TRABAJAN LAS UNIONES (ESQUEMAS S/ ESC.)", w=R - L)
 def esquema(x0, y0, horiz):
     w, hh = 44, 18
@@ -133,15 +138,15 @@ def esquema(x0, y0, horiz):
             px = x0 + 4 + i * 5.1
             sh.pl([(px, y0 + hh + 7), (px, y0 + hh + 1)], "3-REFS", 13); sh.pl([(px - 0.8, y0 + hh + 2.4), (px, y0 + hh + 1), (px + 0.8, y0 + hh + 2.4)], "3-REFS", 13)
         sh.pl([(x0, y0 + hh + 7), (x0 + w, y0 + hh + 7)], "3-REFS", 13)
-esquema(L + 3, Y3 - 34, False)
-esquema(XB + 14 - 8, Y3 - 34, True)
+esquema(L + 3, Y3 - 36, False)
+esquema(L + 17, Y3 - 82, True)
 sh.para(L + 82 - 0, Y3 - 8, 6, "") if False else None
-ficha_spec(sh, L + 50, Y3 - 6, W2 - 50, [
+ficha_spec(sh, L + 70, Y3 - 8, R - L - 70, [
     ("Verticales:", "losa -> studs (U4) -> secundaria -> doble ángulo (U3) -> principal -> placa de corte (U2) -> columna -> placa base y pernos (U1) -> base."),
     ("Articuladas:", "uniones simples, rápidas y baratas; la viga se calcula simplemente apoyada (12 m) y la columna solo a compresión."),
 ], h=1.6, lead=1.36)
-ficha_spec(sh, XB + 54, Y3 - 6, W2 - 54, [
+ficha_spec(sh, L + 70, Y3 - 54, R - L - 70, [
     ("Horizontales:", "fachada -> losa (diafragma, U5) -> vigas -> cruces de San Andrés (U7) -> columnas -> fundación (U1)."),
     ("Sin cruces:", "el pórtico articulado sería un mecanismo: por eso las cruces se montan antes del apriete final."),
 ], h=1.6, lead=1.36)
-sh.save("L08_Uniones_U1_U3")
+sh.save(f"L{lam('u3')}_Union_U3_funcionamiento")

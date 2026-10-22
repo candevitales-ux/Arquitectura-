@@ -3,8 +3,8 @@
 from lib import *
 from geom import *
 
-sh = Sheet(10, "Uniones U8 a U10: cerramientos a la estructura y cubierta", "PUNTO 2 - JUNTAS Y UNIONES", "1:5 - 1:10")
-y0 = sh.encabezado("2° UNIONES U8, U9 Y U10", "Juntas entre los cerramientos (opaco y vidriado) y la estructura de acero (ver lámina 07)")
+sh = Sheet(NUM["u810"], "Uniones U8 a U10: cerramientos a la estructura y cubierta", "PUNTO 2 - JUNTAS Y UNIONES", "1:5 - 1:10")
+y0 = sh.encabezado("2° UNIONES U8, U9 Y U10", f"Juntas entre los cerramientos (opaco y vidriado) y la estructura de acero (ver lámina {lam('uesq')})")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
 XA, XB = L, L + W2 + 6
@@ -14,7 +14,7 @@ EP = 80                                     # espesor del panel
 # =============================================================== U8 PANEL - ESTRUCTURA
 sh.titulo_dib(L, Y1, "U8", "PANEL SÁNDWICH 80 - ESTRUCTURA", "1:5", w=R - L)
 # planta: junta vertical sobre columna (x = hacia afuera, y = a lo largo de la fachada)
-v = sh.view_in((L, Y1 - 82, L + 58, Y1 - 8), (-140, -190, 150, 180), 5)
+v = sh.view_in((L, Y1 - 82, L + 88, Y1 - 8), (-140, -190, 150, 180), 5)
 v.pl([(-140, -62.5), (0, -62.5), (0, 62.5), (-140, 62.5)], "1-SECCION", 35)       # ala de la columna (corte)
 v.hatch([(-16, -62.5), (0, -62.5), (0, 62.5), (-16, 62.5)], "acero")
 v.ln((-16, -62.5), (-16, 62.5), "1-SECCION", 25)
@@ -38,7 +38,7 @@ v.ley("sellador PU + respaldo", (92, 0), (16, -2), 1.5)
 v.ley("tapajunta prepintado", (101, -30), (14, -12), 1.5)
 v.label("PLANTA - JUNTA VERTICAL 1:5", 0, -185, 1.5, TA.MIDDLE_CENTER, True)
 # corte: arranque sobre viga portapanel
-v = sh.view_in((L + 64, Y1 - 82, L + 120, Y1 - 8), (-140, -160, 140, 210), 5)
+v = sh.view_in((L + 94, Y1 - 82, R, Y1 - 8), (-140, -160, 140, 210), 5)
 v.rect(-60, -100, 0, 0, "1-SECCION", 35); v.rect(-57, -97, -3, -3, "1-VISTA", 13)                # viga portapanel 100x60 (girada)
 v.hatch([(-60, -100), (0, -100), (0, -97), (-60, -97)], "negro")
 v.hatch([(-140, -160), (-60, -160), (-60, -10), (-140, -10)], "hormigon"); v.pl([(-140, -10), (-60, -10)], "1-SECCION", 25)
@@ -50,11 +50,11 @@ v.rect(20, 2, 20 + EP, 6, "1-VISTA", 13); v.hatch([(20, 2), (20 + EP, 2), (20 + 
 bulon(v, (20 + EP + 4, 120), (2, 120), 6, cab=3, tuerca=False, lw=13)
 v.rect(0, 20, 20, 210, "1-VISTA", 18)
 v.ley("viga portapanel 100x60x3,2", (-30, -50), (-4, 22), 1.5)
-v.ley("U de arranque + babeta", (110, -30), (2, -10), 1.5)
+v.ley("U de arranque + babeta", (110, -30), (-4, -14), 1.5)
 v.ley("cinta butílica", (50, 4), (14, 14), 1.5)
 v.ley("contrapiso / vereda", (60, -130), (8, -6), 1.5)
 v.label("CORTE - ARRANQUE 1:5", 0, -155, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, L + 124, Y1 - 8, R - L - 124, [
+ficha_spec(sh, L, Y1 - 86, R - L, [
     ("Tipo:", "seca, atornillada; junta machihembrada entre paneles y junta sellada sobre columnas."),
     ("Movimiento:", "la chapa exterior dilata ~1 mm/m con 50 °C: la junta vertical (10 mm) y el sellador elástico absorben el movimiento."),
     ("Fijación:", "2 autoperforantes Ø6,3 por panel y apoyo, sin aplastar el núcleo."),
@@ -62,7 +62,7 @@ ficha_spec(sh, L + 124, Y1 - 8, R - L - 124, [
 ], h=1.55, lead=1.36)
 
 # =============================================================== U9 MURO CORTINA - LOSA
-Y2 = Y1 - 92
+Y2 = Y1 - 114
 sh.titulo_dib(XA, Y2, "U9", "MURO CORTINA - LOSA (ANCLAJE)", "1:5", w=W2)
 v = sh.view_in((XA, Y2 - 90, XA + W2, Y2 - 9), (-200, -240, 240, 150), 5)
 v.hatch([(-200, 0), (-60, 0), (-60, LOSA), (-200, LOSA)], "hormigon"); v.rect(-200, 0, -60, LOSA, "1-SECCION", 35)
@@ -83,7 +83,7 @@ v.rect(112, -230, 137, 150, "1-SECCION", 25); v.hatch([(112, -230), (137, -230),
 v.hatch([(-60, 60), (40, 60), (40, 140), (-60, 140)], "lana"); v.rect(-60, 60, 40, 140, "1-VISTA", 13)
 v.ln((-60, 140), (40, 140), "1-SECCION", 25)
 v.dim((40, -40), (90, -40), 0.01) if False else None
-v.ley("grapa regulable (agujeros ovalados)", (0, 130), (-2, 6), 1.5)
+v.ley("grapa regulable (agujeros ovalados)", (0, 130), (4, 8), 1.5)
 v.ley("riel de anclaje + bulón T M12", (-54, 30), (4, -26), 1.5)
 v.ley("bulón M12 inox", (96, 90), (4, 10), 1.5)
 v.ley("montante 50x150", (65, 0), (16, 2), 1.5)
@@ -105,7 +105,7 @@ v.rect(-145, -LOSA - 200, -55, -LOSA, "1-VISTA", 18)
 v.pl([(-500, 0), (-500, 72), (-60, 40), (-60, 0)], "1-VISTA", 18); v.hatch([(-500, 0), (-500, 72), (-60, 40), (-60, 0)], "mortero")
 v.pl([(-500, 78), (-60, 46), (-40, 46), (-40, 250)], "1-SECCION", 35)
 v.rect(-40, 0, -20, 600, "1-VISTA", 18)                                         # montante de parapeto
-v.rect(0, -170, EP, 600, "1-SECCION", 35); v.hatch([(0, -170), (EP, -170), (EP, 600), (0, 600)], "aislacion")
+v.rect(0, -110, EP, 600, "1-SECCION", 35); v.hatch([(0, -110), (EP, -110), (EP, 600), (0, 600)], "aislacion")
 v.pl([(-30, 250), (-30, 300), (-55, 300)], "1-SECCION", 18)
 v.pl([(-60, 620), (-60, 600), (-50, 610), (EP + 40, 610), (EP + 40, 560)], "1-SECCION", 35)
 v.pl([(-60, 580), (-60, 620)], "1-SECCION", 35)
@@ -124,4 +124,4 @@ ficha_spec(sh, XB, Y2 - 94, W2, [
     ("Movimiento:", "la babeta queda suelta del panel y la cupertina solapa: absorben dilatación sin fisurar."),
     ("Agua:", "pendiente 1-2 % hacia embudos; la cupertina vuelca hacia la cubierta y gotea afuera."),
 ], h=1.55, lead=1.36)
-sh.save("L10_Uniones_U8_U10")
+sh.save(f"L{lam('u810')}_Uniones_U8_U10")

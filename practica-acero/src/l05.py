@@ -4,7 +4,7 @@ conector de corte, cenefa, tapa de cierre, malla y hormigón."""
 from lib import *
 from geom import *
 
-sh = Sheet(5, "Losa colaborante: chapa, conectores, malla, cenefa y cierres", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
+sh = Sheet(NUM["deck"], "Chapa colaborante: perfil, límites, colocación, malla y hormigón", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
            "1:10 - 1:5 - 1:50")
 y0 = sh.encabezado("1° ELEMENTOS: LOSA COLABORANTE (STEEL DECK)", "Chapa de acero galvanizado que es encofrado perdido y armadura inferior de la losa")
 L, R = sh.L + 3, sh.R - 3
@@ -12,7 +12,7 @@ Y1 = y0 - 3.5
 
 # =============================================================== 9. CHAPA COLABORANTE
 sh.titulo_dib(L, Y1, 9, "CHAPA COLABORANTE h = 76 mm - PERFIL TRANSVERSAL", "1:10 / 1:5", w=R - L)
-v = sh.view_in((L, Y1 - 40, L + 112, Y1 - 7), (-120, -200, 1000, 130), 10)
+v = sh.view_in((L, Y1 - 52, L + 112, Y1 - 9), (-120, -230, 1000, 150), 10)
 prof = deck_perfil(0, 3, PASO, H_NERV, CRESTA, VALLE)
 prof = [(-70, 0 - 76)] + prof[1:]                      # arranca en medio valle (hembra)
 prof = [(x, y + 76) for x, y in prof]
@@ -34,7 +34,7 @@ v.ley("valle 140 (apoyo)", (PASO, 0), (4, -12), 1.6)
 v.ley("indentaciones (adherencia)", (PASO + VALLE / 2 + 12, 38), (24, 6), 1.6)
 v.label("PERFIL 1:10", 400, -195, 1.7, TA.MIDDLE_CENTER, True)
 # detalle de solape lateral 1:2,5
-v = sh.view_in((L + 114, Y1 - 40, R, Y1 - 7), (-60, -50, 110, 115), 5)
+v = sh.view_in((L + 114, Y1 - 52, R, Y1 - 9), (-70, -60, 120, 130), 5)
 a = [(-60, 76), (-22.5, 76), (0, 0), (70, 0)]                       # chapa 1 (termina en valle)
 bb = [(-60, 76 + 1.5), (-22.5, 76 + 1.5), (0 - 1.2, 0 + 1.5), (70, 1.5)]
 v.pl([(x, y) for x, y in [(-60, 76), (-22.5, 76), (0, 0), (80, 0)]], "1-SECCION", 35)
@@ -45,7 +45,7 @@ v.ley("chapa 1 (hembra)", (-40, 76), (-2, 8), 1.5)
 v.ley("chapa 2 (macho)", (106, 77.8), (-2, 8), 1.5)
 v.label("SOLAPE LATERAL 1:5", 25, -45, 1.7, TA.MIDDLE_CENTER, True)
 # tabla de máximos y mínimos
-yt = Y1 - 43
+yt = Y1 - 58
 sh.txt("DIMENSIONES MÁXIMAS Y MÍNIMAS Y LÍMITES DE USO (valores de catálogo de chapa h 76 mm)", L, yt - 1.8, 1.8, bold=True)
 filas = [
     ["Espesor de chapa", "0,75 mm (BWG 22)", "1,20 mm (BWG 18)", "0,90 mm"],
@@ -59,10 +59,10 @@ filas = [
     ["Costura lateral (#10)", "-", "900 mm", "c/ 600 mm"],
     ["Sobrecarga de montaje", "-", "150 kg/m² (sin acopios)", "-"],
 ]
-yb = sh.tabla(L, yt - 3.5, [("Parámetro", 46), ("Mínimo", 32), ("Máximo", 50), ("Adoptado", R - L - 128)], filas, h=1.7, lead=1.3, pad=0.6)
+yb = sh.tabla(L, yt - 3.5, [("Parámetro", 46), ("Mínimo", 32), ("Máximo", 50), ("Adoptado", R - L - 128)], filas, h=2.0, lead=1.3, pad=0.9)
 # colocación
-yc = yb - 2.5
-sh.txt("COLOCACIÓN (secuencia de obra)", L, yc - 1.8, 1.8, bold=True)
+yc = yb - 4
+sh.txt("COLOCACIÓN (secuencia de obra)", L, yc - 2.2, 2.2, bold=True)
 pasos = ["1. Verificar nivel de vigas; alas superiores sin pintura donde se sueldan los studs.",
          "2. Izar los paquetes con grúa y apoyarlos sobre las vigas principales, cerca de las columnas.",
          "3. Desplegar las chapas con los nervios perpendiculares a las secundarias, desde un borde, solape macho-hembra.",
@@ -70,79 +70,21 @@ pasos = ["1. Verificar nivel de vigas; alas superiores sin pintura donde se suel
          "5. Coser los solapes laterales con autoperforantes #10; colocar cenefas y tapas de cierre.",
          "6. Soldar los studs a través de la chapa; colocar malla sobre separadores y negativos sobre las vigas.",
          "7. Hormigonar por paños, vibrar y curar 7 días; si la luz supera la máxima, apuntalar a L/2."]
-yy = yc - 4
-colw = (R - L - 4) / 2
+yy = yc - 5
+colw = (R - L - 6) / 2
+fin = []
 for i, p in enumerate(pasos):
-    x = L if i < 4 else L + colw + 4
-    if i == 4: yy = yc - 4
-    yy = sh.para(x, yy, colw, p, 1.7, lead=1.35) - 0.4
-y2 = min(yy, yc - 4 - 4 * 2 * 1.7 * 1.35) - 2
-
-# =============================================================== 10/13/14 fichas chicas
-W3 = (R - L - 8) / 3
-X = [L, L + W3 + 4, L + 2 * W3 + 8]
-Y2 = y2 - 1.5
-sh.titulo_dib(X[0], Y2, 10, "CONECTOR DE CORTE", "1:5", w=W3)
-v = sh.view_in((X[0], Y2 - 47, X[0] + W3, Y2 - 9), (-110, -40, 100, 145), 5)
-v.rect(-100, -27, 100, 0, "1-SECCION", 35); v.hatch([(-100, -27), (100, -27), (100, 0), (-100, 0)], "acero")
-v.pl([(-100, 1), (100, 1)], "1-SECCION", 35)
-v.hatch([(-100, 1.5), (100, 1.5), (100, 140), (-100, 140)], "hormigon")
-v.ln((-100, 140), (100, 140), "1-SECCION", 25)
-stud(v, 0, 1.5)
-v.pl([(-15, 1.5), (-9.5, 10), (9.5, 10), (15, 1.5)], "1-SECCION", 18, True); v.hatch([(-15, 1.5), (-9.5, 10), (9.5, 10), (15, 1.5)], "negro")
-v.dim((-16, 126.5), (16, 126.5), 4)
-v.dim((9.5, 1.5), (9.5, 126.5), 14)
-v.dim((-9.5, 40), (9.5, 40), 0.01)
-v.ley("collar de soldadura", (13, 6), (5, 3), 1.5)
-v.ley("chapa e = 0,9", (-70, 1), (-2, 5), 1.5)
-v.ley("ala de la viga", (-60, -14), (-2, -5), 1.5)
-ficha_spec(sh, X[0], Y2 - 48, W3, [
-    ("Medidas:", "Ø19 x 125 mm, cabeza Ø32 x 10; altura mín. = h nervio + 40 = 116 mm."),
-    ("Especificación:", "acero ASTM A108 (fu 450 MPa); soldado por arco con férula cerámica, a través de la chapa galvanizada."),
-    ("Separación:", "mín. 6 Ø (114 mm), máx. 8 veces la losa; adoptado 1 por nervio (c/ 305)."),
-], h=1.6, lead=1.38)
-
-sh.titulo_dib(X[1], Y2, 13, "CENEFA DE BORDE", "1:5", w=W3)
-v = sh.view_in((X[1], Y2 - 47, X[1] + W3, Y2 - 9), (-90, -50, 190, 150), 5)
-v.pl([(-3, 160), (0, 160), (0, 0), (105, 0), (105, -3), (-3, -3)], "1-SECCION", 35, True)
-v.pl([(0, 160), (30, 160)], "1-SECCION", 25)
-v.ln((105, -3), (105, -40), "1-OCULTO", 9); v.rect(-3, -40, 160, -3, "1-OCULTO", 9)
-v.ln((0, 140), (170, 140), "1-OCULTO", 9)
-v.dim((-3, -3), (-3, 160), -5); v.dim((-3, -3), (105, -3), -10 + 0.01)
-v.dim((0, 160), (30, 160), 4)
-v.ley("labio superior", (20, 160), (6, 4), 1.5)
-v.ley("fijación a viga c/ 300", (60, -3), (4, -4), 1.5)
-v.ley("ala viga de borde", (140, -20), (1, 8), 1.5)
-ficha_spec(sh, X[1], Y2 - 48, W3, [
-    ("Función:", "encofrado perdido del borde de la losa; define el espesor y el vuelo."),
-    ("Medidas:", "chapa galv. plegada e = 1,6 mm (BWG 16), L de 160 x 105 mm, tiras de 3,00 m."),
-    ("Colocación:", "fijada al ala con clavos o soldadura c/ 300 mm; riendas de fleje a la cresta c/ 600 mm."),
-], h=1.6, lead=1.38)
-
-sh.titulo_dib(X[2], Y2, 14, "TAPA DE CIERRE", "1:5", w=W3)
-v = sh.view_in((X[2], Y2 - 46, X[2] + W3, Y2 - 6), (-145, -70, 145, 130), 5)
-prof = [(x - PASO / 2 - 152.5, y + 76) for x, y in deck_perfil(0, 2, PASO, H_NERV, CRESTA, VALLE)]
-prof = clip_x(prof, -140, 140)
-v.pl(prof, "1-SECCION", 25)
-tapa = [(-60, 76), (60, 76), (82.5, 0), (-82.5, 0)]
-tapa = [(-70 + 10, 76 - 1), (70 - 10, 76 - 1), (82.5 - 1, 1), (-82.5 + 1, 1)]
-cx = 0
-v.pl([(-60, 75), (60, 75), (81, 1), (-81, 1)], "1-SECCION", 35, True)
-v.hatch([(-60, 75), (60, 75), (81, 1), (-81, 1)], "gris")
-for xx in (-40, 40): v.circ((xx, 55), 4, "1-VISTA", 13)
-v.dim((-81, 1), (81, 1), -6); v.dim((81, 1), (81, 75), 6)
-v.label("VISTA DEL EXTREMO DE LA CHAPA", 0, -60, 1.5, TA.MIDDLE_CENTER, True)
-ficha_spec(sh, X[2], Y2 - 48, W3, [
-    ("Función:", "cerrar los nervios abiertos en los bordes A y D y en huecos, para que no escape el hormigón."),
-    ("Medidas:", "chapa galv. e = 0,6 mm con la forma del nervio (162 x 74 mm) y pestaña de 30 mm."),
-    ("Colocación:", "a presión dentro del nervio y 2 autoperforantes por tapa."),
-], h=1.6, lead=1.38)
+    x = L if i < 4 else L + colw + 6
+    if i == 4: fin.append(yy); yy = yc - 5
+    yy = sh.para(x, yy, colw, p, 2.0, lead=1.38) - 0.8
+fin.append(yy)
+y2 = min(fin) - 4
 
 # =============================================================== 11/12 malla y hormigón
-Y3 = Y2 - 76
+Y3 = y2 - 2
 W2 = (R - L - 6) / 2
 sh.titulo_dib(L, Y3, 11, "MALLA Q188 Y NEGATIVOS", "1:50", w=W2)
-v = sh.view_in((L, Y3 - 32, L + 40, Y3 - 6), (-100, -150, 1900, 1150), 50)
+v = sh.view_in((L, Y3 - 34, L + 40, Y3 - 6), (-100, -150, 1900, 1150), 50)
 for i in range(0, 13):
     v.ln((0, i * 150 * 0 + i * 90), (1800, i * 90), "1-VISTA", 9) if i * 90 <= 1050 else None
 for j in range(0, 13):
@@ -160,4 +102,69 @@ ficha_spec(sh, L + W2 + 6, Y3 - 6, W2, [
     ("Volumen:", "0,102 m³ por m² de losa (140 mm menos el volumen de nervios)."),
     ("Colocación:", "con bomba, en paños; vibrado de inmersión; curado húmedo 7 días; habilitar al tránsito a los 7 días y a la carga total a los 28."),
 ], h=1.6, lead=1.38)
-sh.save("L05_Losa_colaborante")
+sh.save(f"L{lam('deck')}_Chapa_colaborante")
+
+# =============================================================== 10/13/14 fichas chicas
+sh = Sheet(NUM["deck2"], "Conector de corte, cenefa de borde y tapa de cierre", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS", "1:2,5 - 1:5")
+y0 = sh.encabezado("1° ELEMENTOS: LOSA COLABORANTE (CONTINUACIÓN)", "Piezas complementarias de la losa: conector de corte, cenefa de borde y tapa de cierre")
+W3 = (R - L - 6) / 2
+X = [L, L + W3 + 6, L]
+Y2 = y0 - 3.5
+sh.titulo_dib(X[0], Y2, 10, "CONECTOR DE CORTE", "1:2,5", w=W3)
+v = sh.view_in((X[0], Y2 - 88, X[0] + W3, Y2 - 9), (-110, -40, 100, 150), 2.5)
+v.rect(-100, -27, 100, 0, "1-SECCION", 35); v.hatch([(-100, -27), (100, -27), (100, 0), (-100, 0)], "acero")
+v.pl([(-100, 1), (100, 1)], "1-SECCION", 35)
+v.hatch([(-100, 1.5), (100, 1.5), (100, 140), (-100, 140)], "hormigon")
+v.ln((-100, 140), (100, 140), "1-SECCION", 25)
+stud(v, 0, 1.5)
+v.pl([(-15, 1.5), (-9.5, 10), (9.5, 10), (15, 1.5)], "1-SECCION", 18, True); v.hatch([(-15, 1.5), (-9.5, 10), (9.5, 10), (15, 1.5)], "negro")
+v.dim((-16, 126.5), (16, 126.5), 4)
+v.dim((9.5, 1.5), (9.5, 126.5), 14)
+v.dim((-9.5, 40), (9.5, 40), 0.01)
+v.ley("collar de soldadura", (13, 6), (5, 3), 1.5)
+v.ley("chapa e = 0,9", (-70, 1), (-2, 5), 1.5)
+v.ley("ala de la viga", (-60, -14), (-2, -5), 1.5)
+ficha_spec(sh, X[0], Y2 - 92, W3, [
+    ("Medidas:", "Ø19 x 125 mm, cabeza Ø32 x 10; altura mín. = h nervio + 40 = 116 mm."),
+    ("Especificación:", "acero ASTM A108 (fu 450 MPa); soldado por arco con férula cerámica, a través de la chapa galvanizada."),
+    ("Separación:", "mín. 6 Ø (114 mm), máx. 8 veces la losa; adoptado 1 por nervio (c/ 305)."),
+], h=2.0, lead=1.4)
+
+sh.titulo_dib(X[1], Y2, 13, "CENEFA DE BORDE", "1:5", w=W3)
+v = sh.view_in((X[1], Y2 - 88, X[1] + W3, Y2 - 9), (-160, -60, 260, 180), 5)
+v.pl([(-3, 160), (0, 160), (0, 0), (105, 0), (105, -3), (-3, -3)], "1-SECCION", 35, True)
+v.pl([(0, 160), (30, 160)], "1-SECCION", 25)
+v.ln((105, -3), (105, -40), "1-OCULTO", 9); v.rect(-3, -40, 160, -3, "1-OCULTO", 9)
+v.ln((0, 140), (170, 140), "1-OCULTO", 9)
+v.dim((-3, -3), (-3, 160), -5); v.dim((-3, -3), (105, -3), -10 + 0.01)
+v.dim((0, 160), (30, 160), 4)
+v.ley("labio superior", (20, 160), (6, 4), 1.5)
+v.ley("fijación a viga c/ 300", (60, -3), (4, -4), 1.5)
+v.ley("ala viga de borde", (140, -20), (1, 8), 1.5)
+ficha_spec(sh, X[1], Y2 - 92, W3, [
+    ("Función:", "encofrado perdido del borde de la losa; define el espesor y el vuelo."),
+    ("Medidas:", "chapa galv. plegada e = 1,6 mm (BWG 16), L de 160 x 105 mm, tiras de 3,00 m."),
+    ("Colocación:", "fijada al ala con clavos o soldadura c/ 300 mm; riendas de fleje a la cresta c/ 600 mm."),
+], h=2.0, lead=1.4)
+
+Y2 = Y2 - 128
+sh.titulo_dib(X[2], Y2, 14, "TAPA DE CIERRE DE NERVIO", "1:2,5", w=R - L)
+v = sh.view_in((X[2], Y2 - 90, X[2] + 100, Y2 - 9), (-120, -95, 120, 100), 2.5)
+prof = [(x - PASO / 2 - 152.5, y + 76) for x, y in deck_perfil(0, 2, PASO, H_NERV, CRESTA, VALLE)]
+prof = clip_x(prof, -115, 115)
+v.pl(prof, "1-SECCION", 25)
+tapa = [(-60, 76), (60, 76), (82.5, 0), (-82.5, 0)]
+tapa = [(-70 + 10, 76 - 1), (70 - 10, 76 - 1), (82.5 - 1, 1), (-82.5 + 1, 1)]
+cx = 0
+v.pl([(-60, 75), (60, 75), (81, 1), (-81, 1)], "1-SECCION", 35, True)
+v.hatch([(-60, 75), (60, 75), (81, 1), (-81, 1)], "gris")
+for xx in (-40, 40): v.circ((xx, 55), 4, "1-VISTA", 13)
+v.dim((-81, 1), (81, 1), -6); v.dim((81, 1), (81, 75), 6)
+v.label("VISTA DEL EXTREMO DE LA CHAPA", 0, -40, 1.5, TA.MIDDLE_CENTER, True)
+ficha_spec(sh, X[2] + 104, Y2 - 9, R - L - 104, [
+    ("Función:", "cerrar los nervios abiertos en los bordes A y D y en huecos, para que no escape el hormigón."),
+    ("Medidas:", "chapa galv. e = 0,6 mm con la forma del nervio (162 x 74 mm) y pestaña de 30 mm."),
+    ("Colocación:", "a presión dentro del nervio y 2 autoperforantes por tapa."),
+], h=2.0, lead=1.4)
+
+sh.save(f"L{lam('deck2')}_Conector_cenefa_tapa")

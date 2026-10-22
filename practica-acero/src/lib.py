@@ -7,7 +7,8 @@ import ezdxf
 from ezdxf.enums import TextEntityAlignment as TA
 
 OUT = os.environ.get("OUT", "build")
-TOTAL = 15
+HMIN = 2.0                       # altura mínima de letra en la hoja impresa (mm)
+TOTAL = 21
 FECHA = "22/10/26"
 
 LAYERS = {
@@ -24,6 +25,7 @@ _FC = {}
 
 def tw(s, h, bold=False, wf=0.9):
     """Ancho real (mm) del texto con la fuente usada para dibujar (métricas de Arial = Liberation Sans)."""
+    h = max(h, HMIN)
     k = (h, bold, wf)
     if k not in _FC:
         _FC[k] = _fonts.make_font("LiberationSans-Bold.ttf" if bold else "LiberationSans-Regular.ttf", h, wf)
@@ -32,6 +34,7 @@ def tw(s, h, bold=False, wf=0.9):
 
 def wrap(s, w, h, bold=False):
     """Corta el texto en líneas de ancho w (mm) para altura h, midiendo con la fuente."""
+    h = max(h, HMIN)
     out = []
     for par in s.split("\n"):
         line = ""
@@ -55,7 +58,7 @@ class Sheet:
         for n, (c, lt) in LAYERS.items():
             d.layers.add(n, color=c, linetype=lt)
         ds = d.dimstyles.new("A4")
-        ds.dxf.dimtxsty = "ARIAL"; ds.dxf.dimtxt = 1.8; ds.dxf.dimasz = 1.0; ds.dxf.dimtsz = 0.9
+        ds.dxf.dimtxsty = "ARIAL"; ds.dxf.dimtxt = 2.0; ds.dxf.dimasz = 1.1; ds.dxf.dimtsz = 0.9
         ds.dxf.dimexe = 0.8; ds.dxf.dimexo = 0.6; ds.dxf.dimgap = 0.5; ds.dxf.dimdec = 0; ds.dxf.dimtad = 1
         ds.dxf.dimclrd = 7; ds.dxf.dimclre = 7; ds.dxf.dimclrt = 7; ds.dxf.dimlwd = 13; ds.dxf.dimlwe = 13
         ds.dxf.dimtih = 0; ds.dxf.dimtoh = 0; ds.dxf.dimjust = 0; ds.dxf.dimtmove = 0; ds.dxf.dimzin = 8
@@ -75,6 +78,7 @@ class Sheet:
         return self.msp.add_circle(c, r, dxfattribs=a)
 
     def txt(self, s, x, y, h=2.0, align=TA.LEFT, layer="3-TEXTOS", bold=False, rot=0, color=None, maxw=None):
+        h = max(h, HMIN)
         wf = 0.9
         if maxw and tw(s, h, bold) > maxw: wf = 0.9 * maxw / tw(s, h, bold)
         a = {"layer": layer, "style": "ARIAL-NEGRITA" if bold else "ARIAL", "width": wf, "rotation": rot}
@@ -89,11 +93,13 @@ class Sheet:
 
     def para(self, x, y, w, s, h=2.0, bold=False, lead=1.55):
         """Párrafo con corte automático; devuelve la y debajo del último renglón."""
-        for ln in wrap(s, w, h):
+        h = max(h, HMIN)
+        for ln in wrap(s, w, h, bold):
             self.txt(ln, x, y - h, h, bold=bold); y -= h * lead
         return y
 
     def bullets(self, x, y, w, items, h=2.0, lead=1.5, gap=0.6):
+        h = max(h, HMIN)
         for it in items:
             if isinstance(it, tuple):              # (rótulo en negrita, texto)
                 b, s = it
@@ -128,6 +134,7 @@ class Sheet:
 
     def tabla(self, x, y, cols, filas, h=1.9, head=True, lead=1.45, pad=0.9):
         """cols = [(encabezado, ancho)]; las celdas se cortan en renglones. Devuelve y inferior."""
+        h = max(h, HMIN)
         x1 = x + sum(c[1] for c in cols)
         rows = ([[c[0] for c in cols]] if head else []) + filas
         yy = y
@@ -152,7 +159,7 @@ class Sheet:
             if j < len(cols): xx += cols[j][1]
         return yy
 
-    def globo(self, n, cpos, at=None, r=2.1, h=1.9):
+    def globo(self, n, cpos, at=None, r=2.5, h=2.0):
         x, y = cpos
         if at is not None:
             dx, dy = at[0] - x, at[1] - y; L = math.hypot(dx, dy)
@@ -161,7 +168,7 @@ class Sheet:
                 d = self.msp.add_hatch(color=7, dxfattribs={"layer": "3-REFS"}); d.set_solid_fill(color=7)
                 ep = d.paths.add_edge_path(); ep.add_arc(at, 0.45, 0, 360)
         self.circ(cpos, r, "3-REFS", 25)
-        self.txt(str(n), x, y, h if len(str(n)) < 3 else h * 0.8, TA.MIDDLE_CENTER, "3-REFS", True)
+        self.txt(str(n), x, y, h, TA.MIDDLE_CENTER, "3-REFS", True, maxw=2 * r - 0.6)
 
     def view(self, ox, oy, s):
         return View(self, ox, oy, s)
@@ -182,6 +189,7 @@ class Sheet:
 
     def leyenda(self, s, at, off, h=1.7):
         """Texto con línea de llamada: at en papel; el texto se ubica en at+off (izq. o der. según off)."""
+        h = max(h, HMIN)
         c = (at[0] + off[0], at[1] + off[1])
         self.pl([at, c], "3-REFS", 13)
         d = self.msp.add_hatch(color=7, dxfattribs={"layer": "3-REFS"}); d.set_solid_fill(color=7)
@@ -227,7 +235,7 @@ class Sheet:
         for i, ln in enumerate(wrap(self.escalas or "s/ esc.", xs[4] - xs[3] - 4, 2.0)[:2]):
             self.txt(ln, x, y1 - 7.8 - i * 3.2, 2.0)
         self.txt(f"FECHA: {FECHA}", x, y0 + 5.6, 2.0)
-        self.txt("HOJA A4 - IMPRIMIR AL 100 %", x, y0 + 2.0, 1.8)
+        self.txt("A4 - IMPRIMIR AL 100 %", x, y0 + 2.0, 2.0)
 
     def encabezado(self, s, sub=None):
         """Título general de la lámina arriba a la izquierda; devuelve la y libre."""
@@ -464,6 +472,7 @@ class IsoView:
 
 def ficha_spec(sh, x, y, w, items, h=1.8, lead=1.42):
     """Bloque de especificación: [(rótulo, texto)] con rótulo en negrita en su propio renglón-cabecera."""
+    h = max(h, HMIN)
     for b, s in items:
         sh.txt(b, x, y - h, h, bold=True)
         bw = tw(b + " ", h, True)
@@ -536,7 +545,7 @@ def stud(v, x, zb, h=125, d=19):
     v.hatch([(x - 16, zb + h - 10), (x + 16, zb + h - 10), (x + 16, zb + h), (x - 16, zb + h)], "gris")
 
 
-def marca_u(sh, n, at, off, r=2.9):
+def marca_u(sh, n, at, off, r=3.3):
     """Marca de unión: hexágono con 'U n' y línea de llamada al punto at (papel)."""
     c = (at[0] + off[0], at[1] + off[1])
     dx, dy = at[0] - c[0], at[1] - c[1]; Lr = math.hypot(dx, dy)
@@ -547,5 +556,5 @@ def marca_u(sh, n, at, off, r=2.9):
     pts = [(c[0] + r * math.cos(math.radians(60 * i)), c[1] + r * math.sin(math.radians(60 * i))) for i in range(6)]
     sh.solid(pts, 40, "3-REFS")
     sh.pl(pts, "3-REFS", 25, True)
-    t = sh.txt(f"U{n}", c[0], c[1], 1.7, TA.MIDDLE_CENTER, "3-REFS", True)
+    t = sh.txt(f"U{n}", c[0], c[1], 2.0, TA.MIDDLE_CENTER, "3-REFS", True, maxw=2 * r - 0.8)
     t.dxf.true_color = ezdxf.colors.rgb2int((255, 255, 255))

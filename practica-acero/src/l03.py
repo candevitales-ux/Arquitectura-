@@ -3,13 +3,13 @@
 from lib import *
 from geom import *
 
-sh = Sheet(3, "Fundación, pernos de anclaje, placa base y columna", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
+sh = Sheet(NUM["fund"], "Fundación, pernos de anclaje, placa base y columna", "PUNTO 1 - ELEMENTOS CONSTRUCTIVOS",
            "1:25 - 1:10 - 1:5 - 1:125")
 y0 = sh.encabezado("1° ELEMENTOS: FUNDACIÓN Y COLUMNA", "Croquis a escala con medidas, función y especificación técnica")
 L, R = sh.L + 3, sh.R - 3
 W2 = (R - L - 6) / 2
 XA, XB = L, L + W2 + 6
-YT, YM = y0 - 3.5, y0 - 121
+YT, YM = y0 - 3.5, y0 - 125
 
 # =============================================================== 1. BASE AISLADA (1:25)
 sh.titulo_dib(XA, YT, 1, "BASE AISLADA H°A° + PEDESTAL", "1:25", w=W2)
@@ -48,7 +48,7 @@ for n, at, off in [(1, (550, FUND + 250), (9, 7)), (2, (185, TOPP - 330), (14, -
                    (4, (0, 250), (11, 2))]:
     v.ref(n, at, off)
 v.ley("H° limpieza e = 5 cm", (600, FUND - 25), (2, -4))
-v.ley("parrilla Ø12 c/15", (-450, FUND + 50), (-2, 7))
+v.ley("parrilla Ø12 c/15", (-450, FUND + 50), (-2, 13))
 v.ley("grout e = 30", (-225, TOPP + 15), (-4, 9))
 ficha_spec(sh, XA, YT - 90, W2, [
     ("Función:", "transmitir al suelo la carga de la columna (compresión, corte y momento de vuelco del viento)."),
@@ -155,4 +155,4 @@ ficha_spec(sh, XB, YM - 84, W2, [
     ("Medidas:", "IPN 300: h 300, b 125, tw 10,8, tf 16,2 mm; 54,2 kg/m; A = 69 cm²; Ix = 9800 cm⁴; largo 7,52 m en una sola pieza."),
     ("Especificación:", "acero F-24; llega de taller con placa base, placas de corte y agujeros hechos; antióxido + esmalte."),
 ])
-sh.save("L03_Fundacion_columna")
+sh.save(f"L{lam('fund')}_Fundacion_columna")
