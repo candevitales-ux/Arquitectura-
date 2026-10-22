@@ -38,3 +38,8 @@ tiene los textos y la ubicación de cada referencia. DWG: modelo en mm reales + 
 ```
 pip install ezdxf && sh build_nudos.sh      # requiere ODAFileConverter (+ libopengl0 libegl1 libxkbcommon-x11-0 libxcb-*) y xvfb-run
 ```
+
+## Práctica NUDOS en ACERO (19 láminas A4) – `SISTEMA=acero sh build_nudos.sh && sh entrega_nudos.sh acero`
+`src/acero_corte.py` dibuja el corte integral de acero (VARIANTE opaco / vidriado: HEB 240, IPE 400, IPE 300, losa colaborante,
+placa base + pernos de anclaje, panel sándwich PIR s/ correas C o muro cortina). `src/acero_refs.py`: referencias de los 6 nudos.
+Texto mínimo impreso 2,0 mm (font-size 2,8) en ambas prácticas.

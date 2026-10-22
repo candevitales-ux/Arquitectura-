@@ -1,33 +1,16 @@
-PRÁCTICA EN CLASE · NUDOS (Construcciones II - UNM) - 13 láminas A4 verticales
-=============================================================================
-Mismo edificio de los TP (hormigón premoldeado de grandes luces, sistema Pi). Cada nudo es una ventana
-del corte integral (cerramiento opaco = panel sándwich premoldeado; vidriado = muro cortina stick).
+PRÁCTICA EN CLASE · NUDOS - HORMIGÓN PREMOLDEADO (Construcciones II - UNM) · 17 láminas A4 verticales
+=====================================================================================================
+Altura mínima de letra impresa: 2,0 mm (todas las láminas).
+  01      Carátula, consigna, índice y ubicación de los nudos (cortes 1:100)
+  02      Nudo 1 · Cubierta · opaco (1:20)            03–04  planilla de referencias
+  05      Nudo 2 · Cubierta · vidriado (1:20)         06–07  planilla
+  08      Nudo 3 · Entrepiso · opaco (1:20)           09–10  planilla
+  11      Nudo 4 · Entrepiso · vidriado (1:20)        12–13  planilla
+  14      Nudo 5 · Piso + fundación · opaco (1:20)    15     planilla
+  16      Nudo 6 · Piso + fundación · vidriado (1:20) 17     planilla
+Planilla: N° · DENOMINACIÓN · ESPECIFICACIÓN TÉCNICA DE MATERIALES · FUNCIÓN.
 
-  01  Carátula, consigna, índice y ubicación de los 6 nudos en los cortes integrales (esc. 1:100)
-  02  Nudo 1 · Cubierta con cerramiento exterior opaco ............ 1:20     03  planilla de referencias
-  04  Nudo 2 · Cubierta con cerramiento exterior vidriado .......... 1:20     05  planilla de referencias
-  06  Nudo 3 · Entrepiso con cerramiento exterior opaco ............ 1:20     07  planilla de referencias
-  08  Nudo 4 · Entrepiso con cerramiento exterior vidriado ......... 1:20     09  planilla de referencias
-  10  Nudo 5 · Piso s/ terreno natural, opaco, con fundación ....... 1:20     11  planilla de referencias
-  12  Nudo 6 · Piso s/ terreno natural, vidriado, con fundación .... 1:20     13  planilla de referencias
-
-Cada lámina de dibujo tiene globos numerados + leyenda de denominaciones; la lámina siguiente es la
-planilla completa: N° · DENOMINACIÓN · ESPECIFICACIÓN TÉCNICA DE MATERIALES · FUNCIÓN.
-
-ARCHIVOS
-- PRACTICA_NUDOS_A4_completa.pdf : las 13 láminas. Imprimir en A4 al 100 % ("tamaño real", sin ajustar).
-  Control de escala: la escala gráfica 0-1,00 m de cada nudo mide 50 mm impresa.
-- PDF_por_lamina/ : la misma lámina suelta, 1 PDF por hoja.
-- DWG_AutoCAD/ : 1 DWG por lámina (AutoCAD 2018).
-    * Modelo: el nudo en VERDADERA MAGNITUD (1 unidad = 1 mm). Marco A4, textos, globos y planillas dibujados
-      x20 alrededor del nudo (marco = 4200 x 5940).
-    * Presentación "A4 nn": hoja ISO A4 210 x 297 con una ventana a escala 1:20 (ya fijada). Plotear esa
-      presentación a escala 1:1 en A4 vertical -> el nudo sale a 1:20. (La carátula muestra los cortes a 1:100.)
-    * Capas por material (A-HORMIGON-PREMOLDEADO, A-AISLACION-EPS, A-VIDRIO, A-ARMADURAS...) con rayados
-      AutoCAD (ANSI31, AR-CONC, AR-SAND, EARTH, GRAVEL, INSUL, ZIGZAG) y capas X-COTAS / X-NIVELES /
-      X-REFERENCIAS / X-TABLA / X-ROTULO / X-MARCO / X-EJES.
-- DXF_alternativo/ : los mismos dibujos en DXF.
-- vistas_previas/ : PNG de las láminas de dibujo.
-
-La consigna pide dibujar a mano alzada: estas láminas sirven de base proporcionada para calcar o pasar a mano.
-Regenerar: tp-hormigon-premoldeado/build_nudos.sh
+- PRACTICA_NUDOS_A4_completa.pdf: imprimir A4 al 100 % (tamaño real). Control: la escala gráfica 0–1,00 m mide 50 mm.
+- DWG_AutoCAD/ (AutoCAD 2018), 1 por lámina: Modelo = nudo en verdadera magnitud (1 u = 1 mm), lámina dibujada x20 alrededor;
+  presentación "A4 nn" con ventana fijada a 1:20 -> plotear la presentación a 1:1 en A4.
+- DXF_alternativo/, PDF_por_lamina/, vistas_previas/.

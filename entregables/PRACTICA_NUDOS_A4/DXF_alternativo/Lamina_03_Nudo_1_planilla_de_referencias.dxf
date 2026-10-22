@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461336.5412962963
+2461336.953287037
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461336.5412962963
+2461336.953287037
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-1D2
+1A9
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{5F6D60FA-7B89-4A83-9E16-02136BF8B0AB}
+{E7A827AA-36B4-4631-9972-0A43BB452589}
   9
 $VERSIONGUID
   2
-{8A168A4F-BDBE-4186-A8EC-C9C6CF87364D}
+{CD7DE1E1-23FD-44EC-876A-B2A52ADB561F}
   9
 $EXTNAMES
 290
@@ -1377,7 +1377,7 @@ AcDbSymbolTable
   0
 VPORT
   5
-1CE
+1A5
 330
 8
 100
@@ -2257,7 +2257,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-31
+36
   0
 LAYER
   5
@@ -2823,6 +2823,126 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
+A-AISLACION-PIR
+ 70
+0
+ 62
+50
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A2
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-PLACA-CEMENTICIA
+ 70
+0
+ 62
+252
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A3
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-ACERO-CORTADO
+ 70
+0
+ 62
+250
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A4
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-ACERO-VISTA
+ 70
+0
+ 62
+8
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A5
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+A-CHAPA-GALVANIZADA
+ 70
+0
+ 62
+253
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A6
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
 X-EJES
  70
 0
@@ -2839,7 +2959,7 @@ DASHDOT
   0
 LAYER
   5
-A2
+A7
 330
 1
 100
@@ -2863,7 +2983,7 @@ CONTINUOUS
   0
 LAYER
   5
-A3
+A8
 330
 1
 100
@@ -2887,7 +3007,7 @@ CONTINUOUS
   0
 LAYER
   5
-A4
+A9
 330
 1
 100
@@ -2911,7 +3031,7 @@ CONTINUOUS
   0
 LAYER
   5
-A5
+AA
 330
 1
 100
@@ -2935,7 +3055,7 @@ CONTINUOUS
   0
 LAYER
   5
-A6
+AB
 330
 1
 100
@@ -2959,7 +3079,7 @@ CONTINUOUS
   0
 LAYER
   5
-A7
+AC
 330
 1
 100
@@ -2983,7 +3103,7 @@ CONTINUOUS
   0
 LAYER
   5
-A8
+AD
 330
 1
 100
@@ -3861,7 +3981,7 @@ ACAD
   0
 APPID
   5
-1CF
+1A6
 330
 3
 100
@@ -3875,7 +3995,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-1D0
+1A7
 330
 3
 100
@@ -5661,7 +5781,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-1C8
+19F
 330
 9
 100
@@ -5671,7 +5791,7 @@ AcDbBlockTableRecord
   2
 *Paper_Space
 340
-1CB
+1A2
  70
 0
 280
@@ -5943,9 +6063,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-1C9
+1A0
 330
-1C8
+19F
 100
 AcDbEntity
   8
@@ -5969,9 +6089,9 @@ AcDbBlockBegin
   0
 ENDBLK
   5
-1CA
+1A1
 330
-1C8
+19F
 100
 AcDbEntity
   8
@@ -5987,7 +6107,7 @@ ENTITIES
   0
 TEXT
   5
-A9
+AE
 330
 17
 100
@@ -6019,7 +6139,7 @@ AcDbText
   0
 TEXT
   5
-AA
+AF
 330
 17
 100
@@ -6051,7 +6171,7 @@ AcDbText
   0
 TEXT
   5
-AB
+B0
 330
 17
 100
@@ -6067,7 +6187,7 @@ AcDbText
  30
 0.0
  40
-37.232
+40.096
   1
 REFERENCIAS: denominación, especificación técnica de materiales y función
   7
@@ -6083,7 +6203,7 @@ AcDbText
   0
 TEXT
   5
-AC
+B1
 330
 17
 100
@@ -6095,11 +6215,11 @@ AcDbText
  10
 840.0
  20
-5360.0
+5354.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
 Corresponde al dibujo en escala 1:20 de la lámina 02
  51
@@ -6109,7 +6229,7 @@ ARIAL
  11
 840.0
  21
-5360.0
+5354.0
  31
 0.0
 100
@@ -6117,7 +6237,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-AD
+B2
 330
 17
 100
@@ -6135,15 +6255,15 @@ AcDbPolyline
  10
 200.0
  20
-5290.0
+5230.0
  10
 4000.0
  20
-5290.0
+5230.0
   0
 HATCH
   5
-AE
+B3
 330
 17
 100
@@ -6185,19 +6305,19 @@ SOLID
  10
 240.0
  20
-5240.0
+5160.0
  10
 3960.0
  20
-5240.0
+5160.0
  10
 3960.0
  20
-5120.0
+5040.0
  10
 240.0
  20
-5120.0
+5040.0
  97
 0
  75
@@ -6209,7 +6329,7 @@ SOLID
   0
 LWPOLYLINE
   5
-AF
+B4
 330
 17
 100
@@ -6227,171 +6347,19 @@ AcDbPolyline
  10
 240.0
  20
-5240.0
+5160.0
  10
 3960.0
  20
-5240.0
+5160.0
  10
 3960.0
  20
-5120.0
+5040.0
  10
 240.0
  20
-5120.0
-  0
-TEXT
-  5
-B0
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-5160.0
- 30
-0.0
- 40
-32.93599999999999
-  1
-N°
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-5160.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-B1
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-5160.0
- 30
-0.0
- 40
-32.93599999999999
-  1
-DENOMINACIÓN
-  7
-ARIAL-B
- 11
-424.0
- 21
-5160.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-B2
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-5160.0
- 30
-0.0
- 40
-32.93599999999999
-  1
-ESPECIFICACIÓN TÉCNICA DE MATERIALES
-  7
-ARIAL-B
- 11
-1224.0
- 21
-5160.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-B3
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-5160.0
- 30
-0.0
- 40
-32.93599999999999
-  1
-FUNCIÓN
-  7
-ARIAL-B
- 11
-2784.0
- 21
-5160.0
- 31
-0.0
-100
-AcDbText
-  0
-CIRCLE
-  5
-B4
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-5077.0
- 30
-0.0
- 40
-35.0
+5040.0
   0
 TEXT
   5
@@ -6407,13 +6375,13 @@ AcDbText
  10
 320.0
  20
-5061.0
+5080.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-1
+N°
   7
 ARIAL-B
  72
@@ -6421,7 +6389,7 @@ ARIAL-B
  11
 320.0
  21
-5061.0
+5080.0
  31
 0.0
 100
@@ -6441,19 +6409,19 @@ AcDbText
  10
 424.0
  20
-5063.0
+5080.0
  30
 0.0
  40
-32.22
+40.096
   1
-Fijación de la cupertina
+DENOMINACIÓN
   7
 ARIAL-B
  11
 424.0
  21
-5063.0
+5080.0
  31
 0.0
 100
@@ -6473,19 +6441,19 @@ AcDbText
  10
 1224.0
  20
-5063.0
+5080.0
  30
 0.0
  40
-32.22
+40.096
   1
-Tornillo autorroscante galvanizado c/ arandela de neopreno + sellador
+ESPECIFICACIÓN TÉCNICA DE MATERIALES
   7
-ARIAL
+ARIAL-B
  11
 1224.0
  21
-5063.0
+5080.0
  31
 0.0
 100
@@ -6503,153 +6471,29 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-5007.0
+5080.0
  30
 0.0
  40
-32.22
+40.096
   1
-poliuretánico
+FUNCIÓN
   7
-ARIAL
+ARIAL-B
  11
-1224.0
+2824.0
  21
-5007.0
+5080.0
  31
 0.0
 100
 AcDbText
-  0
-TEXT
-  5
-B9
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-5063.0
- 30
-0.0
- 40
-32.22
-  1
-Fija la cupertina al panel sin perder la estanqueidad
-  7
-ARIAL
- 11
-2784.0
- 21
-5063.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-BA
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-4978.0
- 10
-3960.0
- 20
-4978.0
-  0
-HATCH
-  5
-BB
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-4978.0
- 10
-3960.0
- 20
-4978.0
- 10
-3960.0
- 20
-4836.0
- 10
-240.0
- 20
-4836.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
   0
 CIRCLE
   5
-BC
+B9
 330
 17
 100
@@ -6663,11 +6507,109 @@ AcDbCircle
  10
 320.0
  20
-4935.0
+4989.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+BA
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+4969.0
+ 30
+0.0
+ 40
+40.096
+  1
+1
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+4969.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+BB
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+4974.0
+ 30
+0.0
+ 40
+40.096
+  1
+Fijación de la cupertina
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+4974.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+BC
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+4974.0
+ 30
+0.0
+ 40
+40.096
+  1
+Tornillo autorroscante galvanizado c/ arandela de neopreno +
+  7
+ARIAL
+ 11
+1224.0
+ 21
+4974.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -6681,23 +6623,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+1224.0
  20
-4919.0
+4905.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-2
+sellador poliuretánico
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+1224.0
  21
-4919.0
+4905.0
  31
 0.0
 100
@@ -6715,21 +6655,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+2824.0
  20
-4921.0
+4974.0
  30
 0.0
  40
-32.22
+40.096
   1
-Cupertina
+Fija la cupertina al panel sin perder la
   7
-ARIAL-B
+ARIAL
  11
-424.0
+2824.0
  21
-4921.0
+4974.0
  31
 0.0
 100
@@ -6747,27 +6687,27 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-4921.0
+4905.0
  30
 0.0
  40
-32.22
+40.096
   1
-Chapa de acero galvanizado N°22 plegada, c/ goterones en ambas caras y
+estanqueidad
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-4921.0
+4905.0
  31
 0.0
 100
 AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 C0
 330
@@ -6776,102 +6716,6 @@ C0
 AcDbEntity
   8
 X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-4865.0
- 30
-0.0
- 40
-32.22
-  1
-pendiente hacia la cubierta
-  7
-ARIAL
- 11
-1224.0
- 21
-4865.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C1
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4921.0
- 30
-0.0
- 40
-32.22
-  1
-Protege el coronamiento del cerramiento y desvía el
-  7
-ARIAL
- 11
-2784.0
- 21
-4921.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C2
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4865.0
- 30
-0.0
- 40
-32.22
-  1
-agua para que no escurra por la fachada
-  7
-ARIAL
- 11
-2784.0
- 21
-4865.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-C3
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
 370
 13
 100
@@ -6883,257 +6727,15 @@ AcDbPolyline
  10
 240.0
  20
-4836.0
+4870.0
  10
 3960.0
  20
-4836.0
-  0
-CIRCLE
-  5
-C4
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-4793.0
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-C5
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-4777.0
- 30
-0.0
- 40
-31.504000000000005
-  1
-3
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-4777.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C6
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-4779.0
- 30
-0.0
- 40
-32.22
-  1
-Babeta
-  7
-ARIAL-B
- 11
-424.0
- 21
-4779.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C7
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-4779.0
- 30
-0.0
- 40
-32.22
-  1
-Chapa galvanizada N°24 empotrada en buña 2x2 cm + sellador
-  7
-ARIAL
- 11
-1224.0
- 21
-4779.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C8
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-4723.0
- 30
-0.0
- 40
-32.22
-  1
-poliuretánico
-  7
-ARIAL
- 11
-1224.0
- 21
-4723.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-C9
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4779.0
- 30
-0.0
- 40
-32.22
-  1
-Cubre el borde superior de la membrana en el encuentro
-  7
-ARIAL
- 11
-2784.0
- 21
-4779.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-CA
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4723.0
- 30
-0.0
- 40
-32.22
-  1
-con el paramento vertical
-  7
-ARIAL
- 11
-2784.0
- 21
-4723.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-CB
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-4694.0
- 10
-3960.0
- 20
-4694.0
+4870.0
   0
 HATCH
   5
-CC
+C1
 330
 17
 100
@@ -7175,19 +6777,19 @@ SOLID
  10
 240.0
  20
-4694.0
+4870.0
  10
 3960.0
  20
-4694.0
+4870.0
  10
 3960.0
  20
-4552.0
+4631.0
  10
 240.0
  20
-4552.0
+4631.0
  97
 0
  75
@@ -7199,7 +6801,7 @@ SOLID
   0
 CIRCLE
   5
-CD
+C2
 330
 17
 100
@@ -7213,15 +6815,15 @@ AcDbCircle
  10
 320.0
  20
-4651.0
+4819.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
-CE
+C3
 330
 17
 100
@@ -7233,13 +6835,13 @@ AcDbText
  10
 320.0
  20
-4635.0
+4799.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-4
+2
   7
 ARIAL-B
  72
@@ -7247,7 +6849,7 @@ ARIAL-B
  11
 320.0
  21
-4635.0
+4799.0
  31
 0.0
 100
@@ -7255,7 +6857,7 @@ AcDbText
   0
 TEXT
   5
-CF
+C4
 330
 17
 100
@@ -7267,19 +6869,19 @@ AcDbText
  10
 424.0
  20
-4637.0
+4804.0
  30
 0.0
  40
-32.22
+40.096
   1
-Panel sándwich premoldeado
+Cupertina
   7
 ARIAL-B
  11
 424.0
  21
-4637.0
+4804.0
  31
 0.0
 100
@@ -7287,7 +6889,7 @@ AcDbText
   0
 TEXT
   5
-D0
+C5
 330
 17
 100
@@ -7299,19 +6901,19 @@ AcDbText
  10
 1224.0
  20
-4637.0
+4804.0
  30
 0.0
  40
-32.22
+40.096
   1
-Panel de hormigón armado H-30, e = 20 cm, altura de 2 pisos, cara exterior
+Chapa de acero galvanizado N°22 plegada, c/ goterones en
   7
 ARIAL
  11
 1224.0
  21
-4637.0
+4804.0
  31
 0.0
 100
@@ -7319,7 +6921,7 @@ AcDbText
   0
 TEXT
   5
-D1
+C6
 330
 17
 100
@@ -7331,19 +6933,19 @@ AcDbText
  10
 1224.0
  20
-4581.0
+4735.0
  30
 0.0
  40
-32.22
+40.096
   1
-texturada
+ambas caras y pendiente hacia la cubierta
   7
 ARIAL
  11
 1224.0
  21
-4581.0
+4735.0
  31
 0.0
 100
@@ -7351,7 +6953,7 @@ AcDbText
   0
 TEXT
   5
-D2
+C7
 330
 17
 100
@@ -7361,21 +6963,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-4637.0
+4804.0
  30
 0.0
  40
-32.22
+40.096
   1
-Cerramiento exterior opaco: estanqueidad, aislación
+Protege el coronamiento del cerramiento y
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-4637.0
+4804.0
  31
 0.0
 100
@@ -7383,7 +6985,7 @@ AcDbText
   0
 TEXT
   5
-D3
+C8
 330
 17
 100
@@ -7393,21 +6995,53 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-4581.0
+4735.0
  30
 0.0
  40
-32.22
+40.096
   1
-térmica e inercia
+desvía el agua para que no escurra por la
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-4581.0
+4735.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+C9
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+4666.0
+ 30
+0.0
+ 40
+40.096
+  1
+fachada
+  7
+ARIAL
+ 11
+2824.0
+ 21
+4666.0
  31
 0.0
 100
@@ -7415,7 +7049,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-D4
+CA
 330
 17
 100
@@ -7433,15 +7067,15 @@ AcDbPolyline
  10
 240.0
  20
-4552.0
+4631.0
  10
 3960.0
  20
-4552.0
+4631.0
   0
 CIRCLE
   5
-D5
+CB
 330
 17
 100
@@ -7455,11 +7089,353 @@ AcDbCircle
  10
 320.0
  20
-4509.0
+4580.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+CC
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+4560.0
+ 30
+0.0
+ 40
+40.096
+  1
+3
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+4560.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+CD
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+4565.0
+ 30
+0.0
+ 40
+40.096
+  1
+Babeta
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+4565.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+CE
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+4565.0
+ 30
+0.0
+ 40
+40.096
+  1
+Chapa galvanizada N°24 empotrada en buña 2x2 cm +
+  7
+ARIAL
+ 11
+1224.0
+ 21
+4565.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+CF
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+4496.0
+ 30
+0.0
+ 40
+40.096
+  1
+sellador poliuretánico
+  7
+ARIAL
+ 11
+1224.0
+ 21
+4496.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+D0
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+4565.0
+ 30
+0.0
+ 40
+40.096
+  1
+Cubre el borde superior de la membrana en
+  7
+ARIAL
+ 11
+2824.0
+ 21
+4565.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+D1
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+4496.0
+ 30
+0.0
+ 40
+40.096
+  1
+el encuentro con el paramento vertical
+  7
+ARIAL
+ 11
+2824.0
+ 21
+4496.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+D2
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+240.0
+ 20
+4461.0
+ 10
+3960.0
+ 20
+4461.0
+  0
+HATCH
+  5
+D3
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+420
+15921906
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+240.0
+ 20
+4461.0
+ 10
+3960.0
+ 20
+4461.0
+ 10
+3960.0
+ 20
+4291.0
+ 10
+240.0
+ 20
+4291.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+CIRCLE
+  5
+D4
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+18
+100
+AcDbCircle
+ 10
+320.0
+ 20
+4410.0
+ 30
+0.0
+ 40
+43.0
+  0
+TEXT
+  5
+D5
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+4390.0
+ 30
+0.0
+ 40
+40.096
+  1
+4
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+4390.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -7473,23 +7449,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+424.0
  20
-4493.0
+4395.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-5
+Panel sándwich
   7
 ARIAL-B
- 72
-1
  11
-320.0
+424.0
  21
-4493.0
+4395.0
  31
 0.0
 100
@@ -7509,19 +7483,19 @@ AcDbText
  10
 424.0
  20
-4495.0
+4326.0
  30
 0.0
  40
-32.22
+40.096
   1
-Junta panel / canaleta
+premoldeado
   7
 ARIAL-B
  11
 424.0
  21
-4495.0
+4326.0
  31
 0.0
 100
@@ -7541,19 +7515,19 @@ AcDbText
  10
 1224.0
  20
-4495.0
+4395.0
  30
 0.0
  40
-32.22
+40.096
   1
-Plancha de EPS 2 cm (20 kg/m³) + sellador poliuretánico
+Panel de hormigón armado H-30, e = 20 cm, altura de 2 pisos,
   7
 ARIAL
  11
 1224.0
  21
-4495.0
+4395.0
  31
 0.0
 100
@@ -7571,21 +7545,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-4495.0
+4326.0
  30
 0.0
  40
-32.22
+40.096
   1
-Independiza el panel de la canaleta (dilataciones y
+cara exterior texturada
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-4495.0
+4326.0
  31
 0.0
 100
@@ -7603,21 +7577,53 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-4439.0
+4395.0
  30
 0.0
  40
-32.22
+40.096
   1
-movimientos)
+Cerramiento exterior opaco: estanqueidad,
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-4439.0
+4395.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+DB
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+4326.0
+ 30
+0.0
+ 40
+40.096
+  1
+aislación térmica e inercia
+  7
+ARIAL
+ 11
+2824.0
+ 21
+4326.0
  31
 0.0
 100
@@ -7625,7 +7631,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-DB
+DC
 330
 17
 100
@@ -7643,77 +7649,11 @@ AcDbPolyline
  10
 240.0
  20
-4410.0
+4291.0
  10
 3960.0
  20
-4410.0
-  0
-HATCH
-  5
-DC
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-4410.0
- 10
-3960.0
- 20
-4410.0
- 10
-3960.0
- 20
-4268.0
- 10
-240.0
- 20
-4268.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+4291.0
   0
 CIRCLE
   5
@@ -7731,11 +7671,11 @@ AcDbCircle
  10
 320.0
  20
-4367.0
+4240.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -7751,13 +7691,13 @@ AcDbText
  10
 320.0
  20
-4351.0
+4220.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-6
+5
   7
 ARIAL-B
  72
@@ -7765,7 +7705,7 @@ ARIAL-B
  11
 320.0
  21
-4351.0
+4220.0
  31
 0.0
 100
@@ -7785,19 +7725,19 @@ AcDbText
  10
 424.0
  20
-4353.0
+4225.0
  30
 0.0
  40
-32.22
+40.096
   1
-Hojas de hormigón del panel
+Junta panel / canaleta
   7
 ARIAL-B
  11
 424.0
  21
-4353.0
+4225.0
  31
 0.0
 100
@@ -7817,19 +7757,19 @@ AcDbText
  10
 1224.0
  20
-4353.0
+4225.0
  30
 0.0
  40
-32.22
+40.096
   1
-Hoja exterior H°A 6 cm + hoja interior portante 8 cm, malla Q92 en cada
+Plancha de EPS 2 cm (20 kg/m³) + sellador poliuretánico
   7
 ARIAL
  11
 1224.0
  21
-4353.0
+4225.0
  31
 0.0
 100
@@ -7847,21 +7787,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-4297.0
+4225.0
  30
 0.0
  40
-32.22
+40.096
   1
-hoja
+Independiza el panel de la canaleta
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-4297.0
+4225.0
  31
 0.0
 100
@@ -7879,53 +7819,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-4353.0
+4156.0
  30
 0.0
  40
-32.22
+40.096
   1
-La hoja interior lleva peso y anclajes; la exterior protege
+(dilataciones y movimientos)
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-4353.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-E3
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4297.0
- 30
-0.0
- 40
-32.22
-  1
-de la intemperie
-  7
-ARIAL
- 11
-2784.0
- 21
-4297.0
+4156.0
  31
 0.0
 100
@@ -7933,7 +7841,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-E4
+E3
 330
 17
 100
@@ -7951,11 +7859,77 @@ AcDbPolyline
  10
 240.0
  20
-4268.0
+4121.0
  10
 3960.0
  20
-4268.0
+4121.0
+  0
+HATCH
+  5
+E4
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+420
+15921906
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+240.0
+ 20
+4121.0
+ 10
+3960.0
+ 20
+4121.0
+ 10
+3960.0
+ 20
+3951.0
+ 10
+240.0
+ 20
+3951.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
 CIRCLE
   5
@@ -7973,11 +7947,11 @@ AcDbCircle
  10
 320.0
  20
-4225.0
+4070.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -7993,13 +7967,13 @@ AcDbText
  10
 320.0
  20
-4209.0
+4050.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-7
+6
   7
 ARIAL-B
  72
@@ -8007,7 +7981,7 @@ ARIAL-B
  11
 320.0
  21
-4209.0
+4050.0
  31
 0.0
 100
@@ -8027,19 +8001,19 @@ AcDbText
  10
 424.0
  20
-4211.0
+4055.0
  30
 0.0
  40
-32.22
+40.096
   1
-Núcleo aislante del panel
+Hojas de hormigón del
   7
 ARIAL-B
  11
 424.0
  21
-4211.0
+4055.0
  31
 0.0
 100
@@ -8057,21 +8031,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+424.0
  20
-4211.0
+3986.0
  30
 0.0
  40
-32.22
+40.096
   1
-EPS 6 cm (20 kg/m³) + conectores de fibra de vidrio entre hojas
+panel
   7
-ARIAL
+ARIAL-B
  11
-1224.0
+424.0
  21
-4211.0
+3986.0
  31
 0.0
 100
@@ -8089,21 +8063,117 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-4211.0
+4055.0
  30
 0.0
  40
-32.22
+40.096
   1
-Aislación térmica continua sin puentes térmicos
+Hoja exterior H°A 6 cm + hoja interior portante 8 cm, malla
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-4211.0
+4055.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+EA
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+3986.0
+ 30
+0.0
+ 40
+40.096
+  1
+Q92 en cada hoja
+  7
+ARIAL
+ 11
+1224.0
+ 21
+3986.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+EB
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+4055.0
+ 30
+0.0
+ 40
+40.096
+  1
+La hoja interior lleva peso y anclajes; la
+  7
+ARIAL
+ 11
+2824.0
+ 21
+4055.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+EC
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+3986.0
+ 30
+0.0
+ 40
+40.096
+  1
+exterior protege de la intemperie
+  7
+ARIAL
+ 11
+2824.0
+ 21
+3986.0
  31
 0.0
 100
@@ -8111,7 +8181,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-EA
+ED
 330
 17
 100
@@ -8129,81 +8199,15 @@ AcDbPolyline
  10
 240.0
  20
-4182.0
+3951.0
  10
 3960.0
  20
-4182.0
-  0
-HATCH
-  5
-EB
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-4182.0
- 10
-3960.0
- 20
-4182.0
- 10
-3960.0
- 20
-4096.0
- 10
-240.0
- 20
-4096.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+3951.0
   0
 CIRCLE
   5
-EC
+EE
 330
 17
 100
@@ -8217,77 +8221,11 @@ AcDbCircle
  10
 320.0
  20
-4139.0
+3900.0
  30
 0.0
  40
-35.0
-  0
-TEXT
-  5
-ED
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-4123.0
- 30
-0.0
- 40
-31.504000000000005
-  1
-8
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-4123.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-EE
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-4125.0
- 30
-0.0
- 40
-32.22
-  1
-Rehundido del anclaje
-  7
-ARIAL-B
- 11
-424.0
- 21
-4125.0
- 31
-0.0
-100
-AcDbText
+43.0
   0
 TEXT
   5
@@ -8301,21 +8239,23 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+320.0
  20
-4125.0
+3880.0
  30
 0.0
  40
-32.22
+40.096
   1
-Rehundido Ø100 mm, prof. 3 cm, tapado c/ mortero de reparación
+7
   7
-ARIAL
+ARIAL-B
+ 72
+1
  11
-1224.0
+320.0
  21
-4125.0
+3880.0
  31
 0.0
 100
@@ -8333,27 +8273,27 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+424.0
  20
-4125.0
+3885.0
  30
 0.0
  40
-32.22
+40.096
   1
-Aloja la cabeza del bulón y la protege de la corrosión
+Núcleo aislante del panel
   7
-ARIAL
+ARIAL-B
  11
-2784.0
+424.0
  21
-4125.0
+3885.0
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 F1
 330
@@ -8362,24 +8302,30 @@ F1
 AcDbEntity
   8
 X-TABLA
-370
-13
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-240.0
+1224.0
  20
-4096.0
- 10
-3960.0
- 20
-4096.0
+3885.0
+ 30
+0.0
+ 40
+40.096
+  1
+EPS 6 cm (20 kg/m³) + conectores de fibra de vidrio entre
+  7
+ARIAL
+ 11
+1224.0
+ 21
+3885.0
+ 31
+0.0
+100
+AcDbText
   0
-CIRCLE
+TEXT
   5
 F2
 330
@@ -8388,18 +8334,28 @@ F2
 AcDbEntity
   8
 X-TABLA
-370
-18
 100
-AcDbCircle
+AcDbText
  10
-320.0
+1224.0
  20
-4053.0
+3816.0
  30
 0.0
  40
-35.0
+40.096
+  1
+hojas
+  7
+ARIAL
+ 11
+1224.0
+ 21
+3816.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -8413,23 +8369,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+2824.0
  20
-4037.0000000000005
+3885.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-9
+Aislación térmica continua sin puentes
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+2824.0
  21
-4037.0000000000005
+3885.0
  31
 0.0
 100
@@ -8447,85 +8401,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+2824.0
  20
-4039.0000000000005
+3816.0
  30
 0.0
  40
-32.22
+40.096
   1
-Agujero ovalado + vaina
-  7
-ARIAL-B
- 11
-424.0
- 21
-4039.0000000000005
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-F5
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-4039.0000000000005
- 30
-0.0
- 40
-32.22
-  1
-Agujero ovalado vertical 40 x 60 mm + vaina pasante en la VL
+térmicos
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-4039.0000000000005
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-F6
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-4039.0000000000005
- 30
-0.0
- 40
-32.22
-  1
-Permite dilataciones y tolerancias de montaje panel / viga
-  7
-ARIAL
- 11
-2784.0
- 21
-4039.0000000000005
+3816.0
  31
 0.0
 100
@@ -8533,7 +8423,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-F7
+F5
 330
 17
 100
@@ -8551,15 +8441,15 @@ AcDbPolyline
  10
 240.0
  20
-4010.0
+3781.0
  10
 3960.0
  20
-4010.0
+3781.0
   0
 HATCH
   5
-F8
+F6
 330
 17
 100
@@ -8601,19 +8491,19 @@ SOLID
  10
 240.0
  20
-4010.0
+3781.0
  10
 3960.0
  20
-4010.0
+3781.0
  10
 3960.0
  20
-3924.0000000000005
+3611.0
  10
 240.0
  20
-3924.0000000000005
+3611.0
  97
 0
  75
@@ -8625,7 +8515,7 @@ SOLID
   0
 CIRCLE
   5
-F9
+F7
 330
 17
 100
@@ -8639,11 +8529,77 @@ AcDbCircle
  10
 320.0
  20
-3967.0000000000005
+3730.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+F8
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+3710.0
+ 30
+0.0
+ 40
+40.096
+  1
+8
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+3710.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F9
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+3715.0
+ 30
+0.0
+ 40
+40.096
+  1
+Rehundido del anclaje
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+3715.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -8657,23 +8613,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+1224.0
  20
-3951.0
+3715.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-10
+Rehundido Ø100 mm, prof. 3 cm, tapado c/ mortero de
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+1224.0
  21
-3951.0
+3715.0
  31
 0.0
 100
@@ -8691,21 +8645,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+1224.0
  20
-3953.000000000001
+3646.0
  30
 0.0
  40
-32.22
+40.096
   1
-Junta panel / estructura
+reparación
   7
-ARIAL-B
+ARIAL
  11
-424.0
+1224.0
  21
-3953.000000000001
+3646.0
  31
 0.0
 100
@@ -8723,21 +8677,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-3953.000000000001
+3715.0
  30
 0.0
  40
-32.22
+40.096
   1
-Separación 2 cm rellena c/ lana mineral cortafuego + sellador
+Aloja la cabeza del bulón y la protege de la
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-3953.000000000001
+3715.0
  31
 0.0
 100
@@ -8755,21 +8709,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3953.000000000001
+3646.0
  30
 0.0
  40
-32.22
+40.096
   1
-Aislación y barrera de fuego y humo en el borde de losa
+corrosión
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3953.000000000001
+3646.0
  31
 0.0
 100
@@ -8795,11 +8749,11 @@ AcDbPolyline
  10
 240.0
  20
-3924.0000000000005
+3611.0
  10
 3960.0
  20
-3924.0000000000005
+3611.0
   0
 CIRCLE
   5
@@ -8817,11 +8771,11 @@ AcDbCircle
  10
 320.0
  20
-3881.0
+3560.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -8837,13 +8791,13 @@ AcDbText
  10
 320.0
  20
-3865.0
+3540.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-11
+9
   7
 ARIAL-B
  72
@@ -8851,7 +8805,7 @@ ARIAL-B
  11
 320.0
  21
-3865.0
+3540.0
  31
 0.0
 100
@@ -8871,19 +8825,19 @@ AcDbText
  10
 424.0
  20
-3867.0000000000005
+3545.0
  30
 0.0
  40
-32.22
+40.096
   1
-Membrana hidrófuga
+Agujero ovalado + vaina
   7
 ARIAL-B
  11
 424.0
  21
-3867.0000000000005
+3545.0
  31
 0.0
 100
@@ -8903,19 +8857,19 @@ AcDbText
  10
 1224.0
  20
-3867.0000000000005
+3545.0
  30
 0.0
  40
-32.22
+40.096
   1
-Membrana asfáltica 4 mm c/ foil de aluminio, adherida con soplete, solapes
+Agujero ovalado vertical 40 x 60 mm + vaina pasante en la VL
   7
 ARIAL
  11
 1224.0
  21
-3867.0000000000005
+3545.0
  31
 0.0
 100
@@ -8933,21 +8887,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-3811.0
+3545.0
  30
 0.0
  40
-32.22
+40.096
   1
-10 cm; sube 20 cm por el parapeto
+Permite dilataciones y tolerancias de
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-3811.0
+3545.0
  31
 0.0
 100
@@ -8965,53 +8919,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3867.0000000000005
+3476.0
  30
 0.0
  40
-32.22
+40.096
   1
-Aislación hidrófuga de la cubierta; el aluminio refleja la
+montaje panel / viga
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3867.0000000000005
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-105
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-3811.0
- 30
-0.0
- 40
-32.22
-  1
-radiación solar
-  7
-ARIAL
- 11
-2784.0
- 21
-3811.0
+3476.0
  31
 0.0
 100
@@ -9019,7 +8941,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-106
+105
 330
 17
 100
@@ -9037,15 +8959,15 @@ AcDbPolyline
  10
 240.0
  20
-3782.0000000000005
+3441.0
  10
 3960.0
  20
-3782.0000000000005
+3441.0
   0
 HATCH
   5
-107
+106
 330
 17
 100
@@ -9087,19 +9009,19 @@ SOLID
  10
 240.0
  20
-3782.0000000000005
+3441.0
  10
 3960.0
  20
-3782.0000000000005
+3441.0
  10
 3960.0
  20
-3696.0
+3271.0
  10
 240.0
  20
-3696.0
+3271.0
  97
 0
  75
@@ -9111,7 +9033,7 @@ SOLID
   0
 CIRCLE
   5
-108
+107
 330
 17
 100
@@ -9125,11 +9047,45 @@ AcDbCircle
  10
 320.0
  20
-3739.0000000000005
+3390.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+108
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+3370.0
+ 30
+0.0
+ 40
+40.096
+  1
+10
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+3370.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -9143,23 +9099,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+424.0
  20
-3723.000000000001
+3375.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-12
+Junta panel / estructura
   7
 ARIAL-B
- 72
-1
  11
-320.0
+424.0
  21
-3723.000000000001
+3375.0
  31
 0.0
 100
@@ -9177,21 +9131,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+1224.0
  20
-3725.0000000000005
+3375.0
  30
 0.0
  40
-32.22
+40.096
   1
-Carpeta de asiento
+Separación 2 cm rellena c/ lana mineral cortafuego + sellador
   7
-ARIAL-B
+ARIAL
  11
-424.0
+1224.0
  21
-3725.0000000000005
+3375.0
  31
 0.0
 100
@@ -9209,21 +9163,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-3725.0000000000005
+3375.0
  30
 0.0
  40
-32.22
+40.096
   1
-Mortero cementicio 1:3 c/ 10 % de hidrófugo, e = 2 cm, fratasada
+Aislación y barrera de fuego y humo en el
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-3725.0000000000005
+3375.0
  31
 0.0
 100
@@ -9241,21 +9195,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3725.0000000000005
+3306.0
  30
 0.0
  40
-32.22
+40.096
   1
-Superficie lisa y firme para adherir la membrana
+borde de losa
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3725.0000000000005
+3306.0
  31
 0.0
 100
@@ -9281,11 +9235,11 @@ AcDbPolyline
  10
 240.0
  20
-3696.0
+3271.0
  10
 3960.0
  20
-3696.0
+3271.0
   0
 CIRCLE
   5
@@ -9303,11 +9257,11 @@ AcDbCircle
  10
 320.0
  20
-3653.000000000001
+3220.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -9323,13 +9277,13 @@ AcDbText
  10
 320.0
  20
-3637.0000000000005
+3200.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-13
+11
   7
 ARIAL-B
  72
@@ -9337,7 +9291,7 @@ ARIAL-B
  11
 320.0
  21
-3637.0000000000005
+3200.0
  31
 0.0
 100
@@ -9357,19 +9311,19 @@ AcDbText
  10
 424.0
  20
-3639.000000000001
+3205.0
  30
 0.0
  40
-32.22
+40.096
   1
-Contrapiso de pendiente (aislante)
+Membrana hidrófuga
   7
 ARIAL-B
  11
 424.0
  21
-3639.000000000001
+3205.0
  31
 0.0
 100
@@ -9389,19 +9343,19 @@ AcDbText
  10
 1224.0
  20
-3639.000000000001
+3205.0
  30
 0.0
  40
-32.22
+40.096
   1
-Hormigón liviano c/ perlas de EPS (≈ 500 kg/m³), e mín. 10 cm, pendiente 2
+Membrana asfáltica 4 mm c/ foil de aluminio, adherida con
   7
 ARIAL
  11
 1224.0
  21
-3639.000000000001
+3205.0
  31
 0.0
 100
@@ -9421,19 +9375,19 @@ AcDbText
  10
 1224.0
  20
-3583.000000000001
+3136.0
  30
 0.0
  40
-32.22
+40.096
   1
-%
+soplete, solapes 10 cm; sube 20 cm por el parapeto
   7
 ARIAL
  11
 1224.0
  21
-3583.000000000001
+3136.0
  31
 0.0
 100
@@ -9451,21 +9405,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3639.000000000001
+3205.0
  30
 0.0
  40
-32.22
+40.096
   1
-Da la pendiente de escurrimiento y aporta aislación
+Aislación hidrófuga de la cubierta; el
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3639.000000000001
+3205.0
  31
 0.0
 100
@@ -9483,21 +9437,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3583.000000000001
+3136.0
  30
 0.0
  40
-32.22
+40.096
   1
-térmica a la cubierta
+aluminio refleja la radiación solar
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3583.000000000001
+3136.0
  31
 0.0
 100
@@ -9523,11 +9477,11 @@ AcDbPolyline
  10
 240.0
  20
-3554.000000000001
+3101.0
  10
 3960.0
  20
-3554.000000000001
+3101.0
   0
 HATCH
   5
@@ -9573,19 +9527,19 @@ SOLID
  10
 240.0
  20
-3554.000000000001
+3101.0
  10
 3960.0
  20
-3554.000000000001
+3101.0
  10
 3960.0
  20
-3412.0000000000005
+2931.0
  10
 240.0
  20
-3412.0000000000005
+2931.0
  97
 0
  75
@@ -9611,11 +9565,11 @@ AcDbCircle
  10
 320.0
  20
-3511.0
+3050.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -9631,13 +9585,13 @@ AcDbText
  10
 320.0
  20
-3495.0000000000005
+3030.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-14
+12
   7
 ARIAL-B
  72
@@ -9645,7 +9599,7 @@ ARIAL-B
  11
 320.0
  21
-3495.0000000000005
+3030.0
  31
 0.0
 100
@@ -9665,19 +9619,19 @@ AcDbText
  10
 424.0
  20
-3497.0000000000005
+3035.0
  30
 0.0
  40
-32.22
+40.096
   1
-Barrera de vapor
+Carpeta de asiento
   7
 ARIAL-B
  11
 424.0
  21
-3497.0000000000005
+3035.0
  31
 0.0
 100
@@ -9697,19 +9651,19 @@ AcDbText
  10
 1224.0
  20
-3497.0000000000005
+3035.0
  30
 0.0
  40
-32.22
+40.096
   1
-Imprimación asfáltica + film de polietileno 200 µ, solapes 15 cm
+Mortero cementicio 1:3 c/ 10 % de hidrófugo, e = 2 cm,
   7
 ARIAL
  11
 1224.0
  21
-3497.0000000000005
+3035.0
  31
 0.0
 100
@@ -9727,21 +9681,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-3497.0000000000005
+2966.0
  30
 0.0
  40
-32.22
+40.096
   1
-Impide el paso del vapor interior hacia el aislante (evita
+fratasada
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-3497.0000000000005
+2966.0
  31
 0.0
 100
@@ -9759,21 +9713,53 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-3441.000000000001
+3035.0
  30
 0.0
  40
-32.22
+40.096
   1
-condensación intersticial)
+Superficie lisa y firme para adherir la
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-3441.000000000001
+3035.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+11D
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2966.0
+ 30
+0.0
+ 40
+40.096
+  1
+membrana
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2966.0
  31
 0.0
 100
@@ -9781,7 +9767,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-11D
+11E
 330
 17
 100
@@ -9799,15 +9785,15 @@ AcDbPolyline
  10
 240.0
  20
-3412.0000000000005
+2931.0
  10
 3960.0
  20
-3412.0000000000005
+2931.0
   0
 CIRCLE
   5
-11E
+11F
 330
 17
 100
@@ -9821,45 +9807,11 @@ AcDbCircle
  10
 320.0
  20
-3369.000000000001
+2880.0
  30
 0.0
  40
-35.0
-  0
-TEXT
-  5
-11F
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-3353.000000000001
- 30
-0.0
- 40
-31.504000000000005
-  1
-15
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-3353.000000000001
- 31
-0.0
-100
-AcDbText
+43.0
   0
 TEXT
   5
@@ -9873,21 +9825,23 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+320.0
  20
-3355.0000000000005
+2860.0
  30
 0.0
  40
-32.22
+40.096
   1
-Capa de compresión
+13
   7
 ARIAL-B
+ 72
+1
  11
-424.0
+320.0
  21
-3355.0000000000005
+2860.0
  31
 0.0
 100
@@ -9905,21 +9859,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+424.0
  20
-3355.0000000000005
+2865.0
  30
 0.0
  40
-32.22
+40.096
   1
-Hormigón H-25 in situ, e = 5 cm, malla electrosoldada Ø6 c/15 cm
+Contrapiso de pendiente
   7
-ARIAL
+ARIAL-B
  11
-1224.0
+424.0
  21
-3355.0000000000005
+2865.0
  31
 0.0
 100
@@ -9937,21 +9891,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+424.0
  20
-3355.0000000000005
+2796.0
  30
 0.0
  40
-32.22
+40.096
   1
-Solidariza los paneles TT (diafragma rígido) y reparte las
+(aislante)
   7
-ARIAL
+ARIAL-B
  11
-2784.0
+424.0
  21
-3355.0000000000005
+2796.0
  31
 0.0
 100
@@ -9969,21 +9923,117 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-3299.0000000000005
+2865.0
  30
 0.0
  40
-32.22
+40.096
   1
-cargas
+Hormigón liviano c/ perlas de EPS (≈ 500 kg/m³), e mín. 10
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-3299.0000000000005
+2865.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+124
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+2796.0
+ 30
+0.0
+ 40
+40.096
+  1
+cm, pendiente 2 %
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2796.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+125
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2865.0
+ 30
+0.0
+ 40
+40.096
+  1
+Da la pendiente de escurrimiento y aporta
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2865.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+126
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2796.0
+ 30
+0.0
+ 40
+40.096
+  1
+aislación térmica a la cubierta
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2796.0
  31
 0.0
 100
@@ -9991,7 +10041,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-124
+127
 330
 17
 100
@@ -10009,15 +10059,15 @@ AcDbPolyline
  10
 240.0
  20
-3270.0000000000005
+2761.0
  10
 3960.0
  20
-3270.0000000000005
+2761.0
   0
 HATCH
   5
-125
+128
 330
 17
 100
@@ -10059,19 +10109,19 @@ SOLID
  10
 240.0
  20
-3270.0000000000005
+2761.0
  10
 3960.0
  20
-3270.0000000000005
+2761.0
  10
 3960.0
  20
-3128.000000000001
+2591.0
  10
 240.0
  20
-3128.000000000001
+2591.0
  97
 0
  75
@@ -10083,7 +10133,7 @@ SOLID
   0
 CIRCLE
   5
-126
+129
 330
 17
 100
@@ -10097,109 +10147,11 @@ AcDbCircle
  10
 320.0
  20
-3227.0000000000005
+2710.0
  30
 0.0
  40
-35.0
-  0
-TEXT
-  5
-127
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-3211.000000000001
- 30
-0.0
- 40
-31.504000000000005
-  1
-16
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-3211.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-128
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-3213.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Aislación de la canaleta
-  7
-ARIAL-B
- 11
-424.0
- 21
-3213.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-129
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-3213.000000000001
- 30
-0.0
- 40
-32.22
-  1
-EPS 25 mm + carpeta cementicia armada 15 mm bajo la membrana
-  7
-ARIAL
- 11
-1224.0
- 21
-3213.000000000001
- 31
-0.0
-100
-AcDbText
+43.0
   0
 TEXT
   5
@@ -10213,21 +10165,23 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+320.0
  20
-3213.000000000001
+2690.0
  30
 0.0
  40
-32.22
+40.096
   1
-Evita el puente térmico en la canaleta y da base continua
+14
   7
-ARIAL
+ARIAL-B
+ 72
+1
  11
-2784.0
+320.0
  21
-3213.000000000001
+2690.0
  31
 0.0
 100
@@ -10245,27 +10199,27 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+424.0
  20
-3157.0000000000005
+2695.0
  30
 0.0
  40
-32.22
+40.096
   1
-a la membrana
+Barrera de vapor
   7
-ARIAL
+ARIAL-B
  11
-2784.0
+424.0
  21
-3157.0000000000005
+2695.0
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 12C
 330
@@ -10274,24 +10228,30 @@ LWPOLYLINE
 AcDbEntity
   8
 X-TABLA
-370
-13
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-240.0
+1224.0
  20
-3128.000000000001
- 10
-3960.0
- 20
-3128.000000000001
+2695.0
+ 30
+0.0
+ 40
+40.096
+  1
+Imprimación asfáltica + film de polietileno 200 µ, solapes 15
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2695.0
+ 31
+0.0
+100
+AcDbText
   0
-CIRCLE
+TEXT
   5
 12D
 330
@@ -10300,18 +10260,28 @@ CIRCLE
 AcDbEntity
   8
 X-TABLA
-370
-18
 100
-AcDbCircle
+AcDbText
  10
-320.0
+1224.0
  20
-3085.0000000000005
+2626.0
  30
 0.0
  40
-35.0
+40.096
+  1
+cm
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2626.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -10325,23 +10295,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+2824.0
  20
-3069.000000000001
+2695.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-17
+Impide el paso del vapor interior hacia el
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+2824.0
  21
-3069.000000000001
+2695.0
  31
 0.0
 100
@@ -10359,117 +10327,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+2824.0
  20
-3071.000000000001
+2626.0
  30
 0.0
  40
-32.22
+40.096
   1
-Estribos salientes
-  7
-ARIAL-B
- 11
-424.0
- 21
-3071.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-130
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-3071.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Barras Ø10 c/ 20 cm salientes de la viga de borde
+aislante (evita condensación intersticial)
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-3071.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-131
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-3071.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Anclan el hormigón in situ (capa / canaleta) a la viga
-  7
-ARIAL
- 11
-2784.0
- 21
-3071.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-132
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-3015.0000000000005
- 30
-0.0
- 40
-32.22
-  1
-premoldeada
-  7
-ARIAL
- 11
-2784.0
- 21
-3015.0000000000005
+2626.0
  31
 0.0
 100
@@ -10477,7 +10349,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-133
+130
 330
 17
 100
@@ -10495,81 +10367,15 @@ AcDbPolyline
  10
 240.0
  20
-2986.000000000001
+2591.0
  10
 3960.0
  20
-2986.000000000001
-  0
-HATCH
-  5
-134
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-2986.000000000001
- 10
-3960.0
- 20
-2986.000000000001
- 10
-3960.0
- 20
-2844.000000000001
- 10
-240.0
- 20
-2844.000000000001
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+2591.0
   0
 CIRCLE
   5
-135
+131
 330
 17
 100
@@ -10583,11 +10389,141 @@ AcDbCircle
  10
 320.0
  20
-2943.000000000001
+2540.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+132
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+2520.0
+ 30
+0.0
+ 40
+40.096
+  1
+15
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+2520.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+133
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+2525.0
+ 30
+0.0
+ 40
+40.096
+  1
+Capa de compresión
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+2525.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+134
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+2525.0
+ 30
+0.0
+ 40
+40.096
+  1
+Hormigón H-25 in situ, e = 5 cm, malla electrosoldada Ø6 c/15
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2525.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+135
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+2456.0
+ 30
+0.0
+ 40
+40.096
+  1
+cm
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2456.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -10601,23 +10537,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+2824.0
  20
-2927.000000000001
+2525.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-18
+Solidariza los paneles TT (diafragma rígido)
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+2824.0
  21
-2927.000000000001
+2525.0
  31
 0.0
 100
@@ -10635,27 +10569,27 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+2824.0
  20
-2929.000000000001
+2456.0
  30
 0.0
  40
-32.22
+40.096
   1
-Canaleta de desagüe
+y reparte las cargas
   7
-ARIAL-B
+ARIAL
  11
-424.0
+2824.0
  21
-2929.000000000001
+2456.0
  31
 0.0
 100
 AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 138
 330
@@ -10664,134 +10598,6 @@ TEXT
 AcDbEntity
   8
 X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2929.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Hormigón armado H-25 in situ c/ hueco semicircular Ø 23 cm, pendiente 1
-  7
-ARIAL
- 11
-1224.0
- 21
-2929.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-139
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2873.000000000001
- 30
-0.0
- 40
-32.22
-  1
-% a embudos
-  7
-ARIAL
- 11
-1224.0
- 21
-2873.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13A
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2929.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Colecta el agua de la cubierta junto al parapeto y la lleva
-  7
-ARIAL
- 11
-2784.0
- 21
-2929.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13B
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2873.000000000001
- 30
-0.0
- 40
-32.22
-  1
-a los embudos
-  7
-ARIAL
- 11
-2784.0
- 21
-2873.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-13C
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
 370
 13
 100
@@ -10803,225 +10609,15 @@ AcDbPolyline
  10
 240.0
  20
-2844.000000000001
+2421.0
  10
 3960.0
  20
-2844.000000000001
-  0
-CIRCLE
-  5
-13D
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-2801.000000000001
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-13E
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-2785.000000000001
- 30
-0.0
- 40
-31.504000000000005
-  1
-19
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-2785.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13F
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-2787.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Embudo de desagüe (oculto)
-  7
-ARIAL-B
- 11
-424.0
- 21
-2787.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-140
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2787.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Embudo de PVC c/ rejilla parahojas, junto al eje de columna, a caño de
-  7
-ARIAL
- 11
-1224.0
- 21
-2787.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-141
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2731.000000000001
- 30
-0.0
- 40
-32.22
-  1
-lluvia PVC Ø110 interior
-  7
-ARIAL
- 11
-1224.0
- 21
-2731.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-142
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2787.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Evacua el agua de lluvia colectada en la canaleta
-  7
-ARIAL
- 11
-2784.0
- 21
-2787.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-143
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-2702.000000000001
- 10
-3960.0
- 20
-2702.000000000001
+2421.0
   0
 HATCH
   5
-144
+139
 330
 17
 100
@@ -11063,19 +10659,19 @@ SOLID
  10
 240.0
  20
-2702.000000000001
+2421.0
  10
 3960.0
  20
-2702.000000000001
+2421.0
  10
 3960.0
  20
-2560.000000000001
+2251.0
  10
 240.0
  20
-2560.000000000001
+2251.0
  97
 0
  75
@@ -11087,7 +10683,7 @@ SOLID
   0
 CIRCLE
   5
-145
+13A
 330
 17
 100
@@ -11101,15 +10697,15 @@ AcDbCircle
  10
 320.0
  20
-2659.000000000001
+2370.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
-146
+13B
 330
 17
 100
@@ -11121,13 +10717,13 @@ AcDbText
  10
 320.0
  20
-2643.0000000000014
+2350.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-20
+16
   7
 ARIAL-B
  72
@@ -11135,7 +10731,7 @@ ARIAL-B
  11
 320.0
  21
-2643.0000000000014
+2350.0
  31
 0.0
 100
@@ -11143,7 +10739,7 @@ AcDbText
   0
 TEXT
   5
-147
+13C
 330
 17
 100
@@ -11155,19 +10751,19 @@ AcDbText
  10
 424.0
  20
-2645.000000000001
+2355.0
  30
 0.0
  40
-32.22
+40.096
   1
-Apoyo del ala del TT
+Aislación de la canaleta
   7
 ARIAL-B
  11
 424.0
  21
-2645.000000000001
+2355.0
  31
 0.0
 100
@@ -11175,7 +10771,7 @@ AcDbText
   0
 TEXT
   5
-148
+13D
 330
 17
 100
@@ -11187,19 +10783,19 @@ AcDbText
  10
 1224.0
  20
-2645.000000000001
+2355.0
  30
 0.0
  40
-32.22
+40.096
   1
-Banda de neopreno 10 mm + grout de relleno de la junta
+EPS 25 mm + carpeta cementicia armada 15 mm bajo la
   7
 ARIAL
  11
 1224.0
  21
-2645.000000000001
+2355.0
  31
 0.0
 100
@@ -11207,7 +10803,7 @@ AcDbText
   0
 TEXT
   5
-149
+13E
 330
 17
 100
@@ -11217,21 +10813,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-2645.000000000001
+2286.0
  30
 0.0
  40
-32.22
+40.096
   1
-Apoyo del ala del panel TT sobre la viga de borde; cierra
+membrana
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-2645.000000000001
+2286.0
  31
 0.0
 100
@@ -11239,7 +10835,7 @@ AcDbText
   0
 TEXT
   5
-14A
+13F
 330
 17
 100
@@ -11249,21 +10845,53 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-2589.000000000001
+2355.0
  30
 0.0
  40
-32.22
+40.096
   1
-la junta
+Evita el puente térmico en la canaleta y da
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-2589.000000000001
+2355.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+140
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2286.0
+ 30
+0.0
+ 40
+40.096
+  1
+base continua a la membrana
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2286.0
  31
 0.0
 100
@@ -11271,7 +10899,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-14B
+141
 330
 17
 100
@@ -11289,15 +10917,15 @@ AcDbPolyline
  10
 240.0
  20
-2560.000000000001
+2251.0
  10
 3960.0
  20
-2560.000000000001
+2251.0
   0
 CIRCLE
   5
-14C
+142
 330
 17
 100
@@ -11311,11 +10939,353 @@ AcDbCircle
  10
 320.0
  20
-2517.000000000001
+2200.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+143
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+2180.0
+ 30
+0.0
+ 40
+40.096
+  1
+17
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+2180.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+144
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+2185.0
+ 30
+0.0
+ 40
+40.096
+  1
+Estribos salientes
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+2185.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+145
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+2185.0
+ 30
+0.0
+ 40
+40.096
+  1
+Barras Ø10 c/ 20 cm salientes de la viga de borde
+  7
+ARIAL
+ 11
+1224.0
+ 21
+2185.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+146
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2185.0
+ 30
+0.0
+ 40
+40.096
+  1
+Anclan el hormigón in situ (capa / canaleta)
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2185.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+147
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+2116.0
+ 30
+0.0
+ 40
+40.096
+  1
+a la viga premoldeada
+  7
+ARIAL
+ 11
+2824.0
+ 21
+2116.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+148
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+240.0
+ 20
+2081.0
+ 10
+3960.0
+ 20
+2081.0
+  0
+HATCH
+  5
+149
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+420
+15921906
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+240.0
+ 20
+2081.0
+ 10
+3960.0
+ 20
+2081.0
+ 10
+3960.0
+ 20
+1911.0000000000002
+ 10
+240.0
+ 20
+1911.0000000000002
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+CIRCLE
+  5
+14A
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+18
+100
+AcDbCircle
+ 10
+320.0
+ 20
+2030.0
+ 30
+0.0
+ 40
+43.0
+  0
+TEXT
+  5
+14B
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+2010.0
+ 30
+0.0
+ 40
+40.096
+  1
+18
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+2010.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+14C
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+2015.0
+ 30
+0.0
+ 40
+40.096
+  1
+Canaleta de desagüe
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+2015.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -11329,23 +11299,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+1224.0
  20
-2501.0000000000014
+2015.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-21
+Hormigón armado H-25 in situ c/ hueco semicircular Ø 23 cm,
   7
-ARIAL-B
- 72
-1
+ARIAL
  11
-320.0
+1224.0
  21
-2501.0000000000014
+2015.0
  31
 0.0
 100
@@ -11363,21 +11331,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+1224.0
  20
-2503.0000000000014
+1946.0000000000002
  30
 0.0
  40
-32.22
+40.096
   1
-Viga de borde
+pendiente 1 % a embudos
   7
-ARIAL-B
+ARIAL
  11
-424.0
+1224.0
  21
-2503.0000000000014
+1946.0000000000002
  31
 0.0
 100
@@ -11395,21 +11363,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-2503.0000000000014
+2015.0
  30
 0.0
  40
-32.22
+40.096
   1
-Hormigón premoldeado H-30 apoyado y vinculado sobre la VL
+Colecta el agua de la cubierta junto al
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-2503.0000000000014
+2015.0
  31
 0.0
 100
@@ -11427,21 +11395,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-2503.0000000000014
+1946.0000000000002
  30
 0.0
  40
-32.22
+40.096
   1
-Recibe el ala del TT y la canaleta in situ
+parapeto y la lleva a los embudos
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-2503.0000000000014
+1946.0000000000002
  31
 0.0
 100
@@ -11467,81 +11435,15 @@ AcDbPolyline
  10
 240.0
  20
-2474.000000000001
+1911.0000000000002
  10
 3960.0
  20
-2474.000000000001
-  0
-HATCH
-  5
-152
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-2474.000000000001
- 10
-3960.0
- 20
-2474.000000000001
- 10
-3960.0
- 20
-2332.000000000001
- 10
-240.0
- 20
-2332.000000000001
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+1911.0000000000002
   0
 CIRCLE
   5
-153
+152
 330
 17
 100
@@ -11555,11 +11457,45 @@ AcDbCircle
  10
 320.0
  20
-2431.000000000001
+1860.0
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+153
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+1840.0
+ 30
+0.0
+ 40
+40.096
+  1
+19
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+1840.0
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -11573,23 +11509,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+424.0
  20
-2415.000000000001
+1845.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-22
+Embudo de desagüe
   7
 ARIAL-B
- 72
-1
  11
-320.0
+424.0
  21
-2415.000000000001
+1845.0
  31
 0.0
 100
@@ -11609,19 +11543,19 @@ AcDbText
  10
 424.0
  20
-2417.000000000001
+1776.0000000000002
  30
 0.0
  40
-32.22
+40.096
   1
-Junta VL / viga de borde
+(oculto)
   7
 ARIAL-B
  11
 424.0
  21
-2417.000000000001
+1776.0000000000002
  31
 0.0
 100
@@ -11641,19 +11575,19 @@ AcDbText
  10
 1224.0
  20
-2417.000000000001
+1845.0
  30
 0.0
  40
-32.22
+40.096
   1
-Grout cementicio sin contracción, e = 1 cm + barras de vinculación Ø12
+Embudo de PVC c/ rejilla parahojas, junto al eje de columna,
   7
 ARIAL
  11
 1224.0
  21
-2417.000000000001
+1845.0
  31
 0.0
 100
@@ -11671,21 +11605,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-2417.000000000001
+1776.0000000000002
  30
 0.0
  40
-32.22
+40.096
   1
-Solidariza la viga de borde con la VL y transmite las
+a caño de lluvia PVC Ø110 interior
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-2417.000000000001
+1776.0000000000002
  31
 0.0
 100
@@ -11703,27 +11637,27 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-2361.000000000001
+1845.0
  30
 0.0
  40
-32.22
+40.096
   1
-cargas
+Evacua el agua de lluvia colectada en la
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-2361.000000000001
+1845.0
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 159
 330
@@ -11732,24 +11666,30 @@ LWPOLYLINE
 AcDbEntity
   8
 X-TABLA
-370
-13
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-240.0
+2824.0
  20
-2332.000000000001
- 10
-3960.0
- 20
-2332.000000000001
+1776.0000000000002
+ 30
+0.0
+ 40
+40.096
+  1
+canaleta
+  7
+ARIAL
+ 11
+2824.0
+ 21
+1776.0000000000002
+ 31
+0.0
+100
+AcDbText
   0
-CIRCLE
+LWPOLYLINE
   5
 15A
 330
@@ -11759,222 +11699,6 @@ AcDbEntity
   8
 X-TABLA
 370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-2289.000000000001
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-15B
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-2273.0000000000014
- 30
-0.0
- 40
-31.504000000000005
-  1
-23
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-2273.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15C
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-2275.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Bulón pasante (fija panel)
-  7
-ARIAL-B
- 11
-424.0
- 21
-2275.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15D
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2275.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Bulón M20 acero galvanizado + arandela + tuerca; atraviesa panel y ala de
-  7
-ARIAL
- 11
-1224.0
- 21
-2275.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15E
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-2219.000000000001
- 30
-0.0
- 40
-32.22
-  1
-la VL
-  7
-ARIAL
- 11
-1224.0
- 21
-2219.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15F
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2275.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Fija el panel a la estructura y toma la presión y succión
-  7
-ARIAL
- 11
-2784.0
- 21
-2275.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-160
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2219.000000000001
- 30
-0.0
- 40
-32.22
-  1
-del viento
-  7
-ARIAL
- 11
-2784.0
- 21
-2219.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-161
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
 13
 100
 AcDbPolyline
@@ -11985,15 +11709,15 @@ AcDbPolyline
  10
 240.0
  20
-2190.000000000001
+1741.0000000000002
  10
 3960.0
  20
-2190.000000000001
+1741.0000000000002
   0
 HATCH
   5
-162
+15B
 330
 17
 100
@@ -12035,19 +11759,19 @@ SOLID
  10
 240.0
  20
-2190.000000000001
+1741.0000000000002
  10
 3960.0
  20
-2190.000000000001
+1741.0000000000002
  10
 3960.0
  20
-2048.0000000000014
+1571.0000000000002
  10
 240.0
  20
-2048.0000000000014
+1571.0000000000002
  97
 0
  75
@@ -12056,6 +11780,216 @@ SOLID
 1
  98
 0
+  0
+CIRCLE
+  5
+15C
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+18
+100
+AcDbCircle
+ 10
+320.0
+ 20
+1690.0
+ 30
+0.0
+ 40
+43.0
+  0
+TEXT
+  5
+15D
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+1670.0
+ 30
+0.0
+ 40
+40.096
+  1
+20
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+1670.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+15E
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+424.0
+ 20
+1675.0
+ 30
+0.0
+ 40
+40.096
+  1
+Apoyo del ala del TT
+  7
+ARIAL-B
+ 11
+424.0
+ 21
+1675.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+15F
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+1224.0
+ 20
+1675.0
+ 30
+0.0
+ 40
+40.096
+  1
+Banda de neopreno 10 mm + grout de relleno de la junta
+  7
+ARIAL
+ 11
+1224.0
+ 21
+1675.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+160
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+1675.0
+ 30
+0.0
+ 40
+40.096
+  1
+Apoyo del ala del panel TT sobre la viga de
+  7
+ARIAL
+ 11
+2824.0
+ 21
+1675.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+161
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+1606.0000000000002
+ 30
+0.0
+ 40
+40.096
+  1
+borde; cierra la junta
+  7
+ARIAL
+ 11
+2824.0
+ 21
+1606.0000000000002
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+162
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+240.0
+ 20
+1571.0000000000002
+ 10
+3960.0
+ 20
+1571.0000000000002
   0
 CIRCLE
   5
@@ -12073,11 +12007,11 @@ AcDbCircle
  10
 320.0
  20
-2147.000000000001
+1520.0
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -12093,13 +12027,13 @@ AcDbText
  10
 320.0
  20
-2131.0000000000014
+1500.0
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-24
+21
   7
 ARIAL-B
  72
@@ -12107,7 +12041,7 @@ ARIAL-B
  11
 320.0
  21
-2131.0000000000014
+1500.0
  31
 0.0
 100
@@ -12127,19 +12061,19 @@ AcDbText
  10
 424.0
  20
-2133.0000000000014
+1505.0
  30
 0.0
  40
-32.22
+40.096
   1
-Losa premoldeada TT
+Viga de borde
   7
 ARIAL-B
  11
 424.0
  21
-2133.0000000000014
+1505.0
  31
 0.0
 100
@@ -12159,19 +12093,19 @@ AcDbText
  10
 1224.0
  20
-2133.0000000000014
+1505.0
  30
 0.0
  40
-32.22
+40.096
   1
-Panel doble T pretensado, h = 65 cm (ala 5 cm + nervios), H-40, cordones
+Hormigón premoldeado H-30 apoyado y vinculado sobre la VL
   7
 ARIAL
  11
 1224.0
  21
-2133.0000000000014
+1505.0
  31
 0.0
 100
@@ -12189,85 +12123,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-2077.000000000001
+1505.0
  30
 0.0
  40
-32.22
+40.096
   1
-de pretensado
+Recibe el ala del TT y la canaleta in situ
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-2077.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-168
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2133.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Losa portante de grandes luces; lleva las cargas a las
-  7
-ARIAL
- 11
-2784.0
- 21
-2133.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-169
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-2077.000000000001
- 30
-0.0
- 40
-32.22
-  1
-vigas VP y de borde
-  7
-ARIAL
- 11
-2784.0
- 21
-2077.000000000001
+1505.0
  31
 0.0
 100
@@ -12275,7 +12145,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-16A
+168
 330
 17
 100
@@ -12293,15 +12163,81 @@ AcDbPolyline
  10
 240.0
  20
-2048.0000000000014
+1470.0
  10
 3960.0
  20
-2048.0000000000014
+1470.0
+  0
+HATCH
+  5
+169
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+420
+15921906
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+240.0
+ 20
+1470.0
+ 10
+3960.0
+ 20
+1470.0
+ 10
+3960.0
+ 20
+1300.0
+ 10
+240.0
+ 20
+1300.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
 CIRCLE
   5
-16B
+16A
 330
 17
 100
@@ -12315,11 +12251,45 @@ AcDbCircle
  10
 320.0
  20
-2005.0000000000011
+1418.9999999999998
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+16B
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+1398.9999999999998
+ 30
+0.0
+ 40
+40.096
+  1
+22
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+1398.9999999999998
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -12333,23 +12303,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+424.0
  20
-1989.0000000000014
+1403.9999999999998
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-25
+Junta VL / viga de borde
   7
 ARIAL-B
- 72
-1
  11
-320.0
+424.0
  21
-1989.0000000000014
+1403.9999999999998
  31
 0.0
 100
@@ -12367,21 +12335,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+1224.0
  20
-1991.0000000000014
+1403.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Viga VP principal (en vista)
+Grout cementicio sin contracción, e = 1 cm + barras de
   7
-ARIAL-B
+ARIAL
  11
-424.0
+1224.0
  21
-1991.0000000000014
+1403.9999999999998
  31
 0.0
 100
@@ -12401,19 +12369,19 @@ AcDbText
  10
 1224.0
  20
-1991.0000000000014
+1335.0
  30
 0.0
  40
-32.22
+40.096
   1
-Viga premoldeada pretensada T invertida, H-40
+vinculación Ø12
   7
 ARIAL
  11
 1224.0
  21
-1991.0000000000014
+1335.0
  31
 0.0
 100
@@ -12431,21 +12399,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-1991.0000000000014
+1403.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Viga interior perpendicular a la fachada; recibe los
+Solidariza la viga de borde con la VL y
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-1991.0000000000014
+1403.9999999999998
  31
 0.0
 100
@@ -12463,21 +12431,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-1935.0000000000011
+1335.0
  30
 0.0
  40
-32.22
+40.096
   1
-nervios del TT en su talón
+transmite las cargas
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-1935.0000000000011
+1335.0
  31
 0.0
 100
@@ -12503,81 +12471,15 @@ AcDbPolyline
  10
 240.0
  20
-1906.0000000000014
+1300.0
  10
 3960.0
  20
-1906.0000000000014
-  0
-HATCH
-  5
-172
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-1906.0000000000014
- 10
-3960.0
- 20
-1906.0000000000014
- 10
-3960.0
- 20
-1764.0000000000014
- 10
-240.0
- 20
-1764.0000000000014
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+1300.0
   0
 CIRCLE
   5
-173
+172
 330
 17
 100
@@ -12591,11 +12493,45 @@ AcDbCircle
  10
 320.0
  20
-1863.0000000000014
+1248.9999999999998
  30
 0.0
  40
-35.0
+43.0
+  0
+TEXT
+  5
+173
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+320.0
+ 20
+1228.9999999999998
+ 30
+0.0
+ 40
+40.096
+  1
+23
+  7
+ARIAL-B
+ 72
+1
+ 11
+320.0
+ 21
+1228.9999999999998
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -12609,23 +12545,21 @@ X-TABLA
 100
 AcDbText
  10
-320.0
+424.0
  20
-1847.0000000000016
+1233.9999999999998
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-26
+Bulón pasante (fija panel)
   7
 ARIAL-B
- 72
-1
  11
-320.0
+424.0
  21
-1847.0000000000016
+1233.9999999999998
  31
 0.0
 100
@@ -12643,21 +12577,21 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+1224.0
  20
-1849.0000000000014
+1233.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Viga VL perimetral
+Bulón M20 acero galvanizado + arandela + tuerca; atraviesa
   7
-ARIAL-B
+ARIAL
  11
-424.0
+1224.0
  21
-1849.0000000000014
+1233.9999999999998
  31
 0.0
 100
@@ -12677,19 +12611,19 @@ AcDbText
  10
 1224.0
  20
-1849.0000000000014
+1165.0
  30
 0.0
  40
-32.22
+40.096
   1
-Viga premoldeada pretensada doble T 40 x 70 cm, H-40, cordones Ø12,7
+panel y ala de la VL
   7
 ARIAL
  11
 1224.0
  21
-1849.0000000000014
+1165.0
  31
 0.0
 100
@@ -12707,21 +12641,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+2824.0
  20
-1793.0000000000014
+1233.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-mm
+Fija el panel a la estructura y toma la
   7
 ARIAL
  11
-1224.0
+2824.0
  21
-1793.0000000000014
+1233.9999999999998
  31
 0.0
 100
@@ -12739,53 +12673,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-1849.0000000000014
+1165.0
  30
 0.0
  40
-32.22
+40.096
   1
-Viga portante de fachada: lleva a las columnas las cargas
+presión y succión del viento
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-1849.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-179
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1793.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-de borde y del cerramiento
-  7
-ARIAL
- 11
-2784.0
- 21
-1793.0000000000014
+1165.0
  31
 0.0
 100
@@ -12793,7 +12695,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-17A
+179
 330
 17
 100
@@ -12811,11 +12713,77 @@ AcDbPolyline
  10
 240.0
  20
-1764.0000000000014
+1130.0
  10
 3960.0
  20
-1764.0000000000014
+1130.0
+  0
+HATCH
+  5
+17A
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+420
+15921906
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+240.0
+ 20
+1130.0
+ 10
+3960.0
+ 20
+1130.0
+ 10
+3960.0
+ 20
+960.0
+ 10
+240.0
+ 20
+960.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
 CIRCLE
   5
@@ -12833,11 +12801,11 @@ AcDbCircle
  10
 320.0
  20
-1721.0000000000014
+1078.9999999999998
  30
 0.0
  40
-35.0
+43.0
   0
 TEXT
   5
@@ -12853,13 +12821,13 @@ AcDbText
  10
 320.0
  20
-1705.0000000000018
+1058.9999999999998
  30
 0.0
  40
-31.504000000000005
+40.096
   1
-27
+24
   7
 ARIAL-B
  72
@@ -12867,7 +12835,7 @@ ARIAL-B
  11
 320.0
  21
-1705.0000000000018
+1058.9999999999998
  31
 0.0
 100
@@ -12887,19 +12855,19 @@ AcDbText
  10
 424.0
  20
-1707.0000000000016
+1063.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Apoyo nervio TT / VP
+Losa premoldeada TT
   7
 ARIAL-B
  11
 424.0
  21
-1707.0000000000016
+1063.9999999999998
  31
 0.0
 100
@@ -12919,19 +12887,19 @@ AcDbText
  10
 1224.0
  20
-1707.0000000000016
+1063.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Placa de neopreno 10 mm sobre el talón de la VP
+Panel doble T pretensado, h = 65 cm (ala 5 cm + nervios),
   7
 ARIAL
  11
 1224.0
  21
-1707.0000000000016
+1063.9999999999998
  31
 0.0
 100
@@ -12949,21 +12917,85 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-1707.0000000000016
+995.0
  30
 0.0
  40
-32.22
+40.096
   1
-Apoyo de los nervios del TT; permite giros y dilataciones
+H-40, cordones de pretensado
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-1707.0000000000016
+995.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+180
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+1063.9999999999998
+ 30
+0.0
+ 40
+40.096
+  1
+Losa portante de grandes luces; lleva las
+  7
+ARIAL
+ 11
+2824.0
+ 21
+1063.9999999999998
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+181
+330
+17
+100
+AcDbEntity
+  8
+X-TABLA
+100
+AcDbText
+ 10
+2824.0
+ 20
+995.0
+ 30
+0.0
+ 40
+40.096
+  1
+cargas a las vigas VP y de borde
+  7
+ARIAL
+ 11
+2824.0
+ 21
+995.0
  31
 0.0
 100
@@ -12971,7 +13003,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-180
+182
 330
 17
 100
@@ -12989,81 +13021,15 @@ AcDbPolyline
  10
 240.0
  20
-1678.0000000000014
+960.0
  10
 3960.0
  20
-1678.0000000000014
-  0
-HATCH
-  5
-181
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-1678.0000000000014
- 10
-3960.0
- 20
-1678.0000000000014
- 10
-3960.0
- 20
-1536.0000000000014
- 10
-240.0
- 20
-1536.0000000000014
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+960.0
   0
 CIRCLE
   5
-182
+183
 330
 17
 100
@@ -13077,45 +13043,11 @@ AcDbCircle
  10
 320.0
  20
-1635.0000000000011
+908.9999999999998
  30
 0.0
  40
-35.0
-  0
-TEXT
-  5
-183
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-1619.0000000000014
- 30
-0.0
- 40
-31.504000000000005
-  1
-28
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1619.0000000000014
- 31
-0.0
-100
-AcDbText
+43.0
   0
 TEXT
   5
@@ -13129,21 +13061,23 @@ X-TABLA
 100
 AcDbText
  10
-424.0
+320.0
  20
-1621.0000000000014
+888.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Neopreno + perno VL / ménsula
+25
   7
 ARIAL-B
+ 72
+1
  11
-424.0
+320.0
  21
-1621.0000000000014
+888.9999999999998
  31
 0.0
 100
@@ -13161,21 +13095,21 @@ X-TABLA
 100
 AcDbText
  10
-1224.0
+424.0
  20
-1621.0000000000014
+893.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Placa de neopreno 10 mm + perno Ø20 en vaina Ø40 c/ grout
+Viga VP principal (en vista)
   7
-ARIAL
+ARIAL-B
  11
-1224.0
+424.0
  21
-1621.0000000000014
+893.9999999999998
  31
 0.0
 100
@@ -13193,21 +13127,21 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+1224.0
  20
-1621.0000000000014
+893.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-Apoyo articulado de la VL; el perno impide su
+Viga premoldeada pretensada T invertida, H-40
   7
 ARIAL
  11
-2784.0
+1224.0
  21
-1621.0000000000014
+893.9999999999998
  31
 0.0
 100
@@ -13225,27 +13159,27 @@ X-TABLA
 100
 AcDbText
  10
-2784.0
+2824.0
  20
-1565.0000000000011
+893.9999999999998
  30
 0.0
  40
-32.22
+40.096
   1
-desplazamiento y vuelco
+Viga interior perpendicular a la fachada;
   7
 ARIAL
  11
-2784.0
+2824.0
  21
-1565.0000000000011
+893.9999999999998
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 188
 330
@@ -13254,24 +13188,30 @@ LWPOLYLINE
 AcDbEntity
   8
 X-TABLA
-370
-13
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-240.0
+2824.0
  20
-1536.0000000000014
- 10
-3960.0
- 20
-1536.0000000000014
+825.0
+ 30
+0.0
+ 40
+40.096
+  1
+recibe los nervios del TT en su talón
+  7
+ARIAL
+ 11
+2824.0
+ 21
+825.0
+ 31
+0.0
+100
+AcDbText
   0
-CIRCLE
+LWPOLYLINE
   5
 189
 330
@@ -13281,19 +13221,23 @@ AcDbEntity
   8
 X-TABLA
 370
-18
+13
 100
-AcDbCircle
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-320.0
+240.0
  20
-1493.0000000000014
- 30
-0.0
- 40
-35.0
+790.0
+ 10
+3960.0
+ 20
+790.0
   0
-TEXT
+LWPOLYLINE
   5
 18A
 330
@@ -13302,32 +13246,24 @@ TEXT
 AcDbEntity
   8
 X-TABLA
+370
+13
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-320.0
+400.0
  20
-1477.0000000000016
- 30
-0.0
- 40
-31.504000000000005
-  1
-29
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1477.0000000000016
- 31
-0.0
-100
-AcDbText
+5160.0
+ 10
+400.0
+ 20
+790.0
   0
-TEXT
+LWPOLYLINE
   5
 18B
 330
@@ -13336,30 +13272,24 @@ TEXT
 AcDbEntity
   8
 X-TABLA
+370
+13
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-424.0
+1200.0
  20
-1479.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Velas de cuelgue
-  7
-ARIAL-B
- 11
-424.0
- 21
-1479.0000000000014
- 31
-0.0
-100
-AcDbText
+5160.0
+ 10
+1200.0
+ 20
+790.0
   0
-TEXT
+LWPOLYLINE
   5
 18C
 330
@@ -13368,30 +13298,24 @@ TEXT
 AcDbEntity
   8
 X-TABLA
+370
+13
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-1224.0
+2800.0
  20
-1479.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Perfil / varilla galvanizada + gancho fijado a los nervios del TT
-  7
-ARIAL
- 11
-1224.0
- 21
-1479.0000000000014
- 31
-0.0
-100
-AcDbText
+5160.0
+ 10
+2800.0
+ 20
+790.0
   0
-TEXT
+LWPOLYLINE
   5
 18D
 330
@@ -13400,28 +13324,30 @@ TEXT
 AcDbEntity
   8
 X-TABLA
+370
+30
 100
-AcDbText
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-2784.0
+240.0
  20
-1479.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Cuelgan la estructura del cielorraso de la losa
-  7
-ARIAL
- 11
-2784.0
- 21
-1479.0000000000014
- 31
-0.0
-100
-AcDbText
+5160.0
+ 10
+3960.0
+ 20
+5160.0
+ 10
+3960.0
+ 20
+790.0
+ 10
+240.0
+ 20
+790.0
   0
 LWPOLYLINE
   5
@@ -13431,25 +13357,33 @@ LWPOLYLINE
 100
 AcDbEntity
   8
-X-TABLA
+X-MARCO
 370
-13
+30
 100
 AcDbPolyline
  90
-2
+4
  70
-0
+1
  10
-240.0
+6.0
  20
-1450.0000000000011
+5934.0
  10
-3960.0
+4194.0
  20
-1450.0000000000011
+5934.0
+ 10
+4194.0
+ 20
+6.000000000000227
+ 10
+6.0
+ 20
+6.000000000000227
   0
-HATCH
+LWPOLYLINE
   5
 18F
 330
@@ -13457,65 +13391,33 @@ HATCH
 100
 AcDbEntity
   8
-X-TABLA
-420
-15921906
+X-MARCO
+370
+50
 100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
+AcDbPolyline
+ 90
+4
  70
 1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
  10
-240.0
+200.0
  20
-1450.0000000000011
+5740.0
  10
-3960.0
+4000.0
  20
-1450.0000000000011
+5740.0
  10
-3960.0
+4000.0
  20
-1364.000000000001
+200.0
  10
-240.0
+200.0
  20
-1364.000000000001
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+200.0
   0
-CIRCLE
+LWPOLYLINE
   5
 190
 330
@@ -13523,21 +13425,33 @@ CIRCLE
 100
 AcDbEntity
   8
-X-TABLA
+X-ROTULO
 370
-18
+50
 100
-AcDbCircle
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-320.0
+200.0
  20
-1407.000000000001
- 30
-0.0
- 40
-35.0
+580.0
+ 10
+4000.0
+ 20
+580.0
+ 10
+4000.0
+ 20
+200.0
+ 10
+200.0
+ 20
+200.0
   0
-TEXT
+LWPOLYLINE
   5
 191
 330
@@ -13545,33 +13459,25 @@ TEXT
 100
 AcDbEntity
   8
-X-TABLA
+X-ROTULO
+370
+25
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-320.0
+1240.0
  20
-1391.0000000000014
- 30
-0.0
- 40
-31.504000000000005
-  1
-30
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1391.0000000000014
- 31
-0.0
-100
-AcDbText
+580.0
+ 10
+1240.0
+ 20
+200.0
   0
-TEXT
+LWPOLYLINE
   5
 192
 330
@@ -13579,31 +13485,25 @@ TEXT
 100
 AcDbEntity
   8
-X-TABLA
+X-ROTULO
+370
+25
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-424.0
+2400.0
  20
-1393.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Apoyo de la VP (en vista)
-  7
-ARIAL-B
- 11
-424.0
- 21
-1393.0000000000014
- 31
-0.0
-100
-AcDbText
+580.0
+ 10
+2400.0
+ 20
+200.0
   0
-TEXT
+LWPOLYLINE
   5
 193
 330
@@ -13611,1323 +13511,27 @@ TEXT
 100
 AcDbEntity
   8
-X-TABLA
+X-ROTULO
+370
+25
 100
-AcDbText
+AcDbPolyline
+ 90
+2
+ 70
+0
  10
-1224.0
+3360.0
  20
-1393.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Ménsula c/ diagonal + neopreno 10 mm + perno Ø20 en vaina c/ grout
-  7
-ARIAL
- 11
-1224.0
- 21
-1393.0000000000014
- 31
-0.0
-100
-AcDbText
+580.0
+ 10
+3360.0
+ 20
+200.0
   0
 TEXT
   5
 194
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1393.0000000000014
- 30
-0.0
- 40
-32.22
-  1
-Apoyo articulado de la viga VP sobre la columna
-  7
-ARIAL
- 11
-2784.0
- 21
-1393.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-195
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-1364.000000000001
- 10
-3960.0
- 20
-1364.000000000001
-  0
-CIRCLE
-  5
-196
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-1321.000000000001
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-197
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-1305.0000000000011
- 30
-0.0
- 40
-31.504000000000005
-  1
-31
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1305.0000000000011
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-198
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-1307.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Ménsula corta de columna
-  7
-ARIAL-B
- 11
-424.0
- 21
-1307.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-199
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-1307.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Hormigón armado monolítico c/ la columna; tensor superior + estribos
-  7
-ARIAL
- 11
-1224.0
- 21
-1307.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-19A
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-1251.000000000001
- 30
-0.0
- 40
-32.22
-  1
-cerrados
-  7
-ARIAL
- 11
-1224.0
- 21
-1251.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-19B
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1307.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Apoyo de la viga VL sobre la columna
-  7
-ARIAL
- 11
-2784.0
- 21
-1307.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-19C
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-1222.000000000001
- 10
-3960.0
- 20
-1222.000000000001
-  0
-HATCH
-  5
-19D
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-1222.000000000001
- 10
-3960.0
- 20
-1222.000000000001
- 10
-3960.0
- 20
-1080.0000000000011
- 10
-240.0
- 20
-1080.0000000000011
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-CIRCLE
-  5
-19E
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-1179.000000000001
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-19F
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-1163.0000000000014
- 30
-0.0
- 40
-31.504000000000005
-  1
-32
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1163.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A0
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-1165.0000000000011
- 30
-0.0
- 40
-32.22
-  1
-Columna premoldeada (en vista)
-  7
-ARIAL-B
- 11
-424.0
- 21
-1165.0000000000011
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A1
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-1165.0000000000011
- 30
-0.0
- 40
-32.22
-  1
-Hormigón armado H-30, 40 x 40 cm, c/ ménsulas incorporadas
-  7
-ARIAL
- 11
-1224.0
- 21
-1165.0000000000011
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A2
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1165.0000000000011
- 30
-0.0
- 40
-32.22
-  1
-Recibe las cargas de las vigas y las transmite a la
-  7
-ARIAL
- 11
-2784.0
- 21
-1165.0000000000011
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A3
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1109.000000000001
- 30
-0.0
- 40
-32.22
-  1
-fundación
-  7
-ARIAL
- 11
-2784.0
- 21
-1109.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-1A4
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-1080.0000000000011
- 10
-3960.0
- 20
-1080.0000000000011
-  0
-CIRCLE
-  5
-1A5
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-1037.000000000001
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-1A6
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-1021.0000000000014
- 30
-0.0
- 40
-31.504000000000005
-  1
-33
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-1021.0000000000014
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A7
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-1023.0000000000013
- 30
-0.0
- 40
-32.22
-  1
-Estructura del cielorraso
-  7
-ARIAL-B
- 11
-424.0
- 21
-1023.0000000000013
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A8
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-1023.0000000000013
- 30
-0.0
- 40
-32.22
-  1
-Montantes c/ 40 cm y soleras de chapa galvanizada 35 mm
-  7
-ARIAL
- 11
-1224.0
- 21
-1023.0000000000013
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1A9
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-1023.0000000000013
- 30
-0.0
- 40
-32.22
-  1
-Sostén de las placas de yeso
-  7
-ARIAL
- 11
-2784.0
- 21
-1023.0000000000013
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-1AA
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-994.0000000000009
- 10
-3960.0
- 20
-994.0000000000009
-  0
-HATCH
-  5
-1AB
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-420
-15921906
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-240.0
- 20
-994.0000000000009
- 10
-3960.0
- 20
-994.0000000000009
- 10
-3960.0
- 20
-852.000000000001
- 10
-240.0
- 20
-852.000000000001
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-CIRCLE
-  5
-1AC
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-18
-100
-AcDbCircle
- 10
-320.0
- 20
-951.0000000000008
- 30
-0.0
- 40
-35.0
-  0
-TEXT
-  5
-1AD
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-320.0
- 20
-935.0000000000011
- 30
-0.0
- 40
-31.504000000000005
-  1
-34
-  7
-ARIAL-B
- 72
-1
- 11
-320.0
- 21
-935.0000000000011
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1AE
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-424.0
- 20
-937.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Cielorraso suspendido
-  7
-ARIAL-B
- 11
-424.0
- 21
-937.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1AF
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-1224.0
- 20
-937.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Placa de roca de yeso 12,5 mm, juntas c/ cinta y masilla, pintura látex
-  7
-ARIAL
- 11
-1224.0
- 21
-937.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1B0
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-937.000000000001
- 30
-0.0
- 40
-32.22
-  1
-Terminación interior; oculta la estructura y las
-  7
-ARIAL
- 11
-2784.0
- 21
-937.000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-1B1
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-100
-AcDbText
- 10
-2784.0
- 20
-881.0000000000008
- 30
-0.0
- 40
-32.22
-  1
-instalaciones
-  7
-ARIAL
- 11
-2784.0
- 21
-881.0000000000008
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-1B2
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-240.0
- 20
-852.000000000001
- 10
-3960.0
- 20
-852.000000000001
-  0
-LWPOLYLINE
-  5
-1B3
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-400.0
- 20
-5240.0
- 10
-400.0
- 20
-852.000000000001
-  0
-LWPOLYLINE
-  5
-1B4
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-1200.0
- 20
-5240.0
- 10
-1200.0
- 20
-852.000000000001
-  0
-LWPOLYLINE
-  5
-1B5
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-2760.0
- 20
-5240.0
- 10
-2760.0
- 20
-852.000000000001
-  0
-LWPOLYLINE
-  5
-1B6
-330
-17
-100
-AcDbEntity
-  8
-X-TABLA
-370
-30
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-240.0
- 20
-5240.0
- 10
-3960.0
- 20
-5240.0
- 10
-3960.0
- 20
-852.000000000001
- 10
-240.0
- 20
-852.000000000001
-  0
-LWPOLYLINE
-  5
-1B7
-330
-17
-100
-AcDbEntity
-  8
-X-MARCO
-370
-30
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-6.0
- 20
-5934.0
- 10
-4194.0
- 20
-5934.0
- 10
-4194.0
- 20
-6.000000000000227
- 10
-6.0
- 20
-6.000000000000227
-  0
-LWPOLYLINE
-  5
-1B8
-330
-17
-100
-AcDbEntity
-  8
-X-MARCO
-370
-50
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-200.0
- 20
-5740.0
- 10
-4000.0
- 20
-5740.0
- 10
-4000.0
- 20
-200.0
- 10
-200.0
- 20
-200.0
-  0
-LWPOLYLINE
-  5
-1B9
-330
-17
-100
-AcDbEntity
-  8
-X-ROTULO
-370
-50
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-200.0
- 20
-580.0
- 10
-4000.0
- 20
-580.0
- 10
-4000.0
- 20
-200.0
- 10
-200.0
- 20
-200.0
-  0
-LWPOLYLINE
-  5
-1BA
-330
-17
-100
-AcDbEntity
-  8
-X-ROTULO
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-1240.0
- 20
-580.0
- 10
-1240.0
- 20
-200.0
-  0
-LWPOLYLINE
-  5
-1BB
-330
-17
-100
-AcDbEntity
-  8
-X-ROTULO
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-2400.0
- 20
-580.0
- 10
-2400.0
- 20
-200.0
-  0
-LWPOLYLINE
-  5
-1BC
-330
-17
-100
-AcDbEntity
-  8
-X-ROTULO
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-3360.0
- 20
-580.0
- 10
-3360.0
- 20
-200.0
-  0
-TEXT
-  5
-1BD
 330
 17
 100
@@ -14959,7 +13563,7 @@ AcDbText
   0
 TEXT
   5
-1BE
+195
 330
 17
 100
@@ -14971,11 +13575,11 @@ AcDbText
  10
 240.0
  20
-387.99999999999955
+400.0
  30
 0.0
  40
-32.93599999999999
+40.096
   1
 Nudo 1: planilla de referencias
   7
@@ -14983,7 +13587,7 @@ ARIAL
  11
 240.0
  21
-387.99999999999955
+400.0
  31
 0.0
 100
@@ -14991,7 +13595,7 @@ AcDbText
   0
 TEXT
   5
-1BF
+196
 330
 17
 100
@@ -15007,7 +13611,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 DOCENTE: Arq. Tucci y Arq. Cardozo
   7
@@ -15023,7 +13627,7 @@ AcDbText
   0
 TEXT
   5
-1C0
+197
 330
 17
 100
@@ -15039,7 +13643,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 ALUMNA: Candelaria Vitale
   7
@@ -15055,7 +13659,7 @@ AcDbText
   0
 TEXT
   5
-1C1
+198
 330
 17
 100
@@ -15071,7 +13675,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 GRUPO: 13
   7
@@ -15087,7 +13691,7 @@ AcDbText
   0
 TEXT
   5
-1C2
+199
 330
 17
 100
@@ -15103,7 +13707,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 CONSTRUCCIONES II · UNM
   7
@@ -15119,7 +13723,7 @@ AcDbText
   0
 TEXT
   5
-1C3
+19A
 330
 17
 100
@@ -15135,7 +13739,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 CÁTEDRA: ARQ. TUCCI
   7
@@ -15151,7 +13755,7 @@ AcDbText
   0
 TEXT
   5
-1C4
+19B
 330
 17
 100
@@ -15167,7 +13771,7 @@ AcDbText
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 FECHA: 22/10/2026
   7
@@ -15183,7 +13787,7 @@ AcDbText
   0
 TEXT
   5
-1C5
+19C
 330
 17
 100
@@ -15199,7 +13803,7 @@ AcDbText
  30
 0.0
  40
-31.504000000000005
+40.096
   1
 LÁMINA
   7
@@ -15215,7 +13819,7 @@ AcDbText
   0
 TEXT
   5
-1C6
+19D
 330
 17
 100
@@ -15233,7 +13837,7 @@ AcDbText
  40
 60.144000000000005
   1
-03/13
+03/17
   7
 ARIAL-B
  72
@@ -15249,7 +13853,7 @@ AcDbText
   0
 TEXT
   5
-1C7
+19E
 330
 17
 100
@@ -15261,11 +13865,11 @@ AcDbText
  10
 3400.0
  20
-270.0
+260.0
  30
 0.0
  40
-34.367999999999995
+40.096
   1
 SIN ESCALA
   7
@@ -15273,7 +13877,7 @@ ARIAL-B
  11
 3400.0
  21
-270.0
+260.0
  31
 0.0
 100
@@ -15281,9 +13885,9 @@ AcDbText
   0
 VIEWPORT
   5
-1CC
+1A3
 330
-1C8
+19F
 100
 AcDbEntity
  67
@@ -15385,9 +13989,9 @@ AcDbViewport
   0
 VIEWPORT
   5
-1CD
+1A4
 330
-1C8
+19F
 100
 AcDbEntity
  67
@@ -15587,7 +14191,7 @@ Model
   3
 A4 03
 350
-1CB
+1A2
   0
 DICTIONARY
   5
@@ -16453,7 +15057,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-1D1
+1A8
   0
 DICTIONARYVAR
   5
@@ -16465,7 +15069,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T12:59:28.761095+00:00
+1.4.5 @ 2026-10-22T22:52:44.897880+00:00
   0
 VISUALSTYLE
   5
@@ -23019,7 +21623,7 @@ strokes_ogs.tif
   0
 LAYOUT
   5
-1CB
+1A2
 330
 D
 100
@@ -23141,13 +21745,13 @@ A4 03
  76
 1
 330
-1C8
+19F
 331
-1CC
+1A3
   0
 DICTIONARYVAR
   5
-1D1
+1A8
 330
 2D
 100
@@ -23155,7 +21759,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T12:59:28.774216+00:00
+1.4.5 @ 2026-10-22T22:52:44.909752+00:00
   0
 ENDSEC
   0

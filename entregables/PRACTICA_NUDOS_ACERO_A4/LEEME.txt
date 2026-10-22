@@ -1,0 +1,34 @@
+PRÁCTICA EN CLASE · NUDOS - ESTRUCTURA DE ACERO (Construcciones II - UNM) · 19 láminas A4 verticales
+===================================================================================================
+Como no había corte integral en acero, se diseñó el sistema completo y se dibujó primero el corte integral
+(opaco y vidriado, esc. 1:50); los 6 nudos 1:20 son ventanas de esos cortes. Altura mínima de letra impresa: 2,0 mm.
+
+SISTEMA (corregido respecto del corte de referencia)
+- Columnas HEB 240 (no IPN), alas paralelas a la fachada; antióxido + pintura intumescente F60.
+- Vigas principales IPE 400 c/ 2,50 m: placa extrema 20 mm + 6 bulones M20 8.8 al ala de la columna (nudo rígido).
+- Vigas de borde IPE 300 sobre la fachada: doble ángulo L 90x90x9 + M16 al alma de la columna.
+- Losa colaborante: chapa trapezoidal galv. h 75 e 0,9 + H-25 (e = 13 cm), malla Q188, conectores Nelson Ø19 c/30, frentín.
+- Base: placa 450x450x25 c/ cartelas, 4 pernos de anclaje Ø24 c/ tuerca niveladora, grout 30 mm, cuello 60x60 + zapata
+  1,80x1,80x0,45 de H°A in situ, dado de H° de protección hasta el contrapiso; viga de fundación para el arranque del cerramiento.
+- Opaco: panel sándwich metálico PIR 100 vertical, atornillado a correas C 160x60x20x2,5 galv. fijadas c/ clips a las columnas
+  (tensores Ø10 a media luz); revestimiento interior de yeso; barrera cortafuego en el borde de losa; parapeto c/ montantes UPN 160.
+- Vidriado: muro cortina stick (montante 50x150, DVH 6+12+3+3, spandrel c/ bandeja de lana), colgado de cada losa c/ grapa
+  regulable s/ placa embebida; junta de dilatación 20 mm c/ manguito; guía deslizante en PB; barrera cortafuego.
+
+LÁMINAS
+  01      Carátula, consigna, índice, ubicación de nudos (1:100)
+  02      Corte integral · opaco (1:50)                03  Corte integral · vidriado (1:50)
+  04      Nudo 1 · Cubierta · opaco (1:20)             05–06  planilla de referencias
+  07      Nudo 2 · Cubierta · vidriado (1:20)          08–09  planilla
+  10      Nudo 3 · Entrepiso · opaco (1:20)            11     planilla
+  12      Nudo 4 · Entrepiso · vidriado (1:20)         13     planilla
+  14      Nudo 5 · Piso + fundación · opaco (1:20)     15–16  planilla
+  17      Nudo 6 · Piso + fundación · vidriado (1:20)  18–19  planilla
+
+ARCHIVOS
+- PRACTICA_NUDOS_ACERO_A4_completa.pdf: imprimir A4 al 100 % (tamaño real). Control: escala gráfica 0–1,00 m = 50 mm.
+- DWG_AutoCAD/ (AutoCAD 2018), 1 por lámina. Nudos: Modelo = nudo en verdadera magnitud (1 u = 1 mm), lámina dibujada x20;
+  presentación "A4 nn" con ventana fijada a 1:20 -> plotear la presentación a 1:1 en A4.
+  En las láminas 02–03 (corte integral 1:50) el corte está dibujado a 0,4 de su tamaño dentro de la lámina x20, así la misma
+  presentación a 1:1 sale a 1:50.  Capas por material: A-ACERO-CORTADO, A-ACERO-VISTA, A-AISLACION-PIR, A-CHAPA-GALVANIZADA...
+- DXF_alternativo/, PDF_por_lamina/, vistas_previas/.
