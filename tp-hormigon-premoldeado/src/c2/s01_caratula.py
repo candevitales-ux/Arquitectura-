@@ -85,10 +85,13 @@ def axonometria(num, total):
          ("E11", (2 * LUZ_X - 3000, -420, -300), (160, 178))]
     for lab, p3, at in R:
         sh.callout(P(*p3), at, lab, r=3.0)
-    y = 188
-    sh.text(12, y, "REFERENCIAS · ELEMENTOS DEL SISTEMA", TT, bold=True); y += 7
-    for c, t in ELEM:
-        sh.ball(17, y - 0.9, c, r=2.8); sh.text(23, y, t, TB); y += 6.2
+    y = 186
+    sh.text(12, y, "REFERENCIAS · ELEMENTOS DEL SISTEMA", TT, bold=True); y += 7.5
+    for k, (c, t) in enumerate(ELEM):
+        col, row = divmod(k, 6)
+        xx, yy = 12 + col * 96, y + row * 7.6
+        sh.ball(xx + 3.5, yy - 0.9, c, r=3.2)
+        sh.para(xx + 9, yy, 85, t, TB, 1.15)
     return sh
 
 

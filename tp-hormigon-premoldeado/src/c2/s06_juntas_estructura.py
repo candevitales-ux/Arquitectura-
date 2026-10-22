@@ -18,12 +18,12 @@ def cell(sh, i, j, lab, title, sub):
 
 
 def legend(sh, x0, y0, items):
-    y = y0 + 85
+    y = y0 + 84
     for k, t in enumerate(items):
-        sh.ball(x0 + 3.6, y - 0.8, str(k + 1), r=1.9)
-        for ln in wrap(t, CW - 9, TS):
-            sh.text(x0 + 7, y, ln, TS); y += TS * 1.2
-        y += 0.9
+        sh.ball(x0 + 3.6, y - 0.9, str(k + 1), r=2.4)
+        for ln in wrap(t, CW - 10, TS):
+            sh.text(x0 + 7.5, y, ln, TS); y += TS * 1.18
+        y += 1.75
 
 
 def refs(sh, v, box, pts):

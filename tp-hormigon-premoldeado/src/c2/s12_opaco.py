@@ -20,11 +20,11 @@ def croquis(num, total):
             for xb in (500, 2000): v.circle(x0 + xb, z, 60, fill="#777", sw=0.08)
     v.rect(-200, -500, 5240, -50, fill=geo.C_VP, sw=0.15, dash="1 0.4")
     for z, t in ((0, "±0,00"), (4500, "+4,50"), (9090, "+9,09")):
-        v.line(-400, z, 5600, z, sw=0.12, dash="1.5 0.5", stroke="#666"); sh.level(*v.P(5800, z), t)
+        v.line(-400, z, 5600, z, sw=0.12, dash="1.5 0.5", stroke="#666"); sh.level(*v.P(6100, z), t)
     ground(sh, v.P(-600, 0)[0], v.P(5600, 0)[0], v.P(0, -150)[1])
     v.dim((0, 9440), (2500, 9440), 3.0, "2,50")
     v.dim((0, -40), (0, 9440), 4.0, "9,48")
-    for lab, tgt, at in (("1", (1250, 6000), (92, 76)), ("2", (2000, 8640), (92, 54)), ("3", (2510, 2000), (92, 112)), ("4", (2500, -275), (92, 136))):
+    for lab, tgt, at in (("1", (1250, 6000), (92, 76)), ("2", (2000, 8640), (92, 54)), ("3", (2510, 2000), (92, 112)), ("4", (2500, -275), (92, 146))):
         sh.callout(v.P(*tgt), at, lab)
     legend(sh, 12, 154, ["1 Panel sándwich 2,50 x 9,48 x 0,20 m (≈ 8,3 t)", "2 Fija panel: bulón M20 (rehundido tapado)", "3 Junta vertical 20 mm (J15)",
                          "4 Viga portapanel E11 (bajo el nivel de piso)"], w=92)
@@ -44,11 +44,11 @@ def croquis(num, total):
     sh.note(c.P(130, -275), (150, 132), "viga portapanel (J14)")
     sh.note(c.P(3000, 4415), (150, 72), "entrepiso (VL + L + TT)")
     # sección horizontal 1:20
-    sh.title_drawing(12, 184, "SECCIÓN HORIZONTAL DEL PANEL", "esc. 1:25 · zona de anclaje maciza y junta entre paneles", TT)
+    sh.title_drawing(12, 184, "SECCIÓN HORIZONTAL DEL PANEL", "esc. 1:20 · zona de anclaje maciza y junta entre paneles (se muestra 1 panel y la junta)", TT)
     box = (12, 196, 198, 236)
-    p = fitview(sh, (30, 196, 180, 236), (-400, 2520 + 400, -20, 260), 25)
+    p = fitview(sh, (26, 196, 184, 236), (-100, 2520 + 300, -20, 260), 20)
     for x0 in (-700, 0, 2520):
-        a, b = max(x0, -400), min(x0 + 2500, 2920)
+        a, b = max(x0, -100), min(x0 + 2500, 2820)
         p.rect(a, 0, b, 60, mat="HA", sw=0.25); p.rect(a, 60, b, 120, mat="eps", sw=0.1); p.rect(a, 120, b, 200, mat="HA", sw=0.25)
     for xm in (500, 2000):
         p.rect(xm - 150, 60, xm + 150, 120, mat="HA", sw=0.12)
@@ -56,10 +56,10 @@ def croquis(num, total):
     for x in range(200, 2400, 300):
         if abs(x - 500) > 200 and abs(x - 2000) > 200: p.line(x - 30, 20, x + 30, 180, sw=0.25, stroke="#2e7d32")
     for xj in (-10, 2510): p.rect(xj, 5, xj + 10, 15, mat="neo", stroke=None)
-    breakline(sh, p.P(-400, -30), p.P(-400, 230)); breakline(sh, p.P(2920, -30), p.P(2920, 230))
+    breakline(sh, p.P(-100, -30), p.P(-100, 230)); breakline(sh, p.P(2820, -30), p.P(2820, 230))
     p.dim((0, 0), (2500, 0), -5.0, "2,50")
-    p.dim((2920, 0), (2920, 60), -3.0, "6"); p.dim((2920, 60), (2920, 120), -3.0, "6"); p.dim((2920, 120), (2920, 200), -3.0, "8")
-    sh.text(*p.P(-400, -170), "EXTERIOR", TS, bold=True); sh.text(*p.P(-400, 320), "INTERIOR", TS, bold=True)
+    p.dim((2820, 0), (2820, 200), -4.0, "0,20")
+    sh.text(*p.P(1250, -170), "EXTERIOR", TS, bold=True, anchor="middle"); sh.text(*p.P(1250, 330), "INTERIOR", TS, bold=True, anchor="middle")
     autocallouts(sh, [(l, p.P(*q)) for l, q in (("a", (1250, 30)), ("b", (1150, 90)), ("c", (1250, 160)), ("d", (500, 90)), ("e", (800, 100)), ("f", (2515, 10)))],
                  (12, 196, 198, 238))
     y = 244
@@ -73,7 +73,7 @@ def croquis(num, total):
     return sh
 
 
-@page("E10 · Panel sándwich + E11 · Viga portapanel: especificación")
+@page("E10 + E11 · Especificación panel y viga portapanel")
 def especificacion(num, total):
     sh = Sheet(num, total, "E10 · E11 · especificación", escalas="viga portapanel: elevación 1:100 · sección 1:20", fname="E10_E11_Especificacion")
     heading(sh, "4º CERRAMIENTOS · E10 PANEL Y E11 VIGA PORTAPANEL", "Especificación del panel sándwich y de la viga que lo recibe en el arranque")

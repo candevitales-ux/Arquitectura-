@@ -47,8 +47,8 @@ def cortes(num, total):
             v.line(55, 4140, 690, 4140, sw=0.7); v.rect(650, 4105, 662, 4175, mat="acero", sw=0.05)
             v.rect(30, 4090, 60, 4190, mat="mort", sw=0.06)
             refs = [("1", (60, 3500), "Hoja exterior H°A° 6 cm"), ("2", (120, 3700), "EPS 6 cm (aislación continua)"),
-                    ("3", (190, 3900), "Hoja interior portante 8 cm"), ("4", (500, 4141), "Bulón pasante M20 (ojal vertical)"),
-                    ("5", (240, 4330), "Junta 2 cm lana + sellador"), ("6", (45, 4085), "Rehundido tapado c/ mortero")]
+                    ("3", (190, 3900), "Hoja interior portante 8 cm"), ("4", (500, 4160), "Bulón pasante M20 (ojal vertical)"),
+                    ("5", (240, 4330), "Junta 2 cm lana + sellador"), ("6", (45, 4050), "Rehundido tapado c/ mortero")]
         for z in (Z0, Z1): breakline(sh, v.P(-60, z), v.P(XR, z))
         breakline(sh, v.P(XR, Z0 - 30), v.P(XR, Z1 + 30))
         sh.text(*v.P(-20, Z1 + 80), "EXT.", TS, bold=True, anchor="middle"); sh.text(*v.P(750, Z1 + 80), "INT.", TS, bold=True, anchor="middle")
@@ -110,7 +110,7 @@ def cuadro(num, total):
         sh.text(x0 + k * bw, yy + 3, str(k), TS, anchor="middle", layer="TABLAS")
     sh.rect(150, y + 8, 156, y + 11, fill=C_MC, stroke=None); sh.text(158, y + 10.6, "Muro cortina 23/40", TS, bold=True)
     sh.rect(150, y + 15, 156, y + 18, fill=C_PS, stroke=None); sh.text(158, y + 17.6, "Panel sándwich 31/40", TS, bold=True)
-    spec(sh, 12, yy + 8, 186, "JUSTIFICACIÓN DE LA ELECCIÓN", [
+    spec(sh, 12, yy + 12, 186, "JUSTIFICACIÓN DE LA ELECCIÓN", [
         ("Muro cortina en la fachada principal:", "la estructura de grandes luces libera la fachada: la VL perimetral permite una piel vidriada continua que lleva luz natural "
          "hasta el fondo de la planta (15 m de luz de VP) y da imagen y visuales. Se elige STICK porque son sólo 2 niveles (el unitizado no se amortiza) "
          "y sus grapas regulables absorben las tolerancias del premoldeado."),

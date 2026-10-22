@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461336.7624537037
+2461336.949074074
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461336.7624537037
+2461336.949074074
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-10C
+111
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{E7551FDC-C794-4570-9109-206767FA959C}
+{3D2E5D85-0B68-4D70-A386-2672AAAF9696}
   9
 $VERSIONGUID
   2
-{1F91BA4E-F211-4C07-A06C-55201E35BA0C}
+{C4E9AF29-E5B8-4A1B-9AB3-8D11866B3C24}
   9
 $EXTNAMES
 290
@@ -2237,7 +2237,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-29
+32
   0
 LAYER
   5
@@ -2299,7 +2299,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-MARCO
+ESTUDIO
  70
 0
  62
@@ -2323,7 +2323,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-MARCO-RELLENO
+ESTUDIO-RELLENO
  70
 0
  62
@@ -2347,7 +2347,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-MARCO-RAYADO
+ESTUDIO-RAYADO
  70
 0
  62
@@ -2371,7 +2371,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CONTORNOS
+MARCO
  70
 0
  62
@@ -2395,7 +2395,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CONTORNOS-RELLENO
+MARCO-RELLENO
  70
 0
  62
@@ -2419,7 +2419,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CONTORNOS-RAYADO
+MARCO-RAYADO
  70
 0
  62
@@ -2443,7 +2443,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-LINEAS
+CONTORNOS
  70
 0
  62
@@ -2467,7 +2467,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-LINEAS-RELLENO
+CONTORNOS-RELLENO
  70
 0
  62
@@ -2491,7 +2491,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-LINEAS-RAYADO
+CONTORNOS-RAYADO
  70
 0
  62
@@ -2515,7 +2515,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TEXTOS
+LINEAS
  70
 0
  62
@@ -2539,7 +2539,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TEXTOS-RELLENO
+LINEAS-RELLENO
  70
 0
  62
@@ -2563,7 +2563,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TEXTOS-RAYADO
+LINEAS-RAYADO
  70
 0
  62
@@ -2587,7 +2587,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-REFERENCIAS
+TEXTOS
  70
 0
  62
@@ -2611,7 +2611,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-REFERENCIAS-RELLENO
+TEXTOS-RELLENO
  70
 0
  62
@@ -2635,7 +2635,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-REFERENCIAS-RAYADO
+TEXTOS-RAYADO
  70
 0
  62
@@ -2659,7 +2659,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-COTAS
+REFERENCIAS
  70
 0
  62
@@ -2683,7 +2683,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-COTAS-RELLENO
+REFERENCIAS-RELLENO
  70
 0
  62
@@ -2707,7 +2707,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-COTAS-RAYADO
+REFERENCIAS-RAYADO
  70
 0
  62
@@ -2731,7 +2731,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TABLAS
+COTAS
  70
 0
  62
@@ -2755,7 +2755,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TABLAS-RELLENO
+COTAS-RELLENO
  70
 0
  62
@@ -2779,7 +2779,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-TABLAS-RAYADO
+COTAS-RAYADO
  70
 0
  62
@@ -2803,7 +2803,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ISO
+TABLAS
  70
 0
  62
@@ -2827,7 +2827,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ISO-RELLENO
+TABLAS-RELLENO
  70
 0
  62
@@ -2851,7 +2851,7 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-ISO-RAYADO
+TABLAS-RAYADO
  70
 0
  62
@@ -2875,6 +2875,78 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
+ISO
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A6
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ISO-RELLENO
+ 70
+0
+ 62
+9
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A7
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+ISO-RAYADO
+ 70
+0
+ 62
+8
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+A8
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
 ARMADURAS
  70
 0
@@ -2891,7 +2963,7 @@ Continuous
   0
 LAYER
   5
-A6
+A9
 330
 1
 100
@@ -2915,7 +2987,7 @@ Continuous
   0
 LAYER
   5
-A7
+AA
 330
 1
 100
@@ -3821,7 +3893,7 @@ ACAD
   0
 APPID
   5
-109
+10E
 330
 3
 100
@@ -3835,7 +3907,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-10A
+10F
 330
 3
 100
@@ -5621,7 +5693,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-103
+108
 330
 9
 100
@@ -5631,7 +5703,7 @@ AcDbBlockTableRecord
   2
 *Paper_Space
 340
-106
+10B
  70
 0
 280
@@ -5903,9 +5975,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-104
+109
 330
-103
+108
 100
 AcDbEntity
   8
@@ -5929,9 +6001,9 @@ AcDbBlockBegin
   0
 ENDBLK
   5
-105
+10A
 330
-103
+108
 100
 AcDbEntity
   8
@@ -5947,7 +6019,7 @@ ENTITIES
   0
 TEXT
   5
-A8
+AB
 330
 17
 100
@@ -5963,7 +6035,7 @@ AcDbText
  30
 0.0
  40
-3.0787999999999998
+3.2935999999999996
   1
 4º CERRAMIENTOS · E9 MURO CORTINA · ESPECIFICACIÓN
   7
@@ -5979,7 +6051,7 @@ AcDbText
   0
 TEXT
   5
-A9
+AC
 330
 17
 100
@@ -5997,7 +6069,7 @@ AcDbText
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
 Medidas, función, especificación técnica y justificación del sistema stick
   7
@@ -6013,7 +6085,7 @@ AcDbText
   0
 TEXT
   5
-AA
+AD
 330
 17
 100
@@ -6029,7 +6101,7 @@ AcDbText
  30
 0.0
  40
-2.2912
+2.5776
   1
 ESPECIFICACIÓN TÉCNICA
   7
@@ -6045,7 +6117,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-AB
+AE
 330
 17
 100
@@ -6071,102 +6143,6 @@ AcDbPolyline
   0
 TEXT
   5
-AC
-330
-17
-100
-AcDbEntity
-  8
-TEXTOS
-100
-AcDbText
- 10
-12.0
- 20
-260.2
- 30
-0.0
- 40
-1.79
-  1
-Función:
-  7
-ARIAL-NEGRITA
- 11
-12.0
- 21
-260.2
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-AD
-330
-17
-100
-AcDbEntity
-  8
-TEXTOS
-100
-AcDbText
- 10
-25.049999999999997
- 20
-260.2
- 30
-0.0
- 40
-1.79
-  1
-cerramiento NO portante de la fachada principal: estanqueidad al agua y al aire, luz natural y visuales, sin cargar la estructura
-  7
-ARIAL
- 11
-25.049999999999997
- 21
-260.2
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-AE
-330
-17
-100
-AcDbEntity
-  8
-TEXTOS
-100
-AcDbText
- 10
-12.0
- 20
-256.95
- 30
-0.0
- 40
-1.79
-  1
-(cuelga de la VL / viga L).
-  7
-ARIAL
- 11
-12.0
- 21
-256.95
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
 AF
 330
 17
@@ -6179,19 +6155,19 @@ AcDbText
  10
 12.0
  20
-253.35
+259.7
  30
 0.0
  40
-1.79
+2.0764
   1
-Medidas:
+Función:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-253.35
+259.7
  31
 0.0
 100
@@ -6209,21 +6185,21 @@ TEXTOS
 100
 AcDbText
  10
-25.049999999999997
+25.572
  20
-253.35
+259.7
  30
 0.0
  40
-1.79
+2.0764
   1
-módulo 1,25 m; montantes 50x150 c/ 1,25 m en tramos de 1 nivel (4,68 m) con junta de dilatación de 20 mm; travesaños 50x120;
+cerramiento NO portante de la fachada principal: estanqueidad al agua y al aire, luz natural y visuales, sin cargar la
   7
 ARIAL
  11
-25.049999999999997
+25.572
  21
-253.35
+259.7
  31
 0.0
 100
@@ -6243,19 +6219,19 @@ AcDbText
  10
 12.0
  20
-250.1
+255.93
  30
 0.0
  40
-1.79
+2.0764
   1
-vidrio máx. 1,25 x 3,21 m.
+estructura (cuelga de la VL / viga L).
   7
 ARIAL
  11
 12.0
  21
-250.1
+255.93
  31
 0.0
 100
@@ -6275,19 +6251,19 @@ AcDbText
  10
 12.0
  20
-246.5
+251.81
  30
 0.0
  40
-1.79
+2.0764
   1
-Máx./mín.:
+Medidas:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-246.5
+251.81
  31
 0.0
 100
@@ -6305,21 +6281,21 @@ TEXTOS
 100
 AcDbText
  10
-27.95
+25.572
  20
-246.5
+251.81
  30
 0.0
  40
-1.79
+2.0764
   1
-luz del montante entre anclajes ≤ 4,50-5,00 m; flecha ≤ L/175 (máx. 19 mm) con el viento de cálculo (CIRSOC 102); módulos
+módulo 1,25 m; montantes 50x150 c/ 1,25 m en tramos de 1 nivel (4,68 m) con junta de dilatación de 20 mm; travesaños
   7
 ARIAL
  11
-27.95
+25.572
  21
-246.5
+251.81
  31
 0.0
 100
@@ -6339,19 +6315,19 @@ AcDbText
  10
 12.0
  20
-243.25
+248.04
  30
 0.0
  40
-1.79
+2.0764
   1
-usuales 0,90 a 1,50 m.
+50x120; vidrio máx. 1,25 x 3,21 m.
   7
 ARIAL
  11
 12.0
  21
-243.25
+248.04
  31
 0.0
 100
@@ -6371,19 +6347,19 @@ AcDbText
  10
 12.0
  20
-239.65
+243.92
  30
 0.0
  40
-1.79
+2.0764
   1
-Materiales:
+Máx./mín.:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-239.65
+243.92
  31
 0.0
 100
@@ -6401,21 +6377,21 @@ TEXTOS
 100
 AcDbText
  10
-29.4
+28.588
  20
-239.65
+243.92
  30
 0.0
  40
-1.79
+2.0764
   1
-aluminio 6063-T6 anodizado o pintado; DVH 6+12+3+3 (laminado del lado interior); spandrel templado esmaltado 6 mm + lana 50 mm;
+luz del montante entre anclajes ≤ 4,50-5,00 m; flecha ≤ L/175 (máx. 19 mm) con el viento de cálculo (CIRSOC 102);
   7
 ARIAL
  11
-29.4
+28.588
  21
-239.65
+243.92
  31
 0.0
 100
@@ -6435,19 +6411,19 @@ AcDbText
  10
 12.0
  20
-236.4
+240.14999999999998
  30
 0.0
  40
-1.79
+2.0764
   1
-EPDM y siliconas neutras.
+módulos usuales 0,90 a 1,50 m.
   7
 ARIAL
  11
 12.0
  21
-236.4
+240.14999999999998
  31
 0.0
 100
@@ -6467,19 +6443,19 @@ AcDbText
  10
 12.0
  20
-232.8
+236.02999999999997
  30
 0.0
  40
-1.79
+2.0764
   1
-Prestaciones:
+Materiales:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-232.8
+236.02999999999997
  31
 0.0
 100
@@ -6497,21 +6473,21 @@ TEXTOS
 100
 AcDbText
  10
-32.3
+30.096
  20
-232.8
+236.02999999999997
  30
 0.0
  40
-1.79
+2.0764
   1
-peso ≈ 45-50 kg/m² · K ≈ 2,8 W/m²K (≈ 1,8 con low-e) · aislación acústica ≈ 35 dB · sin resistencia al fuego: requiere
+aluminio 6063-T6 anodizado o pintado; DVH 6+12+3+3 (laminado del lado interior); spandrel templado esmaltado 6 mm +
   7
 ARIAL
  11
-32.3
+30.096
  21
-232.8
+236.02999999999997
  31
 0.0
 100
@@ -6531,19 +6507,19 @@ AcDbText
  10
 12.0
  20
-229.55
+232.26
  30
 0.0
  40
-1.79
+2.0764
   1
-barrera cortafuego en cada losa.
+lana 50 mm; EPDM y siliconas neutras.
   7
 ARIAL
  11
 12.0
  21
-229.55
+232.26
  31
 0.0
 100
@@ -6563,19 +6539,19 @@ AcDbText
  10
 12.0
  20
-225.95
+228.14
  30
 0.0
  40
-1.79
+2.0764
   1
-Anclaje:
+Prestaciones:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-225.95
+228.14
  31
 0.0
 100
@@ -6593,21 +6569,21 @@ TEXTOS
 100
 AcDbText
  10
-25.049999999999997
+33.112
  20
-225.95
+228.14
  30
 0.0
  40
-1.79
+2.0764
   1
-grapa galvanizada regulable en 3 direcciones (± 25 mm) abulonada al riel embutido en la VL: absorbe las tolerancias de la
+peso ≈ 45-50 kg/m² · K ≈ 2,8 W/m²K (≈ 1,8 con low-e) · aislación acústica ≈ 35 dB · sin resistencia al fuego:
   7
 ARIAL
  11
-25.049999999999997
+33.112
  21
-225.95
+228.14
  31
 0.0
 100
@@ -6627,19 +6603,19 @@ AcDbText
  10
 12.0
  20
-222.7
+224.37
  30
 0.0
  40
-1.79
+2.0764
   1
-estructura premoldeada (± 10-15 mm).
+requiere barrera cortafuego en cada losa.
   7
 ARIAL
  11
 12.0
  21
-222.7
+224.37
  31
 0.0
 100
@@ -6659,19 +6635,19 @@ AcDbText
  10
 12.0
  20
-219.10000000000002
+220.25
  30
 0.0
  40
-1.79
+2.0764
   1
-Montaje:
+Anclaje:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-219.10000000000002
+220.25
  31
 0.0
 100
@@ -6689,21 +6665,21 @@ TEXTOS
 100
 AcDbText
  10
-25.049999999999997
+25.572
  20
-219.10000000000002
+220.25
  30
 0.0
  40
-1.79
+2.0764
   1
-replanteo topográfico → grapas → montantes de abajo hacia arriba con manguito → travesaños → sellado de barrera → vidrios desde el
+grapa galvanizada regulable en 3 direcciones (± 25 mm) abulonada al riel embutido en la VL: absorbe las tolerancias de
   7
 ARIAL
  11
-25.049999999999997
+25.572
  21
-219.10000000000002
+220.25
  31
 0.0
 100
@@ -6723,19 +6699,19 @@ AcDbText
  10
 12.0
  20
-215.85000000000002
+216.48000000000002
  30
 0.0
  40
-1.79
+2.0764
   1
-exterior con plataforma (M6) → presores, tapas y sellos → ensayo de estanqueidad con manguera.
+la estructura premoldeada (± 10-15 mm).
   7
 ARIAL
  11
 12.0
  21
-215.85000000000002
+216.48000000000002
  31
 0.0
 100
@@ -6755,25 +6731,25 @@ AcDbText
  10
 12.0
  20
-206.25
+212.36
  30
 0.0
  40
-2.2912
+2.0764
   1
-TIPOS DE MURO CORTINA Y ELECCIÓN
+Montaje:
   7
 ARIAL-NEGRITA
  11
 12.0
  21
-206.25
+212.36
  31
 0.0
 100
 AcDbText
   0
-HATCH
+TEXT
   5
 C2
 330
@@ -6781,65 +6757,31 @@ C2
 100
 AcDbEntity
   8
-TABLAS-RELLENO
-420
-14870250
+TEXTOS
 100
-AcDbHatch
+AcDbText
  10
-0.0
+25.572
  20
-0.0
+212.36
  30
 0.0
-210
+ 40
+2.0764
+  1
+replanteo topográfico → grapas → montantes de abajo hacia arriba con manguito → travesaños → sellado de barrera →
+  7
+ARIAL
+ 11
+25.572
+ 21
+212.36
+ 31
 0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-12.0
- 20
-203.75
- 10
-48.0
- 20
-203.75
- 10
-48.0
- 20
-199.26500000000001
- 10
-12.0
- 20
-199.26500000000001
- 97
-0
- 75
-1
- 76
-1
- 98
-0
+100
+AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 C3
 330
@@ -6847,31 +6789,29 @@ C3
 100
 AcDbEntity
   8
-TABLAS
-370
-13
+TEXTOS
 100
-AcDbPolyline
- 90
-4
- 70
-1
+AcDbText
  10
 12.0
  20
-203.75
- 10
-48.0
- 20
-203.75
- 10
-48.0
- 20
-199.26500000000001
- 10
+208.59000000000003
+ 30
+0.0
+ 40
+2.0764
+  1
+vidrios desde el exterior con plataforma (M6) → presores, tapas y sellos → ensayo de estanqueidad con manguera.
+  7
+ARIAL
+ 11
 12.0
- 20
-199.26500000000001
+ 21
+208.59000000000003
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -6881,25 +6821,25 @@ C4
 100
 AcDbEntity
   8
-TABLAS
+TEXTOS
 100
 AcDbText
  10
-12.8
+12.0
  20
-201.03500000000003
+198.47000000000003
  30
 0.0
  40
-1.6467999999999998
+2.5776
   1
-Sistema
+TIPOS DE MURO CORTINA Y ELECCIÓN
   7
 ARIAL-NEGRITA
  11
-12.8
+12.0
  21
-201.03500000000003
+198.47000000000003
  31
 0.0
 100
@@ -6947,21 +6887,21 @@ SOLID
  93
 4
  10
-48.0
+12.0
  20
-203.75
- 10
-92.0
- 20
-203.75
- 10
-92.0
- 20
-199.26500000000001
+195.97000000000003
  10
 48.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+48.0
+ 20
+190.51000000000005
+ 10
+12.0
+ 20
+190.51000000000005
  97
 0
  75
@@ -6989,21 +6929,21 @@ AcDbPolyline
  70
 1
  10
-48.0
+12.0
  20
-203.75
- 10
-92.0
- 20
-203.75
- 10
-92.0
- 20
-199.26500000000001
+195.97000000000003
  10
 48.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+48.0
+ 20
+190.51000000000005
+ 10
+12.0
+ 20
+190.51000000000005
   0
 TEXT
   5
@@ -7017,21 +6957,21 @@ TABLAS
 100
 AcDbText
  10
-48.8
+12.8
  20
-201.03500000000003
+192.73000000000002
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-Armado
+Sistema
   7
 ARIAL-NEGRITA
  11
-48.8
+12.8
  21
-201.03500000000003
+192.73000000000002
  31
 0.0
 100
@@ -7079,21 +7019,21 @@ SOLID
  93
 4
  10
-92.0
+48.0
  20
-203.75
- 10
-150.0
- 20
-203.75
- 10
-150.0
- 20
-199.26500000000001
+195.97000000000003
  10
 92.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+92.0
+ 20
+190.51000000000005
+ 10
+48.0
+ 20
+190.51000000000005
  97
 0
  75
@@ -7121,21 +7061,21 @@ AcDbPolyline
  70
 1
  10
-92.0
+48.0
  20
-203.75
- 10
-150.0
- 20
-203.75
- 10
-150.0
- 20
-199.26500000000001
+195.97000000000003
  10
 92.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+92.0
+ 20
+190.51000000000005
+ 10
+48.0
+ 20
+190.51000000000005
   0
 TEXT
   5
@@ -7149,21 +7089,21 @@ TABLAS
 100
 AcDbText
  10
-92.8
+48.8
  20
-201.03500000000003
+192.73000000000002
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-Ventaja
+Armado
   7
 ARIAL-NEGRITA
  11
-92.8
+48.8
  21
-201.03500000000003
+192.73000000000002
  31
 0.0
 100
@@ -7211,21 +7151,21 @@ SOLID
  93
 4
  10
-150.0
+92.0
  20
-203.75
- 10
-198.0
- 20
-203.75
- 10
-198.0
- 20
-199.26500000000001
+195.97000000000003
  10
 150.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+150.0
+ 20
+190.51000000000005
+ 10
+92.0
+ 20
+190.51000000000005
  97
 0
  75
@@ -7253,21 +7193,21 @@ AcDbPolyline
  70
 1
  10
-150.0
+92.0
  20
-203.75
- 10
-198.0
- 20
-203.75
- 10
-198.0
- 20
-199.26500000000001
+195.97000000000003
  10
 150.0
  20
-199.26500000000001
+195.97000000000003
+ 10
+150.0
+ 20
+190.51000000000005
+ 10
+92.0
+ 20
+190.51000000000005
   0
 TEXT
   5
@@ -7281,27 +7221,27 @@ TABLAS
 100
 AcDbText
  10
-150.8
+92.8
  20
-201.03500000000003
+192.73000000000002
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-Limitación
+Ventaja
   7
 ARIAL-NEGRITA
  11
-150.8
+92.8
  21
-201.03500000000003
+192.73000000000002
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+HATCH
   5
 CE
 330
@@ -7309,33 +7249,65 @@ CE
 100
 AcDbEntity
   8
-TABLAS
-370
-13
+TABLAS-RELLENO
+420
+14870250
 100
-AcDbPolyline
- 90
-4
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
  70
 1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
  10
-12.0
+150.0
  20
-199.26500000000001
+195.97000000000003
  10
-48.0
+198.0
  20
-199.26500000000001
+195.97000000000003
  10
-48.0
+198.0
  20
-192.02
+190.51000000000005
  10
-12.0
+150.0
  20
-192.02
+190.51000000000005
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
-TEXT
+LWPOLYLINE
   5
 CF
 330
@@ -7344,30 +7316,32 @@ CF
 AcDbEntity
   8
 TABLAS
+370
+13
 100
-AcDbText
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-12.8
+150.0
  20
-196.55
- 30
-0.0
- 40
-1.6467999999999998
-  1
-STICK (elegido)
-  7
-ARIAL
- 11
-12.8
- 21
-196.55
- 31
-0.0
-100
-AcDbText
+195.97000000000003
+ 10
+198.0
+ 20
+195.97000000000003
+ 10
+198.0
+ 20
+190.51000000000005
+ 10
+150.0
+ 20
+190.51000000000005
   0
-LWPOLYLINE
+TEXT
   5
 D0
 330
@@ -7376,32 +7350,30 @@ D0
 AcDbEntity
   8
 TABLAS
-370
-13
 100
-AcDbPolyline
- 90
-4
- 70
-1
+AcDbText
  10
-48.0
+150.8
  20
-199.26500000000001
- 10
-92.0
- 20
-199.26500000000001
- 10
-92.0
- 20
-192.02
- 10
-48.0
- 20
-192.02
+192.73000000000002
+ 30
+0.0
+ 40
+2.0048
+  1
+Limitación
+  7
+ARIAL-NEGRITA
+ 11
+150.8
+ 21
+192.73000000000002
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 D1
 330
@@ -7410,24 +7382,58 @@ D1
 AcDbEntity
   8
 TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+12.0
+ 20
+190.51000000000005
+ 10
+48.0
+ 20
+190.51000000000005
+ 10
+48.0
+ 20
+178.33000000000004
+ 10
+12.0
+ 20
+178.33000000000004
+  0
+TEXT
+  5
+D2
+330
+17
+100
+AcDbEntity
+  8
+TABLAS
 100
 AcDbText
  10
-48.8
+12.8
  20
-196.55
+187.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-en obra, pieza por pieza
+STICK (elegido)
   7
 ARIAL
  11
-48.8
+12.8
  21
-196.55
+187.27000000000004
  31
 0.0
 100
@@ -7435,7 +7441,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-D2
+D3
 330
 17
 100
@@ -7451,53 +7457,21 @@ AcDbPolyline
  70
 1
  10
-92.0
+48.0
  20
-199.26500000000001
- 10
-150.0
- 20
-199.26500000000001
- 10
-150.0
- 20
-192.02
+190.51000000000005
  10
 92.0
  20
-192.02
-  0
-TEXT
-  5
-D3
-330
-17
-100
-AcDbEntity
-  8
-TABLAS
-100
-AcDbText
+190.51000000000005
  10
-92.8
+92.0
  20
-196.55
- 30
-0.0
- 40
-1.6467999999999998
-  1
-económico; absorbe tolerancias de la
-  7
-ARIAL
- 11
-92.8
- 21
-196.55
- 31
-0.0
-100
-AcDbText
+178.33000000000004
+ 10
+48.0
+ 20
+178.33000000000004
   0
 TEXT
   5
@@ -7511,21 +7485,21 @@ TABLAS
 100
 AcDbText
  10
-92.8
+48.8
  20
-193.79000000000002
+187.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-estructura premoldeada; perfiles livianos
+en obra, pieza por pieza
   7
 ARIAL
  11
-92.8
+48.8
  21
-193.79000000000002
+187.27000000000004
  31
 0.0
 100
@@ -7549,21 +7523,21 @@ AcDbPolyline
  70
 1
  10
-150.0
+92.0
  20
-199.26500000000001
- 10
-198.0
- 20
-199.26500000000001
- 10
-198.0
- 20
-192.02
+190.51000000000005
  10
 150.0
  20
-192.02
+190.51000000000005
+ 10
+150.0
+ 20
+178.33000000000004
+ 10
+92.0
+ 20
+178.33000000000004
   0
 TEXT
   5
@@ -7577,21 +7551,21 @@ TABLAS
 100
 AcDbText
  10
-150.8
+92.8
  20
-196.55
+187.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-más mano de obra en altura y sellados
+económico; absorbe tolerancias de la
   7
 ARIAL
  11
-150.8
+92.8
  21
-196.55
+187.27000000000004
  31
 0.0
 100
@@ -7609,27 +7583,27 @@ TABLAS
 100
 AcDbText
  10
-150.8
+92.8
  20
-193.79000000000002
+183.91000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-in situ
+estructura premoldeada; perfiles
   7
 ARIAL
  11
-150.8
+92.8
  21
-193.79000000000002
+183.91000000000003
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 D8
 330
@@ -7638,32 +7612,30 @@ D8
 AcDbEntity
   8
 TABLAS
-370
-13
 100
-AcDbPolyline
- 90
-4
- 70
-1
+AcDbText
  10
-12.0
+92.8
  20
-192.02
- 10
-48.0
- 20
-192.02
- 10
-48.0
- 20
-184.775
- 10
-12.0
- 20
-184.775
+180.55000000000004
+ 30
+0.0
+ 40
+2.0048
+  1
+livianos
+  7
+ARIAL
+ 11
+92.8
+ 21
+180.55000000000004
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 D9
 330
@@ -7672,38 +7644,6 @@ D9
 AcDbEntity
   8
 TABLAS
-100
-AcDbText
- 10
-12.8
- 20
-189.305
- 30
-0.0
- 40
-1.6467999999999998
-  1
-Unitizado
-  7
-ARIAL
- 11
-12.8
- 21
-189.305
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-DA
-330
-17
-100
-AcDbEntity
-  8
-TABLAS
 370
 13
 100
@@ -7713,21 +7653,53 @@ AcDbPolyline
  70
 1
  10
-48.0
+150.0
  20
-192.02
+190.51000000000005
  10
-92.0
+198.0
  20
-192.02
+190.51000000000005
  10
-92.0
+198.0
  20
-184.775
+178.33000000000004
  10
-48.0
+150.0
  20
-184.775
+178.33000000000004
+  0
+TEXT
+  5
+DA
+330
+17
+100
+AcDbEntity
+  8
+TABLAS
+100
+AcDbText
+ 10
+150.8
+ 20
+187.27000000000004
+ 30
+0.0
+ 40
+2.0048
+  1
+más mano de obra en altura y
+  7
+ARIAL
+ 11
+150.8
+ 21
+187.27000000000004
+ 31
+0.0
+100
+AcDbText
   0
 TEXT
   5
@@ -7741,21 +7713,21 @@ TABLAS
 100
 AcDbText
  10
-48.8
+150.8
  20
-189.305
+183.91000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-módulos de piso armados en taller
+sellados in situ
   7
 ARIAL
  11
-48.8
+150.8
  21
-189.305
+183.91000000000003
  31
 0.0
 100
@@ -7779,21 +7751,21 @@ AcDbPolyline
  70
 1
  10
-92.0
+12.0
  20
-192.02
+178.33000000000004
  10
-150.0
+48.0
  20
-192.02
+178.33000000000004
  10
-150.0
+48.0
  20
-184.775
+169.51000000000005
  10
-92.0
+12.0
  20
-184.775
+169.51000000000005
   0
 TEXT
   5
@@ -7807,21 +7779,21 @@ TABLAS
 100
 AcDbText
  10
-92.8
+12.8
  20
-189.305
+175.09000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-rapidez y control de calidad
+Unitizado
   7
 ARIAL
  11
-92.8
+12.8
  21
-189.305
+175.09000000000003
  31
 0.0
 100
@@ -7845,21 +7817,21 @@ AcDbPolyline
  70
 1
  10
-150.0
+48.0
  20
-192.02
+178.33000000000004
  10
-198.0
+92.0
  20
-192.02
+178.33000000000004
  10
-198.0
+92.0
  20
-184.775
+169.51000000000005
  10
-150.0
+48.0
  20
-184.775
+169.51000000000005
   0
 TEXT
   5
@@ -7873,21 +7845,21 @@ TABLAS
 100
 AcDbText
  10
-150.8
+48.8
  20
-189.305
+175.09000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-requiere grúa y mucha repetición; caro
+módulos de piso armados en
   7
 ARIAL
  11
-150.8
+48.8
  21
-189.305
+175.09000000000003
  31
 0.0
 100
@@ -7905,21 +7877,21 @@ TABLAS
 100
 AcDbText
  10
-150.8
+48.8
  20
-186.54500000000002
+171.73000000000005
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-en 2 niveles
+taller
   7
 ARIAL
  11
-150.8
+48.8
  21
-186.54500000000002
+171.73000000000005
  31
 0.0
 100
@@ -7943,21 +7915,21 @@ AcDbPolyline
  70
 1
  10
-12.0
+92.0
  20
-184.775
+178.33000000000004
  10
-48.0
+150.0
  20
-184.775
+178.33000000000004
  10
-48.0
+150.0
  20
-177.53
+169.51000000000005
  10
-12.0
+92.0
  20
-177.53
+169.51000000000005
   0
 TEXT
   5
@@ -7971,21 +7943,21 @@ TABLAS
 100
 AcDbText
  10
-12.8
+92.8
  20
-182.06
+175.09000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-Semi-unitizado
+rapidez y control de calidad
   7
 ARIAL
  11
-12.8
+92.8
  21
-182.06
+175.09000000000003
  31
 0.0
 100
@@ -8009,21 +7981,21 @@ AcDbPolyline
  70
 1
  10
-48.0
+150.0
  20
-184.775
+178.33000000000004
  10
-92.0
+198.0
  20
-184.775
+178.33000000000004
  10
-92.0
+198.0
  20
-177.53
+169.51000000000005
  10
-48.0
+150.0
  20
-177.53
+169.51000000000005
   0
 TEXT
   5
@@ -8037,21 +8009,21 @@ TABLAS
 100
 AcDbText
  10
-48.8
+150.8
  20
-182.06
+175.09000000000003
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-montantes en obra + paños de
+requiere grúa y mucha repetición;
   7
 ARIAL
  11
-48.8
+150.8
  21
-182.06
+175.09000000000003
  31
 0.0
 100
@@ -8069,21 +8041,21 @@ TABLAS
 100
 AcDbText
  10
-48.8
+150.8
  20
-179.3
+171.73000000000005
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-taller
+caro en 2 niveles
   7
 ARIAL
  11
-48.8
+150.8
  21
-179.3
+171.73000000000005
  31
 0.0
 100
@@ -8107,21 +8079,21 @@ AcDbPolyline
  70
 1
  10
-92.0
+12.0
  20
-184.775
+169.51000000000005
  10
-150.0
+48.0
  20
-184.775
+169.51000000000005
  10
-150.0
+48.0
  20
-177.53
+160.69000000000005
  10
-92.0
+12.0
  20
-177.53
+160.69000000000005
   0
 TEXT
   5
@@ -8135,21 +8107,21 @@ TABLAS
 100
 AcDbText
  10
-92.8
+12.8
  20
-182.06
+166.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-intermedio
+Semi-unitizado
   7
 ARIAL
  11
-92.8
+12.8
  21
-182.06
+166.27000000000004
  31
 0.0
 100
@@ -8173,21 +8145,21 @@ AcDbPolyline
  70
 1
  10
-150.0
+48.0
  20
-184.775
+169.51000000000005
  10
-198.0
+92.0
  20
-184.775
+169.51000000000005
  10
-198.0
+92.0
  20
-177.53
+160.69000000000005
  10
-150.0
+48.0
  20
-177.53
+160.69000000000005
   0
 TEXT
   5
@@ -8201,27 +8173,27 @@ TABLAS
 100
 AcDbText
  10
-150.8
+48.8
  20
-182.06
+166.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-logística de paños
+montantes en obra + paños de
   7
 ARIAL
  11
-150.8
+48.8
  21
-182.06
+166.27000000000004
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 EA
 330
@@ -8230,32 +8202,30 @@ EA
 AcDbEntity
   8
 TABLAS
-370
-13
 100
-AcDbPolyline
- 90
-4
- 70
-1
+AcDbText
  10
-12.0
+48.8
  20
-177.53
- 10
-48.0
- 20
-177.53
- 10
-48.0
- 20
-170.285
- 10
-12.0
- 20
-170.285
+162.91000000000003
+ 30
+0.0
+ 40
+2.0048
+  1
+taller
+  7
+ARIAL
+ 11
+48.8
+ 21
+162.91000000000003
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 EB
 330
@@ -8264,24 +8234,58 @@ EB
 AcDbEntity
   8
 TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+92.0
+ 20
+169.51000000000005
+ 10
+150.0
+ 20
+169.51000000000005
+ 10
+150.0
+ 20
+160.69000000000005
+ 10
+92.0
+ 20
+160.69000000000005
+  0
+TEXT
+  5
+EC
+330
+17
+100
+AcDbEntity
+  8
+TABLAS
 100
 AcDbText
  10
-12.8
+92.8
  20
-174.815
+166.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-Vidrio estructural (VEC)
+intermedio
   7
 ARIAL
  11
-12.8
+92.8
  21
-174.815
+166.27000000000004
  31
 0.0
 100
@@ -8289,7 +8293,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-EC
+ED
 330
 17
 100
@@ -8305,53 +8309,21 @@ AcDbPolyline
  70
 1
  10
-48.0
+150.0
  20
-177.53
+169.51000000000005
  10
-92.0
+198.0
  20
-177.53
+169.51000000000005
  10
-92.0
+198.0
  20
-170.285
+160.69000000000005
  10
-48.0
+150.0
  20
-170.285
-  0
-TEXT
-  5
-ED
-330
-17
-100
-AcDbEntity
-  8
-TABLAS
-100
-AcDbText
- 10
-48.8
- 20
-174.815
- 30
-0.0
- 40
-1.6467999999999998
-  1
-vidrio pegado c/ silicona
-  7
-ARIAL
- 11
-48.8
- 21
-174.815
- 31
-0.0
-100
-AcDbText
+160.69000000000005
   0
 TEXT
   5
@@ -8365,21 +8337,21 @@ TABLAS
 100
 AcDbText
  10
-48.8
+150.8
  20
-172.055
+166.27000000000004
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-estructural
+logística de paños
   7
 ARIAL
  11
-48.8
+150.8
  21
-172.055
+166.27000000000004
  31
 0.0
 100
@@ -8403,21 +8375,21 @@ AcDbPolyline
  70
 1
  10
-92.0
+12.0
  20
-177.53
+160.69000000000005
  10
-150.0
+48.0
  20
-177.53
+160.69000000000005
  10
-150.0
+48.0
  20
-170.285
+151.87000000000006
  10
-92.0
+12.0
  20
-170.285
+151.87000000000006
   0
 TEXT
   5
@@ -8431,21 +8403,21 @@ TABLAS
 100
 AcDbText
  10
-92.8
+12.8
  20
-174.815
+157.45000000000005
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-piel continua sin tapas
+Vidrio estructural (VEC)
   7
 ARIAL
  11
-92.8
+12.8
  21
-174.815
+157.45000000000005
  31
 0.0
 100
@@ -8469,21 +8441,21 @@ AcDbPolyline
  70
 1
  10
-150.0
+48.0
  20
-177.53
+160.69000000000005
  10
-198.0
+92.0
  20
-177.53
+160.69000000000005
  10
-198.0
+92.0
  20
-170.285
+151.87000000000006
  10
-150.0
+48.0
  20
-170.285
+151.87000000000006
   0
 TEXT
   5
@@ -8497,27 +8469,27 @@ TABLAS
 100
 AcDbText
  10
-150.8
+48.8
  20
-174.815
+157.45000000000005
  30
 0.0
  40
-1.6467999999999998
+2.0048
   1
-costoso; control estricto de adhesión
+vidrio pegado c/ silicona
   7
 ARIAL
  11
-150.8
+48.8
  21
-174.815
+157.45000000000005
  31
 0.0
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 F3
 330
@@ -8525,31 +8497,29 @@ F3
 100
 AcDbEntity
   8
-MARCO
-370
-50
+TABLAS
 100
-AcDbPolyline
- 90
-4
- 70
-1
+AcDbText
  10
-5.0
+48.8
  20
-292.0
- 10
-205.0
- 20
-292.0
- 10
-205.0
- 20
-5.0
- 10
-5.0
- 20
-5.0
+154.09000000000003
+ 30
+0.0
+ 40
+2.0048
+  1
+estructural
+  7
+ARIAL
+ 11
+48.8
+ 21
+154.09000000000003
+ 31
+0.0
+100
+AcDbText
   0
 LWPOLYLINE
   5
@@ -8559,9 +8529,9 @@ F4
 100
 AcDbEntity
   8
-MARCO
+TABLAS
 370
-50
+13
 100
 AcDbPolyline
  90
@@ -8569,23 +8539,23 @@ AcDbPolyline
  70
 1
  10
-5.0
+92.0
  20
-29.0
+160.69000000000005
  10
-205.0
+150.0
  20
-29.0
+160.69000000000005
  10
-205.0
+150.0
  20
-5.0
+151.87000000000006
  10
-5.0
+92.0
  20
-5.0
+151.87000000000006
   0
-LWPOLYLINE
+TEXT
   5
 F5
 330
@@ -8593,23 +8563,29 @@ F5
 100
 AcDbEntity
   8
-MARCO
-370
-35
+TABLAS
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-5.0
+92.8
  20
-17.0
- 10
-205.0
- 20
-17.0
+157.45000000000005
+ 30
+0.0
+ 40
+2.0048
+  1
+piel continua sin tapas
+  7
+ARIAL
+ 11
+92.8
+ 21
+157.45000000000005
+ 31
+0.0
+100
+AcDbText
   0
 LWPOLYLINE
   5
@@ -8619,25 +8595,33 @@ F6
 100
 AcDbEntity
   8
-MARCO
+TABLAS
 370
-35
+13
 100
 AcDbPolyline
  90
-2
+4
  70
-0
+1
  10
-72.0
+150.0
  20
-29.0
+160.69000000000005
  10
-72.0
+198.0
  20
-17.0
+160.69000000000005
+ 10
+198.0
+ 20
+151.87000000000006
+ 10
+150.0
+ 20
+151.87000000000006
   0
-LWPOLYLINE
+TEXT
   5
 F7
 330
@@ -8645,25 +8629,31 @@ F7
 100
 AcDbEntity
   8
-MARCO
-370
-35
+TABLAS
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-146.0
+150.8
  20
-29.0
- 10
-146.0
- 20
-17.0
+157.45000000000005
+ 30
+0.0
+ 40
+2.0048
+  1
+costoso; control estricto de
+  7
+ARIAL
+ 11
+150.8
+ 21
+157.45000000000005
+ 31
+0.0
+100
+AcDbText
   0
-LWPOLYLINE
+TEXT
   5
 F8
 330
@@ -8671,25 +8661,31 @@ F8
 100
 AcDbEntity
   8
-MARCO
-370
-35
+TABLAS
 100
-AcDbPolyline
- 90
-2
- 70
-0
+AcDbText
  10
-146.0
+150.8
  20
-17.0
- 10
-146.0
- 20
-5.0
+154.09000000000003
+ 30
+0.0
+ 40
+2.0048
+  1
+adhesión
+  7
+ARIAL
+ 11
+150.8
+ 21
+154.09000000000003
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+HATCH
   5
 F9
 330
@@ -8697,31 +8693,65 @@ F9
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO-RELLENO
+420
+16775388
 100
-AcDbText
+AcDbHatch
  10
-7.0
+0.0
  20
-24.399999999999977
+0.0
  30
 0.0
- 40
-2.1479999999999997
-  1
-C2 · PRÁCTICA EN CLASE
-  7
-ARIAL-NEGRITA
- 11
-7.0
- 21
-24.399999999999977
- 31
+210
 0.0
-100
-AcDbText
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+10.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+115.55800000000005
+ 10
+10.0
+ 20
+115.55800000000005
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
-TEXT
+LWPOLYLINE
   5
 FA
 330
@@ -8729,31 +8759,35 @@ FA
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
+370
+35
+420
+13214247
 100
-AcDbText
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-7.0
+10.0
  20
-19.399999999999977
- 30
-0.0
- 40
-1.6467999999999998
-  1
-H° premoldeado de grandes luces
-  7
-ARIAL
- 11
-7.0
- 21
-19.399999999999977
- 31
-0.0
-100
-AcDbText
+144.87000000000006
+ 10
+200.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+115.55800000000005
+ 10
+10.0
+ 20
+115.55800000000005
   0
-TEXT
+HATCH
   5
 FB
 330
@@ -8761,31 +8795,65 @@ FB
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO-RELLENO
+420
+15980410
 100
-AcDbText
+AcDbHatch
  10
-74.0
+0.0
  20
-24.600000000000023
+0.0
  30
 0.0
- 40
-1.6467999999999998
-  1
-DOCENTE: Arq. Tucci y Arq. Cardozo
-  7
-ARIAL
- 11
-74.0
- 21
-24.600000000000023
- 31
+210
 0.0
-100
-AcDbText
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+10.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+136.87000000000006
+ 10
+10.0
+ 20
+136.87000000000006
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
-TEXT
+LWPOLYLINE
   5
 FC
 330
@@ -8793,29 +8861,33 @@ FC
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
+370
+35
+420
+13214247
 100
-AcDbText
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-74.0
+10.0
  20
-19.399999999999977
- 30
-0.0
- 40
-1.6467999999999998
-  1
-ALUMNA: Candelaria Vitale · GRUPO 13
-  7
-ARIAL
- 11
-74.0
- 21
-19.399999999999977
- 31
-0.0
-100
-AcDbText
+144.87000000000006
+ 10
+200.0
+ 20
+144.87000000000006
+ 10
+200.0
+ 20
+136.87000000000006
+ 10
+10.0
+ 20
+136.87000000000006
   0
 TEXT
   5
@@ -8825,25 +8897,25 @@ FD
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-148.0
+14.0
  20
-24.399999999999977
+139.27000000000007
  30
 0.0
  40
-1.9332
+2.5776
   1
-CONSTRUCCIONES II
+PARA ESTUDIAR · IDEAS CLAVE
   7
 ARIAL-NEGRITA
  11
-148.0
+14.0
  21
-24.399999999999977
+139.27000000000007
  31
 0.0
 100
@@ -8857,25 +8929,25 @@ FE
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-148.0
+14.0
  20
-19.399999999999977
+131.37000000000006
  30
 0.0
  40
-1.6467999999999998
+2.0764
   1
-CÁTEDRA: ARQ. TUCCI
+•
   7
 ARIAL
  11
-148.0
+14.0
  21
-19.399999999999977
+131.37000000000006
  31
 0.0
 100
@@ -8889,25 +8961,25 @@ FF
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-7.0
+17.19
  20
-12.199999999999989
+131.37000000000006
  30
 0.0
  40
-2.0048
+2.0764
   1
-E9 · MURO CORTINA · ESPECIFICACIÓN
+Ventajas: luz natural, visuales, liviano (≈ 50 kg/m²), absorbe tolerancias con las grapas.
   7
-ARIAL-NEGRITA
+ARIAL
  11
-7.0
+17.19
  21
-12.199999999999989
+131.37000000000006
  31
 0.0
 100
@@ -8921,25 +8993,25 @@ TEXT
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-7.0
+14.0
  20
-7.199999999999989
+126.54200000000006
  30
 0.0
  40
-1.6467999999999998
+2.0764
   1
-Escalas: s/ escala
+•
   7
 ARIAL
  11
-7.0
+14.0
  21
-7.199999999999989
+126.54200000000006
  31
 0.0
 100
@@ -8953,25 +9025,25 @@ TEXT
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-148.0
+17.19
  20
-11.600000000000023
+126.54200000000006
  30
 0.0
  40
-2.5776
+2.0764
   1
-LÁMINA 22/26
+Desventajas: aísla poco (K 2,8), no resiste fuego, gana calor (requiere control solar) y necesita mantenimiento de
   7
-ARIAL-NEGRITA
+ARIAL
  11
-148.0
+17.19
  21
-11.600000000000023
+126.54200000000006
  31
 0.0
 100
@@ -8985,25 +9057,187 @@ TEXT
 100
 AcDbEntity
   8
-MARCO
+ESTUDIO
 100
 AcDbText
  10
-148.0
+17.19
  20
-7.0
+122.71400000000006
  30
 0.0
  40
-1.5036
+2.0764
   1
-A4 vertical · 22/10/2026
+sellos.
   7
 ARIAL
  11
-148.0
+17.19
  21
-7.0
+122.71400000000006
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+103
+330
+17
+100
+AcDbEntity
+  8
+ESTUDIO
+100
+AcDbText
+ 10
+14.0
+ 20
+117.88600000000005
+ 30
+0.0
+ 40
+2.0764
+  1
+•
+  7
+ARIAL
+ 11
+14.0
+ 21
+117.88600000000005
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+104
+330
+17
+100
+AcDbEntity
+  8
+ESTUDIO
+100
+AcDbText
+ 10
+17.19
+ 20
+117.88600000000005
+ 30
+0.0
+ 40
+2.0764
+  1
+Stick vs. unitizado: el stick conviene en edificios bajos (2 niveles); el unitizado en torres con mucha repetición.
+  7
+ARIAL
+ 11
+17.19
+ 21
+117.88600000000005
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+105
+330
+17
+100
+AcDbEntity
+  8
+MARCO
+370
+13
+420
+10066329
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+10.0
+ 20
+9.0
+ 10
+200.0
+ 20
+9.0
+  0
+TEXT
+  5
+106
+330
+17
+100
+AcDbEntity
+  8
+MARCO
+420
+6710886
+100
+AcDbText
+ 10
+10.0
+ 20
+5.0
+ 30
+0.0
+ 40
+2.0048
+  1
+C2 · Hormigón premoldeado de grandes luces
+  7
+ARIAL
+ 11
+10.0
+ 21
+5.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+107
+330
+17
+100
+AcDbEntity
+  8
+MARCO
+420
+4473924
+100
+AcDbText
+ 10
+200.0
+ 20
+5.0
+ 30
+0.0
+ 40
+2.0048
+  1
+22 / 26
+  7
+ARIAL-NEGRITA
+ 72
+2
+ 11
+200.0
+ 21
+5.0
  31
 0.0
 100
@@ -9011,9 +9245,9 @@ AcDbText
   0
 VIEWPORT
   5
-107
+10C
 330
-103
+108
 100
 AcDbEntity
  67
@@ -9115,9 +9349,9 @@ AcDbViewport
   0
 VIEWPORT
   5
-108
+10D
 330
-103
+108
 100
 AcDbEntity
  67
@@ -9317,7 +9551,7 @@ Model
   3
 LAMINA 22
 350
-106
+10B
   0
 DICTIONARY
   5
@@ -10183,7 +10417,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-10B
+110
   0
 DICTIONARYVAR
   5
@@ -10195,7 +10429,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T18:17:56.381133+00:00
+1.4.5 @ 2026-10-22T22:46:40.981083+00:00
   0
 VISUALSTYLE
   5
@@ -16749,7 +16983,7 @@ strokes_ogs.tif
   0
 LAYOUT
   5
-106
+10B
 330
 D
 100
@@ -16871,13 +17105,13 @@ LAMINA 22
  76
 1
 330
-103
+108
 331
-107
+10C
   0
 DICTIONARYVAR
   5
-10B
+110
 330
 2D
 100
@@ -16885,7 +17119,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-10-22T18:17:56.389982+00:00
+1.4.5 @ 2026-10-22T22:46:40.988888+00:00
   0
 ENDSEC
   0

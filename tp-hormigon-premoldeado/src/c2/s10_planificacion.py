@@ -30,7 +30,7 @@ def implantacion(num, total):
         v.circle(x, y, 14000, sw=0.2, stroke="#c0392b", dash="1.2 0.6")
         v.rect(x - 1300, y - 4200, x + 1300, y + 4200, fill=YEL, sw=0.15)
         sh.ball(*v.P(x, y), f"G{k}", r=2.8, fill="#fff")
-    sh.text(*v.P(43500, 49500), "radio de trabajo 14 m", TS, color="#c0392b")
+    sh.text(*v.P(46500, 49800), "radio de trabajo 14 m", TS, color="#c0392b")
     v.pline([(30000, -4000), (30000, 9000), (30000, 33000)], sw=0.35, dash="1.5 0.6", stroke="#1f618d")
     v.rect(33000, 14000, 35500, 35800, fill="#c0392b", sw=0.15)
     v.rect(48000, 6000, 57000, 38000, fill="#e3dccb", sw=0.15)

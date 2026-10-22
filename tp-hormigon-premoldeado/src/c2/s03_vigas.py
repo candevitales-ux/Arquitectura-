@@ -116,6 +116,9 @@ def vp(num, total):
     for lab, tgt, at in zip("123456", [r[1] for r in R], [(160, 132), (160, 170), (30, 170), (160, 158), (22, 120), (160, 96)]):
         sh.callout(s.P(*tgt), at, lab)
     y = legend(sh, 12, 182, [f"{a} {c}" for a, b, c in R])
+    rows = [("Catálogo", "h (m)", "Luz", "Peso"), ("VL doble T", "0,50-1,20", "6-18 m", "0,45 t/m"),
+            ("Viga L", "0,26-0,60", "5-12 m", "0,19 t/m"), ("VP T inv.", "0,60-1,40", "8-20 m", "0,86 t/m")]
+    sh.table(112, 178, [24, 22, 18, 22], rows, size=TS, rowh=4.6)
     # isometría
     S = Iso((1, -1, 1))
     S.prism(geo.perfil_VP(), "x", 0, 1500, geo.C_VP, sw=0.12)
@@ -127,9 +130,7 @@ def vp(num, total):
         ("Especificación:", "H-45, 23 cordones Ø12,7; contraflecha ≈ L/500; neopreno + perno Ø20 en cada apoyo."),
         ("Colocación:", "llega en carretón (> 12 m); izado c/ balancín; se montan los TT simétricos a ambos lados (evita torsión)."),
     ], size=TB, tsize=2.9)
-    rows = [("Rango de catálogo", "h (m)", "Luz usual", "Peso"), ("VL doble T", "0,50-1,20", "6-18 m", "0,45 t/m"),
-            ("Viga L de borde", "0,26-0,60", "5-12 m", "0,19 t/m"), ("VP T invertida", "0,60-1,40", "8-20 m", "0,86 t/m")]
-    sh.table(12, y + 2, [60, 40, 40, 46], rows, size=TS, rowh=4.6)
+
     return sh
 
 

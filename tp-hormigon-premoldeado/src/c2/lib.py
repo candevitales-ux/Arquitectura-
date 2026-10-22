@@ -9,9 +9,10 @@ from shapely.strtree import STRtree
 
 W, H = 210.0, 297.0          # A4 vertical
 # tamaños de letra (mm de cuerpo; altura de mayúscula ≈ 0,72 x): legibles al imprimir A4 al 100 %
-TB, TS, TD, TT, TH = 2.5, 2.3, 2.1, 3.2, 4.3
+MINF = 2.8                   # cuerpo mínimo: altura de mayúscula ≈ 0,716 x 2,8 = 2,0 mm
+TB, TS, TD, TT, TH = 2.9, 2.8, 2.8, 3.6, 4.6
 FONT = "Arial, 'Liberation Sans', Helvetica, sans-serif"
-CW = 0.53                    # ancho medio de carácter / tamaño de fuente (Arial)
+CW = 0.5                     # ancho medio de carácter / tamaño de fuente (Arial)
 
 # ------------------------------------------------------------------ materiales (relleno SVG, color de fondo DXF, rayado DXF)
 MAT = {
@@ -92,6 +93,7 @@ def lw(sw):
 
 def wrap(text, width, size):
     """corte de líneas por ancho estimado (mismo resultado en SVG y DXF)"""
+    size = max(size, MINF)
     maxc = max(4, int(width / (size * CW)))
     out = []
     for para in str(text).split("\n"):
@@ -149,7 +151,7 @@ class Sheet:
         return pts
 
     def text(self, x, y, s, size=TB, anchor="start", bold=False, ital=False, color="#000", rot=0, layer="TEXTOS"):
-        s = str(s)
+        s = str(s); size = max(size, MINF)
         a = {"start": "start", "middle": "middle", "end": "end"}[anchor]
         tr = f' transform="rotate({f(-rot)} {f(x)} {f(y)})"' if rot else ""
         self.svg.append(f'<text x="{f(x)}" y="{f(y)}" font-family="{FONT}" font-size="{f(size)}" text-anchor="{a}"'
@@ -157,11 +159,13 @@ class Sheet:
         self.ops.append(dict(t="text", p=(x, y), s=s, size=size, anchor=anchor, bold=bold, ital=ital, color=color, rot=rot, layer=layer))
 
     def para(self, x, y, width, text, size=TB, lead=1.3, **k):
+        size = max(size, MINF)
         for ln in wrap(text, width, size):
             self.text(x, y, ln, size, **k); y += size * lead
         return y
 
     def bullets(self, x, y, width, items, size=TB, lead=1.3, gap=0.6, mark="•", **k):
+        size = max(size, MINF)
         for it in items:
             lines = wrap(it, width - size * 1.2, size)
             self.text(x, y, mark, size, **k)
@@ -171,6 +175,8 @@ class Sheet:
         return y
 
     def ball(self, x, y, label, r=2.3, size=None, fill="#fff", color="#000", layer="REFERENCIAS"):
+        r = max(r, 2.0 + 0.55 * len(str(label)))
+        size = MINF
         self.circle(x, y, r, fill=fill, stroke=color, sw=0.22, layer=layer)
         self.text(x, y + (size or r * 0.95) * 0.36, label, size or r * 0.95, anchor="middle", bold=True, color=color, layer=layer)
 
@@ -245,11 +251,12 @@ class Sheet:
         if scale_txt: self.text(x, y + size * 1.15 + 1.4, scale_txt, max(TS, size * 0.72), color="#222")
 
     def table(self, x, y, colw, rows, size=TS, rowh=None, head=True, lead=1.22, fills=None):
+        size = max(size, MINF)
         """tabla con ajuste de texto por celda; devuelve y final"""
         for ri, row in enumerate(rows):
             cells = [wrap(c, colw[i] - 1.6, size) for i, c in enumerate(row)]
             nl = max(len(c) for c in cells)
-            h = rowh or (nl * size * lead + size * 0.75)
+            h = max(rowh or 0, nl * size * lead + size * 0.75)
             xx = x
             bg = "#e2e6ea" if (head and ri == 0) else (fills[ri] if fills and fills[ri] else None)
             for ci, c in enumerate(cells):
@@ -262,23 +269,36 @@ class Sheet:
         return y
 
     # ---------------------------------------------------------- marco + rótulo
+    def content_bottom(self):
+        yb = 0
+        for o in self.ops:
+            if o["layer"] == "MARCO": continue
+            if o["t"] == "text": yb = max(yb, o["p"][1] + 0.6)
+            elif o["t"] == "circ": yb = max(yb, o["c"][1] + o["r"])
+            else: yb = max(yb, max(p[1] for p in o["pts"]))
+        return yb
+
+    def estudiar(self, items, ymax=None):
+        """recuadro de ideas clave en el espacio libre inferior; recorta ítems si no entran"""
+        ymax = ymax or H - 13
+        y0 = self.content_bottom() + 7
+        size, lead = TB, 1.32
+        def height(its):
+            n = sum(len(wrap(t, W - 34 - size * 1.2, size)) for t in its)
+            return 11 + n * size * lead + len(its) * 1.0
+        its = list(items)
+        if y0 + height(its) > ymax: return            # sólo si entra completo
+        h = height(its)
+        self.rect(10, y0, W - 10, y0 + h, fill="#fff8dc", stroke="#c9a227", sw=0.35, layer="ESTUDIO")
+        self.rect(10, y0, W - 10, y0 + 8, fill="#f3d77a", stroke="#c9a227", sw=0.35, layer="ESTUDIO")
+        self.text(14, y0 + 5.6, "PARA ESTUDIAR · IDEAS CLAVE", TT, bold=True, layer="ESTUDIO")
+        self.bullets(14, y0 + 13.5, W - 30, its, size, lead, 1.0, layer="ESTUDIO")
+
     def frame(self):
-        self.rect(5, 5, W - 5, H - 5, stroke="#000", sw=0.5, layer="MARCO")
-        y0, y1, y2 = H - 29, H - 17, H - 5
-        self.rect(5, y0, W - 5, y2, stroke="#000", sw=0.4, layer="MARCO")
-        self.line(5, y1, W - 5, y1, sw=0.3, layer="MARCO")
-        for xx in (72, 146): self.line(xx, y0, xx, y1, sw=0.3, layer="MARCO")
-        self.line(146, y1, 146, y2, sw=0.3, layer="MARCO")
-        self.text(7, y0 + 4.6, "C2 · PRÁCTICA EN CLASE", 3.0, bold=True, layer="MARCO")
-        self.text(7, y0 + 9.6, "H° premoldeado de grandes luces", TS, layer="MARCO")
-        self.text(74, y0 + 4.4, "DOCENTE: Arq. Tucci y Arq. Cardozo", TS, layer="MARCO")
-        self.text(74, y0 + 9.6, "ALUMNA: Candelaria Vitale · GRUPO 13", TS, layer="MARCO")
-        self.text(148, y0 + 4.6, "CONSTRUCCIONES II", 2.7, bold=True, layer="MARCO")
-        self.text(148, y0 + 9.6, "CÁTEDRA: ARQ. TUCCI", TS, layer="MARCO")
-        self.text(7, y1 + 4.8, self.title.upper(), 2.8, bold=True, layer="MARCO")
-        self.text(7, y1 + 9.8, "Escalas: " + self.escalas, TS if len(self.escalas) < 95 else 2.1, layer="MARCO")
-        self.text(148, y1 + 5.4, f"LÁMINA {self.num:02d}/{self.total:02d}", 3.6, bold=True, layer="MARCO")
-        self.text(148, y1 + 10.0, "A4 vertical · 22/10/2026", 2.1, layer="MARCO")
+        """sin rótulo: sólo número de página (para ubicarse con el índice)"""
+        self.line(10, H - 9, W - 10, H - 9, sw=0.15, stroke="#999", layer="MARCO")
+        self.text(10, H - 5, "C2 · Hormigón premoldeado de grandes luces", 2.2, color="#666", layer="MARCO")
+        self.text(W - 10, H - 5, f"{self.num} / {self.total}", 2.6, anchor="end", bold=True, color="#444", layer="MARCO")
 
     def view(self, ox, oy, scale):
         return View(self, ox, oy, scale)
@@ -535,13 +555,14 @@ class Iso:
 
 # ====================================================================== bloques de texto técnicos
 def spec(sh, x, y, w, title, kv, size=TB, lead=1.3, tsize=TT):
+    size = max(size, MINF)
     """bloque de especificación: título + pares (clave, texto); devuelve y final"""
     if title:
         sh.text(x, y, title, tsize, bold=True)
         sh.line(x, y + 0.8, x + w, y + 0.8, sw=0.2)
         y += tsize * 1.25 + 0.8
     for k, v in kv:
-        kw = (len(k) + 1) * size * 0.58
+        kw = (len(k) + 1) * size * 0.52
         first = wrap(v, w - kw, size)[0] if v else ""
         rest = v[len(first):].strip() if v else ""
         sh.text(x, y, k, size, bold=True)

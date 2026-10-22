@@ -23,8 +23,8 @@ def croquis(num, total):
     for k in range(4): v.dim((k * 1250, 9420), ((k + 1) * 1250, 9420), 3.0, "1,25")
     for z0, z1 in ((40, 3250), (3250, 4710), (4710, 7750), (7750, 9390)):
         v.dim((0, z0), (0, z1), 4.0, f"{(z1 - z0) / 1000:.2f}".replace(".", ","))
-    for lab, tgt, at in (("1", (1250, 6000), (90, 70)), ("2", (3125, 2000), (90, 128)), ("3", (2500, 3250), (90, 116)),
-                         ("4", (3700, 4000), (90, 104)), ("5", (2500, 4710), (90, 92)), ("6", (2500, 40), (90, 146))):
+    for lab, tgt, at in (("1", (1250, 6000), (98, 70)), ("2", (3125, 2000), (98, 128)), ("3", (2500, 3250), (98, 116)),
+                         ("4", (3700, 4000), (98, 104)), ("5", (2500, 4710), (98, 92)), ("6", (2500, 40), (98, 140))):
         sh.callout(v.P(*tgt), at, lab)
     legend(sh, 12, 164, ["1 Montante aluminio 50x150 c/ 1,25 m", "2 Paño de visión: DVH 6 + 12 + 3+3 laminado", "3 Travesaño 50x120 (presor + tapa)",
                          "4 Spandrel: vidrio esmaltado + lana (frente de losa)", "5 Junta de dilatación del montante (J11)", "6 Perfil de arranque (J12)"], w=90)
@@ -70,16 +70,16 @@ def croquis(num, total):
     m.dim((-25, D(182)), (25, D(182)), -3.0, "50")
     m.dim((25, D(32)), (25, D(182)), -6.0, "150")
     sh.text(*m.P(-110, D(-40)), "EXTERIOR", TS, anchor="middle", bold=True); sh.text(*m.P(110, D(150)), "INTERIOR", TS, anchor="middle", bold=True)
-    y = 200
-    sh.text(108, 196, "Referencias de los cortes", TS, bold=True)
-    items = ["a DVH 6 + 12 + 3+3 laminado", "b Separador + butilo + silicona", "c Travesaño tubular 50x120 (6063-T6)",
-             "d Presor atornillado (inox c/ 25 cm)", "e Tapa clipada", "f Burletes EPDM", "g Calzo de apoyo del vidrio",
-             "h Spandrel: bandeja galv. + lana 50", "i Montante 50x150 en vista"]
+    y = 196
+    sh.text(12, y, "REFERENCIAS DE LOS CORTES", TT, bold=True); y += 6
+    items = ["a DVH 6 + 12 + 3+3 laminado PVB", "b Separador + butilo + silicona estructural", "c Travesaño tubular 50x120 (aluminio 6063-T6)",
+             "d Presor atornillado (tornillos inox c/ 25 cm)", "e Tapa clipada", "f Burletes de EPDM", "g Calzo de apoyo del vidrio (EPDM)",
+             "h Spandrel: bandeja galv. + lana 50 mm", "i Montante 50x150 (en vista)"]
     for k, t in enumerate(items):
         lab, txt = t.split(" ", 1)
         col, row = divmod(k, 5)
-        xx, yy = 108 + col * 46, y + 2 + row * 5.5
-        sh.ball(xx + 2, yy - 0.8, lab, r=1.9); sh.para(xx + 5.5, yy, 40, txt, 2.1, 1.15)
+        xx, yy = 12 + col * 96, y + row * 5.6
+        sh.ball(xx + 2.6, yy - 0.9, lab, r=2.4); sh.text(xx + 7, yy, txt, TS)
     return sh
 
 

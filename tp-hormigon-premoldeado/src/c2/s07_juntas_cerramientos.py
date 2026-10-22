@@ -72,7 +72,7 @@ def j11(sh, i, j):
     v.rect(-31, 4700, -14, 4720, mat="neo", stroke=None)
     v.rect(0, za, 6, zb, fill=GLASS, sw=0.1); v.rect(18, za, 25, zb, fill=GLASS, sw=0.1)
     for z in (za, zb): breakline(sh, v.P(-40, z), v.P(200, z))
-    v.dim((182, 4700), (182, 4720), -4.0, "20 mm")
+    v.dim((182, 4700), (182, 4720), -7.0, "20")
     refs(sh, v, box, [(182, 4650), (172, 4790), (40, 4652), (-22, 4710), (100, 4780)])
     legend(sh, x0, y0, ["Montante inferior (punto fijo en la grapa)", "Manguito de aluminio interior 30 cm (encastra en ambos tramos)",
                         "Tornillos inox: fijan el manguito SOLO al tramo inferior", "Sellador / burlete en la tapa",
@@ -81,19 +81,19 @@ def j11(sh, i, j):
 
 def j12(sh, i, j):
     x0, y0, box = cell(sh, i, j, "J12", "Muro cortina / piso (arranque)", "Corte vertical 1:10 · seca, deslizante")
-    v = fitview(sh, (box[0] + 6, box[1], box[2] - 6, box[3]), (-300, 420, -420, 230), 10)
-    v.rect(-300, -420, 420, -327, mat="tierra", stroke=None)
+    v = fitview(sh, (box[0] + 6, box[1], box[2] - 6, box[3]), (-300, 420, -380, 180), 10)
+    v.rect(-300, -380, 420, -327, mat="tierra", stroke=None)
     v.rect(-300, -327, -60, -250, mat="tosca", sw=0.1)
     v.poly([(-300, -250), (-60, -250), (-60, -150), (-300, -157)], mat="H", sw=0.15)
     v.rect(-60, -327, 420, -15, mat="HAis", sw=0.2)
     v.rect(-60, -15, 420, 0, mat="mort", sw=0.1)
-    breakline(sh, v.P(420, -430), v.P(420, 20))
+    breakline(sh, v.P(420, -390), v.P(420, 20))
     v.rect(25, 0, 190, 40, mat="alu", sw=0.12); v.rect(32, 6, 182, 40, fill="#fff", sw=0.05)
     v.rect(32, 10, 182, 280, fill="#e3e7ea", sw=0.15)
     v.rect(0, 60, 6, 280, fill=GLASS, sw=0.1); v.rect(18, 60, 25, 280, fill=GLASS, sw=0.1)
     v.rect(2, 50, 24, 60, fill="#333", stroke=None)
     v.rect(-30, 30, -14, 280, fill="#b9c0c6", sw=0.1)
-    breakline(sh, v.P(-40, 230), v.P(200, 230))
+    breakline(sh, v.P(-40, 180), v.P(200, 180))
     v.pline([(-80, -140), (-62, -140), (-62, 0), (25, 0), (25, 30)], sw=0.4)
     v.rect(14, 0, 25, 30, mat="neo", stroke=None)
     v.line(107, -10, 107, -110, sw=0.5)

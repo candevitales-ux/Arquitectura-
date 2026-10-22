@@ -78,8 +78,6 @@ def m1(num, total):
     yy = sh.table(108, 186, [30, 60], rows, size=TB, rowh=5.0, fills=[None] + [None, None, None, "#fde8b0", None, None])
     sh.para(108, yy + 5, 90, "Verificación (R = 14 m): VP 12,6 t + balancín 0,8 t + eslingas 0,2 t = 13,6 t ≤ 0,75 x 19,5 t = 14,6 t ✓",
             TB, 1.3)
-    sh.para(12, 252, 186, "Criterio: la grúa se elige por el par CARGA x RADIO de la pieza más pesada y más lejana (no por la capacidad nominal) "
-            "y trabaja siempre sobre estabilizadores extendidos, con un señalero (rigger) que coordina por radio con el operador.", TS, 1.3, ital=True)
     return sh
 
 
@@ -114,10 +112,10 @@ def m2m3(num, total):
         b.circle(xc + s * 2874, 600, 80, fill="#000", sw=0.05)
     b.rect(xc - 200, 4100, xc + 200, 4500, fill=DARK, sw=0.1)
     b.dim((xc - 2874, 0), (xc + 2874, 0), -4.0, "insertos a L/5 de los extremos")
-    sh.note(b.P(xc + 600, 3200), (75, 122), "eslingas ≥ 45° c/ la horizontal")
-    sh.note(b.P(xc + 2500, 2150), (75, 132), "viga balancín (perfil o tubo)")
-    sh.text(118, 110, "Accesorios de izaje", TT, bold=True)
-    sh.bullets(118, 116, 80, ["Grillete tipo lira c/ perno roscado", "Eslinga de cable de acero o faja de poliéster (c/ etiqueta de carga)",
+    sh.note(b.P(xc + 600, 3200), (52, 122), "eslingas ≥ 45° c/ la horizontal")
+    sh.note(b.P(xc + 2500, 2150), (52, 132), "viga balancín (perfil o tubo)")
+    sh.text(126, 110, "Accesorios de izaje", TT, bold=True)
+    sh.bullets(126, 116, 72, ["Grillete tipo lira c/ perno roscado", "Eslinga de cable de acero o faja de poliéster (c/ etiqueta de carga)",
                               "Argolla giratoria roscada al inserto", "Gancho c/ lengüeta de seguridad", "Sogas guía (vientos)",
                               "Cuñas, calces y cantoneras"], TS, 1.25, 0.8)
     spec(sh, 12, 186, 186, "FUNCIÓN Y USO", [

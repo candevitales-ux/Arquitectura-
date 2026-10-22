@@ -22,7 +22,7 @@ def all_pages():
     return out
 
 
-LAYERS = {"MARCO": 7, "CONTORNOS": 7, "LINEAS": 7, "TEXTOS": 7, "REFERENCIAS": 7, "COTAS": 7, "TABLAS": 7, "ISO": 7, "ARMADURAS": 14}
+LAYERS = {"ESTUDIO": 7, "MARCO": 7, "CONTORNOS": 7, "LINEAS": 7, "TEXTOS": 7, "REFERENCIAS": 7, "COTAS": 7, "TABLAS": 7, "ISO": 7, "ARMADURAS": 14}
 
 
 def new_doc():
@@ -49,6 +49,8 @@ def main():
     sheets = {}
     for i in sel:
         sh = pages[i - 1](i, total)
+        import estudio
+        if sh.fname in estudio.NOTAS: sh.estudiar(estudio.NOTAS[sh.fname])
         sh.frame()
         sheets[i] = sh
         print("lámina", i, sh.fname, len(sh.ops), "entidades")
@@ -75,8 +77,10 @@ def main():
 def publish(sel, sheets):
     dwg_out = os.path.join(B, "dwg_out"); shutil.rmtree(dwg_out, ignore_errors=True); os.makedirs(dwg_out)
     subprocess.run(["xvfb-run", "-a", "ODAFileConverter", os.path.join(B, "dwg_in"), dwg_out, "ACAD2018", "DWG", "0", "1", "*.DXF"], check=True)
+    leeme = os.path.join(OUT, "LEEME.txt"); txt = open(leeme, encoding="utf-8").read() if os.path.exists(leeme) else None
     shutil.rmtree(OUT, ignore_errors=True)
     for d in ("PDF", "DWG", "DXF", "vistas_previas"): os.makedirs(os.path.join(OUT, d))
+    if txt: open(leeme, "w", encoding="utf-8").write(txt)
     shutil.copy(os.path.join(B, "laminas.pdf"), os.path.join(OUT, "C2_PRACTICA_HORMIGON_A4_COMPLETA.pdf"))
     for k, i in enumerate(sel):
         nm = f"L{i:02d}_{sheets[i].fname}"
@@ -87,7 +91,7 @@ def publish(sel, sheets):
     for fpath in glob.glob(os.path.join(B, "dwg_in", "*.dxf")):
         shutil.copy(fpath, os.path.join(OUT, "DXF"))
     shutil.move(os.path.join(OUT, "DWG", "C2_PRACTICA_HORMIGON_A4_CONJUNTO.dwg"), os.path.join(OUT, "C2_PRACTICA_HORMIGON_A4_CONJUNTO.dwg"))
-    print("publicado en", OUT)
+    print("publicado en", OUT)  # (LEEME.txt se mantiene aparte en el repo)
 
 
 if __name__ == "__main__":

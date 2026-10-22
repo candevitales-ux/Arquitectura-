@@ -1,15 +1,13 @@
 C2 · PRÁCTICA EN CLASE · GRANDES LUCES DE HORMIGÓN PREMOLDEADO  (26 láminas A4 VERTICALES)
 
 C2_PRACTICA_HORMIGON_A4_COMPLETA.pdf : las 26 láminas. Imprimir A4 vertical al 100 % ("tamaño real", sin ajustar a página).
-  Letra: textos 2,3-2,5 mm (≈ 7 pt), títulos 3,2-4,3 mm: legible impreso.
+  Sin rótulo. Letra mínima: 2 mm de altura (≈ 8 pt). Cada lámina tiene un recuadro "PARA ESTUDIAR · IDEAS CLAVE".
 PDF/   : cada lámina por separado.
-DWG/   : cada lámina en DWG (AutoCAD 2018), en mm de papel (escala 1:1 de la hoja); cada dibujo ya está en su escala
-         (indicada en el título y en el rótulo). Plotear desde la presentación "LAMINA nn" (A4 vertical, escala 1:1).
-C2_PRACTICA_HORMIGON_A4_CONJUNTO.dwg : las 26 láminas en un único DWG, con una presentación por lámina.
+DWG/   : cada lámina en DWG (AutoCAD 2018) en mm de papel (escala 1:1 de la hoja); cada dibujo ya está en su escala.
+         Plotear desde la presentación "LAMINA nn" (A4 vertical, escala 1:1).
+C2_PRACTICA_HORMIGON_A4_CONJUNTO.dwg : las 26 láminas en un único DWG, una presentación por lámina.
 DXF/   : los mismos dibujos en DXF.  vistas_previas/ : PNG de cada lámina.
 
 01-02  Carátula, índice y axonometría del sistema (E1…E11)
-03-08  1º Elementos: cáliz, columna, VL + viga L, VP, panel TT + capa, apoyos y conectores
-09-14  2º Juntas y uniones J1…J15: ubicación, clasificación y detalles
-15-20  3º Máquinas: grúa, carretón, balancín, moldeo, anclaje, acceso a obra, planificación del alquiler y cronograma
-21-26  4º Muro cortina, panel sándwich, comparación y justificación
+03-08  1º Elementos      09-14  2º Juntas y uniones J1…J15
+15-20  3º Máquinas, acceso a obra y planificación del alquiler      21-26  4º Cerramientos y comparación

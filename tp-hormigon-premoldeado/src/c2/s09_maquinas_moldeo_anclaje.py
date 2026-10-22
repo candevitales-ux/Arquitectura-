@@ -38,8 +38,8 @@ def moldeo(num, total):
                              "3 Pieza TT hormigonada", "4 Cordones Ø12,7 tesados de cabezal a cabezal", "5 Gato hidráulico de tesado + bomba",
                              "6 Pórtico grúa de planta (desmolde y acopio)"], w=92)
     # molde 1:25
-    sh.title_drawing(12, 150, "MOLDE METÁLICO DEL TT (sección)", "esc. 1:25", TT)
-    m = sh.view(30 + 150 / 25, 197, 25)
+    sh.title_drawing(12, 150, "MOLDE METÁLICO DEL TT", "sección esc. 1:40", TT)
+    m = sh.view(18 + 150 / 40, 182, 40)
     m.poly([(-150, 650), (-150, -200), (2550, -200), (2550, 650), (2400, 650), (2400, 600), (1890, 600), (1860, 0), (1740, 0),
             (1710, 600), (690, 600), (660, 0), (540, 0), (510, 600), (0, 600), (0, 650)], fill=MOLD, sw=0.25)
     m.poly(geo.perfil_TT(), mat="HA", sw=0.3)
@@ -47,9 +47,9 @@ def moldeo(num, total):
         for z in (40, 90, 140): m.dot(xc, z, 0.4, "#000")
     for x in (-150, 2550): m.rect(x - 60 if x < 0 else x, 100, x if x < 0 else x + 60, 260, fill=YEL, sw=0.1)
     m.rect(-300, -400, 2700, -200, fill="#888", sw=0.15)
-    sh.note(m.P(2610, 180), (160, 183), "vibrador externo")
-    sh.note(m.P(2000, -300), (160, 200), "bastidor / bancada")
-    sh.note(m.P(2000, 300), (160, 166), "chapa de molde 8 mm")
+    sh.note(m.P(2610, 180), (60, 196), "vibrador externo")
+    sh.note(m.P(1500, -300), (40, 203), "bastidor / bancada")
+    sh.note(m.P(2000, 300), (50, 163), "chapa de molde 8 mm")
     # gato 1:20
     sh.title_drawing(108, 104, "GATO DE TESADO UNIFILAR", "esc. 1:20", TT)
     g = sh.view(114, 128, 20)
@@ -61,7 +61,7 @@ def moldeo(num, total):
     sh.note(g.P(390, 0), (125, 140), "cuñas + anclaje")
     sh.note(g.P(800, 120), (160, 116), "cilindro hidráulico")
     sh.para(108, 146, 92, "Fuerza por cordón Ø12,7: 0,75 · 1860 MPa · 98,7 mm² ≈ 138 kN (14 t); se controla presión y alargamiento.", TS, 1.25)
-    spec(sh, 12, 222, 186, "PROCESO DE MOLDEO", [
+    spec(sh, 104, 158, 94, "PROCESO DE MOLDEO", [
         ("1", "limpieza del molde y desmoldante."), ("2", "colocación y tesado de cordones con el gato."),
         ("3", "armadura pasiva, insertos, vainas y riel embutido."), ("4", "hormigonado H-45 con vibradores externos."),
         ("5", "curado a vapor 12-16 h (60 °C máx.)."), ("6", "destesado con f'c ≥ 30 MPa; corte de cordones."),
