@@ -29,3 +29,12 @@ xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 ```
 python3 src/opaco_corte.py && python3 src/opaco_nodos.py && node render.js src/opaco.html build/opaco portrait
 ```
+
+## Práctica en clase – NUDOS (13 láminas A4 verticales)
+`../entregables/PRACTICA_NUDOS_A4/` – carátula + 6 nudos en corte a 1:20 (cubierta / entrepiso / piso s/ terreno con fundación,
+cada uno opaco y vidriado), cada nudo con su planilla de referencias (denominación · especificación técnica · función).
+`src/nudos_a4.py` toma la geometría de `tp_corte.py` y `opaco_corte.py` (ventanas del mismo corte integral); `src/nudos_refs.py`
+tiene los textos y la ubicación de cada referencia. DWG: modelo en mm reales + presentación A4 con ventana 1:20.
+```
+pip install ezdxf && sh build_nudos.sh      # requiere ODAFileConverter (+ libopengl0 libegl1 libxkbcommon-x11-0 libxcb-*) y xvfb-run
+```
