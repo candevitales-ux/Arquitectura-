@@ -13,7 +13,6 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else "build"
 os.makedirs(OUT, exist_ok=True)
 W, H = 210.0, 297.0
 PAGINA = sys.argv[2] if len(sys.argv) > 2 else 'vidriado'
-F = 1.20   # letra 20 % más grande que en la A3
 
 doc = ezdxf.new("R2018", setup=True); doc.units = ezdxf.units.MM
 doc.styles.add("ARIAL", font="arial.ttf"); doc.styles.add("ARIAL-NEGRITA", font="arialbd.ttf")
@@ -40,7 +39,6 @@ def hatch(pts, pat="SOLID", sc=1.0, ang=0, layer="1-RAYADOS", rgb=None, color=8)
     return h
 
 def txt(s, x, y, h=2.5, align=TA.LEFT, layer="3-TEXTOS", bold=False, rot=0):
-    if layer != "3-TITULOS" and h <= 2.25: h *= F
     t = msp.add_text(s, height=h, rotation=rot,
                      dxfattribs={"layer": layer, "style": "ARIAL-NEGRITA" if bold else "ARIAL", "width": 0.9})
     t.set_placement((x, y), align=align)
@@ -84,7 +82,7 @@ class V:
         d.render()
 
 ds = doc.dimstyles.new("CATALOGO")
-ds.dxf.dimtxt = 2.0 * F; ds.dxf.dimasz = 1.4; ds.dxf.dimblk = "ARCHTICK"; ds.dxf.dimexe = 1.0; ds.dxf.dimexo = 0.8
+ds.dxf.dimtxt = 2.0; ds.dxf.dimasz = 1.4; ds.dxf.dimblk = "ARCHTICK"; ds.dxf.dimexe = 1.0; ds.dxf.dimexo = 0.8
 ds.dxf.dimgap = 0.6; ds.dxf.dimtad = 1; ds.dxf.dimdec = 0; ds.dxf.dimtxsty = "ARIAL"; ds.dxf.dimtih = 0; ds.dxf.dimtoh = 0
 ds.dxf.dimclrd = 7; ds.dxf.dimclre = 7; ds.dxf.dimclrt = 7; ds.dxf.dimtmove = 0
 
@@ -182,7 +180,7 @@ def separador(v, borde, sentido, axis="x", flip=1):
         pl(pts, "1-CONTORNO", 9, True)
 
 
-def g(n, v, at, pos, r=2.1 * F):
+def g(n, v, at, pos, r=2.1):
     """Globo de referencia chico: 'at' en coords reales de la ventana v, 'pos' en mm de papel."""
     a = v.p(*at) if v else at
     dx, dy = a[0] - pos[0], a[1] - pos[1]; d = math.hypot(dx, dy) or 1
@@ -230,22 +228,96 @@ def ajustar(raw, cx, cy, wmax, hmax):
 
 
 # ==================================================================================== HOJA A4
+from ezdxf.math import Matrix44, Vec2
+from ezdxf import bbox as _bbox
+T_TXT, T_GLO, R_GLO, T_DIM = 2.6, 2.5, 2.75, 2.5     # letra grande de la A4 (mm)
+ds.dxf.dimtxt = T_DIM; ds.dxf.dimasz = 1.6
+
+def colocar(ents, k, x, ytop, s=1.3):
+    """Reduce el detalle (geometría) con factor k y lo ubica con su esquina sup. izq. en (x, ytop).
+    Textos, globos y cotas mantienen la letra grande; los globos se separan del dibujo (factor s)
+    para que no se amontonen al achicarlo."""
+    caja = _bbox.extents([e for e in ents if e.dxftype() not in ("TEXT", "DIMENSION")])
+    M = Matrix44.chain(Matrix44.translate(-caja.extmin.x, -caja.extmax.y, 0), Matrix44.scale(k, k, 1),
+                       Matrix44.translate(x, ytop, 0))
+    dib = _bbox.extents([e for e in ents if e.dxf.layer not in ("3-REFERENCIAS", "2-COTAS", "3-TEXTOS")
+                         and e.dxftype() not in ("TEXT", "DIMENSION")])
+    cen = Vec2(M.transform(dib.center))
+    globos, lideres, cotas, numeros = [], [], [], []
+    for e in ents:
+        t = e.dxftype()
+        if t == "DIMENSION":
+            cotas.append(e); continue
+        if t == "TEXT":
+            h = e.dxf.height
+            e.transform(M)
+            e.dxf.height = T_GLO if e.dxf.layer == "3-REFERENCIAS" else (T_TXT if h <= 2.2 else h)
+            if e.dxf.layer == "3-REFERENCIAS": numeros.append(e)
+            continue
+        e.transform(M)
+        if t == "CIRCLE" and e.dxf.layer == "3-REFERENCIAS" and e.dxf.radius > 0.5 * k:
+            globos.append(e)
+        elif t == "LWPOLYLINE" and e.dxf.layer == "3-REFERENCIAS" and len(e) == 2:
+            lideres.append(e)
+    centros = []
+    for c in globos:                       # separar el globo del centro del dibujo y agrandarlo
+        c0 = Vec2(c.dxf.center); c1 = cen + (c0 - cen) * s
+        for n in numeros:
+            if Vec2(n.dxf.align_point).distance(c0) < 0.5: n.dxf.align_point = (c1.x, c1.y, 0)
+        for p in lideres:
+            if Vec2(p[0][:2]).distance(c0) < 3: p.tag_ = c1
+        c.dxf.center = (c1.x, c1.y, 0); c.dxf.radius = R_GLO; centros.append(c1)
+    for p in lideres:                      # el líder arranca en el borde del globo
+        c = getattr(p, "tag_", None)
+        if c is None: continue
+        b = Vec2(p[1][:2]); d = (b - c).normalize()
+        p[0] = (*(c + d * R_GLO), 0, 0, 0)
+    for e in cotas:                        # las cotas se rehacen con la letra grande
+        p1, p2, base = (M.transform(e.dxf.defpoint2), M.transform(e.dxf.defpoint3), M.transform(e.dxf.defpoint))
+        ang, texto = e.dxf.get("angle", 0), e.dxf.get("text", "<>")
+        msp.delete_entity(e)
+        nd = msp.add_linear_dim(base=base, p1=p1, p2=p2, angle=ang, dimstyle="CATALOGO", text=texto,
+                                dxfattribs={"layer": "2-COTAS"})
+        nd.render(); ents.append(nd.dimension)
+    vivos = [e for e in ents if e.is_alive]
+    tot = _bbox.extents(vivos)             # reubicar todo (incluidos globos) en la esquina pedida
+    for e in vivos: e.translate(x - tot.extmin.x, ytop - tot.extmax.y, 0)
+
+def ficha4(x0, x1, x2, ytop, filas, rh=4.1):
+    pl([(x0, ytop), (x2, ytop)], "3-TABLAS", 35)
+    for i, (a, b) in enumerate(filas):
+        y = ytop - (i + 1) * rh
+        if i % 2 == 0: hatch([(x0, y), (x2, y), (x2, y + rh), (x0, y + rh)], "SOLID", layer="3-TABLAS", rgb=(238, 238, 238), color=254)
+        txt(a, x0 + 1, y + 1.0, T_TXT, TA.LEFT, "3-TABLAS", True)
+        txt(b, x1 + 1, y + 1.0, T_TXT, TA.LEFT, "3-TABLAS")
+    yb = ytop - len(filas) * rh
+    pl([(x0, yb), (x2, yb)], "3-TABLAS", 35); pl([(x1, ytop), (x1, yb)], "3-TABLAS", 13)
+    return yb
+
+def lista(titulo, items, ytop, ncol, paso, numerada=True, h=T_TXT):
+    txt(titulo, 15, ytop, 3.0, TA.LEFT, "3-TITULOS", True)
+    pl([(15, ytop - 1.6), (W - 15, ytop - 1.6)], "3-TITULOS", 18)
+    nrow = -(-len(items) // ncol); cw = (W - 30) / ncol
+    for i, r in enumerate(items):
+        col, row = divmod(i, nrow)
+        x, y = 15 + col * cw, ytop - 5.6 - row * paso
+        if numerada:
+            txt(f"{i + 1}", x + 3.6, y, h, TA.RIGHT, "3-REFERENCIAS", True); txt(r, x + 5, y, h)
+        else:
+            txt(r, x, y, h)
+    return ytop - 5.6 - (nrow - 1) * paso
+
 pl([(10, 10), (W - 10, 10), (W - 10, H - 10), (10, H - 10)], "0-MARCO", 50, True)
 txt("CATÁLOGO DE CERRAMIENTOS", 15, 280, 5.5, TA.LEFT, "3-TITULOS", True)
 txt("LÁMINA 4", W - 15, 280, 5.5, TA.RIGHT, "3-TITULOS", True)
-if PAGINA == "vidriado":
-    txt("A  ·  VIDRIADO - MURO CORTINA DE ALUMINIO TIPO STICK", 15, 273, 3.0, TA.LEFT, "3-TITULOS", True)
-    txt("HOJA 1 DE 2", W - 15, 273, 2.6, TA.RIGHT, "3-TITULOS")
-else:
-    txt("B  ·  OPACO - PANEL SÁNDWICH PREMOLDEADO DE H°A° e = 20 cm", 15, 273, 3.0, TA.LEFT, "3-TITULOS", True)
-    txt("HOJA 2 DE 2", W - 15, 273, 2.6, TA.RIGHT, "3-TITULOS")
 pl([(15, 270), (W - 15, 270)], "3-TITULOS", 70)
 
-C30, S30 = math.cos(math.radians(30)), math.sin(math.radians(30))
-if PAGINA == 'vidriado':
+if PAGINA == "vidriado":
+    txt("A  ·  VIDRIADO - MURO CORTINA DE ALUMINIO TIPO STICK", 15, 273, 3.2, TA.LEFT, "3-TITULOS", True)
+    txt("HOJA 1 DE 2", W - 15, 273, 2.8, TA.RIGHT, "3-TITULOS")
+    C30, S30 = math.cos(math.radians(30)), math.sin(math.radians(30))
     _n0 = len(msp)
     # ---------------------------------------------------------------- A1 AXONOMETRÍA
-    titulo_detalle("A1", "AXONOMETRÍA", "S/E", 15, 373, 63)
     C30, S30 = math.cos(math.radians(30)), math.sin(math.radians(30))
     NMOD, MOD, HS, HT, DZ = 3, 1500.0, 900.0, 2600.0, -700.0
     def iso0(x, y, z): return ((x + z) * C30, y + (z - x) * S30)
@@ -284,88 +356,11 @@ if PAGINA == 'vidriado':
     g(6, None, iso(XL, 1300, -Y_P1 + DZ), (76, 326)); g(4, None, iso(MOD * 2.5, HT, TD / 2), (76, 360))
     txt("módulo 1,50 m", 19, 309.5, 2.0)
     
-    for _e in list(msp)[_n0:]:
-        _d = (0, -109) if _e.dxf.layer == '3-TITULOS' else (0, -109)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- A2 FICHA TÉCNICA + DVH
-    titulo_detalle("A2", "FICHA TÉCNICA", "", 82, 373, 100)
-    yb = ficha(82, 116, 182, 369, [
-        ("Sistema", "muro cortina stick, montantes + travesaños"),
-        ("Montante", "aluminio 6063-T6, 50 x 150 mm"),
-        ("Travesaño", "aluminio 6063-T6, 50 x 120 mm"),
-        ("Vidrio visión", "DVH 6 templ. + 12 + 3+3 lam. PVB"),
-        ("Spandrel", "templado 6 esmaltado + lana mineral 50"),
-        ("Fijación vidrio", "presor + tapa + burletes EPDM"),
-        ("Transmit. DVH", "U ≈ 2,8 W/m²·K · Rw ≈ 36 dB"),
-        ("Modulación", "1,50 m · spandrel 0,90 m frente a losa"),
-        ("Montante colgado", "1 piso (4,50 m) desde cada entrepiso"),
-        ("Anclaje", "grapa galv. regulable + bulón M12 inox"),
-        ("Dilatación", "junta 20 mm c/ manguito por piso")])
-    v = V(1, 90, yb - 28)
-    caja(v, 0, 0, 6, 26, "1-VIDRIO", VID, 18); caja(v, 18, 0, 24.76, 26, "1-VIDRIO", VID, 18)
-    pl(v.P([(21.38, 0), (21.38, 26)]), "1-VIDRIO", 9)
-    caja(v, 6, 14, 18, 23, layer="1-ALUMINIO", fill=ALU, lw=9); hatch(v.rect(6, 23, 18, 26), "SOLID", layer="1-EPDM", color=250)
-    for i, (t, xx, yy) in enumerate([("Templado 6 mm (ext.)", 3, 6), ("Cámara 12 mm aire deshidratado", 12, 5),
-                                     ("Laminado 3+3 c/ PVB (int.)", 21.4, 4), ("Separador c/ desecante + sellado", 12, 20)]):
-        y = v.oy + 23 - i * 4.2
-        pl([v.p(xx, yy), (118, y + 0.7), (120, y + 0.7)], "3-REFERENCIAS", 9)
-        txt(t, 121, y, 2.0)
-    txt("DVH esc. 1:1 · e = 24,8 mm", 121, v.oy + 2, 2.0, bold=True)
-    
-    for _e in list(msp)[_n0:]:
-        _d = (3, -110) if _e.dxf.layer == '3-TITULOS' else (3, -110)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- A3 REMATE SUPERIOR 1:10
-    titulo_detalle("A3", "REMATE", "1:10", 186, 373, 47)
-    v = V(10, 197, 342)
-    caja(v, 0, -280, MD, 0, fill=ALU, lw=25)
-    caja(v, -Y_V1, -280, -Y_V1 + 6, -30, "1-VIDRIO", ESM, 18)
-    caja(v, -Y_T1, -280, -Y_P0, -30, fill=TAPA, lw=13)
-    caja(v, MD + 4, -280, MD + 54, -40, "1-AISLACION", (255, 255, 255), 13, "INSUL", 0.05, 90)
-    zo = [(MD + 60, -280), (MD + 180, -280), (MD + 180, -45), (MD + 60, -45)]
-    hatch(v.P(zo), "ANSI31", 0.25, 0, "1-HORMIGON", color=8); pl(v.P(zo), "1-HORMIGON", 25, True)
-    corte_rotura(v, (-Y_T1 - 10, -280), (MD + 190, -280))
-    pl(v.P([(-Y_T1 - 4, -30), (-Y_T1 - 4, 8), (MD + 2, 8), (MD + 2, -12)]), "1-ALUMINIO", 35)
-    pl(v.P([(-Y_T1 - 22, -70), (-Y_T1 - 14, -62), (-Y_T1 - 14, 28), (MD + 196, 18), (MD + 196, -50), (MD + 204, -58)]), "1-CHAPA", 40)
-    g(12, v, (100, 23), (210, 352)); g(13, v, (60, 8), (195, 352)); g(2, v, (-Y_V1 + 3, -150), (190, 316))
-    g(14, v, (MD + 120, -200), (231, 318)); g(10, v, (MD + 30, -220), (214, 312))
-    
-    for _e in list(msp)[_n0:]:
-        _d = (-38, -248) if _e.dxf.layer == '3-TITULOS' else (-38, -234)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- A4 ARRANQUE 1:10
-    titulo_detalle("A4", "ARRANQUE", "1:10", 237, 373, 45)
-    v = V(10, 252, 330)
-    ba = [(-60, -150), (MD + 110, -150), (MD + 110, -60), (-60, -60)]
-    hatch(v.P(ba), "ANSI31", 0.25, 0, "1-HORMIGON", color=8); pl(v.P(ba), "1-HORMIGON", 25, True)
-    pi = [(MD + 20, -60), (MD + 110, -60), (MD + 110, 0), (MD + 20, 0)]
-    hatch(v.P(pi), "AR-SAND", 0.02, 0, "1-HORMIGON", color=8); pl(v.P(pi), "1-HORMIGON", 13, True)
-    ve = [(-130, -150), (-62, -150), (-62, -75), (-130, -78)]
-    hatch(v.P(ve), "AR-CONC", 0.03, 0, "1-HORMIGON", color=8); pl(v.P(ve), "1-HORMIGON", 13, True)
-    gu = [(-4, -60), (MD + 4, -60), (MD + 4, 20), (MD + 1, 20), (MD + 1, -57), (-1, -57), (-1, 20), (-4, 20)]
-    poly(v, gu, fill=ALU, lw=18)
-    pl(v.P([(MD / 2, -55), (MD / 2, -130)]), "1-TORNILLERIA", 25)
-    caja(v, 1, -37, MD - 1, 230, fill=ALU, lw=25)
-    caja(v, -Y_V1, 0, -Y_V1 + 6, 230, "1-VIDRIO", ESM, 18); caja(v, -Y_T1, 0, -Y_P0, 230, fill=TAPA, lw=13)
-    corte_rotura(v, (-Y_T1 - 6, 230), (MD + 6, 230))
-    pl(v.P([(-Y_T1 - 2, 30), (-Y_T1 - 2, -2), (-48, -40), (-64, -40), (-64, -78)]), "1-CHAPA", 35)
-    hatch(v.P([(-4, -60), (-4, -45), (-20, -60)]), "SOLID", layer="1-SELLADOS", color=250)
-    g(21, v, (MD + 2, -20), (280, 336)); g(22, v, (MD / 2, -110), (280, 320)); g(23, v, (-56, -40), (241, 336))
-    g(15, v, (-12, -52), (241, 324)); g(3, v, (MD / 2, 150), (280, 350))
-    
-    for _e in list(msp)[_n0:]:
-        _d = (-85, -187) if _e.dxf.layer == '3-TITULOS' else (-85, -171)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.62, 15, 263 - 5.5, 1.1)
+    titulo_detalle("A1", "AXONOMETRÍA", "S/E", 15, 263, 50)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- A5 MONTANTE - CORTE HORIZONTAL 1:3
-    titulo_detalle("A5", "MONTANTE", "1:3", 15, 301, 59)
     v = V(3, 47, 280)
     caja(v, -MW / 2, -100, MW / 2, 0, fill=ALU, lw=25)
     caja(v, -MW / 2 + 2.5, -100, MW / 2 - 2.5, -14, fill=(255, 255, 255), lw=9)
@@ -389,13 +384,11 @@ if PAGINA == 'vidriado':
     g(8, v, (4, 6), (60, 297)); g(1, v, (55, Y_V0 + 3), (74, 292)); g(9, v, (16, 17), (74, 282))
     g(25, v, (0, -6), (19, 272)); g(3, v, (0, -60), (19, 258))
     
-    for _e in list(msp)[_n0:]:
-        _d = (0, -116) if _e.dxf.layer == '3-TITULOS' else (0, -116)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.6, 15, 205 - 5.5, 1.3)
+    titulo_detalle("A5", "MONTANTE", "1:5", 15, 205, 52)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- A6 TRAVESAÑO 1:3
-    titulo_detalle("A6", "TRAVESAÑO", "1:3", 80, 301, 68)
     v = V(3, 113, 272)
     tubo(v, 0, -MW / 2, TD, MW / 2)
     caja(v, -Y_P0, -8, 0, 8, layer="1-AISLACION", fill=(120, 120, 120), lw=9)
@@ -413,18 +406,16 @@ if PAGINA == 'vidriado':
     pl(v.P([(TD - 30, -MW / 2), (TD - 30, -MW / 2 - 4), (63, -MW / 2 - 4), (63, -70)]), "1-CHAPA", 25)
     for yy in (70, -70): corte_rotura(v, (-Y_T1 - 4, yy), (TD + 4, yy))
     v.dim((0, MW / 2), (TD, MW / 2), 6, text="120")
-    pass
+    v.dim((TD, -MW / 2), (TD, MW / 2), 3, vertical=True, text="50")
     txt("EXT.", v.p(-45, 0)[0], v.p(0, 64)[1], 2.0, TA.MIDDLE_RIGHT)
     g(1, v, (-15, 50), (86, 292)); g(11, v, (-16, 10), (86, 279)); g(2, v, (-Y_V1 + 3, -50), (86, 254))
     g(4, v, (60, 0), (148, 290)); g(10, v, (37, -50), (148, 254)); g(7, v, (-Y_V0 / 2 - 2, -18), (86, 266))
     
-    for _e in list(msp)[_n0:]:
-        _d = (-3, -115) if _e.dxf.layer == '3-TITULOS' else (-3, -115)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.6, 72, 205 - 5.5, 1.3)
+    titulo_detalle("A6", "TRAVESAÑO", "1:5", 72, 205, 50)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- A7 ANCLAJE Y JUNTA EN ENTREPISO 1:5
-    titulo_detalle("A7", "ANCLAJE Y JUNTA DE DILATACIÓN EN ENTREPISO", "1:5", 156, 301, 126)
     v = V(5, 182, 268)
     caja(v, 0, -100, MD, 120, fill=ALU, lw=25); caja(v, 0, 140, MD, 150, fill=ALU, lw=25)
     pl(v.P([(6, 30), (6, 150), (MD - 6, 150), (MD - 6, 30), (6, 30)]), "1-VISTA", 13, lt="DASHED")
@@ -451,11 +442,88 @@ if PAGINA == 'vidriado':
     g(19, v, (MD / 2, 130), (250, 297)); g(20, v, (MD + 68, -60), (262, 264)); g(24, v, (MD + 200, -70), (274, 252))
     g(2, v, (-Y_V1 + 3, -60), (168, 252)); g(10, v, (MD + 30, 100), (262, 292)); g(3, v, (MD / 2, 0), (232, 275))
     
-    for _e in list(msp)[_n0:]:
-        _d = (-143, -178) if _e.dxf.layer == '3-TITULOS' else (-143, -178)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.5, 15, 152 - 5.5, 1.3)
+    titulo_detalle("A7", "ANCLAJE Y JUNTA EN ENTREPISO", "1:10", 15, 152, 92)
     
+    _n0 = len(msp)
+    # ---------------------------------------------------------------- A3 REMATE SUPERIOR 1:10
+    v = V(10, 197, 342)
+    caja(v, 0, -280, MD, 0, fill=ALU, lw=25)
+    caja(v, -Y_V1, -280, -Y_V1 + 6, -30, "1-VIDRIO", ESM, 18)
+    caja(v, -Y_T1, -280, -Y_P0, -30, fill=TAPA, lw=13)
+    caja(v, MD + 4, -280, MD + 54, -40, "1-AISLACION", (255, 255, 255), 13, "INSUL", 0.05, 90)
+    zo = [(MD + 60, -280), (MD + 180, -280), (MD + 180, -45), (MD + 60, -45)]
+    hatch(v.P(zo), "ANSI31", 0.25, 0, "1-HORMIGON", color=8); pl(v.P(zo), "1-HORMIGON", 25, True)
+    corte_rotura(v, (-Y_T1 - 10, -280), (MD + 190, -280))
+    pl(v.P([(-Y_T1 - 4, -30), (-Y_T1 - 4, 8), (MD + 2, 8), (MD + 2, -12)]), "1-ALUMINIO", 35)
+    pl(v.P([(-Y_T1 - 22, -70), (-Y_T1 - 14, -62), (-Y_T1 - 14, 28), (MD + 196, 18), (MD + 196, -50), (MD + 204, -58)]), "1-CHAPA", 40)
+    g(12, v, (100, 23), (210, 352)); g(13, v, (60, 8), (195, 352)); g(2, v, (-Y_V1 + 3, -150), (190, 316))
+    g(14, v, (MD + 120, -200), (231, 318)); g(10, v, (MD + 30, -220), (214, 312))
+    
+    colocar(list(msp)[_n0:], 0.6666666666666666, 113, 152 - 5.5, 1.3)
+    titulo_detalle("A3", "REMATE", "1:15", 113, 152, 38)
+    
+    _n0 = len(msp)
+    # ---------------------------------------------------------------- A4 ARRANQUE 1:10
+    v = V(10, 252, 330)
+    ba = [(-60, -150), (MD + 110, -150), (MD + 110, -60), (-60, -60)]
+    hatch(v.P(ba), "ANSI31", 0.25, 0, "1-HORMIGON", color=8); pl(v.P(ba), "1-HORMIGON", 25, True)
+    pi = [(MD + 20, -60), (MD + 110, -60), (MD + 110, 0), (MD + 20, 0)]
+    hatch(v.P(pi), "AR-SAND", 0.02, 0, "1-HORMIGON", color=8); pl(v.P(pi), "1-HORMIGON", 13, True)
+    ve = [(-130, -150), (-62, -150), (-62, -75), (-130, -78)]
+    hatch(v.P(ve), "AR-CONC", 0.03, 0, "1-HORMIGON", color=8); pl(v.P(ve), "1-HORMIGON", 13, True)
+    gu = [(-4, -60), (MD + 4, -60), (MD + 4, 20), (MD + 1, 20), (MD + 1, -57), (-1, -57), (-1, 20), (-4, 20)]
+    poly(v, gu, fill=ALU, lw=18)
+    pl(v.P([(MD / 2, -55), (MD / 2, -130)]), "1-TORNILLERIA", 25)
+    caja(v, 1, -37, MD - 1, 230, fill=ALU, lw=25)
+    caja(v, -Y_V1, 0, -Y_V1 + 6, 230, "1-VIDRIO", ESM, 18); caja(v, -Y_T1, 0, -Y_P0, 230, fill=TAPA, lw=13)
+    corte_rotura(v, (-Y_T1 - 6, 230), (MD + 6, 230))
+    pl(v.P([(-Y_T1 - 2, 30), (-Y_T1 - 2, -2), (-48, -40), (-64, -40), (-64, -78)]), "1-CHAPA", 35)
+    hatch(v.P([(-4, -60), (-4, -45), (-20, -60)]), "SOLID", layer="1-SELLADOS", color=250)
+    g(21, v, (MD + 2, -20), (280, 336)); g(22, v, (MD / 2, -110), (280, 320)); g(23, v, (-56, -40), (241, 336))
+    g(15, v, (-12, -52), (241, 324)); g(3, v, (MD / 2, 150), (280, 350))
+    
+    colocar(list(msp)[_n0:], 0.6666666666666666, 157, 152 - 5.5, 1.3)
+    titulo_detalle("A4", "ARRANQUE", "1:15", 157, 152, 38)
+    
+    titulo_detalle("A2", "FICHA TÉCNICA", "", 70, 263, 125)
+    yb = ficha4(70, 104, 195, 259, [
+        ("Sistema", "muro cortina stick"), ("Montante", "aluminio 6063-T6, 50 x 150 mm"),
+        ("Travesaño", "aluminio 6063-T6, 50 x 120 mm"), ("Vidrio visión", "DVH 6 templ. + 12 + 3+3 lam. PVB"),
+        ("Spandrel", "templado 6 esmaltado + lana min. 50"), ("Fijación vidrio", "presor + tapa + burletes EPDM"),
+        ("Transmitancia", "DVH U ≈ 2,8 W/m²·K · Rw ≈ 36 dB"), ("Modulación", "1,50 m · spandrel 0,90 m"),
+        ("Montante", "colgado, 1 piso (4,50 m)"), ("Anclaje", "grapa galv. regulable + bulón M12"),
+        ("Dilatación", "junta 20 mm c/ manguito por piso")])
+    # composición del DVH 1:1
+    titulo_detalle("A8", "COMPOSICIÓN DEL DVH", "1:1", 126, 205, 69)
+    v = V(1, 128, 171)
+    caja(v, 0, 0, 6, 26, "1-VIDRIO", VID, 18); caja(v, 18, 0, 24.76, 26, "1-VIDRIO", VID, 18)
+    pl(v.P([(21.38, 0), (21.38, 26)]), "1-VIDRIO", 9)
+    caja(v, 6, 14, 18, 23, layer="1-ALUMINIO", fill=ALU, lw=9); hatch(v.rect(6, 23, 18, 26), "SOLID", layer="1-EPDM", color=250)
+    for i, (t, xx, yy) in enumerate([("templado 6 mm (ext.)", 3, 6), ("cámara 12 mm", 12, 4),
+                                     ("laminado 3+3 PVB (int.)", 21.4, 2), ("separador + desecante", 12, 20)]):
+        y = 195 - i * 5.2
+        pl([v.p(xx, yy), (157, y + 0.9), (158.5, y + 0.9)], "3-REFERENCIAS", 9)
+        txt(t, 159, y, 2.4)
+    txt("e = 24,8 mm", 159, 173.5, 2.6, bold=True)
+    yy = lista("SECUENCIA DE MONTAJE", ["1. Embutir rieles (17) y fijar grapas regulables (16).",
+                                                  "2. Colgar montantes por piso; junta 20 mm c/ manguito (19).",
+                                                  "3. Guía de arranque (21), travesaños (4) y barrera cortafuego (20).",
+                                                  "4. DVH s/ calzos (11), burletes (7), presor (6) y tapas (5).",
+                                                  "5. Cupertina (12), babeta (23) y sellados (15)."], 104, 1, 3.6, numerada=False)
+    lista("REFERENCIAS", [
+    "DVH 6+12+3+3 (ref. 27)", "Spandrel templ. 6 esmaltado (ref. 28)", "Montante alum. 50x150 (ref. 25)", "Travesaño alum. 50x120",
+    "Tapa exterior de aluminio", "Presor de aluminio", "Burletes EPDM int. / ext.", "Aislador (ruptura puente térm.)",
+    "Separador c/ desecante + sellado", "Lana mineral 50 + bandeja (ref. 29)", "Calzo / suplemento EPDM",
+    "Cupertina chapa galv. N°22 (ref. 1)", "Perfil de cierre sup. (ref. 2)", "Zócalo sup. H°A° (ref. 8)",
+    "Sellador silicona neutra (ref. 34)", "Grapa acero galv. regulable (ref. 31)", "Riel de anclaje + bulón T (ref. 18)",
+    "Bulón M12 inox (ref. 31)", "Junta 20 mm + manguito (ref. 32)", "Barrera cortafuego (ref. 30)",
+    "Perfil guía de arranque (ref. 33)", "Broca c/ prisionero Ø9,5 (ref. 55)", "Babeta chapa galv. (ref. 44)",
+    "Viga de borde / losa H°A° (ref. 13)", "Canal de tornillo del montante"], yy - 6, 2, 3.45)
 else:
+    txt("B  ·  OPACO - PANEL SÁNDWICH PREMOLDEADO DE H°A° e = 20 cm", 15, 273, 3.2, TA.LEFT, "3-TITULOS", True)
+    txt("HOJA 2 DE 2", W - 15, 273, 2.8, TA.RIGHT, "3-TITULOS")
+    C30, S30 = math.cos(math.radians(30)), math.sin(math.radians(30))
     EXT_, ALM, INT_ = 60.0, 60.0, 80.0     # hoja ext. / alma EPS / hoja int. portante (mm)
     X1, X2, X3 = EXT_, EXT_ + ALM, EXT_ + ALM + INT_
     
@@ -480,7 +548,6 @@ else:
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- B1 AXONOMETRÍA DEL PANEL
-    titulo_detalle("B1", "AXONOMETRÍA", "S/E", 15, 210, 63)
     HP, LP = 1500.0, 2400.0
     def isoB0(x, y, z): return ((z - x) * C30, y + (x + z) * S30)
     _raw = [isoB0(x, y, z) for x in (-20, X3) for y in (0, HP) for z in (0, LP)]
@@ -514,94 +581,11 @@ else:
     g(4, None, isoB((X1 + X2) / 2, 750, 350), (19, 176)); g(6, None, isoB(0, 1050, 2000), (76, 196))
     txt("ancho 2,40 · alto 1 piso", 19, 147.5, 2.0)
     
-    for _e in list(msp)[_n0:]:
-        _d = (0, 53) if _e.dxf.layer == '3-TITULOS' else (0, 53)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- B2 FICHA TÉCNICA + COMPOSICIÓN
-    titulo_detalle("B2", "FICHA TÉCNICA", "", 82, 210, 100)
-    yb = ficha(82, 116, 182, 206, [
-        ("Sistema", "panel sándwich premoldeado de H°A°"),
-        ("Espesor", "20 cm: 6 ext. + 6 EPS + 8 int. portante"),
-        ("Hormigón", "H-30, malla en cada hoja"),
-        ("Aislación", "EPS 6 cm, conectores fibra de vidrio"),
-        ("Módulo", "2,40 m x 1 piso (4,50 m)"),
-        ("Peso propio", "≈ 340 kg/m²"),
-        ("Transmitancia", "K ≈ 0,5 W/m²·K"),
-        ("Fijación", "bulón pasante M20 al ala de la VL"),
-        ("Dilatación", "agujero ovalado vertical 40x60 + vaina"),
-        ("Apoyo inferior", "viga portapanel + mortero + pasador Ø16"),
-        ("Juntas", "20 mm, fondo de junta + sellador PU")])
-    v = V(5, 90, yb - 26)
-    for x0, x1, f in ((0, X1, H_A), (X2, X3, H_A), (X1, X2, EPS)):
-        p = v.rect(x0, 0, x1, 90); hatch(p, "SOLID", layer="1-HORMIGON", rgb=f, color=9)
-        if f == H_A: hatch(p, "AR-CONC", 0.025, 0, "1-HORMIGON", color=8)
-        pl(p, "1-HORMIGON", 18, True)
-    for yy in (25, 65): pl(v.P([(X1 - 20, yy), (X2 + 25, yy)]), "1-TORNILLERIA", 25)
-    v.dim((0, 90), (X1, 90), 2.5, text="6"); v.dim((X1, 90), (X2, 90), 2.5, text="6"); v.dim((X2, 90), (X3, 90), 2.5, text="8")
-    for i, (t, xx, yy) in enumerate([("Hoja ext. H°A° 6 cm", 30, 45), ("Alma EPS 6 cm", 90, 45),
-                                     ("Hoja int. portante 8 cm", 160, 45), ("Conector de fibra de vidrio", 120, 25)]):
-        y = v.oy + 16 - i * 4.2
-        pl([v.p(xx, yy), (130, y + 0.7), (132, y + 0.7)], "3-REFERENCIAS", 9)
-        txt(t, 133, y, 2.0)
-    txt("composición esc. 1:5 (cm)", 133, v.oy + 20.5, 2.0, bold=True)
-    
-    for _e in list(msp)[_n0:]:
-        _d = (3, 53) if _e.dxf.layer == '3-TITULOS' else (3, 53)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- B3 REMATE SUPERIOR 1:10
-    titulo_detalle("B3", "REMATE", "1:10", 186, 210, 47)
-    v = V(10, 190, 199)
-    panel_v(v, -480, 0, cortes=(-480,))
-    p = v.rect(X3 - 15, -240, X3, -220); hatch(p, "SOLID", layer="1-OCULTAR", rgb=(255, 255, 255), color=7)   # buña
-    pl(v.P([(-25, -60), (-15, -50), (-15, 15), (X3 + 15, 15), (X3 + 15, -30), (X3 + 25, -40)]), "1-CHAPA", 40)    # cupertina
-    pl(v.P([(100, 15), (100, -60)]), "1-TORNILLERIA", 25)
-    cn = [(X3 + 20, -480), (440, -480), (440, -260), (X3 + 20, -260)]                                         # canaleta
-    hormigon(v, cn, 18)
-    hatch(v.P([(X3, -480), (X3 + 20, -480), (X3 + 20, -250), (X3, -250)]), "SOLID", layer="1-AISLACION", rgb=EPS, color=9)
-    ar = [(330 + 70 * math.cos(math.pi + t * math.pi / 10), -262 + 70 * math.sin(math.pi + t * math.pi / 10)) for t in range(11)]
-    hatch(v.P([(260, -262)] + ar + [(400, -262)]), "SOLID", layer="1-OCULTAR", rgb=(255, 255, 255), color=7)
-    pl(v.P([(X3 + 2, -228), (X3 + 22, -228), (X3 + 22, -262), (260, -262)] + ar + [(440, -262)]), "1-CHAPA", 35)   # membrana
-    pl(v.P([(X3 - 12, -226), (X3 + 26, -226), (X3 + 26, -290)]), "1-CHAPA", 25)                                 # babeta
-    corte_rotura(v, (440, -490), (440, -250))
-    g(18, v, (100, 15), (200, 204.5)); g(19, v, (100, -30), (224, 204.5)); g(20, v, (X3 + 26, -260), (231, 195))
-    g(22, v, (360, -420), (231, 160)); g(21, v, (300, -333), (231, 180)); g(23, v, (X3 + 10, -420), (204, 148))
-    g(1, v, (30, -380), (187, 160))
-    
-    for _e in list(msp)[_n0:]:
-        _d = (-38, -23) if _e.dxf.layer == '3-TITULOS' else (-38, -22)
-        _e.translate(_d[0], _d[1], 0)
-    
-    _n0 = len(msp)
-    # ---------------------------------------------------------------- B4 ARRANQUE SOBRE VIGA PORTAPANEL 1:10
-    titulo_detalle("B4", "ARRANQUE", "1:10", 237, 210, 45)
-    v = V(10, 251, 176)
-    hormigon(v, [(0, -150), (X3, -150), (X3, 0), (0, 0)], 25, 0.025)                                         # viga portapanel
-    corte_rotura(v, (-10, -150), (X3 + 10, -150))
-    hatch(v.P([(0, 0), (X3, 0), (X3, 20), (0, 20)]), "AR-SAND", 0.02, 0, "1-HORMIGON", color=8)               # mortero de asiento
-    pl(v.P([(0, 20), (X3, 20)]), "1-HORMIGON", 9)
-    panel_v(v, 20, 170, cortes=(170,))
-    pl(v.P([(150, -120), (150, 150)]), "1-TORNILLERIA", 35)                                                    # pasador Ø16 en vaina
-    pl(v.P([(140, -120), (140, 150), (160, 150), (160, -120), (140, -120)]), "1-VISTA", 9, lt="DASHED")
-    ve = [(-120, -150), (-10, -150), (-10, -50), (-120, -50)]                                                  # vereda
-    hormigon(v, ve, 13, 0.03); corte_rotura(v, (-120, -40), (-120, -160))
-    hatch(v.P([(-10, -150), (0, -150), (0, -50), (-10, -50)]), "SOLID", layer="1-AISLACION", rgb=EPS, color=9)  # junta EPS
-    pass                                                        # pintura asfáltica
-    pl(v.P([(-1, 20), (0, 18), (16, 18), (16, 22), (-1, 22)]), "1-SELLADOS", 35)                               # sellador PU
-    txt("-0,15", v.p(-118, -45)[0], v.p(0, -45)[1] + 0.6, 2.0)
-    g(12, v, (100, -80), (277, 168)); g(11, v, (150, 10), (277, 180)); g(15, v, (-60, -100), (241, 160))
-    g(16, v, (-5, -100), (241, 150)); g(10, v, (8, 20), (241, 184)); g(3, v, (160, 120), (277, 190))
-    
-    for _e in list(msp)[_n0:]:
-        _d = (-86, -91) if _e.dxf.layer == '3-TITULOS' else (-87, -81)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.62, 15, 263 - 5.5, 1.1)
+    titulo_detalle("B1", "AXONOMETRÍA", "S/E", 15, 263, 50)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- B5 JUNTA VERTICAL - PLANTA 1:5
-    titulo_detalle("B5", "JUNTA VERTICAL · PLANTA", "1:5", 15, 138, 76)
     v = V(5, 53, 125)     # x a lo largo de la fachada, y = 0 cara exterior, interior hacia -y
     for s in (-1, 1):
         a, b = s * 10, s * 165
@@ -619,13 +603,11 @@ else:
     g(10, v, (0, -6), (44, 133)); g(1, v, (-100, -30), (19, 131)); g(2, v, (-70, -90), (19, 115))
     g(3, v, (-100, -160), (19, 99)); g(10, v, (0, -X3 + 6), (64, 87))
     
-    for _e in list(msp)[_n0:]:
-        _d = (0, 49) if _e.dxf.layer == '3-TITULOS' else (0, 49)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.5, 15, 199 - 5.5, 1.3)
+    titulo_detalle("B5", "JUNTA VERTICAL", "1:10", 15, 199, 50)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- B6 JUNTA HORIZONTAL - CORTE 1:5
-    titulo_detalle("B6", "JUNTA HORIZ.", "1:5", 95, 138, 51)
     v = V(5, 110, 108)
     panel_v(v, 10, 120, cortes=(120,)); panel_v(v, -120, -10, cortes=(-120,))
     hatch(v.P([(X2, -10), (X3, -10), (X3, 10), (X2, 10)]), "AR-SAND", 0.02, 0, "1-HORMIGON", color=8)        # mortero de asiento
@@ -638,13 +620,55 @@ else:
     g(10, v, (6, 0), (99, 116)); g(11, v, (160, 0), (147, 116)); g(1, v, (30, 60), (99, 128)); g(2, v, (90, -60), (99, 90))
     g(3, v, (170, -80), (147, 92))
     
-    for _e in list(msp)[_n0:]:
-        _d = (-1, 49) if _e.dxf.layer == '3-TITULOS' else (-1, 49)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.5, 71, 199 - 5.5, 1.3)
+    titulo_detalle("B6", "JUNTA HORIZ.", "1:10", 71, 199, 40)
+    
+    _n0 = len(msp)
+    # ---------------------------------------------------------------- B3 REMATE SUPERIOR 1:10
+    v = V(10, 190, 199)
+    panel_v(v, -480, 0, cortes=(-480,))
+    p = v.rect(X3 - 15, -240, X3, -220); hatch(p, "SOLID", layer="1-OCULTAR", rgb=(255, 255, 255), color=7)   # buña
+    pl(v.P([(-25, -60), (-15, -50), (-15, 15), (X3 + 15, 15), (X3 + 15, -30), (X3 + 25, -40)]), "1-CHAPA", 40)    # cupertina
+    pl(v.P([(100, 15), (100, -60)]), "1-TORNILLERIA", 25)
+    cn = [(X3 + 20, -480), (440, -480), (440, -260), (X3 + 20, -260)]                                         # canaleta
+    hormigon(v, cn, 18)
+    hatch(v.P([(X3, -480), (X3 + 20, -480), (X3 + 20, -250), (X3, -250)]), "SOLID", layer="1-AISLACION", rgb=EPS, color=9)
+    ar = [(330 + 70 * math.cos(math.pi + t * math.pi / 10), -262 + 70 * math.sin(math.pi + t * math.pi / 10)) for t in range(11)]
+    hatch(v.P([(260, -262)] + ar + [(400, -262)]), "SOLID", layer="1-OCULTAR", rgb=(255, 255, 255), color=7)
+    pl(v.P([(X3 + 2, -228), (X3 + 22, -228), (X3 + 22, -262), (260, -262)] + ar + [(440, -262)]), "1-CHAPA", 35)   # membrana
+    pl(v.P([(X3 - 12, -226), (X3 + 26, -226), (X3 + 26, -290)]), "1-CHAPA", 25)                                 # babeta
+    corte_rotura(v, (440, -490), (440, -250))
+    g(18, v, (100, 15), (200, 204.5)); g(19, v, (100, -30), (224, 204.5)); g(20, v, (X3 + 26, -260), (231, 195))
+    g(22, v, (360, -420), (231, 160)); g(21, v, (300, -333), (231, 180)); g(23, v, (X3 + 10, -420), (204, 148))
+    g(1, v, (30, -380), (187, 160))
+    
+    colocar(list(msp)[_n0:], 0.6666666666666666, 115, 199 - 5.5, 1.1)
+    titulo_detalle("B3", "REMATE", "1:15", 115, 199, 38)
+    
+    _n0 = len(msp)
+    # ---------------------------------------------------------------- B4 ARRANQUE SOBRE VIGA PORTAPANEL 1:10
+    v = V(10, 251, 176)
+    hormigon(v, [(0, -150), (X3, -150), (X3, 0), (0, 0)], 25, 0.025)                                         # viga portapanel
+    corte_rotura(v, (-10, -150), (X3 + 10, -150))
+    hatch(v.P([(0, 0), (X3, 0), (X3, 20), (0, 20)]), "AR-SAND", 0.02, 0, "1-HORMIGON", color=8)               # mortero de asiento
+    pl(v.P([(0, 20), (X3, 20)]), "1-HORMIGON", 9)
+    panel_v(v, 20, 170, cortes=(170,))
+    pl(v.P([(150, -120), (150, 150)]), "1-TORNILLERIA", 35)                                                    # pasador Ø16 en vaina
+    pl(v.P([(140, -120), (140, 150), (160, 150), (160, -120), (140, -120)]), "1-VISTA", 9, lt="DASHED")
+    ve = [(-120, -150), (-10, -150), (-10, -50), (-120, -50)]                                                  # vereda
+    hormigon(v, ve, 13, 0.03); corte_rotura(v, (-120, -40), (-120, -160))
+    hatch(v.P([(-10, -150), (0, -150), (0, -50), (-10, -50)]), "SOLID", layer="1-AISLACION", rgb=EPS, color=9)  # junta EPS
+    pass                                                        # pintura asfáltica
+    pl(v.P([(-1, 20), (0, 18), (16, 18), (16, 22), (-1, 22)]), "1-SELLADOS", 35)                               # sellador PU
+    txt("-0,15", v.p(-118, -45)[0], v.p(0, -45)[1] + 0.6, 2.0)
+    g(12, v, (100, -80), (277, 168)); g(11, v, (150, 10), (277, 180)); g(15, v, (-60, -100), (241, 160))
+    g(16, v, (-5, -100), (241, 150)); g(10, v, (8, 20), (241, 184)); g(3, v, (160, 120), (277, 190))
+    
+    colocar(list(msp)[_n0:], 0.6666666666666666, 158, 199 - 5.5, 1.1)
+    titulo_detalle("B4", "ARRANQUE", "1:15", 158, 199, 37)
     
     _n0 = len(msp)
     # ---------------------------------------------------------------- B7 FIJACIÓN A LA VIGA VL 1:10
-    titulo_detalle("B7", "FIJACIÓN A LA VIGA VL · BULÓN PASANTE", "1:10", 154, 138, 128)
     v = V(10, 168, 110)
     panel_v(v, -250, 250, maciza=(-150, 150), cortes=(-250, 250))
     p = v.rect(0, -50, 30, 50); hatch(p, "SOLID", layer="1-HORMIGON", rgb=(190, 190, 190), color=9); pl(p, "1-HORMIGON", 13, True)  # rehundido
@@ -660,74 +684,60 @@ else:
     g(6, v, (15, 40), (164, 129)); g(7, v, (400, 0), (240, 128)); g(8, v, (120, 28), (190, 129))
     g(5, v, (90, 100), (204, 129)); g(9, v, (X3 + 10, 200), (226, 129)); g(17, v, (450, -150), (240, 90))
     g(1, v, (30, -200), (176, 84)); g(2, v, (90, -200), (188, 84)); g(3, v, (160, -200), (200, 84))
-    txt("agujero ovalado vertical 40x60:", 246, 118, 2.0); txt("el panel dilata sin trabar la viga", 246, 114.5, 2.0)
-    txt("zona maciza 30x30 sin EPS", 246, 109.5, 2.0); txt("en cada anclaje", 246, 106, 2.0)
     
-    for _e in list(msp)[_n0:]:
-        _d = (-143, -17) if _e.dxf.layer == '3-TITULOS' else (-143, -17)
-        _e.translate(_d[0], _d[1], 0)
+    colocar(list(msp)[_n0:], 0.6666666666666666, 15, 140 - 5.5, 1.15)
+    titulo_detalle("B7", "FIJACIÓN A LA VIGA VL · BULÓN M20", "1:15", 15, 140, 110)
     
-
-def referencias4(titulo, refs, ytop, ncol=3, paso=2.75):
-    txt(titulo, 15, ytop, 2.6, TA.LEFT, "3-TITULOS", True)
-    pl([(15, ytop - 1.4), (W - 15, ytop - 1.4)], "3-TITULOS", 18)
-    nrow = math.ceil(len(refs) / ncol); cw = (W - 30) / ncol
-    for i, r in enumerate(refs):
-        col, row = divmod(i, nrow)
-        x, y = 15 + col * cw, ytop - 4.4 - row * paso
-        txt(f"{i + 1}", x + 2.8, y, 1.85, TA.RIGHT, "3-REFERENCIAS", True)
-        txt(r, x + 4.0, y, 1.85)
-
-def montaje4(titulo, pasos, ytop):
-    txt(titulo, 15, ytop, 2.6, TA.LEFT, "3-TITULOS", True)
-    pl([(15, ytop - 1.4), (W - 15, ytop - 1.4)], "3-TITULOS", 18)
-    for i, p in enumerate(pasos):
-        col, row = (0, i) if i < 3 else (1, i - 3)
-        txt(p, 15 + col * 90, ytop - 4.4 - row * 3.1, 2.0)
-
-if PAGINA == "vidriado":
-    montaje4("SECUENCIA DE MONTAJE", ["1. Embutir rieles (17) y fijar grapas regulables (16).",
-                                                  "2. Colgar montantes por piso; junta 20 mm c/ manguito (19).",
-                                                  "3. Guía de arranque (21), travesaños (4) y barrera cortafuego (20).",
-                                                  "4. DVH s/ calzos (11), burletes (7), presor (6) y tapas (5).",
-                                                  "5. Cupertina (12), babeta (23) y sellados (15)."], 64.5)
-    referencias4("REFERENCIAS", [
-    "DVH 6+12+3+3 (ref. 27)", "Spandrel templ. 6 esmaltado (ref. 28)", "Montante alum. 50x150 (ref. 25)", "Travesaño alum. 50x120",
-    "Tapa exterior de aluminio", "Presor de aluminio", "Burletes EPDM int. / ext.", "Aislador (ruptura puente térm.)",
-    "Separador c/ desecante + sellado", "Lana mineral 50 + bandeja (ref. 29)", "Calzo / suplemento EPDM",
-    "Cupertina chapa galv. N°22 (ref. 1)", "Perfil de cierre sup. (ref. 2)", "Zócalo sup. H°A° (ref. 8)",
-    "Sellador silicona neutra (ref. 34)", "Grapa acero galv. regulable (ref. 31)", "Riel de anclaje + bulón T (ref. 18)",
-    "Bulón M12 inox (ref. 31)", "Junta 20 mm + manguito (ref. 32)", "Barrera cortafuego (ref. 30)",
-    "Perfil guía de arranque (ref. 33)", "Broca c/ prisionero Ø9,5 (ref. 55)", "Babeta chapa galv. (ref. 44)",
-    "Viga de borde / losa H°A° (ref. 13)", "Canal de tornillo del montante"], 49.6)
-else:
-    montaje4("SECUENCIA DE MONTAJE", ["1. Nivelar la viga portapanel (12) s/ neopreno (13).",
+    titulo_detalle("B2", "FICHA TÉCNICA", "", 70, 263, 125)
+    yb = ficha4(70, 104, 195, 259, [
+        ("Sistema", "panel sándwich premoldeado H°A°"), ("Espesor", "20 cm: 6 ext. + 6 EPS + 8 int."),
+        ("Hormigón", "H-30, malla en cada hoja"), ("Aislación", "EPS 6 cm + conectores fibra vidrio"),
+        ("Módulo", "2,40 m x 1 piso (4,50 m)"), ("Peso propio", "≈ 340 kg/m²"),
+        ("Transmitancia", "K ≈ 0,5 W/m²·K"), ("Fijación", "bulón pasante M20 al ala de la VL"),
+        ("Dilatación", "agujero ovalado vertical 40x60"), ("Apoyo inferior", "viga portapanel + mortero + Ø16"),
+        ("Juntas", "20 mm, fondo + sellador PU")])
+    # composición del panel 1:10 y notas de la fijación
+    titulo_detalle("B8", "COMPOSICIÓN", "1:10", 135, 138, 60)
+    v = V(10, 137, 115)
+    for x0, x1, f in ((0, X1, H_A), (X2, X3, H_A), (X1, X2, EPS)):
+        p = v.rect(x0, 0, x1, 160); hatch(p, "SOLID", layer="1-HORMIGON", rgb=f, color=9)
+        if f == H_A: hatch(p, "AR-CONC", 0.02, 0, "1-HORMIGON", color=8)
+        pl(p, "1-HORMIGON", 18, True)
+    for yy_ in (40, 120): pl(v.P([(X1 - 20, yy_), (X2 + 25, yy_)]), "1-TORNILLERIA", 25)
+    for i, (t, xx, yy_) in enumerate([("hoja ext. 6 cm", 30, 80), ("alma EPS 6 cm", 90, 140),
+                                      ("hoja int. 8 cm", 160, 100), ("conector fibra vidrio", 110, 40)]):
+        y = 130 - i * 5.0
+        pl([v.p(xx, yy_), (160, y + 0.9), (161.5, y + 0.9)], "3-REFERENCIAS", 9)
+        txt(t, 162, y, 2.4)
+    txt("agujero ovalado vertical 40x60:", 135, 105, 2.4); txt("el panel dilata sin trabar la viga.", 135, 101.6, 2.4)
+    txt("zona maciza 30x30 sin EPS", 135, 96.6, 2.4); txt("en cada anclaje.", 135, 93.2, 2.4)
+    yy = lista("SECUENCIA DE MONTAJE", ["1. Nivelar la viga portapanel (12) s/ neopreno (13).",
                                                "2. Asentar el panel en mortero c/ pasador Ø16 (11).",
                                                "3. Bulón pasante M20 (7) en agujero ovalado (8) al ala de VL (17).",
                                                "4. Tapar rehundido (6); junta 2 cm lana mineral (9).",
-                                               "5. Fondo de junta + sellador PU (10); cupertina (18) y babeta (20)."], 60.5)
-    referencias4("REFERENCIAS", [
+                                               "5. Fondo de junta + sellador PU (10); cupertina (18) y babeta (20)."], 85.5, 2, 3.5, numerada=False, h=2.25)
+    lista("REFERENCIAS", [
     "Hoja ext. H°A° 6 cm (ref. 26)", "Alma EPS 6 cm (ref. 27)", "Hoja int. portante 8 cm (ref. 26)", "Conectores fibra de vidrio (ref. 27)",
     "Zona maciza 30x30 (ref. 57)", "Rehundido Ø100 c/ mortero (ref. 28)", "Bulón pasante M20 (ref. 29)", "Agujero ovalado 40x60 + vaina (ref. 30)",
     "Junta 2 cm lana mineral (ref. 31)", "Fondo de junta + sellador PU (33-34)", "Mortero + pasador Ø16 (ref. 43)",
     "Viga portapanel 20x85 (ref. 42)", "Neopreno de apoyo (ref. 55)", "Pintura asfáltica (ref. 44)", "Vereda H° peinado (ref. 45)",
     "Junta vereda EPS 1 cm (ref. 56)", "Viga VL doble T 40x70 (ref. 14)", "Cupertina chapa galv. N°22 (ref. 1)",
     "Tornillo c/ arandela neopreno (ref. 2)", "Babeta chapa galv. en buña (ref. 6)", "Membrana asfáltica 4 mm (ref. 3)",
-    "Canaleta H°A° in situ (ref. 9)", "Junta EPS 2 cm + sellador (ref. 8)"], 45.6, paso=2.6)
+    "Canaleta H°A° in situ (ref. 9)", "Junta EPS 2 cm + sellador (ref. 8)"], yy - 6, 2, 3.3)
 
 # ---------------------------------------------------------------- RÓTULO (formato TP FINAL)
-ry0, ry1 = 12, 21
-xs = [15, 39, 118, 158, 195]
+ry0, ry1 = 12, 22
+xs = [15, 41, 118, 158, 195]
 pl([(xs[0], ry0), (xs[-1], ry0), (xs[-1], ry1), (xs[0], ry1)], "0-MARCO", 50, True)
 for x in xs[1:-1]: pl([(x, ry0), (x, ry1)], "0-MARCO", 25)
-txt("TP FINAL", (xs[0] + xs[1]) / 2, 17.8, 3.2, TA.MIDDLE_CENTER, "3-TITULOS", True)
-txt("FECHA: 19/10/2026", (xs[0] + xs[1]) / 2, 13.6, 1.7, TA.MIDDLE_CENTER, "3-TITULOS")
-txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 1.5, 18.9, 1.8)
-txt("ALUMNA: Candelaria Vitale", xs[1] + 1.5, 16.1, 1.8)
-txt("GRUPO: 13", xs[1] + 1.5, 13.3, 1.8)
-txt("NIVEL:", xs[2] + 1.5, 18.9, 1.8); txt("OBS:", xs[2] + 1.5, 16.1, 1.8)
-txt("CONSTRUCCIONES II", (xs[3] + xs[4]) / 2, 17.9, 2.0, TA.MIDDLE_CENTER)
-txt("CATEDRA: ARQ. TUCCI", (xs[3] + xs[4]) / 2, 14.5, 2.0, TA.MIDDLE_CENTER)
+txt("TP FINAL", (xs[0] + xs[1]) / 2, 18.4, 3.6, TA.MIDDLE_CENTER, "3-TITULOS", True)
+txt("FECHA: 19/10/2026", (xs[0] + xs[1]) / 2, 14.0, 1.9, TA.MIDDLE_CENTER, "3-TITULOS")
+txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 1.5, 19.3, 2.1, layer="3-TITULOS")
+txt("ALUMNA: Candelaria Vitale", xs[1] + 1.5, 16.2, 2.1, layer="3-TITULOS")
+txt("GRUPO: 13", xs[1] + 1.5, 13.1, 2.1, layer="3-TITULOS")
+txt("NIVEL:", xs[2] + 1.5, 19.3, 2.1, layer="3-TITULOS"); txt("OBS:", xs[2] + 1.5, 16.2, 2.1, layer="3-TITULOS")
+txt("CONSTRUCCIONES II", (xs[3] + xs[4]) / 2, 18.6, 2.3, TA.MIDDLE_CENTER, "3-TITULOS")
+txt("CATEDRA: ARQ. TUCCI", (xs[3] + xs[4]) / 2, 14.8, 2.3, TA.MIDDLE_CENTER, "3-TITULOS")
 
 doc.saveas(f"{OUT}/Lamina4_Catalogo_{PAGINA.capitalize()}_A4.dxf")
 print("ok", PAGINA)
