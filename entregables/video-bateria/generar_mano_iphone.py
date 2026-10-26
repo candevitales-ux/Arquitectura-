@@ -67,7 +67,14 @@ def una(d, punta, base, grosor):
     d.ellipse(caja(cx - r, cy - r, cx + r, cy + r), fill=UNA)
 
 
-def telefono_frente():
+# pantalla (área visible dentro del marco), en coordenadas sin supersampling
+PANT_X, PANT_Y = 18, 18
+PANT_W, PANT_H = TEL_W - 37, TEL_H - 37
+PANT_RADIO = 40
+
+
+def telefono_con_pantalla(pantalla):
+    """Marco del iPhone 13 de frente con `pantalla` (imagen RGBA de s(PANT_W) x s(PANT_H)) adentro."""
     img = Image.new("RGBA", (s(TEL_W), s(TEL_H)), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     radio = 58
@@ -75,33 +82,43 @@ def telefono_frente():
     d.rounded_rectangle(caja(3, 3, TEL_W - 4, TEL_H - 4), radius=s(radio - 3), outline=MARCO_BRILLO, width=s(2))
     d.rounded_rectangle(caja(7, 7, TEL_W - 8, TEL_H - 8), radius=s(radio - 7), fill=NEGRO)
 
-    # pantalla de bloqueo con fondo degradado
-    bx0, by0, bx1, by1 = 18, 18, TEL_W - 19, TEL_H - 19
-    pw, ph = s(bx1 - bx0), s(by1 - by0)
-    fondo = Image.new("RGBA", (pw, ph))
-    fd = ImageDraw.Draw(fondo)
-    for y in range(ph):
-        t = y / ph
-        c = (int(40 + 90 * t), int(70 + 20 * t), int(170 - 40 * t), 255)
-        fd.line((0, y, pw, y), fill=c)
-    mascara = Image.new("L", (pw, ph), 0)
-    ImageDraw.Draw(mascara).rounded_rectangle((0, 0, pw - 1, ph - 1), radius=s(radio - 18), fill=255)
-    img.paste(fondo, (s(bx0), s(by0)), mascara)
+    mascara = Image.new("L", pantalla.size, 0)
+    ImageDraw.Draw(mascara).rounded_rectangle((0, 0, pantalla.width - 1, pantalla.height - 1),
+                                              radius=s(PANT_RADIO), fill=255)
+    img.paste(pantalla, (s(PANT_X), s(PANT_Y)), mascara)
 
     # notch
     nw, nh = 130, 30
     d.rounded_rectangle(caja((TEL_W - nw) / 2, 10, (TEL_W + nw) / 2, 18 + nh), radius=s(16), fill=NEGRO)
     d.ellipse(caja(TEL_W / 2 + 34, 22, TEL_W / 2 + 44, 32), fill=(30, 34, 50))
-
-    # hora y fecha
-    d.text((s(TEL_W / 2), s(150)), "9:41", font=ImageFont.truetype(FUENTE_BOLD, s(84)),
-           fill=(255, 255, 255), anchor="mm")
-    d.text((s(TEL_W / 2), s(92)), "lunes 26 de octubre", font=ImageFont.truetype(FUENTE, s(19)),
-           fill=(235, 235, 245), anchor="mm")
-    # barra de inicio
-    d.rounded_rectangle(caja(TEL_W / 2 - 62, TEL_H - 36, TEL_W / 2 + 62, TEL_H - 30), radius=s(3),
-                        fill=(255, 255, 255))
     return img
+
+
+def fondo_degradado():
+    pw, ph = s(PANT_W), s(PANT_H)
+    fondo = Image.new("RGBA", (pw, ph))
+    fd = ImageDraw.Draw(fondo)
+    for y in range(ph):
+        t = y / ph
+        fd.line((0, y, pw, y), fill=(int(40 + 90 * t), int(70 + 20 * t), int(170 - 40 * t), 255))
+    return fondo
+
+
+def barra_inicio(d, color=(255, 255, 255)):
+    """Barra de inicio, dibujada sobre la pantalla (coordenadas de pantalla)."""
+    d.rounded_rectangle(caja(PANT_W / 2 - 62, PANT_H - 18, PANT_W / 2 + 62, PANT_H - 12), radius=s(3), fill=color)
+
+
+def telefono_frente():
+    pantalla = fondo_degradado()
+    d = ImageDraw.Draw(pantalla)
+    # hora y fecha
+    d.text((s(PANT_W / 2), s(150 - PANT_Y)), "9:41", font=ImageFont.truetype(FUENTE_BOLD, s(84)),
+           fill=(255, 255, 255), anchor="mm")
+    d.text((s(PANT_W / 2), s(92 - PANT_Y)), "lunes 26 de octubre", font=ImageFont.truetype(FUENTE, s(19)),
+           fill=(235, 235, 245), anchor="mm")
+    barra_inicio(d)
+    return telefono_con_pantalla(pantalla)
 
 
 def telefono_dorso():
