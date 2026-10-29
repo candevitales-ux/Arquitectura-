@@ -11,11 +11,10 @@ img.det { position: absolute; }
 </head><body><div id="page"></div>
 <script type="module">
 const page = document.getElementById('page');
-const base = await (await fetch('/build/corte.svgpart')).text();
-page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
+const base = await (await fetch('/build/lamina.svgpart')).text();
+page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
 let o = '';
-const NODOS = new URLSearchParams(location.search).get('nodos') !== '0';
-if (NODOS) { const m = await import('./detalles_lamina.js'); o = await m.dibujar(page); }
+if (new URLSearchParams(location.search).get('nodos') !== '0') { const m = await import('./detalles_lamina.js'); o = await m.dibujar(page); }
 page.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${o}</svg>`);
 await Promise.all([...document.images].map(im => im.decode()));
 window.READY = true;
