@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 297mm 420mm; margin: 0 }
+html, body { margin: 0; padding: 0; background: #fff; font-family: 'Liberation Sans', Arial, sans-serif; }
+#page { position: relative; width: 297mm; height: 420mm; overflow: hidden; }
+svg { position: absolute; left: 0; top: 0; }
+img.det { position: absolute; }
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="page"></div>
+<script type="module">
+const page = document.getElementById('page');
+const base = await (await fetch('/build/corte.svgpart')).text();
+page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
+let o = '';
+const NODOS = new URLSearchParams(location.search).get('nodos') !== '0';
+if (NODOS) { const m = await import('./detalles_lamina.js'); o = await m.dibujar(page); }
+page.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${o}</svg>`);
+await Promise.all([...document.images].map(im => im.decode()));
+window.READY = true;
+</script></body></html>
