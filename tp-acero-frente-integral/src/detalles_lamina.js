@@ -15,9 +15,12 @@ export async function dibujar(page) {
   const Ln = (p) => o += `<polyline points="${p.map(q => q.join(',')).join(' ')}" fill="none" stroke="#000" stroke-width="0.15"/>`;
   for (const s of SLOTS) {
     const D = DETALLES[s.d], iw = s.W, ih = s.H - HD;
-    const S = escena(D);
+    const S = escena(D); S.want2D = !!globalThis.WANT2D;   // vectores 2D para el DWG
     const r = S.render(Math.round(iw * PX), Math.round(ih * PX), ISO, 1, [0, 0], 2.0, iw * DEN);
     console.log(D.t, 'necesita', (S.fit.needW / DEN).toFixed(1), 'x', (S.fit.needH / DEN).toFixed(1), 'mm; slot', iw, 'x', ih);
+    if (r.vec) { const mx = (x) => s.x + (x + 1) / 2 * iw, my = (y) => s.y + HD + (1 - y) / 2 * ih;
+      (globalThis.VEC2D ||= []).push({ d: D.n, faces: r.vec.faces.map(f => ({ ...f, tris: f.tris.map(t => [mx(t[0]), my(t[1]), mx(t[2]), my(t[3]), mx(t[4]), my(t[5])]) })),
+        edges: r.vec.edges.map(e => [mx(e[0]), my(e[1]), mx(e[2]), my(e[3]), e[4]]) }); }
     const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
     Object.assign(img.style, { left: s.x + 'mm', top: (s.y + HD) + 'mm', width: iw + 'mm', height: ih + 'mm' });
     page.appendChild(img);

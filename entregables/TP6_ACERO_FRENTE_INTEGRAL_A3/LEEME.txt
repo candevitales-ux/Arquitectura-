@@ -1,0 +1,22 @@
+TP N°6 - CORTE INTEGRAL ACERO / FRENTE INTEGRAL - HOJA A3 VERTICAL EN DWG
+La hoja es copia exacta del PDF (Corte_Integral_Acero_Frente_Integral_A3.pdf): mismo corte, globos, referencias,
+detalles 1-2-3 y rótulo, en la misma posición. Todo es vectorial y editable (líneas, rellenos y textos Arial).
+
+DWG_AutoCAD/
+  Corte_Integral_Acero_A3_ESC1-20_medidas_reales.dwg   <- USAR ESTE PARA MEDIR
+     La hoja completa está multiplicada x20: el CORTE (esc 1:20) queda en VERDADERA MAGNITUD,
+     1 unidad = 1 mm real. Con DIST o con cotas leés la medida real directamente
+     (ej.: la escala gráfica del corte, 0 a 1 m, mide 1000).
+     El marco A3 mide 5940 x 8400. Para imprimir: Trazar > Ventana (esquinas del marco) > papel A3 vertical,
+     escala 1:20 (1 mm = 20 unidades) -> sale idéntico a la lámina.
+     Ojo: los DETALLES 1-2-3 están a 1:10 en la hoja, así que en este archivo medirlos da el doble;
+     además son axonometrías (sirven como dibujo, no para medir).
+  Corte_Integral_Acero_A3_hoja_1a1_mm_papel.dwg
+     La misma hoja en mm de papel (marco 297 x 420). Se imprime a escala 1:1.
+     Medidas del corte: lo que mide x 20.
+
+DXF_alternativo/  los mismos dos dibujos en DXF (R2000). Si AutoCAD protesta al abrir un DWG,
+  abrir el DXF (queda igual) y hacer "Guardar como" DWG.
+
+Capas: 0-MARCO-A3 (borde de hoja, no imprimir), 1-CORTE-LINEAS / -RELLENOS / -RAYADOS / -ROJO,
+2-DETALLES-ARISTAS / -RAYADOS, 3-TEXTOS, 3-REFERENCIAS, 3-ROTULO.

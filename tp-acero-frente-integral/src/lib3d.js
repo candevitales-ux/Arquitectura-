@@ -217,6 +217,10 @@ export class Scene3D {
   _vectorize(renderer, cam, W, H) {
     const lines = []; this.scene.traverse(o => { if (o.isLineSegments2) { lines.push(o); o.visible = false; } });
     const glassM = (this.meshes || []).filter(m => MAT[m.key].glass).map(m => m.mesh); glassM.forEach(m => m.visible = false);
+    // rango de profundidad ajustado a la escena (más precisión en el z-buffer; se restituye al final)
+    const n0 = cam.near, f0 = cam.far;
+    { const R = this.bbox.getSize(new THREE.Vector3()).length() / 2 + 50, dc = cam.position.distanceTo(this.bbox.getCenter(new THREE.Vector3()));
+      cam.near = dc - R; cam.far = dc + R; cam.updateProjectionMatrix(); }
     const rt = new THREE.WebGLRenderTarget(W, H);
     this.scene.overrideMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking });
     const bg = this.scene.background; this.scene.background = null;
@@ -268,6 +272,7 @@ export class Scene3D {
     });
     const faces = [...groups.values()].map(G => ({ key: G.key, color: G.color, hatch: G.hatch, glass: G.glass, cap: G.cap, shade: G.shade, depth: G.dsum / G.dn, tris: G.tris }))
       .sort((p, q) => q.depth - p.depth);
+    cam.near = n0; cam.far = f0; cam.updateProjectionMatrix();
     return { faces, edges };
   }
   render(Wpx, Hpx, dir, frac = 0.72, offset = [0, 0], lineW = 3.2, fixedW = null) {

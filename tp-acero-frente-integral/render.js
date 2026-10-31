@@ -14,10 +14,9 @@ const { chromium } = require('playwright-core');
     fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return;}
     const t={'.js':'text/javascript','.html':'text/html','.svg':'image/svg+xml'}[path.extname(f)]||'application/octet-stream';
     r.writeHead(200,{'Content-Type':t});r.end(d);});}).listen(8765);
-  await p.goto('http://localhost:8765/' + inp);
+  await p.goto('http://localhost:8765/' + inp + (process.argv[5] ? '?dwg=1' : ''));
   await p.waitForFunction('window.READY === true', { timeout: 240000 });
-  if (process.argv[5]) require('fs').writeFileSync(process.argv[5], JSON.stringify(await p.evaluate(() => window.EXPORT)));
-  if (process.argv[6]) require('fs').writeFileSync(process.argv[6], JSON.stringify(await p.evaluate(() => ({ VEC2D: window.VEC2D || [], OVERLAY: window.OVERLAY || '' }))));
+  if (process.argv[5]) require('fs').writeFileSync(process.argv[5], JSON.stringify(await p.evaluate(() => globalThis.VEC2D || [])));
   await p.pdf({ path: out + '.pdf', width: W+'mm', height: H+'mm', printBackground: true, pageRanges:'1' });
   await p.screenshot({ path: out + '.png', fullPage: false });
   await b.close(); srv.close();

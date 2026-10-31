@@ -10,6 +10,7 @@ img.det { position: absolute; }
 <script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
 </head><body><div id="page"></div>
 <script type="module">
+if (new URLSearchParams(location.search).get('dwg') === '1') globalThis.WANT2D = true;
 const page = document.getElementById('page');
 const base = await (await fetch('/build/lamina.svgpart')).text();
 page.insertAdjacentHTML('afterbegin', `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="297mm" height="420mm" viewBox="0 0 297 420" font-family="Liberation Sans, Arial, sans-serif">${base}</svg>`);
