@@ -356,8 +356,6 @@ txt("CONSTRUCCIONES II", (xs[3] + xs[4]) / 2, 21.0, 2.6, TA.MIDDLE_CENTER)
 txt("CATEDRA: ARQ. TUCCI", (xs[3] + xs[4]) / 2, 17.0, 2.6, TA.MIDDLE_CENTER)
 
 if FOTOS:
-    txt("Fotos de referencia: Wikimedia Commons (dominio público / licencias CC). Autores y licencias en CREDITOS_FOTOS.txt.",
-        15, 30.2, 2.0)
     import json, shutil
     json.dump(RECTS, open(f"{OUT}/fotos_rects.json", "w"))
     shutil.copy(os.path.join(FOTOS_DIR, "CREDITOS_FOTOS.txt"), f"{OUT}/fotos/CREDITOS_FOTOS.txt")
