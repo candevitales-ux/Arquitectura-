@@ -1,0 +1,4 @@
+CATÁLOGO ESTRUCTURAL DE HORMIGÓN (A3 vertical, formato fichas)
+- PDF: imprimir al 100 % en A3 vertical.
+- DWG: lámina 1:1 en mm de papel. Las imágenes están VINCULADAS: mantener la carpeta "fotos" junto al DWG.
+- Contenido e imágenes: catálogo estructural del grupo (CATALOGO_ESTRUCTURAL.pdf).
