@@ -92,6 +92,16 @@ function materials(key) {
 }
 
 // ---------------------------------------------------------- escena
+// recorte de un polígono por un rectángulo [u0,u1]x[v0,v1] (Sutherland–Hodgman)
+function clipRect(P, [u0, u1, v0, v1]) {
+  const edge = (P, inside, inter) => { const out = []; for (let i = 0; i < P.length; i++) { const a = P[i], b = P[(i + 1) % P.length];
+    if (inside(a)) { out.push(a); if (!inside(b)) out.push(inter(a, b)); } else if (inside(b)) out.push(inter(a, b)); } return out; };
+  const ix = (k) => (a, b) => { const t = (k - a[0]) / (b[0] - a[0]); return [k, a[1] + (b[1] - a[1]) * t]; };
+  const iy = (k) => (a, b) => { const t = (k - a[1]) / (b[1] - a[1]); return [a[0] + (b[0] - a[0]) * t, k]; };
+  P = edge(P, p => p[0] >= u0, ix(u0)); if (P.length) P = edge(P, p => p[0] <= u1, ix(u1));
+  if (P.length) P = edge(P, p => p[1] >= v0, iy(v0)); if (P.length) P = edge(P, p => p[1] <= v1, iy(v1));
+  return P;
+}
 export class Scene3D {
   constructor() {
     this.scene = new THREE.Scene();
@@ -117,6 +127,16 @@ export class Scene3D {
   //  'z': (x=u, y=v, z=w)   'x': (x=w, y=v, z=-u)   'y': (x=u, y=w, z=-v)
   prism(pts, axis, w0, w1, key, holes = [], opt = {}) {
     if (w1 < w0) [w0, w1] = [w1, w0];
+    if (this.crop) {   // recorte opcional del detalle: caja [x0,x1]x[y0,y1]x[z0,z1]
+      const c = this.crop;
+      const win = axis === 'z' ? [c.x0, c.x1, c.y0, c.y1, c.z0, c.z1] : axis === 'x' ? [-c.z1, -c.z0, c.y0, c.y1, c.x0, c.x1] : [c.x0, c.x1, -c.z1, -c.z0, c.y0, c.y1];
+      w0 = Math.max(w0, win[4]); w1 = Math.min(w1, win[5]); if (w1 - w0 < 0.01) return null;
+      pts = clipRect(pts, win); if (pts.length < 3) return null;
+      holes = holes.filter(h => {
+        if (h.circle) { const [cx, cy, r] = h.circle; return cx - r > win[0] && cx + r < win[1] && cy - r > win[2] && cy + r < win[3]; }
+        return h.every(q => q[0] > win[0] && q[0] < win[1] && q[1] > win[2] && q[1] < win[3]);
+      });
+    }
     const sh = new THREE.Shape(pts.map(p => new THREE.Vector2(p[0], p[1])));
     for (const h of holes) {
       const p = new THREE.Path();
@@ -140,6 +160,13 @@ export class Scene3D {
     if (ax === 'y') return this.prism([[x0, -zb], [x1, -zb], [x1, -za], [x0, -za]], 'y', y0, y1, key, [], opt);
   }
   cyl(axis, c1, c2, r, w0, w1, key, seg = 28) {   // c1,c2: coordenadas del centro en el plano normal
+    if (this.crop) {
+      const c = this.crop, inR = (v, a, b) => v >= a && v <= b;
+      const [r1, r2, rw] = axis === 'y' ? [[c.x0, c.x1], [c.z0, c.z1], [c.y0, c.y1]] : axis === 'x' ? [[c.y0, c.y1], [c.z0, c.z1], [c.x0, c.x1]] : [[c.x0, c.x1], [c.y0, c.y1], [c.z0, c.z1]];
+      if (!inR(c1, ...r1) || !inR(c2, ...r2)) return null;
+      const a = Math.max(Math.min(w0, w1), rw[0]), b = Math.min(Math.max(w0, w1), rw[1]); if (b - a < 0.01) return null;
+      w0 = a; w1 = b;
+    }
     const g = new THREE.CylinderGeometry(r, r, Math.abs(w1 - w0), seg);
     const m = (w0 + w1) / 2;
     if (axis === 'y') g.translate(c1, m, c2);
@@ -174,7 +201,11 @@ export class Scene3D {
     }
     return { meshes: out, anchors: this.anchors.map(a => ({ n: a.n, p: [a.p.x, a.p.y, a.p.z] })) };
   }
-  anchor(n, x, y, z) { this.anchors.push({ n, p: new THREE.Vector3(x, y, z) }); }
+  anchor(n, x, y, z) {
+    const c = this.crop;
+    if (c && !(x >= c.x0 - 1 && x <= c.x1 + 1 && y >= c.y0 - 1 && y <= c.y1 + 1 && z >= c.z0 - 1 && z <= c.z1 + 1)) return;
+    this.anchors.push({ n, p: new THREE.Vector3(x, y, z) });
+  }
 
   // render a imagen; devuelve dataURL y posiciones de anclas en [0..1]
   // perspectiva cónica simétrica: cámara sobre el plano de simetría z = zc, mirando al centro
