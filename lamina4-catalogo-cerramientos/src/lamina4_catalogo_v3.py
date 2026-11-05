@@ -542,7 +542,7 @@ pl(v.P([(X3 - 10, -302), (X3 + 26, -302), (X3 + 26, -380)]), "1-CHAPA", 25)     
 lm = [(X3, -1100), (JS, -1100), (JS, -700), (X3, -700)]                                                   # junta c/ lana mineral
 hatch(v.P(lm), "INSUL", 0.03, 90, "1-AISLACION", color=8); pl(v.P(lm), "1-AISLACION", 9, True)
 corte_rotura(v, (JS + 470, -1110), (JS + 470, -600)); corte_rotura(v, (JS - 10, -1100), (JS + 260, -1100))
-txt("pend. 2 %", v.p(JS + 330, -560)[0], v.p(0, -560)[1], 1.8, TA.MIDDLE_CENTER)
+txt("pend. 2 %", v.p(JS + 330, -560)[0], v.p(0, -560)[1], 2.0, TA.MIDDLE_CENTER)
 g(10, v, (100, 18), (199, 205.3)); g(11, v, (100, -40), (224, 205.3)); g(12, v, (X3 + 20, -330), (231, 197))
 g(13, v, (X3 + 2, -450), (231, 187)); g(14, v, (JS + 300, -660), (231, 177)); g(15, v, (JS + 400, -800), (231, 166))
 g(16, v, (JS + 60, -1000), (231, 155)); g(8, v, (X3 + 10, -900), (205, 148)); g(1, v, (25, -800), (189, 160))
@@ -665,7 +665,7 @@ yb_ = ty - len(filas_c) * th
 for x in tx: pl([(x, ty), (x, yb_)], "3-TABLAS", 13)
 for y in (ty, ty - th, yb_): pl([(tx[0], y), (tx[3], y)], "3-TABLAS", 25)
 txt("Estructura y fundación iguales para ambos (detalle en el corte SHAP, en desarrollo). "
-    "Valores de catálogo: verificar con el fabricante.", 15, yb_ - 3.6, 1.9)
+    "Valores de catálogo: verificar con el fabricante.", 15, yb_ - 3.8, 2.0)
 
 # ---------------------------------------------------------------- RÓTULO (formato TP FINAL)
 ry0, ry1 = 12, 26
@@ -673,7 +673,7 @@ xs = [15, 41, 170, 237, 282]
 pl([(xs[0], ry0), (xs[-1], ry0), (xs[-1], ry1), (xs[0], ry1)], "0-MARCO", 50, True)
 for x in xs[1:-1]: pl([(x, ry0), (x, ry1)], "0-MARCO", 25)
 txt("TP FINAL", (xs[0] + xs[1]) / 2, 20.4, 3.4, TA.MIDDLE_CENTER, "3-TITULOS", True)
-txt("FECHA: 19/10/2026", (xs[0] + xs[1]) / 2, 15.2, 1.8, TA.MIDDLE_CENTER)
+txt("FECHA: 05/11/2026", (xs[0] + xs[1]) / 2, 15.0, 2.0, TA.MIDDLE_CENTER)
 txt("DOCENTE: Arq. Tucci y Arq. Cardozo", xs[1] + 2, 22.6, 2.4)
 txt("ALUMNA: Candelaria Vitale", xs[1] + 2, 19.0, 2.4)
 txt("GRUPO: 13", xs[1] + 2, 15.4, 2.4)

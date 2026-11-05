@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.076851852
+2461350.0774652776
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.076851852
+2461350.0774652776
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{7DEAC94B-8E2B-4AF2-83E6-0E8B254D7E59}
+{DCD2D505-0156-431A-A347-14209D079A3C}
   9
 $VERSIONGUID
   2
-{A0924B7A-1F66-43EB-97DF-69243D6802D7}
+{10C1D750-564D-4806-BAEB-9BA74896816E}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -47225,7 +47225,7 @@ AcDbText
  30
 0.0
  40
-1.8
+2.0
   1
 pend. 2 %
   7
@@ -63907,11 +63907,11 @@ AcDbText
  10
 15.0
  20
-30.4
+30.2
  30
 0.0
  40
-1.9
+2.0
   1
 Estructura y fundación iguales para ambos (detalle en el corte SHAP, en desarrollo). Valores de catálogo: verificar con el fabricante.
   7
@@ -63921,7 +63921,7 @@ ARIAL
  11
 15.0
  21
-30.4
+30.2
  31
 0.0
 100
@@ -64091,13 +64091,13 @@ AcDbText
  10
 28.0
  20
-15.2
+15.0
  30
 0.0
  40
-1.8
+2.0
   1
-FECHA: 19/10/2026
+FECHA: 05/11/2026
   7
 ARIAL
  41
@@ -64107,7 +64107,7 @@ ARIAL
  11
 28.0
  21
-15.2
+15.0
  31
 0.0
 100
@@ -65463,7 +65463,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T01:50:40.896553+00:00
+1.4.5 @ 2026-11-05T01:51:33.558406+00:00
   0
 VISUALSTYLE
   5
@@ -72025,7 +72025,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T01:50:40.936097+00:00
+1.4.5 @ 2026-11-05T01:51:33.596860+00:00
   0
 ENDSEC
   0
