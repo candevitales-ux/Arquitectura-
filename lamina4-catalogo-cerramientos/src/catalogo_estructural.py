@@ -73,46 +73,45 @@ def foto(cod, x0, y0, x1, y1):
 
 # ------------------------------------------------------------------ ficha
 CW, CH = 86.0, 116.0
-FILAS = ("UBICACIÓN", "MEDIDAS", "MATERIAL", "HERRAJES", "COLOR", "OBSERVACIONES")
-def ficha(x, yt, cod, desc, datos):
-    rh, rd, lab = 4.6, 4.8, 27.0
+NR, RH = 5, 4.6                        # renglones de texto debajo de la imagen
+def renglones(texto, h, maxw):
+    """Corta el texto en renglones que entran en maxw (mm)."""
+    out, cur = [], ""
+    for w in texto.split():
+        t = (cur + " " + w).strip()
+        if ancho(t, h) * 1.45 <= maxw: cur = t     # margen: el texto renderizado sale bastante más ancho que la medida
+        else: out.append(cur); cur = w
+    return out + [cur]
+
+def ficha(x, yt, cod, titulo, texto):
+    rd, lab = 4.8, 27.0
     xl, xr = x + lab, x + CW
     yb = yt - CH
-    img_t, img_b = yt - 2 * rd, yb + len(FILAS) * rh
+    img_t, img_b = yt - rd, yb + NR * RH
     pl([(x, yt), (xr, yt), (xr, yb), (x, yb)], "3-TABLAS", 35, True)
-    for y in (yt - rd, img_t, img_b): pl([(x, y), (xr, y)], "3-TABLAS", 25)
-    for i in range(1, len(FILAS)): pl([(x, img_b - i * rh), (xr, img_b - i * rh)], "3-TABLAS", 13)
-    pl([(xl, yt), (xl, img_t)], "3-TABLAS", 13); pl([(xl, img_b), (xl, yb)], "3-TABLAS", 13)
+    for y in (img_t, img_b): pl([(x, y), (xr, y)], "3-TABLAS", 25)
+    for i in range(1, NR): pl([(x, img_b - i * RH), (xr, img_b - i * RH)], "3-TABLAS", 13)
+    pl([(xl, yt), (xl, img_t)], "3-TABLAS", 13)
     solido([(x, yt - rd), (xr, yt - rd), (xr, yt), (x, yt)], (232, 232, 232), "3-TABLAS")
     txt("DESCRIPCIÓN", x + 1, yt - rd / 2, 2.2, TA.MIDDLE_LEFT, "3-TABLAS", True, lab - 1.5)
-    txt(desc, xl + (CW - lab) / 2, yt - rd / 2, 2.2, TA.MIDDLE_CENTER, "3-TABLAS", True, CW - lab - 1.2)
-    txt("DENOMINACIÓN", x + 1, yt - 1.5 * rd, 2.2, TA.MIDDLE_LEFT, "3-TABLAS", True, lab - 1.5)
-    txt(cod, xl + (CW - lab) / 2, yt - 1.5 * rd, 2.2, TA.MIDDLE_CENTER, "3-TABLAS")
-    for i, (k, val) in enumerate(zip(FILAS, datos)):
-        y = img_b - (i + 0.5) * rh
-        txt(k, x + 1, y, 2.2, TA.MIDDLE_LEFT, "3-TABLAS", True, lab - 1.5)
-        txt(val, xl + (CW - lab) / 2, y, 2.2, TA.MIDDLE_CENTER, "3-TABLAS", max_ancho=CW - lab - 1.2)
+    txt(titulo, xl + (CW - lab) / 2, yt - rd / 2, 2.2, TA.MIDDLE_CENTER, "3-TABLAS", True, CW - lab - 1.2)
+    lin = renglones(texto, 2.4, CW - 3)
+    assert len(lin) <= NR, (cod, lin)
+    for i, l in enumerate(lin):
+        txt(l, x + 1.5, img_b - (i + 0.5) * RH, 2.4, TA.MIDDLE_LEFT, "3-TABLAS")
     foto(cod, x + 0.8, img_b + 0.8, xr - 0.8, img_t - 0.8)
 
+# títulos y textos del catálogo estructural del grupo (PDF 2), con ortografía corregida
 ELEMENTOS = [
-    ("E-01", "PANEL PI", ("cubiertas y techos de grandes luces", "2,50 m x 10 m", "hormigón premoldeado",
-                          "apoyo s/ ménsula + neopreno", "gris hormigón", "elemento prefabricado (Astori)")),
-    ("E-02", "VIGA DOBLE T PRETENSADA", ("entrepisos y techos", "0,70 m x 12 m", "hormigón pretensado",
-                                         "pernos + neopreno", "gris hormigón", "viga de alta resistencia")),
-    ("E-03", "VIGA L", ("apoyo de losas, paneles y viguetas", "sección en L · según cálculo", "hormigón premoldeado",
-                        "pernos + neopreno", "gris hormigón", "apoya en las ménsulas")),
-    ("E-04", "COLUMNA PREMOLDEADA", ("estructura vertical", "altura variable c/ empalme", "hormigón premoldeado",
-                                     "ménsulas + caño de desagüe", "gris hormigón", "baja las cargas a la fundación")),
-    ("E-05", "MÉNSULA", ("saliente de la columna", "según fabricante", "hormigón (con la columna)",
-                         "pernos + neopreno", "gris hormigón", "recibe las cargas de las vigas")),
-    ("E-06", "APOYO VIGA DOBLE T", ("unión viga doble T - columna", "apoyo 20/25 cm · h/2", "neopreno + pernos",
-                                    "pernos de anclaje", "------", "evita que la viga se desplace")),
-    ("E-07", "APOYO VIGA L", ("unión viga L - columna", "según cálculo", "hormigón premoldeado + neopreno",
-                              "pernos de anclaje", "gris hormigón", "transferencia de cargas")),
-    ("E-08", "APOYO PANEL PI", ("cubierta: panel Pi - columna", "según fabricante", "hormigón premoldeado + neopreno",
-                                "apoyo s/ ménsula", "gris hormigón", "panel Pi marca Astori")),
-    ("E-09", "FUNDACIÓN", ("base de la columna", "según cálculo", "hormigón armado in situ",
-                           "rebaje p/ conexión de columna", "gris hormigón", "la columna encastra en la base")),
+    ("E-01", "PANEL PI", "Panel Pi: elemento prefabricado de 2,50 m x 10 m utilizado habitualmente para cubiertas y techos de grandes luces."),
+    ("E-02", "VIGA DOBLE “T” TENSAR", "Viga tensar doble “T”: viga de alta resistencia pretensada de 0,70 m x 12 m ubicada generalmente en entrepisos y techos."),
+    ("E-03", "VIGA “L”", "Viga “L”: viga con sección en forma de L, es utilizada para los apoyos de losas, paneles, viguetas; generalmente se apoya en las ménsulas de las columnas."),
+    ("E-04", "COLUMNA PREMOLDEADA", "Columna premoldeada: esta columna premoldeada de hormigón está destinada a soportar y transportar todo el peso de la estructura hacia la cimentación."),
+    ("E-05", "MÉNSULA", "Ménsula: la ménsula es una saliente de la columna que está destinada a soportar y recibir las cargas de las vigas."),
+    ("E-06", "APOYO DE VIGA DOBLE “T”", "Ménsula: otra imagen de la ménsula donde se observa su vinculación con una viga doble T, con sus pernos de anclaje y el neopreno, que ayudan a que la viga no se caiga."),
+    ("E-07", "APOYO DE VIGA “L” A COLUMNA", "Apoyo de viga “L” a columna: en esta imagen se observa cómo está colocada la viga L, ya que se requiere un correcto montaje y diseño de la transferencia de cargas."),
+    ("E-08", "APOYO DEL PANEL PI", "Apoyo de panel Pi a columna: se observa con detalle cómo se vincula en la cubierta el panel Pi de marca Astori a la ménsula de la columna premoldeada."),
+    ("E-09", "FUNDACIÓN", "Fundación: soporta las cargas estructurales de grandes luces, además de estar diseñada para encastrarse a la columna y asegurar su estabilidad."),
 ]
 
 # ==================================================================================== HOJA

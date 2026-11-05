@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.6367245372
+2461350.6391319446
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.6367245372
+2461350.6391319446
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-1C9
+14A
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{908F69C7-2D82-4A7D-9485-536828D7DB99}
+{AFAAA23D-29BF-4427-A676-03B91162C69E}
   9
 $VERSIONGUID
   2
-{120FF04F-DCFE-48A7-BE5C-1EC23576FFA8}
+{F13DEFB0-5C2E-4B6A-A34F-BE5F5CFBBF8A}
   9
 $EXTNAMES
 290
@@ -1375,9 +1375,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1391,9 +1391,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -3361,7 +3361,7 @@ ACAD
   0
 APPID
   5
-1C6
+147
 330
 3
 100
@@ -3375,7 +3375,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-1C7
+148
 330
 3
 100
@@ -5701,11 +5701,11 @@ AcDbPolyline
  10
 15.0
  20
-376.4
+293.0
  10
 101.0
  20
-376.4
+293.0
   0
 LWPOLYLINE
   5
@@ -5717,7 +5717,7 @@ AcDbEntity
   8
 3-TABLAS
 370
-25
+13
 100
 AcDbPolyline
  90
@@ -5727,11 +5727,11 @@ AcDbPolyline
  10
 15.0
  20
-297.6
+288.4
  10
 101.0
  20
-297.6
+288.4
   0
 LWPOLYLINE
   5
@@ -5753,11 +5753,11 @@ AcDbPolyline
  10
 15.0
  20
-293.0
+283.8
  10
 101.0
  20
-293.0
+283.8
   0
 LWPOLYLINE
   5
@@ -5779,11 +5779,11 @@ AcDbPolyline
  10
 15.0
  20
-288.40000000000003
+279.2
  10
 101.0
  20
-288.40000000000003
+279.2
   0
 LWPOLYLINE
   5
@@ -5805,67 +5805,15 @@ AcDbPolyline
  10
 15.0
  20
-283.8
+274.6
  10
 101.0
  20
-283.8
+274.6
   0
 LWPOLYLINE
   5
 9E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-279.20000000000005
- 10
-101.0
- 20
-279.20000000000005
-  0
-LWPOLYLINE
-  5
-9F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-274.6
- 10
-101.0
- 20
-274.6
-  0
-LWPOLYLINE
-  5
-A0
 330
 17
 100
@@ -5887,37 +5835,11 @@ AcDbPolyline
  10
 42.0
  20
-376.4
-  0
-LWPOLYLINE
-  5
-A1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-42.0
- 20
-297.6
- 10
-42.0
- 20
-270.0
+381.2
   0
 HATCH
   5
-A2
+9F
 330
 17
 100
@@ -5985,7 +5907,7 @@ SOLID
   0
 TEXT
   5
-A3
+A0
 330
 17
 100
@@ -6021,7 +5943,7 @@ AcDbText
   0
 TEXT
   5
-A4
+A1
 330
 17
 100
@@ -6059,7 +5981,7 @@ AcDbText
   0
 TEXT
   5
-A5
+A2
 330
 17
 100
@@ -6069,61 +5991,23 @@ AcDbEntity
 100
 AcDbText
  10
-16.0
+16.5
  20
-378.8
+290.7
  30
 0.0
  40
-2.2
+2.4
   1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-378.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-A6
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-378.8
- 30
-0.0
- 40
-2.2
-  1
-E-01
+Panel Pi: elemento prefabricado de 2,50 m x 10 m utilizado
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-71.5
+16.5
  21
-378.8
+290.7
  31
 0.0
 100
@@ -6133,7 +6017,7 @@ AcDbText
   0
 TEXT
   5
-A7
+A3
 330
 17
 100
@@ -6143,431 +6027,23 @@ AcDbEntity
 100
 AcDbText
  10
-16.0
- 20
-295.3
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-295.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-A8
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-295.3
- 30
-0.0
- 40
-2.2
-  1
-cubiertas y techos de grandes luces
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-295.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-A9
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-290.70000000000005
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-290.70000000000005
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-290.70000000000005
- 30
-0.0
- 40
-2.2
-  1
-2,50 m x 10 m
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-290.70000000000005
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AB
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
+16.5
  20
 286.1
  30
 0.0
  40
-2.2
+2.4
   1
-MATERIAL
+habitualmente para cubiertas y techos de grandes luces.
   7
-ARIAL-NEGRITA
+ARIAL
  41
 0.9
  11
-16.0
+16.5
  21
 286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-286.1
- 30
-0.0
- 40
-2.2
-  1
-hormigón premoldeado
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AD
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-apoyo s/ ménsula + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-AF
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-B0
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-B1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-272.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-B2
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-elemento prefabricado (Astori)
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-272.3
  31
 0.0
 100
@@ -6577,7 +6053,7 @@ AcDbText
   0
 IMAGE
   5
-B6
+A7
 330
 17
 100
@@ -6591,27 +6067,27 @@ AcDbRasterImage
  10
 15.8
  20
-298.40000000000003
+293.8
  30
 0.0
  11
-0.10230303030303031
+0.11482993197278912
  21
 0.0
  31
 0.0
  12
-6.261108138687125e-18
+7.023471046765613e-18
  22
-0.10225165562913899
+0.11470198675496684
  32
 0.0
  13
-825.0
+735.0
  23
 755.0
 340
-B5
+A6
  70
 3
 280
@@ -6623,7 +6099,7 @@ B5
 283
 0
 360
-B7
+A8
  71
 1
  91
@@ -6633,7 +6109,7 @@ B7
  24
 -0.5
  14
-824.5
+734.5
  24
 754.5
 290
@@ -6641,7 +6117,7 @@ B7
   0
 LWPOLYLINE
   5
-B8
+A9
 330
 17
 100
@@ -6659,23 +6135,23 @@ AcDbPolyline
  10
 15.8
  20
-298.40000000000003
+293.8
  10
 100.2
  20
-298.40000000000003
+293.8
  10
 100.2
  20
-375.59999999999997
+380.4
  10
 15.8
  20
-375.59999999999997
+380.4
   0
 LWPOLYLINE
   5
-B9
+AA
 330
 17
 100
@@ -6709,7 +6185,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-BA
+AB
 330
 17
 100
@@ -6735,7 +6211,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-BB
+AC
 330
 17
 100
@@ -6753,41 +6229,15 @@ AcDbPolyline
  10
 105.5
  20
-376.4
+293.0
  10
 191.5
  20
-376.4
+293.0
   0
 LWPOLYLINE
   5
-BC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-297.6
- 10
-191.5
- 20
-297.6
-  0
-LWPOLYLINE
-  5
-BD
+AD
 330
 17
 100
@@ -6805,41 +6255,15 @@ AcDbPolyline
  10
 105.5
  20
-293.0
+288.4
  10
 191.5
  20
-293.0
+288.4
   0
 LWPOLYLINE
   5
-BE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-288.40000000000003
- 10
-191.5
- 20
-288.40000000000003
-  0
-LWPOLYLINE
-  5
-BF
+AE
 330
 17
 100
@@ -6865,7 +6289,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-C0
+AF
 330
 17
 100
@@ -6883,15 +6307,15 @@ AcDbPolyline
  10
 105.5
  20
-279.20000000000005
+279.2
  10
 191.5
  20
-279.20000000000005
+279.2
   0
 LWPOLYLINE
   5
-C1
+B0
 330
 17
 100
@@ -6917,7 +6341,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-C2
+B1
 330
 17
 100
@@ -6939,7 +6363,545 @@ AcDbPolyline
  10
 132.5
  20
-376.4
+381.2
+  0
+HATCH
+  5
+B2
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+ 62
+9
+420
+15263976
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+105.5
+ 20
+381.2
+ 10
+191.5
+ 20
+381.2
+ 10
+191.5
+ 20
+386.0
+ 10
+105.5
+ 20
+386.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+TEXT
+  5
+B3
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+106.5
+ 20
+383.6
+ 30
+0.0
+ 40
+2.2
+  1
+DESCRIPCIÓN
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 11
+106.5
+ 21
+383.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+B4
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+162.0
+ 20
+383.6
+ 30
+0.0
+ 40
+2.2
+  1
+VIGA DOBLE “T” TENSAR
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 72
+1
+ 11
+162.0
+ 21
+383.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+B5
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+290.7
+ 30
+0.0
+ 40
+2.4
+  1
+Viga tensar doble “T”: viga de alta resistencia pretensada
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+290.7
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+B6
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+286.1
+ 30
+0.0
+ 40
+2.4
+  1
+de 0,70 m x 12 m ubicada generalmente en entrepisos y
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+286.1
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+B7
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+281.5
+ 30
+0.0
+ 40
+2.4
+  1
+techos.
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+281.5
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+IMAGE
+  5
+B9
+330
+17
+100
+AcDbEntity
+  8
+1-DIBUJO
+100
+AcDbRasterImage
+ 90
+0
+ 10
+106.3
+ 20
+293.8
+ 30
+0.0
+ 11
+0.11870604781997186
+ 21
+0.0
+ 31
+0.0
+ 12
+7.264000877134298e-18
+ 22
+0.11863013698630133
+ 32
+0.0
+ 13
+711.0
+ 23
+730.0
+340
+B8
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
+BA
+ 71
+1
+ 91
+2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+710.5
+ 24
+729.5
+290
+0
+  0
+LWPOLYLINE
+  5
+BB
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+106.3
+ 20
+293.8
+ 10
+190.7
+ 20
+293.8
+ 10
+190.7
+ 20
+380.4
+ 10
+106.3
+ 20
+380.4
+  0
+LWPOLYLINE
+  5
+BC
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+35
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+196.0
+ 20
+386.0
+ 10
+282.0
+ 20
+386.0
+ 10
+282.0
+ 20
+270.0
+ 10
+196.0
+ 20
+270.0
+  0
+LWPOLYLINE
+  5
+BD
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+381.2
+ 10
+282.0
+ 20
+381.2
+  0
+LWPOLYLINE
+  5
+BE
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+293.0
+ 10
+282.0
+ 20
+293.0
+  0
+LWPOLYLINE
+  5
+BF
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+288.4
+ 10
+282.0
+ 20
+288.4
+  0
+LWPOLYLINE
+  5
+C0
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+283.8
+ 10
+282.0
+ 20
+283.8
+  0
+LWPOLYLINE
+  5
+C1
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+279.2
+ 10
+282.0
+ 20
+279.2
+  0
+LWPOLYLINE
+  5
+C2
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+274.6
+ 10
+282.0
+ 20
+274.6
   0
 LWPOLYLINE
   5
@@ -6959,13 +6921,13 @@ AcDbPolyline
  70
 0
  10
-132.5
+223.0
  20
-297.6
+386.0
  10
-132.5
+223.0
  20
-270.0
+381.2
   0
 HATCH
   5
@@ -7011,19 +6973,19 @@ SOLID
  93
 4
  10
-105.5
+196.0
  20
 381.2
  10
-191.5
+282.0
  20
 381.2
  10
-191.5
+282.0
  20
 386.0
  10
-105.5
+196.0
  20
 386.0
  97
@@ -7047,7 +7009,7 @@ AcDbEntity
 100
 AcDbText
  10
-106.5
+197.0
  20
 383.6
  30
@@ -7061,7 +7023,7 @@ ARIAL-NEGRITA
  41
 0.9
  11
-106.5
+197.0
  21
 383.6
  31
@@ -7083,7 +7045,7 @@ AcDbEntity
 100
 AcDbText
  10
-162.0
+252.5
  20
 383.6
  30
@@ -7091,7 +7053,7 @@ AcDbText
  40
 2.2
   1
-VIGA DOBLE T PRETENSADA
+VIGA “L”
   7
 ARIAL-NEGRITA
  41
@@ -7099,7 +7061,7 @@ ARIAL-NEGRITA
  72
 1
  11
-162.0
+252.5
  21
 383.6
  31
@@ -7121,23 +7083,23 @@ AcDbEntity
 100
 AcDbText
  10
-106.5
+197.5
  20
-378.8
+290.7
  30
 0.0
  40
-2.2
+2.4
   1
-DENOMINACIÓN
+Viga “L”: viga con sección en forma de L, es utilizada para
   7
-ARIAL-NEGRITA
+ARIAL
  41
 0.9
  11
-106.5
+197.5
  21
-378.8
+290.7
  31
 0.0
 100
@@ -7157,25 +7119,23 @@ AcDbEntity
 100
 AcDbText
  10
-162.0
+197.5
  20
-378.8
+286.1
  30
 0.0
  40
-2.2
+2.4
   1
-E-02
+los apoyos de losas, paneles, viguetas; generalmente se
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-162.0
+197.5
  21
-378.8
+286.1
  31
 0.0
 100
@@ -7195,61 +7155,23 @@ AcDbEntity
 100
 AcDbText
  10
-106.5
+197.5
  20
-295.3
+281.5
  30
 0.0
  40
-2.2
+2.4
   1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-295.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-CA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-295.3
- 30
-0.0
- 40
-2.2
-  1
-entrepisos y techos
+apoya en las ménsulas de las columnas.
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-162.0
+197.5
  21
-295.3
+281.5
  31
 0.0
 100
@@ -7257,7 +7179,7 @@ AcDbText
  73
 2
   0
-TEXT
+IMAGE
   5
 CB
 330
@@ -7265,73 +7187,63 @@ CB
 100
 AcDbEntity
   8
-3-TABLAS
+1-DIBUJO
 100
-AcDbText
+AcDbRasterImage
+ 90
+0
  10
-106.5
+196.8
  20
-290.70000000000005
+293.8
  30
 0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
  11
-106.5
+0.11870604781997184
  21
-290.70000000000005
+0.0
  31
 0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
+ 12
+7.264000877134298e-18
+ 22
+0.11863013698630133
+ 32
+0.0
+ 13
+711.0
+ 23
+730.0
+340
+CA
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
 CC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-290.70000000000005
- 30
-0.0
- 40
-2.2
-  1
-0,70 m x 12 m
-  7
-ARIAL
- 41
-0.9
- 72
+ 71
 1
- 11
-162.0
- 21
-290.70000000000005
- 31
-0.0
-100
-AcDbText
- 73
+ 91
 2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+710.5
+ 24
+729.5
+290
+0
   0
-TEXT
+LWPOLYLINE
   5
 CD
 330
@@ -7340,34 +7252,32 @@ CD
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
+AcDbPolyline
+ 90
+4
+ 70
+1
  10
-106.5
+196.8
  20
-286.1
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
+293.8
+ 10
+281.2
+ 20
+293.8
+ 10
+281.2
+ 20
+380.4
+ 10
+196.8
+ 20
+380.4
   0
-TEXT
+LWPOLYLINE
   5
 CE
 330
@@ -7376,36 +7286,32 @@ CE
 AcDbEntity
   8
 3-TABLAS
+370
+35
 100
-AcDbText
- 10
-162.0
- 20
-286.1
- 30
-0.0
- 40
-2.2
-  1
-hormigón pretensado
-  7
-ARIAL
- 41
-0.9
- 72
+AcDbPolyline
+ 90
+4
+ 70
 1
- 11
-162.0
- 21
-286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
+ 10
+15.0
+ 20
+266.0
+ 10
+101.0
+ 20
+266.0
+ 10
+101.0
+ 20
+150.0
+ 10
+15.0
+ 20
+150.0
   0
-TEXT
+LWPOLYLINE
   5
 CF
 330
@@ -7414,34 +7320,24 @@ CF
 AcDbEntity
   8
 3-TABLAS
+370
+25
 100
-AcDbText
- 10
-106.5
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+261.2
+ 10
+101.0
+ 20
+261.2
   0
-TEXT
+LWPOLYLINE
   5
 D0
 330
@@ -7450,36 +7346,24 @@ D0
 AcDbEntity
   8
 3-TABLAS
+370
+25
 100
-AcDbText
- 10
-162.0
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-pernos + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+173.0
+ 10
+101.0
+ 20
+173.0
   0
-TEXT
+LWPOLYLINE
   5
 D1
 330
@@ -7488,34 +7372,24 @@ D1
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-106.5
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+168.4
+ 10
+101.0
+ 20
+168.4
   0
-TEXT
+LWPOLYLINE
   5
 D2
 330
@@ -7524,36 +7398,24 @@ D2
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-162.0
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+163.8
+ 10
+101.0
+ 20
+163.8
   0
-TEXT
+LWPOLYLINE
   5
 D3
 330
@@ -7562,34 +7424,24 @@ D3
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-106.5
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-272.3
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+159.2
+ 10
+101.0
+ 20
+159.2
   0
-TEXT
+LWPOLYLINE
   5
 D4
 330
@@ -7598,36 +7450,50 @@ D4
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-162.0
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-viga de alta resistencia
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-272.3
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+15.0
+ 20
+154.6
+ 10
+101.0
+ 20
+154.6
   0
-IMAGE
+LWPOLYLINE
+  5
+D5
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+42.0
+ 20
+266.0
+ 10
+42.0
+ 20
+261.2
+  0
+HATCH
   5
 D6
 330
@@ -7635,1549 +7501,105 @@ D6
 100
 AcDbEntity
   8
-1-DIBUJO
+3-TABLAS
+ 62
+9
+420
+15263976
 100
-AcDbRasterImage
- 90
-0
+AcDbHatch
  10
-106.3
+0.0
  20
-298.40000000000003
+0.0
  30
 0.0
- 11
-0.10576441102756891
- 21
+210
 0.0
- 31
+220
 0.0
- 12
-6.475529650285999e-18
- 22
-0.10575342465753415
- 32
-0.0
- 13
-798.0
- 23
-730.0
-340
-D5
+230
+1.0
+  2
+SOLID
  70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-D7
- 71
 1
+ 71
+0
  91
-2
- 14
--0.5
- 24
--0.5
- 14
-797.5
- 24
-729.5
-290
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+15.0
+ 20
+261.2
+ 10
+101.0
+ 20
+261.2
+ 10
+101.0
+ 20
+266.0
+ 10
+15.0
+ 20
+266.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
 0
   0
-LWPOLYLINE
+TEXT
+  5
+D7
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+16.0
+ 20
+263.6
+ 30
+0.0
+ 40
+2.2
+  1
+DESCRIPCIÓN
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 11
+16.0
+ 21
+263.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
   5
 D8
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-106.3
- 20
-298.40000000000003
- 10
-190.7
- 20
-298.40000000000003
- 10
-190.7
- 20
-375.59999999999997
- 10
-106.3
- 20
-375.59999999999997
-  0
-LWPOLYLINE
-  5
-D9
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-196.0
- 20
-386.0
- 10
-282.0
- 20
-386.0
- 10
-282.0
- 20
-270.0
- 10
-196.0
- 20
-270.0
-  0
-LWPOLYLINE
-  5
-DA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-381.2
- 10
-282.0
- 20
-381.2
-  0
-LWPOLYLINE
-  5
-DB
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-376.4
- 10
-282.0
- 20
-376.4
-  0
-LWPOLYLINE
-  5
-DC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-297.6
- 10
-282.0
- 20
-297.6
-  0
-LWPOLYLINE
-  5
-DD
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-293.0
- 10
-282.0
- 20
-293.0
-  0
-LWPOLYLINE
-  5
-DE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-288.40000000000003
- 10
-282.0
- 20
-288.40000000000003
-  0
-LWPOLYLINE
-  5
-DF
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-283.8
- 10
-282.0
- 20
-283.8
-  0
-LWPOLYLINE
-  5
-E0
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-279.20000000000005
- 10
-282.0
- 20
-279.20000000000005
-  0
-LWPOLYLINE
-  5
-E1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-274.6
- 10
-282.0
- 20
-274.6
-  0
-LWPOLYLINE
-  5
-E2
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-386.0
- 10
-223.0
- 20
-376.4
-  0
-LWPOLYLINE
-  5
-E3
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-297.6
- 10
-223.0
- 20
-270.0
-  0
-HATCH
-  5
-E4
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-196.0
- 20
-381.2
- 10
-282.0
- 20
-381.2
- 10
-282.0
- 20
-386.0
- 10
-196.0
- 20
-386.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-E5
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-383.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-383.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-E6
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-383.6
- 30
-0.0
- 40
-2.2
-  1
-VIGA L
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-383.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-E7
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-378.8
- 30
-0.0
- 40
-2.2
-  1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-378.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-E8
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-378.8
- 30
-0.0
- 40
-2.2
-  1
-E-03
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-378.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-E9
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-295.3
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-295.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-EA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-295.3
- 30
-0.0
- 40
-2.2
-  1
-apoyo de losas, paneles y viguetas
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-295.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-EB
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-290.70000000000005
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-290.70000000000005
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-EC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-290.70000000000005
- 30
-0.0
- 40
-2.2
-  1
-sección en L · según cálculo
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-290.70000000000005
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-ED
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-286.1
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-EE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-286.1
- 30
-0.0
- 40
-2.2
-  1
-hormigón premoldeado
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-286.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-EF
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-F0
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-281.5
- 30
-0.0
- 40
-2.2
-  1
-pernos + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-281.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-F1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-F2
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-276.90000000000003
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-276.90000000000003
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-F3
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-272.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-F4
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-272.3
- 30
-0.0
- 40
-2.2
-  1
-apoya en las ménsulas
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-272.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-IMAGE
-  5
-F6
-330
-17
-100
-AcDbEntity
-  8
-1-DIBUJO
-100
-AcDbRasterImage
- 90
-0
- 10
-196.8
- 20
-298.40000000000003
- 30
-0.0
- 11
-0.1057644110275689
- 21
-0.0
- 31
-0.0
- 12
-6.475529650285999e-18
- 22
-0.10575342465753415
- 32
-0.0
- 13
-798.0
- 23
-730.0
-340
-F5
- 70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-F7
- 71
-1
- 91
-2
- 14
--0.5
- 24
--0.5
- 14
-797.5
- 24
-729.5
-290
-0
-  0
-LWPOLYLINE
-  5
-F8
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-196.8
- 20
-298.40000000000003
- 10
-281.2
- 20
-298.40000000000003
- 10
-281.2
- 20
-375.59999999999997
- 10
-196.8
- 20
-375.59999999999997
-  0
-LWPOLYLINE
-  5
-F9
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-15.0
- 20
-266.0
- 10
-101.0
- 20
-266.0
- 10
-101.0
- 20
-150.0
- 10
-15.0
- 20
-150.0
-  0
-LWPOLYLINE
-  5
-FA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-261.2
- 10
-101.0
- 20
-261.2
-  0
-LWPOLYLINE
-  5
-FB
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-256.4
- 10
-101.0
- 20
-256.4
-  0
-LWPOLYLINE
-  5
-FC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-177.6
- 10
-101.0
- 20
-177.6
-  0
-LWPOLYLINE
-  5
-FD
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-173.0
- 10
-101.0
- 20
-173.0
-  0
-LWPOLYLINE
-  5
-FE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-168.4
- 10
-101.0
- 20
-168.4
-  0
-LWPOLYLINE
-  5
-FF
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-163.79999999999998
- 10
-101.0
- 20
-163.79999999999998
-  0
-LWPOLYLINE
-  5
-100
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-159.2
- 10
-101.0
- 20
-159.2
-  0
-LWPOLYLINE
-  5
-101
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-154.6
- 10
-101.0
- 20
-154.6
-  0
-LWPOLYLINE
-  5
-102
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-42.0
- 20
-266.0
- 10
-42.0
- 20
-256.4
-  0
-LWPOLYLINE
-  5
-103
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-42.0
- 20
-177.6
- 10
-42.0
- 20
-150.0
-  0
-HATCH
-  5
-104
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-15.0
- 20
-261.2
- 10
-101.0
- 20
-261.2
- 10
-101.0
- 20
-266.0
- 10
-15.0
- 20
-266.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-105
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-263.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-263.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-106
 330
 17
 100
@@ -9215,7 +7637,7 @@ AcDbText
   0
 TEXT
   5
-107
+D9
 330
 17
 100
@@ -9225,169 +7647,21 @@ AcDbEntity
 100
 AcDbText
  10
-16.0
- 20
-258.8
- 30
-0.0
- 40
-2.2
-  1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-258.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-108
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-258.8
- 30
-0.0
- 40
-2.2
-  1
-E-04
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-258.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-109
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-10A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-estructura vertical
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-10B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
+16.5
  20
 170.7
  30
 0.0
  40
-2.2
+2.4
   1
-MEDIDAS
+Columna premoldeada: esta columna premoldeada de
   7
-ARIAL-NEGRITA
+ARIAL
  41
 0.9
  11
-16.0
+16.5
  21
 170.7
  31
@@ -9399,7 +7673,7 @@ AcDbText
   0
 TEXT
   5
-10C
+DA
 330
 17
 100
@@ -9409,59 +7683,21 @@ AcDbEntity
 100
 AcDbText
  10
-71.5
- 20
-170.7
- 30
-0.0
- 40
-2.2
-  1
-altura variable c/ empalme
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-170.7
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-10D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
+16.5
  20
 166.1
  30
 0.0
  40
-2.2
+2.4
   1
-MATERIAL
+hormigón está destinada a soportar y transportar todo el
   7
-ARIAL-NEGRITA
+ARIAL
  41
 0.9
  11
-16.0
+16.5
  21
 166.1
  31
@@ -9473,7 +7709,7 @@ AcDbText
   0
 TEXT
   5
-10E
+DB
 330
 17
 100
@@ -9483,247 +7719,23 @@ AcDbEntity
 100
 AcDbText
  10
-71.5
- 20
-166.1
- 30
-0.0
- 40
-2.2
-  1
-hormigón premoldeado
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-166.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-10F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
+16.5
  20
 161.5
  30
 0.0
  40
-2.2
+2.4
   1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-161.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-110
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-161.5
- 30
-0.0
- 40
-2.2
-  1
-ménsulas + caño de desagüe
+peso de la estructura hacia la cimentación.
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-71.5
+16.5
  21
 161.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-111
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-156.9
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-156.9
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-112
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-156.9
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-156.9
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-113
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-152.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-114
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-baja las cargas a la fundación
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-152.3
  31
 0.0
 100
@@ -9733,7 +7745,7 @@ AcDbText
   0
 IMAGE
   5
-116
+DD
 330
 17
 100
@@ -9747,7 +7759,7 @@ AcDbRasterImage
  10
 15.8
  20
-178.4
+173.8
  30
 0.0
  11
@@ -9757,17 +7769,17 @@ AcDbRasterImage
  31
 0.0
  12
-6.115312606350299e-18
+6.109125161645204e-18
  22
-0.09987063389391974
+0.09976958525345618
  32
 0.0
  13
 846.0
  23
-773.0
+868.0
 340
-115
+DC
  70
 3
 280
@@ -9779,7 +7791,7 @@ AcDbRasterImage
 283
 0
 360
-117
+DE
  71
 1
  91
@@ -9791,13 +7803,13 @@ AcDbRasterImage
  14
 845.5
  24
-772.5
+867.5
 290
 0
   0
 LWPOLYLINE
   5
-118
+DF
 330
 17
 100
@@ -9815,23 +7827,23 @@ AcDbPolyline
  10
 15.8
  20
-178.4
+173.8
  10
 100.2
  20
-178.4
+173.8
  10
 100.2
  20
-255.59999999999997
+260.4
  10
 15.8
  20
-255.59999999999997
+260.4
   0
 LWPOLYLINE
   5
-119
+E0
 330
 17
 100
@@ -9865,7 +7877,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-11A
+E1
 330
 17
 100
@@ -9891,7 +7903,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-11B
+E2
 330
 17
 100
@@ -9909,58 +7921,6 @@ AcDbPolyline
  10
 105.5
  20
-256.4
- 10
-191.5
- 20
-256.4
-  0
-LWPOLYLINE
-  5
-11C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-177.6
- 10
-191.5
- 20
-177.6
-  0
-LWPOLYLINE
-  5
-11D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
 173.0
  10
 191.5
@@ -9969,7 +7929,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-11E
+E3
 330
 17
 100
@@ -9995,7 +7955,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-11F
+E4
 330
 17
 100
@@ -10013,15 +7973,15 @@ AcDbPolyline
  10
 105.5
  20
-163.79999999999998
+163.8
  10
 191.5
  20
-163.79999999999998
+163.8
   0
 LWPOLYLINE
   5
-120
+E5
 330
 17
 100
@@ -10047,7 +8007,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-121
+E6
 330
 17
 100
@@ -10073,7 +8033,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-122
+E7
 330
 17
 100
@@ -10095,37 +8055,11 @@ AcDbPolyline
  10
 132.5
  20
-256.4
-  0
-LWPOLYLINE
-  5
-123
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-132.5
- 20
-177.6
- 10
-132.5
- 20
-150.0
+261.2
   0
 HATCH
   5
-124
+E8
 330
 17
 100
@@ -10193,7 +8127,7 @@ SOLID
   0
 TEXT
   5
-125
+E9
 330
 17
 100
@@ -10229,7 +8163,7 @@ AcDbText
   0
 TEXT
   5
-126
+EA
 330
 17
 100
@@ -10267,7 +8201,1625 @@ AcDbText
   0
 TEXT
   5
-127
+EB
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+170.7
+ 30
+0.0
+ 40
+2.4
+  1
+Ménsula: la ménsula es una saliente de la columna que
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+170.7
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+EC
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+166.1
+ 30
+0.0
+ 40
+2.4
+  1
+está destinada a soportar y recibir las cargas de las vigas.
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+166.1
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+IMAGE
+  5
+EE
+330
+17
+100
+AcDbEntity
+  8
+1-DIBUJO
+100
+AcDbRasterImage
+ 90
+0
+ 10
+106.3
+ 20
+173.8
+ 30
+0.0
+ 11
+0.11609353507565336
+ 21
+0.0
+ 31
+0.0
+ 12
+7.108204611672973e-18
+ 22
+0.11608579088471846
+ 32
+0.0
+ 13
+727.0
+ 23
+746.0
+340
+ED
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
+EF
+ 71
+1
+ 91
+2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+726.5
+ 24
+745.5
+290
+0
+  0
+LWPOLYLINE
+  5
+F0
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+106.3
+ 20
+173.8
+ 10
+190.7
+ 20
+173.8
+ 10
+190.7
+ 20
+260.4
+ 10
+106.3
+ 20
+260.4
+  0
+LWPOLYLINE
+  5
+F1
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+35
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+196.0
+ 20
+266.0
+ 10
+282.0
+ 20
+266.0
+ 10
+282.0
+ 20
+150.0
+ 10
+196.0
+ 20
+150.0
+  0
+LWPOLYLINE
+  5
+F2
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+261.2
+ 10
+282.0
+ 20
+261.2
+  0
+LWPOLYLINE
+  5
+F3
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+173.0
+ 10
+282.0
+ 20
+173.0
+  0
+LWPOLYLINE
+  5
+F4
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+168.4
+ 10
+282.0
+ 20
+168.4
+  0
+LWPOLYLINE
+  5
+F5
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+163.8
+ 10
+282.0
+ 20
+163.8
+  0
+LWPOLYLINE
+  5
+F6
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+159.2
+ 10
+282.0
+ 20
+159.2
+  0
+LWPOLYLINE
+  5
+F7
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+196.0
+ 20
+154.6
+ 10
+282.0
+ 20
+154.6
+  0
+LWPOLYLINE
+  5
+F8
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+223.0
+ 20
+266.0
+ 10
+223.0
+ 20
+261.2
+  0
+HATCH
+  5
+F9
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+ 62
+9
+420
+15263976
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+196.0
+ 20
+261.2
+ 10
+282.0
+ 20
+261.2
+ 10
+282.0
+ 20
+266.0
+ 10
+196.0
+ 20
+266.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+TEXT
+  5
+FA
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+197.0
+ 20
+263.6
+ 30
+0.0
+ 40
+2.2
+  1
+DESCRIPCIÓN
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 11
+197.0
+ 21
+263.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+FB
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+252.5
+ 20
+263.6
+ 30
+0.0
+ 40
+2.2
+  1
+APOYO DE VIGA DOBLE “T”
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 72
+1
+ 11
+252.5
+ 21
+263.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+FC
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+197.5
+ 20
+170.7
+ 30
+0.0
+ 40
+2.4
+  1
+Ménsula: otra imagen de la ménsula donde se observa su
+  7
+ARIAL
+ 41
+0.9
+ 11
+197.5
+ 21
+170.7
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+FD
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+197.5
+ 20
+166.1
+ 30
+0.0
+ 40
+2.4
+  1
+vinculación con una viga doble T, con sus pernos de
+  7
+ARIAL
+ 41
+0.9
+ 11
+197.5
+ 21
+166.1
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+FE
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+197.5
+ 20
+161.5
+ 30
+0.0
+ 40
+2.4
+  1
+anclaje y el neopreno, que ayudan a que la viga no se
+  7
+ARIAL
+ 41
+0.9
+ 11
+197.5
+ 21
+161.5
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+FF
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+197.5
+ 20
+156.9
+ 30
+0.0
+ 40
+2.4
+  1
+caiga.
+  7
+ARIAL
+ 41
+0.9
+ 11
+197.5
+ 21
+156.9
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+IMAGE
+  5
+101
+330
+17
+100
+AcDbEntity
+  8
+1-DIBUJO
+100
+AcDbRasterImage
+ 90
+0
+ 10
+196.8
+ 20
+173.8
+ 30
+0.0
+ 11
+0.09745958429561198
+ 21
+0.0
+ 31
+0.0
+ 12
+5.971532252599141e-18
+ 22
+0.09752252252252248
+ 32
+0.0
+ 13
+866.0
+ 23
+888.0
+340
+100
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
+102
+ 71
+1
+ 91
+2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+865.5
+ 24
+887.5
+290
+0
+  0
+LWPOLYLINE
+  5
+103
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+196.8
+ 20
+173.8
+ 10
+281.2
+ 20
+173.8
+ 10
+281.2
+ 20
+260.4
+ 10
+196.8
+ 20
+260.4
+  0
+LWPOLYLINE
+  5
+104
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+35
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+15.0
+ 20
+146.0
+ 10
+101.0
+ 20
+146.0
+ 10
+101.0
+ 20
+30.0
+ 10
+15.0
+ 20
+30.0
+  0
+LWPOLYLINE
+  5
+105
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+141.2
+ 10
+101.0
+ 20
+141.2
+  0
+LWPOLYLINE
+  5
+106
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+53.0
+ 10
+101.0
+ 20
+53.0
+  0
+LWPOLYLINE
+  5
+107
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+48.4
+ 10
+101.0
+ 20
+48.4
+  0
+LWPOLYLINE
+  5
+108
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+43.8
+ 10
+101.0
+ 20
+43.8
+  0
+LWPOLYLINE
+  5
+109
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+39.2
+ 10
+101.0
+ 20
+39.2
+  0
+LWPOLYLINE
+  5
+10A
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+15.0
+ 20
+34.6
+ 10
+101.0
+ 20
+34.6
+  0
+LWPOLYLINE
+  5
+10B
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+42.0
+ 20
+146.0
+ 10
+42.0
+ 20
+141.2
+  0
+HATCH
+  5
+10C
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+ 62
+9
+420
+15263976
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+15.0
+ 20
+141.2
+ 10
+101.0
+ 20
+141.2
+ 10
+101.0
+ 20
+146.0
+ 10
+15.0
+ 20
+146.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+TEXT
+  5
+10D
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+16.0
+ 20
+143.6
+ 30
+0.0
+ 40
+2.2
+  1
+DESCRIPCIÓN
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 11
+16.0
+ 21
+143.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+10E
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+71.5
+ 20
+143.6
+ 30
+0.0
+ 40
+2.2
+  1
+APOYO DE VIGA “L” A COLUMNA
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 72
+1
+ 11
+71.5
+ 21
+143.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+10F
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+16.5
+ 20
+50.7
+ 30
+0.0
+ 40
+2.4
+  1
+Apoyo de viga “L” a columna: en esta imagen se observa
+  7
+ARIAL
+ 41
+0.9
+ 11
+16.5
+ 21
+50.7
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+110
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+16.5
+ 20
+46.1
+ 30
+0.0
+ 40
+2.4
+  1
+cómo está colocada la viga L, ya que se requiere un
+  7
+ARIAL
+ 41
+0.9
+ 11
+16.5
+ 21
+46.1
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+111
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+16.5
+ 20
+41.5
+ 30
+0.0
+ 40
+2.4
+  1
+correcto montaje y diseño de la transferencia de cargas.
+  7
+ARIAL
+ 41
+0.9
+ 11
+16.5
+ 21
+41.5
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+IMAGE
+  5
+113
+330
+17
+100
+AcDbEntity
+  8
+1-DIBUJO
+100
+AcDbRasterImage
+ 90
+0
+ 10
+15.8
+ 20
+53.8
+ 30
+0.0
+ 11
+0.11609353507565338
+ 21
+0.0
+ 31
+0.0
+ 12
+7.108204611672973e-18
+ 22
+0.11608579088471847
+ 32
+0.0
+ 13
+727.0
+ 23
+746.0
+340
+112
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
+114
+ 71
+1
+ 91
+2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+726.5
+ 24
+745.5
+290
+0
+  0
+LWPOLYLINE
+  5
+115
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+15.8
+ 20
+53.8
+ 10
+100.2
+ 20
+53.8
+ 10
+100.2
+ 20
+140.39999999999998
+ 10
+15.8
+ 20
+140.39999999999998
+  0
+LWPOLYLINE
+  5
+116
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+35
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+105.5
+ 20
+146.0
+ 10
+191.5
+ 20
+146.0
+ 10
+191.5
+ 20
+30.0
+ 10
+105.5
+ 20
+30.0
+  0
+LWPOLYLINE
+  5
+117
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+141.2
+ 10
+191.5
+ 20
+141.2
+  0
+LWPOLYLINE
+  5
+118
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+25
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+53.0
+ 10
+191.5
+ 20
+53.0
+  0
+LWPOLYLINE
+  5
+119
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+48.4
+ 10
+191.5
+ 20
+48.4
+  0
+LWPOLYLINE
+  5
+11A
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+43.8
+ 10
+191.5
+ 20
+43.8
+  0
+LWPOLYLINE
+  5
+11B
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+39.2
+ 10
+191.5
+ 20
+39.2
+  0
+LWPOLYLINE
+  5
+11C
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+105.5
+ 20
+34.6
+ 10
+191.5
+ 20
+34.6
+  0
+LWPOLYLINE
+  5
+11D
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+132.5
+ 20
+146.0
+ 10
+132.5
+ 20
+141.2
+  0
+HATCH
+  5
+11E
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+ 62
+9
+420
+15263976
+100
+AcDbHatch
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+210
+0.0
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
+ 73
+1
+ 93
+4
+ 10
+105.5
+ 20
+141.2
+ 10
+191.5
+ 20
+141.2
+ 10
+191.5
+ 20
+146.0
+ 10
+105.5
+ 20
+146.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
+  0
+TEXT
+  5
+11F
 330
 17
 100
@@ -10279,13 +9831,13 @@ AcDbText
  10
 106.5
  20
-258.8
+143.6
  30
 0.0
  40
 2.2
   1
-DENOMINACIÓN
+DESCRIPCIÓN
   7
 ARIAL-NEGRITA
  41
@@ -10293,7 +9845,7 @@ ARIAL-NEGRITA
  11
 106.5
  21
-258.8
+143.6
  31
 0.0
 100
@@ -10302,6 +9854,250 @@ AcDbText
 2
   0
 TEXT
+  5
+120
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+162.0
+ 20
+143.6
+ 30
+0.0
+ 40
+2.2
+  1
+APOYO DEL PANEL PI
+  7
+ARIAL-NEGRITA
+ 41
+0.9
+ 72
+1
+ 11
+162.0
+ 21
+143.6
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+121
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+50.7
+ 30
+0.0
+ 40
+2.4
+  1
+Apoyo de panel Pi a columna: se observa con detalle cómo
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+50.7
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+122
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+46.1
+ 30
+0.0
+ 40
+2.4
+  1
+se vincula en la cubierta el panel Pi de marca Astori a la
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+46.1
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+123
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+100
+AcDbText
+ 10
+107.0
+ 20
+41.5
+ 30
+0.0
+ 40
+2.4
+  1
+ménsula de la columna premoldeada.
+  7
+ARIAL
+ 41
+0.9
+ 11
+107.0
+ 21
+41.5
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+IMAGE
+  5
+125
+330
+17
+100
+AcDbEntity
+  8
+1-DIBUJO
+100
+AcDbRasterImage
+ 90
+0
+ 10
+106.3
+ 20
+53.8
+ 30
+0.0
+ 11
+0.11609353507565336
+ 21
+0.0
+ 31
+0.0
+ 12
+7.108204611672973e-18
+ 22
+0.11608579088471847
+ 32
+0.0
+ 13
+727.0
+ 23
+746.0
+340
+124
+ 70
+3
+280
+0
+281
+50
+282
+50
+283
+0
+360
+126
+ 71
+1
+ 91
+2
+ 14
+-0.5
+ 24
+-0.5
+ 14
+726.5
+ 24
+745.5
+290
+0
+  0
+LWPOLYLINE
+  5
+127
+330
+17
+100
+AcDbEntity
+  8
+3-TABLAS
+370
+13
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+106.3
+ 20
+53.8
+ 10
+190.7
+ 20
+53.8
+ 10
+190.7
+ 20
+140.39999999999998
+ 10
+106.3
+ 20
+140.39999999999998
+  0
+LWPOLYLINE
   5
 128
 330
@@ -10310,36 +10106,32 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+35
 100
-AcDbText
- 10
-162.0
- 20
-258.8
- 30
-0.0
- 40
-2.2
-  1
-E-05
-  7
-ARIAL
- 41
-0.9
- 72
+AcDbPolyline
+ 90
+4
+ 70
 1
- 11
-162.0
- 21
-258.8
- 31
-0.0
-100
-AcDbText
- 73
-2
+ 10
+196.0
+ 20
+146.0
+ 10
+282.0
+ 20
+146.0
+ 10
+282.0
+ 20
+30.0
+ 10
+196.0
+ 20
+30.0
   0
-TEXT
+LWPOLYLINE
   5
 129
 330
@@ -10348,34 +10140,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+25
 100
-AcDbText
- 10
-106.5
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+141.2
+ 10
+282.0
+ 20
+141.2
   0
-TEXT
+LWPOLYLINE
   5
 12A
 330
@@ -10384,36 +10166,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+25
 100
-AcDbText
- 10
-162.0
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-saliente de la columna
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+53.0
+ 10
+282.0
+ 20
+53.0
   0
-TEXT
+LWPOLYLINE
   5
 12B
 330
@@ -10422,34 +10192,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-106.5
- 20
-170.7
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-170.7
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+48.4
+ 10
+282.0
+ 20
+48.4
   0
-TEXT
+LWPOLYLINE
   5
 12C
 330
@@ -10458,36 +10218,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-162.0
- 20
-170.7
- 30
-0.0
- 40
-2.2
-  1
-según fabricante
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-170.7
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+43.8
+ 10
+282.0
+ 20
+43.8
   0
-TEXT
+LWPOLYLINE
   5
 12D
 330
@@ -10496,34 +10244,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-106.5
- 20
-166.1
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-166.1
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+39.2
+ 10
+282.0
+ 20
+39.2
   0
-TEXT
+LWPOLYLINE
   5
 12E
 330
@@ -10532,36 +10270,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-162.0
- 20
-166.1
- 30
-0.0
- 40
-2.2
-  1
-hormigón (con la columna)
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-166.1
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+196.0
+ 20
+34.6
+ 10
+282.0
+ 20
+34.6
   0
-TEXT
+LWPOLYLINE
   5
 12F
 330
@@ -10570,34 +10296,24 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+370
+13
 100
-AcDbText
- 10
-106.5
- 20
-161.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-161.5
- 31
-0.0
-100
-AcDbText
- 73
+AcDbPolyline
+ 90
 2
+ 70
+0
+ 10
+223.0
+ 20
+146.0
+ 10
+223.0
+ 20
+141.2
   0
-TEXT
+HATCH
   5
 130
 330
@@ -10606,34 +10322,64 @@ TEXT
 AcDbEntity
   8
 3-TABLAS
+ 62
+9
+420
+15263976
 100
-AcDbText
+AcDbHatch
  10
-162.0
+0.0
  20
-161.5
+0.0
  30
 0.0
- 40
-2.2
-  1
-pernos + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-161.5
- 31
+210
 0.0
-100
-AcDbText
+220
+0.0
+230
+1.0
+  2
+SOLID
+ 70
+1
+ 71
+0
+ 91
+1
+ 92
+3
+ 72
+0
  73
-2
+1
+ 93
+4
+ 10
+196.0
+ 20
+141.2
+ 10
+282.0
+ 20
+141.2
+ 10
+282.0
+ 20
+146.0
+ 10
+196.0
+ 20
+146.0
+ 97
+0
+ 75
+1
+ 76
+1
+ 98
+0
   0
 TEXT
   5
@@ -10647,23 +10393,23 @@ AcDbEntity
 100
 AcDbText
  10
-106.5
+197.0
  20
-156.9
+143.6
  30
 0.0
  40
 2.2
   1
-COLOR
+DESCRIPCIÓN
   7
 ARIAL-NEGRITA
  41
 0.9
  11
-106.5
+197.0
  21
-156.9
+143.6
  31
 0.0
 100
@@ -10674,3770 +10420,6 @@ AcDbText
 TEXT
   5
 132
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-156.9
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-156.9
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-133
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-152.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-134
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-recibe las cargas de las vigas
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-152.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-IMAGE
-  5
-136
-330
-17
-100
-AcDbEntity
-  8
-1-DIBUJO
-100
-AcDbRasterImage
- 90
-0
- 10
-106.3
- 20
-178.4
- 30
-0.0
- 11
-0.10355828220858895
- 21
-0.0
- 31
-0.0
- 12
-6.336644295856275e-18
- 22
-0.10348525469168895
- 32
-0.0
- 13
-815.0
- 23
-746.0
-340
-135
- 70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-137
- 71
-1
- 91
-2
- 14
--0.5
- 24
--0.5
- 14
-814.5
- 24
-745.5
-290
-0
-  0
-LWPOLYLINE
-  5
-138
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-106.3
- 20
-178.4
- 10
-190.7
- 20
-178.4
- 10
-190.7
- 20
-255.59999999999997
- 10
-106.3
- 20
-255.59999999999997
-  0
-LWPOLYLINE
-  5
-139
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-196.0
- 20
-266.0
- 10
-282.0
- 20
-266.0
- 10
-282.0
- 20
-150.0
- 10
-196.0
- 20
-150.0
-  0
-LWPOLYLINE
-  5
-13A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-261.2
- 10
-282.0
- 20
-261.2
-  0
-LWPOLYLINE
-  5
-13B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-256.4
- 10
-282.0
- 20
-256.4
-  0
-LWPOLYLINE
-  5
-13C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-177.6
- 10
-282.0
- 20
-177.6
-  0
-LWPOLYLINE
-  5
-13D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-173.0
- 10
-282.0
- 20
-173.0
-  0
-LWPOLYLINE
-  5
-13E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-168.4
- 10
-282.0
- 20
-168.4
-  0
-LWPOLYLINE
-  5
-13F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-163.79999999999998
- 10
-282.0
- 20
-163.79999999999998
-  0
-LWPOLYLINE
-  5
-140
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-159.2
- 10
-282.0
- 20
-159.2
-  0
-LWPOLYLINE
-  5
-141
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-154.6
- 10
-282.0
- 20
-154.6
-  0
-LWPOLYLINE
-  5
-142
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-266.0
- 10
-223.0
- 20
-256.4
-  0
-LWPOLYLINE
-  5
-143
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-177.6
- 10
-223.0
- 20
-150.0
-  0
-HATCH
-  5
-144
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-196.0
- 20
-261.2
- 10
-282.0
- 20
-261.2
- 10
-282.0
- 20
-266.0
- 10
-196.0
- 20
-266.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-145
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-263.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-263.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-146
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-263.6
- 30
-0.0
- 40
-2.2
-  1
-APOYO VIGA DOBLE T
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-263.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-147
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-258.8
- 30
-0.0
- 40
-2.2
-  1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-258.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-148
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-258.8
- 30
-0.0
- 40
-2.2
-  1
-E-06
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-258.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-149
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-175.29999999999998
- 30
-0.0
- 40
-2.2
-  1
-unión viga doble T - columna
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-175.29999999999998
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-170.7
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-170.7
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-170.7
- 30
-0.0
- 40
-2.2
-  1
-apoyo 20/25 cm · h/2
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-170.7
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-166.1
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-166.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-166.1
- 30
-0.0
- 40
-2.2
-  1
-neopreno + pernos
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-166.1
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-14F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-161.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-161.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-150
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-161.5
- 30
-0.0
- 40
-2.2
-  1
-pernos de anclaje
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-161.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-151
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-156.9
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-156.9
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-152
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-156.9
- 30
-0.0
- 40
-2.2
-  1
-------
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-156.9
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-153
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-152.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-154
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-152.3
- 30
-0.0
- 40
-2.2
-  1
-evita que la viga se desplace
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-152.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-IMAGE
-  5
-156
-330
-17
-100
-AcDbEntity
-  8
-1-DIBUJO
-100
-AcDbRasterImage
- 90
-0
- 10
-196.8
- 20
-178.4
- 30
-0.0
- 11
-0.09745958429561198
- 21
-0.0
- 31
-0.0
- 12
-5.9686068746322994e-18
- 22
-0.09747474747474742
- 32
-0.0
- 13
-866.0
- 23
-792.0
-340
-155
- 70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-157
- 71
-1
- 91
-2
- 14
--0.5
- 24
--0.5
- 14
-865.5
- 24
-791.5
-290
-0
-  0
-LWPOLYLINE
-  5
-158
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-196.8
- 20
-178.4
- 10
-281.2
- 20
-178.4
- 10
-281.2
- 20
-255.59999999999997
- 10
-196.8
- 20
-255.59999999999997
-  0
-LWPOLYLINE
-  5
-159
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-15.0
- 20
-146.0
- 10
-101.0
- 20
-146.0
- 10
-101.0
- 20
-30.0
- 10
-15.0
- 20
-30.0
-  0
-LWPOLYLINE
-  5
-15A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-141.2
- 10
-101.0
- 20
-141.2
-  0
-LWPOLYLINE
-  5
-15B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-136.4
- 10
-101.0
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-15C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-57.599999999999994
- 10
-101.0
- 20
-57.599999999999994
-  0
-LWPOLYLINE
-  5
-15D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-52.99999999999999
- 10
-101.0
- 20
-52.99999999999999
-  0
-LWPOLYLINE
-  5
-15E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-48.39999999999999
- 10
-101.0
- 20
-48.39999999999999
-  0
-LWPOLYLINE
-  5
-15F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-43.8
- 10
-101.0
- 20
-43.8
-  0
-LWPOLYLINE
-  5
-160
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-39.199999999999996
- 10
-101.0
- 20
-39.199999999999996
-  0
-LWPOLYLINE
-  5
-161
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-15.0
- 20
-34.599999999999994
- 10
-101.0
- 20
-34.599999999999994
-  0
-LWPOLYLINE
-  5
-162
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-42.0
- 20
-146.0
- 10
-42.0
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-163
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-42.0
- 20
-57.599999999999994
- 10
-42.0
- 20
-30.0
-  0
-HATCH
-  5
-164
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-15.0
- 20
-141.2
- 10
-101.0
- 20
-141.2
- 10
-101.0
- 20
-146.0
- 10
-15.0
- 20
-146.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-165
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-143.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-143.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-166
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-143.6
- 30
-0.0
- 40
-2.2
-  1
-APOYO VIGA L
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-143.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-167
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-138.8
- 30
-0.0
- 40
-2.2
-  1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-138.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-168
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-138.8
- 30
-0.0
- 40
-2.2
-  1
-E-07
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-138.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-169
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-55.3
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-55.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-55.3
- 30
-0.0
- 40
-2.2
-  1
-unión viga L - columna
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-55.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-según cálculo
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-hormigón premoldeado + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-16F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-41.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-170
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-41.5
- 30
-0.0
- 40
-2.2
-  1
-pernos de anclaje
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-171
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-172
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-173
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-16.0
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-16.0
- 21
-32.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-174
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-71.5
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-transferencia de cargas
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-71.5
- 21
-32.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-IMAGE
-  5
-176
-330
-17
-100
-AcDbEntity
-  8
-1-DIBUJO
-100
-AcDbRasterImage
- 90
-0
- 10
-15.8
- 20
-58.39999999999999
- 30
-0.0
- 11
-0.10355828220858897
- 21
-0.0
- 31
-0.0
- 12
-6.336644295856278e-18
- 22
-0.10348525469168901
- 32
-0.0
- 13
-815.0
- 23
-746.0
-340
-175
- 70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-177
- 71
-1
- 91
-2
- 14
--0.5
- 24
--0.5
- 14
-814.5
- 24
-745.5
-290
-0
-  0
-LWPOLYLINE
-  5
-178
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-15.8
- 20
-58.39999999999999
- 10
-100.2
- 20
-58.39999999999999
- 10
-100.2
- 20
-135.6
- 10
-15.8
- 20
-135.6
-  0
-LWPOLYLINE
-  5
-179
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-105.5
- 20
-146.0
- 10
-191.5
- 20
-146.0
- 10
-191.5
- 20
-30.0
- 10
-105.5
- 20
-30.0
-  0
-LWPOLYLINE
-  5
-17A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-141.2
- 10
-191.5
- 20
-141.2
-  0
-LWPOLYLINE
-  5
-17B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-136.4
- 10
-191.5
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-17C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-57.599999999999994
- 10
-191.5
- 20
-57.599999999999994
-  0
-LWPOLYLINE
-  5
-17D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-52.99999999999999
- 10
-191.5
- 20
-52.99999999999999
-  0
-LWPOLYLINE
-  5
-17E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-48.39999999999999
- 10
-191.5
- 20
-48.39999999999999
-  0
-LWPOLYLINE
-  5
-17F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-43.8
- 10
-191.5
- 20
-43.8
-  0
-LWPOLYLINE
-  5
-180
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-39.199999999999996
- 10
-191.5
- 20
-39.199999999999996
-  0
-LWPOLYLINE
-  5
-181
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-105.5
- 20
-34.599999999999994
- 10
-191.5
- 20
-34.599999999999994
-  0
-LWPOLYLINE
-  5
-182
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-132.5
- 20
-146.0
- 10
-132.5
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-183
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-132.5
- 20
-57.599999999999994
- 10
-132.5
- 20
-30.0
-  0
-HATCH
-  5
-184
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-105.5
- 20
-141.2
- 10
-191.5
- 20
-141.2
- 10
-191.5
- 20
-146.0
- 10
-105.5
- 20
-146.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-185
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-143.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-143.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-186
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-143.6
- 30
-0.0
- 40
-2.2
-  1
-APOYO PANEL PI
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-143.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-187
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-138.8
- 30
-0.0
- 40
-2.2
-  1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-138.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-188
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-138.8
- 30
-0.0
- 40
-2.2
-  1
-E-08
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-138.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-189
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-55.3
- 30
-0.0
- 40
-2.2
-  1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-55.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-55.3
- 30
-0.0
- 40
-2.2
-  1
-cubierta: panel Pi - columna
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-55.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-según fabricante
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-hormigón premoldeado + neopreno
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-18F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-41.5
- 30
-0.0
- 40
-2.2
-  1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-190
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-41.5
- 30
-0.0
- 40
-2.2
-  1
-apoyo s/ ménsula
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-191
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-192
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-193
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-106.5
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-106.5
- 21
-32.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-194
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-162.0
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-panel Pi marca Astori
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-162.0
- 21
-32.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-IMAGE
-  5
-196
-330
-17
-100
-AcDbEntity
-  8
-1-DIBUJO
-100
-AcDbRasterImage
- 90
-0
- 10
-106.3
- 20
-58.39999999999999
- 30
-0.0
- 11
-0.10355828220858895
- 21
-0.0
- 31
-0.0
- 12
-6.336644295856278e-18
- 22
-0.10348525469168901
- 32
-0.0
- 13
-815.0
- 23
-746.0
-340
-195
- 70
-3
-280
-0
-281
-50
-282
-50
-283
-0
-360
-197
- 71
-1
- 91
-2
- 14
--0.5
- 24
--0.5
- 14
-814.5
- 24
-745.5
-290
-0
-  0
-LWPOLYLINE
-  5
-198
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-106.3
- 20
-58.39999999999999
- 10
-190.7
- 20
-58.39999999999999
- 10
-190.7
- 20
-135.6
- 10
-106.3
- 20
-135.6
-  0
-LWPOLYLINE
-  5
-199
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-35
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-196.0
- 20
-146.0
- 10
-282.0
- 20
-146.0
- 10
-282.0
- 20
-30.0
- 10
-196.0
- 20
-30.0
-  0
-LWPOLYLINE
-  5
-19A
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-141.2
- 10
-282.0
- 20
-141.2
-  0
-LWPOLYLINE
-  5
-19B
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-136.4
- 10
-282.0
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-19C
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-57.599999999999994
- 10
-282.0
- 20
-57.599999999999994
-  0
-LWPOLYLINE
-  5
-19D
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-52.99999999999999
- 10
-282.0
- 20
-52.99999999999999
-  0
-LWPOLYLINE
-  5
-19E
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-48.39999999999999
- 10
-282.0
- 20
-48.39999999999999
-  0
-LWPOLYLINE
-  5
-19F
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-43.8
- 10
-282.0
- 20
-43.8
-  0
-LWPOLYLINE
-  5
-1A0
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-39.199999999999996
- 10
-282.0
- 20
-39.199999999999996
-  0
-LWPOLYLINE
-  5
-1A1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-196.0
- 20
-34.599999999999994
- 10
-282.0
- 20
-34.599999999999994
-  0
-LWPOLYLINE
-  5
-1A2
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-146.0
- 10
-223.0
- 20
-136.4
-  0
-LWPOLYLINE
-  5
-1A3
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-370
-13
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-223.0
- 20
-57.599999999999994
- 10
-223.0
- 20
-30.0
-  0
-HATCH
-  5
-1A4
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
- 62
-9
-420
-15263976
-100
-AcDbHatch
- 10
-0.0
- 20
-0.0
- 30
-0.0
-210
-0.0
-220
-0.0
-230
-1.0
-  2
-SOLID
- 70
-1
- 71
-0
- 91
-1
- 92
-3
- 72
-0
- 73
-1
- 93
-4
- 10
-196.0
- 20
-141.2
- 10
-282.0
- 20
-141.2
- 10
-282.0
- 20
-146.0
- 10
-196.0
- 20
-146.0
- 97
-0
- 75
-1
- 76
-1
- 98
-0
-  0
-TEXT
-  5
-1A5
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-143.6
- 30
-0.0
- 40
-2.2
-  1
-DESCRIPCIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-143.6
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1A6
 330
 17
 100
@@ -14475,7 +10457,7 @@ AcDbText
   0
 TEXT
   5
-1A7
+133
 330
 17
 100
@@ -14485,61 +10467,23 @@ AcDbEntity
 100
 AcDbText
  10
-197.0
+197.5
  20
-138.8
+50.7
  30
 0.0
  40
-2.2
+2.4
   1
-DENOMINACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-138.8
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1A8
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-138.8
- 30
-0.0
- 40
-2.2
-  1
-E-09
+Fundación: soporta las cargas estructurales de grandes
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-252.5
+197.5
  21
-138.8
+50.7
  31
 0.0
 100
@@ -14549,7 +10493,7 @@ AcDbText
   0
 TEXT
   5
-1A9
+134
 330
 17
 100
@@ -14559,61 +10503,23 @@ AcDbEntity
 100
 AcDbText
  10
-197.0
+197.5
  20
-55.3
+46.1
  30
 0.0
  40
-2.2
+2.4
   1
-UBICACIÓN
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-55.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1AA
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-55.3
- 30
-0.0
- 40
-2.2
-  1
-base de la columna
+luces, además de estar diseñada para encastrarse a la
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-252.5
+197.5
  21
-55.3
+46.1
  31
 0.0
 100
@@ -14623,7 +10529,7 @@ AcDbText
   0
 TEXT
   5
-1AB
+135
 330
 17
 100
@@ -14633,357 +10539,23 @@ AcDbEntity
 100
 AcDbText
  10
-197.0
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-MEDIDAS
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1AC
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-50.699999999999996
- 30
-0.0
- 40
-2.2
-  1
-según cálculo
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-50.699999999999996
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1AD
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-MATERIAL
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1AE
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-46.099999999999994
- 30
-0.0
- 40
-2.2
-  1
-hormigón armado in situ
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-46.099999999999994
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1AF
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
+197.5
  20
 41.5
  30
 0.0
  40
-2.2
+2.4
   1
-HERRAJES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1B0
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-41.5
- 30
-0.0
- 40
-2.2
-  1
-rebaje p/ conexión de columna
+columna y asegurar su estabilidad.
   7
 ARIAL
  41
 0.9
- 72
-1
  11
-252.5
+197.5
  21
 41.5
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1B1
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-COLOR
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1B2
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-36.89999999999999
- 30
-0.0
- 40
-2.2
-  1
-gris hormigón
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-36.89999999999999
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1B3
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-197.0
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-OBSERVACIONES
-  7
-ARIAL-NEGRITA
- 41
-0.9
- 11
-197.0
- 21
-32.3
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1B4
-330
-17
-100
-AcDbEntity
-  8
-3-TABLAS
-100
-AcDbText
- 10
-252.5
- 20
-32.3
- 30
-0.0
- 40
-2.2
-  1
-la columna encastra en la base
-  7
-ARIAL
- 41
-0.9
- 72
-1
- 11
-252.5
- 21
-32.3
  31
 0.0
 100
@@ -14993,7 +10565,7 @@ AcDbText
   0
 IMAGE
   5
-1B6
+137
 330
 17
 100
@@ -15007,7 +10579,7 @@ AcDbRasterImage
  10
 196.8
  20
-58.39999999999999
+53.8
  30
 0.0
  11
@@ -15017,17 +10589,17 @@ AcDbRasterImage
  31
 0.0
  12
-5.961080258144746e-18
+5.964815118456736e-18
  22
-0.09735182849936949
+0.09741282339707534
  32
 0.0
  13
 867.0
  23
-793.0
+889.0
 340
-1B5
+136
  70
 3
 280
@@ -15039,7 +10611,7 @@ AcDbRasterImage
 283
 0
 360
-1B7
+138
  71
 1
  91
@@ -15051,13 +10623,13 @@ AcDbRasterImage
  14
 866.5
  24
-792.5
+888.5
 290
 0
   0
 LWPOLYLINE
   5
-1B8
+139
 330
 17
 100
@@ -15075,23 +10647,23 @@ AcDbPolyline
  10
 196.8
  20
-58.39999999999999
+53.8
  10
 281.2
  20
-58.39999999999999
+53.8
  10
 281.2
  20
-135.6
+140.39999999999998
  10
 196.8
  20
-135.6
+140.39999999999998
   0
 LWPOLYLINE
   5
-1B9
+13A
 330
 17
 100
@@ -15125,7 +10697,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BA
+13B
 330
 17
 100
@@ -15151,7 +10723,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BB
+13C
 330
 17
 100
@@ -15177,7 +10749,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BC
+13D
 330
 17
 100
@@ -15203,7 +10775,7 @@ AcDbPolyline
   0
 TEXT
   5
-1BD
+13E
 330
 17
 100
@@ -15241,7 +10813,7 @@ AcDbText
   0
 TEXT
   5
-1BE
+13F
 330
 17
 100
@@ -15279,7 +10851,7 @@ AcDbText
   0
 TEXT
   5
-1BF
+140
 330
 17
 100
@@ -15313,7 +10885,7 @@ AcDbText
   0
 TEXT
   5
-1C0
+141
 330
 17
 100
@@ -15347,7 +10919,7 @@ AcDbText
   0
 TEXT
   5
-1C1
+142
 330
 17
 100
@@ -15381,7 +10953,7 @@ AcDbText
   0
 TEXT
   5
-1C2
+143
 330
 17
 100
@@ -15415,7 +10987,7 @@ AcDbText
   0
 TEXT
   5
-1C3
+144
 330
 17
 100
@@ -15449,7 +11021,7 @@ AcDbText
   0
 TEXT
   5
-1C4
+145
 330
 17
 100
@@ -15487,7 +11059,7 @@ AcDbText
   0
 TEXT
   5
-1C5
+146
 330
 17
 100
@@ -15589,11 +11161,11 @@ EZDXF_META
   3
 ACAD_IMAGE_VARS
 350
-B3
+A4
   3
 ACAD_IMAGE_DICT
 350
-B4
+A5
   0
 DICTIONARY
   5
@@ -16621,7 +12193,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-1C8
+149
   0
 DICTIONARYVAR
   5
@@ -16633,7 +12205,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T15:16:53.619569+00:00
+1.4.5 @ 2026-11-05T15:20:21.765522+00:00
   0
 VISUALSTYLE
   5
@@ -23187,7 +18759,7 @@ strokes_ogs.tif
   0
 RASTERVARIABLES
   5
-B3
+A4
 102
 {ACAD_REACTORS
 330
@@ -23209,7 +18781,7 @@ AcDbRasterVariables
   0
 DICTIONARY
   5
-B4
+A5
 330
 A
 100
@@ -23219,53 +18791,53 @@ AcDbDictionary
   3
 fotos/E-01.jpg
 350
-B5
+A6
   3
 fotos/E-02.jpg
 350
-D5
+B8
   3
 fotos/E-03.jpg
 350
-F5
+CA
   3
 fotos/E-04.jpg
 350
-115
+DC
   3
 fotos/E-05.jpg
 350
-135
+ED
   3
 fotos/E-06.jpg
 350
-155
+100
   3
 fotos/E-07.jpg
 350
-175
+112
   3
 fotos/E-08.jpg
 350
-195
+124
   3
 fotos/E-09.jpg
 350
-1B5
+136
   0
 IMAGEDEF
   5
-B5
+A6
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-B7
+A8
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23273,7 +18845,7 @@ AcDbRasterImageDef
   1
 fotos/E-01.jpg
  10
-825.0
+735.0
  20
 755.0
  11
@@ -23287,29 +18859,29 @@ fotos/E-01.jpg
   0
 IMAGEDEF_REACTOR
   5
-B7
+A8
 330
-B6
+A7
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-B6
+A7
   0
 IMAGEDEF
   5
-D5
+B8
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-D7
+BA
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23317,7 +18889,7 @@ AcDbRasterImageDef
   1
 fotos/E-02.jpg
  10
-798.0
+711.0
  20
 730.0
  11
@@ -23331,29 +18903,29 @@ fotos/E-02.jpg
   0
 IMAGEDEF_REACTOR
   5
-D7
+BA
 330
-D6
+B9
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-D6
+B9
   0
 IMAGEDEF
   5
-F5
+CA
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-F7
+CC
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23361,7 +18933,7 @@ AcDbRasterImageDef
   1
 fotos/E-03.jpg
  10
-798.0
+711.0
  20
 730.0
  11
@@ -23375,29 +18947,29 @@ fotos/E-03.jpg
   0
 IMAGEDEF_REACTOR
   5
-F7
+CC
 330
-F6
+CB
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-F6
+CB
   0
 IMAGEDEF
   5
-115
+DC
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-117
+DE
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23407,7 +18979,7 @@ fotos/E-04.jpg
  10
 846.0
  20
-773.0
+868.0
  11
 0.01
  21
@@ -23419,29 +18991,29 @@ fotos/E-04.jpg
   0
 IMAGEDEF_REACTOR
   5
-117
+DE
 330
-116
+DD
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-116
+DD
   0
 IMAGEDEF
   5
-135
+ED
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-137
+EF
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23449,7 +19021,7 @@ AcDbRasterImageDef
   1
 fotos/E-05.jpg
  10
-815.0
+727.0
  20
 746.0
  11
@@ -23463,29 +19035,29 @@ fotos/E-05.jpg
   0
 IMAGEDEF_REACTOR
   5
-137
+EF
 330
-136
+EE
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-136
+EE
   0
 IMAGEDEF
   5
-155
+100
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-157
+102
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23495,7 +19067,7 @@ fotos/E-06.jpg
  10
 866.0
  20
-792.0
+888.0
  11
 0.01
  21
@@ -23507,29 +19079,29 @@ fotos/E-06.jpg
   0
 IMAGEDEF_REACTOR
   5
-157
+102
 330
-156
+101
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-156
+101
   0
 IMAGEDEF
   5
-175
+112
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-177
+114
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23537,7 +19109,7 @@ AcDbRasterImageDef
   1
 fotos/E-07.jpg
  10
-815.0
+727.0
  20
 746.0
  11
@@ -23551,29 +19123,29 @@ fotos/E-07.jpg
   0
 IMAGEDEF_REACTOR
   5
-177
+114
 330
-176
+113
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-176
+113
   0
 IMAGEDEF
   5
-195
+124
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-197
+126
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23581,7 +19153,7 @@ AcDbRasterImageDef
   1
 fotos/E-08.jpg
  10
-815.0
+727.0
  20
 746.0
  11
@@ -23595,29 +19167,29 @@ fotos/E-08.jpg
   0
 IMAGEDEF_REACTOR
   5
-197
+126
 330
-196
+125
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-196
+125
   0
 IMAGEDEF
   5
-1B5
+136
 102
 {ACAD_REACTORS
 330
-B4
+A5
 330
-1B7
+138
 102
 }
 330
-B4
+A5
 100
 AcDbRasterImageDef
  90
@@ -23627,7 +19199,7 @@ fotos/E-09.jpg
  10
 867.0
  20
-793.0
+889.0
  11
 0.01
  21
@@ -23639,19 +19211,19 @@ fotos/E-09.jpg
   0
 IMAGEDEF_REACTOR
   5
-1B7
+138
 330
-1B6
+137
 100
 AcDbRasterImageDefReactor
  90
 2
 330
-1B6
+137
   0
 DICTIONARYVAR
   5
-1C8
+149
 330
 2D
 100
@@ -23659,7 +19231,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T15:16:53.691059+00:00
+1.4.5 @ 2026-11-05T15:20:21.841140+00:00
   0
 ENDSEC
   0
