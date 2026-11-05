@@ -88,7 +88,7 @@ export function cielorraso(crop = null) {
   // anclas adicionales solo para los detalles (fuera del recorte se descartan solas)
   if (crop) {
     S.anchor(1, 2150, H, -430); S.anchor(7, 2152, 600, -500); S.anchor(9, 2116, H - 16, -500);                 // A
-    S.anchor(5, 2205, yS + 17, -390); S.anchor(6, 2085, yM + 17, -320); S.anchor(7, 2152, 170, -500);
+    S.anchor(5, 2185, yS + 17, -392); S.anchor(6, 2085, yM + 17, -360); S.anchor(7, 2152, 170, -500);
     S.anchor(9, 2100, yMb + 2.5, -400);                                                                         // B
     S.anchor(2, 1640, -100, -2000); S.anchor(3, 1880, PL + 0.5, -1985); S.anchor(4, 1950, PL + 18.5, -Z + 3.5);
     S.anchor(10, 1650, 0, -1800); S.anchor(11, 1725, -0.5, -1985); S.anchor(5, 1900, PL + 1.5, -1600);        // C
@@ -115,6 +115,6 @@ export const REFS = [
 // recortes para los detalles ampliados
 export const CROPS = {
   A: { x0: 2010, x1: 2190, y0: 560, y1: 770, z0: -590, z1: -410 },   // anclaje de la vela a la losa
-  B: { x0: 1990, x1: 2220, y0: 10, y1: 200, z0: -620, z1: -290 },    // cruce maestra – secundario – vela
+  B: { x0: 2010, x1: 2200, y0: 10, y1: 200, z0: -560, z1: -340 },    // cruce maestra – secundario – vela
   C: { x0: 1560, x1: 1990, y0: -120, y1: 110, z0: -2150, z1: -1560 }, // solera perimetral + placa + muro
 };

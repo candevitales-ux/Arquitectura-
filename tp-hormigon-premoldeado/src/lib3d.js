@@ -119,7 +119,7 @@ export class Scene3D {
     geom.computeBoundingBox(); this.bbox.union(geom.boundingBox);
     if (edges) {
       const e = new THREE.EdgesGeometry(geom, edgeAngle);
-      this.edges.push({ pos: e.attributes.position.array, w: MAT[key].glass ? 0.6 : 1 });
+      this.edges.push({ pos: e.attributes.position.array, w: MAT[key].glass ? 0.6 : 1, key });
     }
     return mesh;
   }
@@ -233,7 +233,7 @@ export class Scene3D {
     const up = new THREE.Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
     target.addScaledVector(up, -shiftY * dist * Math.tan(fov * Math.PI / 360));
     cam.position.copy(target).addScaledVector(d, dist); cam.lookAt(target); cam.updateMatrixWorld();
-    for (const e of this.edges) {
+    for (const e of (globalThis.NO_RASTER_EDGES ? [] : this.edges)) {
       const g = new LineSegmentsGeometry(); g.setPositions(e.pos);
       const m = new LineMaterial({ color: '#111111', linewidth: lineW * e.w, resolution: new THREE.Vector2(Wpx, Hpx) });
       const l = new LineSegments2(g, m); l.renderOrder = 20; this.scene.add(l);
@@ -272,9 +272,9 @@ export class Scene3D {
         for (let k = 0; k <= n; k++) {
           const t = k / n, q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
           if (visible(q)) { if (!run) run = [q, q]; else run[1] = q; }
-          else if (run) { edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0]); run = null; }
+          else if (run) { edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0, e.key]); run = null; }
         }
-        if (run) edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0]);
+        if (run) edges.push([run[0][0], run[0][1], run[1][0], run[1][1], e.w < 1 ? 1 : 0, e.key]);
       }
     }
     // caras visibles agrupadas por plano, con profundidad para el orden del pintor
@@ -308,6 +308,7 @@ export class Scene3D {
     const d = new THREE.Vector3(...dir).normalize();
     const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, -100000, 100000);
     cam.position.copy(target).addScaledVector(d, 20000); cam.up.set(0, 1, 0); cam.lookAt(target);
+    if (this.want2D) { const rr = this.bbox.getSize(new THREE.Vector3()).length() / 2 + 50; cam.near = 20000 - rr; cam.far = 20000 + rr; cam.updateProjectionMatrix(); }   // precisión de profundidad para líneas ocultas
     cam.updateMatrixWorld();
     // encuadre
     const inv = cam.matrixWorldInverse; let mnx = 1e9, mxx = -1e9, mny = 1e9, mxy = -1e9;
@@ -327,7 +328,7 @@ export class Scene3D {
     if (!fixedW) { cam.left = cx - w / 2; cam.right = cx + w / 2; cam.top = cy + h / 2; cam.bottom = cy - h / 2; cam.updateProjectionMatrix(); }
     this.mmPerPx = w / Wpx;
     // aristas
-    for (const e of this.edges) {
+    for (const e of (globalThis.NO_RASTER_EDGES ? [] : this.edges)) {
       const g = new LineSegmentsGeometry(); g.setPositions(e.pos);
       const m = new LineMaterial({ color: '#111111', linewidth: lineW * e.w, resolution: new THREE.Vector2(Wpx, Hpx) });
       const l = new LineSegments2(g, m); l.renderOrder = 20; this.scene.add(l);
