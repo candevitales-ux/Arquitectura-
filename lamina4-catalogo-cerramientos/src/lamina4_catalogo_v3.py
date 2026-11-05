@@ -227,7 +227,6 @@ def ajustar(raw, cx, cy, wmax, hmax):
 pl([(10, 10), (W - 10, 10), (W - 10, H - 10), (10, H - 10)], "0-MARCO", 50, True)
 txt("CATÁLOGO DE CERRAMIENTOS", 15, 399, 7.0, TA.LEFT, "3-TITULOS", True)
 txt("VIDRIADOS Y OPACOS  |  ESTRUCTURA COMÚN: COLUMNAS H°A 40x40 · VL 40x70 · VIGA L DE BORDE · LOSA SHAP h 16 · BASES C/ CUELLO + VIGA DE FUNDACIÓN", 15, 392, 2.4, TA.LEFT, "3-TITULOS")
-txt("LÁMINA 4", W - 15, 399, 7.0, TA.RIGHT, "3-TITULOS", True)
 pl([(15, 389.5), (W - 15, 389.5)], "3-TITULOS", 70)
 
 # #################################################################################### A · VIDRIADO
