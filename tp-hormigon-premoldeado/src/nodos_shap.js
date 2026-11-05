@@ -101,13 +101,14 @@ export function n1() {
   vigaL(S, yt, ZB, 0, Y0);
   losaSHAP(S, yt, X1, ZB);
   capa(S, yt, X1, ZB);
-  // cubierta: barrera de vapor + contrapiso liviano H° c/ EPS + carpeta + membrana
-  S.box(250, X1, 8965, 8968, ZB, 0, 'film');
-  S.prism([[260, 8968], [400, 8968], [400, 9410], [260, 9440]], 'z', ZB, 0, 'insitu');                  // zócalo superior
+  // cubierta: pintura asfáltica + contrapiso liviano H° c/ EPS + film + carpeta + membrana; agregado in situ s/ viga L
+  S.box(400, X1, 8965, 8968, ZB, 0, 'memb');
+  S.prism([[250, 8965], [400, 8965], [400, 9410], [250, 9440]], 'z', ZB, 0, 'insitu');                  // agregado H°A° in situ
   for (const z of [-60, -200]) S.sheet([[300, 8870], [300, 9390], [360, 9390], [360, 8870]], 10, 'z', z - 5, z + 5, 'red');
   const sl = (x, b) => b + (x - 400) * 0.02;
   S.prism([[400, 8968], [X1, 8968], [X1, sl(X1, 9068)], [400, 9068]], 'z', ZB, -60, 'eps');
-  S.prism([[400, 9068], [X1, sl(X1, 9068)], [X1, sl(X1, 9088)], [400, 9088]], 'z', ZB, -130, 'mort');
+  S.prism([[400, 9068], [X1, sl(X1, 9068)], [X1, sl(X1, 9071)], [400, 9071]], 'z', ZB, -95, 'film');
+  S.prism([[400, 9071], [X1, sl(X1, 9071)], [X1, sl(X1, 9088)], [400, 9088]], 'z', ZB, -130, 'mort');
   S.prism([[400, 9088], [460, 9088], [400, 9148]], 'z', ZB, -130, 'mort');
   S.prism([[400, 9088], [X1, sl(X1, 9088)], [X1, sl(X1, 9092)], [460, 9092], [404, 9148], [404, 9335], [400, 9335]], 'z', ZB, -190, 'memb');
   S.sheet([[420, 9356], [402, 9356], [402, 9300]], 3, 'z', ZB, -190, 'galv');
@@ -115,12 +116,12 @@ export function n1() {
   // muro cortina
   mullion(S, Y0, 9380);
   for (const [z0, z1] of GSEG(ZB)) { S.box(0, 6, Y0, 9380, z0, z1, 'spandrel'); S.box(40, 90, Y0, 9380, z0, z1, 'lana'); S.box(90, 93, Y0, 9380, z0, z1, 'galv'); }
-  S.box(-32, 190, 9380, 9420, ZB, 0, 'alu'); S.box(185, 260, 9420, 9440, ZB, 0, 'seal');
+  S.box(-32, 190, 9380, 9420, ZB, 0, 'alu'); S.box(185, 250, 9420, 9440, ZB, 0, 'seal');
   grapa(S, 8515);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(5, 700, 9020, -60); A(6, 410, 9356, -190);
-  A(7, 600, 8966, -20); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(10, 700, 8940, 0); A(11, 455, 8955, -60); A(12, 800, 8830, 0); A(19, 540, 8750, 0); A(14, 450, 8350, 0);
-  A(13, 330, yt - 150, 0);  A(18, 270, 8515, -40); A(30, 110, 9000, ZM + 25); A(33, 3, 8800, 0); A(34, 65, 8700, 0); A(36, 160, 8515, ZM + 35);
+  A(1, 200, 9465, -100); A(2, 80, 9400, 0); A(3, 700, 9095, -220); A(4, 700, 9080, -130); A(6, 700, 9020, -60); A(10, 410, 9356, -190);
+  A(7, 600, 8966, -20); A(5, 700, 9070, -95); A(8, 330, 9250, 0); A(9, 420, 9105, -130); A(11, 700, 8940, 0); A(12, 455, 8955, -60); A(13, 800, 8830, 0); A(20, 540, 8750, 0); A(15, 450, 8350, 0);
+  A(14, 330, yt - 150, 0);  A(19, 270, 8515, -40); A(34, 110, 9000, ZM + 25); A(37, 3, 8800, 0); A(38, 65, 8700, 0); A(40, 160, 8515, ZM + 35);
   return S;
 }
 
@@ -128,11 +129,11 @@ export function n1() {
 export function n2() {
   const S = new Scene3D();
   ZM = -95;                                         // montante frente a la VL (la grapa toma el riel de la VL)
-  const Y0 = 3050, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4415;   // recortado abajo p/ esc. 1:15
+  const Y0 = 2980, Y1 = 4520, X1 = 1265, ZB = -420, yt = 4345;   // recortado abajo p/ esc. 1:15
   const ZC = -180, ZC0 = -580;                      // columna 40x40: z -580..-180 (el corte pasa a 18 cm de su cara)
   // columna (en vista) y ménsula de la VL CORTADA en z = 0 (como en el corte integral)
   S.box(250, 650, Y0, Y1, ZC0, ZC, 'pre', { axis: 'y' });
-  const ytm = 3385;
+  const ytm = yt - 1030;
   S.box(250, 650, ytm - 301, ytm, ZC, 0, 'pre');                                                     // ménsula VL (cara cortada)
   S.prism(clipY([[180, ytm - 301], [0, ytm - 301], [180, ytm - 470]], Y0).reverse(), 'x', 250, 650, 'prev');     // su diagonal hasta la columna
   S.box(250, 650, ytm, ytm + 10, ZC + 10, 0, 'neo');                                                  // neopreno VL / ménsula
@@ -153,7 +154,11 @@ export function n2() {
   // capa de compresión y piso (sobre TT y VP; la columna atraviesa)
   capa(S, yt, X1, ZC + 10);
   S.box(660, X1, yt, yt + 50, ZB, ZC + 10, 'insitu');
-  S.box(250, X1, 4465, 4485, ZC + 10, -120, 'mort'); S.box(660, X1, 4465, 4485, ZB, ZC + 10, 'mort');
+  // perfil L galv. de borde (anclado a la viga L) + contrapiso liviano + carpeta + solado (escalonados)
+  S.box(250, 256, yt + 50, 4500, ZC + 10, 0, 'galv'); S.box(256, 520, yt + 50, yt + 56, ZC + 10, 0, 'galv');
+  for (const z of [-40, -150]) S.cyl('y', 330, z, 5, yt - 60, yt + 56, 'inox', 10);
+  S.box(256, X1, yt + 56, 4465, ZC + 10, -40, 'hs'); S.box(660, X1, yt + 56, 4465, ZB, ZC + 10, 'hs');
+  S.box(256, X1, 4465, 4485, ZC + 10, -120, 'mort'); S.box(660, X1, 4465, 4485, ZB, ZC + 10, 'mort');
   S.box(660, X1, 4485, 4500, ZB, -220, 'porc');
   // muro cortina: visión + travesaño + spandrel (bandeja tipo caja c/ lana), montante, grapa
   mullion(S, Y0, Y1);
@@ -167,14 +172,14 @@ export function n2() {
   S.box(93, 250, 4355, 4362, ZB, 0, 'galv'); S.box(243, 250, 4280, 4355, ZB, 0, 'galv'); S.box(93, 100, 4362, 4400, ZB, 0, 'galv');
   S.box(100, 243, 4365, 4458, ZB, 0, 'lana'); S.box(93, 250, 4458, 4466, ZB, 0, 'intum');
   for (const z of [-40, -150]) S.cyl('x', 4318, z, 6, 236, 330, 'inox', 12);
-  S.sheet([[182, 4503], [330, 4503]], 3, 'z', ZB, -120, 'alu');
-  grapa(S, 4015);
+  S.sheet([[182, 4503], [250, 4503]], 3, 'z', ZB, -120, 'alu');
+  grapa(S, yt - 400);
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(10, 900, 4440, 0); A(11, 455, 4455, -60); A(12, 935, 4330, 0); A(19, 540, 4250, 0); A(14, 450, 3750, 0); A(13, 330, yt - 150, 0);
-  A(15, 650, 3150, -380); A(16, 450, 3200, 0); A(17, 470, ytm + 5, 0); A(20, 330, 3470, 0.8); A(21, 600, yt - 320, 0);
-  A(22, 900, 3950, ZC); A(23, 720, 3500, ZC);
-  A(18, 270, 4015, ZM + 40); A(25, 900, 4500, -300); A(26, 900, 4475, -200);
-  A(35, 170, 4410, 0); A(36, 160, 4015, ZM + 35);
+  A(11, 900, yt + 25, -20); A(13, 935, yt - 80, 0); A(20, 540, yt - 165, 0); A(15, 450, yt - 650, 0); A(14, 330, yt - 150, 0);
+  A(16, 650, 3080, -380); A(17, 450, ytm - 150, 0); A(18, 470, ytm + 5, 0); A(21, 330, ytm + 85, 0.8); A(22, 600, yt - 320, 0);
+  A(23, 900, yt - 400, ZC); A(24, 720, yt - 880, ZC);
+  A(19, 270, yt - 400, ZM + 40); A(26, 253, 4470, 0); A(29, 900, 4430, -40); A(27, 900, 4500, -300); A(28, 900, 4475, -200);
+  A(39, 170, 4410, 0); A(40, 160, yt - 400, ZM + 35);
   return S;
 }
 
@@ -187,7 +192,7 @@ export function n3() {
   S.box(-75, 175, Y0, -510, -275, 0, 'insitu'); S.box(725, X1, Y0, -510, -275, 0, 'insitu');
   S.box(175, 250, Y0, -510, -275, 0, 'grout'); S.box(650, 725, Y0, -510, -275, 0, 'grout'); S.box(250, 650, Y0, -510, -275, -200, 'grout');
   S.box(250, 650, Y0, Y1, -200, 0, 'pre', { axis: 'y' });
-  for (const x of [212, 688]) S.cyl('y', x, -1, 8, Y0, -560, 'red', 12);      // barras de vinculación a los costados de la columna
+  for (const x of [120, 780]) S.cyl('y', x, -1, 8, Y0, -560, 'red', 12);      // armadura de vinculación en las paredes del cuello
   // terreno y vereda
   S.box(X0, -76, Y0, -327, ZB, 0, 'tierra'); S.box(-76, 230, -510, -327, ZB, 0, 'tierra');
   S.box(X0, -66, -327, -250, ZB, 0, 'tosca'); S.box(X0, -66, -250, -150, ZB, -120, 'hs'); S.box(-70, -66, -250, -150, ZB, -120, 'seal');
@@ -210,9 +215,9 @@ export function n3() {
   mullion(S, 40, Y1);
   S.box(-30, 25, 0, 4, ZB, 0, 'seal');
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
-  A(15, 450, 150, -200); A(38, 100, 20, 0); A(39, -5, 2, 0); A(40, 800, 0, -230); A(41, 800, -25, -190);
-  A(42, 800, -45, -140); A(43, 800, -120, -90); A(44, 800, -176, -40); A(45, 800, -260, 0); A(46, 240, -250, 0); A(47, 100, -120, 0);
-  A(48, 110, 200, ZM + 25); A(49, -68, -60, -150); A(50, -110, -200, -120); A(51, 450, -650, 0); A(52, 212, -650, 0); A(53, 688, -620, 0);
-  A(54, 790, -650, 0); A(58, 780, -420, 0); A(59, 100, -60, -60); A(32, 12, 200, 0);
+  A(16, 450, 150, -200); A(42, 100, 20, 0); A(43, -5, 2, 0); A(44, 800, 0, -230); A(45, 800, -25, -190);
+  A(46, 800, -45, -140); A(47, 800, -120, -90); A(48, 800, -176, -40); A(49, 800, -260, 0); A(50, 240, -250, 0); A(51, 100, -120, 0);
+  A(52, 110, 200, ZM + 25); A(53, -68, -60, -150); A(54, -110, -200, -120); A(55, 450, -650, 0); A(56, 212, -650, 0); A(57, 780, -620, 0);
+  A(58, 790, -650, 0); A(62, 780, -420, 0); A(63, 100, -60, -60); A(36, 12, 200, 0);
   return S;
 }
