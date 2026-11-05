@@ -72,8 +72,8 @@ def foto(cod, x0, y0, x1, y1):
     RECTS[cod] = (x0, y0, x1, y1)
 
 # ------------------------------------------------------------------ ficha
-CW, CH = 86.0, 116.0
-NR, RH = 5, 4.6                        # renglones de texto debajo de la imagen
+CW, CH = 87.0, 117.0
+NR, RH = 3, 4.8                        # renglones de texto debajo de la imagen
 def renglones(texto, h, maxw):
     """Corta el texto en renglones que entran en maxw (mm)."""
     out, cur = [], ""
@@ -122,7 +122,7 @@ txt("Elementos premoldeados de hormigón para grandes luces: panel Pi · vigas d
 pl([(15, 390), (W - 15, 390)], "3-TITULOS", 70)
 for i, (cod, desc, datos) in enumerate(ELEMENTOS):
     col, fila = i % 3, i // 3
-    ficha(15 + col * (CW + 4.5), 386 - fila * (CH + 4.0), cod, desc, datos)
+    ficha(15 + col * (CW + 3.0), 386.5 - fila * (CH + 3.0), cod, desc, datos)
 
 # ---------------------------------------------------------------- RÓTULO (formato TP FINAL)
 ry0, ry1 = 12, 26
