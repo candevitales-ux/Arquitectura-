@@ -30,3 +30,10 @@ xvfb-run -a ODAFileConverter build/dwg_in build/dwg_out ACAD2018 DWG 0 1 "*.DXF"
 python3 src/opaco_corte.py && python3 src/opaco_nodos.py && node render.js src/opaco.html build/opaco portrait "" build/opaco_2d.json
 python3 src/sheet2dxf.py opaco && xvfb-run -a ODAFileConverter build/dwg_opaco_in build/dwg_opaco_out ACAD2018 DWG 0 1 "*.DXF"   # DWG 2D A3 en mm de papel
 ```
+
+## Cielorraso técnico steel frame – axonometría
+`../entregables/CIELORRASO_STEEL_FRAME_AXONOMETRIA_A3/`: lámina A3 vertical solo línea (PDF), DXF 2D (mm de papel, capas con grosor de línea) y DXF 3D (MESH, mm reales).
+```
+node render.js src/cielorraso_bn.html build/cielorraso_bn portrait build/cielorraso_3d.json build/cielorraso_2d.json
+python3 src/cielorraso_dxf.py      # -> build/dwg_in/*.dxf  (DWG: abrir en AutoCAD y GUARDARCOMO, o ODAFileConverter)
+```

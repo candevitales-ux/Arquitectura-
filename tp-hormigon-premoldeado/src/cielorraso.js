@@ -106,7 +106,7 @@ export const REFS = [
   'Vela rígida (montante 34) c/ 1,00 m sobre cada maestra',
   'Ángulo de anclaje galv. + broca metálica Ø 8 a la losa',
   'Tornillos T1 (punta aguja) en uniones perfil–perfil',
-  'Placa de roca de yeso estándar 12,5 mm (1,20 x 2,40 m), lado largo ⟂ montantes',
+  'Placa de roca de yeso estándar 12,5 mm (1,20 x 2,40 m), lado largo perpendicular a montantes',
   'Tornillos T2 c/ 25 cm sobre montantes y soleras',
   'Junta tomada: cinta de papel microperforada + masilla (3 manos)',
   'Borde de placa (canto) – placa atornillada a la cara inferior de los montantes',
