@@ -1,0 +1,103 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 420mm 297mm; margin: 0 }
+html, body { margin: 0; padding: 0; background: #fff; font-family: 'Liberation Sans', Arial, sans-serif; }
+#page { position: relative; width: 420mm; height: 297mm; overflow: hidden; }
+svg { position: absolute; left: 0; top: 0; }
+img.det { position: absolute; }
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="page"></div>
+<script type="module">
+import { cielorraso, REFS, CROPS } from './cielorraso.js';
+
+const PX = 12;                          // px por mm de papel
+const page = document.getElementById('page');
+let svg = '';
+const T = (x, y, s, o = {}) => svg += `<text x="${x}" y="${y}" font-size="${o.size || 2}" font-weight="${o.w || 'normal'}" fill="${o.fill || '#000'}" text-anchor="${o.a || 'start'}"${o.it ? ' font-style="italic"' : ''}>${s}</text>`;
+const R = (x, y, w, h, o = {}) => svg += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${o.fill || 'none'}" stroke="${o.st || '#000'}" stroke-width="${o.sw || 0.25}"/>`;
+const Ln = (pts, o = {}) => svg += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="${o.st || '#c0392b'}" stroke-width="${o.sw || 0.15}"/>`;
+
+const BELOW = [1, -1, 1], ABOVE = [1, 1, 1];   // isometría inferior / superior
+const VIEWS = [
+  { crop: null, x: 7, y: 17, w: 252, h: 203, dir: BELOW, frac: 0.9, lw: 2.2, t: 'AXONOMETRÍA ISOMÉTRICA INFERIOR · CIELORRASO SUSPENDIDO STEEL FRAME', st: 'Vista desde abajo con las placas retiradas en parte: estructura de perfiles de chapa galvanizada colgada de la losa' },
+  { crop: CROPS.A, x: 265, y: 17, w: 148, h: 70, dir: BELOW, frac: 0.82, lw: 2.6, t: 'DETALLE A · ANCLAJE DE VELA A LOSA', st: 'Isometría inferior' },
+  { crop: CROPS.B, x: 265, y: 104, w: 148, h: 70, dir: ABOVE, frac: 0.82, lw: 2.6, t: 'DETALLE B · CRUCE MAESTRA – MONTANTE – VELA', st: 'Isometría superior (desde el pleno)' },
+  { crop: CROPS.C, x: 265, y: 191, w: 148, h: 70, dir: BELOW, frac: 0.82, lw: 2.6, t: 'DETALLE C · ENCUENTRO CON MURO', st: 'Isometría inferior: solera perimetral, montante y placa' },
+];
+
+for (const V of VIEWS) {
+  const S = cielorraso(V.crop);
+  const r = S.render(Math.round(V.w * PX), Math.round(V.h * PX), V.dir, V.frac, [0, 0], V.lw);
+  const img = document.createElement('img'); img.className = 'det'; img.src = r.url;
+  Object.assign(img.style, { left: V.x + 'mm', top: V.y + 'mm', width: V.w + 'mm', height: V.h + 'mm' });
+  page.appendChild(img);
+  svg += `<rect x="${V.x}" y="${V.y - 8.5}" width="${V.w}" height="5.2" fill="#2f3b45"/>`;
+  T(V.x + 1.5, V.y - 4.6, V.t, { size: V.crop ? 2.5 : 3, w: 'bold', fill: '#fff' });
+  T(V.x + V.w - 1.5, V.y - 4.6, `ESC. APROX. 1:${Math.round(r.scale / V.w)}`, { size: 1.9, fill: '#fff', a: 'end', w: 'bold' });
+  T(V.x + 0.5, V.y - 0.8, V.st, { size: 1.85, it: true, fill: '#333' });
+  R(V.x, V.y, V.w, V.h, { sw: 0.2 });
+  // globos de referencia a izquierda / derecha
+  const pts = r.anchors.map(a => ({ n: a.n, ax: V.x + a.x * V.w, ay: V.y + a.y * V.h }))
+    .filter(p => p.ax > V.x + 1 && p.ax < V.x + V.w - 1 && p.ay > V.y + 1 && p.ay < V.y + V.h - 1);
+  const mid = V.x + V.w / 2;
+  pts.forEach(p => p.left = p.ax < mid);
+  for (const side of [true, false]) {
+    const L = pts.filter(p => p.left === side).sort((a, b) => a.ay - b.ay);
+    const gap = 5.4, ymin = V.y + 4, ymax = V.y + V.h - 4;
+    L.forEach((p, k) => { p.by = Math.max(p.ay, k ? L[k - 1].by + gap : ymin); });
+    for (let k = L.length - 1; k >= 0; k--) { const lim = k === L.length - 1 ? ymax : L[k + 1].by - gap; if (L[k].by > lim) L[k].by = lim; }
+    const bx = side ? V.x + 4.5 : V.x + V.w - 4.5;
+    for (const p of L) {
+      const ex = side ? bx + 2 : bx - 2, kx = side ? bx + 6 : bx - 6;
+      Ln([[p.ax, p.ay], [kx, p.by], [ex, p.by]]);
+      svg += `<circle cx="${p.ax}" cy="${p.ay}" r="0.45" fill="#c0392b"/>`;
+      svg += `<circle cx="${bx}" cy="${p.by}" r="2.05" fill="#fff" stroke="#c0392b" stroke-width="0.22"/>`;
+      T(bx, p.by + 0.75, p.n, { size: 2.1, w: 'bold', fill: '#c0392b', a: 'middle' });
+    }
+  }
+}
+
+// referencias (debajo de la axonometría)
+{
+  const x0 = 7, y0 = 222.5, w = 252, h = 45.5;
+  R(x0, y0, w, h, { sw: 0.2 });
+  T(x0 + 1.5, y0 + 4, 'REFERENCIAS', { size: 2.3, w: 'bold' });
+  const half = Math.ceil(REFS.length / 2), cw = w / 2;
+  REFS.forEach((s, k) => {
+    const c = k < half ? 0 : 1, xx = x0 + c * cw, yy = y0 + 8.8 + (k % half) * 5.1;
+    svg += `<circle cx="${xx + 3.2}" cy="${yy - 0.7}" r="1.85" fill="#fff" stroke="#c0392b" stroke-width="0.2"/>`;
+    T(xx + 3.2, yy, k + 1, { size: 1.95, w: 'bold', fill: '#c0392b', a: 'middle' });
+    T(xx + 6.5, yy, s, { size: 2.05 });
+  });
+}
+// notas técnicas
+{
+  const x0 = 265, y0 = 263.5, w = 148, h = 4.5;
+  T(x0, y0 + 1, 'Separaciones: montantes c/ 0,40 m · maestras c/ 1,20 m · velas c/ 1,00 m · T2 c/ 0,25 m (0,20 m en bordes).', { size: 1.75, it: true, fill: '#333' });
+  T(x0, y0 + 3.6, 'Pleno libre ≈ 0,60 m. Placas trabadas, juntas sobre montante. Perfiles de chapa galv. Z275, e = 0,52 mm.', { size: 1.75, it: true, fill: '#333' });
+}
+
+// rótulo
+const ry = 297 - 23;
+R(7, ry, 406, 17, { sw: 0.3 });
+T(10, ry + 6.5, 'CIELORRASO TÉCNICO SUSPENDIDO · AXONOMETRÍA', { size: 4, w: 'bold' });
+T(10, ry + 11.5, 'Sistema en seco (steel frame): placas de roca de yeso 12,5 mm sobre estructura de perfiles de chapa galvanizada colgada de la losa', { size: 2.3 });
+T(10, ry + 15, 'Isometría verdadera (ejes a 120°), vista inferior. Medidas en mm salvo indicación. Detalles A, B y C: ampliaciones del mismo modelo.', { size: 1.8, it: true, fill: '#333' });
+const cells = [['MATERIA', 'Construcciones II'], ['CÁTEDRA', 'Arq. ____________'], ['ALUMNO/A', '__________________'], ['GRUPO', '____'], ['FECHA', '05/11/2026 · A3']];
+let cx = 235;
+for (const [k, v] of cells) {
+  const w = k === 'ALUMNO/A' ? 46 : k === 'GRUPO' ? 18 : 36;
+  svg += `<line x1="${cx}" y1="${ry}" x2="${cx}" y2="${ry + 17}" stroke="#000" stroke-width="0.2"/>`;
+  T(cx + 1.5, ry + 5, k, { size: 1.7, w: 'bold' }); T(cx + 1.5, ry + 11, v, { size: 2.1 });
+  cx += w;
+}
+// leyenda de materiales
+const sw = [['#d3ccbd', 'H°A° in situ'], ['#d9b39a', 'Mampostería'], ['#a0a7ae', 'Chapa galvanizada'], ['#5d6369', 'Fijaciones / T1'], ['#1d1d1d', 'Tornillos T2'], ['#f5f5f3', 'Roca de yeso'], ['#e9e2cf', 'Cinta + masilla']];
+sw.forEach(([c, t], k) => { const xx = 7 + k * 36; svg += `<rect x="${xx}" y="${ry - 3.6}" width="4" height="2.4" fill="${c}" stroke="#000" stroke-width="0.12"/>`; T(xx + 5, ry - 1.7, t, { size: 1.7 }); });
+svg = `<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297" font-family="Liberation Sans, Arial, sans-serif"><rect x="3" y="3" width="414" height="291" fill="none" stroke="#000" stroke-width="0.5"/>${svg}</svg>`;
+page.insertAdjacentHTML('beforeend', svg);
+await Promise.all([...document.images].map(im => im.decode()));
+window.READY = true;
+</script></body></html>

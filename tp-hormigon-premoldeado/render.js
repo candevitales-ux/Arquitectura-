@@ -2,7 +2,7 @@
 const { chromium } = require('playwright-core');
 (async () => {
   const [,, inp, out, orient] = process.argv;
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist'] });
+  const b = await chromium.launch({ executablePath: process.env.CHROME || ['/opt/pw-browsers/chromium-1194/chrome-linux/chrome','/opt/pw-browsers/chromium-1243/chrome-linux64/chrome'].find(f => require('fs').existsSync(f)), args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist'] });
   const land = orient === 'landscape';
   const W = land ? 420 : 297, H = land ? 297 : 420;
   const p = await b.newPage({ viewport: { width: Math.round(W*96/25.4), height: Math.round(H*96/25.4) }, deviceScaleFactor: 4 });
