@@ -506,7 +506,7 @@ A('<rect x="10.7" y="400.1" width="274.9" height="11.2" fill="none" stroke="#000
 for xx in (39.5, 150.9, 244.3):
     A(f'<line x1="{xx}" y1="400.1" x2="{xx}" y2="411.3" stroke="#000" stroke-width="0.25"/>')
 T(12.6, 405.0, "TP FINAL", 4.2, weight="bold")
-T(12.6, 409.4, "FECHA: 19/10/2026", 2.8)
+T(12.6, 409.4, "FECHA: 05/11/2026", 2.8)
 T(41.2, 403.6, "DOCENTE: Arq. Tucci y Arq. Cardozo", 2.8)
 T(41.2, 406.8, "ALUMNA: Candelaria Vitale", 2.8)
 T(41.2, 410.0, "GRUPO: 13", 2.8)
