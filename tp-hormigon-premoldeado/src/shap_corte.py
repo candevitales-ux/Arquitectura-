@@ -252,10 +252,9 @@ rect(256, 4465, 2700, 4485, fill="url(#pMort)", **CUTT)                         
 rect(260, 4485, 2700, 4490, fill="#8d8d8d", stroke="none", sw=0)
 rect(260, 4490, 2700, 4500, fill="url(#pPorc)", **CUTT)
 for xx in range(860, 2700, 400): line(xx, 4490, xx, 4500, sw=0.15)
-cielorraso(2750, YE)
+
 # cubierta
 mensula_corte(7885); mensula_vp(8915); viga_L(8915); losa_shap(8915); capa_compresion(8915, 400)
-cielorraso(7350, 8915)
 
 # ------------------------------------------------------------------ MURO CORTINA
 montante(40, 4700); montante(4720, 9390)
@@ -359,9 +358,7 @@ def nivel(y, txt, xpos, side="r", sub=""):
 nivel(9472, "+9,47", -600, "r", "Cupertina")
 nivel(9092, "+9,09", 1650, "l", "Cubierta terminada")
 nivel(8915, "+8,92", 800, "r", "")
-nivel(7350, "+7,35", 1350, "r", "")
 nivel(4500, "+4,50", 1250, "r", "N.P.T. P. Alta")
-nivel(2750, "+2,75", 1350, "r", "")
 nivel(0, "±0,00", 1250, "r", "N.P.T. P. Baja")
 nivel(-150, "-0,15", -560, "r", "")
 nivel(-510, "-0,51", 1650, "l", "Sup. cuello")
@@ -411,16 +408,15 @@ REFS_POS = [
  (16, 450, 2900, 14, 0), (17, 560, 3150, 30, 6), (18, 600, 3320, 34, 9), (19, 272, YE - 400, 22, 9),
  (20, 540, YE - 165, 50.5, 14), (21, 330, 3400, 41, 9), (22, 620, YE - 320, 46.5, 0.75), (23, 1100, 3730, 4, 6), (24, 900, 3200, 38, -6), (25, 1300, YE - 165, 12.5, 19.5),
  (26, 253, 4440, 18, -20), (27, 950, 4495, 0, -7), (28, 1100, 4475, 0, -9), (29, 1250, 4430, 0, -11),
- (30, 1300, 2756, 0, 6), (31, 1317, YE - 1026, 20, -8), (32, 1317, 3000, 20, -2), (33, 1717, 2780, 0, 6),
  # muro cortina
- (34, 120, 4200, -16, 0), (35, 100, 4590, 14, -8), (36, 12, 4665, -24, 14), (37, 3, 4100, -14, 3), (38, 65, 3900, -16, 4),
- (39, 170, 4410, -22, -4), (40, 210, YE - 400, -23, 12.25), (41, 100, 4708, -28, 1), (42, 100, 20, -18, -5), (43, -5, 2, 4, -14),
+ (30, 120, 4200, -16, 0), (31, 100, 4590, 14, -8), (32, 12, 4665, -24, 14), (33, 3, 4100, -14, 3), (34, 65, 3900, -16, 4),
+ (35, 170, 4410, -22, -4), (36, 210, YE - 400, -23, 12.25), (37, 100, 4708, -28, 1), (38, 100, 20, -18, -5), (39, -5, 2, 4, -14),
  # planta baja y fundación
- (44, 850, -5, 0, -6), (45, 1000, -25, 0, -8), (46, 1150, -45, 0, -10), (47, 1100, -120, 0, 12), (48, 1550, -176, 0, 9),
- (49, 1350, -260, 0, 10), (50, 660, -250, 14, 10), (51, 100, -120, -16, 6), (52, 120, 600, 14, 0), (53, -60, -40, -10, -4),
- (54, -300, -200, 6, -9), (55, 450, -900, 14, 0), (56, 690, -1200, 22, 0), (57, -30, -1100, -16, 0),
- (58, 850, -700, 18, 12), (59, 1200, -1800, 9, 0), (60, 1100, -1960, 10, -4), (61, 1400, -2100, 4, 3), (62, 1500, -1000, 0, 5),
- (63, 60, -70, -6, 16),
+ (40, 850, -5, 0, -6), (41, 1000, -25, 0, -8), (42, 1150, -45, 0, -10), (43, 1100, -120, 0, 12), (44, 1550, -176, 0, 9),
+ (45, 1350, -260, 0, 10), (46, 660, -250, 14, 10), (47, 100, -120, -16, 6), (48, 120, 600, 14, 0), (49, -60, -40, -10, -4),
+ (50, -300, -200, 6, -9), (51, 450, -900, 14, 0), (52, 690, -1200, 22, 0), (53, -30, -1100, -16, 0),
+ (54, 850, -700, 18, 12), (55, 1200, -1800, 9, 0), (56, 1100, -1960, 10, -4), (57, 1400, -2100, 4, 3), (58, 1500, -1000, 0, 5),
+ (59, 60, -70, -6, 16),
 ]
 for n, x, y, dx, dy in REFS_POS:
     if (dx, dy) != (0, 0): ref(n, x, y, dx, dy)
@@ -453,47 +449,43 @@ LEG = [
 (23, "Viga VP doble T pretensada (en vista)"),
 (24, "Ménsula + neopreno + perno: apoyo VP (vista)"),
 (25, "Losa s/ VP: neopreno; juntas c/ grout"),
-("ENTREPISO Y CIELORRASOS", None),
+("ENTREPISO", None),
 (26, "Perfil L galv. de borde anclado a viga L"),
 (27, "Solado cerámico s/ adhesivo cementicio"),
 (28, "Carpeta de nivelación MHR 1:1/4:3, e = 2 cm"),
 (29, "Contrapiso liviano H° c/ perlita, e = 7 cm"),
-(30, "Placa de roca de yeso 12,5 mm"),
-(31, "Perfil PGU anclado a la VP c/ broca"),
-(32, "Montante PGC (vela de cuelgue)"),
-(33, "Perfil PGU inferior + soporte perimetral"),
 ("MURO CORTINA (STICK, MÓDULO 1,25 m)", None),
-(34, "Mullion: montante alum. 50x150"),
-(35, "Travesaño + presor + tapa + burletes EPDM"),
-(36, "DVH 6 templado + 12 + 3+3 laminado PVB"),
-(37, "Spandrel: vidrio templado 6 mm esmaltado"),
-(38, "Aislación: lana 50 mm en bandeja galv."),
-(39, "Cortafuego: lana + sellador s/ ángulo galv."),
-(40, "Grapa acero galv. regulable + bulón M12 inox"),
-(41, "Junta de dilatación 20 mm + manguito"),
-(42, "Perfil guía de arranque (deslizante)"),
-(43, "Sellador silicona neutra s/ fondo de junta"),
+(30, "Mullion: montante alum. 50x150"),
+(31, "Travesaño + presor + tapa + burletes EPDM"),
+(32, "DVH 6 templado + 12 + 3+3 laminado PVB"),
+(33, "Spandrel: vidrio templado 6 mm esmaltado"),
+(34, "Aislación: lana 50 mm en bandeja galv."),
+(35, "Cortafuego: lana + sellador s/ ángulo galv."),
+(36, "Grapa acero galv. regulable + bulón M12 inox"),
+(37, "Junta de dilatación 20 mm + manguito"),
+(38, "Perfil guía de arranque (deslizante)"),
+(39, "Sellador silicona neutra s/ fondo de junta"),
 ("PLANTA BAJA Y FUNDACIÓN", None),
-(44, "Solado cerámico s/ adhesivo cementicio"),
-(45, "Carpeta niveladora MHR 1:1/4:3"),
-(46, "Carpeta hidrófuga MCI 1:3 c/ 10 % aditivo"),
-(47, "Contrapiso de H° pobre, e = 12 cm"),
-(48, "Film de polietileno 200 µ"),
-(49, "Tosca compactada, e = 15 cm"),
-(50, "Junta de dilatación EPS 2 cm + sellador"),
-(51, "Contrapiso armado hasta la fachada"),
-(52, "Montante colgado del entrepiso"),
-(53, "Babeta chapa galv. + aislación hidrófuga"),
-(54, "Vereda de H° peinado s/ tosca"),
-(55, "Tronco de columna dentro del cuello"),
-(56, "Relleno de H° cementicio cuello/columna"),
-(57, "Armadura de vinculación base–cuello"),
-(58, "Cuello de la base, H°A° in situ"),
-(59, "Zapata de H°A° colada in situ"),
-(60, "Armadura de zapata: parrilla Ø12 c/15"),
-(61, "H° de limpieza, e = 10 cm"),
-(62, "Suelo natural"),
-(63, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
+(40, "Solado cerámico s/ adhesivo cementicio"),
+(41, "Carpeta niveladora MHR 1:1/4:3"),
+(42, "Carpeta hidrófuga MCI 1:3 c/ 10 % aditivo"),
+(43, "Contrapiso de H° pobre, e = 12 cm"),
+(44, "Film de polietileno 200 µ"),
+(45, "Tosca compactada, e = 15 cm"),
+(46, "Junta de dilatación EPS 2 cm + sellador"),
+(47, "Contrapiso armado hasta la fachada"),
+(48, "Montante colgado del entrepiso"),
+(49, "Babeta chapa galv. + aislación hidrófuga"),
+(50, "Vereda de H° peinado s/ tosca"),
+(51, "Tronco de columna dentro del cuello"),
+(52, "Relleno de H° cementicio cuello/columna"),
+(53, "Armadura de vinculación base–cuello"),
+(54, "Cuello de la base, H°A° in situ"),
+(55, "Zapata de H°A° colada in situ"),
+(56, "Armadura de zapata: parrilla Ø12 c/15"),
+(57, "H° de limpieza, e = 10 cm"),
+(58, "Suelo natural"),
+(59, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
 ]
 
 # ---------------- FORMATO TP (según plantilla de la cátedra)
@@ -504,11 +496,11 @@ T(16, 65.8, "REFERENCIAS", 5.0)
 items = [it for it in LEG if it[1] is not None]
 y0 = 70.4; dy = 3.25
 for k, (n, txt) in enumerate(items):
-    col, row = (0, k) if k < 32 else (1, k - 32)
+    col, row = (0, k) if k < 30 else (1, k - 30)
     xn = 18.6 if col == 0 else 90.4
     T(xn, y0 + row * dy, str(n), 2.8, "end", "bold")
     T(xn + 1.3, y0 + row * dy, txt, 2.8)
-yend = my = y0 + 32 * dy
+yend = my = y0 + 30 * dy
 # rótulo (como la plantilla)
 A('<rect x="10.7" y="400.1" width="274.9" height="11.2" fill="none" stroke="#000" stroke-width="0.35"/>')
 for xx in (39.5, 150.9, 244.3):
