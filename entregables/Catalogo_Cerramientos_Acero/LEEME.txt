@@ -1,0 +1,3 @@
+CATÁLOGO DE CERRAMIENTOS EN ACERO (A3 vertical, formato fichas)
+- PDF: imprimir al 100 % en A3 vertical.
+- DWG: lámina 1:1 en mm de papel. Las imágenes están VINCULADAS: mantener la carpeta "fotos" junto al DWG.
