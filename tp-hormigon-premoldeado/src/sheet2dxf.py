@@ -30,7 +30,7 @@ def lw(sw):
 # =============================================================== CORTE (geometría real -> papel, por bandas)
 import sys
 TAG = sys.argv[1] if len(sys.argv) > 1 else 'final'
-S, PX0, XR0, XMAX = 20.0, (170.0 if TAG in ('tp', 'opaco', 'shap') else 9.0), -600.0, 1700.0
+S, PX0, XR0, XMAX = 20.0, (170.0 if TAG in ('tp', 'opaco', 'shap') else 172.0), -600.0, 1700.0
 BANDS = [(7330, 9540, 8.0), (2720, 5000, 122.5), (-2180, 900, 241.0)] if TAG == 'shap' else [(7450, 9540, 8.0), (2980, 5000, 116.5), (-2180, 1200, 221.5)] if TAG in ('tp', 'opaco') else [(7600, 9540, 10.0), (3200, 5000, 111.0), (-2180, 1500, 205.0)]
 FILL = {"url(#pHA)": ("ANSI31", 0.4, 0), "url(#pHAis)": ("AR-CONC", 0.06, 0), "url(#pH)": ("AR-CONC", 0.04, 0),
         "url(#pMort)": ("AR-SAND", 0.03, 0), "url(#pHid)": ("AR-SAND", 0.02, 0), "url(#pGrout)": ("AR-SAND", 0.02, 0),

@@ -5,7 +5,7 @@ Geometría en mm reales; x+ hacia el interior, y+ hacia arriba, ±0.00 = NPT pla
 import math, os
 
 S = 20.0                      # escala 1:20
-PX0, XR0 = 9.0, -600.0        # x de papel donde cae x real -600
+PX0, XR0 = 172.0, -600.0      # x de papel donde cae x real -600 (corte a la derecha de la lámina)
 def X(x): return PX0 + (x - XR0) / S
 def YC(y): return 1000.0 - y / S          # coordenada "continua" antes de cortar en bandas
 
@@ -459,11 +459,11 @@ LEG = [
 (55, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
 ]
 
-RX = 130.0
-LX, LY = 128.0, 13.0
+RX = 10.0
+LX, LY = 8.0, 13.0
 def legend():
     T(LX, LY, "REFERENCIAS (corte integral y nudos)", 3.6, weight="bold")
-    A(f'<line x1="{LX}" y1="{LY+1.4}" x2="292" y2="{LY+1.4}" stroke="#000" stroke-width="0.25"/>')
+    A(f'<line x1="{LX}" y1="{LY+1.4}" x2="{LX+158}" y2="{LY+1.4}" stroke="#000" stroke-width="0.25"/>')
     cols = [(LX, LY + 6.5), (LX + 82, LY + 6.5)]; ci = 0; x0, y = cols[0]; ymax = 136.0
     blocks = []; cur = None
     for item in LEG:
@@ -481,7 +481,7 @@ def legend():
 yend = legend(); my = yend
 # rótulo (sin recuadro)
 ry = 392.0
-A(f'<line x1="{RX-2}" y1="{ry-3.5}" x2="292" y2="{ry-3.5}" stroke="#000" stroke-width="0.25"/>')
+A(f'<line x1="{RX-2}" y1="{ry-3.5}" x2="{RX+156}" y2="{ry-3.5}" stroke="#000" stroke-width="0.25"/>')
 T(RX - 2, ry + 1, "CORTE INTEGRAL 1:20 + NUDOS AXONOMÉTRICOS", 3.6, weight="bold")
 T(RX - 2, ry + 5.2, "H° premoldeado de grandes luces · cerramiento vidriado", 2.8)
 cells = [("MATERIA:", "Construcciones II"), ("CÁTEDRA:", "Arq. Tucci"), ("ALUMNO/A:", "____________"), ("GRUPO:", "____"),
