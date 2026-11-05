@@ -7,6 +7,7 @@ Todo se dibuja en un DXF en mm de papel (A3 vertical 297x420, escala 1:1 de la h
 pip install ezdxf pymupdf
 python3 src/computo_plantilla.py build   # plantilla en blanco (entrega actual)
 python3 src/computo_opaco.py build      # cómputo completado con edificio estándar
+python3 src/lamina4_catalogo_v2.py build   # LÁMINA FINAL v2 (cortes Astori opaco + muro cortina SHAP)
 python3 src/lamina4_catalogo.py build    # LÁMINA FINAL: vidriado + opaco en una hoja
 python3 src/armar_a4.py && python3 src/lamina4_a4.py build vidriado && python3 src/lamina4_a4.py build opaco   # 2 hojas A4
 python3 src/dxf2pdf.py build/Lamina4_Catalogo_Vidriado_A4.dxf build/a4_vidriado.pdf build/a4_vidriado.png A4
