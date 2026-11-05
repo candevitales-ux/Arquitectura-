@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Lámina 4 - Catálogo de cerramientos en formato FICHAS (estilo catálogo de productos), una hoja A3 vertical:
+"""Lámina 4 - Catálogo de cerramientos en formato FICHAS CON FOTOS (estilo catálogo de productos), una hoja A3 vertical:
 columna OPACO (panel liso de H°A con alma de EPS, vertical, Astori) y columna VIDRIADO (muro cortina stick),
 sobre la estructura común (columnas, VL, viga L de borde, losa SHAP, fundación).
-Cada ficha: descripción, denominación, dibujo 3D del componente, ubicación, medidas, material, herrajes, color y
+Cada ficha: descripción, denominación, foto real de referencia del componente (Wikimedia Commons, ver
+fotos/CREDITOS_FOTOS.txt; con --dibujos se usan los dibujos 3D), ubicación, medidas, material, herrajes, color y
 observaciones. Todo en un DXF en mm de papel (escala 1:1 de la hoja); del DXF salen el PDF y el DWG.
 Letra mínima 2 mm."""
 import math, sys, os
@@ -17,6 +18,9 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else "build"
 os.makedirs(OUT, exist_ok=True)
 W, H = 297.0, 420.0
 FECHA = "05/11/2026"
+FOTOS = "--dibujos" not in sys.argv
+FOTOS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fotos")
+RECTS = {}   # código -> recuadro (x0, y0, x1, y1) de la foto en mm de papel, para el PDF
 T_MIN = 2.0
 
 doc = ezdxf.new("R2018", setup=True); doc.units = ezdxf.units.MM
@@ -230,6 +234,21 @@ def d_guia():
     cil_v(78, 160, 5, 3, 40, (150, 155, 160)); caja(70, 86, 3, 9, 152, 168, (150, 155, 160))
     caja(3, 153, 22, 300, 30, 290, ALU)                                                            # montante (no apoya)
 
+# ------------------------------------------------------------------ fotos
+def foto(cod, x0, y0, x1, y1):
+    """Recorta la foto al recuadro (cubre todo, centrada), la guarda en OUT/fotos y la inserta como IMAGE."""
+    from PIL import Image
+    im = Image.open(os.path.join(FOTOS_DIR, f"{cod}.jpg")).convert("RGB")
+    r = (x1 - x0) / (y1 - y0); w, h = im.size
+    if w / h > r: nw = int(h * r); im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+    else: nh = int(w / r); im = im.crop((0, (h - nh) // 2, w, (h - nh) // 2 + nh))
+    os.makedirs(f"{OUT}/fotos", exist_ok=True)
+    dst = f"{OUT}/fotos/{cod}.jpg"; im.save(dst, quality=90)
+    idef = doc.add_image_def(filename=f"fotos/{cod}.jpg", size_in_pixel=im.size)
+    msp.add_image(idef, insert=(x0, y0), size_in_units=(x1 - x0, y1 - y0), dxfattribs={"layer": "1-DIBUJO"})
+    pl([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], "3-TABLAS", 13, True)
+    RECTS[cod] = (x0, y0, x1, y1)
+
 # ------------------------------------------------------------------ ficha
 CW, CH = 64.0, 84.0
 FILAS = ("UBICACIÓN", "MEDIDAS", "MATERIAL", "HERRAJES", "COLOR", "OBSERVACIONES")
@@ -251,7 +270,8 @@ def ficha(x, yt, cod, desc, dibujo, datos):
         y = img_b - (i + 0.5) * rh
         txt(k, x + 1, y, 2.0, TA.MIDDLE_LEFT, "3-TABLAS", True, lab - 1.5)
         txt(val, xl + (CW - lab) / 2, y, 2.0, TA.MIDDLE_CENTER, "3-TABLAS", max_ancho=CW - lab - 1.2)
-    n0 = len(msp); dibujo(); colocar(list(msp)[n0:], x, img_b, xr, img_t)
+    if FOTOS: foto(cod, x + 0.8, img_b + 0.8, xr - 0.8, img_t - 0.8)
+    else: n0 = len(msp); dibujo(); colocar(list(msp)[n0:], x, img_b, xr, img_t)
 
 OPACO = [
     ("OP-01", "PANEL PL LISO C/ ALMA EPS", d_panel,
@@ -312,7 +332,7 @@ txt("CATÁLOGO DE CERRAMIENTOS", W / 2, 401, 7.0, TA.MIDDLE_CENTER, "3-TITULOS",
 txt("Estructura común a ambos: columnas H°A 40x40 · vigas VL doble T 40x70 · viga L de borde · losa hueca SHAP h 16 · bases c/ cuello + viga de fundación",
     W / 2, 393.2, 2.0, TA.MIDDLE_CENTER, "3-TITULOS")
 pl([(15, 390), (W - 15, 390)], "3-TITULOS", 70)
-pl([(W / 2, 388), (W / 2, 30)], "3-TITULOS", 35)
+pl([(W / 2, 388), (W / 2, 34)], "3-TITULOS", 35)
 
 for x0, tit, sub, fichas in ((15, "OPACO", "panel liso de H°A c/ alma de EPS, vertical (Astori) · e = 20 cm", OPACO),
                              (W / 2 + 3, "VIDRIADO", "muro cortina de aluminio tipo stick · DVH", VIDRIADO)):
@@ -337,5 +357,11 @@ txt("NIVEL:", xs[2] + 2, 22.6, 2.4); txt("OBS:", xs[2] + 2, 19.0, 2.4)
 txt("CONSTRUCCIONES II", (xs[3] + xs[4]) / 2, 21.0, 2.6, TA.MIDDLE_CENTER)
 txt("CATEDRA: ARQ. TUCCI", (xs[3] + xs[4]) / 2, 17.0, 2.6, TA.MIDDLE_CENTER)
 
+if FOTOS:
+    txt("Fotos de referencia: Wikimedia Commons (dominio público / licencias CC). Autores y licencias en CREDITOS_FOTOS.txt.",
+        15, 30.2, 2.0)
+    import json, shutil
+    json.dump(RECTS, open(f"{OUT}/fotos_rects.json", "w"))
+    shutil.copy(os.path.join(FOTOS_DIR, "CREDITOS_FOTOS.txt"), f"{OUT}/fotos/CREDITOS_FOTOS.txt")
 doc.saveas(f"{OUT}/Lamina4_Catalogo_Fichas_A3.dxf")
 print("ok")

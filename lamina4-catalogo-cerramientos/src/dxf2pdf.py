@@ -10,6 +10,8 @@ from ezdxf.fonts import fonts
 src, pdf, png = sys.argv[1:4]
 PW, PH = (210, 297) if len(sys.argv) > 4 and sys.argv[4].upper() == "A4" else (297, 420)   # hoja: A3 (defecto) o A4
 doc = ezdxf.readfile(src); msp = doc.modelspace()
+# las fotos (IMAGE) se insertan después con pegar_fotos.py, ya recortadas a su recuadro
+for e in list(msp.query("IMAGE")): msp.delete_entity(e)
 # Arial no está en este equipo: se dibuja con Liberation Sans (mismas métricas); el DWG sigue pidiendo Arial.
 for st in doc.styles:
     f = st.dxf.font.lower()

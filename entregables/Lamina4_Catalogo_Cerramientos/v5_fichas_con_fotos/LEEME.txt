@@ -1,0 +1,5 @@
+CATÁLOGO DE CERRAMIENTOS - fichas con fotos (A3 vertical)
+- Catalogo_Cerramientos_Fichas_Fotos_A3_vertical.pdf : imprimir al 100 % en A3 vertical.
+- Catalogo_Cerramientos_Fichas_Fotos_A3_vertical.dwg : lámina 1:1 en mm de papel. Las fotos están VINCULADAS
+  (no incrustadas): mantener la carpeta "fotos" junto al DWG para que AutoCAD las muestre.
+- CREDITOS_FOTOS.txt : autor y licencia de cada foto (Wikimedia Commons).
