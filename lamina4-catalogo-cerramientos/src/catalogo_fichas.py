@@ -256,16 +256,14 @@ def ficha(x, yt, cod, desc, dibujo, datos):
     rh, rd, lab = 4.4, 4.6, 24.0
     xl, xr = x + lab, x + CW
     yb = yt - CH
-    img_t, img_b = yt - 2 * rd, yb + len(FILAS) * rh
+    img_t, img_b = yt - rd, yb + len(FILAS) * rh          # sin renglón de denominación: la foto sube
     pl([(x, yt), (xr, yt), (xr, yb), (x, yb)], "3-TABLAS", 35, True)
-    for y in (yt - rd, img_t, img_b): pl([(x, y), (xr, y)], "3-TABLAS", 25)
+    for y in (img_t, img_b): pl([(x, y), (xr, y)], "3-TABLAS", 25)
     for i in range(1, len(FILAS)): pl([(x, img_b - i * rh), (xr, img_b - i * rh)], "3-TABLAS", 13)
     pl([(xl, yt), (xl, img_t)], "3-TABLAS", 13); pl([(xl, img_b), (xl, yb)], "3-TABLAS", 13)
     solido([(x, yt - rd), (xr, yt - rd), (xr, yt), (x, yt)], (232, 232, 232), "3-TABLAS")
     txt("DESCRIPCIÓN", x + 1, yt - rd / 2, 2.0, TA.MIDDLE_LEFT, "3-TABLAS", True)
     txt(desc, xl + (CW - lab) / 2, yt - rd / 2, 2.0, TA.MIDDLE_CENTER, "3-TABLAS", True, CW - lab - 1.2)
-    txt("DENOMINACIÓN", x + 1, yt - 1.5 * rd, 2.0, TA.MIDDLE_LEFT, "3-TABLAS", True)
-    txt(cod, xl + (CW - lab) / 2, yt - 1.5 * rd, 2.0, TA.MIDDLE_CENTER, "3-TABLAS")
     for i, (k, val) in enumerate(zip(FILAS, datos)):
         y = img_b - (i + 0.5) * rh
         txt(k, x + 1, y, 2.0, TA.MIDDLE_LEFT, "3-TABLAS", True, lab - 1.5)
