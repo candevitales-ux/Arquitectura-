@@ -9,6 +9,7 @@ from shapely.ops import unary_union
 from shapely.affinity import affine_transform
 
 src, out = sys.argv[1], sys.argv[2]
+COLOR = sys.argv[3] if len(sys.argv) > 3 else None    # capa de color del corte (PNG de paint_mask.py, zona 33-157 x 25-372 mm)
 K = 72 / 25.4
 FR = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
 FB = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
@@ -165,6 +166,8 @@ for i, (g, b, (px, py)) in enumerate(zip(DET, bb, place)):
 print("detalles: fila 1 hasta", round(ytop + 6 + row1_h, 1), " detalle 3 hasta", round(y2 + 6 + SD * (bb[2][3] - bb[2][1]), 1))
 
 D.update_stream(pg.get_contents()[0], ops.encode())
+if COLOR:   # colores por debajo de las líneas del corte (mismo desplazamiento que el corte)
+    pg.insert_image(pymupdf.Rect((33 + 137) * K, 25 * K, (157 + 137) * K, 372 * K), filename=COLOR, overlay=False)
 pg.insert_font(fontname="LibSans", fontfile=FR); pg.insert_font(fontname="LibSansB", fontfile=FB)
 for x, y, s, size, bold, a in TXT:
     f = fB if bold else fR
