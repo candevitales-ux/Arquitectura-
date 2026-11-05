@@ -142,9 +142,12 @@ export function n2() {
     S.box(xp - 10, xp + 10, ytm - 260, ytm + 170, -3, 0.8, 'steel');
   }
   // VP 40x50 (perpendicular a la fachada) sobre su ménsula c/ diagonal + neopreno + perno; recibe la losa c/ neopreno
-  S.prism([[650, yt - 670], [1000, yt - 670], [1000, yt - 830], [650, yt - 1140]], 'z', ZC0, ZC, 'prev');
-  S.box(670, 990, yt - 670, yt - 660, ZC0 + 20, ZC - 20, 'neo');
-  S.box(660, X1, yt - 660, yt - 170, ZC0, ZC, 'prev');
+  S.prism(clipY([[650, yt - 1030], [1000, yt - 1030], [1000, yt - 1190], [650, yt - 1500]], Y0), 'z', ZC0, ZC, 'prev');
+  S.box(670, 990, yt - 1030, yt - 1020, ZC0 + 20, ZC - 20, 'neo');
+  { // VP doble T (misma base que la VL, llega a la losa): perfil en y-z extruido en x
+    const yb = yt - 1020, yv = yt - 170, u0 = -ZC, u1 = -ZC0, um = (u0 + u1) / 2;
+    S.prism([[u0, yb], [u1, yb], [u1, yb + 150], [um + 80, yb + 210], [um + 60, yb + 210], [um + 60, yv - 220], [um + 80, yv - 220], [u1, yv - 160], [u1, yv],
+             [u0, yv], [u0, yv - 160], [um - 80, yv - 220], [um - 60, yv - 220], [um - 60, yb + 210], [um - 80, yb + 210], [u0, yb + 150]], 'x', 660, X1, 'prev'); }
   S.box(660, X1, yt - 170, yt - 160, ZC0 + 20, ZC, 'neo');
   // VL doble T + viga L (terminan a 1 cm de la columna)
   vigaL(S, yt, ZC + 10, 0);
@@ -177,7 +180,7 @@ export function n2() {
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(11, 900, yt + 25, -20); A(13, 935, yt - 80, 0); A(20, 540, yt - 165, 0); A(15, 450, yt - 650, 0); A(14, 330, yt - 150, 0);
   A(16, 650, 3080, -380); A(17, 450, ytm - 150, 0); A(18, 470, ytm + 5, 0); A(21, 330, ytm + 85, 0.8); A(22, 600, yt - 320, 0);
-  A(23, 900, yt - 400, ZC); A(24, 720, yt - 880, ZC);
+  A(23, 900, yt - 600, -380); A(24, 720, yt - 1200, ZC);
   A(19, 270, yt - 400, ZM + 40); A(26, 253, 4470, 0); A(29, 900, 4430, -40); A(27, 900, 4500, -300); A(28, 900, 4475, -200);
   A(39, 170, 4410, 0); A(40, 160, yt - 400, ZM + 35);
   return S;
@@ -192,7 +195,7 @@ export function n3() {
   S.box(-75, 175, Y0, -510, -275, 0, 'insitu'); S.box(725, X1, Y0, -510, -275, 0, 'insitu');
   S.box(175, 250, Y0, -510, -275, 0, 'grout'); S.box(650, 725, Y0, -510, -275, 0, 'grout'); S.box(250, 650, Y0, -510, -275, -200, 'grout');
   S.box(250, 650, Y0, Y1, -200, 0, 'pre', { axis: 'y' });
-  for (const x of [120, 780]) S.cyl('y', x, -1, 8, Y0, -560, 'red', 12);      // armadura de vinculación en las paredes del cuello
+  for (const x of [-30, 830]) S.cyl('y', x, -1, 8, Y0, -560, 'red', 12);      // armadura de vinculación: 1 barra por lado, junto a la cara exterior
   // terreno y vereda
   S.box(X0, -76, Y0, -327, ZB, 0, 'tierra'); S.box(-76, 230, -510, -327, ZB, 0, 'tierra');
   S.box(X0, -66, -327, -250, ZB, 0, 'tosca'); S.box(X0, -66, -250, -150, ZB, -120, 'hs'); S.box(-70, -66, -250, -150, ZB, -120, 'seal');
@@ -217,7 +220,7 @@ export function n3() {
   const A = (n, x, y, z) => S.anchor(n, x, y, z);
   A(16, 450, 150, -200); A(42, 100, 20, 0); A(43, -5, 2, 0); A(44, 800, 0, -230); A(45, 800, -25, -190);
   A(46, 800, -45, -140); A(47, 800, -120, -90); A(48, 800, -176, -40); A(49, 800, -260, 0); A(50, 240, -250, 0); A(51, 100, -120, 0);
-  A(52, 110, 200, ZM + 25); A(53, -68, -60, -150); A(54, -110, -200, -120); A(55, 450, -650, 0); A(56, 212, -650, 0); A(57, 780, -620, 0);
+  A(52, 110, 200, ZM + 25); A(53, -68, -60, -150); A(54, -110, -200, -120); A(55, 450, -650, 0); A(56, 212, -650, 0); A(57, 830, -620, 0);
   A(58, 790, -650, 0); A(62, 780, -420, 0); A(63, 100, -60, -60); A(36, 12, 200, 0);
   return S;
 }

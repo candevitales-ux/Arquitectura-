@@ -131,8 +131,8 @@ rect(250, -1300, 650, 0, fill="url(#pHA)", **CUT)                               
 # armadura de base y cuello
 pline([(-480, -1890), (-480, -1975), (1380, -1975), (1380, -1890)], stroke=REB, sw=0.22)
 for xx in range(-450, 1400, 120): circ(xx, -1958, 0.28, fill=REB)
-for xx in (-30, 120, 780, 930):   # armadura de vinculación base–cuello: en las paredes del cuello, ancladas c/ pata en la base
-    pline([(xx + (120 if xx < 450 else -120), -1930), (xx, -1930), (xx, -560)], stroke=REB, sw=0.3 if xx in (-30, 930) else 0.18)
+for xx in (-30, 930):   # armadura de vinculación base–cuello: 1 barra por lado, junto a la cara exterior del cuello, c/ pata en la zapata
+    pline([(xx + (120 if xx < 450 else -120), -1930), (xx, -1930), (xx, -560)], stroke=REB, sw=0.3)
 for yy in range(-1400, -540, 140):
     pline([(-30, yy), (930, yy)], stroke=REB, sw=0.08, extra='stroke-dasharray="1.5 0.6"')
 # armadura de la columna (estribos y barras)
@@ -176,7 +176,7 @@ def mensula_corte(ytop):
     for xp in (330, 570): rect(xp - 10, ytop - 260, xp + 10, ytop, fill=STEEL, stroke="#000", sw=0.08)
 def mensula_vp(yt):
     """ménsula c/ diagonal que recibe la VP (perpendicular a la fachada) — EN VISTA, detrás del plano de corte"""
-    yv = yt - 670
+    yv = yt - 1030
     poly([(650, yv), (1000, yv), (1000, yv - 160), (650, yv - 470)], fill="#e3e6e8", stroke="#222", sw=0.2)
     pline([(680, yv - 40), (970, yv - 40), (970, yv - 150), (690, yv - 400)], stroke=REB, sw=0.12, extra=DASH)  # armadura (oculta)
     rect(670, yv, 990, yv + 10, fill=NEO, stroke="#222", sw=0.06)                          # neopreno VP / ménsula
@@ -212,7 +212,10 @@ def losa_shap(yt):
     """losa hueca pretensada SHAP h = 16 cm, cortada transversalmente (alvéolos vistos en corte). Apoya en sus extremos
     s/ la VP (en vista, detrás) y su borde s/ el talón de la viga L, ambos c/ neopreno; juntas longitudinales c/ grout"""
     yl = yt - 160
-    rect(660, yt - 660, 2700, yl - 10, fill="#e9ebed", **VIEW)                             # viga VP 40x50 (en vista)
+    yb = yt - 1020                                                                          # VP doble T (en vista): misma base que la VL
+    rect(660, yb, 2700, yl - 10, fill="#e9ebed", **VIEW)
+    rect(660, yb + 210, 2700, yl - 220, fill="#d6dade", stroke="none", sw=0)              # alma retirada (hueco entre alas)
+    for yy in (yb + 150, yb + 210, yl - 220, yl - 160): line(660, yy, 2700, yy, stroke="#444", sw=0.1)   # alas + chaflanes
     rect(660, yl - 10, 2700, yl, fill=NEO, stroke="#222", sw=0.06)                         # neopreno losa / VP (en vista)
     for xa, xb in ((420, 1620), (1640, 2840)):                                            # módulos de 1,20 m
         rect(xa, yl, xb, yt, fill="url(#pHA)", **CUT)
@@ -233,9 +236,9 @@ def cielorraso(y, ytt):
     for xx in range(900, 2700, 400): rect(xx, y + 12.5, xx + 35, y + 47, fill=ALU, stroke="#444", sw=0.08)   # PGU inferior (cortado)
     pline([(190, y + 70), (190, y), (230, y)], stroke="#000", sw=0.2)                      # soporte perimetral
     for xc in (1317, 2117):
-        rect(xc - 17, y + 47, xc + 17, ytt - 672, fill="none", stroke="#555", sw=0.12)       # montante PGC (vela)
-        rect(xc - 45, ytt - 672, xc + 45, ytt - 660, fill=ALU, stroke="#444", sw=0.08)       # PGU superior anclado a la VP
-        line(xc, ytt - 672, xc, ytt - 600, stroke="#000", sw=0.25)                         # broca
+        rect(xc - 17, y + 47, xc + 17, ytt - 1032, fill="none", stroke="#555", sw=0.12)      # montante PGC (vela)
+        rect(xc - 45, ytt - 1032, xc + 45, ytt - 1020, fill=ALU, stroke="#444", sw=0.08)     # PGU superior anclado a la VP
+        line(xc, ytt - 1032, xc, ytt - 960, stroke="#000", sw=0.25)                        # broca
 
 # columnas en vista
 columna_vista(0, 3015); columna_vista(4500, 7585)
@@ -402,13 +405,13 @@ REFS_POS = [
  (7, 1000, 8967, 0, 16), (8, 330, 9250, 12, -12), (9, 420, 9110, 24, -3), (10, 410, 9356, 14, -4),
  (11, 1700, 8945, 0, 14), (12, 470, 8980, 34, -16), (13, 1000, 8835, 27.5, 7.25), (14, 330, 8800, 20, 3), (15, 470, 8250, 28, 4),
  (16, 450, 7450, 14, 0), (17, 560, 7700, 30, 6), (18, 600, 7890, 34, 9), (19, 272, 8515, 22, 9),
- (20, 540, 8750, 50.5, 14), (21, 330, 7960, 41, 7), (22, 620, 8595, 46.5, 0.75), (23, 1100, 8370, 4, 6), (24, 800, 7930, 30, 8), (25, 1300, 8750, 12.5, 19.5),
+ (20, 540, 8750, 50.5, 14), (21, 330, 7960, 41, 7), (22, 620, 8595, 46.5, 0.75), (23, 1100, 8300, 4, 6), (24, 800, 7650, 30, 4), (25, 1300, 8750, 12.5, 19.5),
  # entrepiso
  (11, 1450, 4370, 0, -13), (12, 560, 4370, 14, -24), (13, 1000, 4265, 27.5, 7.25), (14, 330, 4250, 20, 3), (15, 470, 3700, 28, 4),
  (16, 450, 2900, 14, 0), (17, 560, 3150, 30, 6), (18, 600, 3320, 34, 9), (19, 272, YE - 400, 22, 9),
- (20, 540, YE - 165, 50.5, 14), (21, 330, 3400, 41, 9), (22, 620, YE - 320, 46.5, 0.75), (23, 1100, 3800, 4, 6), (24, 800, 3430, 30, 8), (25, 1300, YE - 165, 12.5, 19.5),
+ (20, 540, YE - 165, 50.5, 14), (21, 330, 3400, 41, 9), (22, 620, YE - 320, 46.5, 0.75), (23, 1100, 3730, 4, 6), (24, 900, 3200, 38, -6), (25, 1300, YE - 165, 12.5, 19.5),
  (26, 253, 4440, 18, -20), (27, 950, 4495, 0, -7), (28, 1100, 4475, 0, -9), (29, 1250, 4430, 0, -11),
- (30, 1300, 2756, 0, 6), (31, 1317, YE - 666, 20, -2), (32, 1317, 3300, 20, -2), (33, 1717, 2780, 0, 6),
+ (30, 1300, 2756, 0, 6), (31, 1317, YE - 1026, 20, -8), (32, 1317, 3000, 20, -2), (33, 1717, 2780, 0, 6),
  # muro cortina
  (34, 120, 4200, -16, 0), (35, 100, 4590, 14, -8), (36, 12, 4665, -24, 14), (37, 3, 4100, -14, 3), (38, 65, 3900, -16, 4),
  (39, 170, 4410, -22, -4), (40, 210, YE - 400, -23, 12.25), (41, 100, 4708, -28, 1), (42, 100, 20, -18, -5), (43, -5, 2, 4, -14),
@@ -447,7 +450,7 @@ LEG = [
 (20, "Losa s/ talón viga L: neopreno + grout"),
 (21, "2 pernos Ø20 en vainas c/ grout (antivuelco)"),
 (22, "Junta VL / viga L: grout + barras Ø12"),
-(23, "Viga VP 40x50 pretensada (en vista)"),
+(23, "Viga VP doble T pretensada (en vista)"),
 (24, "Ménsula + neopreno + perno: apoyo VP (vista)"),
 (25, "Losa s/ VP: neopreno; juntas c/ grout"),
 ("ENTREPISO Y CIELORRASOS", None),
