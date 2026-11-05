@@ -135,17 +135,9 @@ for xx in (-30, 120, 780, 930):
     pline([(xx + (40 if xx < 450 else -40), -1975), (xx, -1975), (xx, -560)], stroke=REB, sw=0.18)
 for yy in range(-1400, -540, 140):
     pline([(-30, yy), (930, yy)], stroke=REB, sw=0.08, extra='stroke-dasharray="1.5 0.6"')
-# anclaje mecánico húmedo: horquillas entrelazadas columna / cuello
-for side in (0, 1):
-    xc, xw = (250, 175) if side == 0 else (650, 725)
-    s = -1 if side == 0 else 1
-    for k, yy in enumerate(range(-1240, -560, 115)):
-        pline([(xc, yy), (xc + s * 55, yy), (xc + s * 55, yy + 38), (xc + s * 15, yy + 38)], stroke=REB, sw=0.2)          # de columna
-        pline([(xw, yy + 58), (xw - s * 55, yy + 58), (xw - s * 55, yy + 96), (xw - s * 15, yy + 96)], stroke=REB, sw=0.2)  # de cuello
-# armadura de vinculación fundación–columna (en vainas grouteadas de la columna)
-for xx in (360, 540):
-    pline([(xx - 90 if xx < 450 else xx + 90, -1930), (xx, -1930), (xx, -760)], stroke=REB, sw=0.3)
-    rect(xx - 18, -1300, xx + 18, -740, fill="none", stroke="#555", sw=0.1, extra=DASH)
+# armadura de vinculación fundación–columna: barras a los costados de la columna, dentro del relleno cuello/columna
+for xx in (212, 688):
+    pline([(xx - 120 if xx < 450 else xx + 120, -1930), (xx, -1930), (xx, -560)], stroke=REB, sw=0.3)
 # armadura de la columna (estribos y barras)
 for xx in (290, 610): pline([(xx, -1290), (xx, -10)], stroke=REB, sw=0.12)
 # SIN viga perimetral: el muro cortina de PB cuelga del entrepiso; abajo solo una guía deslizante sobre el contrapiso
@@ -383,7 +375,7 @@ cota_v(3765, 4415, 1550, "0,65")
 cota_v(-2050, -1750, 1560, "0,30"); cota_v(-1350, -510, 1600, "0,84")
 cota_v(8968, 9440, 220, "0,47")
 cota_h(-32, 182, 3090, "21"); cota_h(182, 250, 3090, "7"); cota_h(250, 650, 3090, "40")
-cota_h(-550, 1450, -2170, "2,00", below=True); cota_h(-75, 975, -1420, "1,05")
+cota_h(-550, 1450, -2170, "2,00", below=True)
 
 T(X(-530), Y(9300), "EXTERIOR", 2.0, fill="#555"); T(X(1450), Y(9420), "INTERIOR", 2.0, fill="#555")
 T(X(-530), Y(4900), "EXTERIOR", 2.0, fill="#555"); T(X(800), Y(4900), "INTERIOR · PLANTA ALTA", 2.0, fill="#555")
@@ -413,9 +405,9 @@ REFS_POS = [
  (35, 170, 4410, -22, -4), (36, 210, 4125, 24, -4), (37, 100, 4708, -28, 1), (38, 100, 20, -18, -5), (39, -5, 2, 4, -14),
  (40, 850, -5, 0, -6), (41, 1000, -25, 0, -8), (42, 1150, -45, 0, -10), (43, 1100, -120, 0, 12), (44, 1550, -176, 0, 9),
  (45, 1350, -260, 0, 10), (46, 660, -250, 14, 10), (47, 100, -120, -16, 6), (48, 120, 600, 14, 0), (49, -60, -40, -10, -4),
- (50, -300, -200, 6, -9), (51, 450, -900, 14, 0), (52, 700, -800, 20, 0), (53, 690, -1200, 22, 0), (54, 540, -1600, 20, 2),
- (55, 850, -700, 18, 12), (56, 1200, -1800, 9, 0), (57, 1100, -1960, 10, -4), (58, 1400, -2100, 4, 3), (59, 1500, -1000, 0, 5),
- (60, 60, -70, -6, 16), (5, 0, 0, 0, 0),
+ (50, -300, -200, 6, -9), (51, 450, -900, 14, 0), (52, 690, -1200, 22, 0), (53, 688, -1600, 20, 2),
+ (54, 850, -700, 18, 12), (55, 1200, -1800, 9, 0), (56, 1100, -1960, 10, -4), (57, 1400, -2100, 4, 3), (58, 1500, -1000, 0, 5),
+ (59, 60, -70, -6, 16), (5, 0, 0, 0, 0),
 ]
 for n, x, y, dx, dy in REFS_POS:
     if (dx, dy) != (0, 0): ref(n, x, y, dx, dy)
@@ -477,15 +469,14 @@ LEG = [
 (49, "Babeta chapa galv. + aislación hidrófuga"),
 (50, "Vereda de H° peinado s/ tosca"),
 (51, "Tronco de columna dentro del cuello"),
-(52, "Anclaje mecánico húmedo (horquillas)"),
-(53, "Relleno de H° cementicio cuello/columna"),
-(54, "Armadura de vinculación fundación–columna"),
-(55, "Cuello de la base, H°A° in situ"),
-(56, "Base de H°A° colada in situ"),
-(57, "Armadura de base: parrilla Ø12 c/15"),
-(58, "H° de limpieza, e = 10 cm"),
-(59, "Terreno natural"),
-(60, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
+(52, "Relleno de H° cementicio cuello/columna"),
+(53, "Armadura de vinculación fundación–columna"),
+(54, "Cuello de la base, H°A° in situ"),
+(55, "Base de H°A° colada in situ"),
+(56, "Armadura de base: parrilla Ø12 c/15"),
+(57, "H° de limpieza, e = 10 cm"),
+(58, "Terreno natural"),
+(59, "Broca c/ prisionero Ø9,5 x 80 + tuerca"),
 ]
 
 # ---------------- FORMATO TP (según plantilla de la cátedra)
