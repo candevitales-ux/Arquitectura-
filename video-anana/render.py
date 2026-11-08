@@ -687,10 +687,10 @@ def main(out_path, t_start=0.0, t_end=DUR, only=None):
              "colorbalance=rs=0.045:gs=0.02:bs=-0.05:rm=0.04:gm=0.015:bm=-0.04:rh=0.02:bh=-0.03,"
              "curves=all='0/0.035 0.5/0.51 1/0.97'")
     dec = subprocess.Popen(['ffmpeg', '-v', 'error', '-ss', str(t_start), '-i', SRC, '-t', str(t_end - t_start),
-                            '-vf', grade + ',format=rgb24', '-f', 'rawvideo', '-'], stdout=subprocess.PIPE)
+                            '-vf', 'scale=in_color_matrix=bt709:in_range=tv,format=rgb24', '-f', 'rawvideo', '-'], stdout=subprocess.PIPE)
     enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}',
                             '-r', str(FPS), '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
-                            '-pix_fmt', 'yuv420p', out_path], stdin=subprocess.PIPE)
+                            '-vf', 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p', '-color_primaries', 'smpte432', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv', out_path], stdin=subprocess.PIPE)
     n = 0
     fsz = W * H * 3
     rng = np.random.default_rng(0)
@@ -701,9 +701,7 @@ def main(out_path, t_start=0.0, t_end=DUR, only=None):
         arr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)
         img = Image.fromarray(arr)
         img = apply_zoom(img, zoom_at(t))
-        a = np.asarray(img).astype(np.float32) * VIG
-        a += rng.normal(0, 3.0, (H // 2, W // 2, 1)).repeat(2, 0).repeat(2, 1)
-        img = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8)).convert('RGBA')
+        img = img.convert('RGBA')
         img.alpha_composite(draw_overlay(t))
         enc.stdin.write(img.convert('RGB').tobytes())
         n += 1
