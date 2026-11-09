@@ -72,6 +72,15 @@ def sparkle():
         out[s:s + len(c)] += c[:len(out) - s]
     return out
 
+def trans(d=0.0, lo=0.0, hi=0.0):
+    # soft tonal transition: woodblock tap + short rising blip (replaces noise whoosh)
+    n = int(0.35 * SR); t = np.arange(n) / SR
+    wood = np.sin(2 * np.pi * 1250 * t) * np.exp(-t / 0.018) + 0.5 * np.sin(2 * np.pi * 2150 * t) * np.exp(-t / 0.01)
+    f = 700 + 700 * np.clip(t / 0.11, 0, 1)
+    blip = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-np.maximum(0, t - 0.03) / 0.07) * np.minimum(1, t / 0.01)
+    blip = np.concatenate([np.zeros(int(0.04 * SR)), blip[:n - int(0.04 * SR)]])
+    return (wood * 0.35 + blip * 0.22) * 0.9
+
 N = int(DUR * SR)
 mix = np.zeros(N)
 def add(t, x, g=1.0):
@@ -83,8 +92,8 @@ def add(t, x, g=1.0):
 # soft whooshes / transitions
 for t, g in [(0.0, .6), (5.55, .6), (6.95, .6), (10.35, .8), (11.1, .6), (18.2, .6), (24.4, .6), (26.5, .5),
              (34.95, .6), (39.0, .5), (42.5, .6), (44.4, .5)]:
-    add(t - 0.12, whoosh(), g)
-add(4.95, whoosh(0.7, 0.05, 0.4), 1.0)          # speed
+    add(t, trans(), g)
+add(4.95, trans(), .9)
 add(10.62, chime(784, 1.8), .9); add(10.64, chime(1175, 1.6), .5)  # brand
 for t, g in [(0.9, .6), (1.78, .7), (2.2, .7), (3.66, .6), (7.0, .5), (8.65, .7), (12.3, .7), (13.5, .7),
              (14.62, .6), (15.28, .6), (15.74, .6), (18.25, .5), (19.8, .6), (21.65, .7), (27.55, .6), (29.4, .7),
