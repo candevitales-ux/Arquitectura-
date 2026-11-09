@@ -266,12 +266,15 @@ def composite_card(w, h, items, fill=(245, 238, 226, 238), outline=None):
 
 # ================= V5 words =================
 words = json.load(open(os.path.join(BASE, 'words_v5.json')))
-FIX = {0: 'Mirá,', 1: 'mirá,', 3: 'Línea', 4: 'Oficial', 31: 'pará,'}
+FIX = {0: 'Amiga,', 1: 'mirá,', 3: 'ninaokoficial', 31: 'pará,'}
 tokens = []
 for i, (s, e, w) in enumerate(words):
     tokens.append([s, e, FIX.get(i, w)])
+# "línea oficial" is the brand ninaokoficial (one word)
+tokens[3] = [tokens[3][0], tokens[4][1], 'ninaokoficial']
+del tokens[4]
 # merge "30 %" / "20 %"
-for idx in (26, 12):
+for idx in (25, 11):
     tokens[idx] = [tokens[idx][0], tokens[idx + 1][1], tokens[idx][2] + '%']
     del tokens[idx + 1]
 tokens = [t for t in tokens if t[0] < 11.4]   # stop before "3 doritos después"
@@ -280,8 +283,8 @@ def clean(w):
     return w.rstrip('.,:;')
 
 GROUPS = [
-    ("Mirá, mirá,", ""),
-    ("en Línea Oficial", ""),
+    ("Amiga, mirá,", ""),
+    ("en ninaokoficial", ""),
     ("sacaron nuevos", "modelos de bikinis"),
     ("encima tienen", "30% de descuento"),
     ("pagando con", "transferencias"),
@@ -314,7 +317,7 @@ for i, g in enumerate(groups):
 SKIP_GROUPS = set()
 
 CAP_Y1, CAP_Y2 = 1000, 1092
-HL_WORDS = {'30%', '20%', 'gratis', 'bikinis', 'Línea', 'Oficial', 'pará'}
+HL_WORDS = {'30%', '20%', 'gratis', 'bikinis', 'ninaokoficial', 'pará'}
 
 def layout_line(ws, f, color_fn, maxw=960):
     sprites = [text_sprite(clean(w) if not w.endswith('?') else w, f, color_fn(w)) for w, _, _ in ws]
@@ -1112,7 +1115,7 @@ def draw_overlay(t):
     if t >= EDIT_END:
         return cv
     icon_disc(cv, 'phone', W / 2, GY, 150, t, 0.05, 0.5, t_out=0.62, width=7)
-    headline(cv, 'NUEVOS MODELOS', t, 0.66, 2.7, y=250, size=62, sub='Línea Oficial')
+    headline(cv, 'NUEVOS MODELOS', t, 0.66, 2.7, y=250, size=62, sub='ninaokoficial')
     icon_disc(cv, 'bikini', W / 2, GY + 70, 160, t, 1.7, 0.7, t_out=2.7, width=6)
     offer_card(cv, t, 3.25, 5.45, 'DESCUENTO', '30%', sub='PAGANDO CON TRANSFERENCIA', t_sub=4.55)
     chips2(cv, t, [('bag', '2 O MÁS', 5.85)], t_out=6.75, y=GY + 20)
