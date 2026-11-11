@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Lámina A3 apaisada: instalación eléctrica de un edificio PB + 4 pisos (1 departamento por planta).
-Esquema de montantes + esquema unifilar (acometida, CT, medidores, TP, TPSG, TS, TSG, TB, TA, TR).
+Esquema de montantes + esquema unifilar (acometida, CT, medidores, TP, TPSG, TS, TSG, TB, TA, TRA).
 Un mismo dibujo se exporta a SVG/HTML (-> PDF y PNG con Chromium) y a DXF (mm de papel, escala 1:1 de la hoja).
 uso: python3 src/unifilar.py  (desde tp-electricidad/)"""
 import math, os, html
@@ -206,7 +206,7 @@ text(14, 40, "AZOTEA", 1.9, bold=True)
 # --- acometida y CT
 line([(12, 221), (20.5, 221), (20.5, 203.5)], NEG, 0.55)
 text(12.5, 219.6, "acometida", 1.3, italic=True)
-rect(17.5, 194, 6, 9.5, NEG, 0.35, fill="#ffffff"); text(20.5, 192.8, "CT", 1.7, "middle", True)
+rect(17.5, 194, 6, 9.5, NEG, 0.35, fill="#ffffff"); text(20.5, 192.8, "CTP", 1.5, "middle", True)
 fuse(20.5, 194.3)
 # gabinete de medidores + TP
 rect(25.5, 188.5, 25, 20.5, NEG, 0.35, fill="#ffffff", layer="7-TABLEROS")
@@ -216,7 +216,7 @@ for i in range(6):
     circle(cx, 195.5, 1.5, DEP if i < 5 else SG, 0.22, fill="#ffffff")
     rect(cx - 1.3, 199.5, 2.6, 2.6, DEP if i < 5 else SG, 0.22, fill="#ffffff")
     line([(cx, 197), (cx, 199.5)], DEP if i < 5 else SG, 0.2)
-text(38, 205.0, "GABINETE MEDIDORES", 1.15, "middle", True); text(38, 207.3, "+ TP (5) + medidor SG", 1.15, "middle")
+text(38, 190.8, "TPSD + CTS", 1.2, "middle", True, col=DEP); text(38, 205.0, "GABINETE MEDIDORES", 1.15, "middle", True); text(38, 207.3, "5 med. + 5 TP · med. SG", 1.15, "middle")
 # montantes de departamentos D1..D4
 DX = {"1": 42, "2": 44, "3": 46, "4": 48}
 for k, x in DX.items():
@@ -233,11 +233,11 @@ text(53.6, 194.8, "TPSG", 1.4, "middle", True, col=SG)
 # SG -> azotea (TA y TR)
 line([(58, 196), (58, 47), (76, 47)], SG, 0.4); line([(58, 45), (40, 45)], SG, 0.4)
 line([(58, 45), (58, 47)], SG, 0.4)
-text(60.8, 74, "a TA y TR", 1.25, rot=90, col=SG)
+text(60.8, 74, "a TA y TRA", 1.25, rot=90, col=SG)
 board(76, 44, 8, 6, SG, SG); text(80, 42.6, "TA", 1.6, "middle", True, col=SG)
 line([(84, 47), (88, 47)], SG, 0.35); motor(91, 44.2, SG, 2.8)
 text(85, 53.8, "máquina ascensor", 1.2, "middle", col=GRI, italic=True)
-board(32, 42.5, 8, 6, SG, SG); text(36, 51.8, "TR", 1.6, "middle", True, col=SG)
+board(32, 42.5, 8, 6, SG, SG); text(36, 51.8, "TRA", 1.6, "middle", True, col=SG)
 line([(40, 45.5), (40, 45)], SG, 0.4)
 # TSG + palieres
 line([(60, 200), (63, 200)], SG, 0.4)
@@ -266,31 +266,49 @@ text(32, 225.5, "jabalina (PE)", 1.25, col=PE)
 BX = 124
 line([(120.5, 16), (120.5, 290)], NEG, 0.2, layer="0-MARCO")
 text(BX, 19.5, "2. ESQUEMA UNIFILAR GENERAL — ACOMETIDA, MEDICIÓN, TP Y TPSG", 2.5, bold=True)
-text(BX, 25.5, "RED PÚBLICA BT", 1.7, bold=True); text(BX, 28.0, "3x380/220 V · 50 Hz", 1.5)
 XA = 136
-line([(XA, 29.5), (XA, 46)], NEG, 0.6); slashes(XA, 36, 4, NEG)
-text(XA + 2.4, 34.2, "Acometida subt.", 1.45, bold=True); text(XA + 2.4, 36.6, "3x35/16 mm²", 1.45)
-text(XA + 2.4, 39.0, "Cu XLPE 1,1 kV", 1.45)
-rect(127, 44, 34, 18, NEG, 0.3, dash="box", layer="7-TABLEROS")
-fuse(XA, 46.5); text(XA + 2.4, 50.5, "Fusibles NH", 1.45, bold=True); text(XA + 2.4, 52.9, "3x100 A", 1.45)
-line([(XA, 46), (XA, 46.5)], NEG, 0.6)
-text(128.3, 48.0, "CT", 1.9, bold=True); text(XA + 2.4, 56.6, "Caja de toma (L.M.)", 1.4, italic=True)
-line([(XA, 55.5), (XA, 76)], NEG, 0.6); slashes(XA, 66, 4, NEG)
-text(XA + 2.4, 66.0, "L. principal", 1.45, bold=True); text(XA + 2.4, 68.4, "3x35/16 mm²", 1.45)
+# red MT + transformador de la distribuidora
+line([(126, 23.6), (150, 23.6)], NEG, 0.35, "box"); text(124.5, 22.8, "Red MT 13,2 kV", 1.3, italic=True)
+dot(XA, 23.6); line([(XA, 23.6), (XA, 25.2)], NEG, 0.35)
+circle(XA, 27.2, 2.0, NEG, 0.3); circle(XA, 29.8, 2.0, NEG, 0.3)
+text(XA + 3.0, 27.4, "Transformador MT/BT 13,2/0,4 kV", 1.4, bold=True)
+text(XA + 3.0, 29.7, "(cámara de la distribuidora)", 1.3, italic=True)
+line([(XA, 31.8), (XA, 33.6)], NEG, 0.6)
+line([(126, 33.6), (150, 33.6)], NEG, 0.9); dot(XA, 33.6)
+text(124.5, 32.6, "Red BT", 1.3, bold=True); text(XA + 3.0, 32.6, "3x380/220 V · 50 Hz", 1.3)
+# acometida
+line([(XA, 33.6), (XA, 42)], NEG, 0.6); slashes(XA, 37.6, 4, NEG)
+text(XA + 2.4, 37.6, "Acometida subt.", 1.4, bold=True); text(XA + 2.4, 39.9, "3x35/16 mm² Cu XLPE", 1.35)
+# caja de toma primaria
+rect(127, 42, 39, 10.5, NEG, 0.3, dash="box", layer="7-TABLEROS")
+fuse(XA, 42.5); line([(XA, 42), (XA, 42.5)], NEG, 0.6)
+text(128.0, 46.2, "CTP", 1.6, bold=True)
+text(XA + 2.4, 46.0, "Caja de toma primaria", 1.4, bold=True); text(XA + 2.4, 48.3, "fusibles NH 3x100 A (L.M.)", 1.3)
+line([(XA, 51.5), (XA, 55)], NEG, 0.6); slashes(XA, 53.3, 4, NEG)
+# caja de toma secundaria
+rect(127, 55, 39, 10.5, NEG, 0.3, dash="box", layer="7-TABLEROS")
+fuse(XA, 55.5); line([(XA, 55), (XA, 55.5)], NEG, 0.6)
+text(128.0, 59.2, "CTS", 1.6, bold=True)
+text(XA + 2.4, 59.0, "Caja de toma secundaria", 1.4, bold=True); text(XA + 2.4, 61.3, "fusibles de reparto 3x100 A", 1.3)
+line([(XA, 64.5), (XA, 76)], NEG, 0.6); slashes(XA, 70, 4, NEG)
+text(XA + 2.4, 69.6, "L. principal 3x35/16 mm²", 1.35, bold=True)
 # barra general
 line([(XA, 76), (322, 76)], NEG, 0.9)
-text(XA + 2.4, 74.6, "BARRA GENERAL (gabinete de medidores)  R · S · T · N", 1.5, bold=True)
+text(XA + 2.4, 74.6, "BARRA R·S·T·N", 1.4, bold=True)
+rect(143.5, 71.5, 106.5, 36.5, DEP, 0.35, dash="box", layer="7-TABLEROS")
+text(163, 74.6, "TPSD · Tablero principal de servicios domiciliarios", 1.5, bold=True, col=DEP)
 dot(XA, 76)
 # datos generales
 notes = ["DATOS GENERALES",
          "• Suministro trifásico 3x380/220 V – 50 Hz. Esquema de conexión a tierra TT (AEA 90364-7-771).",
-         "• Acometida subterránea de la red pública a la Caja de Toma (CT) sobre línea municipal.",
-         "• 5 unidades (PB a 4°): medidor monofásico 220 V + TP c/u. Servicios generales: medidor trifásico + TPSG.",
+         "• Transformador MT/BT de la distribuidora → acometida subterránea → caja de toma primaria (L.M.) → caja de toma secundaria.",
+         "• TPSD = gabinete colectivo de medidores: 1 medidor + 1 TP por vivienda; de cada TP sale su línea seccional al TS.",
+         "• 5 viviendas (PB a 4°): medidor monofásico 220 V c/u. Servicios generales: medidor trifásico + TPSG.",
          "• Reparto de fases: PB y 3° → R · 1° y 4° → S · 2° → T · SG → R-S-T (cargas equilibradas).",
          "• Dpto. ≈ 85 m², grado de electrificación MEDIO, DPMS ≈ 7 kVA.  SG ≈ 12 kVA (ascensor 5,5 kW, bombas 2x1,1 kW).",
          "• Todo circuito lleva conductor de protección PE (verde-amarillo) unido a la barra PE y a la jabalina (R ≤ 10 Ω)."]
 for i, s in enumerate(notes):
-    text(170, 30 + i * 4.6, s, 1.75 if i else 2.0, bold=(i == 0))
+    text(170, 30 + i * 4.2, s, 1.75 if i else 2.0, bold=(i == 0))
 
 # departamentos
 DEPTS = [("PB", "R"), ("1°", "S"), ("2°", "T"), ("3°", "R"), ("4°", "S")]
@@ -316,9 +334,9 @@ text(252.5, 97.6, "Tablero principal de", 1.35, col=SG); text(252.5, 99.8, "serv
 line([(c, 90), (c, 92.5)], SG, 0.4)
 device(c, 92.5, "PIA", 4, SG, ("IG · PIA", "4x40 A"))
 line([(c, 102.5), (c, 107)], SG, 0.4)
-SGX = {"TSG": 262, "TB": 312, "TA": 352, "TR": 390}
+SGX = {"TSG": 262, "TB": 312, "TA": 352, "TRA": 390}
 line([(262, 107), (390, 107)], SG, 0.8); dot(c, 107, SG)
-OUTS = {"TSG": ("2x25 A", "2x6+PE", 2), "TB": ("4x16 A", "4x4+PE", 4), "TA": ("4x32 A", "4x10+PE", 4), "TR": ("2x16 A", "2x4+PE", 2)}
+OUTS = {"TSG": ("2x25 A", "2x6+PE", 2), "TB": ("4x16 A", "4x4+PE", 4), "TA": ("4x32 A", "4x10+PE", 4), "TRA": ("2x16 A", "2x4+PE", 2)}
 for k, x in SGX.items():
     pr, cab, n = OUTS[k]
     dot(x, 107, SG); line([(x, 107), (x, 109)], SG, 0.4)
@@ -413,12 +431,12 @@ sg_board(262, "TSG", "hall PB · 1~ (R)", ("2x25 A", 2), ("2x40 A 30 mA", 2), [
 sg_board(312, "TB", "sala de bombas PB · 3~", ("4x16 A", 4), ("4x25 A 30 mA", 4), [
     (303, "GM 2,5-4 A", ("B1 bomba", "elevadora 1,1 kW", "4x2,5+PE"), "M", ("K", "K1")),
     (317, "GM 2,5-4 A", ("B2 bomba", "elevadora 1,1 kW", "(alternada)"), "M", ("K", "K2")),
-    (331, "2x6 A", ("C3 mando", "alternador, flotan-", "tes cisterna/TR"), "CTRL", None)])
+    (331, "2x6 A", ("C3 mando", "alternador, flotan-", "tes cisterna/TRA"), "CTRL", None)])
 sg_board(352, "TA", "sala máq. azotea · 3~", ("4x32 A", 4), None, [
     (347, "4x25 A", ("F ascensor", "controlador + M", "5,5 kW · 4x6+PE"), "M", ("ID", "4x40 300mA")),
     (359, "2x10 A", ("C2 IUG", "cabina, hueco", "y sala máq."), "lamp", ("ID", "2x25 30mA")),
     (371, "2x16 A", ("C3 TUG", "sala de", "máquinas"), "sock", ("ID", "2x25 30mA"))])
-sg_board(390, "TR", "tanque reserva · 1~ (S)", ("2x16 A", 2), ("2x25 A 30 mA", 2), [
+sg_board(390, "TRA", "tanque reserva · 1~ (S)", ("2x16 A", 2), ("2x25 A 30 mA", 2), [
     (385, "2x6 A", ("C1 nivel", "control tanque", "(señal a TB)"), "CTRL", None),
     (395, "2x10 A", ("C2 IUG", "azotea y", "tanque"), "lamp", None),
     (404, "2x16 A", ("C3 TUG", "azotea"), "sock", None)])
@@ -461,15 +479,16 @@ rect(160, 277.3, 10, 4, NEG, 0.25, dash="box"); text(172, 280.2, "Límite de tab
 
 line([(213, 232), (213, 292)], NEG, 0.2, layer="0-MARCO")
 text(216, 236.5, "ABREVIATURAS", 2.1, bold=True)
-AB = [("CT", "Caja de toma (fusibles de la distribuidora)"), ("TP", "Tablero principal de cada departamento"),
+AB = [("CTP / CTS", "Caja de toma primaria / secundaria"), ("TPSD", "Tablero ppal. servicios domiciliarios"),
+      ("TP", "Tablero principal de cada vivienda (1 x medidor)"),
       ("TS", "Tablero seccional (dentro del departamento)"), ("TPSG", "Tablero principal de servicios generales"),
       ("TSG", "Tablero seccional de servicios generales"), ("TB", "Tablero de bombas (elevación de agua)"),
-      ("TA", "Tablero de ascensor (sala de máquinas)"), ("TR", "Tablero del tanque de reserva (azotea)"),
+      ("TA", "Tablero de ascensor (sala de máquinas)"), ("TRA", "Tablero del tanque de reserva de agua"),
       ("IG / ID", "Interruptor general / diferencial"), ("IE / MBTS", "Ilum. emergencia / muy baja tensión"),
       ("DPMS", "Demanda de potencia máx. simultánea")]
 for i, (a, s) in enumerate(AB):
-    y = 241 + i * 4.4
-    text(216, y, a, 1.55, bold=True); text(231, y, s, 1.55)
+    y = 240.8 + i * 3.95
+    text(216, y, a, 1.5, bold=True); text(232, y, s, 1.5)
 
 line([(290, 232), (290, 292)], NEG, 0.2, layer="0-MARCO")
 text(293, 236.5, "NOTAS", 2.1, bold=True)
@@ -480,8 +499,8 @@ NT = ["1. Cañerías embutidas de acero semipesado o PVC ignífugo;",
       "3. ID 30 mA en todo circuito terminal; ID 300 mA (sel.)",
       "   en fuerza motriz del ascensor.",
       "4. Selectividad: TP 40 A > IG TS; TPSG 40 A > seccionales.",
-      "5. Montante de SG alimenta TA y TR (azotea); TB y TSG",
-      "   en PB. El control de nivel del TR comanda las bombas."]
+      "5. Montante de SG alimenta TA y TRA (azotea); TB y TSG",
+      "   en PB. El control de nivel del TRA comanda las bombas."]
 for i, s in enumerate(NT): text(293, 241 + i * 3.7, s, 1.45)
 
 rect(353, 268, 62, 24, NEG, 0.35, layer="0-MARCO")
