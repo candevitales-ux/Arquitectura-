@@ -738,8 +738,9 @@ def viewfinder2(canvas, t, t0, t1, label):
         d.line([(x, y + sy * L), (x, y), (x + sx * L, y)], fill=col, width=6, joint='curve')
     if (t * 2) % 1 < 0.6:
         d.ellipse([x0 + 30, y0 + 30, x0 + 52, y0 + 52], fill=(214, 120, 96, int(220 * a * p)))
-    spr = text_sprite(label, SANS(28, 600), CREAM, tracking=6)
-    place(canvas, spr, x0 + 70 + spr.width / 2 - 30, y0 + 42, 1, a * p)
+    if label:
+        spr = text_sprite(label, SANS(28, 600), CREAM, tracking=6)
+        place(canvas, spr, x0 + 70 + spr.width / 2 - 30, y0 + 42, 1, a * p)
 
 def gauge(canvas, t, t0, t1, t_up, t_max):
     if not (t0 <= t < t1 + 0.3): return
@@ -1293,7 +1294,6 @@ def link_cta(canvas, t, t0):
 def draw_overlay(t):
     cv = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     # hook
-    headline(cv, 'RUTINA DE NOCHE', t, 0.0, 3.3, y=250, size=60)
     icon_disc(cv, 'moon', W / 2, GY, 140, t, 0.85, 0.6, t_out=3.3, width=7)
     # cremas que no sirven
     crossed(cv, t, 3.9, 6.42, 'jar', 5.5)
@@ -1309,14 +1309,12 @@ def draw_overlay(t):
     card_icon_text(cv, t, 16.9, 19.88, 'TODA LA NOCHE', 'moon', 'Sella', 'la piel')
     sparks(cv, t, 17.0, 19.8, n=25, seed=21, y0=1750, rise=500)
     # fijate, blanca
-    viewfinder2(cv, t, 19.9, 22.95, 'ANOCHE')
+    viewfinder2(cv, t, 19.9, 22.95, '')
     # skincare coreano
-    headline(cv, 'SKINCARE COREANO', t, 23.14, 27.35, y=250, size=58)
     strike_card(cv, t, 24.3, 27.35, '10 pasos', 24.95, 25.7, '1 PASO')
     # buen día
-    headline(cv, 'A LA MAÑANA', t, 28.14, 29.5, y=250, size=60)
     icon_disc(cv, 'sun', W / 2, GY, 150, t, 28.14, 0.6, t_out=29.5, width=7)
-    viewfinder2(cv, t, 29.58, 33.4, 'TRANSPARENTE')
+    viewfinder2(cv, t, 29.58, 33.4, '')
     checklist(cv, t, 32.3, 33.4, [('ABSORBIDA', 32.55)])
     # alguna crema...
     icon_disc(cv, 'qmark', W / 2, GY, 150, t, 33.5, 0.6, t_out=36.2, width=8)
@@ -1325,11 +1323,9 @@ def draw_overlay(t):
     crossed(cv, t, 40.4, 42.8, 'drop', 41.6)
     pills(cv, t, [('SIN ENJUAGUE', 41.9)], t_out=42.8, y=GY + 165)
     # antes / después
-    polaroid(cv, t, 42.86, 47.55, 20.6, 'anoche', x=830, y=430, rot=5)
     pills(cv, t, [('AHORA', 44.02)], t_out=44.75, y=GY)
     checklist(cv, t, 44.8, 47.55, [('SIN FILTRO', 44.95), ('LISA', 45.5), ('HIDRATADA', 45.9), ('DESCANSADA', 46.75)])
     # cajas
-    headline(cv, 'CAJAS', t, 47.6, 50.35, y=250, size=62)
     boxes(cv, t, [('4', 48.6), ('8', 49.0), ('12', 49.45)], t_out=50.35)
     # cuotas + envío
     offer_card(cv, t, 50.9, 52.85, 'CUOTAS', '3', sub='SIN INTERÉS', t_sub=52.05, big_size=130)
