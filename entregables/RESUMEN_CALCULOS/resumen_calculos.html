@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Resumen de cálculos</title><style>
+@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
+:root{
+  --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
+  --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:"Inter","Liberation Sans",sans-serif;font-size:9.2pt;line-height:1.4}
+
+.cover{border-bottom:2.5pt solid var(--acc);padding-bottom:6pt;margin-bottom:10pt}
+.cover h1{margin:0;font-size:20pt;color:var(--acc);letter-spacing:-.3pt}
+.cover p{margin:3pt 0 0;color:var(--muted);font-size:9pt}
+
+.part{background:var(--acc);color:#fff;border-radius:4pt;padding:6pt 10pt;margin:0 0 12pt;
+  display:flex;align-items:baseline;gap:9pt}
+.part b{font-size:8.5pt;letter-spacing:1pt;opacity:.75}
+.part span{font-size:12.5pt;font-weight:700}
+
+section{margin:0 0 12pt;break-inside:avoid}
+h2{margin:0 0 6pt;font-size:11.5pt;color:var(--acc);display:flex;align-items:center;gap:7pt;
+  padding-bottom:3pt;border-bottom:.8pt solid var(--line)}
+h2 .n{width:17pt;height:17pt;border-radius:50%;background:var(--acc);color:#fff;font-size:8.5pt;
+  display:inline-flex;align-items:center;justify-content:center;flex:none}
+h2 small{font-weight:400;font-size:8.5pt;color:var(--muted);margin-left:auto}
+.intro{color:var(--muted);font-size:8.8pt;margin:0 0 6pt}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:7.8pt;text-transform:uppercase;letter-spacing:.4pt;color:var(--muted);font-weight:600;
+  text-align:left;padding:4pt 7pt;border-bottom:1.2pt solid var(--ink)}
+td{padding:2.7pt 7pt;border-bottom:.6pt solid var(--line);vertical-align:middle}
+.r{text-align:right;white-space:nowrap}
+td.r{font-family:"JetBrains Mono",monospace;font-size:9pt}
+th.af,td.af{background:var(--af-soft);color:var(--af)}
+th.ac,td.ac{background:var(--ac-soft);color:var(--ac)}
+tr.grp td{background:var(--soft);font-weight:700;color:var(--acc);padding-top:3.5pt;padding-bottom:3.5pt}
+.x{display:inline-block;margin-left:6pt;background:var(--acc);color:#fff;border-radius:3pt;
+  padding:0 5pt;font-size:8pt;font-family:"JetBrains Mono",monospace}
+tr.sub td{font-weight:700;border-bottom:1.2pt solid #aebccb}
+tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-top:5pt;padding-bottom:5pt}
+.code{font-family:"JetBrains Mono",monospace;font-weight:700}
+.code.af{color:var(--af)} .code.ac{color:var(--ac)}
+.d{font-weight:700;color:var(--acc)} .d i{font-style:normal;font-weight:400;color:var(--muted);margin-left:5pt}
+.note{color:var(--muted);font-size:8.3pt;font-style:italic}
+
+.calc{border:.8pt solid var(--line);border-radius:5pt;overflow:hidden}
+.step{display:grid;grid-template-columns:130pt 1fr;border-bottom:.6pt solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .k{background:var(--soft);padding:4pt 9pt;color:var(--muted);font-size:8.6pt;font-weight:600}
+.step .v{padding:4pt 10pt;font-family:"JetBrains Mono",monospace;font-size:9pt}
+.step.res .k{background:var(--acc);color:#fff}
+.step.res .v{font-weight:700;color:var(--acc);font-size:10pt}
+.step .v small{font-family:"Inter",sans-serif;color:var(--muted);font-weight:400;font-size:8.4pt;margin-left:6pt}
+
+.tanks{display:grid;grid-template-columns:repeat(3,1fr);gap:9pt}
+.t{border:.8pt solid var(--line);border-radius:5pt;padding:8pt 10pt}
+.t .l{font-size:8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}
+.t .big{font-size:16pt;font-weight:700;color:var(--acc);margin:2pt 0}
+.t .big small{font-size:9pt;font-weight:500;color:var(--muted)}
+.t .f{font-family:"JetBrains Mono",monospace;font-size:8.4pt;color:var(--muted)}
+.t.main{background:var(--acc);border-color:var(--acc)}
+.t.main .l,.t.main .f,.t.main .big small{color:#c8d7e5}.t.main .big{color:#fff}
+
+.pb{break-before:page}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.ct{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.4pt;padding:3pt 6pt;border-radius:3pt;margin-bottom:3pt}
+.ct.ver{background:var(--af-soft);color:var(--af)} .ct.inv{background:var(--ac-soft);color:var(--ac)}
+td.b{font-weight:700;color:var(--acc)} tr.tot td.b{color:#fff}
+.sm{font-size:7.5pt;color:var(--muted)}
+td{font-size:8.8pt} td.r{font-size:8.4pt}
+.note{margin-top:3pt}
+td:first-child{white-space:nowrap}
+.g34{grid-template-columns:.85fr 1.15fr}
+section{margin-bottom:12pt}
+</style></head><body><div class="cover">
+  <h1>Resumen de cálculos</h1>
+  <p>Instalaciones II · UNM · Grupo 02 · Datos principales de cada cálculo</p>
+</div>
+
+<section>
+  <h2><span class="n">1</span>Balance térmico de verano</h2>
+  <div class="two">
+    <div>
+      <div class="ct ver">Vivienda · te 35 °C · ti 24 °C</div>
+      <table>
+        <thead><tr><th>Local</th><th class="r">Q total kcal/h</th><th class="r">R kcal/h</th><th class="r">TR</th></tr></thead>
+        <tbody>
+          <tr><td>SUM</td><td class="r">10.181,40</td><td class="r">16.380,47</td><td class="r b">5,42</td></tr>
+          <tr><td>Dúplex 1er piso</td><td class="r">7.801,25</td><td class="r">9.624,89</td><td class="r b">3,18</td></tr>
+          <tr><td>Dúplex 2do piso</td><td class="r">7.156,30</td><td class="r">9.365,08</td><td class="r b">3,09</td></tr>
+          <tr><td>Vivienda 1 dorm.</td><td class="r">9.475,90</td><td class="r">11.921,70</td><td class="r b">3,94</td></tr>
+          <tr><td>Vivienda 2 dorm.</td><td class="r">10.422,18</td><td class="r">3.236,40</td><td class="r b">1,07</td></tr>
+        </tbody>
+      </table>
+      <p class="note">R = calor a sustraer por el equipo (psicrometría). Sistema: multisplit VRV LG.</p>
+    </div>
+    <div>
+      <div class="ct ver">Escuela · te 35 °C · ti 24 °C · pasillos 27 °C</div>
+      <table>
+        <thead><tr><th>Local</th><th class="r">QT kcal/h</th><th class="r">TR</th><th class="r">kW</th></tr></thead>
+        <tbody>
+          <tr><td>Aula (56 m²)</td><td class="r">12.277,37</td><td class="r b">4,06</td><td class="r">14,28</td></tr>
+          <tr><td>Aula taller 1</td><td class="r">13.806,04</td><td class="r b">4,57</td><td class="r">16,05</td></tr>
+          <tr><td>SUM</td><td class="r">34.624,88</td><td class="r b">11,45</td><td class="r">40,26</td></tr>
+          <tr><td>Pasillos</td><td class="r">140.150,67</td><td class="r b">46,35</td><td class="r">162,97</td></tr>
+          <tr class="tot"><td>Total · 18 locales</td><td class="r">328.018,17</td><td class="r">108,47</td><td class="r">381,42</td></tr>
+        </tbody>
+      </table>
+      <p class="note">CAM total 65.083 m³/h. Sistema: VRV frío/calor con recuperador entálpico (ERV).</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Balance térmico de invierno</h2>
+  <div class="two">
+    <div>
+      <div class="ct inv">Vivienda · Δt 20 °C · 1 renovación/h</div>
+      <table>
+        <thead><tr><th>Tipología (todos los pisos)</th><th class="r">Q kcal/h</th></tr></thead>
+        <tbody>
+          <tr><td>Dúplex PB (1er + 2 int.)</td><td class="r">11.481,98</td></tr>
+          <tr><td>Dúplex PA (último + 2 int.)</td><td class="r">11.582,62</td></tr>
+          <tr><td>Vivienda 1 dorm. (2 ext. + 3 int.)</td><td class="r">17.291,05</td></tr>
+          <tr><td>Vivienda 2 dorm. (2 ext. + 3 int.)</td><td class="r">27.931,24</td></tr>
+          <tr><td>SUM</td><td class="r">4.777,69</td></tr>
+          <tr class="tot"><td>Total edificio</td><td class="r">73.064,58</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Caldera: Q + 30 % = <b>94.984,08 kcal/h</b> → <b>Peisa XP 120</b> (piso radiante).</p>
+    </div>
+    <div>
+      <div class="ct inv">Escuela · Δt 20 °C · 1 renovación/h</div>
+      <table>
+        <thead><tr><th>Concepto</th><th class="r">kcal/h</th></tr></thead>
+        <tbody>
+          <tr><td>Pérdidas</td><td class="r">171.150,84</td></tr>
+          <tr><td>Ganancias</td><td class="r">36.966,76</td></tr>
+          <tr><td>Aula (56 m²) · calor a reponer</td><td class="r">4.867,17</td></tr>
+          <tr><td>Pasillos · calor a reponer</td><td class="r">45.275,33</td></tr>
+          <tr class="tot"><td>Total a reponer · 156,03 kW</td><td class="r">134.184,08</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Se cubre con el mismo VRV frío/calor (bomba de calor).</p>
+    </div>
+  </div>
+</section>
+
+<div class="two g34">
+<section>
+  <h2><span class="n">3</span>Transporte vertical · Vivienda</h2>
+  <table>
+    <tbody>
+      <tr><td>Población</td><td class="r">183 personas</td></tr>
+      <tr><td>Capacidad necesaria</td><td class="r">19 pas. / 5 min</td></tr>
+      <tr><td>Ascensor</td><td class="r">6 pers. · 450 kg</td></tr>
+      <tr><td>Tiempo total de viaje</td><td class="r">99,71 s</td></tr>
+      <tr><td>Capacidad por ascensor</td><td class="r">19 pas. / 5 min</td></tr>
+      <tr class="tot"><td>Ascensores</td><td class="r">1</td></tr>
+      <tr><td>Intervalo (40 – 120 s)</td><td class="r b">99,71 s ✔</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Datos: 313 m² × 7 pisos / 12 m² · Vn 0,70 m/s. Equipo: Servas EcoStyle · Montanari M73 · CF Control VVF.</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Instalación sanitaria</h2>
+  <table>
+    <thead><tr><th></th><th class="r">Vivienda</th><th class="r">Ed. público</th></tr></thead>
+    <tbody>
+      <tr><td>RTD</td><td class="r b">15.970 lts</td><td class="r b">9.740 lts</td></tr>
+      <tr><td>Tanque de reserva</td><td class="r">12.800 lts<br><span class="sm">4 × 3.200</span></td><td class="r">8.000 lts</td></tr>
+      <tr><td>Tanque de bombeo</td><td class="r">3.200 lts</td><td class="r">2.000 lts</td></tr>
+      <tr><td>Conexión</td><td class="r">Ø 0,019 (3/4")</td><td class="r">Ø 0,013 (1/2")</td></tr>
+      <tr><td>Bomba</td><td class="r">38 m · 90 l/min</td><td class="r">26 m · 87 l/min</td></tr>
+      <tr><td>Asp. / impulsión</td><td class="r">Ø 0,025 (1")</td><td class="r">Ø 0,025 (1")</td></tr>
+      <tr><td>Colector</td><td class="r">Ø 0,038 (1½")</td><td class="r">Ø 0,038 (1½")</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Bombas Lüsqtoff (edificio público: modelo CPM146). AF = agua fría · AC = agua caliente.</p>
+</section>
+</div>
+</body></html>
