@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Instalaciones II · Carpeta</title>
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#1d2733;--muted:#6a7787;--line:#dfe5ec;--soft:#f4f7fa;--acc:#123f63;--af:#1f6fb2;--ac:#c4502a}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:"Inter","Liberation Sans",sans-serif}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;break-after:page}
+.page:last-child{break-after:auto}
+.band{position:absolute;left:0;top:0;bottom:0;width:14mm;background:var(--acc)}
+.band i{position:absolute;left:0;right:0;height:46mm;bottom:52mm;background:var(--ac)}
+.in{position:absolute;left:30mm;right:20mm;top:30mm;bottom:20mm;display:flex;flex-direction:column}
+.kick{font-size:9pt;letter-spacing:2.5pt;text-transform:uppercase;color:var(--muted);font-weight:600}
+.big{font-size:56pt;font-weight:800;color:var(--acc);letter-spacing:-1pt;line-height:1.02;margin:6mm 0 3mm}
+.sub{font-size:14pt;line-height:1.4;color:var(--ink)}
+.rule{height:2.5pt;background:var(--acc);width:40mm;margin:18mm 0 14mm}
+.info{display:grid;grid-template-columns:30mm 1fr;gap:6mm 6mm;font-size:12.5pt;line-height:1.45}
+.info .k{font-size:8pt;letter-spacing:1.5pt;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:2pt}
+.info ul{margin:0;padding:0;list-style:none}
+.idx{margin-top:auto;border-top:.8pt solid var(--line);padding-top:6mm}
+.idx h3{font-size:8pt;letter-spacing:1.5pt;text-transform:uppercase;color:var(--muted);margin:0 0 3mm;font-weight:600}
+.idx table{width:100%;border-collapse:collapse;font-size:10.5pt}
+.idx td{padding:2.6mm 0;border-bottom:.6pt solid var(--line)}
+.idx td.n{width:12mm;font-family:"JetBrains Mono",monospace;color:var(--ac);font-weight:700}
+.idx td.p{text-align:right;font-family:"JetBrains Mono",monospace;color:var(--muted);width:20mm}
+.foot{position:absolute;left:30mm;right:20mm;bottom:12mm;font-size:8pt;color:var(--muted);display:flex;justify-content:space-between;border-top:.6pt solid var(--line);padding-top:3mm}
+/* divisores */
+.num{font-family:"JetBrains Mono",monospace;font-size:90pt;font-weight:700;color:var(--ac);line-height:1;margin-top:40mm}
+.dt{font-size:36pt;font-weight:800;color:var(--acc);letter-spacing:-.8pt;line-height:1.05;margin:8mm 0 4mm}
+.ds{font-size:13pt;color:var(--muted)}
+.cont{margin-top:14mm}
+.cont h3{font-size:8pt;letter-spacing:1.5pt;text-transform:uppercase;color:var(--muted);margin:0 0 3mm;font-weight:600}
+.cont ol{margin:0;padding:0;list-style:none;counter-reset:c}
+.cont li{font-size:11pt;padding:2.4mm 0 2.4mm 10mm;border-bottom:.6pt solid var(--line);position:relative}
+.cont li:before{counter-increment:c;content:counter(c,upper-alpha);position:absolute;left:0;top:2.4mm;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--acc)}
+.cont li span{color:var(--muted);font-size:9.5pt}
+.pg{margin-top:auto;font-size:9pt;color:var(--muted)}
+</style></head><body>
+
+<div class="page">
+  <div class="band"><i></i></div>
+  <div class="in">
+    <div class="kick">Universidad Nacional de Moreno · UNM</div>
+    <div class="big">Instalaciones II</div>
+    <div class="sub">Carpeta de cálculos · Instalación sanitaria · Balance térmico · Psicrometría · Transporte vertical</div>
+    <div class="rule"></div>
+    <div class="info">
+      <div class="k">Docentes</div><div>Pirolo, Gabriel · Discacciati, Mariela</div>
+      <div class="k">Grupo</div><div>Grupo 02 · 2.º cuatrimestre · Comisión 1</div>
+      <div class="k">Alumnos</div><div><ul><li>Avelar Paz, Valentina</li><li>Bartolotti, Tobías</li><li>Di Cosmo, Ignacio</li><li>Galdames, Abril</li><li>Gómez, Lucio</li><li>Vitale, Candelaria</li></ul></div>
+    </div>
+    <div class="idx">
+      <h3>Contenido</h3>
+      <table>
+        <tr><td class="n">01</td><td>Instalación sanitaria · Cálculos</td><td class="p">pág. 2</td></tr>
+        <tr><td class="n">02</td><td>Balance térmico verano – invierno · Escuela</td><td class="p">pág. 7</td></tr>
+        <tr><td class="n">03</td><td>Balance térmico verano – invierno y psicrometría · Vivienda</td><td class="p">pág. 18</td></tr>
+        <tr><td class="n">04</td><td>Transporte vertical · Vivienda</td><td class="p">pág. 26</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="band"><i></i></div>
+  <div class="in">
+    <div class="kick">Instalaciones II · UNM</div>
+    <div class="num">01</div>
+    <div class="dt">Instalación sanitaria<br>Cálculos</div>
+    <div class="ds">Cálculos · Edificio de viviendas y edificio público</div>
+    <div class="cont"><h3>Contenido</h3><ol><li>Edificio de viviendas<br><span>RTD, tanques, conexión domiciliaria, bombeo, bajadas, colector y montantes</span></li><li>Edificio público<br><span>RTD con bombeo y tanque de reserva, montantes, bajadas, colector, conexión y bombeo</span></li></ol></div>
+  </div>
+  <div class="foot"><span>Grupo 02 · 2.º cuatrimestre · Comisión 1</span><span>Docentes: Pirolo, Gabriel · Discacciati, Mariela</span></div>
+</div>
+<div class="page">
+  <div class="band"><i></i></div>
+  <div class="in">
+    <div class="kick">Instalaciones II · UNM</div>
+    <div class="num">02</div>
+    <div class="dt">Balance térmico<br>verano – invierno<br>Escuela</div>
+    <div class="ds">Escuela secundaria · 18 locales acondicionados</div>
+    <div class="cont"><h3>Contenido</h3><ol><li>Balance térmico de verano y psicrometría<br><span>condiciones, coeficientes, ejemplo resuelto, ganancias y equipos por local</span></li><li>Balance térmico de invierno<br><span>condiciones, ejemplo resuelto, pérdidas y balance por local, resumen general</span></li><li>Fichas por local<br><span>ubicación en planta, muros y resultados de verano e invierno</span></li></ol></div>
+  </div>
+  <div class="foot"><span>Grupo 02 · 2.º cuatrimestre · Comisión 1</span><span>Docentes: Pirolo, Gabriel · Discacciati, Mariela</span></div>
+</div>
+<div class="page">
+  <div class="band"><i></i></div>
+  <div class="in">
+    <div class="kick">Instalaciones II · UNM</div>
+    <div class="num">03</div>
+    <div class="dt">Balance térmico<br>verano – invierno<br>y psicrometría · Vivienda</div>
+    <div class="ds">Vivienda · SUM, dúplex y viviendas de 1 y 2 dormitorios</div>
+    <div class="cont"><h3>Contenido</h3><ol><li>Balance térmico de verano<br><span>condiciones, coeficientes, ejemplo resuelto y ganancias por local</span></li><li>Psicrometría de verano<br><span>procedimiento en el ábaco, ejemplo y resultados por local</span></li><li>Balance térmico de invierno<br><span>ejemplo resuelto, balance por caso, total del edificio y caldera</span></li><li>Fichas por local<br><span>planta, ábaco psicrométrico y resultados de los tres cálculos</span></li></ol></div>
+  </div>
+  <div class="foot"><span>Grupo 02 · 2.º cuatrimestre · Comisión 1</span><span>Docentes: Pirolo, Gabriel · Discacciati, Mariela</span></div>
+</div>
+<div class="page">
+  <div class="band"><i></i></div>
+  <div class="in">
+    <div class="kick">Instalaciones II · UNM</div>
+    <div class="num">04</div>
+    <div class="dt">Transporte vertical<br>Vivienda</div>
+    <div class="ds">Vivienda · cálculo de ascensores</div>
+    <div class="cont"><h3>Contenido</h3><ol><li>Población y capacidad de transporte necesaria</li><li>Tiempo total de viaje</li><li>Capacidad de un ascensor y cantidad necesaria<br><span>con verificación de intervalo</span></li></ol></div>
+  </div>
+  <div class="foot"><span>Grupo 02 · 2.º cuatrimestre · Comisión 1</span><span>Docentes: Pirolo, Gabriel · Discacciati, Mariela</span></div>
+</div>
+
+</body></html>
