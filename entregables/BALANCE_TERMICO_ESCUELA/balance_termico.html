@@ -72,6 +72,10 @@ table.big td.r{font-size:7.7pt}
 td.b{font-weight:700;color:var(--acc)}
 tr.tot td.r,tr.tot td.b{color:#fff}
 .step{grid-template-columns:150pt 1fr}
+.m{font-family:"JetBrains Mono",monospace;font-size:8.4pt}
+section.flow{break-inside:auto}
+section.flow table,section.flow .calc{break-inside:avoid}
+h2{break-after:avoid}
 .sm{font-family:"Inter",sans-serif;color:var(--muted);font-size:8.2pt}
 </style></head><body>
 
@@ -83,36 +87,110 @@ tr.tot td.r,tr.tot td.b{color:#fff}
 <div class="part"><b>PARTE A</b><span>Balance térmico de verano y psicrometría</span></div>
 
 <section>
-  <h2><span class="n">1</span>Condiciones de diseño</h2>
+  <h2><span class="n">1</span>Condiciones de diseño y datos</h2>
   <div class="calc">
-    <div class="step"><div class="k">Temperaturas</div><div class="v">te = 35 °C · ti = 24 °C · pasillo tp = 27 °C</div></div>
-    <div class="step"><div class="k">Saltos térmicos</div><div class="v">Δt exterior 11 °C · pasillo 3 °C · local no acond. 8 °C · local acond. 0 °C</div></div>
+    <div class="step"><div class="k">Ubicación</div><div class="v">Latitud 35° S · uso educativo · actividad: trabajo liviano</div></div>
+    <div class="step"><div class="k">Temperaturas</div><div class="v">te = 35 °C · ti = 24 °C · pasillo acondicionado tp = 27 °C</div></div>
+    <div class="step"><div class="k">Saltos térmicos (Δt)</div><div class="v">exterior 11 °C · hacia pasillo 3 °C · local no acond. 8 °C · local acond. 0 °C</div></div>
     <div class="step"><div class="k">Humedad específica</div><div class="v">Me − Mi = 4,3 − 1,5 = 2,8 g/kg</div></div>
     <div class="step"><div class="k">Personas</div><div class="v">57 kcal/h sensible · 60 kcal/h latente · aire exterior 24 m³/h por persona</div></div>
-    <div class="step"><div class="k">Iluminación y equipos</div><div class="v">20 W/m² cada uno × 0,86</div></div>
+    <div class="step"><div class="k">Iluminación y equipos</div><div class="v">20 W/m² cada uno · 1 W = 0,86 kcal/h</div></div>
     <div class="step"><div class="k">Mayoración</div><div class="v">+10 % al calor sensible · +5 % al calor latente</div></div>
+    <div class="step"><div class="k">Equipo</div><div class="v">TR = QT / 3024 · CAM = TR × 600 m³/h · kW = QT / 860</div></div>
   </div>
 </section>
 
 <section>
-  <h2><span class="n">2</span>Método de cálculo <small>ejemplo: Aula chica tipo 1 · 38 m² · 15 personas</small></h2>
+  <h2><span class="n">2</span>Coeficientes utilizados</h2>
+  <div class="grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:12pt">
+  <table>
+    <thead><tr><th>Elemento</th><th class="r">K (kcal/h·m²·°C)</th></tr></thead>
+    <tbody>
+      <tr><td>Ladrillo común 15 cm</td><td class="r">2,30</td></tr>
+      <tr><td>Vidrio con cortinas interiores claras</td><td class="r">5,00</td></tr>
+      <tr><td>Carpintería de hierro</td><td class="r">5,19</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th>Constante</th><th class="r">Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Calor específico del aire (Ce)</td><td class="r">0,24</td></tr>
+      <tr><td>Calor latente de vaporización (L)</td><td class="r">0,576</td></tr>
+      <tr><td>Peso específico del aire (Pe)</td><td class="r">1,14</td></tr>
+      <tr><td>Factor de cortinas interiores claras (C)</td><td class="r">0,5</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">R: tabla 2 (fila K = 2,3) · I: tabla 3 (latitud 35°) · se toma la hora de máxima ganancia de cada fachada.</p>
+</section>
+
+<section class="flow">
+  <h2><span class="n">3</span>Ejemplo resuelto · Aula chica tipo 1 <small>38 m² · 15 personas</small></h2>
+  <table>
+    <thead><tr><th>Muro</th><th>Linda con</th><th>Elemento</th><th class="r">K</th><th class="r">S (m²)</th><th class="r">Δt</th><th class="r">Qt (kcal/h)</th></tr></thead>
+    <tbody>
+      <tr><td class="code">NO</td><td>exterior · galería / patio</td><td>Ladrillo común 15 cm</td><td class="r">2,30</td><td class="r">22,00</td><td class="r">11</td><td class="r">556,60</td></tr>
+      <tr><td class="code">NO</td><td>exterior · galería / patio</td><td>Vidrio con cortinas</td><td class="r">5,00</td><td class="r">6,00</td><td class="r">11</td><td class="r">330,00</td></tr>
+      <tr><td class="code">NO</td><td>exterior · galería / patio</td><td>Carpintería de hierro</td><td class="r">5,19</td><td class="r">1,60</td><td class="r">11</td><td class="r">91,34</td></tr>
+      <tr><td class="code">SO</td><td>exterior · lateral del edificio</td><td>Ladrillo común 15 cm</td><td class="r">2,30</td><td class="r">18,90</td><td class="r">11</td><td class="r">478,17</td></tr>
+      <tr><td class="code">SE</td><td>interior · pasillo</td><td>Ladrillo común 15 cm</td><td class="r">2,30</td><td class="r">22,00</td><td class="r">3</td><td class="r">151,80</td></tr>
+      <tr><td class="code">SE</td><td>interior · pasillo</td><td>Carpintería de hierro</td><td class="r">5,19</td><td class="r">1,60</td><td class="r">3</td><td class="r">24,91</td></tr>
+      <tr><td class="code">NE</td><td>interior · Aula 1</td><td>Ladrillo común 15 cm</td><td class="r">2,30</td><td class="r">18,90</td><td class="r">0</td><td class="r">0,00</td></tr>
+      <tr class="tot"><td colspan="6">Qt = K · S · Δt · transmisión total</td><td class="r">1.632,83</td></tr>
+    </tbody>
+  </table>
+  <div style="height:8pt"></div>
+  <table>
+    <thead><tr><th>Fachada</th><th>Hora · R · I</th><th>Cálculo</th><th class="r">Qr (kcal/h)</th></tr></thead>
+    <tbody>
+      <tr><td class="code">NO</td><td>15 h · R 16 · I 427</td><td class="m">2,30×22,00×16 + 6,00×427×0,5 + 5,19×1,60×16</td><td class="r b">2.223,46 ✔</td></tr>
+      <tr><td class="code">SO</td><td>20 h · R 21</td><td class="m">2,30×18,90×21</td><td class="r">912,87</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Se adopta la fachada de mayor ganancia: el sol no incide en todas las fachadas a la vez.</p>
+  <div style="height:6pt"></div>
   <div class="calc">
-    <div class="step"><div class="k">Transmisión</div><div class="v">Qt = K · S · Δt <small>todos los muros</small> → 1.632,83 kcal/h</div></div>
-    <div class="step"><div class="k">Radiación solar</div><div class="v">Opacos K·S·R · vidrio S·I·C (C = 0,5) <small>fachada de mayor ganancia (NO)</small> → 2.223,46 kcal/h</div></div>
-    <div class="step"><div class="k">Aire exterior · sensible</div><div class="v">0,24 × V × 1,14 × Δt = 0,24 × 360 × 1,14 × 11 = 1.083,46 kcal/h</div></div>
-    <div class="step"><div class="k">Aire exterior · latente</div><div class="v">0,576 × V × 1,14 × ΔM = 0,576 × 360 × 1,14 × 2,8 = 661,89 kcal/h</div></div>
-    <div class="step"><div class="k">Personas</div><div class="v">15 × 57 = 855,00 sens. · 15 × 60 = 900,00 lat.</div></div>
-    <div class="step"><div class="k">Iluminación + equipos</div><div class="v">2 × (38 × 20) × 0,86 = 1.307,20 kcal/h</div></div>
-    <div class="step"><div class="k">Q sensible total</div><div class="v">(Qt + Qr + Qs aire + Qps + Qi + Qe) × 1,10 = 7.812,14 kcal/h</div></div>
-    <div class="step"><div class="k">Q latente total</div><div class="v">(Ql aire + Qpl) × 1,05 = 1.639,99 kcal/h</div></div>
+    <div class="step"><div class="k">Aire exterior</div><div class="v">V = 15 × 24 = 360 m³/h</div></div>
+    <div class="step"><div class="k">Aire ext. · sensible</div><div class="v">Qs = 0,24 × 360 × 1,14 × 11 = 1.083,46 kcal/h</div></div>
+    <div class="step"><div class="k">Aire ext. · latente</div><div class="v">Ql = 0,576 × 360 × 1,14 × 2,8 = 661,89 kcal/h</div></div>
+    <div class="step"><div class="k">Personas</div><div class="v">15 × 57 = 855,00 sensible · 15 × 60 = 900,00 latente</div></div>
+    <div class="step"><div class="k">Iluminación · equipos</div><div class="v">(38 × 20) × 0,86 = 653,60 + 653,60 kcal/h</div></div>
+    <div class="step"><div class="k">Q sensible total</div><div class="v">(1.632,83 + 2.223,46 + 1.083,46 + 855,00 + 653,60 + 653,60) × 1,10 = 7.812,14</div></div>
+    <div class="step"><div class="k">Q latente total</div><div class="v">(661,89 + 900,00) × 1,05 = 1.639,99</div></div>
     <div class="step res"><div class="k">QT = Qs + Ql</div><div class="v">9.452,13 kcal/h <small>FCS = Qs / QT = 0,83</small></div></div>
-    <div class="step"><div class="k">Equipo</div><div class="v">TR = QT / 3024 = 3,13 · CAM = TR × 600 = 1.875 m³/h · kW = QT / 860 = 10,99</div></div>
-    <div class="step"><div class="k">Aire exterior / retorno</div><div class="v">CAE = máx (pers. × 24 ; 20 % CAM) = 375 m³/h · CAR = CAM − CAE = 1.500 m³/h</div></div>
+    <div class="step"><div class="k">Equipo</div><div class="v">3,13 TR · CAM 1.875 m³/h · 10,99 kW</div></div>
+    <div class="step"><div class="k">CAE · CAR</div><div class="v">CAE = máx (15 × 24 = 360 ; 20 % CAM = 375) = 375 m³/h · CAR = 1.875 − 375 = 1.500 m³/h</div></div>
   </div>
 </section>
 
-<section class="pb">
-  <h2><span class="n">3</span>Ganancias de calor por local <small>kcal/h</small></h2>
+<section>
+  <h2><span class="n">4</span>Datos por local y fachada adoptada</h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">Sup. m²</th><th class="r">Pers.</th><th class="r">Δt ext.</th><th class="r">Qt transm.</th><th>Fachada adoptada</th><th class="r">Hora</th><th class="r">R</th><th class="r">I</th><th class="r">Qr kcal/h</th></tr></thead>
+    <tbody><tr><td>Aula chica tipo 1</td><td class="r">38,00</td><td class="r">15</td><td class="r">11 °C</td><td class="r">1.632,83</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">15 h</td><td class="r">16</td><td class="r">427</td><td class="r b">2.223,46</td></tr>
+<tr><td>Aula chica tipo 2</td><td class="r">38,00</td><td class="r">15</td><td class="r">11 °C</td><td class="r">1.632,83</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">15 h</td><td class="r">16</td><td class="r">427</td><td class="r b">2.223,46</td></tr>
+<tr><td>Aula 1</td><td class="r">56,00</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.387,98</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">17 h</td><td class="r">22</td><td class="r">260</td><td class="r b">2.131,27</td></tr>
+<tr><td>Aula 2</td><td class="r">56,00</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.387,98</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">17 h</td><td class="r">22</td><td class="r">260</td><td class="r b">2.131,27</td></tr>
+<tr><td>Aula 3</td><td class="r">56,00</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.387,98</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">17 h</td><td class="r">22</td><td class="r">260</td><td class="r b">2.131,27</td></tr>
+<tr><td>Aula 4</td><td class="r">56,00</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.397,09</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">17 h</td><td class="r">22</td><td class="r">260</td><td class="r b">2.131,27</td></tr>
+<tr><td>Aula 5</td><td class="r">56,00</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.387,98</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">17 h</td><td class="r">22</td><td class="r">260</td><td class="r b">2.131,27</td></tr>
+<tr><td>Aula taller 1</td><td class="r">85,20</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.875,88</td><td><b>SO</b> <span class="sm">suroeste</span></td><td class="r">20 h</td><td class="r">21</td><td class="r">—</td><td class="r b">2.028,60</td></tr>
+<tr><td>Aula taller 2</td><td class="r">85,20</td><td class="r">25</td><td class="r">11 °C</td><td class="r">813,28</td><td><b>SE</b> <span class="sm">sureste</span></td><td class="r">10 h</td><td class="r">16</td><td class="r">110</td><td class="r b">654,87</td></tr>
+<tr><td>Aula taller 3</td><td class="r">85,20</td><td class="r">25</td><td class="r">11 °C</td><td class="r">1.875,88</td><td><b>NE</b> <span class="sm">noreste</span></td><td class="r">12 h</td><td class="r">18</td><td class="r">—</td><td class="r b">1.738,80</td></tr>
+<tr><td>Sala de docentes</td><td class="r">27,36</td><td class="r">8</td><td class="r">11 °C</td><td class="r">675,70</td><td><b>SO</b> <span class="sm">suroeste</span></td><td class="r">17 h</td><td class="r">14</td><td class="r">366</td><td class="r b">835,42</td></tr>
+<tr><td>Administración</td><td class="r">27,36</td><td class="r">8</td><td class="r">11 °C</td><td class="r">526,66</td><td><b>SO</b> <span class="sm">suroeste</span></td><td class="r">17 h</td><td class="r">14</td><td class="r">366</td><td class="r b">835,42</td></tr>
+<tr><td>Tesorería</td><td class="r">30,00</td><td class="r">8</td><td class="r">11 °C</td><td class="r">1.291,44</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">15 h</td><td class="r">16</td><td class="r">427</td><td class="r b">864,92</td></tr>
+<tr><td>Dirección</td><td class="r">32,00</td><td class="r">4</td><td class="r">11 °C</td><td class="r">630,48</td><td><b>NE</b> <span class="sm">noreste</span></td><td class="r">12 h</td><td class="r">18</td><td class="r">215</td><td class="r b">868,32</td></tr>
+<tr><td>Vicedirección</td><td class="r">32,00</td><td class="r">4</td><td class="r">11 °C</td><td class="r">796,08</td><td><b>NE</b> <span class="sm">noreste</span></td><td class="r">12 h</td><td class="r">18</td><td class="r">215</td><td class="r b">868,32</td></tr>
+<tr><td>Biblioteca</td><td class="r">72,00</td><td class="r">20</td><td class="r">11 °C</td><td class="r">1.881,20</td><td><b>SO</b> <span class="sm">suroeste</span></td><td class="r">17 h</td><td class="r">14</td><td class="r">366</td><td class="r b">1.828,62</td></tr>
+<tr><td>SUM</td><td class="r">122,70</td><td class="r">100</td><td class="r">11 °C</td><td class="r">2.903,52</td><td><b>SE</b> <span class="sm">sureste</span></td><td class="r">10 h</td><td class="r">16</td><td class="r">—</td><td class="r b">1.490,40</td></tr>
+<tr><td>Pasillos</td><td class="r">614,00</td><td class="r">250</td><td class="r">8 °C</td><td class="r">21.099,55</td><td><b>NO</b> <span class="sm">noroeste</span></td><td class="r">15 h</td><td class="r">16</td><td class="r">427</td><td class="r b">32.957,45</td></tr>
+</tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">5</span>Ganancias de calor por local <small>kcal/h</small></h2>
   <table class="big">
     <thead><tr><th>Local</th><th class="r">Transm.</th><th class="r">Radiación</th><th class="r">Aire ext. S</th><th class="r">Aire ext. L</th><th class="r">Personas</th><th class="r">Ilum.+Eq.</th><th class="r af">Qs ×1,10</th><th class="r ac">Ql ×1,05</th><th class="r">QT</th><th class="r">FCS</th></tr></thead>
     <tbody><tr><td>Aula chica tipo 1</td><td class="r">1.632,83</td><td class="r">2.223,46</td><td class="r">1.083,46</td><td class="r">661,89</td><td class="r">1.755,00</td><td class="r">1.307,20</td><td class="r af">7.812,14</td><td class="r ac">1.639,99</td><td class="r b">9.452,13</td><td class="r">0,83</td></tr>
@@ -139,7 +217,7 @@ tr.tot td.r,tr.tot td.b{color:#fff}
 </section>
 
 <section>
-  <h2><span class="n">4</span>Equipo necesario por local</h2>
+  <h2><span class="n">6</span>Equipo necesario por local</h2>
   <table class="big">
     <thead><tr><th>Local</th><th class="r">Sup. (m²)</th><th class="r">Pers.</th><th class="r">QT (kcal/h)</th><th class="r">TR</th><th class="r">CAM (m³/h)</th><th class="r">CAE (m³/h)</th><th class="r">CAR (m³/h)</th><th class="r">kW</th></tr></thead>
     <tbody><tr><td>Aula chica tipo 1</td><td class="r">38,00</td><td class="r">15</td><td class="r">9.452,13</td><td class="r b">3,13</td><td class="r">1.875</td><td class="r">375</td><td class="r">1.500</td><td class="r">10,99</td></tr>
@@ -167,21 +245,71 @@ tr.tot td.r,tr.tot td.b{color:#fff}
 <div class="part pb"><b>PARTE B</b><span>Balance térmico de invierno</span></div>
 
 <section>
-  <h2><span class="n">1</span>Condiciones y método <small>ejemplo: Aula chica tipo 1 · 43,20 m² · h 3,50 m · 15 personas</small></h2>
+  <h2><span class="n">1</span>Condiciones de diseño y coeficientes</h2>
   <div class="calc">
-    <div class="step"><div class="k">Condiciones</div><div class="v">Δt exterior 20 °C · Δt a locales interiores 10 °C · 1 renovación/hora</div></div>
+    <div class="step"><div class="k">Saltos térmicos (Δt)</div><div class="v">hacia el exterior 20 °C · hacia locales interiores 10 °C</div></div>
+    <div class="step"><div class="k">Renovaciones de aire</div><div class="v">1 por hora · Qv = 0,3 × RH × Vol × Δt</div></div>
     <div class="step"><div class="k">Coeficientes K</div><div class="v">ladrillo 2,30 · vidrio 3,50 · puerta 5,19 · piso sobre terreno 1,50</div></div>
-    <div class="step"><div class="k">Transmisión</div><div class="v">Qtr = S · K · Δt <small>muros + aberturas + piso</small> → 4.962,47 kcal/h</div></div>
-    <div class="step"><div class="k">Orientación</div><div class="v">Qor = Qtr ext. × % <small>N·NE·NO 0 % · E·O 5 % · S·SE·SO 10 %</small> → 869,40 × 10 % = 86,94</div></div>
-    <div class="step"><div class="k">Ventilación</div><div class="v">Qv = 0,3 × RH × Vol × Δt = 0,3 × 1 × 151,20 × 20 = 907,20 kcal/h</div></div>
-    <div class="step"><div class="k">Pérdidas</div><div class="v">Qtr + Qor + Qv = 5.956,61 kcal/h</div></div>
-    <div class="step"><div class="k">Ganancias</div><div class="v">Personas 15 × 55 + ilum. 40 W × 0,86 + equipos 40 W × 0,86 = 893,80 kcal/h</div></div>
-    <div class="step res"><div class="k">Calor a reponer</div><div class="v">Q = 5.956,61 − 893,80 = 5.062,81 kcal/h → 5,89 kW <small>(Q / 860) · 117,2 kcal/h·m²</small></div></div>
+    <div class="step"><div class="k">Orientación</div><div class="v">N · NE · NO: 0 % · E · O: 5 % · S · SE · SO: 10 % <small>solo elementos al exterior</small></div></div>
+    <div class="step"><div class="k">Ganancias</div><div class="v">personas 55 kcal/h c/u · iluminación y equipos: W × 0,86</div></div>
+    <div class="step"><div class="k">Balance</div><div class="v">Q = pérdidas − ganancias · kW = Q / 860</div></div>
+  </div>
+</section>
+
+<section class="flow">
+  <h2><span class="n">2</span>Ejemplo resuelto · Aula chica tipo 1 <small>43,20 m² · h 3,50 m · 151,20 m³ · 15 personas</small></h2>
+  <table>
+    <thead><tr><th>Elemento</th><th>Orient. · linda con</th><th>Superficie S (m²)</th><th class="r">K × Δt</th><th class="r">Q (kcal/h)</th></tr></thead>
+    <tbody>
+      <tr><td>M1 Muro exterior</td><td>NO · galería / patio</td><td class="m">8,00 × 4,00 − V1 − P1 = 25,40</td><td class="r">2,30 × 20</td><td class="r">1.168,40</td></tr>
+      <tr><td>M2 Muro exterior</td><td>SO · lateral del edificio</td><td class="m">5,40 × 3,50 = 18,90</td><td class="r">2,30 × 20</td><td class="r">869,40</td></tr>
+      <tr><td>M3 Muro interior</td><td>Aula 1</td><td class="m">5,40 × 3,50 = 18,90</td><td class="r">2,30 × 10</td><td class="r">434,70</td></tr>
+      <tr><td>M4 Muro interior</td><td>pasillo</td><td class="m">8,00 × 3,00 = 24,00</td><td class="r">2,30 × 10</td><td class="r">552,00</td></tr>
+      <tr><td>V1 Ventana</td><td>NO · exterior</td><td class="m">3,00 × 1,50 = 4,50</td><td class="r">3,50 × 20</td><td class="r">315,00</td></tr>
+      <tr><td>P1 Puerta exterior</td><td>NO · exterior</td><td class="m">1,00 × 2,10 = 2,10</td><td class="r">5,19 × 20</td><td class="r">217,98</td></tr>
+      <tr><td>P2 Puerta interior</td><td>local interior</td><td class="m">1,00 × 2,10 = 2,10</td><td class="r">5,19 × 10</td><td class="r">108,99</td></tr>
+      <tr><td>Piso</td><td>sobre terreno</td><td class="m">43,20</td><td class="r">1,50 × 20</td><td class="r">1.296,00</td></tr>
+      <tr class="tot"><td colspan="4">Qtr = S · K · Δt · transmisión total</td><td class="r">4.962,47</td></tr>
+    </tbody>
+  </table>
+  <div style="height:6pt"></div>
+  <div class="calc">
+    <div class="step"><div class="k">Orientación</div><div class="v">V1, P1 y M1 al NO: 0 % · M2 al SO: 869,40 × 10 % = 86,94 kcal/h</div></div>
+    <div class="step"><div class="k">Ventilación</div><div class="v">Qv = 0,3 × 1 × 151,20 × 20 = 907,20 kcal/h</div></div>
+    <div class="step"><div class="k">Pérdidas</div><div class="v">Qtr + Qor + Qv = 4.962,47 + 86,94 + 907,20 = 5.956,61 kcal/h</div></div>
+    <div class="step"><div class="k">Ganancias</div><div class="v">personas 15 × 55 = 825,00 · iluminación 40 W × 0,86 = 34,40 · equipos 34,40 → 893,80</div></div>
+    <div class="step res"><div class="k">Calor a reponer</div><div class="v">Q = 5.956,61 − 893,80 = 5.062,81 kcal/h → 5,89 kW <small>117,2 kcal/h por m²</small></div></div>
   </div>
 </section>
 
 <section>
-  <h2><span class="n">2</span>Balance por local <small>kcal/h</small></h2>
+  <h2><span class="n">3</span>Pérdidas por transmisión, orientación y ventilación <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">Muros</th><th class="r">Vent. y puertas</th><th class="r">Piso</th><th class="r">Qtr</th><th class="r">Qor</th><th class="r">Altura m</th><th class="r">Vol. m³</th><th class="r">Qv</th></tr></thead>
+    <tbody><tr><td>Aula chica tipo 1</td><td class="r">3.024,50</td><td class="r">641,97</td><td class="r">1.296,00</td><td class="r b">4.962,47</td><td class="r">86,94</td><td class="r">3,50</td><td class="r">151,20</td><td class="r">907,20</td></tr>
+<tr><td>Aula chica tipo 2</td><td class="r">3.024,50</td><td class="r">641,97</td><td class="r">1.296,00</td><td class="r b">4.962,47</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">151,20</td><td class="r">907,20</td></tr>
+<tr><td>Aula 1</td><td class="r">2.847,40</td><td class="r">641,97</td><td class="r">1.680,00</td><td class="r b">5.169,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">196,00</td><td class="r">1.176,00</td></tr>
+<tr><td>Aula 2</td><td class="r">2.847,40</td><td class="r">641,97</td><td class="r">1.680,00</td><td class="r b">5.169,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">196,00</td><td class="r">1.176,00</td></tr>
+<tr><td>Aula 3</td><td class="r">2.847,40</td><td class="r">641,97</td><td class="r">1.680,00</td><td class="r b">5.169,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">196,00</td><td class="r">1.176,00</td></tr>
+<tr><td>Aula 4</td><td class="r">2.847,40</td><td class="r">641,97</td><td class="r">1.680,00</td><td class="r b">5.169,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">196,00</td><td class="r">1.176,00</td></tr>
+<tr><td>Aula 5</td><td class="r">2.847,40</td><td class="r">641,97</td><td class="r">1.680,00</td><td class="r b">5.169,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">196,00</td><td class="r">1.176,00</td></tr>
+<tr><td>Aula taller 1</td><td class="r">4.044,32</td><td class="r">885,57</td><td class="r">2.556,00</td><td class="r b">7.485,89</td><td class="r">321,09</td><td class="r">3,50</td><td class="r">298,20</td><td class="r">1.789,20</td></tr>
+<tr><td>Aula taller 2</td><td class="r">3.078,32</td><td class="r">885,57</td><td class="r">2.556,00</td><td class="r b">6.519,89</td><td class="r">127,89</td><td class="r">3,50</td><td class="r">298,20</td><td class="r">1.789,20</td></tr>
+<tr><td>Aula taller 3</td><td class="r">4.044,32</td><td class="r">885,57</td><td class="r">2.556,00</td><td class="r b">7.485,89</td><td class="r">127,89</td><td class="r">3,50</td><td class="r">298,20</td><td class="r">1.789,20</td></tr>
+<tr><td>Sala de docentes</td><td class="r">1.904,40</td><td class="r">270,99</td><td class="r">820,80</td><td class="r b">2.996,19</td><td class="r">64,96</td><td class="r">3,50</td><td class="r">95,76</td><td class="r">574,56</td></tr>
+<tr><td>Administración</td><td class="r">1.904,40</td><td class="r">270,99</td><td class="r">820,80</td><td class="r b">2.996,19</td><td class="r">64,96</td><td class="r">3,50</td><td class="r">95,76</td><td class="r">574,56</td></tr>
+<tr><td>Tesorería</td><td class="r">2.028,60</td><td class="r">517,98</td><td class="r">1.339,20</td><td class="r b">3.885,78</td><td class="r">66,30</td><td class="r">3,50</td><td class="r">156,24</td><td class="r">937,44</td></tr>
+<tr><td>Dirección</td><td class="r">1.996,40</td><td class="r">401,97</td><td class="r">960,00</td><td class="r b">3.358,37</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">112,00</td><td class="r">672,00</td></tr>
+<tr><td>Vicedirección</td><td class="r">2.219,50</td><td class="r">313,98</td><td class="r">960,00</td><td class="r b">3.493,48</td><td class="r">0,00</td><td class="r">3,50</td><td class="r">112,00</td><td class="r">672,00</td></tr>
+<tr><td>Biblioteca</td><td class="r">3.795,00</td><td class="r">951,96</td><td class="r">2.160,00</td><td class="r b">6.906,96</td><td class="r">248,02</td><td class="r">3,50</td><td class="r">252,00</td><td class="r">1.512,00</td></tr>
+<tr><td>SUM</td><td class="r">4.848,40</td><td class="r">562,98</td><td class="r">3.681,30</td><td class="r b">9.092,68</td><td class="r">295,01</td><td class="r">3,00</td><td class="r">368,13</td><td class="r">2.208,78</td></tr>
+<tr><td>Pasillos</td><td class="r">12.398,61</td><td class="r">16.797,96</td><td class="r">18.419,10</td><td class="r b">47.615,67</td><td class="r">874,20</td><td class="r">3,00</td><td class="r">1.841,91</td><td class="r">11.051,46</td></tr>
+<tr class="tot"><td>Total escuela</td><td class="r">62.548,27</td><td class="r">27.239,31</td><td class="r">47.821,20</td><td class="r">137.608,78</td><td class="r">2.277,26</td><td></td><td class="r">5.210,80</td><td class="r">31.264,80</td></tr></tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Balance por local <small>kcal/h</small></h2>
   <table class="big">
     <thead><tr><th>Local</th><th class="r">Sup. m²</th><th class="r">Vol. m³</th><th class="r">Pers.</th><th class="r">Transm.</th><th class="r">Orient.</th><th class="r">Ventil.</th><th class="r ac">Pérdidas</th><th class="r af">Ganancias</th><th class="r">Q</th><th class="r">kW</th><th class="r">kcal/h·m²</th></tr></thead>
     <tbody><tr><td>Aula chica tipo 1</td><td class="r">43,20</td><td class="r">151,20</td><td class="r">15</td><td class="r">4.962,47</td><td class="r">86,94</td><td class="r">907,20</td><td class="r ac">5.956,61</td><td class="r af">893,80</td><td class="r b">5.062,81</td><td class="r">5,89</td><td class="r">117,2</td></tr>
@@ -207,7 +335,7 @@ tr.tot td.r,tr.tot td.b{color:#fff}
 </section>
 
 <section>
-  <h2><span class="n">3</span>Resumen general</h2>
+  <h2><span class="n">5</span>Resumen general</h2>
   <div class="tanks">
     <div class="t main"><div class="l">Verano · refrigeración</div><div class="big">108,47 <small>TR</small></div><div class="f">QT 328.018,17 kcal/h · 381,42 kW<br>CAM 65.083 m³/h</div></div>
     <div class="t"><div class="l">Invierno · calefacción</div><div class="big">156,03 <small>kW</small></div><div class="f">Q 134.184,08 kcal/h</div></div>
