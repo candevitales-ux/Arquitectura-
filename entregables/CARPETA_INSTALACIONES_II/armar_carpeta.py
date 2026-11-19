@@ -9,7 +9,7 @@ U='/root/.claude/uploads/14df2116-8de2-54f6-8942-50f1368fca3c'; S='/tmp/claude-0
 c=PdfReader(S+'/caratulas.pdf')
 R=PdfReader
 san=R(U+'/7439b1b7-Instalacion_Sanitaria_Calculos.pdf'); esc=R(U+'/2fc101c3-Balance_Termico_Escuela.pdf'); viv=R(U+'/76acc24a-Balance_Termico_Psicrometria_Vivienda.pdf')
-tv=R(U+'/d48f380b-Calculos_Transporte_Vertical_Vivienda.pdf'); me=R(U+'/8e6483f8-Memoria_descriptiva_-_Acondicionamiento_termico.pdf')
+tv=R('/home/user/Arquitectura-/entregables/CALCULOS_TRANSPORTE_VERTICAL/Calculos_Transporte_Vertical_Vivienda.pdf'); me=R(U+'/8e6483f8-Memoria_descriptiva_-_Acondicionamiento_termico.pdf')
 mv=R(U+'/7b579e55-Memoria_descriptiva_-_AA__-_CALEFACCION_vivienda.pdf'); ie=R(U+'/ab1de566-MEMORIA_I.E._EDIFICIO_PUBLICO.pdf')
 mel=R(D+'/memorias/memoria_electricidad_transporte_vertical.pdf'); minc=R(D+'/memorias/memoria_incendio_sanitarias.pdf'); anx=R(D+'/memorias/anexo_plano_ie.pdf')
 w=PdfWriter(); mask=set()

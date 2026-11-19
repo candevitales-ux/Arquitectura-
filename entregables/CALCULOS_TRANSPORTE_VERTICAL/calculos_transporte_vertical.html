@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Cálculos transporte vertical Vivienda</title>
 <style>
-@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
+@page { size: A4; margin: 10mm 15mm 9mm 15mm; }
 :root{
   --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
   --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
@@ -70,15 +70,22 @@ tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-t
 .m{font-family:"JetBrains Mono",monospace;font-size:9pt}
 .d{font-weight:700;color:var(--acc);white-space:nowrap}
 .g45 .step{grid-template-columns:62pt 1fr}
+section{margin:0 0 8pt !important}
+.step .k,.step .v{padding-top:3.2pt !important;padding-bottom:3.2pt !important}
+td{padding-top:2.6pt !important;padding-bottom:2.6pt !important}
+.t{padding:6pt 10pt !important}
+.t .big{font-size:13pt !important}
+.intro{margin-bottom:4pt !important}
+h2{margin-bottom:4pt !important}
 </style>
 </head>
 <body>
 <div class="cover">
   <h1>CÁLCULOS TRANSPORTE VERTICAL VIVIENDA</h1>
-  <p>Población · Capacidad de transporte · Tiempo total de viaje · Cantidad de ascensores · Verificación de intervalo</p>
+  <p>Cálculo según norma <b>IRAM 11.526</b> · Población · Capacidad de transporte · Tiempo total de viaje · Cantidad de ascensores · Verificación de intervalo</p>
 </div>
 
-<div class="tanks" style="margin-bottom:14pt">
+<div class="tanks" style="margin-bottom:10pt">
   <div class="t"><div class="l">Edificio</div><div class="big">7 <small>pisos</small></div><div class="f">313 m² por planta · recorrido 15 m</div></div>
   <div class="t"><div class="l">Ascensor adoptado</div><div class="big">450 <small>kg</small></div><div class="f">6 pasajeros × 75 kg · Vn 0,70 m/s</div></div>
   <div class="t main"><div class="l">Resultado</div><div class="big">1 <small>ascensor</small></div><div class="f">Intervalo I = 99,71 s ✔</div></div>
@@ -140,6 +147,15 @@ tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-t
   </div>
 </section>
 </div>
+
+<section>
+  <h2><span class="n">6</span>Ascensor elegido</h2>
+  <div class="tanks">
+    <div class="t main"><div class="l">Capacidad</div><div class="big">6 <small>personas</small></div></div>
+    <div class="t"><div class="l">Peso (carga nominal)</div><div class="big">450 <small>kg</small></div></div>
+    <div class="t"><div class="l">Medidas de cabina</div><div class="big">1,10 × 1,30 <small>m</small></div></div>
+  </div>
+</section>
 
 </body>
 </html>
