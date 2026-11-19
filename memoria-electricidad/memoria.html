@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Memoria descriptiva · Electricidad y transporte vertical</title>
+<style>
+  @page { size: A4; margin: 28mm 25mm 26mm 25mm; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body { font-family: Arial, "Liberation Sans", Helvetica, sans-serif; font-size: 10.6pt; line-height: 1.55; color: #1a1a1a; }
+  .cover { height: 238mm; padding-top: 52mm; box-sizing: border-box; page-break-after: always; }
+  .kicker { color: #c3313a; font-weight: 700; font-size: 11.5pt; letter-spacing: .2px; margin: 0 0 6px; }
+  .cover h1 { color: #1f3a5f; font-size: 23pt; margin: 0; line-height: 1.2; }
+  .cover .sub { color: #444; font-size: 14pt; margin: 4px 0 30px; }
+  .cover p { margin: 0 0 10px; font-size: 10.6pt; }
+  h2 { color: #1f3a5f; font-size: 15pt; margin: 20px 0 4px; page-break-after: avoid; }
+  h3 { color: #1f3a5f; font-size: 13pt; margin: 18px 0 4px; page-break-after: avoid; }
+  .part { page-break-before: always; margin: 0 0 6px; border-bottom: 2px solid #c3313a; padding-bottom: 6px; }
+  .part .kicker { margin: 0; }
+  .part h2 { margin: 2px 0 0; font-size: 19pt; }
+  p { margin: 0 0 9px; text-align: left; }
+  ul { margin: 2px 0 10px; padding-left: 26px; }
+  li { margin: 0 0 4px; }
+  figure { margin: 12px 0 14px; text-align: center; page-break-inside: avoid; }
+  figure img { max-width: 100%; }
+  figcaption { color: #666; font-size: 9pt; font-style: italic; margin-top: 4px; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 12px; font-size: 9.8pt; page-break-inside: avoid; }
+  th, td { border: 1px solid #c9ced6; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #eef1f6; color: #1f3a5f; }
+  .row2 { display: flex; gap: 14px; align-items: flex-end; justify-content: center; }
+  .row2 img { max-height: 62mm; }
+  .keep { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <p class="kicker">INSTALACIONES II · U.N.M.</p>
+  <h1>Memoria descriptiva</h1>
+  <p class="sub">Instalación eléctrica y transporte vertical del edificio de viviendas</p>
+  <p><b>Docentes:</b> Pirolo, Gabriel · Discacciati, Mariela</p>
+  <p><b>Grupo:</b> 02 · 2.º cuatrimestre · Comisión 1</p>
+  <p><b>Alumnos:</b> Avelar Paz, Valentina · Bartolotti, Tobías · Di Cosmo, Ignacio · Galdames, Abril · Gómez, Lucio · Vitale, Candelaria</p>
+</section>
+
+<h2>1. Introducción</h2>
+<p>En este trabajo hicimos la instalación eléctrica y el transporte vertical del edificio de viviendas que venimos trabajando en la materia. Primero vimos qué consume cada parte del edificio, con eso armamos el esquema unifilar de tableros, y después elegimos el ascensor y su máquina.</p>
+<p>La memoria está dividida en dos partes: <b>Electricidad</b> y <b>Transporte vertical</b>. En cada una explicamos qué elegimos, cómo funciona y por qué tomamos cada decisión.</p>
+
+<h2>2. El edificio</h2>
+<p>El edificio tiene subsuelo, planta baja, seis pisos altos y azotea. La planta baja está en el nivel ±0,00, el primer piso en +3,40 y desde ahí los pisos se repiten cada 2,90 m hasta el sexto piso en +17,90. La azotea está en +20,85 y sobre ella está la sala de máquinas del ascensor.</p>
+<p>Tiene <b>10 viviendas</b> y <b>3 viviendas dúplex</b>. Los dúplex ocupan dos pisos cada uno (1.º y 2.º, 3.º y 4.º, 5.º y 6.º) y tienen escalera interna. En planta baja están el ingreso, el hall y el SUM. En el subsuelo están las instalaciones de servicio, como las bombas.</p>
+<p>Esto nos sirvió para la instalación eléctrica, porque hay dos tipos de consumo muy distintos: el de cada vivienda, que paga cada propietario, y el de las partes comunes (bombas, ascensor, iluminación de palieres, SUM), que paga el consorcio.</p>
+
+<!-- ======================= ELECTRICIDAD ======================= -->
+<div class="part">
+  <p class="kicker">PARTE 1</p>
+  <h2>Electricidad</h2>
+</div>
+
+<h3>3. Suministro y acometida</h3>
+<p>El edificio se alimenta de la red de baja tensión de la distribuidora, que es de <b>3 × 380/220 V</b>. Entre dos fases hay 380 V y entre una fase y el neutro hay 220 V. La acometida entra con <b>tres fases y neutro (3F + N)</b> a la caja general de toma, que está sobre la línea municipal y tiene los fusibles de la distribuidora.</p>
+<p>Pedimos acometida trifásica porque el edificio tiene muchas unidades y equipos con motor. Con una sola fase no alcanzaría la potencia y además no se podrían alimentar los motores trifásicos de las bombas y del ascensor.</p>
+
+<h3>4. Sala de medidores: medición individual</h3>
+<p>De la caja de toma se pasa a una barra de distribución en la sala de medidores, que está en planta baja. De esa barra salen tres grupos, cada uno con sus fusibles y su medidor:</p>
+<ul>
+  <li><b>10 medidores monofásicos</b>, uno por cada vivienda.</li>
+  <li><b>3 medidores monofásicos</b>, uno por cada dúplex.</li>
+  <li><b>1 medidor trifásico</b> para los servicios generales del edificio.</li>
+</ul>
+<p>Elegimos medición individual porque cada propietario tiene que pagar lo que consume su departamento y nada más. Las partes comunes tienen su propio medidor, y eso lo paga el consorcio. Juntamos todos los medidores en un solo lugar en planta baja para que la distribuidora pueda leerlos sin entrar a los departamentos.</p>
+
+<h3>5. Por qué monofásico en las viviendas</h3>
+<p>Cada vivienda y cada dúplex se alimenta en <b>monofásico (una fase + neutro, 220 V)</b>. Lo elegimos así por estas razones:</p>
+<ul>
+  <li>Lo que hay en una vivienda (luces, tomacorrientes, heladera, lavarropas, aire acondicionado split, etc.) funciona todo a 220 V. No hay motores grandes que necesiten trifásica.</li>
+  <li>La potencia de una vivienda entra cómoda en una sola fase.</li>
+  <li>El medidor, el tablero y los cables son más simples y más baratos que en trifásico.</li>
+</ul>
+<p>Para que la acometida no quede desbalanceada, repartimos los 13 medidores monofásicos entre las tres fases R, S y T. Así cada fase carga más o menos la misma cantidad de departamentos. En los dúplex pusimos uno en cada fase.</p>
+
+<h3>6. Por qué trifásico en los servicios generales</h3>
+<p>Los servicios generales se alimentan en <b>trifásico (3F + N + PE)</b>. Lo elegimos así porque:</p>
+<ul>
+  <li>Las <b>bombas</b> (cloacal y de agua) y el <b>ascensor</b> tienen motores trifásicos de 380 V. Un motor trifásico, para la misma potencia, es más chico, arranca mejor y rinde más que uno monofásico.</li>
+  <li>La suma de todas las cargas comunes es mucho más grande que la de una vivienda, y repartida en tres fases cada conductor lleva menos corriente.</li>
+  <li>Los circuitos que son de 220 V (iluminación de palieres, SUM, azotea, caldera, termotanque) también salen de este tablero, cada uno colgado de una fase distinta para equilibrar.</li>
+</ul>
+
+<h3>7. Tableros de las viviendas</h3>
+<p>En cada unidad hay un <b>tablero principal (TP)</b> y uno o más <b>tableros seccionales (TS)</b>:</p>
+<ul>
+  <li><b>TP-V (×10):</b> tablero principal de cada vivienda, al ingreso. Tiene el interruptor general y el diferencial, y desde ahí se puede cortar todo el departamento.</li>
+  <li><b>TS-V (×10):</b> tablero seccional de cada vivienda, de donde salen los circuitos de iluminación y de tomacorrientes.</li>
+</ul>
+<p>Los dúplex tienen un tablero más porque tienen dos plantas:</p>
+<ul>
+  <li><b>TP-D (×3):</b> tablero principal del dúplex, al ingreso.</li>
+  <li><b>TS-D (×3):</b> tablero seccional de la planta de abajo.</li>
+  <li><b>TSS-D (×3):</b> tablero subseccional de la planta de arriba.</li>
+</ul>
+<p>Pusimos el tablero subseccional en la planta de arriba para que los circuitos de ese piso no tengan que bajar todos hasta el tablero de abajo. Los recorridos de cable quedan más cortos, y si hay una falla arriba se puede cortar solo esa planta.</p>
+
+<h3>8. Tablero principal de servicios generales y sus seccionales</h3>
+<p>Después del medidor trifásico está el <b>TP-SG (tablero principal de servicios generales)</b>. Tiene un interruptor general tetrapolar con diferencial y una barra de la que salen <b>9 líneas, una para cada tablero seccional</b>:</p>
+<table>
+  <tr><th>Tablero</th><th>Alimenta</th><th>Protección</th><th>Por qué</th></tr>
+  <tr><td>TS-1</td><td>Subsuelo</td><td>bipolar · fase R</td><td>Iluminación y tomas del subsuelo. Separado para poder cortarlo sin dejar sin luz al resto.</td></tr>
+  <tr><td>TS-2</td><td>Planta baja</td><td>bipolar · fase S</td><td>Hall, ingreso y palieres. Es lo que más se usa y no tiene que quedar sin luz por una falla en otro sector.</td></tr>
+  <tr><td>TS-3</td><td>Azotea</td><td>bipolar · fase T</td><td>Iluminación y tomas de la azotea y de la sala de máquinas.</td></tr>
+  <tr><td>TS-4</td><td>SUM</td><td>bipolar · fase R</td><td>El SUM tiene un uso propio y cargas que varían mucho (eventos, equipos), por eso le dimos una línea exclusiva.</td></tr>
+  <tr><td>TS-5</td><td>Bomba cloacal</td><td>tetrapolar · R·S·T</td><td>Motor trifásico. Saca los líquidos cloacales del subsuelo, que está por debajo de la colectora.</td></tr>
+  <tr><td>TS-6</td><td>Bombeo de agua</td><td>tetrapolar · R·S·T</td><td>Motor trifásico. Sube el agua de la cisterna al tanque de reserva.</td></tr>
+  <tr><td>TS-7</td><td>Ascensores</td><td>tetrapolar · R·S·T</td><td>Motor trifásico de la máquina de tracción (ver Parte 2).</td></tr>
+  <tr><td>TS-8</td><td>Caldera</td><td>bipolar · fase S</td><td>Comando, encendido y bomba de la caldera, que funcionan a 220 V.</td></tr>
+  <tr><td>TS-9</td><td>Termotanque</td><td>bipolar · fase T</td><td>Equipo de 220 V. Tiene su propia línea para poder cortarlo por mantenimiento.</td></tr>
+</table>
+<p>Elegimos un tablero seccional para cada servicio por tres razones. La primera es que, si salta una protección, se corta solo ese servicio y el resto del edificio sigue funcionando. La segunda es que cada equipo se puede cortar por mantenimiento sin tocar los demás. Y la tercera es que los equipos con motor quedan separados de la iluminación.</p>
+<p>Las líneas de motores (bombas y ascensor) son <b>tetrapolares</b> porque llevan las tres fases y el neutro. Las de 220 V son <b>bipolares</b> (fase y neutro) y las repartimos entre R, S y T para que ninguna fase quede más cargada que las otras.</p>
+
+<h3>9. Cambios respecto del primer planteo</h3>
+<ul>
+  <li><b>Sacamos el grupo electrógeno.</b> En el primer esquema había un tablero para el grupo electrógeno. Lo sacamos porque en un edificio de viviendas de esta escala no lo consideramos necesario y suma costo, espacio y mantenimiento.</li>
+  <li><b>El SUM pasó a tener su propio tablero seccional.</b> Al principio el SUM colgaba como subseccional del tablero de planta baja. Lo cambiamos a un TS con su propia línea desde el TP-SG, para que una falla o una sobrecarga en el SUM no deje sin luz al hall y los palieres, y para poder cortarlo de manera independiente.</li>
+  <li><b>Agregamos un TS para la azotea</b>, para la iluminación y los tomas de la azotea y la sala de máquinas.</li>
+</ul>
+
+<h3>10. Protecciones</h3>
+<p>Cada tablero tiene dos tipos de protección:</p>
+<ul>
+  <li><b>Interruptor termomagnético:</b> corta cuando pasa más corriente de la que aguanta el cable (sobrecarga) o cuando hay un cortocircuito. Protege la instalación.</li>
+  <li><b>Interruptor diferencial:</b> compara la corriente que va por la fase con la que vuelve por el neutro. Si hay diferencia es porque se está yendo corriente a tierra, por ejemplo a través de una persona, y corta. Protege a las personas.</li>
+</ul>
+<p>Son <b>bipolares</b> en los circuitos monofásicos y <b>tetrapolares</b> en los trifásicos, para que corten todos los conductores activos a la vez.</p>
+
+<h3>11. Puesta a tierra y pararrayos</h3>
+<p>Al lado de la sala de medidores hay una <b>jabalina</b> clavada en el terreno. De ella sale el <b>conductor de protección (PE)</b>, que llega a todos los tableros del edificio. A ese conductor se conectan las partes metálicas de los equipos y los tomas con tierra. Si un cable pelado toca la carcasa de un equipo, la corriente se va por el PE y el diferencial corta, en vez de pasar por la persona que lo toca.</p>
+<p>En el punto más alto del edificio planteamos un <b>pararrayos</b>: una punta captora sobre un mástil que recibe la descarga del rayo y la lleva por un conductor de bajada hasta su propia puesta a tierra. La puesta a tierra del pararrayos se une con la de la instalación para que todo quede al mismo potencial y no haya diferencias de tensión peligrosas entre ellas.</p>
+
+<h3>12. Esquema unifilar</h3>
+<p>Todo lo anterior lo resumimos en el esquema unifilar de tableros. En el esquema, los trazos oblicuos sobre cada línea indican cuántos conductores activos lleva: dos en monofásico (F + N) y cuatro en trifásico (3F + N).</p>
+<p>El esquema completo está en la página siguiente.</p>
+<figure style="page-break-before:always;margin:0">
+  <img src="img/unifilar_rot.png" alt="Esquema unifilar de tableros" style="height:228mm">
+  <figcaption>Esquema unifilar de tableros del edificio.</figcaption>
+</figure>
+
+<!-- ======================= TRANSPORTE VERTICAL ======================= -->
+<div class="part">
+  <p class="kicker">PARTE 2</p>
+  <h2>Transporte vertical</h2>
+</div>
+
+<h3>13. Por qué un ascensor y cuántas paradas</h3>
+<p>El edificio tiene subsuelo, planta baja y seis pisos, así que hace falta un ascensor para que se pueda llegar a todos los pisos sin escalera, incluidas las personas con movilidad reducida. Pusimos <b>un ascensor con 8 paradas</b>: subsuelo, planta baja y los pisos 1.º a 6.º. El recorrido es de unos 21 m, desde el subsuelo hasta el sexto piso (+17,90).</p>
+
+<h3>14. Sistema elegido: ascensor eléctrico de tracción con sala de máquinas</h3>
+<p>Elegimos un <b>ascensor eléctrico de tracción con sala de máquinas</b> arriba del hueco, en la azotea. Lo elegimos por estas razones:</p>
+<ul>
+  <li>Un <b>ascensor hidráulico</b> sirve para pocos pisos y recorridos cortos, y es más lento. Con 8 paradas y unos 21 m de recorrido conviene el de tracción.</li>
+  <li>El de tracción tiene <b>contrapeso</b>, así que el motor solo tiene que mover la diferencia de peso entre la cabina y el contrapeso. Gasta mucha menos energía que el hidráulico, que tiene que levantar toda la cabina con aceite a presión.</li>
+  <li>Con <b>sala de máquinas</b>, la máquina y el tablero de comando quedan en un local propio, fácil de acceder para el mantenimiento, y no dentro del hueco. En el corte la sala está en la azotea, con escalera de acceso.</li>
+</ul>
+
+<h3>15. Cómo funciona</h3>
+<p>El ascensor de tracción funciona así:</p>
+<ul>
+  <li><b>Máquina de tracción:</b> un motor eléctrico mueve, a través de un reductor, una <b>polea</b> con gargantas.</li>
+  <li><b>Cables de acero:</b> pasan por la polea. De un lado cuelga la cabina y del otro el <b>contrapeso</b>. La cabina no se mueve porque la polea “tire” del cable, sino por el rozamiento entre los cables y las gargantas de la polea.</li>
+  <li><b>Contrapeso:</b> pesa lo mismo que la cabina más alrededor de la mitad de la carga. Así el motor siempre hace poca fuerza.</li>
+  <li><b>Guías:</b> la cabina y el contrapeso suben y bajan por guías de acero fijadas al hueco.</li>
+  <li><b>Seguridad:</b> el freno de la máquina sostiene la cabina cuando está parada. Si la cabina baja más rápido de lo que debe, el <b>limitador de velocidad</b> acciona el <b>paracaídas</b>, que la frena agarrándose de las guías. En el fondo del hueco (foso) hay <b>amortiguadores</b>.</li>
+</ul>
+
+<h3>16. Cabina: Servas EcoStyle</h3>
+<p>Para la cabina tomamos la línea <b>EcoStyle de Servas</b>, que viene en versión con sala de máquinas y sin sala de máquinas. La elegimos porque está pensada para edificios de este tamaño (hasta 16 paradas, hasta 1,5 m/s y menos de 1.000 kg) y porque la fabrica una empresa argentina, así que hay repuestos y service.</p>
+<div class="row2">
+  <figure><img src="img/cabina.jpg" alt="Cabina EcoStyle"><figcaption>Cabina EcoStyle (folleto Servas).</figcaption></figure>
+</div>
+<table>
+  <tr><th>Dato</th><th>Valor adoptado</th></tr>
+  <tr><td>Versión</td><td>EM, con sala de máquinas</td></tr>
+  <tr><td>Carga</td><td>450 kg (6 personas)</td></tr>
+  <tr><td>Cabina (A × B)</td><td>1.100 × 1.300 mm</td></tr>
+  <tr><td>Hueco (C × D)</td><td>1.750 × 1.590 mm (contrapeso lateral, 1 embarque)</td></tr>
+  <tr><td>Puerta</td><td>800 mm, apertura lateral</td></tr>
+  <tr><td>Velocidad</td><td>1 m/s</td></tr>
+  <tr><td>Paradas</td><td>8 (subsuelo, planta baja y 1.º a 6.º piso)</td></tr>
+</table>
+<p>Elegimos la cabina de 1.100 × 1.300 mm porque es la más chica de la línea que entra una silla de ruedas, y para un edificio de viviendas 6 personas por viaje es suficiente. Elegimos 1 m/s porque con 8 paradas el ascensor hace el recorrido completo en unos 21 segundos. Más velocidad no hace falta y obligaría a una máquina más grande y a más altura de hueco.</p>
+
+<h3>17. Máquina de tracción: Montanari M73</h3>
+<p>Como máquina elegimos la <b>M73 de Montanari</b>, que en Argentina distribuye Trimarchi. Es una máquina <b>con reductor</b> (sinfín y corona) y polea de tracción.</p>
+<figure>
+  <img src="img/m73.jpg" alt="Máquina de tracción Montanari M73" style="max-height:62mm">
+  <figcaption>Máquina de tracción M73 (catálogo Montanari).</figcaption>
+</figure>
+<table>
+  <tr><th>Dato</th><th>Valor</th></tr>
+  <tr><td>Tipo</td><td>Máquina de tracción con reductor</td></tr>
+  <tr><td>Polea de tracción</td><td>Ø 480 mm</td></tr>
+  <tr><td>Relación de reducción</td><td>1/37</td></tr>
+  <tr><td>Motor</td><td>5,5 kW, asincrónico, 4 polos, con variador VVVF, 50 Hz</td></tr>
+  <tr><td>Velocidad y carga (según catálogo)</td><td>1,02 m/s · hasta 499 kg</td></tr>
+  <tr><td>Carga estática máxima</td><td>2.200 kg</td></tr>
+  <tr><td>Peso del reductor</td><td>110 kg · 2,8 l de aceite</td></tr>
+</table>
+<p>La elegimos por estas razones:</p>
+<ul>
+  <li>Con polea de 480 mm y reducción 1/37 da justo la velocidad de 1 m/s que queríamos y lleva hasta 499 kg, así que cubre los 450 kg de la cabina.</li>
+  <li>Es una máquina muy usada en ascensores de edificios de viviendas. Los ascensoristas la conocen y se consiguen repuestos, lo que hace más fácil el mantenimiento.</li>
+  <li>Con el <b>variador de frecuencia (VVVF)</b>, el motor arranca y frena de a poco. El viaje es más cómodo, la cabina para justo al nivel del piso y no hay picos de corriente grandes en el arranque, lo que también cuida la instalación eléctrica del edificio.</li>
+</ul>
+
+<h3>18. Hueco, foso y sala de máquinas</h3>
+<p>El hueco del ascensor recorre el edificio desde el subsuelo hasta la azotea, y arriba está la sala de máquinas con la M73 y el tablero de maniobra. Para la versión con sala de máquinas, a 1 m/s y hasta 600 kg, el fabricante pide:</p>
+<ul>
+  <li><b>Foso (S):</b> 1.280 mm como mínimo por debajo del nivel de la parada más baja (el subsuelo).</li>
+  <li><b>Última altura (K):</b> 3.820 mm como mínimo entre el nivel de la última parada y el techo del hueco.</li>
+</ul>
+<p>El foso es para que entren los amortiguadores y para que la cabina tenga lugar si se pasa del nivel de abajo. La última altura es para que la cabina tenga lugar arriba si se pasa del último piso, y para proteger al técnico que trabaja sobre el techo de la cabina.</p>
+
+<h3>19. Alimentación eléctrica del ascensor</h3>
+<p>El ascensor se alimenta desde el <b>TS-7 (Ascensores)</b>, que sale del tablero principal de servicios generales con una línea <b>tetrapolar (3F + N + PE)</b>. Es trifásico porque el motor de la M73 es trifásico de 380 V. En la sala de máquinas, esa línea llega al tablero de maniobra del ascensor, que tiene su propio interruptor y el variador VVVF. La iluminación de la sala de máquinas sale del TS-3 (Azotea), así que hay luz en la sala aunque se corte el ascensor para hacerle mantenimiento.</p>
+<p>Al estar en servicios generales, el consumo del ascensor lo mide el medidor trifásico y lo paga el consorcio.</p>
+
+</body>
+</html>
