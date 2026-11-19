@@ -1,5 +1,5 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><title>Resumen de cálculos</title><style>
-@page { size: 210mm 148mm; margin: 10mm 13mm; }
+@page { margin: 0; } body{padding:8mm 11mm !important}
 :root{
   --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
   --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
@@ -63,18 +63,18 @@ tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-t
 
 .pb{break-before:page}
 
-.card{height:128mm;display:flex;flex-direction:column;break-after:page}
+.card{break-after:page}
 .card:last-child{break-after:auto}
 .hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2pt solid var(--acc);padding-bottom:4pt;margin-bottom:7pt}
 .hd h1{margin:0;font-size:15pt;color:var(--acc);letter-spacing:-.2pt}
 .hd .k{font-size:7.5pt;letter-spacing:1.2pt;text-transform:uppercase;color:var(--muted)}
 .tag{display:inline-block;font-size:7.6pt;font-weight:700;text-transform:uppercase;letter-spacing:.4pt;padding:2.5pt 7pt;border-radius:3pt;margin-bottom:6pt}
 .tag.ver{background:var(--af-soft);color:var(--af)} .tag.inv{background:var(--ac-soft);color:var(--ac)} .tag.neu{background:var(--soft);color:var(--acc)}
-td{font-size:9pt;padding:3pt 7pt} td.r{font-size:8.8pt} th{font-size:7.4pt}
+td{font-size:8.6pt;padding:2.6pt 6pt} td.r{font-size:8.8pt} th{font-size:7.4pt}
 td:first-child{white-space:nowrap}
 td.b{font-weight:700;color:var(--acc)} tr.tot td.b{color:#fff}
 .sm{font-size:7.5pt;color:var(--muted)}
-.ft{margin-top:auto;display:flex;gap:8pt}
+.ft{margin-top:8pt;display:flex;gap:8pt}
 .ft .t{flex:1;border:.8pt solid var(--line);border-radius:4pt;padding:5pt 8pt}
 .ft .t.main{background:var(--acc);border-color:var(--acc)}
 .ft .l{font-size:6.8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}

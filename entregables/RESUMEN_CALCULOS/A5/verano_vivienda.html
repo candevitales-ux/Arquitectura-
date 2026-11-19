@@ -1,5 +1,5 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><title>Resumen de cálculos</title><style>
-@page { size: 210mm 148mm; margin: 10mm 13mm; }
+@page { margin: 0; } body{padding:8mm 11mm !important}
 :root{
   --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
   --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
@@ -63,27 +63,27 @@ tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-t
 
 .pb{break-before:page}
 
-.card{height:128mm;display:flex;flex-direction:column;break-after:page}
+.card{break-after:page}
 .card:last-child{break-after:auto}
 .hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2pt solid var(--acc);padding-bottom:4pt;margin-bottom:7pt}
 .hd h1{margin:0;font-size:15pt;color:var(--acc);letter-spacing:-.2pt}
 .hd .k{font-size:7.5pt;letter-spacing:1.2pt;text-transform:uppercase;color:var(--muted)}
 .tag{display:inline-block;font-size:7.6pt;font-weight:700;text-transform:uppercase;letter-spacing:.4pt;padding:2.5pt 7pt;border-radius:3pt;margin-bottom:6pt}
 .tag.ver{background:var(--af-soft);color:var(--af)} .tag.inv{background:var(--ac-soft);color:var(--ac)} .tag.neu{background:var(--soft);color:var(--acc)}
-td{font-size:9pt;padding:3pt 7pt} td.r{font-size:8.8pt} th{font-size:7.4pt}
+td{font-size:8.6pt;padding:2.6pt 6pt} td.r{font-size:8.8pt} th{font-size:7.4pt}
 td:first-child{white-space:nowrap}
 td.b{font-weight:700;color:var(--acc)} tr.tot td.b{color:#fff}
 .sm{font-size:7.5pt;color:var(--muted)}
-.ft{margin-top:auto;display:flex;gap:8pt}
+.ft{margin-top:8pt;display:flex;gap:8pt}
 .ft .t{flex:1;border:.8pt solid var(--line);border-radius:4pt;padding:5pt 8pt}
 .ft .t.main{background:var(--acc);border-color:var(--acc)}
 .ft .l{font-size:6.8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}
 .ft .v{font-size:12pt;font-weight:700;color:var(--acc)}
 .ft .main .l{color:#c8d7e5}.ft .main .v{color:#fff}
 .note{font-size:7.8pt;margin-top:4pt}
-</style></head><body><div class="card"><div class="hd"><h1>Balance térmico de verano · Vivienda</h1><span class="k">Instalaciones II · Resumen de cálculos</span></div><div><span class="tag ver">te 35 °C · ti 24 °C · HR 40 % / 50 %</span></div><table><thead><tr><th>Local</th><th class="r">Q total kcal/h</th><th class="r">FCS</th><th class="r">R kcal/h</th><th class="r">TR</th></tr></thead><tbody>
-<tr><td>SUM</td><td class="r">10.181,40</td><td class="r">0,694</td><td class="r">16.380,47</td><td class="r b">5,42</td></tr>
-<tr><td>Dúplex 1er piso</td><td class="r">7.801,25</td><td class="r">0,964</td><td class="r">9.624,89</td><td class="r b">3,18</td></tr>
-<tr><td>Dúplex 2do piso</td><td class="r">7.156,30</td><td class="r">0,961</td><td class="r">9.365,08</td><td class="r b">3,09</td></tr>
-<tr><td>Vivienda 1 dormitorio</td><td class="r">9.475,90</td><td class="r">0,98</td><td class="r">11.921,70</td><td class="r b">3,94</td></tr>
-<tr><td>Vivienda 2 dormitorios</td><td class="r">10.422,18</td><td class="r">0,97</td><td class="r">3.236,40</td><td class="r b">1,07</td></tr></tbody></table><p class=note>R surge de la psicrometría (ábaco). TR = R / 3024.</p><div class="ft"><div class="t main"><div class="l">Sistema</div><div class="v">Multisplit VRV LG</div></div><div class="t"><div class="l">Equipo mayor</div><div class="v">SUM · 5,42 TR</div></div><div class="t"><div class="l">R = calor a sustraer</div><div class="v">W × (Em − Ec)</div></div></div></div></body></html>
+</style></head><body><div class="card"><div class="hd"><h1>Balance térmico de verano · Vivienda</h1><span class="k">Instalaciones II · Resumen de cálculos</span></div><div><span class="tag ver">te 35 °C · ti 24 °C · HR 40 % / 50 %</span></div><table><thead><tr><th>Local</th><th class="r">Q total kcal/h</th><th class="r">FCS</th><th class="r">R kcal/h</th><th class="r">TR</th><th class="r">CAM m³/h</th><th class="r">CAE m³/h</th><th class="r">CAR m³/h</th></tr></thead><tbody>
+<tr><td>SUM</td><td class="r">10.181,40</td><td class="r">0,694</td><td class="r">16.380,47</td><td class="r b">5,42</td><td class="r">1.828,70</td><td class="r">1.050,00</td><td class="r">778,70</td></tr>
+<tr><td>Dúplex 1er piso</td><td class="r">7.801,25</td><td class="r">0,964</td><td class="r">9.624,89</td><td class="r b">3,18</td><td class="r">2.496,39</td><td class="r">499,27</td><td class="r">1.997,12</td></tr>
+<tr><td>Dúplex 2do piso</td><td class="r">7.156,30</td><td class="r">0,961</td><td class="r">9.365,08</td><td class="r b">3,09</td><td class="r">2.429,06</td><td class="r">485,81</td><td class="r">1.943,25</td></tr>
+<tr><td>Vivienda 1 dormitorio</td><td class="r">9.475,90</td><td class="r">0,98</td><td class="r">11.921,70</td><td class="r b">3,94</td><td class="r">3.278,47</td><td class="r">655,60</td><td class="r">2.622,87</td></tr>
+<tr><td>Vivienda 2 dormitorios</td><td class="r">10.422,18</td><td class="r">0,97</td><td class="r">3.236,40</td><td class="r b">1,07</td><td class="r">926,29</td><td class="r">185,30</td><td class="r">740,90</td></tr></tbody></table><p class=note>R y caudales surgen de la psicrometría (ábaco). TR = R / 3024 · CAM = W × Vec · CAE = personas × 25 m³/h (mín. 20 % del CAM) · CAR = CAM − CAE.</p><div class="ft"><div class="t main"><div class="l">Sistema</div><div class="v">Multisplit VRV LG</div></div><div class="t"><div class="l">Equipo mayor</div><div class="v">SUM · 5,42 TR</div></div><div class="t"><div class="l">R = calor a sustraer</div><div class="v">W × (Em − Ec)</div></div></div></div></body></html>
