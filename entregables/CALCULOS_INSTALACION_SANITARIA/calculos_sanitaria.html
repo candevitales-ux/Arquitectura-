@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cálculos instalación sanitaria Vivienda</title>
+<style>
+@page { size: A4; margin: 11mm 12mm 12mm 12mm; }
+:root{
+  --ink:#1b2430; --muted:#5d6b7a; --line:#d5dde6; --soft:#f2f6fa;
+  --af:#1f6fb2; --af-soft:#e6f0fa; --ac:#c4502a; --ac-soft:#fbece6;
+  --acc:#0f3b5f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:"Inter","Liberation Sans",sans-serif;font-size:8.6pt;line-height:1.32}
+.num,td.n,.mono{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:8pt}
+td.n,th.n{text-align:right;white-space:nowrap}
+
+/* encabezado */
+.head{display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:2.2pt solid var(--acc);padding-bottom:5pt;margin-bottom:8pt}
+.head h1{margin:0;font-size:17pt;letter-spacing:-.2pt;color:var(--acc);font-weight:700}
+.head .sub{color:var(--muted);font-size:8.4pt;margin-top:2pt}
+.legend{display:flex;gap:8pt;white-space:nowrap;font-size:7.6pt;color:var(--muted)}
+.chip{display:inline-block;width:8pt;height:8pt;border-radius:2pt;vertical-align:-1pt;margin-right:3pt}
+
+.part{display:flex;align-items:center;gap:7pt;margin:2pt 0 6pt}
+.part .tag{background:var(--acc);color:#fff;font-weight:700;font-size:8pt;
+  padding:2pt 7pt;border-radius:3pt;letter-spacing:.4pt}
+.part h2{margin:0;font-size:11.5pt;color:var(--acc)}
+.part .rule{flex:1;border-top:.8pt solid var(--line)}
+
+section{break-inside:avoid;margin-bottom:7pt}
+h3{margin:0 0 3pt;font-size:9.4pt;color:var(--acc);display:flex;align-items:baseline;gap:5pt}
+h3 .k{display:inline-block;min-width:15pt;font-family:"JetBrains Mono",monospace;
+  font-size:8pt;color:#fff;background:#4a6a86;border-radius:2pt;text-align:center;padding:0 3pt}
+h3 small{font-weight:400;color:var(--muted);font-size:7.8pt}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9pt}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7pt}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:7.4pt;text-transform:uppercase;letter-spacing:.3pt;color:var(--muted);
+  font-weight:600;text-align:left;border-bottom:1pt solid var(--ink);padding:2pt 4pt}
+td{padding:1.2pt 4pt;border-bottom:.5pt solid var(--line);vertical-align:top}
+tr.grp td{background:var(--soft);font-weight:600;color:var(--acc);border-bottom:.5pt solid var(--line)}
+tr.grp td .x{font-family:"JetBrains Mono",monospace;font-weight:700;color:#fff;background:#4a6a86;
+  border-radius:2pt;padding:0 3pt;margin-left:4pt;font-size:7.4pt}
+tr.sub td{font-weight:600;border-bottom:.9pt solid #9fb0c2}
+tr.tot td{font-weight:700;background:var(--acc);color:#fff;border:none}
+tr.tot td.n{color:#fff}
+.af{color:var(--af)} .ac{color:var(--ac)}
+td.af,th.af{background:var(--af-soft)} td.ac,th.ac{background:var(--ac-soft)}
+tr.tot td.af,tr.tot td.ac{background:var(--acc);color:#fff}
+.note{color:var(--muted);font-size:7.6pt;font-style:italic}
+
+/* tarjetas de resultado */
+.cards{display:grid;gap:6pt}
+.card{border:.8pt solid var(--line);border-radius:4pt;padding:5pt 7pt;background:#fff}
+.card .lbl{font-size:7.2pt;text-transform:uppercase;letter-spacing:.4pt;color:var(--muted)}
+.card .val{font-size:12pt;font-weight:700;color:var(--acc);margin-top:1pt}
+.card .val small{font-size:8pt;font-weight:500;color:var(--muted)}
+.card .f{font-family:"JetBrains Mono",monospace;font-size:7.6pt;color:var(--muted);margin-top:2pt}
+.card.hl{background:var(--acc);border-color:var(--acc)}
+.card.hl .lbl,.card.hl .f{color:#c9d8e6}.card.hl .val{color:#fff}.card.hl .val small{color:#c9d8e6}
+
+.box{border:.8pt solid var(--line);border-radius:4pt;padding:5pt 7pt}
+.eq{display:grid;grid-template-columns:auto 1fr;gap:1.5pt 8pt;align-items:baseline}
+.eq .l{color:var(--muted);font-size:7.8pt;white-space:nowrap}
+.eq .r{font-family:"JetBrains Mono",monospace;font-size:8pt}
+.res{display:inline-block;background:var(--acc);color:#fff;font-weight:700;border-radius:2.5pt;
+  padding:0 4pt;font-family:"JetBrains Mono",monospace;font-size:8pt}
+.pump{display:grid;grid-template-columns:repeat(4,auto);gap:2pt 10pt;margin-top:4pt;
+  padding-top:4pt;border-top:.6pt dashed var(--line)}
+.pump div{font-size:7.6pt;color:var(--muted)} .pump b{display:block;color:var(--ink);font-size:8.6pt}
+
+.diam{font-weight:700;color:var(--acc);white-space:nowrap}
+.diam i{font-style:normal;font-weight:500;color:var(--muted);font-size:7.4pt;margin-left:2pt}
+
+.pagebreak{break-before:page}
+.foot{margin-top:4pt;color:var(--muted);font-size:7pt;display:flex;justify-content:space-between;
+  border-top:.6pt solid var(--line);padding-top:3pt}
+</style>
+</head>
+<body>
+
+<!-- ============================ HOJA 1 ============================ -->
+<div class="head">
+  <div>
+    <h1>Cálculos instalación sanitaria Vivienda</h1>
+    <div class="sub">RTD · tanques · conexión domiciliaria · bombeo · bajadas · colector · montantes</div>
+  </div>
+  <div class="legend"><span><span class="chip" style="background:var(--af)"></span>Agua fría</span>
+    <span><span class="chip" style="background:var(--ac)"></span>Agua caliente</span></div>
+</div>
+
+<div class="part"><span class="tag">A</span><h2>Edificio de viviendas</h2><span class="rule"></span></div>
+
+<div class="grid2" style="grid-template-columns:1.25fr 1fr">
+<section>
+  <h3><span class="k">1</span>Cálculo RTD — Reserva total diaria <small>AF + AC (TAR) por nivel</small></h3>
+  <table>
+    <thead><tr><th>Nivel / unidad</th><th class="n af">AF (lts)</th><th class="n ac">AC – TAR (lts)</th></tr></thead>
+    <tbody>
+      <tr class="grp"><td colspan="3">Subsuelo</td></tr>
+      <tr><td>1 baño</td><td class="n af">250</td><td class="n ac">20</td></tr>
+
+      <tr class="grp"><td colspan="3">Planta baja</td></tr>
+      <tr><td>2 baños</td><td class="n af">500</td><td class="n ac">40</td></tr>
+      <tr><td>Cocina</td><td class="n af">250</td><td class="n ac">20</td></tr>
+
+      <tr class="grp"><td colspan="3">1° P, 3° P y 5° P <span class="x">× 3</span></td></tr>
+      <tr><td>Vivienda 4 ambientes, 2 baños, 1 toilette</td><td class="n af">725</td><td class="n ac">100</td></tr>
+      <tr><td>Vivienda 3 ambientes, 1 baño, 1 toilette</td><td class="n af">600</td><td class="n ac">80</td></tr>
+      <tr><td>Vivienda 2 ambientes, 1 baño</td><td class="n af">600</td><td class="n ac">80</td></tr>
+      <tr><td>Dúplex 3 ambientes, 1 baño, 1 toilette</td><td class="n af">600</td><td class="n ac">80</td></tr>
+      <tr class="sub"><td>Total 1° P, 3° P y 5° P</td><td class="n af">7.575</td><td class="n ac">1.020</td></tr>
+
+      <tr class="grp"><td colspan="3">2° P y 4° P <span class="x">× 2</span></td></tr>
+      <tr><td>Vivienda 4 ambientes, 2 baños, 1 toilette</td><td class="n af">725</td><td class="n ac">100</td></tr>
+      <tr><td>Vivienda 3 ambientes, 1 baño, 1 toilette</td><td class="n af">600</td><td class="n ac">80</td></tr>
+      <tr><td>Vivienda 2 ambientes, 1 baño</td><td class="n af">600</td><td class="n ac">80</td></tr>
+      <tr><td>Dúplex parte superior <span class="note">(ya calculada)</span></td><td class="n af">—</td><td class="n ac">—</td></tr>
+      <tr class="sub"><td>Total 2° P y 4° P</td><td class="n af">5.775</td><td class="n ac">520</td></tr>
+
+      <tr class="tot"><td>Subtotales</td><td class="n af">14.350</td><td class="n ac">1.620</td></tr>
+      <tr class="tot"><td>RTD total</td><td class="n" colspan="2">15.970 lts</td></tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:2pt">Agua caliente: 80 lts por unidad de vivienda + 20 lts por local excedente.</div>
+</section>
+
+<div>
+<section>
+  <h3><span class="k">2</span>Tanques <small>reparto de la RTD</small></h3>
+  <div class="cards" style="grid-template-columns:1fr 1fr">
+    <div class="card hl" style="grid-column:1/3"><div class="lbl">RTD</div><div class="val">15.970 <small>lts</small></div><div class="f">AF 14.350 + AC 1.620</div></div>
+    <div class="card"><div class="lbl">Tanque de reserva (4/5)</div><div class="val">12.800 <small>lts adoptado</small></div><div class="f">15.970 × 4/5 = 12.776<br>→ 4 tanques × 3.200 lts</div></div>
+    <div class="card"><div class="lbl">Tanque de bombeo (1/5)</div><div class="val">3.200 <small>lts adoptado</small></div><div class="f">15.970 × 1/5 = 3.194 lts</div></div>
+  </div>
+</section>
+<section>
+  <h3><span class="k">3</span>Conexión domiciliaria</h3>
+  <div class="box eq">
+    <span class="l">Gasto</span><span class="r">TB / t llenado = 3.200 / 7.200 s = 0,44 l/s</span>
+    <span class="l">Presión disp.</span><span class="r">PD = PNV + 1,70 m = 8 MCA + 1,70 = 9,70 ≈ 10 m</span>
+    <span class="l">Diámetro (tabla)</span><span class="r"><span class="res">Ø 0,019 m · 3/4"</span></span>
+  </div>
+</section>
+<section>
+  <h3><span class="k">4</span>Cañerías de aspiración e impulsión</h3>
+  <div class="box">
+    <div class="eq">
+      <span class="l">Presión manom.</span><span class="r">28,30 m + 30 % pérdidas = 36,79 m</span>
+      <span class="l">Caudal</span><span class="r">TR / t = 12.800 / 10.800 s = 1,18 l/s = 70,8 l/min</span>
+    </div>
+    <div class="pump">
+      <div>Bomba<b>Lüsqtoff</b></div><div>H máx<b>38 m</b></div><div>Q máx<b>90 l/min</b></div>
+      <div>Asp. / imp.<b>Ø 0,025 · 1"</b></div>
+    </div>
+  </div>
+</section>
+</div>
+</div>
+
+<div class="grid2">
+<section>
+  <h3><span class="k">5</span>Diámetros de bajadas <small>agua fría</small></h3>
+  <table>
+    <thead><tr><th>Bajada</th><th>Servicio</th><th class="n">Cálculo</th><th class="n">Ø</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">B1</td><td>Núcleo sanit. dúplex, baño hall y vestuario subsuelo</td><td class="n">0,53 × 5 = 2,65</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono">B2</td><td>Cocina dúplex</td><td class="n">0,44 × 3 = 1,32</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono">B3</td><td>Toilette dúplex</td><td class="n">0,53 × 3 = 1,59</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono">B4</td><td>Caldera</td><td class="n">0,36</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono">B5</td><td>Cocina SUM y cocina viv. medio</td><td class="n">0,44 × 6 = 2,64</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono">B6</td><td>Baño viv. medio</td><td class="n">0,53 × 5 = 2,65</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono">B7</td><td>Cocina viv. derecha</td><td class="n">0,44 × 5 = 2,20</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono">B8</td><td>Toilette y lavarropas viv. der. y baño SUM</td><td class="n">0,53 × 6 = 3,18</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono">B9</td><td>Baño vivienda derecha</td><td class="n">0,53 × 5 = 2,65</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:2pt">Secciones en cm² (consumo por artefacto × n° de pisos). Ø en metros.</div>
+
+  <h3 style="margin-top:6pt"><span class="k">6</span>Diámetro del colector</h3>
+  <div class="box eq">
+    <span class="l">Sección</span><span class="r">S = 3,18 + (2,65 + 1,32 + 1,59 + 0,36 + 2,64 + 2,65 + 2,20 + 2,65) / 2 = 10,80 cm²</span>
+    <span class="l">Diámetro</span><span class="r"><span class="res">Ø 0,038 m · 1 1/2"</span></span>
+  </div>
+</section>
+
+<section>
+  <h3><span class="k">7</span>Diámetros de montantes <small>agua caliente</small></h3>
+  <table>
+    <thead><tr><th>Mont.</th><th>Servicio</th><th class="n">Cálculo</th><th class="n">Ø</th></tr></thead>
+    <tbody>
+      <tr><td class="mono ac">M1</td><td>Núcleo sanit. dúplex, baño hall y vestuario subsuelo</td><td class="n">0,53 × 5 = 2,65</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono ac">M2</td><td>Cocina dúplex</td><td class="n">0,36 × 3 = 1,08</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono ac">M3</td><td>Baño medio</td><td class="n">0,44 × 5 = 2,20</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono ac">M4</td><td>Cocina SUM – cocina derecha</td><td class="n">0,44 × 6 = 2,64</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono ac">M5</td><td>Cocina medio</td><td class="n">0,36 × 5 = 1,80</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono ac">M6</td><td>Toilette dúplex</td><td class="n">0,44 × 3 = 1,32</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono ac">M7</td><td>Baño toilette viv. derecha</td><td class="n">0,44 × 5 = 2,20</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono ac">M8</td><td>Baño viv. derecha y baño SUM</td><td class="n">0,53 × 6 = 3,18</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:2pt">Secciones en cm². Ø en metros.</div>
+</section>
+</div>
+
+<!-- ============================ HOJA 2 ============================ -->
+<div class="pagebreak"></div>
+<div class="part"><span class="tag">B</span><h2>Edificio público — RTD con bombeo y tanque de reserva</h2><span class="rule"></span></div>
+
+<div class="grid2" style="grid-template-columns:1.55fr 1fr">
+<section>
+  <h3><span class="k">1</span>Consumo de agua fría por local <small>planta baja</small></h3>
+  <table>
+    <thead><tr><th>Local</th><th>Artefactos</th><th class="n">Parcial</th><th class="n">×</th><th class="n af">Total (lts)</th></tr></thead>
+    <tbody>
+      <tr><td>Baño femenino</td><td>4 inodoros + 4 lavatorios</td><td class="n">1.400</td><td class="n">2</td><td class="n af">2.800</td></tr>
+      <tr><td>Baño masculino</td><td>3 inodoros + 3 mingitorios + 3 lavatorios</td><td class="n">1.500</td><td class="n">2</td><td class="n af">3.000</td></tr>
+      <tr><td>Baño discapacitados</td><td>1 inodoro + 1 lavatorio</td><td class="n">350</td><td class="n">2</td><td class="n af">700</td></tr>
+      <tr><td>Aula</td><td>3 lavatorios</td><td class="n">300</td><td class="n">3</td><td class="n af">900</td></tr>
+      <tr><td>Sala de profesores</td><td>2 inodoros + 2 lavatorios + 2 duchas</td><td class="n">900</td><td class="n">1</td><td class="n af">900</td></tr>
+      <tr><td>Secretaría</td><td>1 inodoro + 1 lavatorio</td><td class="n">350</td><td class="n">1</td><td class="n af">350</td></tr>
+      <tr><td>Sala de máquinas</td><td>1 inodoro + 1 lavatorio + 1 ducha</td><td class="n">450</td><td class="n">1</td><td class="n af">450</td></tr>
+      <tr class="tot"><td colspan="4">Total agua fría</td><td class="n af">9.100</td></tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <h3>Dotación por artefacto <small>edificio público</small></h3>
+  <table>
+    <thead><tr><th>Artefacto</th><th class="n af">AF (lts)</th></tr></thead>
+    <tbody>
+      <tr><td>Inodoro</td><td class="n af">250</td></tr>
+      <tr><td>Mingitorio</td><td class="n af">150</td></tr>
+      <tr><td>Lavatorio</td><td class="n af">100</td></tr>
+      <tr><td>Ducha</td><td class="n af">100</td></tr>
+    </tbody>
+  </table>
+  <h3 style="margin-top:6pt"><span class="k">2</span>Agua caliente</h3>
+  <div class="box eq">
+    <span class="l">Dotación</span><span class="r">20 lts por pico</span>
+    <span class="l">PB</span><span class="r">32 picos × 20 = <span class="res">640 lts</span></span>
+  </div>
+</section>
+</div>
+
+<section>
+  <h3><span class="k">3</span>RTD y tanques</h3>
+  <div class="cards" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="card hl"><div class="lbl">RTD</div><div class="val">9.740 <small>lts</small></div><div class="f">9.100 (AF) + 640 (AC)</div></div>
+    <div class="card"><div class="lbl">Tanque de bombeo (1/5 RTD)</div><div class="val">2.000 <small>lts adoptado</small></div><div class="f">9.740 / 5 = 1.948 lts</div></div>
+    <div class="card"><div class="lbl">Tanque de reserva</div><div class="val">8.000 <small>lts adoptado</small></div><div class="f">9.740 − 2.000 = 7.740 lts</div></div>
+  </div>
+</section>
+
+<div>
+<section>
+  <h3><span class="k">4</span>Diámetros de montantes <small>agua caliente</small></h3>
+  <table>
+    <thead><tr><th>Mont.</th><th>Servicio</th><th class="n">Cálculo (cm²)</th><th class="n">Ø</th></tr></thead>
+    <tbody>
+      <tr><td class="mono ac">M1</td><td>Núcleo de baños a la derecha</td><td class="n">(0,27×2)+(0,18×17)&nbsp;= 0,72 + 4,59 = 5,31</td><td class="n diam">0,025<i>1"</i></td></tr>
+      <tr><td class="mono ac">M2</td><td>Núcleo de baños a la izquierda</td><td class="n">0,27 + (0,18×15) = 2,97</td><td class="n diam">0,019<i>3/4"</i></td></tr>
+      <tr><td class="mono ac">M3</td><td>Núcleo de baños en el centro</td><td class="n">0,27 × 3 = 0,81</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <h3><span class="k">5</span>Diámetros de bajadas <small>agua fría</small></h3>
+  <table>
+    <thead><tr><th>Bajada</th><th>Servicio</th><th class="n">Cálculo (cm²)</th><th class="n">Ø</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">B1</td><td>Núcleo baños derecha</td><td class="n">(0,36×2)+(0,27×17)&nbsp;= 0,72 + 4,59 = 5,31</td><td class="n diam">0,025<i>1"</i></td></tr>
+      <tr><td class="mono">B2</td><td>Núcleo baños izquierda</td><td class="n">0,36 + (0,27×26) = 7,38</td><td class="n diam">0,032<i>1 1/4"</i></td></tr>
+      <tr><td class="mono">B3</td><td>Núcleo medio</td><td class="n">0,36 × 3 = 1,08</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+      <tr><td class="mono">B4</td><td>Termotanque alta recuperación</td><td class="n">0,44</td><td class="n diam">0,013<i>1/2"</i></td></tr>
+    </tbody>
+  </table>
+</section>
+</div>
+
+<section>
+  <h3><span class="k">6</span>Diámetro del colector</h3>
+  <div class="box eq">
+    <span class="l">Sección</span><span class="r">S = 7,38 + (5,31 + 1,08 + 0,44) / 2 = 10,795 cm²</span>
+    <span class="l">Diámetro</span><span class="r"><span class="res">Ø 0,038 m · 1 1/2"</span></span>
+  </div>
+</section>
+
+<div class="grid2">
+<section>
+  <h3><span class="k">7</span>Conexión domiciliaria</h3>
+  <div class="box eq">
+    <span class="l">Gasto</span><span class="r">TB / t llenado = 2.000 / 7.200 s = 0,27 l/s</span>
+    <span class="l">Presión disp.</span><span class="r">PD = 8 MCA − 2,20 m = 5,80 ≈ 5 m</span>
+    <span class="l">Diámetro (tabla)</span><span class="r"><span class="res">Ø 0,013 m</span></span>
+  </div>
+</section>
+<section>
+  <h3><span class="k">8</span>Cañerías de aspiración e impulsión</h3>
+  <div class="box">
+    <div class="eq">
+      <span class="l">Presión manom.</span><span class="r">8 m + 30 % pérdidas = 10,40 m</span>
+      <span class="l">Caudal</span><span class="r">TR / t = 8.000 / 7.200 s = 1,11 l/s = 66,6 l/min</span>
+    </div>
+    <div class="pump">
+      <div>Bomba<b>Lüsqtoff CPM146</b></div><div>H máx<b>26 m</b></div><div>Q máx<b>87 l/min</b></div>
+      <div>Asp. / imp.<b>Ø 0,025 · 1"</b></div>
+    </div>
+  </div>
+</section>
+</div>
+
+</body>
+</html>
