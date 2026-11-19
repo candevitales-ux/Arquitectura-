@@ -1,7 +1,7 @@
 """Genera el esquema unifilar de tableros (SVG dentro de HTML, A4 apaisado)."""
 import sys
 
-W, H = 1400, 990
+W, H = 1400, 870
 INK = "#1d2430"
 GREY = "#5b6470"
 DASH = "#8b929b"
@@ -105,12 +105,12 @@ for x in (XA, XB, XC):
     line(x, BUS_Y, x, 300)
     fuse(x, 240, 24, 34)
     meter(x, 300)
-    line(x, 352, x, 450 if x != XC else 430)
+    line(x, 352, x, 450 if x != XC else 446)
 text(XA + 18, 262, "fusibles", 11.5)
 text(XB + 18, 262, "fusibles", 11.5)
 text(XC + 18, 262, "fusible tripolar NH", 11.5)
 
-label(XA + 34, 318, "Medidor monofásico ×18", ["viviendas · 6 por fase R · S · T"])
+label(XA + 34, 318, "Medidor monofásico ×10", ["viviendas · repartidos en R · S · T"])
 label(XB + 34, 318, "Medidor monofásico ×3", ["viviendas dúplex · 1 por fase"])
 label(XC + 34, 318, "Medidor trifásico", ["servicios generales"])
 
@@ -128,14 +128,14 @@ ground(40, 286)
 text(22, 236, "jabalina", 12, PE, 600)
 text(22, 251, "PE", 12, PE, 600)
 
-# ---- Rama A: viviendas ×18
-dashed(110, 436, 270, 300, "VIVIENDA TIPO", "una por unidad · ×18", bottom=True)
+# ---- Rama A: viviendas ×10
+dashed(110, 436, 270, 300, "VIVIENDA TIPO", "una por unidad · ×10", bottom=True)
 line(XA, 450, XA, 584)
 board(XA, 470, 80, 34, cross=True)
-label(XA + 52, 482, "TP-V · ×18", ["tablero principal", "de vivienda"], tsize=12.5)
+label(XA + 52, 482, "TP-V · ×10", ["tablero principal", "de vivienda"], tsize=12.5)
 ticks_v(XA, 544, 2)
 board(XA, 584, 80, 34)
-label(XA + 52, 596, "TS-V · ×18", ["tablero seccional", "de vivienda"], tsize=12.5)
+label(XA + 52, 596, "TS-V · ×10", ["tablero seccional", "de vivienda"], tsize=12.5)
 
 # ---- Rama B: dúplex ×3
 dashed(395, 436, 255, 300, "VIVIENDA DÚPLEX", "una por unidad · ×3", bottom=True)
@@ -152,10 +152,9 @@ line(XB, 586, XB, 634)
 
 # ---- Rama C: TP servicios generales
 ticks_v(XC, 384, 4); text(XC + 14, 388, "3F + N + PE", 11.5)
-dashed(670, 436, 705, 172, "TP-SG · TABLERO PRINCIPAL", "servicios generales")
-breaker(XC, 470)
-text(XC + 20, 474, "TM general tetrapolar + ID", 12)
-line(XC, 482, XC, 516)
+board(XC, 446, 110, 40, cross=True)
+label(XC - 68, 460, "TP-SG · Tablero principal", ["servicios generales", "TM general tetrapolar + ID"], anchor="end")
+line(XC, 486, XC, 516)
 OUT = [
     ("TS-1", ["Subsuelo"], "bipolar", "fase R", 2),
     ("TS-2", ["Planta baja"], "bipolar", "fase S", 2),
@@ -185,23 +184,9 @@ PEY = 840
 line(JX, PEY, 1388, PEY, PE, 2)
 for x in (245, 522):
     line(x, PEY, x, 736, PE, 2)
-line(1388, PEY, 1388, 520, PE, 2)
-line(1388, 520, 1375, 520, PE, 2)
+line(1388, PEY, 1388, 466, PE, 2)
+line(1388, 466, XC + 55, 466, PE, 2)
 text(700, PEY - 8, "PE · puesta a tierra (jabalina)", 12.5, PE, 600, "middle")
-
-# ---- Referencias
-LY = 890
-text(110, LY - 16, "REFERENCIAS", 12, INK, 700)
-items = []
-cx = 120
-fuse(cx + 6, LY - 2, 18, 26); text(cx + 26, LY + 15, "fusible", 11.5)
-breaker(cx + 106, LY + 11, 20); text(cx + 124, LY + 15, "interruptor termomagnético", 11.5)
-meter(cx + 300, LY - 2, 22, 26); text(cx + 320, LY + 15, "medidor", 11.5)
-board(cx + 410, LY, 44, 22, cross=True); text(cx + 440, LY + 15, "tablero principal", 11.5)
-board(cx + 570, LY, 44, 22); text(cx + 600, LY + 15, "tablero seccional / subseccional", 11.5)
-line(cx + 820, LY - 2, cx + 820, LY + 26); ticks_v(cx + 820, LY + 11, 2)
-text(cx + 834, LY + 15, "n.º de conductores activos (2 = F + N · 4 = 3F + N)", 11.5)
-text(110, LY + 56, "TP: tablero principal · TS: tablero seccional · TSS: tablero subseccional · ID: interruptor diferencial · PE: conductor de protección", 11.5)
 
 a('</svg>')
 svg = "\n".join(out)
