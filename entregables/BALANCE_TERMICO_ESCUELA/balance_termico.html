@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Balance térmico · Escuela secundaria</title>
+<style>
+@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
+:root{
+  --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
+  --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:"Inter","Liberation Sans",sans-serif;font-size:9.2pt;line-height:1.4}
+
+.cover{border-bottom:2.5pt solid var(--acc);padding-bottom:6pt;margin-bottom:10pt}
+.cover h1{margin:0;font-size:20pt;color:var(--acc);letter-spacing:-.3pt}
+.cover p{margin:3pt 0 0;color:var(--muted);font-size:9pt}
+
+.part{background:var(--acc);color:#fff;border-radius:4pt;padding:6pt 10pt;margin:0 0 12pt;
+  display:flex;align-items:baseline;gap:9pt}
+.part b{font-size:8.5pt;letter-spacing:1pt;opacity:.75}
+.part span{font-size:12.5pt;font-weight:700}
+
+section{margin:0 0 12pt;break-inside:avoid}
+h2{margin:0 0 6pt;font-size:11.5pt;color:var(--acc);display:flex;align-items:center;gap:7pt;
+  padding-bottom:3pt;border-bottom:.8pt solid var(--line)}
+h2 .n{width:17pt;height:17pt;border-radius:50%;background:var(--acc);color:#fff;font-size:8.5pt;
+  display:inline-flex;align-items:center;justify-content:center;flex:none}
+h2 small{font-weight:400;font-size:8.5pt;color:var(--muted);margin-left:auto}
+.intro{color:var(--muted);font-size:8.8pt;margin:0 0 6pt}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:7.8pt;text-transform:uppercase;letter-spacing:.4pt;color:var(--muted);font-weight:600;
+  text-align:left;padding:4pt 7pt;border-bottom:1.2pt solid var(--ink)}
+td{padding:2.7pt 7pt;border-bottom:.6pt solid var(--line);vertical-align:middle}
+.r{text-align:right;white-space:nowrap}
+td.r{font-family:"JetBrains Mono",monospace;font-size:9pt}
+th.af,td.af{background:var(--af-soft);color:var(--af)}
+th.ac,td.ac{background:var(--ac-soft);color:var(--ac)}
+tr.grp td{background:var(--soft);font-weight:700;color:var(--acc);padding-top:3.5pt;padding-bottom:3.5pt}
+.x{display:inline-block;margin-left:6pt;background:var(--acc);color:#fff;border-radius:3pt;
+  padding:0 5pt;font-size:8pt;font-family:"JetBrains Mono",monospace}
+tr.sub td{font-weight:700;border-bottom:1.2pt solid #aebccb}
+tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-top:5pt;padding-bottom:5pt}
+.code{font-family:"JetBrains Mono",monospace;font-weight:700}
+.code.af{color:var(--af)} .code.ac{color:var(--ac)}
+.d{font-weight:700;color:var(--acc)} .d i{font-style:normal;font-weight:400;color:var(--muted);margin-left:5pt}
+.note{color:var(--muted);font-size:8.3pt;font-style:italic}
+
+.calc{border:.8pt solid var(--line);border-radius:5pt;overflow:hidden}
+.step{display:grid;grid-template-columns:130pt 1fr;border-bottom:.6pt solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .k{background:var(--soft);padding:4pt 9pt;color:var(--muted);font-size:8.6pt;font-weight:600}
+.step .v{padding:4pt 10pt;font-family:"JetBrains Mono",monospace;font-size:9pt}
+.step.res .k{background:var(--acc);color:#fff}
+.step.res .v{font-weight:700;color:var(--acc);font-size:10pt}
+.step .v small{font-family:"Inter",sans-serif;color:var(--muted);font-weight:400;font-size:8.4pt;margin-left:6pt}
+
+.tanks{display:grid;grid-template-columns:repeat(3,1fr);gap:9pt}
+.t{border:.8pt solid var(--line);border-radius:5pt;padding:8pt 10pt}
+.t .l{font-size:8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}
+.t .big{font-size:16pt;font-weight:700;color:var(--acc);margin:2pt 0}
+.t .big small{font-size:9pt;font-weight:500;color:var(--muted)}
+.t .f{font-family:"JetBrains Mono",monospace;font-size:8.4pt;color:var(--muted)}
+.t.main{background:var(--acc);border-color:var(--acc)}
+.t.main .l,.t.main .f,.t.main .big small{color:#c8d7e5}.t.main .big{color:#fff}
+
+.pb{break-before:page}
+
+table.big th{font-size:6.9pt;padding:3pt 4pt;white-space:nowrap}
+table.big td{font-size:8pt;padding:2.3pt 4pt}
+table.big td:first-child{white-space:nowrap}
+table.big td.r{font-size:7.7pt}
+td.b{font-weight:700;color:var(--acc)}
+tr.tot td.r,tr.tot td.b{color:#fff}
+.step{grid-template-columns:150pt 1fr}
+.sm{font-family:"Inter",sans-serif;color:var(--muted);font-size:8.2pt}
+</style></head><body>
+
+<div class="cover">
+  <h1>Balance térmico · Escuela secundaria</h1>
+  <p>Verano (refrigeración y psicrometría) e invierno (calefacción) · 18 locales, incluidos los pasillos</p>
+</div>
+
+<div class="part"><b>PARTE A</b><span>Balance térmico de verano y psicrometría</span></div>
+
+<section>
+  <h2><span class="n">1</span>Condiciones de diseño</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Temperaturas</div><div class="v">te = 35 °C · ti = 24 °C · pasillo tp = 27 °C</div></div>
+    <div class="step"><div class="k">Saltos térmicos</div><div class="v">Δt exterior 11 °C · pasillo 3 °C · local no acond. 8 °C · local acond. 0 °C</div></div>
+    <div class="step"><div class="k">Humedad específica</div><div class="v">Me − Mi = 4,3 − 1,5 = 2,8 g/kg</div></div>
+    <div class="step"><div class="k">Personas</div><div class="v">57 kcal/h sensible · 60 kcal/h latente · aire exterior 24 m³/h por persona</div></div>
+    <div class="step"><div class="k">Iluminación y equipos</div><div class="v">20 W/m² cada uno × 0,86</div></div>
+    <div class="step"><div class="k">Mayoración</div><div class="v">+10 % al calor sensible · +5 % al calor latente</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Método de cálculo <small>ejemplo: Aula chica tipo 1 · 38 m² · 15 personas</small></h2>
+  <div class="calc">
+    <div class="step"><div class="k">Transmisión</div><div class="v">Qt = K · S · Δt <small>todos los muros</small> → 1.632,83 kcal/h</div></div>
+    <div class="step"><div class="k">Radiación solar</div><div class="v">Opacos K·S·R · vidrio S·I·C (C = 0,5) <small>fachada de mayor ganancia (NO)</small> → 2.223,46 kcal/h</div></div>
+    <div class="step"><div class="k">Aire exterior · sensible</div><div class="v">0,24 × V × 1,14 × Δt = 0,24 × 360 × 1,14 × 11 = 1.083,46 kcal/h</div></div>
+    <div class="step"><div class="k">Aire exterior · latente</div><div class="v">0,576 × V × 1,14 × ΔM = 0,576 × 360 × 1,14 × 2,8 = 661,89 kcal/h</div></div>
+    <div class="step"><div class="k">Personas</div><div class="v">15 × 57 = 855,00 sens. · 15 × 60 = 900,00 lat.</div></div>
+    <div class="step"><div class="k">Iluminación + equipos</div><div class="v">2 × (38 × 20) × 0,86 = 1.307,20 kcal/h</div></div>
+    <div class="step"><div class="k">Q sensible total</div><div class="v">(Qt + Qr + Qs aire + Qps + Qi + Qe) × 1,10 = 7.812,14 kcal/h</div></div>
+    <div class="step"><div class="k">Q latente total</div><div class="v">(Ql aire + Qpl) × 1,05 = 1.639,99 kcal/h</div></div>
+    <div class="step res"><div class="k">QT = Qs + Ql</div><div class="v">9.452,13 kcal/h <small>FCS = Qs / QT = 0,83</small></div></div>
+    <div class="step"><div class="k">Equipo</div><div class="v">TR = QT / 3024 = 3,13 · CAM = TR × 600 = 1.875 m³/h · kW = QT / 860 = 10,99</div></div>
+    <div class="step"><div class="k">Aire exterior / retorno</div><div class="v">CAE = máx (pers. × 24 ; 20 % CAM) = 375 m³/h · CAR = CAM − CAE = 1.500 m³/h</div></div>
+  </div>
+</section>
+
+<section class="pb">
+  <h2><span class="n">3</span>Ganancias de calor por local <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">Transm.</th><th class="r">Radiación</th><th class="r">Aire ext. S</th><th class="r">Aire ext. L</th><th class="r">Personas</th><th class="r">Ilum.+Eq.</th><th class="r af">Qs ×1,10</th><th class="r ac">Ql ×1,05</th><th class="r">QT</th><th class="r">FCS</th></tr></thead>
+    <tbody><tr><td>Aula chica tipo 1</td><td class="r">1.632,83</td><td class="r">2.223,46</td><td class="r">1.083,46</td><td class="r">661,89</td><td class="r">1.755,00</td><td class="r">1.307,20</td><td class="r af">7.812,14</td><td class="r ac">1.639,99</td><td class="r b">9.452,13</td><td class="r">0,83</td></tr>
+<tr><td>Aula chica tipo 2</td><td class="r">1.632,83</td><td class="r">2.223,46</td><td class="r">1.083,46</td><td class="r">661,89</td><td class="r">1.755,00</td><td class="r">1.307,20</td><td class="r af">7.812,14</td><td class="r ac">1.639,99</td><td class="r b">9.452,13</td><td class="r">0,83</td></tr>
+<tr><td>Aula 1</td><td class="r">1.387,98</td><td class="r">2.131,27</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">1.926,40</td><td class="r af">9.544,05</td><td class="r ac">2.733,31</td><td class="r b">12.277,37</td><td class="r">0,78</td></tr>
+<tr><td>Aula 2</td><td class="r">1.387,98</td><td class="r">2.131,27</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">1.926,40</td><td class="r af">9.544,05</td><td class="r ac">2.733,31</td><td class="r b">12.277,37</td><td class="r">0,78</td></tr>
+<tr><td>Aula 3</td><td class="r">1.387,98</td><td class="r">2.131,27</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">1.926,40</td><td class="r af">9.544,05</td><td class="r ac">2.733,31</td><td class="r b">12.277,37</td><td class="r">0,78</td></tr>
+<tr><td>Aula 4</td><td class="r">1.397,09</td><td class="r">2.131,27</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">1.926,40</td><td class="r af">9.554,07</td><td class="r ac">2.733,31</td><td class="r b">12.287,38</td><td class="r">0,78</td></tr>
+<tr><td>Aula 5</td><td class="r">1.387,98</td><td class="r">2.131,27</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">1.926,40</td><td class="r af">9.544,05</td><td class="r ac">2.733,31</td><td class="r b">12.277,37</td><td class="r">0,78</td></tr>
+<tr><td>Aula taller 1</td><td class="r">1.875,88</td><td class="r">2.028,60</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">2.930,88</td><td class="r af">11.072,73</td><td class="r ac">2.733,31</td><td class="r b">13.806,04</td><td class="r">0,80</td></tr>
+<tr><td>Aula taller 2</td><td class="r">813,28</td><td class="r">654,87</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">2.930,88</td><td class="r af">8.392,76</td><td class="r ac">2.733,31</td><td class="r b">11.126,07</td><td class="r">0,75</td></tr>
+<tr><td>Aula taller 3</td><td class="r">1.875,88</td><td class="r">1.738,80</td><td class="r">1.805,76</td><td class="r">1.103,16</td><td class="r">2.925,00</td><td class="r">2.930,88</td><td class="r af">10.753,95</td><td class="r ac">2.733,31</td><td class="r b">13.487,26</td><td class="r">0,80</td></tr>
+<tr><td>Sala de docentes</td><td class="r">675,70</td><td class="r">835,42</td><td class="r">577,84</td><td class="r">353,01</td><td class="r">936,00</td><td class="r">941,18</td><td class="r af">3.834,76</td><td class="r ac">874,66</td><td class="r b">4.709,42</td><td class="r">0,81</td></tr>
+<tr><td>Administración</td><td class="r">526,66</td><td class="r">835,42</td><td class="r">577,84</td><td class="r">353,01</td><td class="r">936,00</td><td class="r">941,18</td><td class="r af">3.670,81</td><td class="r ac">874,66</td><td class="r b">4.545,47</td><td class="r">0,81</td></tr>
+<tr><td>Tesorería</td><td class="r">1.291,44</td><td class="r">864,92</td><td class="r">577,84</td><td class="r">353,01</td><td class="r">936,00</td><td class="r">1.032,00</td><td class="r af">4.644,43</td><td class="r ac">874,66</td><td class="r b">5.519,09</td><td class="r">0,84</td></tr>
+<tr><td>Dirección</td><td class="r">630,48</td><td class="r">868,32</td><td class="r">288,92</td><td class="r">176,50</td><td class="r">468,00</td><td class="r">1.100,80</td><td class="r af">3.428,17</td><td class="r ac">437,33</td><td class="r b">3.865,50</td><td class="r">0,89</td></tr>
+<tr><td>Vicedirección</td><td class="r">796,08</td><td class="r">868,32</td><td class="r">288,92</td><td class="r">176,50</td><td class="r">468,00</td><td class="r">1.100,80</td><td class="r af">3.610,33</td><td class="r ac">437,33</td><td class="r b">4.047,66</td><td class="r">0,89</td></tr>
+<tr><td>Biblioteca</td><td class="r">1.881,20</td><td class="r">1.828,62</td><td class="r">1.444,61</td><td class="r">882,52</td><td class="r">2.340,00</td><td class="r">2.476,80</td><td class="r af">9.648,35</td><td class="r ac">2.186,65</td><td class="r b">11.835,00</td><td class="r">0,82</td></tr>
+<tr><td>SUM</td><td class="r">2.903,52</td><td class="r">1.490,40</td><td class="r">7.223,04</td><td class="r">4.412,62</td><td class="r">11.700,00</td><td class="r">4.220,88</td><td class="r af">23.691,63</td><td class="r ac">10.933,25</td><td class="r b">34.624,88</td><td class="r">0,68</td></tr>
+<tr><td>Pasillos</td><td class="r">21.099,55</td><td class="r">32.957,45</td><td class="r">13.132,80</td><td class="r">11.031,55</td><td class="r">29.250,00</td><td class="r">21.121,60</td><td class="r af">112.817,54</td><td class="r ac">27.333,13</td><td class="r b">140.150,67</td><td class="r">0,80</td></tr>
+<tr class="tot"><td>Total escuela</td><td class="r">44.584,34</td><td class="r">60.074,41</td><td class="r">40.724,81</td><td class="r">27.887,78</td><td class="r">73.944,00</td><td class="r">53.974,28</td><td class="r">258.920,01</td><td class="r">69.098,13</td><td class="r">328.018,17</td><td></td></tr></tbody>
+  </table>
+  <p class="note">Pasillos calculados con ti = 27 °C (Δt exterior = 8 °C).</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Equipo necesario por local</h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">Sup. (m²)</th><th class="r">Pers.</th><th class="r">QT (kcal/h)</th><th class="r">TR</th><th class="r">CAM (m³/h)</th><th class="r">CAE (m³/h)</th><th class="r">CAR (m³/h)</th><th class="r">kW</th></tr></thead>
+    <tbody><tr><td>Aula chica tipo 1</td><td class="r">38,00</td><td class="r">15</td><td class="r">9.452,13</td><td class="r b">3,13</td><td class="r">1.875</td><td class="r">375</td><td class="r">1.500</td><td class="r">10,99</td></tr>
+<tr><td>Aula chica tipo 2</td><td class="r">38,00</td><td class="r">15</td><td class="r">9.452,13</td><td class="r b">3,13</td><td class="r">1.875</td><td class="r">375</td><td class="r">1.500</td><td class="r">10,99</td></tr>
+<tr><td>Aula 1</td><td class="r">56,00</td><td class="r">25</td><td class="r">12.277,37</td><td class="r b">4,06</td><td class="r">2.436</td><td class="r">600</td><td class="r">1.836</td><td class="r">14,28</td></tr>
+<tr><td>Aula 2</td><td class="r">56,00</td><td class="r">25</td><td class="r">12.277,37</td><td class="r b">4,06</td><td class="r">2.436</td><td class="r">600</td><td class="r">1.836</td><td class="r">14,28</td></tr>
+<tr><td>Aula 3</td><td class="r">56,00</td><td class="r">25</td><td class="r">12.277,37</td><td class="r b">4,06</td><td class="r">2.436</td><td class="r">600</td><td class="r">1.836</td><td class="r">14,28</td></tr>
+<tr><td>Aula 4</td><td class="r">56,00</td><td class="r">25</td><td class="r">12.287,38</td><td class="r b">4,06</td><td class="r">2.438</td><td class="r">600</td><td class="r">1.838</td><td class="r">14,29</td></tr>
+<tr><td>Aula 5</td><td class="r">56,00</td><td class="r">25</td><td class="r">12.277,37</td><td class="r b">4,06</td><td class="r">2.436</td><td class="r">600</td><td class="r">1.836</td><td class="r">14,28</td></tr>
+<tr><td>Aula taller 1</td><td class="r">85,20</td><td class="r">25</td><td class="r">13.806,04</td><td class="r b">4,57</td><td class="r">2.739</td><td class="r">600</td><td class="r">2.139</td><td class="r">16,05</td></tr>
+<tr><td>Aula taller 2</td><td class="r">85,20</td><td class="r">25</td><td class="r">11.126,07</td><td class="r b">3,68</td><td class="r">2.208</td><td class="r">600</td><td class="r">1.608</td><td class="r">12,94</td></tr>
+<tr><td>Aula taller 3</td><td class="r">85,20</td><td class="r">25</td><td class="r">13.487,26</td><td class="r b">4,46</td><td class="r">2.676</td><td class="r">600</td><td class="r">2.076</td><td class="r">15,68</td></tr>
+<tr><td>Sala de docentes</td><td class="r">27,36</td><td class="r">8</td><td class="r">4.709,42</td><td class="r b">1,56</td><td class="r">934</td><td class="r">192</td><td class="r">742</td><td class="r">5,48</td></tr>
+<tr><td>Administración</td><td class="r">27,36</td><td class="r">8</td><td class="r">4.545,47</td><td class="r b">1,50</td><td class="r">902</td><td class="r">192</td><td class="r">710</td><td class="r">5,29</td></tr>
+<tr><td>Tesorería</td><td class="r">30,00</td><td class="r">8</td><td class="r">5.519,09</td><td class="r b">1,83</td><td class="r">1.095</td><td class="r">219</td><td class="r">876</td><td class="r">6,42</td></tr>
+<tr><td>Dirección</td><td class="r">32,00</td><td class="r">4</td><td class="r">3.865,50</td><td class="r b">1,28</td><td class="r">767</td><td class="r">153</td><td class="r">614</td><td class="r">4,49</td></tr>
+<tr><td>Vicedirección</td><td class="r">32,00</td><td class="r">4</td><td class="r">4.047,66</td><td class="r b">1,34</td><td class="r">803</td><td class="r">161</td><td class="r">642</td><td class="r">4,71</td></tr>
+<tr><td>Biblioteca</td><td class="r">72,00</td><td class="r">20</td><td class="r">11.835,00</td><td class="r b">3,91</td><td class="r">2.348</td><td class="r">480</td><td class="r">1.868</td><td class="r">13,76</td></tr>
+<tr><td>SUM</td><td class="r">122,70</td><td class="r">100</td><td class="r">34.624,88</td><td class="r b">11,45</td><td class="r">6.870</td><td class="r">2.400</td><td class="r">4.470</td><td class="r">40,26</td></tr>
+<tr><td>Pasillos</td><td class="r">614,00</td><td class="r">250</td><td class="r">140.150,67</td><td class="r b">46,35</td><td class="r">27.808</td><td class="r">6.000</td><td class="r">21.808</td><td class="r">162,97</td></tr>
+<tr class="tot"><td colspan="3">Total escuela</td><td class="r">328.018,17</td><td class="r">108,47</td><td class="r">65.083</td><td class="r">15.347</td><td class="r">49.735</td><td class="r">381,42</td></tr></tbody>
+  </table>
+</section>
+
+<div class="part pb"><b>PARTE B</b><span>Balance térmico de invierno</span></div>
+
+<section>
+  <h2><span class="n">1</span>Condiciones y método <small>ejemplo: Aula chica tipo 1 · 43,20 m² · h 3,50 m · 15 personas</small></h2>
+  <div class="calc">
+    <div class="step"><div class="k">Condiciones</div><div class="v">Δt exterior 20 °C · Δt a locales interiores 10 °C · 1 renovación/hora</div></div>
+    <div class="step"><div class="k">Coeficientes K</div><div class="v">ladrillo 2,30 · vidrio 3,50 · puerta 5,19 · piso sobre terreno 1,50</div></div>
+    <div class="step"><div class="k">Transmisión</div><div class="v">Qtr = S · K · Δt <small>muros + aberturas + piso</small> → 4.962,47 kcal/h</div></div>
+    <div class="step"><div class="k">Orientación</div><div class="v">Qor = Qtr ext. × % <small>N·NE·NO 0 % · E·O 5 % · S·SE·SO 10 %</small> → 869,40 × 10 % = 86,94</div></div>
+    <div class="step"><div class="k">Ventilación</div><div class="v">Qv = 0,3 × RH × Vol × Δt = 0,3 × 1 × 151,20 × 20 = 907,20 kcal/h</div></div>
+    <div class="step"><div class="k">Pérdidas</div><div class="v">Qtr + Qor + Qv = 5.956,61 kcal/h</div></div>
+    <div class="step"><div class="k">Ganancias</div><div class="v">Personas 15 × 55 + ilum. 40 W × 0,86 + equipos 40 W × 0,86 = 893,80 kcal/h</div></div>
+    <div class="step res"><div class="k">Calor a reponer</div><div class="v">Q = 5.956,61 − 893,80 = 5.062,81 kcal/h → 5,89 kW <small>(Q / 860) · 117,2 kcal/h·m²</small></div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Balance por local <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">Sup. m²</th><th class="r">Vol. m³</th><th class="r">Pers.</th><th class="r">Transm.</th><th class="r">Orient.</th><th class="r">Ventil.</th><th class="r ac">Pérdidas</th><th class="r af">Ganancias</th><th class="r">Q</th><th class="r">kW</th><th class="r">kcal/h·m²</th></tr></thead>
+    <tbody><tr><td>Aula chica tipo 1</td><td class="r">43,20</td><td class="r">151,20</td><td class="r">15</td><td class="r">4.962,47</td><td class="r">86,94</td><td class="r">907,20</td><td class="r ac">5.956,61</td><td class="r af">893,80</td><td class="r b">5.062,81</td><td class="r">5,89</td><td class="r">117,2</td></tr>
+<tr><td>Aula chica tipo 2</td><td class="r">43,20</td><td class="r">151,20</td><td class="r">15</td><td class="r">4.962,47</td><td class="r">0,00</td><td class="r">907,20</td><td class="r ac">5.869,67</td><td class="r af">893,80</td><td class="r b">4.975,87</td><td class="r">5,79</td><td class="r">115,2</td></tr>
+<tr><td>Aula 1</td><td class="r">56,00</td><td class="r">196,00</td><td class="r">25</td><td class="r">5.169,37</td><td class="r">0,00</td><td class="r">1.176,00</td><td class="r ac">6.345,37</td><td class="r af">1.478,20</td><td class="r b">4.867,17</td><td class="r">5,66</td><td class="r">86,9</td></tr>
+<tr><td>Aula 2</td><td class="r">56,00</td><td class="r">196,00</td><td class="r">25</td><td class="r">5.169,37</td><td class="r">0,00</td><td class="r">1.176,00</td><td class="r ac">6.345,37</td><td class="r af">1.478,20</td><td class="r b">4.867,17</td><td class="r">5,66</td><td class="r">86,9</td></tr>
+<tr><td>Aula 3</td><td class="r">56,00</td><td class="r">196,00</td><td class="r">25</td><td class="r">5.169,37</td><td class="r">0,00</td><td class="r">1.176,00</td><td class="r ac">6.345,37</td><td class="r af">1.478,20</td><td class="r b">4.867,17</td><td class="r">5,66</td><td class="r">86,9</td></tr>
+<tr><td>Aula 4</td><td class="r">56,00</td><td class="r">196,00</td><td class="r">25</td><td class="r">5.169,37</td><td class="r">0,00</td><td class="r">1.176,00</td><td class="r ac">6.345,37</td><td class="r af">1.478,20</td><td class="r b">4.867,17</td><td class="r">5,66</td><td class="r">86,9</td></tr>
+<tr><td>Aula 5</td><td class="r">56,00</td><td class="r">196,00</td><td class="r">25</td><td class="r">5.169,37</td><td class="r">0,00</td><td class="r">1.176,00</td><td class="r ac">6.345,37</td><td class="r af">1.478,20</td><td class="r b">4.867,17</td><td class="r">5,66</td><td class="r">86,9</td></tr>
+<tr><td>Aula taller 1</td><td class="r">85,20</td><td class="r">298,20</td><td class="r">25</td><td class="r">7.485,89</td><td class="r">321,09</td><td class="r">1.789,20</td><td class="r ac">9.596,18</td><td class="r af">1.478,20</td><td class="r b">8.117,98</td><td class="r">9,44</td><td class="r">95,3</td></tr>
+<tr><td>Aula taller 2</td><td class="r">85,20</td><td class="r">298,20</td><td class="r">25</td><td class="r">6.519,89</td><td class="r">127,89</td><td class="r">1.789,20</td><td class="r ac">8.436,98</td><td class="r af">1.478,20</td><td class="r b">6.958,78</td><td class="r">8,09</td><td class="r">81,7</td></tr>
+<tr><td>Aula taller 3</td><td class="r">85,20</td><td class="r">298,20</td><td class="r">25</td><td class="r">7.485,89</td><td class="r">127,89</td><td class="r">1.789,20</td><td class="r ac">9.402,98</td><td class="r af">1.478,20</td><td class="r b">7.924,78</td><td class="r">9,21</td><td class="r">93,0</td></tr>
+<tr><td>Sala de docentes</td><td class="r">27,36</td><td class="r">95,76</td><td class="r">8</td><td class="r">2.996,19</td><td class="r">64,96</td><td class="r">574,56</td><td class="r ac">3.635,71</td><td class="r af">543,20</td><td class="r b">3.092,51</td><td class="r">3,60</td><td class="r">113,0</td></tr>
+<tr><td>Administración</td><td class="r">27,36</td><td class="r">95,76</td><td class="r">8</td><td class="r">2.996,19</td><td class="r">64,96</td><td class="r">574,56</td><td class="r ac">3.635,71</td><td class="r af">543,20</td><td class="r b">3.092,51</td><td class="r">3,60</td><td class="r">113,0</td></tr>
+<tr><td>Tesorería</td><td class="r">44,64</td><td class="r">156,24</td><td class="r">8</td><td class="r">3.885,78</td><td class="r">66,30</td><td class="r">937,44</td><td class="r ac">4.889,52</td><td class="r af">543,20</td><td class="r b">4.346,32</td><td class="r">5,05</td><td class="r">97,4</td></tr>
+<tr><td>Dirección</td><td class="r">32,00</td><td class="r">112,00</td><td class="r">4</td><td class="r">3.358,37</td><td class="r">0,00</td><td class="r">672,00</td><td class="r ac">4.030,37</td><td class="r af">324,06</td><td class="r b">3.706,31</td><td class="r">4,31</td><td class="r">115,8</td></tr>
+<tr><td>Vicedirección</td><td class="r">32,00</td><td class="r">112,00</td><td class="r">4</td><td class="r">3.493,48</td><td class="r">0,00</td><td class="r">672,00</td><td class="r ac">4.165,48</td><td class="r af">324,06</td><td class="r b">3.841,42</td><td class="r">4,47</td><td class="r">120,0</td></tr>
+<tr><td>Biblioteca</td><td class="r">72,00</td><td class="r">252,00</td><td class="r">20</td><td class="r">6.906,96</td><td class="r">248,02</td><td class="r">1.512,00</td><td class="r ac">8.666,98</td><td class="r af">1.206,64</td><td class="r b">7.460,34</td><td class="r">8,67</td><td class="r">103,6</td></tr>
+<tr><td>SUM</td><td class="r">122,71</td><td class="r">368,13</td><td class="r">100</td><td class="r">9.092,68</td><td class="r">295,01</td><td class="r">2.208,78</td><td class="r ac">11.596,47</td><td class="r af">5.603,20</td><td class="r b">5.993,27</td><td class="r">6,97</td><td class="r">48,8</td></tr>
+<tr><td>Pasillos</td><td class="r">613,97</td><td class="r">1.841,91</td><td class="r">250</td><td class="r">47.615,67</td><td class="r">874,20</td><td class="r">11.051,46</td><td class="r ac">59.541,33</td><td class="r af">14.266,00</td><td class="r b">45.275,33</td><td class="r">52,65</td><td class="r">73,7</td></tr>
+<tr class="tot"><td colspan="4">Total escuela</td><td class="r">137.608,78</td><td class="r">2.277,26</td><td class="r">31.264,80</td><td class="r">171.150,84</td><td class="r">36.966,76</td><td class="r">134.184,08</td><td class="r">156,03</td><td></td></tr></tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Resumen general</h2>
+  <div class="tanks">
+    <div class="t main"><div class="l">Verano · refrigeración</div><div class="big">108,47 <small>TR</small></div><div class="f">QT 328.018,17 kcal/h · 381,42 kW<br>CAM 65.083 m³/h</div></div>
+    <div class="t"><div class="l">Invierno · calefacción</div><div class="big">156,03 <small>kW</small></div><div class="f">Q 134.184,08 kcal/h</div></div>
+    <div class="t"><div class="l">Locales calculados</div><div class="big">18 <small>locales</small></div><div class="f">Invierno: pérdidas 171.150,84<br>ganancias 36.966,76 kcal/h</div></div>
+  </div>
+</section>
+</body></html>
