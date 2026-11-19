@@ -220,8 +220,32 @@
 </ul>
 <p>El foso es para que entren los amortiguadores y para que la cabina tenga lugar si se pasa del nivel de abajo. La última altura es para que la cabina tenga lugar arriba si se pasa del último piso, y para proteger al técnico que trabaja sobre el techo de la cabina.</p>
 
-<h3>19. Alimentación eléctrica del ascensor</h3>
-<p>El ascensor se alimenta desde el <b>TS-7 (Ascensores)</b>, que sale del tablero principal de servicios generales con una línea <b>tetrapolar (3F + N + PE)</b>. Es trifásico porque el motor de la M73 es trifásico de 380 V. En la sala de máquinas, esa línea llega al tablero de maniobra del ascensor, que tiene su propio interruptor y el variador VVVF. La iluminación de la sala de máquinas sale del TS-3 (Azotea), así que hay luz en la sala aunque se corte el ascensor para hacerle mantenimiento.</p>
+<h3>19. Tablero de maniobra: CF Control VVF</h3>
+<p>El tablero de maniobra es el “cerebro” del ascensor: recibe los llamados de los palieres y de la cabina, decide a qué piso ir, comanda el motor y controla todas las seguridades. Elegimos el <b>Control VVF para sala de máquinas de CF Control</b>, una empresa argentina. Va en la sala de máquinas de la azotea, al lado de la M73.</p>
+<figure>
+  <img src="img/control_foto.jpg" alt="Tablero de maniobra CF Control VVF" style="max-height:95mm">
+  <figcaption>Tablero de maniobra Control VVF para sala de máquinas (CF Control).</figcaption>
+</figure>
+<p>Adentro del gabinete se ven sus partes principales:</p>
+<ul>
+  <li><b>Variador de frecuencia</b> (a la izquierda): alimenta el motor y le cambia la frecuencia para que arranque y frene suave. Es el VVVF del que hablamos en la máquina. Trabaja con control vectorial, con o sin encoder.</li>
+  <li><b>Contactores</b> (abajo a la izquierda): conectan y desconectan el motor. El tablero detecta si alguno queda trabado.</li>
+  <li><b>Protecciones y borneras</b> (arriba a la derecha): las termomagnéticas de los circuitos de comando y las borneras donde llegan los cables del hueco y de la cabina.</li>
+  <li><b>Placa de control</b> (en el centro a la derecha): es la que procesa los llamados y maneja la maniobra. Tiene un display para ver en qué piso está la cabina y los códigos de error.</li>
+  <li><b>Placa de comunicación</b> (abajo a la derecha): recibe los llamados por el bus CF-CAN.</li>
+</ul>
+<p>Lo elegimos por estas razones:</p>
+<ul>
+  <li>Es el modelo de la marca pensado para <b>ascensores con sala de máquinas</b> y sirve para <b>motores asincrónicos con reductor</b>, como la M73. Los otros modelos (MRL) son para ascensores sin sala de máquinas con motor sin reductor, y el hidráulico es para otro sistema.</li>
+  <li>Trae el <b>variador de frecuencia</b> incorporado, así que con un solo tablero tenemos la maniobra y el control del motor.</li>
+  <li>Tiene <b>circuitos de seguridad redundantes</b>, detección de contactores trabados y protección del motor por PTC (un sensor de temperatura en el bobinado).</li>
+  <li>Se le puede agregar <b>rescate automático con apertura de puerta</b>: si se corta la luz, lleva la cabina al piso más cercano y abre la puerta, así nadie queda encerrado.</li>
+  <li>Usa el <b>bus CF-CAN</b>: los llamados de todos los pisos viajan por solo dos cables, en vez de un cable por cada botón. Con 8 paradas eso ahorra mucho cableado en el hueco.</li>
+  <li>El fabricante declara que cumple las normas IRAM 3681-10, NM 207 y EN 81, y que está registrado en CABA.</li>
+</ul>
+
+<h3>20. Alimentación eléctrica del ascensor</h3>
+<p>El ascensor se alimenta desde el <b>TS-7 (Ascensores)</b>, que sale del tablero principal de servicios generales con una línea <b>tetrapolar (3F + N + PE)</b>. Es trifásico porque el motor de la M73 es trifásico de 380 V. En la sala de máquinas, esa línea llega al tablero de maniobra CF Control, que tiene su propio interruptor y el variador VVVF. La iluminación de la sala de máquinas sale del TS-3 (Azotea), así que hay luz en la sala aunque se corte el ascensor para hacerle mantenimiento.</p>
 <p>Al estar en servicios generales, el consumo del ascensor lo mide el medidor trifásico y lo paga el consorcio.</p>
 
 </body>
