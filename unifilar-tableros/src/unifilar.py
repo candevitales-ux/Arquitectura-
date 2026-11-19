@@ -158,8 +158,8 @@ line(XC, 486, XC, 516)
 OUT = [
     ("TS-1", ["Subsuelo"], "bipolar", "fase R", 2),
     ("TS-2", ["Planta baja"], "bipolar", "fase S", 2),
-    ("TS-3", ["SUM"], "bipolar", "fase T", 2),
-    ("TS-4", ["Azotea"], "bipolar", "fase R", 2),
+    ("TS-3", ["Azotea"], "bipolar", "fase T", 2),
+    ("TS-4", ["SUM"], "bipolar", "fase R", 2),
     ("TS-5", ["Bomba", "cloacal"], "tetrapolar", "R · S · T", 4),
     ("TS-6", ["Bombeo", "de agua"], "tetrapolar", "R · S · T", 4),
     ("TS-7", ["Ascensores"], "tetrapolar", "R · S · T", 4),
