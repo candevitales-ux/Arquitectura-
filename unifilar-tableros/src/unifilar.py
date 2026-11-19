@@ -159,13 +159,14 @@ OUT = [
     ("TS-1", ["Subsuelo"], "bipolar", "fase R", 2),
     ("TS-2", ["Planta baja"], "bipolar", "fase S", 2),
     ("TS-3", ["SUM"], "bipolar", "fase T", 2),
-    ("TS-4", ["Bomba", "cloacal"], "tetrapolar", "R · S · T", 4),
-    ("TS-5", ["Bombeo", "de agua"], "tetrapolar", "R · S · T", 4),
-    ("TS-6", ["Ascensores"], "tetrapolar", "R · S · T", 4),
-    ("TS-7", ["Caldera"], "bipolar", "fase R", 2),
-    ("TS-8", ["Termotanque"], "bipolar", "fase S", 2),
+    ("TS-4", ["Azotea"], "bipolar", "fase R", 2),
+    ("TS-5", ["Bomba", "cloacal"], "tetrapolar", "R · S · T", 4),
+    ("TS-6", ["Bombeo", "de agua"], "tetrapolar", "R · S · T", 4),
+    ("TS-7", ["Ascensores"], "tetrapolar", "R · S · T", 4),
+    ("TS-8", ["Caldera"], "bipolar", "fase S", 2),
+    ("TS-9", ["Termo-", "tanque"], "bipolar", "fase T", 2),
 ]
-x0, dx = 716, 88
+x0, dx = 714, 78
 xs = [x0 + i * dx for i in range(len(OUT))]
 a(f'<line x1="{xs[0]}" y1="516" x2="{xs[-1]}" y2="516" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>')
 for x, (name, desc, pol, ph, n) in zip(xs, OUT):
@@ -174,7 +175,7 @@ for x, (name, desc, pol, ph, n) in zip(xs, OUT):
     text(x + 4, 572, pol, 11, GREY)
     text(x + 4, 586, ph, 11, RED, 500)
     ticks_v(x, 630, n)
-    board(x, 660, 70, 38)
+    board(x, 660, 64, 38)
     text(x, 718, name, 13.5, INK, 600, "middle")
     for j, d in enumerate(desc):
         text(x, 734 + j * 14, d, 11.5, GREY, 400, "middle")
