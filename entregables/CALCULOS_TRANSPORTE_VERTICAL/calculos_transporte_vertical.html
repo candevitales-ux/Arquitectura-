@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cálculos transporte vertical Vivienda</title>
+<style>
+@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
+:root{
+  --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
+  --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:"Inter","Liberation Sans",sans-serif;font-size:9.2pt;line-height:1.4}
+
+.cover{border-bottom:2.5pt solid var(--acc);padding-bottom:6pt;margin-bottom:10pt}
+.cover h1{margin:0;font-size:20pt;color:var(--acc);letter-spacing:-.3pt}
+.cover p{margin:3pt 0 0;color:var(--muted);font-size:9pt}
+
+.part{background:var(--acc);color:#fff;border-radius:4pt;padding:6pt 10pt;margin:0 0 12pt;
+  display:flex;align-items:baseline;gap:9pt}
+.part b{font-size:8.5pt;letter-spacing:1pt;opacity:.75}
+.part span{font-size:12.5pt;font-weight:700}
+
+section{margin:0 0 12pt;break-inside:avoid}
+h2{margin:0 0 6pt;font-size:11.5pt;color:var(--acc);display:flex;align-items:center;gap:7pt;
+  padding-bottom:3pt;border-bottom:.8pt solid var(--line)}
+h2 .n{width:17pt;height:17pt;border-radius:50%;background:var(--acc);color:#fff;font-size:8.5pt;
+  display:inline-flex;align-items:center;justify-content:center;flex:none}
+h2 small{font-weight:400;font-size:8.5pt;color:var(--muted);margin-left:auto}
+.intro{color:var(--muted);font-size:8.8pt;margin:0 0 6pt}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:7.8pt;text-transform:uppercase;letter-spacing:.4pt;color:var(--muted);font-weight:600;
+  text-align:left;padding:4pt 7pt;border-bottom:1.2pt solid var(--ink)}
+td{padding:2.7pt 7pt;border-bottom:.6pt solid var(--line);vertical-align:middle}
+.r{text-align:right;white-space:nowrap}
+td.r{font-family:"JetBrains Mono",monospace;font-size:9pt}
+th.af,td.af{background:var(--af-soft);color:var(--af)}
+th.ac,td.ac{background:var(--ac-soft);color:var(--ac)}
+tr.grp td{background:var(--soft);font-weight:700;color:var(--acc);padding-top:3.5pt;padding-bottom:3.5pt}
+.x{display:inline-block;margin-left:6pt;background:var(--acc);color:#fff;border-radius:3pt;
+  padding:0 5pt;font-size:8pt;font-family:"JetBrains Mono",monospace}
+tr.sub td{font-weight:700;border-bottom:1.2pt solid #aebccb}
+tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-top:5pt;padding-bottom:5pt}
+.code{font-family:"JetBrains Mono",monospace;font-weight:700}
+.code.af{color:var(--af)} .code.ac{color:var(--ac)}
+.d{font-weight:700;color:var(--acc)} .d i{font-style:normal;font-weight:400;color:var(--muted);margin-left:5pt}
+.note{color:var(--muted);font-size:8.3pt;font-style:italic}
+
+.calc{border:.8pt solid var(--line);border-radius:5pt;overflow:hidden}
+.step{display:grid;grid-template-columns:110pt 1fr;border-bottom:.6pt solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .k{background:var(--soft);padding:4pt 9pt;color:var(--muted);font-size:8.6pt;font-weight:600}
+.step .v{padding:4pt 10pt;font-family:"JetBrains Mono",monospace;font-size:9pt}
+.step.res .k{background:var(--acc);color:#fff}
+.step.res .v{font-weight:700;color:var(--acc);font-size:10pt}
+.step .v small{font-family:"Inter",sans-serif;color:var(--muted);font-weight:400;font-size:8.4pt;margin-left:6pt}
+
+.tanks{display:grid;grid-template-columns:repeat(3,1fr);gap:9pt}
+.t{border:.8pt solid var(--line);border-radius:5pt;padding:8pt 10pt}
+.t .l{font-size:8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}
+.t .big{font-size:16pt;font-weight:700;color:var(--acc);margin:2pt 0}
+.t .big small{font-size:9pt;font-weight:500;color:var(--muted)}
+.t .f{font-family:"JetBrains Mono",monospace;font-size:8.4pt;color:var(--muted)}
+.t.main{background:var(--acc);border-color:var(--acc)}
+.t.main .l,.t.main .f,.t.main .big small{color:#c8d7e5}.t.main .big{color:#fff}
+
+.pb{break-before:page}
+.m{font-family:"JetBrains Mono",monospace;font-size:9pt}
+.d{font-weight:700;color:var(--acc);white-space:nowrap}
+.g45 .step{grid-template-columns:62pt 1fr}
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>CÁLCULOS TRANSPORTE VERTICAL VIVIENDA</h1>
+  <p>Población · Capacidad de transporte · Tiempo total de viaje · Cantidad de ascensores · Verificación de intervalo</p>
+</div>
+
+<div class="tanks" style="margin-bottom:14pt">
+  <div class="t"><div class="l">Edificio</div><div class="big">7 <small>pisos</small></div><div class="f">313 m² por planta · recorrido 15 m</div></div>
+  <div class="t"><div class="l">Ascensor adoptado</div><div class="big">450 <small>kg</small></div><div class="f">6 pasajeros × 75 kg · Vn 0,70 m/s</div></div>
+  <div class="t main"><div class="l">Resultado</div><div class="big">1 <small>ascensor</small></div><div class="f">Intervalo I = 99,71 s ✔</div></div>
+</div>
+
+<section>
+  <h2><span class="n">1</span>Población y capacidad de transporte necesaria</h2>
+  <div class="calc">
+    <div class="step"><div class="k">a) Personas totales</div><div class="v">Pb = Sup × N° pisos / coef. ocupacional<br>= 313 m² × 7 pisos / 12 m² por persona = 182,6</div></div>
+    <div class="step res"><div class="k">Población</div><div class="v">Pb = 183 personas</div></div>
+    <div class="step"><div class="k">b) Capacidad nec.</div><div class="v">Nts = a (%) × Pb<br>= 10 % × 183 personas = 18,3</div></div>
+    <div class="step res"><div class="k">Nts</div><div class="v">19 pasajeros / 5 min</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Tiempo total de viaje (Tt)</h2>
+  <p class="intro">Datos del ascensor: velocidad nominal Vn = 0,70 m/s · carga nominal Cn = 6 × 75 kg = 450 kg · recorrido R = 15 m.</p>
+  <table>
+    <thead><tr><th style="width:24%">Componente</th><th>Fórmula y reemplazo</th><th class="r">Resultado</th></tr></thead>
+    <tbody>
+      <tr><td><b>a)</b> Tiempo de recorrido</td><td class="m">TR = 2 × R / Vn = 2 × 15 m / 0,70 m/s</td><td class="r d">42,85 s</td></tr>
+      <tr><td><b>b)</b> Paradas probables</td><td>Por tabla: 6 personas y 7 pisos</td><td class="r d">Pn = 4,99</td></tr>
+      <tr><td><b>c)</b> Apertura y cierre</td><td>Puertas automáticas · por tabla</td><td class="r d">Tp = 4 s</td></tr>
+      <tr><td><b>d)</b> Aceleración y frenado</td><td class="m">Ta = K × Vn = 1,1 s²/m × 0,70 m/s</td><td class="r d">0,77 s</td></tr>
+      <tr><td><b>e)</b> Entrada y salida</td><td class="m">Ts = N° pasajeros × 4 s = 6 × 4 s</td><td class="r d">24 s</td></tr>
+    </tbody>
+  </table>
+  <div style="height:8pt"></div>
+  <div class="calc">
+    <div class="step"><div class="k">f) Tiempo total</div><div class="v">Tt = 1,1 × [TR + Pn × (Tp + Ta) + Ts]<br>= 1,1 × [42,85 + 4,99 × (4 + 0,77) + 24]</div></div>
+    <div class="step res"><div class="k">Tt</div><div class="v">99,71 s</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Capacidad de transporte de un ascensor en 5 minutos</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Fórmula</div><div class="v">N15 = N° pasajeros × 300 s / Tt<br>= 6 pasajeros × 300 s / 99,71 s = 18,05</div></div>
+    <div class="step res"><div class="k">N15</div><div class="v">19 pasajeros / 5 min por ascensor</div></div>
+  </div>
+</section>
+
+<div class="g45" style="display:grid;grid-template-columns:1fr 1.2fr;gap:12pt">
+<section>
+  <h2><span class="n">4</span>Número de ascensores necesarios</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Fórmula</div><div class="v">NA = Nts / N15<br>= 19 / 19</div></div>
+    <div class="step res"><div class="k">NA</div><div class="v">1 ascensor</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">5</span>Verificación de intervalo</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Fórmula</div><div class="v">I = Tt / NA<br>= 99,71 s / 1 = 99,71 s</div></div>
+    <div class="step"><div class="k">Condición</div><div class="v">40 s &lt; 99,71 s &lt; 120 s</div></div>
+    <div class="step res"><div class="k">Resultado</div><div class="v">Verifica ✔</div></div>
+  </div>
+</section>
+</div>
+
+</body>
+</html>
