@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Balance térmico y psicrometría · Vivienda</title>
+<style>
+@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
+:root{
+  --ink:#1d2733; --muted:#6a7787; --line:#dfe5ec; --soft:#f4f7fa;
+  --acc:#123f63; --af:#1f6fb2; --af-soft:#eaf2fb; --ac:#c4502a; --ac-soft:#fcefe9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:"Inter","Liberation Sans",sans-serif;font-size:9.2pt;line-height:1.4}
+
+.cover{border-bottom:2.5pt solid var(--acc);padding-bottom:6pt;margin-bottom:10pt}
+.cover h1{margin:0;font-size:20pt;color:var(--acc);letter-spacing:-.3pt}
+.cover p{margin:3pt 0 0;color:var(--muted);font-size:9pt}
+
+.part{background:var(--acc);color:#fff;border-radius:4pt;padding:6pt 10pt;margin:0 0 12pt;
+  display:flex;align-items:baseline;gap:9pt}
+.part b{font-size:8.5pt;letter-spacing:1pt;opacity:.75}
+.part span{font-size:12.5pt;font-weight:700}
+
+section{margin:0 0 12pt;break-inside:avoid}
+h2{margin:0 0 6pt;font-size:11.5pt;color:var(--acc);display:flex;align-items:center;gap:7pt;
+  padding-bottom:3pt;border-bottom:.8pt solid var(--line)}
+h2 .n{width:17pt;height:17pt;border-radius:50%;background:var(--acc);color:#fff;font-size:8.5pt;
+  display:inline-flex;align-items:center;justify-content:center;flex:none}
+h2 small{font-weight:400;font-size:8.5pt;color:var(--muted);margin-left:auto}
+.intro{color:var(--muted);font-size:8.8pt;margin:0 0 6pt}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:7.8pt;text-transform:uppercase;letter-spacing:.4pt;color:var(--muted);font-weight:600;
+  text-align:left;padding:4pt 7pt;border-bottom:1.2pt solid var(--ink)}
+td{padding:2.7pt 7pt;border-bottom:.6pt solid var(--line);vertical-align:middle}
+.r{text-align:right;white-space:nowrap}
+td.r{font-family:"JetBrains Mono",monospace;font-size:9pt}
+th.af,td.af{background:var(--af-soft);color:var(--af)}
+th.ac,td.ac{background:var(--ac-soft);color:var(--ac)}
+tr.grp td{background:var(--soft);font-weight:700;color:var(--acc);padding-top:3.5pt;padding-bottom:3.5pt}
+.x{display:inline-block;margin-left:6pt;background:var(--acc);color:#fff;border-radius:3pt;
+  padding:0 5pt;font-size:8pt;font-family:"JetBrains Mono",monospace}
+tr.sub td{font-weight:700;border-bottom:1.2pt solid #aebccb}
+tr.tot td{background:var(--acc);color:#fff;font-weight:700;border:none;padding-top:5pt;padding-bottom:5pt}
+.code{font-family:"JetBrains Mono",monospace;font-weight:700}
+.code.af{color:var(--af)} .code.ac{color:var(--ac)}
+.d{font-weight:700;color:var(--acc)} .d i{font-style:normal;font-weight:400;color:var(--muted);margin-left:5pt}
+.note{color:var(--muted);font-size:8.3pt;font-style:italic}
+
+.calc{border:.8pt solid var(--line);border-radius:5pt;overflow:hidden}
+.step{display:grid;grid-template-columns:130pt 1fr;border-bottom:.6pt solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .k{background:var(--soft);padding:4pt 9pt;color:var(--muted);font-size:8.6pt;font-weight:600}
+.step .v{padding:4pt 10pt;font-family:"JetBrains Mono",monospace;font-size:9pt}
+.step.res .k{background:var(--acc);color:#fff}
+.step.res .v{font-weight:700;color:var(--acc);font-size:10pt}
+.step .v small{font-family:"Inter",sans-serif;color:var(--muted);font-weight:400;font-size:8.4pt;margin-left:6pt}
+
+.tanks{display:grid;grid-template-columns:repeat(3,1fr);gap:9pt}
+.t{border:.8pt solid var(--line);border-radius:5pt;padding:8pt 10pt}
+.t .l{font-size:8pt;text-transform:uppercase;letter-spacing:.5pt;color:var(--muted)}
+.t .big{font-size:16pt;font-weight:700;color:var(--acc);margin:2pt 0}
+.t .big small{font-size:9pt;font-weight:500;color:var(--muted)}
+.t .f{font-family:"JetBrains Mono",monospace;font-size:8.4pt;color:var(--muted)}
+.t.main{background:var(--acc);border-color:var(--acc)}
+.t.main .l,.t.main .f,.t.main .big small{color:#c8d7e5}.t.main .big{color:#fff}
+
+.pb{break-before:page}
+
+.m{font-family:"JetBrains Mono",monospace;font-size:8.4pt}
+table.big th{font-size:6.8pt;padding:3pt 4pt;white-space:nowrap}
+table.big td{font-size:8pt;padding:2.6pt 4pt}
+table.big td.r{font-size:7.7pt}
+table.big td:first-child{white-space:nowrap}
+td.b{font-weight:700;color:var(--acc)}
+tr.tot td.r,tr.tot td.b{color:#fff}
+.step{grid-template-columns:150pt 1fr}
+section.flow{break-inside:auto}
+section.flow table,section.flow .calc{break-inside:avoid}
+h2{break-after:avoid}
+.sm{font-family:"Inter",sans-serif;color:var(--muted);font-size:8.2pt}
+.steps{counter-reset:s;display:grid;grid-template-columns:1fr 1fr;gap:4pt 14pt;margin:0;padding:0;list-style:none}
+.steps li{font-size:8.5pt;padding:3pt 0 3pt 20pt;position:relative;border-bottom:.5pt solid var(--line)}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:3pt;width:14pt;height:14pt;border-radius:50%;background:var(--acc);color:#fff;font-size:7pt;display:flex;align-items:center;justify-content:center}
+.steps b{color:var(--acc)}
+.ficha{border:.8pt solid var(--line);border-radius:5pt;margin:0 0 9pt;break-inside:avoid;overflow:hidden}
+.fh{background:var(--soft);padding:4pt 8pt;display:flex;align-items:baseline;gap:7pt;border-bottom:.6pt solid var(--line)}
+.fh b{font-size:11pt;color:var(--acc)}
+.fn{font-family:"JetBrains Mono",monospace;font-size:8pt;background:var(--acc);color:#fff;border-radius:3pt;padding:0 4pt}
+.fs{margin-left:auto;color:var(--muted);font-size:8pt}
+.fb1{display:grid;grid-template-columns:auto 62mm 1fr;gap:8pt;padding:6pt 8pt 2pt;align-items:start}
+.fb2{display:grid;grid-template-columns:1fr 1.15fr;gap:8pt;padding:4pt 8pt 7pt}
+.pl img{height:62mm;max-width:46mm;object-fit:contain;display:block;border:.6pt solid var(--line);border-radius:3pt;background:#fff}
+.ab img{width:100%;display:block;border:.6pt solid var(--line);border-radius:3pt}
+.ft{width:100%;border-collapse:collapse}
+.ft td{font-size:7.6pt;padding:1.3pt 3pt;border-bottom:.5pt solid var(--line)}
+.ft td.r{font-size:7.3pt}
+.ft td:first-child{white-space:nowrap}
+.ft th{font-size:6.5pt;padding:2pt 3pt;white-space:nowrap}
+.ft tr.hl td{font-weight:700;color:var(--acc);background:var(--soft)}
+.ct{font-size:7.4pt;font-weight:700;text-transform:uppercase;letter-spacing:.5pt;padding:2pt 4pt;border-radius:2pt;margin-bottom:2pt}
+.ct.ver{background:var(--af-soft);color:var(--af)} .ct.inv{background:var(--ac-soft);color:var(--ac)} .ct.psi{background:var(--soft);color:var(--acc)}
+.chart{display:grid;grid-template-columns:1fr 1fr;gap:12pt;align-items:start}
+.chart img{width:100%;border:.6pt solid var(--line);border-radius:4pt}
+</style></head><body>
+
+<div class="cover">
+  <h1>Balance térmico y psicrometría · Vivienda</h1>
+  <p>Verano (refrigeración) · Psicrometría · Invierno (calefacción) · SUM, dúplex y viviendas de 1 y 2 dormitorios</p>
+</div>
+
+<div class="part"><b>PARTE A</b><span>Balance térmico de verano</span></div>
+
+<section>
+  <h2><span class="n">1</span>Condiciones de diseño y datos</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Temperaturas</div><div class="v">te = 35 °C (HR 40 %) · ti = 24 °C (HR 50 %)</div></div>
+    <div class="step"><div class="k">Saltos térmicos (Δt)</div><div class="v">muro exterior 11 °C · muro interior 8 °C</div></div>
+    <div class="step"><div class="k">Humedad específica</div><div class="v">Me − Mi = 2,8 g/kg</div></div>
+    <div class="step"><div class="k">Personas</div><div class="v">57 kcal/h sensible · 60 kcal/h latente · aire exterior 25 m³/h por persona (50 m³/h en SUM)</div></div>
+    <div class="step"><div class="k">Iluminación y equipos</div><div class="v">20 W/m² cada uno · 1 W = 0,86 kcal/h</div></div>
+    <div class="step"><div class="k">Mayoración</div><div class="v">+10 % al calor sensible · +5 % al calor latente</div></div>
+    <div class="step"><div class="k">Equipos adoptados</div><div class="v">Sistema VRV LG · evaporadoras de pared tipo split STANDAR · condensadoras LG A5UW30GFA2</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Coeficientes utilizados</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12pt">
+  <table>
+    <thead><tr><th>Elemento</th><th class="r">K (kcal/h·m²·°C)</th></tr></thead>
+    <tbody>
+      <tr><td>Ladrillo común 15 cm</td><td class="r">2,30</td></tr>
+      <tr><td>Vidrio sin protección</td><td class="r">5,00</td></tr>
+      <tr><td>Carpintería de hierro</td><td class="r">5,19</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th>Constante</th><th class="r">Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Calor específico del aire (Ce)</td><td class="r">0,24 kcal/kg·°C</td></tr>
+      <tr><td>Calor latente de vaporización (L)</td><td class="r">0,576 kcal/g</td></tr>
+      <tr><td>Peso específico del aire (Pe)</td><td class="r">1,14 kg/m³</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">R: tablas 2 y 3 · I: tabla de radiación a través del vidrio · factores de ocupación y actividad: tablas 5 y 6.</p>
+</section>
+
+<section class="flow">
+  <h2><span class="n">3</span>Ejemplo resuelto · Dúplex 1er piso <small>Sureste · 47 m² · 141 m³ · 4 personas</small></h2>
+  <table>
+    <thead><tr><th>Muro</th><th>Elemento</th><th>K × S × Δt</th><th class="r">Qt (kcal/h)</th></tr></thead>
+    <tbody><tr><td class="code">EXT</td><td>Ladrillo común 15 cm</td><td class="m">2,30 × 23,88 × 11</td><td class="r">604,16</td></tr><tr><td class="code">EXT</td><td>Vidrio sin protección</td><td class="m">5,00 × 4,80 × 11</td><td class="r">264,00</td></tr><tr><td class="code">EXT</td><td>Carpintería de hierro</td><td class="m">5,19 × 1,32 × 11</td><td class="r">75,36</td></tr><tr><td class="code">INT</td><td>Ladrillo común 15 cm</td><td class="m">2,30 × 30,00 × 8</td><td class="r">345,00</td></tr><tr class="tot"><td colspan="3">Qt = K · S · Δt · transmisión total</td><td class="r">1.288,52</td></tr></tbody>
+  </table>
+  <div style="height:7pt"></div>
+  <table>
+    <thead><tr><th>Radiación (muro exterior)</th><th>Opacos K·S·R · vidrio K·S·I</th><th class="r">Qr (kcal/h)</th></tr></thead>
+    <tbody><tr><td>Ladrillo común 15 cm</td><td class="m">2,30 × 23,88 × 16</td><td class="r">878,80</td></tr><tr><td>Vidrio sin protección</td><td class="m">5,00 × 4,80 × 110</td><td class="r">2.640,00</td></tr><tr><td>Carpintería de hierro</td><td class="m">5,19 × 1,32 × 16</td><td class="r">109,61</td></tr><tr class="tot"><td colspan="2">Qr total (R = 16 · I = 110)</td><td class="r">3.628,41</td></tr></tbody>
+  </table>
+  <div style="height:7pt"></div>
+  <div class="calc">
+    <div class="step"><div class="k">Aire exterior</div><div class="v">V = 12 × 4 / 47 × 25 = 25,53 m³/h</div></div>
+    <div class="step"><div class="k">Aire ext. · sensible</div><div class="v">Qs = 0,24 × 25,53 × 1,14 × 11 = 76,86 kcal/h</div></div>
+    <div class="step"><div class="k">Aire ext. · latente</div><div class="v">Ql = 0,576 × 25,53 × 1,14 × 2,8 = 46,86 kcal/h</div></div>
+    <div class="step"><div class="k">Personas</div><div class="v">4 × 57 = 228 sensible · 4 × 60 = 240 latente</div></div>
+    <div class="step"><div class="k">Iluminación · equipos</div><div class="v">(47 × 20) × 0,86 = 808,40 + 808,40 kcal/h</div></div>
+    <div class="step"><div class="k">Q sensible total</div><div class="v">(1.288,52 + 3.628,41 + 76,86 + 228 + 808,40 + 808,40) + 10 % = 7.522,45</div></div>
+    <div class="step"><div class="k">Q latente total</div><div class="v">(46,86 + 240) + 5 % = 278,80</div></div>
+    <div class="step res"><div class="k">Q total = Qs + Ql</div><div class="v">7.801,25 kcal/h</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Ganancias de calor por local <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th>Orient.</th><th class="r">Sup. m²</th><th class="r">Pers.</th><th class="r">Transm.</th><th class="r">Radiación</th><th class="r">Aire ext. S</th><th class="r">Personas S</th><th class="r">Ilum.+Eq.</th><th class="r af">Qs +10 %</th><th class="r ac">Ql +5 %</th><th class="r">Q total</th></tr></thead>
+    <tbody><tr><td>SUM · planta baja</td><td>Noroeste</td><td class="r">43,40</td><td class="r">42</td><td class="r">839,04</td><td class="r">971,52</td><td class="r">728,20</td><td class="r">2.394,00</td><td class="r">1.492,96</td><td class="r af">7.068,30</td><td class="r ac">3.113,10</td><td class="r b">10.181,40</td></tr>
+<tr><td>Dúplex · 1er piso</td><td>Sureste</td><td class="r">47</td><td class="r">4</td><td class="r">1.288,52</td><td class="r">3.628,41</td><td class="r">76,86</td><td class="r">228,00</td><td class="r">1.616,80</td><td class="r af">7.522,45</td><td class="r ac">278,80</td><td class="r b">7.801,25</td></tr>
+<tr><td>Dúplex · 2do piso</td><td>Sureste</td><td class="r">47</td><td class="r">4</td><td class="r">1.313,15</td><td class="r">3.017,50</td><td class="r">76,86</td><td class="r">228,00</td><td class="r">1.616,80</td><td class="r af">6.877,50</td><td class="r ac">278,80</td><td class="r b">7.156,30</td></tr>
+<tr><td>Vivienda 1 dormitorio</td><td>Noreste</td><td class="r">56</td><td class="r">2</td><td class="r">1.135,28</td><td class="r">5.278,80</td><td class="r">32,25</td><td class="r">114,00</td><td class="r">1.926,40</td><td class="r af">9.338,70</td><td class="r ac">137,20</td><td class="r b">9.475,90</td></tr>
+<tr><td>Vivienda 2 dormitorios</td><td>Noroeste</td><td class="r">87</td><td class="r">4</td><td class="r">1.629,28</td><td class="r">4.367,90</td><td class="r">41,50</td><td class="r">228,00</td><td class="r">2.992,80</td><td class="r af">10.155,70</td><td class="r ac">266,48</td><td class="r b">10.422,18</td></tr>
+</tbody>
+  </table>
+</section>
+
+<div class="part" style="margin-top:4pt;break-after:avoid"><b>PARTE B</b><span>Psicrometría de verano</span></div>
+
+<section>
+  <h2><span class="n">1</span>Procedimiento en el ábaco</h2>
+  <ol class="steps">
+    <li><b>FCS</b> = Qs / (Qs + Ql), del balance térmico</li>
+    <li><b>Punto I</b> (interior): 24 °C · HR 50 %</li>
+    <li><b>Punto E</b> (exterior): 35 °C · HR 40 % · se une E con I</li>
+    <li><b>Recta del FCS</b>: desde el valor de FCS hasta el punto P</li>
+    <li><b>Punto C</b>: paralela desde I hasta la curva de HR 95 % → TBSc, Vec, Ec</li>
+    <li><b>Peso del aire</b>: W = Qs / [0,25 × (TBSi − TBSc)]</li>
+    <li><b>Caudal de mando</b>: CAM = W × Vec</li>
+    <li><b>Aire exterior</b>: CAE = personas × 25 m³/h (mínimo 20 % del CAM)</li>
+    <li><b>Aire recirculado</b>: CAR = CAM − CAE</li>
+    <li><b>Punto M</b>: sobre E–I, según la proporción CAE / CAR → TBSm, Em</li>
+    <li><b>Calor a sustraer</b>: R = W × (Em − Ec)</li>
+    <li><b>Equipo</b>: TR = R / 3024 · kW = R / 860 · BTU = R × 3,96</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Ejemplo · SUM <small>FCS = 7.068,3 / 10.181,4 = 0,694</small></h2>
+  <div class="chart">
+    <img src="img/abaco_1.jpg">
+    <div class="calc">
+      <div class="step"><div class="k">Punto C</div><div class="v">TBS 11,4 °C · HR 95 % · Vec 0,815 · Ec 7,9</div></div>
+      <div class="step"><div class="k">Peso del aire</div><div class="v">W = 7.068,3 / (0,25 × 12,6) = 2.243,9 kg/h</div></div>
+      <div class="step"><div class="k">CAM</div><div class="v">2.243,9 × 0,815 = 1.828,7 m³/h</div></div>
+      <div class="step"><div class="k">CAE</div><div class="v">42 × 25 = 1.050 m³/h <small>57 % del CAM · verifica</small></div></div>
+      <div class="step"><div class="k">CAR</div><div class="v">1.828,7 − 1.050 = 778,7 m³/h</div></div>
+      <div class="step"><div class="k">Punto M</div><div class="v">TBS 30 °C · HR 46 % · Vem 0,875 · Em 15,2</div></div>
+      <div class="step res"><div class="k">R</div><div class="v">2.243,9 × (15,2 − 7,9) = 16.380,47 kcal/h</div></div>
+      <div class="step"><div class="k">Equipo</div><div class="v">5,42 TR · 19,04 kW · 64.866,6 BTU</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Resultados por local</h2>
+  <table class="big">
+    <thead><tr><th>Local</th><th class="r">FCS</th><th class="r">TBS C</th><th class="r">Ec</th><th class="r">W kg/h</th><th class="r">CAM m³/h</th><th class="r">CAE m³/h</th><th class="r">CAR m³/h</th><th class="r">TBS M</th><th class="r">Em</th><th class="r">R kcal/h</th><th class="r">TR</th><th class="r">kW</th></tr></thead>
+    <tbody><tr><td>SUM · planta baja</td><td class="r">0,694</td><td class="r">11,4 °C</td><td class="r">7,9</td><td class="r">2.243,90</td><td class="r">1.828,70</td><td class="r">1.050,00</td><td class="r">778,70</td><td class="r">30 °C</td><td class="r">15,2</td><td class="r b">16.380,47</td><td class="r b">5,42</td><td class="r">19,04</td></tr>
+<tr><td>Dúplex · 1er piso</td><td class="r">0,964</td><td class="r">14,6 °C</td><td class="r">9,9</td><td class="r">3.007,78</td><td class="r">2.496,39</td><td class="r">499,27</td><td class="r">1.997,12</td><td class="r">26,1 °C</td><td class="r">13,1</td><td class="r b">9.624,89</td><td class="r b">3,18</td><td class="r">11,18</td></tr>
+<tr><td>Dúplex · 2do piso</td><td class="r">0,961</td><td class="r">14,1 °C</td><td class="r">9,9</td><td class="r">2.926,59</td><td class="r">2.429,06</td><td class="r">485,81</td><td class="r">1.943,25</td><td class="r">26,1 °C</td><td class="r">13,1</td><td class="r b">9.365,08</td><td class="r b">3,09</td><td class="r">10,88</td></tr>
+<tr><td>Vivienda 1 dormitorio</td><td class="r">0,98</td><td class="r">14,6 °C</td><td class="r">9,9</td><td class="r">3.973,90</td><td class="r">3.278,47</td><td class="r">655,60</td><td class="r">2.622,87</td><td class="r">26 °C</td><td class="r">12,9</td><td class="r b">11.921,70</td><td class="r b">3,94</td><td class="r">13,85</td></tr>
+<tr><td>Vivienda 2 dormitorios</td><td class="r">0,97</td><td class="r">14,9 °C</td><td class="r">10</td><td class="r">1.116,01</td><td class="r">926,29</td><td class="r">185,30</td><td class="r">740,90</td><td class="r">26 °C</td><td class="r">12,9</td><td class="r b">3.236,40</td><td class="r b">1,07</td><td class="r">8,5</td></tr>
+</tbody>
+  </table>
+  <p class="note">Ec y Em en kcal/kg. En dúplex y viviendas el CAE por personas no llega al 20 % del CAM y se adopta ese mínimo.</p>
+</section>
+
+<div class="part" style="margin-top:4pt;break-after:avoid"><b>PARTE C</b><span>Balance térmico de invierno</span></div>
+
+<section>
+  <h2><span class="n">1</span>Condiciones de diseño y coeficientes</h2>
+  <div class="calc">
+    <div class="step"><div class="k">Salto térmico (Δt)</div><div class="v">20 °C · altura de locales 2,60 m · 1 renovación por hora</div></div>
+    <div class="step"><div class="k">Coeficientes K</div><div class="v">ladrillo 2,30 · vidrio 2,80 · puerta 5,19 · piso y techo 1,50</div></div>
+    <div class="step"><div class="k">Transmisión</div><div class="v">Q = S × K × Δt <small>piso solo en 1er piso · techo solo en último piso</small></div></div>
+    <div class="step"><div class="k">Orientación</div><div class="v">Qor = Qtr × % · N, NE, NO 0 % · E, O 5 % · S, SE, SO 10 %</div></div>
+    <div class="step"><div class="k">Ventilación</div><div class="v">Qv = 0,3 × RH × Vol × Δt <small>0,3 ≈ 0,24 × 1,19</small></div></div>
+    <div class="step"><div class="k">Ganancias</div><div class="v">personas 55 kcal/h c/u · iluminación y equipos W × 0,86</div></div>
+    <div class="step"><div class="k">Balance</div><div class="v">Q = pérdidas − ganancias</div></div>
+  </div>
+</section>
+
+<section class="flow">
+  <h2><span class="n">2</span>Ejemplo resuelto · Dúplex PB 1er piso <small>49 m² · h 2,60 m · 127,4 m³ · 4 personas</small></h2>
+  <table>
+    <thead><tr><th>Elemento</th><th>Orient.</th><th>S × K × Δt</th><th class="r">Q (kcal/h)</th><th class="r">%</th><th class="r">Qor</th></tr></thead>
+    <tbody>
+      <tr><td>V1 Ventana</td><td>SO</td><td class="m">(1,60 × 0,60) × 2,8 × 20</td><td class="r">53,76</td><td class="r">10</td><td class="r">5,38</td></tr>
+      <tr><td>V4 Ventana</td><td>SE</td><td class="m">(0,90 × 0,60) × 2,8 × 20</td><td class="r">30,24</td><td class="r">10</td><td class="r">3,02</td></tr>
+      <tr><td>V7 Ventana</td><td>SE</td><td class="m">(2,50 × 0,60) × 2,8 × 20</td><td class="r">84,00</td><td class="r">10</td><td class="r">8,40</td></tr>
+      <tr><td>V10 Ventana</td><td>NE</td><td class="m">(2,70 × 2,40) × 2,8 × 20</td><td class="r">362,88</td><td class="r">0</td><td class="r">0,00</td></tr>
+      <tr><td>P1 Puerta</td><td>SO</td><td class="m">(0,80 × 2,10) × 5,19 × 20</td><td class="r">174,39</td><td class="r">10</td><td class="r">17,44</td></tr>
+      <tr><td>M1 Muro ext.</td><td>SO</td><td class="m">(4,75 × 2,60 − V1 − P1) × 2,3 × 20</td><td class="r">446,66</td><td class="r">10</td><td class="r">44,67</td></tr>
+      <tr><td>M6 Muro ext.</td><td>SE</td><td class="m">(3,10 × 2,60 − V4) × 2,3 × 20</td><td class="r">345,92</td><td class="r">10</td><td class="r">34,59</td></tr>
+      <tr><td>M11 Muro ext.</td><td>SE</td><td class="m">(5,10 × 2,60 − V7) × 2,3 × 20</td><td class="r">540,96</td><td class="r">10</td><td class="r">54,10</td></tr>
+      <tr><td>M16 Muro ext.</td><td>SE</td><td class="m">(2,90 × 2,60) × 2,3 × 20</td><td class="r">346,84</td><td class="r">10</td><td class="r">34,68</td></tr>
+      <tr><td>M20 Muro ext.</td><td>SE</td><td class="m">(2,00 × 2,60) × 2,3 × 20</td><td class="r">239,20</td><td class="r">10</td><td class="r">23,92</td></tr>
+      <tr><td>M19 Muro ext.</td><td>NE</td><td class="m">(3,80 × 2,60 − V10) × 2,3 × 20</td><td class="r">440,68</td><td class="r">0</td><td class="r">0,00</td></tr>
+      <tr><td>Piso</td><td>terreno</td><td class="m">49 × 1,5 × 20</td><td class="r">1.470,00</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr class="tot"><td colspan="3">Transmisión · orientación</td><td class="r">4.535,53</td><td></td><td class="r">226,20</td></tr>
+    </tbody>
+  </table>
+  <div style="height:7pt"></div>
+  <div class="calc">
+    <div class="step"><div class="k">Ventilación</div><div class="v">Qv = 0,3 × 1 × 127,4 × 20 = 764,40 kcal/h</div></div>
+    <div class="step"><div class="k">Pérdidas</div><div class="v">4.535,53 + 226,20 + 764,40 = 5.526,13 kcal/h</div></div>
+    <div class="step"><div class="k">Ganancias</div><div class="v">personas 4 × 55 = 220 · iluminación 90 W × 0,86 = 77,40 · equipos 490 W × 0,86 = 421,40 → 718,80</div></div>
+    <div class="step res"><div class="k">Calor a reponer</div><div class="v">Q = 5.526,13 − 718,80 = 4.807,33 kcal/h</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Pérdidas por transmisión <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Caso</th><th class="r">Muros</th><th class="r">Ventanas</th><th class="r">Puertas</th><th class="r">Piso</th><th class="r">Techo</th><th class="r">Qtr</th><th class="r">Sup. m²</th><th class="r">Vol. m³</th></tr></thead>
+    <tbody><tr><td>Dúplex PB · 1er piso</td><td class="r">2.360,26</td><td class="r">530,88</td><td class="r">174,39</td><td class="r">1.470,00</td><td class="r">—</td><td class="r b">4.535,53</td><td class="r">49</td><td class="r">127,40</td></tr>
+<tr><td>Dúplex PB · intermedios</td><td class="r">2.360,26</td><td class="r">530,88</td><td class="r">174,39</td><td class="r">—</td><td class="r">—</td><td class="r b">3.065,53</td><td class="r">49</td><td class="r">127,40</td></tr>
+<tr><td>Dúplex PA · último piso</td><td class="r">2.605,44</td><td class="r">468,72</td><td class="r">174,39</td><td class="r">—</td><td class="r">1.470,00</td><td class="r b">4.718,55</td><td class="r">49</td><td class="r">127,40</td></tr>
+<tr><td>Dúplex PA · intermedios</td><td class="r">2.605,44</td><td class="r">468,72</td><td class="r">174,39</td><td class="r">—</td><td class="r">—</td><td class="r b">3.248,55</td><td class="r">49</td><td class="r">127,40</td></tr>
+<tr><td>1 dormitorio · 1er y último piso</td><td class="r">1.460,65</td><td class="r">682,08</td><td class="r">337,88</td><td class="r">1.680,00</td><td class="r">—</td><td class="r b">4.160,61</td><td class="r">56</td><td class="r">145,60</td></tr>
+<tr><td>1 dormitorio · intermedios</td><td class="r">1.460,65</td><td class="r">682,08</td><td class="r">337,88</td><td class="r">—</td><td class="r">—</td><td class="r b">2.480,61</td><td class="r">56</td><td class="r">145,60</td></tr>
+<tr><td>2 dormitorios · 1er y último piso</td><td class="r">2.933,88</td><td class="r">1.036,76</td><td class="r">174,39</td><td class="r">2.610,00</td><td class="r">—</td><td class="r b">6.755,03</td><td class="r">87</td><td class="r">226,20</td></tr>
+<tr><td>2 dormitorios · intermedios</td><td class="r">2.933,88</td><td class="r">1.036,76</td><td class="r">174,39</td><td class="r">—</td><td class="r">—</td><td class="r b">4.145,03</td><td class="r">87</td><td class="r">226,20</td></tr>
+<tr><td>SUM · planta baja</td><td class="r">2.448,12</td><td class="r">682,08</td><td class="r">174,39</td><td class="r">1.350,00</td><td class="r">—</td><td class="r b">4.654,59</td><td class="r">45</td><td class="r">117,00</td></tr>
+</tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Balance por caso y total del edificio <small>kcal/h</small></h2>
+  <table class="big">
+    <thead><tr><th>Caso</th><th class="r">Transm.</th><th class="r">Orient.</th><th class="r">Ventil.</th><th class="r ac">Pérdidas</th><th class="r af">Ganancias</th><th class="r">Q por piso</th><th class="r">Pisos</th><th class="r">Q total</th></tr></thead>
+    <tbody><tr><td>Dúplex PB · 1er piso</td><td class="r">4.535,53</td><td class="r">226,20</td><td class="r">764,40</td><td class="r ac">5.526,13</td><td class="r af">718,80</td><td class="r b">4.807,33</td><td class="r">× 1</td><td class="r b">4.807,33</td></tr>
+<tr><td>Dúplex PB · intermedios</td><td class="r">3.065,53</td><td class="r">226,20</td><td class="r">764,40</td><td class="r ac">4.056,13</td><td class="r af">718,80</td><td class="r b">3.337,33</td><td class="r">× 2</td><td class="r b">6.674,65</td></tr>
+<tr><td>Dúplex PA · último piso</td><td class="r">4.718,55</td><td class="r">184,92</td><td class="r">764,40</td><td class="r ac">5.667,88</td><td class="r af">827,00</td><td class="r b">4.840,87</td><td class="r">× 1</td><td class="r b">4.840,87</td></tr>
+<tr><td>Dúplex PA · intermedios</td><td class="r">3.248,55</td><td class="r">184,92</td><td class="r">764,40</td><td class="r ac">4.197,88</td><td class="r af">827,00</td><td class="r b">3.370,88</td><td class="r">× 2</td><td class="r b">6.741,75</td></tr>
+<tr><td>1 dormitorio · 1er y último piso</td><td class="r">4.160,61</td><td class="r">92,40</td><td class="r">873,60</td><td class="r ac">5.126,61</td><td class="r af">660,40</td><td class="r b">4.466,21</td><td class="r">× 2</td><td class="r b">8.932,42</td></tr>
+<tr><td>1 dormitorio · intermedios</td><td class="r">2.480,61</td><td class="r">92,40</td><td class="r">873,60</td><td class="r ac">3.446,61</td><td class="r af">660,40</td><td class="r b">2.786,21</td><td class="r">× 3</td><td class="r b">8.358,63</td></tr>
+<tr><td>2 dormitorios · 1er y último piso</td><td class="r">6.755,03</td><td class="r">154,42</td><td class="r">1.357,20</td><td class="r ac">8.266,65</td><td class="r af">1.114,40</td><td class="r b">7.152,25</td><td class="r">× 2</td><td class="r b">14.304,50</td></tr>
+<tr><td>2 dormitorios · intermedios</td><td class="r">4.145,03</td><td class="r">154,42</td><td class="r">1.357,20</td><td class="r ac">5.656,65</td><td class="r af">1.114,40</td><td class="r b">4.542,25</td><td class="r">× 3</td><td class="r b">13.626,75</td></tr>
+<tr><td>SUM · planta baja</td><td class="r">4.654,59</td><td class="r">165,50</td><td class="r">702,00</td><td class="r ac">5.522,09</td><td class="r af">744,40</td><td class="r b">4.777,69</td><td class="r">× 1</td><td class="r b">4.777,69</td></tr>
+<tr class="tot"><td colspan="8">Total edificio (todos los pisos)</td><td class="r">73.064,58</td></tr></tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">5</span>Caldera</h2>
+  <div class="tanks">
+    <div class="t"><div class="l">Q total edificio</div><div class="big">73.064,58 <small>kcal/h</small></div><div class="f">suma de todos los pisos</div></div>
+    <div class="t"><div class="l">Q total + 30 %</div><div class="big">94.984,08 <small>kcal/h</small></div><div class="f">73.064,58 × 1,3</div></div>
+    <div class="t main"><div class="l">Caldera adoptada</div><div class="big">XP 120 <small>Peisa</small></div><div class="f">caldera comercial</div></div>
+  </div>
+</section>
+
+<div class="part pb"><b>PARTE D</b><span>Fichas por local · verano, psicrometría e invierno</span></div>
+<p class="intro">Cada ficha muestra la planta del local (muro exterior en rojo, interior en verde), su ábaco psicrométrico con los puntos I, E, C y M, y los resultados de los tres cálculos. Valores en kcal/h salvo indicación.</p>
+<div class="ficha">
+  <div class="fh"><span class="fn">01</span><b>SUM · planta baja</b><span class="fs">Orientación Noroeste · 43,40 m² · 130,20 m³ · 42 personas</span></div>
+  <div class="fb1">
+    <div class="pl"><img src="img/plano_1.jpg"></div>
+    <div class="ab"><img src="img/abaco_1.jpg"></div>
+    <div>
+      <div class="ct psi">Puntos del ábaco</div>
+      <table class="ft"><thead><tr><th>Punto</th><th class="r">TBS °C</th><th class="r">HR %</th><th class="r">Ve m³/kg</th><th class="r">E kcal/kg</th></tr></thead><tbody><tr><td class="code">I</td><td class="r">24</td><td class="r">50</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">E</td><td class="r">35</td><td class="r">40</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">C</td><td class="r">11,4</td><td class="r">95</td><td class="r">0,815</td><td class="r">7,9</td></tr><tr><td class="code">M</td><td class="r">30</td><td class="r">46</td><td class="r">0,875</td><td class="r">15,2</td></tr></tbody></table>
+      <div class="ct psi" style="margin-top:5pt">Psicrometría</div>
+      <table class="ft"><tr class=""><td>FCS</td><td class="r">0,694</td></tr><tr class=""><td>W = Qs / 0,25 Δt</td><td class="r">2.243,90 kg/h</td></tr><tr class=""><td>CAM = W × Vec</td><td class="r">1.828,70 m³/h</td></tr><tr class=""><td>CAE · CAR</td><td class="r">1.050,00 · 778,70</td></tr><tr class="hl"><td>R = W (Em − Ec)</td><td class="r">16.380,47</td></tr><tr class="hl"><td>TR · kW</td><td class="r">5,42 · 19,04</td></tr><tr class=""><td>BTU</td><td class="r">64.866,60</td></tr></table>
+    </div>
+  </div>
+  <div class="fb2">
+    <div><div class="ct ver">Verano · kcal/h</div><table class="ft"><tr class=""><td>Transmisión</td><td class="r">839,04</td></tr><tr class=""><td>Radiación (R = 22)</td><td class="r">971,52</td></tr><tr class=""><td>Aire ext. (241,96 m³/h) S · L</td><td class="r">728,20 · 444,86</td></tr><tr class=""><td>Personas S · L</td><td class="r">2.394,00 · 2.520,00</td></tr><tr class=""><td>Iluminación + equipos</td><td class="r">1.492,96</td></tr><tr class=""><td>Qs +10 % · Ql +5 %</td><td class="r">7.068,30 · 3.113,10</td></tr><tr class="hl"><td>Q total</td><td class="r">10.181,40</td></tr></table></div>
+    <div><div class="ct inv">Invierno · kcal/h</div><table class="ft"><tr><th></th><th class="r">planta baja</th></tr><tr class=""><td>Transmisión</td><td class="r">4.654,59</td></tr><tr class=""><td>Orientación</td><td class="r">165,50</td></tr><tr class=""><td>Ventilación</td><td class="r">702,00</td></tr><tr class=""><td>Pérdidas</td><td class="r">5.522,09</td></tr><tr class=""><td>Ganancias</td><td class="r">744,40</td></tr><tr class="hl"><td>Q a reponer</td><td class="r">4.777,69</td></tr><tr class=""><td>Cantidad de pisos</td><td class="r">× 1</td></tr></table></div>
+  </div>
+</div>
+<div class="ficha">
+  <div class="fh"><span class="fn">02</span><b>Dúplex · 1er piso</b><span class="fs">Orientación Sureste · 47 m² · 141 m³ · 4 personas</span></div>
+  <div class="fb1">
+    <div class="pl"><img src="img/plano_2.jpg"></div>
+    <div class="ab"><img src="img/abaco_2.jpg"></div>
+    <div>
+      <div class="ct psi">Puntos del ábaco</div>
+      <table class="ft"><thead><tr><th>Punto</th><th class="r">TBS °C</th><th class="r">HR %</th><th class="r">Ve m³/kg</th><th class="r">E kcal/kg</th></tr></thead><tbody><tr><td class="code">I</td><td class="r">24</td><td class="r">50</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">E</td><td class="r">35</td><td class="r">40</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">C</td><td class="r">14,6</td><td class="r">95</td><td class="r">0,83</td><td class="r">9,9</td></tr><tr><td class="code">M</td><td class="r">26,1</td><td class="r">49</td><td class="r">0,865</td><td class="r">13,1</td></tr></tbody></table>
+      <div class="ct psi" style="margin-top:5pt">Psicrometría</div>
+      <table class="ft"><tr class=""><td>FCS</td><td class="r">0,964</td></tr><tr class=""><td>W = Qs / 0,25 Δt</td><td class="r">3.007,78 kg/h</td></tr><tr class=""><td>CAM = W × Vec</td><td class="r">2.496,39 m³/h</td></tr><tr class=""><td>CAE · CAR</td><td class="r">499,27 · 1.997,12</td></tr><tr class="hl"><td>R = W (Em − Ec)</td><td class="r">9.624,89</td></tr><tr class="hl"><td>TR · kW</td><td class="r">3,18 · 11,18</td></tr><tr class=""><td>BTU</td><td class="r">38.114,56</td></tr></table>
+    </div>
+  </div>
+  <div class="fb2">
+    <div><div class="ct ver">Verano · kcal/h</div><table class="ft"><tr class=""><td>Transmisión</td><td class="r">1.288,52</td></tr><tr class=""><td>Radiación (R = 16 · I = 110)</td><td class="r">3.628,41</td></tr><tr class=""><td>Aire ext. (25,53 m³/h) S · L</td><td class="r">76,86 · 46,86</td></tr><tr class=""><td>Personas S · L</td><td class="r">228,00 · 240,00</td></tr><tr class=""><td>Iluminación + equipos</td><td class="r">1.616,80</td></tr><tr class=""><td>Qs +10 % · Ql +5 %</td><td class="r">7.522,45 · 278,80</td></tr><tr class="hl"><td>Q total</td><td class="r">7.801,25</td></tr></table></div>
+    <div><div class="ct inv">Invierno · kcal/h</div><table class="ft"><tr><th></th><th class="r">1er piso</th><th class="r">intermedios</th></tr><tr class=""><td>Transmisión</td><td class="r">4.535,53</td><td class="r">3.065,53</td></tr><tr class=""><td>Orientación</td><td class="r">226,20</td><td class="r">226,20</td></tr><tr class=""><td>Ventilación</td><td class="r">764,40</td><td class="r">764,40</td></tr><tr class=""><td>Pérdidas</td><td class="r">5.526,13</td><td class="r">4.056,13</td></tr><tr class=""><td>Ganancias</td><td class="r">718,80</td><td class="r">718,80</td></tr><tr class="hl"><td>Q a reponer</td><td class="r">4.807,33</td><td class="r">3.337,33</td></tr><tr class=""><td>Cantidad de pisos</td><td class="r">× 1</td><td class="r">× 2</td></tr></table></div>
+  </div>
+</div>
+<div class="ficha">
+  <div class="fh"><span class="fn">03</span><b>Dúplex · 2do piso</b><span class="fs">Orientación Sureste · 47 m² · 141 m³ · 4 personas</span></div>
+  <div class="fb1">
+    <div class="pl"><img src="img/plano_3.jpg"></div>
+    <div class="ab"><img src="img/abaco_3.jpg"></div>
+    <div>
+      <div class="ct psi">Puntos del ábaco</div>
+      <table class="ft"><thead><tr><th>Punto</th><th class="r">TBS °C</th><th class="r">HR %</th><th class="r">Ve m³/kg</th><th class="r">E kcal/kg</th></tr></thead><tbody><tr><td class="code">I</td><td class="r">24</td><td class="r">50</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">E</td><td class="r">35</td><td class="r">40</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">C</td><td class="r">14,1</td><td class="r">95</td><td class="r">0,83</td><td class="r">9,9</td></tr><tr><td class="code">M</td><td class="r">26,1</td><td class="r">49</td><td class="r">0,865</td><td class="r">13,1</td></tr></tbody></table>
+      <div class="ct psi" style="margin-top:5pt">Psicrometría</div>
+      <table class="ft"><tr class=""><td>FCS</td><td class="r">0,961</td></tr><tr class=""><td>W = Qs / 0,25 Δt</td><td class="r">2.926,59 kg/h</td></tr><tr class=""><td>CAM = W × Vec</td><td class="r">2.429,06 m³/h</td></tr><tr class=""><td>CAE · CAR</td><td class="r">485,81 · 1.943,25</td></tr><tr class="hl"><td>R = W (Em − Ec)</td><td class="r">9.365,08</td></tr><tr class="hl"><td>TR · kW</td><td class="r">3,09 · 10,88</td></tr><tr class=""><td>BTU</td><td class="r">37.085,71</td></tr></table>
+    </div>
+  </div>
+  <div class="fb2">
+    <div><div class="ct ver">Verano · kcal/h</div><table class="ft"><tr class=""><td>Transmisión</td><td class="r">1.313,15</td></tr><tr class=""><td>Radiación (R = 16 · I = 110)</td><td class="r">3.017,50</td></tr><tr class=""><td>Aire ext. (25,53 m³/h) S · L</td><td class="r">76,86 · 46,86</td></tr><tr class=""><td>Personas S · L</td><td class="r">228,00 · 240,00</td></tr><tr class=""><td>Iluminación + equipos</td><td class="r">1.616,80</td></tr><tr class=""><td>Qs +10 % · Ql +5 %</td><td class="r">6.877,50 · 278,80</td></tr><tr class="hl"><td>Q total</td><td class="r">7.156,30</td></tr></table></div>
+    <div><div class="ct inv">Invierno · kcal/h</div><table class="ft"><tr><th></th><th class="r">último piso</th><th class="r">intermedios</th></tr><tr class=""><td>Transmisión</td><td class="r">4.718,55</td><td class="r">3.248,55</td></tr><tr class=""><td>Orientación</td><td class="r">184,92</td><td class="r">184,92</td></tr><tr class=""><td>Ventilación</td><td class="r">764,40</td><td class="r">764,40</td></tr><tr class=""><td>Pérdidas</td><td class="r">5.667,88</td><td class="r">4.197,88</td></tr><tr class=""><td>Ganancias</td><td class="r">827,00</td><td class="r">827,00</td></tr><tr class="hl"><td>Q a reponer</td><td class="r">4.840,87</td><td class="r">3.370,88</td></tr><tr class=""><td>Cantidad de pisos</td><td class="r">× 1</td><td class="r">× 2</td></tr></table></div>
+  </div>
+</div>
+<div class="ficha">
+  <div class="fh"><span class="fn">04</span><b>Vivienda 1 dormitorio</b><span class="fs">Orientación Noreste · 56 m² · 168 m³ · 2 personas</span></div>
+  <div class="fb1">
+    <div class="pl"><img src="img/plano_4.jpg"></div>
+    <div class="ab"><img src="img/abaco_4.jpg"></div>
+    <div>
+      <div class="ct psi">Puntos del ábaco</div>
+      <table class="ft"><thead><tr><th>Punto</th><th class="r">TBS °C</th><th class="r">HR %</th><th class="r">Ve m³/kg</th><th class="r">E kcal/kg</th></tr></thead><tbody><tr><td class="code">I</td><td class="r">24</td><td class="r">50</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">E</td><td class="r">35</td><td class="r">40</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">C</td><td class="r">14,6</td><td class="r">95</td><td class="r">0,825</td><td class="r">9,9</td></tr><tr><td class="code">M</td><td class="r">26</td><td class="r">46</td><td class="r">0,865</td><td class="r">12,9</td></tr></tbody></table>
+      <div class="ct psi" style="margin-top:5pt">Psicrometría</div>
+      <table class="ft"><tr class=""><td>FCS</td><td class="r">0,98</td></tr><tr class=""><td>W = Qs / 0,25 Δt</td><td class="r">3.973,90 kg/h</td></tr><tr class=""><td>CAM = W × Vec</td><td class="r">3.278,47 m³/h</td></tr><tr class=""><td>CAE · CAR</td><td class="r">655,60 · 2.622,87</td></tr><tr class="hl"><td>R = W (Em − Ec)</td><td class="r">11.921,70</td></tr><tr class="hl"><td>TR · kW</td><td class="r">3,94 · 13,85</td></tr><tr class=""><td>BTU</td><td class="r">47.209,90</td></tr></table>
+    </div>
+  </div>
+  <div class="fb2">
+    <div><div class="ct ver">Verano · kcal/h</div><table class="ft"><tr class=""><td>Transmisión</td><td class="r">1.135,28</td></tr><tr class=""><td>Radiación (R = 18 · I = 110)</td><td class="r">5.278,80</td></tr><tr class=""><td>Aire ext. (10,70 m³/h) S · L</td><td class="r">32,25 · 19,70</td></tr><tr class=""><td>Personas S · L</td><td class="r">114,00 · 120,00</td></tr><tr class=""><td>Iluminación + equipos</td><td class="r">1.926,40</td></tr><tr class=""><td>Qs +10 % · Ql +5 %</td><td class="r">9.338,70 · 137,20</td></tr><tr class="hl"><td>Q total</td><td class="r">9.475,90</td></tr></table></div>
+    <div><div class="ct inv">Invierno · kcal/h</div><table class="ft"><tr><th></th><th class="r">1er y último piso</th><th class="r">intermedios</th></tr><tr class=""><td>Transmisión</td><td class="r">4.160,61</td><td class="r">2.480,61</td></tr><tr class=""><td>Orientación</td><td class="r">92,40</td><td class="r">92,40</td></tr><tr class=""><td>Ventilación</td><td class="r">873,60</td><td class="r">873,60</td></tr><tr class=""><td>Pérdidas</td><td class="r">5.126,61</td><td class="r">3.446,61</td></tr><tr class=""><td>Ganancias</td><td class="r">660,40</td><td class="r">660,40</td></tr><tr class="hl"><td>Q a reponer</td><td class="r">4.466,21</td><td class="r">2.786,21</td></tr><tr class=""><td>Cantidad de pisos</td><td class="r">× 2</td><td class="r">× 3</td></tr></table></div>
+  </div>
+</div>
+<div class="ficha">
+  <div class="fh"><span class="fn">05</span><b>Vivienda 2 dormitorios</b><span class="fs">Orientación Noroeste · 87 m² · 261 m³ · 4 personas</span></div>
+  <div class="fb1">
+    <div class="pl"><img src="img/plano_5.jpg"></div>
+    <div class="ab"><img src="img/abaco_5.jpg"></div>
+    <div>
+      <div class="ct psi">Puntos del ábaco</div>
+      <table class="ft"><thead><tr><th>Punto</th><th class="r">TBS °C</th><th class="r">HR %</th><th class="r">Ve m³/kg</th><th class="r">E kcal/kg</th></tr></thead><tbody><tr><td class="code">I</td><td class="r">24</td><td class="r">50</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">E</td><td class="r">35</td><td class="r">40</td><td class="r">—</td><td class="r">—</td></tr><tr><td class="code">C</td><td class="r">14,9</td><td class="r">95</td><td class="r">0,83</td><td class="r">10</td></tr><tr><td class="code">M</td><td class="r">26</td><td class="r">46</td><td class="r">0,865</td><td class="r">12,9</td></tr></tbody></table>
+      <div class="ct psi" style="margin-top:5pt">Psicrometría</div>
+      <table class="ft"><tr class=""><td>FCS</td><td class="r">0,97</td></tr><tr class=""><td>W = Qs / 0,25 Δt</td><td class="r">1.116,01 kg/h</td></tr><tr class=""><td>CAM = W × Vec</td><td class="r">926,29 m³/h</td></tr><tr class=""><td>CAE · CAR</td><td class="r">185,30 · 740,90</td></tr><tr class="hl"><td>R = W (Em − Ec)</td><td class="r">3.236,40</td></tr><tr class="hl"><td>TR · kW</td><td class="r">1,07 · 8,5</td></tr><tr class=""><td>BTU</td><td class="r">12.816,44</td></tr></table>
+    </div>
+  </div>
+  <div class="fb2">
+    <div><div class="ct ver">Verano · kcal/h</div><table class="ft"><tr class=""><td>Transmisión</td><td class="r">1.629,28</td></tr><tr class=""><td>Radiación (R = 22 · I = 110)</td><td class="r">4.367,90</td></tr><tr class=""><td>Aire ext. (13,79 m³/h) S · L</td><td class="r">41,50 · 25,35</td></tr><tr class=""><td>Personas S · L</td><td class="r">228,00 · 240,00</td></tr><tr class=""><td>Iluminación + equipos</td><td class="r">2.992,80</td></tr><tr class=""><td>Qs +10 % · Ql +5 %</td><td class="r">10.155,70 · 266,48</td></tr><tr class="hl"><td>Q total</td><td class="r">10.422,18</td></tr></table></div>
+    <div><div class="ct inv">Invierno · kcal/h</div><table class="ft"><tr><th></th><th class="r">1er y último piso</th><th class="r">intermedios</th></tr><tr class=""><td>Transmisión</td><td class="r">6.755,03</td><td class="r">4.145,03</td></tr><tr class=""><td>Orientación</td><td class="r">154,42</td><td class="r">154,42</td></tr><tr class=""><td>Ventilación</td><td class="r">1.357,20</td><td class="r">1.357,20</td></tr><tr class=""><td>Pérdidas</td><td class="r">8.266,65</td><td class="r">5.656,65</td></tr><tr class=""><td>Ganancias</td><td class="r">1.114,40</td><td class="r">1.114,40</td></tr><tr class="hl"><td>Q a reponer</td><td class="r">7.152,25</td><td class="r">4.542,25</td></tr><tr class=""><td>Cantidad de pisos</td><td class="r">× 2</td><td class="r">× 3</td></tr></table></div>
+  </div>
+</div>
+
+</body></html>
